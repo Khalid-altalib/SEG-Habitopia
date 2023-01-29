@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-seghabitopia-dev-113809-authRole",
+      "UnauthRoleArn": "arn:aws:iam::281181984812:role/amplify-seghabitopia-dev-113809-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::281181984812:role/amplify-seghabitopia-dev-113809-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-seghabitopia-dev-113809-deployment",
+      "UnauthRoleName": "amplify-seghabitopia-dev-113809-unauthRole",
+      "StackName": "amplify-seghabitopia-dev-113809",
+      "StackId": "arn:aws:cloudformation:eu-west-1:281181984812:stack/amplify-seghabitopia-dev-113809/681a7280-9fc9-11ed-af26-0a00c3b55aa5",
+      "AmplifyAppId": "ditjv29046c32"
+    }
+  }
+}
