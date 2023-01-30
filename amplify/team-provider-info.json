@@ -1,15 +1,15 @@
 {
-  "dev": {
+  "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-seghabitopia-dev-113809-authRole",
-      "UnauthRoleArn": "arn:aws:iam::281181984812:role/amplify-seghabitopia-dev-113809-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::281181984812:role/amplify-seghabitopia-dev-113809-authRole",
-      "Region": "eu-west-1",
-      "DeploymentBucketName": "amplify-seghabitopia-dev-113809-deployment",
-      "UnauthRoleName": "amplify-seghabitopia-dev-113809-unauthRole",
-      "StackName": "amplify-seghabitopia-dev-113809",
-      "StackId": "arn:aws:cloudformation:eu-west-1:281181984812:stack/amplify-seghabitopia-dev-113809/681a7280-9fc9-11ed-af26-0a00c3b55aa5",
-      "AmplifyAppId": "ditjv29046c32"
+      "AuthRoleName": "amplify-habitopia-staging-213137-authRole",
+      "UnauthRoleArn": "arn:aws:iam::281181984812:role/amplify-habitopia-staging-213137-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::281181984812:role/amplify-habitopia-staging-213137-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-habitopia-staging-213137-deployment",
+      "UnauthRoleName": "amplify-habitopia-staging-213137-unauthRole",
+      "StackName": "amplify-habitopia-staging-213137",
+      "StackId": "arn:aws:cloudformation:eu-west-2:281181984812:stack/amplify-habitopia-staging-213137/4fb824f0-a01c-11ed-96b7-0af9653417d6",
+      "AmplifyAppId": "d2fz6on51wdtwq"
     }
   }
 }
