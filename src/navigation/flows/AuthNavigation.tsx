@@ -4,27 +4,27 @@ import Welcome from "../../screens/Welcome";
 import SignUp from "../../screens/SignUp";
 import LogIn from "../../screens/LogIn";
 
-const AuthNavigation = () => {
-  const AuthStack = createNativeStackNavigator();
+import { Stack } from "../Navigation";
 
+const AuthNavigation = () => {
   return (
-    <AuthStack.Navigator initialRouteName="Welcome">
-      <AuthStack.Screen
+    <>
+      <Stack.Screen
         name="Welcome"
         component={Welcome}
         options={{ headerShown: false }}
       />
-      <AuthStack.Screen
+      <Stack.Screen
         name="SignUp"
         component={SignUp}
         options={{ headerTitle: "Sign up" }}
       />
-      <AuthStack.Screen
+      <Stack.Screen
         name="LogIn"
         component={LogIn}
         options={{ headerTitle: "Log in" }}
       />
-    </AuthStack.Navigator>
+    </>
   );
 };
 

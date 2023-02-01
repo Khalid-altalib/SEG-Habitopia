@@ -3,15 +3,22 @@ import React from "react";
 
 import MainNavigation from "./flows/MainNavigation";
 import AuthNavigation from "./flows/AuthNavigation";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-function Navigation() {
+type Props = {};
+
+export const Stack = createNativeStackNavigator();
+
+const Navigation = (props: Props) => {
   let isAuthenticated: boolean = false; // BACKEND PLACEHOLDER
 
   return (
     <NavigationContainer>
-      {isAuthenticated ? <MainNavigation /> : <AuthNavigation />}
+      <Stack.Navigator initialRouteName="Welcome">
+        {isAuthenticated ? <MainNavigation /> : <AuthNavigation />}
+      </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 export default Navigation;
