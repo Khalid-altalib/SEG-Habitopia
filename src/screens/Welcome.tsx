@@ -2,8 +2,11 @@ import React from "react";
 import { ImageBackground } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button, Box, Heading, ZStack, Image } from "native-base";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 import Layout from "../constants/Layout";
+import styles from "../constants/Styles";
+import { RootStackParams } from "../../types";
 
 function Welcome(): JSX.Element {
   const WINDOW_WIDTH: number = Math.round(Layout.window.width);
@@ -14,23 +17,26 @@ function Welcome(): JSX.Element {
 
   const insets = useSafeAreaInsets();
 
+  const navigation = useNavigation<NavigationProp<RootStackParams>>();
+
   return (
     <ZStack>
       <ImageBackground
         source={{ uri: BACKGROUND_IMAGE_PATH }}
-        style={{ width: WINDOW_WIDTH, height: WINDOW_HEIGHT }}
+        style={{ width: "100%", height: "100%" }}
       />
       <Box
-        style={{
-          width: "100%",
-          height: "100%",
-          paddingTop: insets.top + 30,
-          paddingBottom: insets.bottom + 30,
-          paddingLeft: insets.left + 30,
-          paddingRight: insets.right + 30,
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
+        style={[
+          styles.maxSize,
+          {
+            paddingTop: insets.top + 30,
+            paddingBottom: insets.bottom + 30,
+            paddingLeft: insets.left + 30,
+            paddingRight: insets.right + 30,
+            alignItems: "center",
+            justifyContent: "space-between",
+          },
+        ]}
       >
         <Box style={{ width: "100%", alignItems: "center" }}>
           <Box
@@ -56,7 +62,12 @@ function Welcome(): JSX.Element {
           </Heading>
         </Box>
         <Box style={{ width: "100%" }}>
-          <Button style={{ width: "100%" }} size="lg" colorScheme="blue">
+          <Button
+            style={{ width: "100%" }}
+            size="lg"
+            colorScheme="blue"
+            onPress={() => navigation.navigate("SignUp")}
+          >
             Create account
           </Button>
           <Button
@@ -64,6 +75,7 @@ function Welcome(): JSX.Element {
             size="lg"
             colorScheme="dark"
             variant="subtle"
+            onPress={() => navigation.navigate("LogIn")}
           >
             Sign in
           </Button>

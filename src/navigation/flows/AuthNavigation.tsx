@@ -1,16 +1,30 @@
-import React from "react";
-import { Button, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { ProfileScreenNavigationProp } from "../../../types";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import Welcome from "../../screens/Welcome";
+import SignUp from "../../screens/SignUp";
+import LogIn from "../../screens/LogIn";
 
 const AuthNavigation = () => {
-  const navigation = useNavigation<ProfileScreenNavigationProp>();
+  const AuthStack = createNativeStackNavigator();
 
   return (
-    <View>
-      <Button onPress={() => navigation.navigate("SignUp")} title="Sign up" />
-      <Button onPress={() => navigation.navigate("LogIn")} title="Log in" />
-    </View>
+    <AuthStack.Navigator initialRouteName="Welcome">
+      <AuthStack.Screen
+        name="Welcome"
+        component={Welcome}
+        options={{ headerShown: false }}
+      />
+      <AuthStack.Screen
+        name="SignUp"
+        component={SignUp}
+        options={{ headerTitle: "Sign up" }}
+      />
+      <AuthStack.Screen
+        name="LogIn"
+        component={LogIn}
+        options={{ headerTitle: "Log in" }}
+      />
+    </AuthStack.Navigator>
   );
 };
 

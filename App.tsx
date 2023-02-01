@@ -1,19 +1,20 @@
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { NativeBaseProvider, Button, Center } from "native-base";
-import store from "./src/app/store";
+import { NativeBaseProvider } from "native-base";
 import { Provider } from "react-redux";
-import Welcome from "./src/screens/Welcome";
+
+import Navigation from "./src/navigation/Navigation";
+import store from "./src/app/store";
 
 export default function App() {
   return (
     <Provider store={store}>
-      <SafeAreaProvider>
-        <NativeBaseProvider>
+      <NativeBaseProvider>
+        <SafeAreaProvider>
           <StatusBar />
-          <Welcome />
-        </NativeBaseProvider>
-      </SafeAreaProvider>
+          <Navigation />
+        </SafeAreaProvider>
+      </NativeBaseProvider>
     </Provider>
   );
 }

@@ -1,28 +1,17 @@
-import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
+import React from "react";
+
 import MainNavigation from "./flows/MainNavigation";
 import AuthNavigation from "./flows/AuthNavigation";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../types";
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+function Navigation() {
+  let isAuthenticated: boolean = false; // BACKEND PLACEHOLDER
 
-const Dummy = () => {
-  return <div>#</div>;
-};
-
-const RootNavigator = () => {
-  const isSignedIn = false;
-
-  return isSignedIn ? <MainNavigation /> : <AuthNavigation />;
-};
-
-const Navigation = () => {
   return (
     <NavigationContainer>
-      <RootNavigator />
+      {isAuthenticated ? <MainNavigation /> : <AuthNavigation />}
     </NavigationContainer>
   );
-};
+}
 
 export default Navigation;
