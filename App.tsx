@@ -3,7 +3,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NativeBaseProvider, Button, Center } from "native-base";
 import store from "./src/app/store";
 import { Provider } from "react-redux";
-import WelcomeScreen from "./src/screens/WelcomeScreen";
+import Welcome from "./src/screens/Welcome";
 
 export default function App() {
   return (
@@ -11,7 +11,7 @@ export default function App() {
       <SafeAreaProvider>
         <NativeBaseProvider>
           <StatusBar />
-          <WelcomeScreen />
+          <Welcome />
         </NativeBaseProvider>
       </SafeAreaProvider>
     </Provider>

@@ -5,7 +5,7 @@ import { Button, Box, Heading, ZStack, Image } from "native-base";
 
 import Layout from "../constants/Layout";
 
-function WelcomeScreen(): JSX.Element {
+function Welcome(): JSX.Element {
   const WINDOW_WIDTH: number = Math.round(Layout.window.width);
   const WINDOW_HEIGHT: number = Math.round(Layout.window.height);
 
@@ -73,4 +73,4 @@ function WelcomeScreen(): JSX.Element {
   );
 }
 
-export default WelcomeScreen;
+export default Welcome;
