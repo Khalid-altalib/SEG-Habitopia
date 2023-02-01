@@ -68,7 +68,7 @@ function Welcome(): JSX.Element {
             colorScheme="blue"
             onPress={() => navigation.navigate("SignUp")}
           >
-            Create account
+            Sign up
           </Button>
           <Button
             style={{ width: "100%", marginTop: 25 }}
@@ -77,7 +77,7 @@ function Welcome(): JSX.Element {
             variant="subtle"
             onPress={() => navigation.navigate("LogIn")}
           >
-            Sign in
+            Log in
           </Button>
         </Box>
       </Box>
