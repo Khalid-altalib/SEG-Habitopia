@@ -7,16 +7,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 type Props = {};
 
-export const Stack = createNativeStackNavigator();
-
 const Navigation = (props: Props) => {
   let isAuthenticated: boolean = false; // BACKEND PLACEHOLDER
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Welcome">
-        {isAuthenticated ? <MainNavigation /> : <AuthNavigation />}
-      </Stack.Navigator>
+      {isAuthenticated ? <MainNavigation /> : <AuthNavigation />}
     </NavigationContainer>
   );
 };
