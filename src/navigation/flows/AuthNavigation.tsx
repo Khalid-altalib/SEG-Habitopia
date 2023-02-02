@@ -1,12 +1,15 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Welcome from "../../screens/Welcome";
-import SignUp from "../../screens/SignUp";
-import LogIn from "../../screens/LogIn";
+
+import SignUp from "../../screens/SignUp/SignUp";
+import LogIn from "../../screens/LogIn/LogIn";
+
+import { View } from "react-native";
+
+export const AuthStack = createNativeStackNavigator();
 
 const AuthNavigation = () => {
-  const AuthStack = createNativeStackNavigator();
-
   return (
     <AuthStack.Navigator initialRouteName="Welcome">
       <AuthStack.Screen
@@ -14,11 +17,15 @@ const AuthNavigation = () => {
         component={Welcome}
         options={{ headerShown: false }}
       />
+
+      {/* Sign Up Flow */}
       <AuthStack.Screen
         name="SignUp"
         component={SignUp}
         options={{ headerTitle: "Sign up" }}
       />
+
+      {/* Log In Flow */}
       <AuthStack.Screen
         name="LogIn"
         component={LogIn}
