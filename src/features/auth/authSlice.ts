@@ -3,34 +3,43 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../app/store";
 
 interface AuthState {
-  value: number;
+  signUpData: {
+    email?: string;
+    password?: string;
+  };
+  logInData: {
+    email?: string;
+    password?: string;
+  };
+  user?: object;
 }
 
+const getLoggedInUserFromStorage = () => {
+  return {};
+};
+
 const initialState: AuthState = {
-  value: 0,
+  signUpData: {},
+  logInData: {},
+  user: getLoggedInUserFromStorage(),
 };
 
 export const authSlice = createSlice({
   name: "auth",
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
+    addSignUpData: (state, action: PayloadAction<object>) => {
+      state.signUpData = { ...state.signUpData, ...action.payload };
     },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    // Use the PayloadAction type to declare the contents of `action.payload`
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
+    addLogInData: (state, action: PayloadAction<object>) => {
+      state.logInData = { ...state.logInData, ...action.payload };
     },
   },
 });
 
-export const { increment, decrement, incrementByAmount } = authSlice.actions;
+export const { addSignUpData, addLogInData } = authSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectCount = (state: RootState) => state.auth.value;
+// export const selectCount = (state: RootState) => state.auth.value;
 
 export default authSlice.reducer;
