@@ -1,14 +1,14 @@
 import { Text, View } from "native-base";
 import React from "react";
 
-import styles from "../constants/Styles";
+import styles from "../../constants/Styles";
 
-function SignUp() {
+function LogIn() {
   return (
     <View style={[styles.maxSize, styles.centeredContent]}>
-      <Text>SignUpScreen</Text>
+      <Text>LogInScreen</Text>
     </View>
   );
 }
 
-export default SignUp;
+export default LogIn;
