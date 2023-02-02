@@ -11,11 +11,24 @@ interface AuthState {
     email?: string;
     password?: string;
   };
-  user?: object;
+  user: LocalUser | null;
 }
 
-const getLoggedInUserFromStorage = () => {
-  return {};
+interface LocalUser {
+  authToken: string;
+  username: string;
+}
+
+const getLoggedInUserFromStorage = (): LocalUser | null => {
+  const data = localStorage.getItem("user");
+
+  if (data === null) {
+    return null;
+  }
+
+  const user = JSON.parse(data);
+
+  return user;
 };
 
 const initialState: AuthState = {
