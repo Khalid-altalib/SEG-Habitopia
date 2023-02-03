@@ -30,17 +30,29 @@ const getLoggedInUserFromStorage = (): LocalUser | null => {
   return user;
 };
 
-const logInUser = createAsyncThunk<LocalUser, void, { rejectValue: string }>(
-  "auth/logIn",
-  async (_, thunkAPI) => {
-    try {
-      const response = await fetch(`https://test/api`); //  BACKEND PLACEHOLDER
-      return (await response.json()) as LocalUser;
-    } catch (error: any) {
-      const message = error.message;
-      return thunkAPI.rejectWithValue(message);
+const createAsyncThunkForAuthentication = (name: string, endpoint: string) => {
+  return createAsyncThunk<LocalUser, void, { rejectValue: string }>(
+    name,
+    async (_, thunkAPI) => {
+      try {
+        const response = await fetch(endpoint); //  BACKEND PLACEHOLDER
+        return (await response.json()) as LocalUser;
+      } catch (error: any) {
+        const message = error.message;
+        return thunkAPI.rejectWithValue(message);
+      }
     }
-  }
+  );
+};
+
+export const logInUser = createAsyncThunkForAuthentication(
+  "auth/login",
+  "`https://test/api/login`"
+);
+
+export const signUpUser = createAsyncThunkForAuthentication(
+  "auth/signup",
+  "`https://test/api/signup`"
 );
 
 const initialState: AuthState = {
@@ -65,10 +77,7 @@ const authenticationFulfilled = (
   localStorage.set("user", JSON.stringify(action.payload));
 };
 
-const authenticationRejected = (
-  state: AuthState,
-  action: PayloadAction<string>
-) => {
+const authenticationRejected = (state: AuthState, action: any) => {
   state.loading = false;
   state.user = null;
   state.error = action.payload;
@@ -89,6 +98,9 @@ export const authSlice = createSlice({
     builder.addCase(logInUser.pending, authenticationPending);
     builder.addCase(logInUser.fulfilled, authenticationFulfilled);
     builder.addCase(logInUser.rejected, authenticationRejected);
+    builder.addCase(signUpUser.pending, authenticationPending);
+    builder.addCase(signUpUser.fulfilled, authenticationFulfilled);
+    builder.addCase(signUpUser.rejected, authenticationRejected);
   },
 });
 
