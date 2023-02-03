@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "../../app/store";
 import { LocalUser } from "../../../types";
 
 type AuthState = {
@@ -52,6 +51,29 @@ const initialState: AuthState = {
   error: "",
 };
 
+const authenticationPending = (state: AuthState) => {
+  state.loading = true;
+};
+
+const authenticationFulfilled = (
+  state: AuthState,
+  action: PayloadAction<LocalUser>
+) => {
+  state.loading = false;
+  state.user = action.payload;
+  state.error = "";
+  localStorage.set("user", JSON.stringify(action.payload));
+};
+
+const authenticationRejected = (
+  state: AuthState,
+  action: PayloadAction<string>
+) => {
+  state.loading = false;
+  state.user = null;
+  state.error = action.payload;
+};
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -64,19 +86,9 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(logInUser.pending, (state) => {
-      state.loading = true;
-    });
-    builder.addCase(logInUser.fulfilled, (state, action) => {
-      state.loading = false;
-      state.user = action.payload;
-      state.error = "";
-    });
-    builder.addCase(logInUser.rejected, (state, action) => {
-      state.loading = false;
-      state.user = null;
-      state.error = action.payload as string;
-    });
+    builder.addCase(logInUser.pending, authenticationPending);
+    builder.addCase(logInUser.fulfilled, authenticationFulfilled);
+    builder.addCase(logInUser.rejected, authenticationRejected);
   },
 });
 
