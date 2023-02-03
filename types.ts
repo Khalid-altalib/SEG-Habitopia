@@ -16,3 +16,8 @@ export type RootStackParams = {
 
 export type ProfileScreenNavigationProp =
   NativeStackNavigationProp<RootStackParams>;
+
+export type LocalUser = {
+  authToken: string;
+  username: string;
+};
