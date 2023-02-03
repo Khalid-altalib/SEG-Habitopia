@@ -1,21 +1,26 @@
 import React from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
-import styles from "../constants/Styles";
+
 
 
 type Props = {}
 
-const Chat = (props: Props) => {
+const ChatItem = (props: Props) => {
   return (
     <View style={chatstyles.chatContainer}>
         <Image source={{uri: 'https://via.placeholder.com/150'}} style={chatstyles.image}/>
         <View style={chatstyles.container}>
             <View style={chatstyles.row}>
-                <Text style={chatstyles.name} numberOfLines={1}>User</Text>
+                <Text style={chatstyles.name} numberOfLines={1}>
+                    Name Lorem Ipsum
+                </Text>
                 <Text>00:00</Text>
             </View>
             <View>
-                <Text numberOfLines={2} style={chatstyles.lastMessage}>Hello!</Text>
+                <Text numberOfLines={2} style={chatstyles.lastMessage}>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    Labore earum alias minima facilis eos quis vitae id culpa, aut illo dolorem quas cupiditate totam eveniet quos nam obcaecati temporibus at!
+                </Text>
             </View>
         </View>
     </View>
@@ -58,4 +63,4 @@ const chatstyles = StyleSheet.create({
     }
 })
 
-export default Chat
+export default ChatItem

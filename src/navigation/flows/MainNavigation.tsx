@@ -5,7 +5,8 @@ import Home from "../../screens/Home";
 import Explore from "../../screens/Explore";
 import Leaderboard from "../../screens/Leaderboard";
 import Profile from "../../screens/Profile";
-import Chat from "../../screens/Chat"
+import ChatList from "../../screens/Chat/ChatList";
+import Chat from "../../screens/Chat/Chat";
 
 const Tab = createBottomTabNavigator();
 
