@@ -12,6 +12,7 @@ export type RootStackParams = {
   SignUp: undefined;
   LogIn: undefined;
   Home: undefined;
+  Chat: undefined;
 };
 
 export type ProfileScreenNavigationProp =
