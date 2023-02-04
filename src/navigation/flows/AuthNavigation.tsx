@@ -5,9 +5,9 @@ import Welcome from "../../screens/Welcome";
 import SignUp from "../../screens/SignUp/SignUp";
 import LogIn from "../../screens/LogIn/LogIn";
 
-import { View } from "react-native";
+import { AuthParams } from "../../../types";
 
-export const AuthStack = createNativeStackNavigator();
+export const AuthStack = createNativeStackNavigator<AuthParams>();
 
 const AuthNavigation = () => {
   return (

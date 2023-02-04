@@ -3,11 +3,15 @@ import React from "react";
 
 import MainNavigation from "./flows/MainNavigation";
 import AuthNavigation from "./flows/AuthNavigation";
+import ChatNavigation from "./flows/ChatNavigation";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { LocalUser } from "../../types";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { logInUserFromStorage } from "../features/auth/authSlice";
 
-type Props = {};
+import { RootParams } from "../../types";
+
+const Stack = createNativeStackNavigator<RootParams>()
 
 const Navigation = (props: Props) => {
   const dispatch = useAppDispatch();
@@ -19,7 +23,13 @@ const Navigation = (props: Props) => {
 
   return (
     <NavigationContainer>
-      {localUser ? <MainNavigation /> : <AuthNavigation />}
+      <Stack.Navigator >
+        {localUser ?
+          (<Stack.Screen name="Existing" component={MainNavigation} options={{headerShown: false}}/>) :
+          (<Stack.Screen name="Auth" component={AuthNavigation} options={{headerShown: false}}/>)
+        }
+        <Stack.Screen name='Chat' component={ChatNavigation}/>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };
