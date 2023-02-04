@@ -4,7 +4,7 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 export type RootParams = {
   Auth: undefined,
   Existing: undefined,
-  Other : undefined,
+  Chat : undefined,
 }
 
 export type ProfileParams = {

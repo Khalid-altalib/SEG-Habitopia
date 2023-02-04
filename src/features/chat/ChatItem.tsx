@@ -6,25 +6,29 @@ import { RootParams } from '../../../types'
 
 
 
-type Props = {}
+type Chat = {
+    name: string,
+    image: string,
+    text: string,
+    time: string
+}
 
-const ChatItem = (props: Props) => {
+const ChatItem = (chat: Chat) => {
   const navigation = useNavigation<NavigationProp<RootParams>>()
 
   return (
-    <Pressable onPress={() => navigation.navigate('Other')}style={chatstyles.chatContainer}>
-        <Image source={{uri: 'https://via.placeholder.com/150'}} style={chatstyles.image}/>
+    <Pressable onPress={() => navigation.navigate('Chat')}style={chatstyles.chatContainer}>
+        <Image source={{uri: chat.image}} style={chatstyles.image}/>
         <View style={chatstyles.container}>
             <View style={chatstyles.row}>
                 <Text style={chatstyles.name} numberOfLines={1}>
-                    Name Lorem Ipsum
+                    {chat.name}
                 </Text>
-                <Text>00:00</Text>
+                <Text>{chat.time}</Text>
             </View>
             <View>
                 <Text numberOfLines={2} style={chatstyles.lastMessage}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    Labore earum alias minima facilis eos quis vitae id culpa, aut illo dolorem quas cupiditate totam eveniet quos nam obcaecati temporibus at!
+                    {chat.text}
                 </Text>
             </View>
         </View>

@@ -2,8 +2,7 @@ import React from 'react'
 import { FlatList } from 'react-native'
 import styles from "../../constants/Styles";
 import ChatItem from '../../features/chat/ChatItem';
-
-let arr = [1,2]
+import chat from '../../../assets/data/chat.json'
 
 type Props = {}
 
@@ -13,7 +12,11 @@ const ChatList = (props: Props) => {
         <FlatList data={chats} renderItem({item} => <ChatItem/>)/>
     */
 
-    <FlatList data={arr} renderItem={(arr => <ChatItem/>)}/>
+    <FlatList data={chat} renderItem={(item => <ChatItem name={item.item.user.name} 
+      image={item.item.user.image}
+      text={item.item.lastMessage.text}
+      time={item.item.lastMessage.createdAt}
+      />)}/>
   )
 }
 

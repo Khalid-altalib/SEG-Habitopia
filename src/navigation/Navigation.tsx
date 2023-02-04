@@ -15,12 +15,12 @@ const Navigation = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Navigator >
         {isAuthenticated ?
-          (<Stack.Screen name="Existing" component={MainNavigation}/>) :
-          (<Stack.Screen name="Auth" component={AuthNavigation}/>)
+          (<Stack.Screen name="Existing" component={MainNavigation} options={{headerShown: false}}/>) :
+          (<Stack.Screen name="Auth" component={AuthNavigation} options={{headerShown: false}}/>)
         }
-        <Stack.Screen name='Other' component={ChatNavigation}/>
+        <Stack.Screen name='Chat' component={ChatNavigation}/>
       </Stack.Navigator>
       
       
