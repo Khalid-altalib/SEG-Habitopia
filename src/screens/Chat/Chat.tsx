@@ -2,6 +2,7 @@ import React from 'react'
 import { Text, ImageBackground, StyleSheet, FlatList } from 'react-native'
 import data from '../../../assets/data/messages.json'
 import Message from '../../features/chat/Message'
+import InputBox from '../../features/chat/InputBox'
 
 type Props = {}
 
@@ -14,6 +15,7 @@ const Chat = (props: Props) => {
         style={styles.flatList}
         inverted
       />
+      <InputBox/>
     </ImageBackground>
   )
 }

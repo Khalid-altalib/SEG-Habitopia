@@ -32,7 +32,6 @@ const Message = (message: message) => {
 
 const styles = StyleSheet.create({
     container: {
-        
         margin: 5,
         padding: 10,
         borderRadius: 10,
