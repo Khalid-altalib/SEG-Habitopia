@@ -1,13 +1,18 @@
+import { NavigationProp, useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Pressable, Text, Image, StyleSheet } from 'react-native'
+import { RootParams } from '../../../types'
+
 
 
 
 type Props = {}
 
 const ChatItem = (props: Props) => {
+  const navigation = useNavigation<NavigationProp<RootParams>>()
+
   return (
-    <View style={chatstyles.chatContainer}>
+    <Pressable onPress={() => navigation.navigate('Other')}style={chatstyles.chatContainer}>
         <Image source={{uri: 'https://via.placeholder.com/150'}} style={chatstyles.image}/>
         <View style={chatstyles.container}>
             <View style={chatstyles.row}>
@@ -23,7 +28,7 @@ const ChatItem = (props: Props) => {
                 </Text>
             </View>
         </View>
-    </View>
+    </Pressable>
   )
 }
 

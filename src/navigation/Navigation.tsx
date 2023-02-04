@@ -3,16 +3,27 @@ import React from "react";
 
 import MainNavigation from "./flows/MainNavigation";
 import AuthNavigation from "./flows/AuthNavigation";
+import ChatNavigation from "./flows/ChatNavigation";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-type Props = {};
+import { RootParams } from "../../types";
 
-const Navigation = (props: Props) => {
+const Stack = createNativeStackNavigator<RootParams>()
+
+const Navigation = () => {
   let isAuthenticated: boolean = true; // BACKEND PLACEHOLDER
 
   return (
     <NavigationContainer>
-      {isAuthenticated ? <MainNavigation /> : <AuthNavigation />}
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        {isAuthenticated ?
+          (<Stack.Screen name="Existing" component={MainNavigation}/>) :
+          (<Stack.Screen name="Auth" component={AuthNavigation}/>)
+        }
+        <Stack.Screen name='Other' component={ChatNavigation}/>
+      </Stack.Navigator>
+      
+      
     </NavigationContainer>
   );
 };

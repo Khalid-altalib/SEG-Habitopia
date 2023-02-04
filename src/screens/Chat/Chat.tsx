@@ -6,6 +6,7 @@ import InputBox from '../../features/chat/InputBox'
 
 type Props = {}
 
+
 const Chat = (props: Props) => {
   return (
     <ImageBackground source={{ uri: "https://placeholder.com" }} style={styles.bg}>
@@ -32,5 +33,6 @@ const styles = StyleSheet.create({
 
 
 })
+
 
 export default Chat

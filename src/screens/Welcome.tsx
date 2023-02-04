@@ -6,7 +6,7 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 import Layout from "../constants/Layout";
 import styles from "../constants/Styles";
-import { RootStackParams } from "../../types";
+import { AuthParams } from "../../types";
 
 function Welcome(): JSX.Element {
   const WINDOW_WIDTH: number = Math.round(Layout.window.width);
@@ -17,7 +17,7 @@ function Welcome(): JSX.Element {
 
   const insets = useSafeAreaInsets();
 
-  const navigation = useNavigation<NavigationProp<RootStackParams>>();
+  const navigation = useNavigation<NavigationProp<AuthParams>>();
 
   return (
     <ZStack>
