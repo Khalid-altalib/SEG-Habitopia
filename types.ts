@@ -27,3 +27,9 @@ export type ChatParams= {
   Chat: undefined;
 }
 
+
+export type LocalUser = {
+  authToken: string;
+  username: string;
+};
+

@@ -5,25 +5,31 @@ import MainNavigation from "./flows/MainNavigation";
 import AuthNavigation from "./flows/AuthNavigation";
 import ChatNavigation from "./flows/ChatNavigation";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { LocalUser } from "../../types";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { logInUserFromStorage } from "../features/auth/authSlice";
 
 import { RootParams } from "../../types";
 
 const Stack = createNativeStackNavigator<RootParams>()
 
-const Navigation = () => {
-  let isAuthenticated: boolean = true; // BACKEND PLACEHOLDER
+const Navigation = (props: Props) => {
+  const dispatch = useAppDispatch();
+  dispatch(logInUserFromStorage());
+
+  const localUser: LocalUser | null = useAppSelector(
+    (state) => state.auth.user
+  );
 
   return (
     <NavigationContainer>
       <Stack.Navigator >
-        {isAuthenticated ?
+        {localUser ?
           (<Stack.Screen name="Existing" component={MainNavigation} options={{headerShown: false}}/>) :
           (<Stack.Screen name="Auth" component={AuthNavigation} options={{headerShown: false}}/>)
         }
         <Stack.Screen name='Chat' component={ChatNavigation}/>
       </Stack.Navigator>
-      
-      
     </NavigationContainer>
   );
 };
