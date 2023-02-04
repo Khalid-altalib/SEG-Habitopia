@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { LocalUser } from "../../../types";
+import { AsyncStorage } from "react-native";
 
 type AuthState = {
   signUpData: {
@@ -16,18 +17,6 @@ type AuthState = {
   user: LocalUser | null;
   loading: boolean;
   error: string;
-};
-
-const getLoggedInUserFromStorage = (): LocalUser | null => {
-  const data = localStorage.getItem("user");
-
-  if (data === null) {
-    return null;
-  }
-
-  const user = JSON.parse(data);
-
-  return user;
 };
 
 const createAsyncThunkForAuthentication = (name: string, endpoint: string) => {
@@ -55,10 +44,23 @@ export const signUpUser = createAsyncThunkForAuthentication(
   "`https://test/api/signup`"
 );
 
+export const logInUserFromStorage = createAsyncThunk<
+  LocalUser,
+  void,
+  { rejectValue: string }
+>("auth/loginFromStorage", async (_, thunkAPI) => {
+  const data = await AsyncStorage.getItem("user");
+  if (data === null) {
+    return thunkAPI.rejectWithValue("Please log in again");
+  } else {
+    return JSON.parse(data) as LocalUser;
+  }
+});
+
 const initialState: AuthState = {
   signUpData: {},
   logInData: {},
-  user: getLoggedInUserFromStorage(),
+  user: null,
   loading: false,
   error: "",
 };
@@ -101,6 +103,9 @@ export const authSlice = createSlice({
     builder.addCase(signUpUser.pending, authenticationPending);
     builder.addCase(signUpUser.fulfilled, authenticationFulfilled);
     builder.addCase(signUpUser.rejected, authenticationRejected);
+    builder.addCase(logInUserFromStorage.pending, authenticationPending);
+    builder.addCase(logInUserFromStorage.fulfilled, authenticationFulfilled);
+    builder.addCase(logInUserFromStorage.rejected, authenticationRejected);
   },
 });
 
