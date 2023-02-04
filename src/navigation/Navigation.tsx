@@ -3,16 +3,23 @@ import React from "react";
 
 import MainNavigation from "./flows/MainNavigation";
 import AuthNavigation from "./flows/AuthNavigation";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { LocalUser } from "../../types";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { logInUserFromStorage } from "../features/auth/authSlice";
 
 type Props = {};
 
 const Navigation = (props: Props) => {
-  let isAuthenticated: boolean = true; // BACKEND PLACEHOLDER
+  const dispatch = useAppDispatch();
+  dispatch(logInUserFromStorage());
+
+  const localUser: LocalUser | null = useAppSelector(
+    (state) => state.auth.user
+  );
 
   return (
     <NavigationContainer>
-      {isAuthenticated ? <MainNavigation /> : <AuthNavigation />}
+      {localUser ? <MainNavigation /> : <AuthNavigation />}
     </NavigationContainer>
   );
 };
