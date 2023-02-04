@@ -27,4 +27,3 @@ export type ChatParams= {
   Chat: undefined;
 }
 
-export type ChatNagivationProp = NativeStackNavigationProp<ChatParams>;
