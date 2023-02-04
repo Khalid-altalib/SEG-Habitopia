@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Welcome from "../../screens/Welcome";
 
 import SignUp from "../../screens/SignUp/SignUp";
-import EmailLogIn from "../../screens/LogIn/EmailLogIn";
+import LogIn from "../../screens/LogIn";
 
 import { AuthParams } from "../../../types";
 
@@ -28,7 +28,7 @@ const AuthNavigation = () => {
       {/* Log In Flow */}
       <AuthStack.Screen
         name="LogIn"
-        component={EmailLogIn}
+        component={LogIn}
         options={{ headerTitle: "Log in" }}
       />
     </AuthStack.Navigator>
