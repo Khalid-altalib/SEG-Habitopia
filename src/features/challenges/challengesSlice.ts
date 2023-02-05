@@ -1,5 +1,6 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { Challenge } from "../../../types";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { Challenge, LocalUser } from "../../../types";
+import store from "../../app/store";
 
 type ChallengesState = {
   challenges: Challenge[];
@@ -21,6 +22,28 @@ export const fetchChallenges = createAsyncThunk<
   }
 });
 
+export const joinChallenge = createAsyncThunk<
+  object,
+  string,
+  { rejectValue: string }
+>("challenges/join", async (challengeName: string, thunkAPI) => {
+  try {
+    const state = store.getState();
+    const localUser: LocalUser | null = state.auth.user;
+    const response = await fetch("https://test/api/challenges/join", {
+      method: "POST",
+      body: JSON.stringify({ challengeName }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }); //  BACKEND PLACEHOLDER
+    return await response.json();
+  } catch (error: any) {
+    const message = error.message;
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 const initialState: ChallengesState = {
   challenges: [],
   loading: false,
@@ -31,5 +54,44 @@ export const challengesSlice = createSlice({
   name: "challenges",
   initialState,
   reducers: {},
-  extraReducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchChallenges.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(
+      fetchChallenges.fulfilled,
+      (state, action: PayloadAction<Challenge[]>) => {
+        state.challenges = action.payload;
+        state.loading = false;
+      }
+    );
+    builder.addCase(fetchChallenges.rejected, (state, action: any) => {
+      state.challenges = [];
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(joinChallenge.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(
+      joinChallenge.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        const joinedChallengeName = action.payload.challengeName;
+        state.challenges = state.challenges.map((challenge) => {
+          if (challenge.name == joinedChallengeName) {
+            return { ...challenge, active: true };
+          } else {
+            return challenge;
+          }
+        });
+        state.loading = false;
+        state.error = "";
+      }
+    );
+    builder.addCase(joinChallenge.rejected, (state, action: any) => {
+      state.challenges = [];
+      state.loading = false;
+      state.error = action.payload;
+    });
+  },
 });

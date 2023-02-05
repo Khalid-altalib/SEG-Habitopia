@@ -36,12 +36,12 @@ const createAsyncThunkForAuthentication = (name: string, endpoint: string) => {
 
 export const logInUser = createAsyncThunkForAuthentication(
   "auth/login",
-  "`https://test/api/login`"
+  "https://test/api/login"
 );
 
 export const signUpUser = createAsyncThunkForAuthentication(
   "auth/signup",
-  "`https://test/api/signup`"
+  "https://test/api/signup"
 );
 
 export const logInUserFromStorage = createAsyncThunk<
