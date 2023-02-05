@@ -48,7 +48,7 @@ export const logInUserFromStorage = createAsyncThunk<
   LocalUser,
   void,
   { rejectValue: string }
->("auth/loginFromStorage", async (_, thunkAPI) => {
+>("auth/logInFromStorage", async (_, thunkAPI) => {
   const data = await AsyncStorage.getItem("user");
   if (data === null) {
     return thunkAPI.rejectWithValue("Please log in again");
@@ -56,6 +56,13 @@ export const logInUserFromStorage = createAsyncThunk<
     return JSON.parse(data) as LocalUser;
   }
 });
+
+export const logOutUser = createAsyncThunk(
+  "auth/logOutUser",
+  async (_, thunkAPI) => {
+    return await AsyncStorage.removeItem("user");
+  }
+);
 
 const initialState: AuthState = {
   signUpData: {},
@@ -106,6 +113,13 @@ export const authSlice = createSlice({
     builder.addCase(logInUserFromStorage.pending, authenticationPending);
     builder.addCase(logInUserFromStorage.fulfilled, authenticationFulfilled);
     builder.addCase(logInUserFromStorage.rejected, authenticationRejected);
+    builder.addCase(logOutUser.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(logOutUser.fulfilled, (state) => {
+      state.loading = false;
+      state.user = null;
+    });
   },
 });
 
