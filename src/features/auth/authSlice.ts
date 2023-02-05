@@ -5,10 +5,7 @@ import { AsyncStorage } from "react-native";
 
 type AuthState = {
   signUpData: {
-    phoneNumber: {
-      countryCode: number;
-      number: string;
-    };
+    phoneNumber: string;
     willReceiveMarketingCommunications: false;
     avatar: string;
     email: string;

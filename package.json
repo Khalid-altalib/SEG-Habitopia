@@ -35,6 +35,7 @@
     "react-dom": "18.1.0",
     "react-hook-form": "^7.43.0",
     "react-native": "0.70.5",
+    "react-native-phone-number-input": "^2.1.0",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "~3.18.0",
     "react-native-svg": "^12.1.1",

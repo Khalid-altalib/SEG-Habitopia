@@ -9,6 +9,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  paddedContent: {
+    padding: 30,
+  },
 });
 
 export default styles;
