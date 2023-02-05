@@ -95,3 +95,5 @@ export const challengesSlice = createSlice({
     });
   },
 });
+
+export default challengesSlice.reducer;
