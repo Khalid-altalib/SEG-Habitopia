@@ -25,23 +25,27 @@ const LogInForm = () => {
   };
   return (
     <>
-      <Text>Email</Text>
       <Controller
         control={control}
         render={({ field: { onChange, value } }) => (
-          <Input onChangeText={onChange} value={value} />
+          <Input onChangeText={onChange} value={value} placeholder="Email" />
         )}
         name="email"
       />
-      <Text>Password</Text>
       <Controller
         control={control}
         render={({ field: { onChange, value } }) => (
-          <Input type={"password"} onChangeText={onChange} value={value} />
+          <Input
+            type={"password"}
+            onChangeText={onChange}
+            value={value}
+            mt="6"
+            placeholder="Password"
+          />
         )}
         name="password"
       />
-      <Button onPress={handleSubmit(onSubmit)}>
+      <Button onPress={handleSubmit(onSubmit)} mt="10">
         <Text>Submit</Text>
       </Button>
     </>

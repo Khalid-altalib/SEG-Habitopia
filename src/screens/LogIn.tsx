@@ -1,12 +1,18 @@
 import React from "react";
 import styles from "../constants/Styles";
 import LogInForm from "../features/auth/LogInForm";
-import { View } from "native-base";
+import { Box, Text, View, Center, Image } from "native-base";
+import PaddedLayout from "../components/PaddedLayout";
 
 const LogIn = () => {
   return (
     <View style={[styles.maxSize, styles.centeredContent]}>
-      <LogInForm />
+      <PaddedLayout>
+        <Center mb={"4"}>Welcome back! Log In to your account</Center>
+        <Box>
+          <LogInForm />
+        </Box>
+      </PaddedLayout>
     </View>
   );
 };
