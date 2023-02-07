@@ -19,18 +19,18 @@ const LeaderboardCards = (props: Props) => {
     { name: "George", wins: 27 },
   ];
   return (
-    <VStack space={5}>
-      {/* <LoadingLayout loading={false}> */}
-      {leaderboardEntries.map((entry, index) => (
-        <LeaderboardCard
-          name={entry.name}
-          wins={entry.wins}
-          key={index}
-          place={index}
-        />
-      ))}
-      {/* </LoadingLayout> */}
-    </VStack>
+    <LoadingLayout loading={false}>
+      <VStack space={5}>
+        {leaderboardEntries.map((entry, index) => (
+          <LeaderboardCard
+            name={entry.name}
+            wins={entry.wins}
+            key={index}
+            place={index}
+          />
+        ))}
+      </VStack>
+    </LoadingLayout>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Spinner } from "native-base";
+import { Spinner, Text, View } from "native-base";
 import React from "react";
 
 type Props = {
@@ -7,7 +7,9 @@ type Props = {
 };
 
 const LoadingLayout = (props: Props) => {
-  return props.loading ? <Spinner /> : props.children;
+  const { loading, children } = props;
+
+  return <>{loading ? <Spinner /> : children}</>;
 };
 
 export default LoadingLayout;
