@@ -1,22 +1,33 @@
 import { Avatar, Box, Card, Heading, HStack, Text, View } from "native-base";
 import React from "react";
 
-type Props = {};
+type Props = {
+  name: string;
+  wins: number;
+  place: number;
+};
+
+const rankedColors = ["amber.200", "light.200", "orange.200"];
 
 const LeaderboardCard = (props: Props) => {
+  const { name, wins, place } = props;
+
+  const cardColor =
+    place < rankedColors.length ? rankedColors[place] : "light.100";
+
   return (
     <Box shadow="3">
-      <Card backgroundColor="amber.200">
+      <Card backgroundColor={cardColor}>
         <HStack justifyContent={"space-between"} alignItems="center">
           <HStack space={4}>
             <Avatar />
             <View>
-              <Heading>Ihtasham</Heading>
-              <Text>140 Check-ins</Text>
+              <Heading>{name}</Heading>
+              <Text>{wins} wins</Text>
             </View>
           </HStack>
           <View>
-            <Heading>#1</Heading>
+            <Heading>#{place + 1}</Heading>
           </View>
         </HStack>
       </Card>
