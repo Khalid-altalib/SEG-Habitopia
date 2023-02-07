@@ -1,12 +1,13 @@
 import { Box } from "native-base";
 import React from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import styles from "../constants/Styles";
+import styles from "../../constants/Styles";
 
 type Props = { children: React.ReactNode };
 
 const RegularLayout = (props: Props) => {
-  const BORDER_PADDING_SIZE = 15;
+  const HORIZONTAL_BORDER_PADDING_SIZE = 15;
+  const VERTICAL_BORDER_PADDING_SIZE = 20;
 
   const insets = useSafeAreaInsets();
 
@@ -15,10 +16,10 @@ const RegularLayout = (props: Props) => {
       style={[
         styles.maxSize,
         {
-          paddingTop: BORDER_PADDING_SIZE,
-          paddingBottom: BORDER_PADDING_SIZE,
-          paddingLeft: insets.left + BORDER_PADDING_SIZE,
-          paddingRight: insets.right + BORDER_PADDING_SIZE,
+          paddingTop: VERTICAL_BORDER_PADDING_SIZE,
+          paddingBottom: VERTICAL_BORDER_PADDING_SIZE,
+          paddingLeft: insets.left + HORIZONTAL_BORDER_PADDING_SIZE,
+          paddingRight: insets.right + HORIZONTAL_BORDER_PADDING_SIZE,
         },
       ]}
     >

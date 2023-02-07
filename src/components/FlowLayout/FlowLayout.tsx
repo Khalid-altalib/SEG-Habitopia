@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "native-base";
-import { EdgeInsets, useSafeAreaInsets } from "react-native-safe-area-context";
-import styles from "../constants/Styles";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import styles from "../../constants/Styles";
 
 type Props = { children: React.ReactNode };
 

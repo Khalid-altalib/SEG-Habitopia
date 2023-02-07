@@ -1,17 +1,17 @@
-import { Heading, Text, View } from "native-base";
+import { ScrollView } from "native-base";
 import React from "react";
-import PaddedLayout from "../components/FlowLayout";
-import RegularLayout from "../components/RegularLayout";
+import RegularLayout from "../components/RegularLayout/RegularLayout";
+import LeaderboardCards from "../features/leaderboard/LeaderboardCards/LeaderboardCards";
 
 type Props = {};
 
 const Leaderboard = (props: Props) => {
   return (
-    <View>
+    <ScrollView>
       <RegularLayout>
-        <Heading>Hi</Heading>
+        <LeaderboardCards />
       </RegularLayout>
-    </View>
+    </ScrollView>
   );
 };
 
