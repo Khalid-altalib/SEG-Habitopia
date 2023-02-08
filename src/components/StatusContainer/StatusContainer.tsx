@@ -14,7 +14,7 @@ const StatusContainer = (props: Props) => {
   const renderStatusDisplay = () => {
     if (loading) {
       return <Spinner />;
-    } else if (error) {
+    } else if (error && error.length > 0) {
       return <Text>An error has occured</Text>;
     } else if (data && data.length === 0) {
       return <Text>No results</Text>;

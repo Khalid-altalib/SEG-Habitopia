@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
-type LeaderboardState = {
+export type LeaderboardState = {
   loading: boolean;
   error: string;
   challengeType: string;
@@ -38,10 +38,10 @@ export const leaderboardSlice = createSlice({
   reducers: {
     changeSetting: (
       state: LeaderboardState,
-      action: PayloadAction<{ name: keyof LeaderboardState; value: string }>
+      action: PayloadAction<{ name: string; value: string }>
     ) => {
       const { name, value } = action.payload;
-      state[name] = value as never;
+      state[name as keyof LeaderboardState] = value as never;
       state.page = 1;
       state.entries = [];
     },
@@ -69,5 +69,7 @@ export const leaderboardSlice = createSlice({
     );
   },
 });
+
+export const { changeSetting } = leaderboardSlice.actions;
 
 export default leaderboardSlice.reducer;
