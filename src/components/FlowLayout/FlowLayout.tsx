@@ -5,7 +5,7 @@ import styles from "../../constants/Styles";
 
 type Props = { children: React.ReactNode };
 
-const PaddedLayout = (props: Props) => {
+const FlowLayout = (props: Props) => {
   const BORDER_PADDING_SIZE = 30;
 
   const insets = useSafeAreaInsets();
@@ -27,4 +27,4 @@ const PaddedLayout = (props: Props) => {
   );
 };
 
-export default PaddedLayout;
+export default FlowLayout;

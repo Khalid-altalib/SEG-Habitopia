@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import store from "../../app/store";
 
 type LeaderboardState = {
   loading: boolean;

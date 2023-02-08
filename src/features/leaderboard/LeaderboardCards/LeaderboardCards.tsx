@@ -1,6 +1,6 @@
 import { View, VStack } from "native-base";
 import React from "react";
-import LoadingLayout from "../../../components/LoadingLayout/LoadingLayout";
+import StatusContainer from "../../../components/StatusContainer/StatusContainer";
 import LeaderboardCard from "../LeaderboardCard/LeaderboardCard";
 
 type Props = {};
@@ -19,7 +19,7 @@ const LeaderboardCards = (props: Props) => {
     { name: "George", wins: 27 },
   ];
   return (
-    <LoadingLayout loading={false}>
+    <StatusContainer loading={false}>
       <VStack space={5}>
         {leaderboardEntries.map((entry, index) => (
           <LeaderboardCard
@@ -30,7 +30,7 @@ const LeaderboardCards = (props: Props) => {
           />
         ))}
       </VStack>
-    </LoadingLayout>
+    </StatusContainer>
   );
 };
 
