@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { Challenge, LocalUser } from "../../../types";
-import store from "../../app/store";
 
 type ChallengesState = {
   challenges: Challenge[];
@@ -28,8 +27,8 @@ export const joinChallenge = createAsyncThunk<
   { rejectValue: string }
 >("challenges/join", async (challengeName: string, thunkAPI) => {
   try {
-    const state = store.getState();
-    const localUser: LocalUser | null = state.auth.user;
+    // const state = store.getState();
+    // const localUser: LocalUser | null = state.auth.user;
     const response = await fetch("https://test/api/challenges/join", {
       method: "POST",
       body: JSON.stringify({ challengeName }),

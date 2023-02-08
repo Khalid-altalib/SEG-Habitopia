@@ -12,8 +12,8 @@ export type LeaderboardState = {
 const initialState: LeaderboardState = {
   loading: false,
   error: "",
-  challengeType: "sleep",
-  timeInterval: "weekly",
+  challengeType: "Sleep",
+  timeInterval: "Weekly",
   page: 1,
   entries: [{}],
 };
@@ -41,9 +41,16 @@ export const leaderboardSlice = createSlice({
       action: PayloadAction<{ name: string; value: string }>
     ) => {
       const { name, value } = action.payload;
+
+      if (state[name as keyof LeaderboardState] == value) {
+        return;
+      }
+
       state[name as keyof LeaderboardState] = value as never;
       state.page = 1;
       state.entries = [];
+      state.loading = false;
+      state.error = "";
     },
   },
   extraReducers: (builder) => {
@@ -61,7 +68,7 @@ export const leaderboardSlice = createSlice({
       state.error = "";
     });
     builder.addCase(
-      fetchLeaderboard.pending,
+      fetchLeaderboard.rejected,
       (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.error = action.payload;

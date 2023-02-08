@@ -12,6 +12,12 @@ const LeaderboardCards = (props: Props) => {
 
   const loading = useAppSelector((state) => state.leaderboard.loading);
   const error = useAppSelector((state) => state.leaderboard.error);
+  const challengeType = useAppSelector(
+    (state) => state.leaderboard.challengeType
+  );
+  const timeInterval = useAppSelector(
+    (state) => state.leaderboard.timeInterval
+  );
 
   const leaderboardEntries = [
     { name: "Ihtasham", wins: 63 },
@@ -19,11 +25,11 @@ const LeaderboardCards = (props: Props) => {
     { name: "Bob", wins: 35 },
     { name: "Harry", wins: 29 },
     { name: "George", wins: 27 },
-  ]; // useAppSelector((state) => state.leaderboard.entries);
+  ]; // useAppSelector((state) => state.leaderboard.entries); BACKEND_PLACEHOLDER
 
   useEffect(() => {
     dispatch(fetchLeaderboard());
-  }, []);
+  }, [challengeType, timeInterval]);
 
   return (
     <StatusContainer loading={loading} error={error} data={leaderboardEntries}>

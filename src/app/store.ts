@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "../features/auth/authSlice";
-import challengesSlice from "../features/challenges/challengesSlice";
-import leaderboardSlice from "../features/leaderboard/leaderboardSlice";
+import leaderboardReducer from "../features/leaderboard/leaderboardSlice";
+import challengesReducer from "../features/challenges/challengesSlice";
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
-    challenges: challengesSlice,
-    leaderboard: leaderboardSlice,
+    challenges: challengesReducer,
+    leaderboard: leaderboardReducer,
   },
 });
 

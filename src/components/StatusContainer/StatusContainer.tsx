@@ -1,5 +1,15 @@
-import { Spinner, Text, View } from "native-base";
+import {
+  Center,
+  HStack,
+  QuestionOutlineIcon,
+  Spinner,
+  Text,
+  View,
+  VStack,
+  WarningOutlineIcon,
+} from "native-base";
 import React from "react";
+import StatusIcon from "./StatusIcon";
 
 type Props = {
   loading?: boolean;
@@ -13,18 +23,25 @@ const StatusContainer = (props: Props) => {
 
   const renderStatusDisplay = () => {
     if (loading) {
-      return <Spinner />;
+      return <StatusIcon label="Loading" icon={<Spinner />} />;
     } else if (error && error.length > 0) {
-      return <Text>An error has occured</Text>;
+      return (
+        <StatusIcon
+          label="An error has occured"
+          icon={<WarningOutlineIcon />}
+        />
+      );
     } else if (data && data.length === 0) {
-      return <Text>No results</Text>;
+      return (
+        <StatusIcon label="No results found" icon={<QuestionOutlineIcon />} />
+      );
     }
   };
 
   return (
     <View>
       <View>{children}</View>
-      {renderStatusDisplay}
+      <Center>{renderStatusDisplay()}</Center>
     </View>
   );
 };

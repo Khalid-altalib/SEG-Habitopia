@@ -18,11 +18,13 @@ const LeaderboardSettings = (props: Props) => {
     (state) => state.leaderboard.challengeType
   );
 
-  const challenges = useAppSelector((state) => state.challenges.challenges);
+  // const challenges = useAppSelector((state) => state.challenges.challenges); BACKEND_PLACEHOLDER
 
-  const challengeTypes = challenges.map(
-    (challenge: Challenge) => challenge.name
-  );
+  // const challengeTypes = challenges.map(
+  //   (challenge: Challenge) => challenge.name
+  // );
+
+  const challengeTypes = ["Sleep", "Gym", "Diet"];
 
   const dispatch = useAppDispatch();
 
@@ -45,7 +47,7 @@ const LeaderboardSettings = (props: Props) => {
       <Select
         selectedValue={challengeType}
         minWidth={120}
-        onValueChange={(value) => handleChange("challengeTypes", value)}
+        onValueChange={(value) => handleChange("challengeType", value)}
       >
         {challengeTypes.map((value) => (
           <Select.Item label={value} value={value} key={value} />
