@@ -1,11 +1,9 @@
 import React from "react";
 import { ImageBackground } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button, Box, Heading, ZStack, Image } from "native-base";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import PaddedLayout from "../components/PaddedLayout";
+import FlowLayout from "../components/FlowLayout/FlowLayout";
 import Layout from "../constants/Layout";
-import styles from "../constants/Styles";
 import { AuthParams } from "../../types";
 
 function Welcome(): JSX.Element {
@@ -23,7 +21,7 @@ function Welcome(): JSX.Element {
         source={{ uri: BACKGROUND_IMAGE_PATH }}
         // style={{ width: "100%", height: "100%" }}
       />
-      <PaddedLayout>
+      <FlowLayout>
         <Box
           style={{
             alignItems: "center",
@@ -75,7 +73,7 @@ function Welcome(): JSX.Element {
             </Button>
           </Box>
         </Box>
-      </PaddedLayout>
+      </FlowLayout>
     </ZStack>
   );
 }
