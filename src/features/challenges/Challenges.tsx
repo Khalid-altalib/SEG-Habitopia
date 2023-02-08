@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { View, Image, SafeAreaView, FlatList, Text, TouchableOpacity, GestureResponderEvent, ListRenderItem, Alert, Modal, Pressable } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Challenge } from '../../../types';
+import { useAppSelector } from '../../app/hooks';
 import PaddedLayout from '../../components/PaddedLayout';
 import styles from '../../constants/Styles';
 
@@ -11,6 +12,7 @@ type ChallengeChoice = {
     onPress: ((event: GestureResponderEvent) => void);
 }
 const Challenges = () => {
+    const {challenges, loading, error} = useAppSelector((state) => (state.challenges));
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedChallenge, setselectedChallenge] = useState<Challenge>()
