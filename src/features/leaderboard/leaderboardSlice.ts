@@ -45,6 +45,10 @@ export const fetchLeaderboard = createAsyncThunk<
       ) {
         return false;
       }
+
+      if (leaderboard.error.length > 0) {
+        return false;
+      }
     },
   }
 );

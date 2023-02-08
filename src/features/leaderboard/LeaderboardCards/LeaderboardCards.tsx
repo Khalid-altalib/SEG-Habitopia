@@ -25,6 +25,10 @@ const LeaderboardCards = (props: Props) => {
     { name: "Bob", wins: 35 },
     { name: "Harry", wins: 29 },
     { name: "George", wins: 27 },
+    { name: "Harry", wins: 29 },
+    { name: "George", wins: 27 },
+    { name: "Harry", wins: 29 },
+    { name: "George", wins: 27 },
   ]; // useAppSelector((state) => state.leaderboard.entries); BACKEND_PLACEHOLDER
 
   useEffect(() => {
