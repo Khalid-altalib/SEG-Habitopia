@@ -23,7 +23,7 @@ const StatusContainer = (props: Props) => {
 
   const renderStatusDisplay = () => {
     if (loading) {
-      return <StatusIcon label="Loading" icon={<Spinner />} />;
+      return <StatusIcon label="Loading..." icon={<Spinner />} />;
     } else if (error && error.length > 0) {
       return (
         <StatusIcon
