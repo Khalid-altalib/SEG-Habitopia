@@ -35,4 +35,6 @@ export type Challenge = {
   name: string;
   description: string;
   active: boolean;
+  color: string;
+  image: string;
 };
