@@ -7,21 +7,17 @@ import Profile from "../../screens/Profile";
 import ChatList from "../../screens/Chat/ChatList";
 import { ProfileParams } from "../../../types";
 
-
 const Tab = createBottomTabNavigator<ProfileParams>();
 
 const MainNavigation = () => {
   return (
-    
     <Tab.Navigator initialRouteName="Home" screenOptions={{}}>
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Chats" component={ChatList}/>
+      <Tab.Screen name="Chats" component={ChatList} />
       <Tab.Screen name="Explore" component={Explore} />
       <Tab.Screen name="Leaderboard" component={Leaderboard} />
       <Tab.Screen name="You" component={Profile} />
-      
     </Tab.Navigator>
-    
   );
 };
 

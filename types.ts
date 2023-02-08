@@ -36,3 +36,12 @@ export type Challenge = {
   description: string;
   active: boolean;
 };
+
+export type Profile = {
+  username: string;
+  name: string;
+  rankings: Array<object>;
+  statistics: object;
+  friends: undefined;
+  friendStatus: undefined;
+};

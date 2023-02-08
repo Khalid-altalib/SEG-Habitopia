@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { Challenge, LocalUser } from "../../../types";
+import { RootState } from "../../app/store";
+import { getAuthTokenFromThunk } from "../../app/util";
 
 type ChallengesState = {
   challenges: Challenge[];
@@ -13,7 +15,12 @@ export const fetchChallenges = createAsyncThunk<
   { rejectValue: string }
 >("challenges/fetch", async (_, thunkAPI) => {
   try {
-    const response = await fetch("https://test/api/challenges"); //  BACKEND PLACEHOLDER
+    const response = await fetch("https://test/api/challenges", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: getAuthTokenFromThunk(thunkAPI),
+      },
+    }); //  BACKEND PLACEHOLDER
     return (await response.json()) as Challenge[];
   } catch (error: any) {
     const message = error.message;
@@ -24,16 +31,15 @@ export const fetchChallenges = createAsyncThunk<
 export const joinChallenge = createAsyncThunk<
   object,
   string,
-  { rejectValue: string }
+  { rejectValue: string; state: RootState }
 >("challenges/join", async (challengeName: string, thunkAPI) => {
   try {
-    // const state = store.getState();
-    // const localUser: LocalUser | null = state.auth.user;
     const response = await fetch("https://test/api/challenges/join", {
       method: "POST",
       body: JSON.stringify({ challengeName }),
       headers: {
         "Content-Type": "application/json",
+        Authorization: getAuthTokenFromThunk(thunkAPI),
       },
     }); //  BACKEND PLACEHOLDER
     return await response.json();
