@@ -10,6 +10,8 @@ npm-debug.*
 *.orig.*
 web-build/
 .vscode/
+package-lock.json
+yarn.lock
 
 # macOS
 .DS_Store
@@ -35,3 +37,4 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+
