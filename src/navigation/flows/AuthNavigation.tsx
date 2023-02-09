@@ -22,7 +22,9 @@ const AuthNavigation = () => {
       <AuthStack.Screen
         name="SignUp"
         component={SignUp}
-        options={{ headerTitle: "Sign up" }}
+        options={{
+          headerTitle: "Sign up",
+        }}
       />
 
       {/* Log In Flow */}

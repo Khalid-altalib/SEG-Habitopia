@@ -1,17 +1,14 @@
 import React from "react";
-import { View } from "native-base";
-
-import styles from "../../constants/Styles";
-import PhoneNumberForm from "../../features/auth/sign_up_forms/PhoneNumberForm";
+import PhoneNumber from "./PhoneNumber";
+import ConfirmationCode from "./ConfirmationCode";
+import Name from "./Name";
+import EmailAddress from "./EmailAddress";
+import SelectAvatar from "./SelectAvatar";
+import SelectChallenges from "./SelectChallenges";
+import SelectInstagram from "./SelectInstagram";
 
 const SignUp = () => {
-  return (
-    <View style={[styles.maxSize, styles.centeredContent]}>
-      <View style={[styles.paddedContent]}>
-        <PhoneNumberForm />
-      </View>
-    </View>
-  );
+  return <EmailAddress />;
 };
 
 export default SignUp;

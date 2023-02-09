@@ -11,6 +11,7 @@ type Props = {
   isFullWidth?: boolean;
   onPress?: () => void;
   type: ButtonType;
+  icon?: JSX.Element;
   children: string;
 };
 
@@ -19,6 +20,7 @@ const Button = ({
   isFullWidth = false,
   onPress,
   type,
+  icon,
   children,
 }: Props) => {
   if (type == undefined) type = ButtonType.Primary;
@@ -60,7 +62,7 @@ const Button = ({
         },
       ]}
     >
-      <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
+      <TouchableOpacity activeOpacity={0.7} onPress={onPress} style={style}>
         <LinearGradient
           colors={typeStyles[additionalStyle].backgroundColors}
           start={[0, 0]}
@@ -68,10 +70,17 @@ const Button = ({
           style={[
             styles.base,
             isFullWidth ? { width: "100%" } : { alignSelf: "flex-start" },
-            style,
           ]}
         >
-          <Text type={TextType.Button}>{children}</Text>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text
+              type={TextType.Button}
+              style={icon == undefined ? null : { marginRight: 5 }}
+            >
+              {children}
+            </Text>
+            {icon}
+          </View>
         </LinearGradient>
       </TouchableOpacity>
     </View>

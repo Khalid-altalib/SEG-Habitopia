@@ -11,7 +11,7 @@ import { logInUserFromStorage } from "../features/auth/authSlice";
 
 import { RootParams } from "../../types";
 
-const Stack = createNativeStackNavigator<RootParams>()
+const Stack = createNativeStackNavigator<RootParams>();
 
 const Navigation = (props: Props) => {
   const dispatch = useAppDispatch();
@@ -23,12 +23,21 @@ const Navigation = (props: Props) => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator >
-        {localUser ?
-          (<Stack.Screen name="Existing" component={MainNavigation} options={{headerShown: false}}/>) :
-          (<Stack.Screen name="Auth" component={AuthNavigation} options={{headerShown: false}}/>)
-        }
-        <Stack.Screen name='Chat' component={ChatNavigation}/>
+      <Stack.Navigator>
+        {localUser ? (
+          <Stack.Screen
+            name="Existing"
+            component={MainNavigation}
+            options={{ headerShown: false }}
+          />
+        ) : (
+          <Stack.Screen
+            name="Auth"
+            component={AuthNavigation}
+            options={{ headerShown: false }}
+          />
+        )}
+        <Stack.Screen name="Chat" component={ChatNavigation} />
       </Stack.Navigator>
     </NavigationContainer>
   );
