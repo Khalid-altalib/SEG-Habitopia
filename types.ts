@@ -1,11 +1,10 @@
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-
 export type RootParams = {
-  Auth: undefined,
-  Existing: undefined,
-  Chat : undefined,
-}
+  Auth: undefined;
+  Existing: undefined;
+  Chat: undefined;
+};
 
 export type ProfileParams = {
   Home: undefined;
@@ -15,7 +14,7 @@ export type ProfileParams = {
   Leaderboard: undefined;
   You: undefined;
   Chat: undefined;
-}
+};
 
 export type AuthParams = {
   Welcome: undefined;
@@ -23,13 +22,17 @@ export type AuthParams = {
   LogIn: undefined;
 };
 
-export type ChatParams= {
+export type ChatParams = {
   Chat: undefined;
-}
-
+};
 
 export type LocalUser = {
   authToken: string;
   username: string;
 };
 
+export enum TextType {
+  Regular,
+  Subtle,
+  Heading,
+}
