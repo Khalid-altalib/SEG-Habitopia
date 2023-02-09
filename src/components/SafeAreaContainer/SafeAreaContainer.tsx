@@ -9,7 +9,14 @@ type Props = {
   children: any;
 };
 
-const SafeArea = (props: Props) => {
+/**
+ * A container that ensures that all of its children are within the "safe area" of the screen
+ * and not obscured by issues such as the iPhone notch.
+ *
+ * @param props The children components to be displayed within this safe area container.
+ * @returns The container with its children.
+ */
+const SafeAreaContainer = (props: Props) => {
   const insets = useSafeAreaInsets();
 
   const styles = StyleSheet.create({
@@ -28,4 +35,4 @@ const SafeArea = (props: Props) => {
   );
 };
 
-export default SafeArea;
+export default SafeAreaContainer;
