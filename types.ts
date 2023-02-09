@@ -35,4 +35,10 @@ export enum TextType {
   Regular,
   Subtle,
   Heading,
+  Button,
+}
+
+export enum ButtonType {
+  Primary,
+  Secondary,
 }

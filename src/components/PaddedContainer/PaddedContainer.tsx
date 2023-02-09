@@ -12,7 +12,7 @@ type Props = {
  * @returns The padded container with its children.
  */
 const PaddedContainer = (props: Props) => {
-  const PADDING = 15;
+  const PADDING = 25;
 
   return <View style={{ padding: PADDING }}>{props.children}</View>;
 };

@@ -13,10 +13,7 @@ type Props = {
  * @returns The background component.
  */
 const Background = (props: Props) => {
-  const LIGHT_MODE_GRADIENT = [
-    theme.colors.blueGray[200],
-    theme.colors.blueGray[100],
-  ];
+  const LIGHT_MODE_GRADIENT = [theme.colors.gray[200], theme.colors.gray[100]];
   const DARK_MODE_GRADIENT = [
     theme.colors.blueGray[900],
     theme.colors.blueGray[800],

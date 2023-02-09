@@ -25,20 +25,25 @@ const Text = ({ type, style, children }: any) => {
 
   const styles = StyleSheet.create({
     base: {
-      color: useColorModeValue(theme.colors.gray[700], theme.colors.gray[200]),
+      color: useColorModeValue(theme.colors.gray[900], theme.colors.gray[200]),
     },
     regular: {
-      fontSize: 14,
+      fontSize: 19,
       fontFamily: fontsLoaded ? "Roboto Medium" : undefined,
     },
     subtle: {
-      fontSize: 12,
+      fontSize: 15,
       color: useColorModeValue(theme.colors.gray[500], theme.colors.gray[400]),
       fontFamily: fontsLoaded ? "Roboto Medium" : undefined,
     },
     heading: {
-      fontSize: 30,
+      fontSize: 40,
       fontFamily: fontsLoaded ? "Roboto Black" : undefined,
+    },
+    button: {
+      color: useColorModeValue(theme.colors.gray[200], theme.colors.gray[200]),
+      fontSize: 19,
+      fontFamily: fontsLoaded ? "Roboto Medium" : undefined,
     },
   });
 
