@@ -15,19 +15,28 @@ const initialState: ProfileState = {
   error: "",
 };
 
+let requestPromise: any = undefined;
+
 export const fetchProfile = createAsyncThunk<
   string,
   any,
   { rejectValue: string }
 >("profile/fetch", async (username: string, thunkAPI) => {
   try {
-    const endpoint = `https://test/api/profile/${username}`;
-    const response = await fetch(endpoint, {
+    const endpoint = `https://test/api/profile/${username}`; //  BACKEND PLACEHOLDER
+
+    if (requestPromise) {
+      requestPromise.abort();
+    }
+
+    requestPromise = fetch(endpoint, {
       headers: {
         "Content-Type": "application/json",
         Authorization: getAuthTokenFromThunk(thunkAPI),
       },
-    }); //  BACKEND PLACEHOLDER
+    });
+
+    const response = await requestPromise;
     return await response.json();
   } catch (error: any) {
     const message = error.message;
@@ -49,14 +58,11 @@ export const profileSlice = createSlice({
         state.error = "";
       }
     );
-    builder.addCase(
-      fetchProfile.pending,
-      (state: ProfileState, action: PayloadAction<any>) => {
-        state.profile = undefined;
-        state.loading = true;
-        state.error = "";
-      }
-    );
+    builder.addCase(fetchProfile.pending, (state: ProfileState) => {
+      state.profile = undefined;
+      state.loading = true;
+      state.error = "";
+    });
     builder.addCase(
       fetchProfile.rejected,
       (state: ProfileState, action: PayloadAction<any>) => {
