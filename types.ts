@@ -45,8 +45,3 @@ export type Profile = {
   friends: undefined;
   friendStatus: undefined;
 };
-
-export type Status = {
-  loading: boolean;
-  error: string;
-};

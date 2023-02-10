@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { Profile, Status } from "../../../types";
-import { RootState } from "../../app/store";
+import { Profile } from "../../../types";
 import { getAuthTokenFromThunk } from "../../app/util";
 
 export type ProfileState = {

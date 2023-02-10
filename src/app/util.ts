@@ -1,6 +1,6 @@
 import { LocalUser } from "../../types";
 
-export const getAuthToken = (thunkAPI: any) => {
+export const getAuthTokenFromThunk = (thunkAPI: any) => {
   const state = thunkAPI.getState();
   const localUser: LocalUser | null = state.auth.user;
   const authToken = localUser ? localUser.authToken : "";
