@@ -4,11 +4,15 @@ import { RootState } from "../../app/store";
 import { getAuthTokenFromThunk } from "../../app/util";
 
 export type ProfileState = {
-  profiles: Array<Profile & Status>;
+  profile?: Profile;
+  loading: boolean;
+  error: string;
 };
 
 const initialState: ProfileState = {
-  profiles: [],
+  profile: undefined,
+  loading: false,
+  error: "",
 };
 
 export const fetchProfile = createAsyncThunk<
@@ -40,10 +44,25 @@ export const profileSlice = createSlice({
       fetchProfile.fulfilled,
       (state: ProfileState, action: PayloadAction<any>) => {
         const { profile } = action.payload;
-        let selectedProfile = state.profiles.find(
-          (p) => p.name == profile.name
-        );
-        selectedProfile = { ...selectedProfile };
+        state.profile = profile;
+        state.loading = false;
+        state.error = "";
+      }
+    );
+    builder.addCase(
+      fetchProfile.pending,
+      (state: ProfileState, action: PayloadAction<any>) => {
+        state.profile = undefined;
+        state.loading = true;
+        state.error = "";
+      }
+    );
+    builder.addCase(
+      fetchProfile.rejected,
+      (state: ProfileState, action: PayloadAction<any>) => {
+        state.profile = undefined;
+        state.loading = false;
+        state.error = action.payload.message;
       }
     );
   },
