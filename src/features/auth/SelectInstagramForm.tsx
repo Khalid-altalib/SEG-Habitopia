@@ -7,8 +7,9 @@ import { addLogInData, logInUser } from "./authSlice";
 import { useAppDispatch } from "../../app/hooks";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
-import { TextType } from "../../../types";
+import { AuthParams, ButtonType, TextType } from "../../../types";
 import { View } from "react-native";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 type formData = {
   instagramHandle: string;
@@ -20,7 +21,10 @@ const SelectInstagramForm = () => {
       instagramHandle: "",
     },
   });
+
   const dispatch = useAppDispatch();
+
+  const navigation = useNavigation<NavigationProp<AuthParams>>();
 
   const onSubmit = async (data: formData) => {
     console.log(data);
@@ -41,7 +45,11 @@ const SelectInstagramForm = () => {
         name="instagramHandle"
       />
       <Button
-        onPress={handleSubmit(onSubmit)}
+        onPress={() => {
+          handleSubmit(onSubmit);
+          navigation.navigate("SelectChallenges");
+        }}
+        type={ButtonType.Primary}
         style={{ marginTop: 20 }}
         isFullWidth
         icon={<AntDesign name="arrowright" size={20} color="white" />}

@@ -18,7 +18,13 @@ export type ProfileParams = {
 
 export type AuthParams = {
   Welcome: undefined;
-  SignUp: undefined;
+  PhoneNumber: undefined;
+  ConfirmationCode: undefined;
+  Name: undefined;
+  EmailAddress: undefined;
+  SelectAvatar: undefined;
+  SelectInstagram: undefined;
+  SelectChallenges: undefined;
   LogIn: undefined;
 };
 

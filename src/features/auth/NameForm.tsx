@@ -7,8 +7,9 @@ import { addLogInData, logInUser } from "./authSlice";
 import { useAppDispatch } from "../../app/hooks";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
-import { TextType } from "../../../types";
+import { AuthParams, ButtonType, TextType } from "../../../types";
 import { View } from "react-native";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 type formData = {
   name: string;
@@ -28,6 +29,8 @@ const NameForm = () => {
     await dispatch(logInUser());
   };
 
+  const navigation = useNavigation<NavigationProp<AuthParams>>();
+
   return (
     <View>
       <Text style={{ marginBottom: 5 }} type={TextType.Subtle}>
@@ -41,7 +44,11 @@ const NameForm = () => {
         name="name"
       />
       <Button
-        onPress={handleSubmit(onSubmit)}
+        onPress={() => {
+          handleSubmit(onSubmit);
+          navigation.navigate("EmailAddress");
+        }}
+        type={ButtonType.Primary}
         style={{ marginTop: 20 }}
         isFullWidth
         icon={<AntDesign name="arrowright" size={20} color="white" />}

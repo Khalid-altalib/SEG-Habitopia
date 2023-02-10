@@ -23,6 +23,7 @@ const LogInForm = () => {
     dispatch(addLogInData(data));
     await dispatch(logInUser());
   };
+
   return (
     <>
       <Text>Email</Text>

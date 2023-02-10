@@ -7,7 +7,7 @@ import { theme, useColorModeValue } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 
 type Props = {
-  style: ViewStyle;
+  style?: ViewStyle;
   isFullWidth?: boolean;
   onPress?: () => void;
   type: ButtonType;
