@@ -1,4 +1,4 @@
-import { FlatList, Heading, VStack } from "native-base";
+import { FlatList, Heading, View, VStack } from "native-base";
 import React from "react";
 import { Statistic } from "../../../../types";
 import { useAppSelector } from "../../../app/hooks";
@@ -12,19 +12,19 @@ const ProfileStatistics = (props: Props) => {
 
   const statistics: Statistic[] = [
     { name: "Streak", quantity: 5 },
-    { name: "Wins", quantity: 5 },
-    { name: "Check Ins", quantity: 5 },
-    { name: "Level", quantity: 5 },
+    { name: "Wins", quantity: 1 },
+    { name: "Check Ins", quantity: 42 },
+    { name: "Level", quantity: 8 },
   ];
 
   return (
     <VStack>
       <Heading mb={4}>Statistics</Heading>
-      <VStack space={4}>
+      <View flexWrap="wrap" flexDirection={"row"}>
         {statistics.map((statistic) => (
           <ProfileStatistic statistic={statistic} />
         ))}
-      </VStack>
+      </View>
     </VStack>
   );
 };
