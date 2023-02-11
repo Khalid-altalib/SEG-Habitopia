@@ -1,21 +1,14 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Pressable, Text, Image, StyleSheet } from "react-native";
-import { RootParams } from "../../../types";
-
-type Chat = {
-  name: string;
-  image: string;
-  text: string;
-  time: string;
-};
+import { Chat, ChatParams, RootParams } from "../../../types";
 
 const ChatItem = (chat: Chat) => {
   const navigation = useNavigation<NavigationProp<RootParams>>();
 
   return (
     <Pressable
-      onPress={() => navigation.navigate("Chat")}
+      onPress={() => navigation.navigate("Chat", {screen: 'Individual Chat'})}
       style={chatstyles.chatContainer}
     >
       <Image source={{ uri: chat.image }} style={chatstyles.image} />

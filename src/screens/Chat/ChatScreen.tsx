@@ -1,12 +1,16 @@
 import React from "react";
-import { Text, ImageBackground, StyleSheet, FlatList } from "react-native";
+import { ImageBackground, StyleSheet, FlatList, Text } from "react-native";
 import data from "../../../assets/data/messages.json";
 import Message from "../../features/chat/Message";
 import InputBox from "../../features/chat/InputBox";
+import { RouteProp, useRoute } from "@react-navigation/native";
+import { ChatParams, ChatRouteProps, RootParams } from "../../../types";
 
 type Props = {};
 
-const Chat = (props: Props) => {
+const ChatScreen = (props: Props) => {
+  const route = useRoute<RouteProp<RootParams, 'Chat'>>();
+  console.log(route);
   return (
     <ImageBackground
       source={{ uri: "https://placeholder.com" }}
@@ -24,6 +28,7 @@ const Chat = (props: Props) => {
         style={styles.flatList}
         inverted
       />
+      
       <InputBox />
     </ImageBackground>
   );
@@ -39,4 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Chat;
+export default ChatScreen;
