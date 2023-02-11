@@ -17,11 +17,11 @@ const Navigation = () => {
   const dispatch = useAppDispatch();
   dispatch(logInUserFromStorage());
 
-  // const localUser: LocalUser | null = useAppSelector(
-  //   (state) => state.auth.user
-  // );
+  const localUser: LocalUser | null = useAppSelector(
+     (state) => state.auth.user
+   );
 
-  const localUser = true;
+  //const localUser = true;
 
   return (
     <NavigationContainer>
