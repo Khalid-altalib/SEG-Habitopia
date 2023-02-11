@@ -4,13 +4,14 @@ import data from "../../../assets/data/messages.json";
 import Message from "../../features/chat/Message";
 import InputBox from "../../features/chat/InputBox";
 import { RouteProp, useRoute } from "@react-navigation/native";
-import { ChatParams, ChatRouteProps, RootParams } from "../../../types";
+import { ChatParams, RootParams } from "../../../types";
 
 type Props = {};
 
 const ChatScreen = (props: Props) => {
-  const route = useRoute<RouteProp<RootParams, 'Chat'>>();
-  console.log(route);
+  const route = useRoute<RouteProp<ChatParams, 'IndividualChat'>>();
+  const {id} = route.params;
+  console.log(id)
   return (
     <ImageBackground
       source={{ uri: "https://placeholder.com" }}

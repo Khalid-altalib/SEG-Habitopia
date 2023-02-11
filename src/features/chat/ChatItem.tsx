@@ -1,14 +1,15 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Pressable, Text, Image, StyleSheet } from "react-native";
-import { Chat, ChatParams, RootParams } from "../../../types";
+import { Chat, ChatParams, IndividualChatScreenNavigationProp, ProfileParams } from "../../../types";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 const ChatItem = (chat: Chat) => {
-  const navigation = useNavigation<NavigationProp<RootParams>>();
+  const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
 
   return (
     <Pressable
-      onPress={() => navigation.navigate("Chat", {screen: 'Individual Chat'})}
+      onPress={() => navigation.push('IndividualChat', { id: chat.id })}
       style={chatstyles.chatContainer}
     >
       <Image source={{ uri: chat.image }} style={chatstyles.image} />

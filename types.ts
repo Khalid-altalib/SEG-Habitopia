@@ -4,9 +4,7 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 export type RootParams = {
   Auth: undefined;
   Existing: undefined;
-  Chat: {
-    screen: string;
-  }
+  Chat: undefined;
 };
 
 export type ProfileParams = {
@@ -16,7 +14,7 @@ export type ProfileParams = {
   Explore: undefined;
   Leaderboard: undefined;
   You: undefined;
-  Chat: undefined;
+  Chat: ChatParams;
 };
 
 export type AuthParams = {
@@ -26,15 +24,14 @@ export type AuthParams = {
 };
 
 export type ChatParams = {
+  ChatList: undefined
   IndividualChat: {
     id: string
   }
+  Test: undefined
 };
 
-export type ChatRouteProps<IndividualChat extends keyof ChatParams> = RouteProp<
-  ChatParams,
-  IndividualChat
->;
+export type IndividualChatScreenNavigationProp = NativeStackNavigationProp<ChatParams, 'IndividualChat'>;
 
 export type LocalUser = {
   authToken: string;
