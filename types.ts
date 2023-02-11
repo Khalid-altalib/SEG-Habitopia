@@ -40,6 +40,7 @@ export type Challenge = {
 export type Profile = {
   userId: number;
   name: string;
+  biography: string;
   rankings: Array<object>;
   statistics: object;
   friends: undefined;

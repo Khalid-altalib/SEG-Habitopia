@@ -22,6 +22,16 @@ export const fetchProfile = createAsyncThunk<
   { rejectValue: string }
 >("profile/fetch", async (userId: string, thunkAPI) => {
   try {
+    const profile = {
+      userId: 1,
+      name: "Ihtasham",
+      biography:
+        "Hi, my name is Ihtasham and this is my bio. Welcome to Habitopia.",
+      statistics: { checkIns: 32, streak: 6, level: 5, wins: 0 },
+    }; // BACKEND_PLACEHOLDER
+
+    return profile;
+
     const endpoint = `https://test/api/profile/${userId}`; //  BACKEND PLACEHOLDER
 
     if (requestPromise) {
@@ -72,3 +82,7 @@ export const profileSlice = createSlice({
     );
   },
 });
+
+export const {} = profileSlice.actions;
+
+export default profileSlice.reducer;
