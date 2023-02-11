@@ -61,8 +61,7 @@ export const profileSlice = createSlice({
     builder.addCase(
       fetchProfile.fulfilled,
       (state: ProfileState, action: PayloadAction<any>) => {
-        const { profile } = action.payload;
-        state.profile = profile;
+        state.profile = action.payload;
         state.loading = false;
         state.error = "";
       }

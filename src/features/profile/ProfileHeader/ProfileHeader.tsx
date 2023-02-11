@@ -18,11 +18,10 @@ type Props = {
 
 const ProfileHeader = (props: Props) => {
   const { isLocalUserProfile } = props;
-  const { error, loading, profile } = useAppSelector((state) => state.profile);
-  const { name, biography } = profile!;
+  const { profile } = useAppSelector((state) => state.profile);
 
   return (
-    <StatusContainer error={error} loading={loading}>
+    <View>
       <HStack space={4} pb={4}>
         <Avatar size={100} />
         <VStack flex={1} justifyContent={"space-between"}>
@@ -39,11 +38,11 @@ const ProfileHeader = (props: Props) => {
       </HStack>
       <View>
         <Text bold fontSize={"md"}>
-          {name}
+          {profile!.name}
         </Text>
-        <Text fontSize={"md"}>{biography}</Text>
+        <Text fontSize={"md"}>{profile!.biography}</Text>
       </View>
-    </StatusContainer>
+    </View>
   );
 };
 

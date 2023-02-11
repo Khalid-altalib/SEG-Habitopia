@@ -46,3 +46,8 @@ export type Profile = {
   friends: undefined;
   friendStatus: undefined;
 };
+
+export type Statistic = {
+  name: string;
+  quantity: number;
+};
