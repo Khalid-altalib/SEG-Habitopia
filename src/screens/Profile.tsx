@@ -1,8 +1,11 @@
 import {
   Avatar,
   Button,
+  Divider,
   Heading,
   HStack,
+  ScrollView,
+  SimpleGrid,
   Text,
   View,
   VStack,
@@ -20,11 +23,13 @@ type Props = {
 const ProfileComponent = (props: Props) => {
   // const { profile } = props;
 
-  const { username, biography } = {
-    username: "Ihtasham",
+  const { name, biography, statistics, userId } = {
+    userId: 1,
+    name: "Ihtasham",
     biography:
       "Hi, my name is Ihtasham and this is my bio. Welcome to Habitopia.",
-  };
+    statistics: { checkIns: 32, streak: 6, level: 5, wins: 0 },
+  }; // PLACEHOLDER
 
   const dispatch = useAppDispatch();
 
@@ -32,35 +37,42 @@ const ProfileComponent = (props: Props) => {
     (state) => state.auth.user
   );
 
-  const isLocalUserProfile = localUser?.username === username;
+  const isLocalUserProfile = localUser?.userId === userId;
 
   useEffect(() => {
-    dispatch(fetchProfile(username));
+    dispatch(fetchProfile(userId));
   }, []);
 
   return (
-    <RegularLayout>
-      <HStack space={4} pb={4}>
-        <Avatar size={100} />
-        <VStack flex={1} justifyContent={"space-between"}>
-          <View flex={1} justifyContent="center">
-            <Heading>152 Friends</Heading>
-          </View>
+    <ScrollView>
+      <RegularLayout>
+        <HStack space={4} pb={4}>
+          <Avatar size={100} />
+          <VStack flex={1} justifyContent={"space-between"}>
+            <View flex={1} justifyContent="center">
+              <Heading>152 Friends</Heading>
+            </View>
 
-          {isLocalUserProfile ? (
-            <Button>Edit Profile</Button>
-          ) : (
-            <Button>Send Friend Request</Button>
-          )}
+            {isLocalUserProfile ? (
+              <Button>Edit Profile</Button>
+            ) : (
+              <Button>Send Friend Request</Button>
+            )}
+          </VStack>
+        </HStack>
+        <View>
+          <Text bold fontSize={"md"}>
+            {name}
+          </Text>
+          <Text fontSize={"md"}>{biography}</Text>
+        </View>
+        <Divider my={4} />
+        <VStack>
+          <Heading>Statistics</Heading>
+          <SimpleGrid></SimpleGrid>
         </VStack>
-      </HStack>
-      <View>
-        <Text bold fontSize={"md"}>
-          {username}
-        </Text>
-        <Text fontSize={"md"}>{biography}</Text>
-      </View>
-    </RegularLayout>
+      </RegularLayout>
+    </ScrollView>
   );
 };
 

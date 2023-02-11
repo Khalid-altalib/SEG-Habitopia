@@ -28,7 +28,7 @@ export type ChatParams = {
 
 export type LocalUser = {
   authToken: string;
-  username: string;
+  userId: number;
 };
 
 export type Challenge = {
@@ -38,7 +38,7 @@ export type Challenge = {
 };
 
 export type Profile = {
-  username: string;
+  userId: number;
   name: string;
   rankings: Array<object>;
   statistics: object;

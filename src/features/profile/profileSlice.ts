@@ -20,9 +20,9 @@ export const fetchProfile = createAsyncThunk<
   string,
   any,
   { rejectValue: string }
->("profile/fetch", async (username: string, thunkAPI) => {
+>("profile/fetch", async (userId: string, thunkAPI) => {
   try {
-    const endpoint = `https://test/api/profile/${username}`; //  BACKEND PLACEHOLDER
+    const endpoint = `https://test/api/profile/${userId}`; //  BACKEND PLACEHOLDER
 
     if (requestPromise) {
       requestPromise.abort();
