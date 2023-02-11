@@ -26,11 +26,9 @@ const ProfileComponent = (props: Props) => {
 
   const dispatch = useAppDispatch();
 
-  const localUser: LocalUser | null = useAppSelector(
+  const localUser: LocalUser | undefined = useAppSelector(
     (state) => state.auth.user
   );
-
-  const { profile } = useAppSelector((state) => state.profile);
 
   const isLocalUserProfile = localUser?.userId === userId;
 
