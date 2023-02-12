@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { Amplify } from "aws-amplify";
 import awsconfig from "./src/aws-exports";
 import Navigation from "./src/navigation/Navigation";
-import store from "./src/app/store";
+import store from "./src/aws-exports";
 
 Amplify.configure(awsconfig);
 
