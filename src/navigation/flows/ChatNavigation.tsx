@@ -2,8 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ChatScreen from "../../screens/Chat/ChatScreen";
 import ChatList from "../../screens/Chat/ChatList";
 import { ChatParams } from "../../../types";
-import Profile from "../../screens/Profile";
-import ContactIcon from "../../features/chat/ContactIcon";
+import ContactIcon from "../../screens/Chat/ContactIcon";
 
 export const ChatStack = createNativeStackNavigator<ChatParams>();
 
@@ -20,7 +19,6 @@ const ChatNavigation = () => {
         }}
       />
       <ChatStack.Screen name="IndividualChat" component={ChatScreen} />
-      <ChatStack.Screen name="Test" component={Profile} />
     </ChatStack.Navigator>
   );
 };

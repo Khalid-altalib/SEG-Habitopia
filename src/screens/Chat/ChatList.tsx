@@ -11,7 +11,7 @@ const ChatList = (props: Props) => {
   return (
     <FlatList
       data={chats}
-      renderItem={({item}) => (
+      renderItem={({ item }) => (
         <ChatItem
           id={item.id}
           name={item.name}
