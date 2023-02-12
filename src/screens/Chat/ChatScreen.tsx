@@ -15,7 +15,6 @@ const ChatScreen = (props: Props) => {
   const route = useRoute<RouteProp<ChatParams, "IndividualChat">>();
   const { chats } = useAppSelector((store) => store.chats);
   const { id } = route.params;
-
   useEffect(() => {
     const chat = chats.filter((chat) => chat.id == id)[0];
     navigation.setOptions({ title: chat.name, headerShown: true });

@@ -3,7 +3,8 @@ import ChatScreen from "../../screens/Chat/ChatScreen";
 import ChatList from "../../screens/Chat/ChatList";
 import { ChatParams } from "../../../types";
 import Profile from "../../screens/Profile";
-import ContactIcon from "../../features/chat/ContactIcon";
+import ContactIcon from "../../screens/Chat/ContactIcon";
+
 
 export const ChatStack = createNativeStackNavigator<ChatParams>();
 
