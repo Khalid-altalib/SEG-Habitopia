@@ -3,6 +3,7 @@ import authReducer from "../features/auth/authSlice";
 import leaderboardReducer from "../features/leaderboard/leaderboardSlice";
 import challengesReducer from "../features/challenges/challengesSlice";
 import profileReducer from "../features/profile/profileSlice";
+import chatsReducer from "../features/chat/chatSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     challenges: challengesReducer,
     leaderboard: leaderboardReducer,
     profile: profileReducer,
+    chats: chatsReducer,
   },
 });
 

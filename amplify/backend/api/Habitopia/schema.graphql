@@ -1,0 +1,6 @@
+type Checkin @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  timeStamp: AWSDateTime
+  userID: ID
+  groupID: ID
+}
