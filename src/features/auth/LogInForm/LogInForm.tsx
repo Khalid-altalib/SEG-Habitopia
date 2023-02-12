@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Input, Text, Button } from "native-base";
 import { useForm, Controller } from "react-hook-form";
-import { addLogInData, logInUser } from "../../../features/auth/authSlice";
+import { addLogInData, logInUser } from "../authSlice";
 import { useAppDispatch } from "../../../app/hooks";
 
 type logInCredentials = {
@@ -19,7 +19,6 @@ const LogInForm = () => {
   const dispatch = useAppDispatch();
 
   const onSubmit = async (data: logInCredentials) => {
-    console.log(data);
     dispatch(addLogInData(data));
     await dispatch(logInUser());
   };

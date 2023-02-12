@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../constants/Styles";
-import LogInForm from "../features/auth/LogInForm";
+import LogInForm from "../features/auth/LogInForm/LogInForm";
 import { Box, Text, View, Center, Image } from "native-base";
 import FlowLayout from "../components/FlowLayout/FlowLayout";
 
