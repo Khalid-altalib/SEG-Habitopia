@@ -20,7 +20,7 @@ type Props = {
 
 const StatusContainer = (props: Props) => {
   const { loading, error, data, children } = props;
-  console.log(data);
+
   const renderStatusDisplay = () => {
     if (loading) {
       return <StatusIcon label="Loading..." icon={<Spinner />} />;
