@@ -6,19 +6,19 @@ import Leaderboard from "../../screens/Leaderboard";
 import Profile from "../../screens/Profile";
 import { ProfileParams } from "../../../types";
 import ChatNavigation from "./ChatNavigation";
-import { useAppSelector } from "../../app/hooks";
 
 const Tab = createBottomTabNavigator<ProfileParams>();
 
 const TabNavigation = () => {
-  const { headerOption } = useAppSelector((store) => store.chats);
   return (
     <Tab.Navigator initialRouteName="Home" screenOptions={{}}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen
-        name="Chats"
+        name="ChatList"
         component={ChatNavigation}
-        options={{ headerShown: headerOption }}
+        options={{
+          headerShown: false,
+        }}
       />
       <Tab.Screen name="Explore" component={Explore} />
       <Tab.Screen name="Leaderboard" component={Leaderboard} />
