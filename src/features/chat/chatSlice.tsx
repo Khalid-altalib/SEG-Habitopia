@@ -4,7 +4,6 @@ import { Chat } from "../../../types";
 
 type ChatState = {
   chats: Chat[];
-  headerOption: boolean;
 };
 
 export const fetchChats = createAsyncThunk<
@@ -31,19 +30,14 @@ const initialState: ChatState = {
       time: item.lastMessage.createdAt,
     };
   }),
-  headerOption: true,
 };
 
 export const chatSlice = createSlice({
   name: "chats",
   initialState,
-  reducers: {
-    changeHeaderOption: (state, action) => {
-      state.headerOption = action.payload;
-    },
-  },
+  reducers: {},
 });
 
-export const { changeHeaderOption } = chatSlice.actions;
+export const {} = chatSlice.actions;
 
 export default chatSlice.reducer;

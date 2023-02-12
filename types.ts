@@ -9,7 +9,7 @@ export type RootParams = {
 
 export type ProfileParams = {
   Home: undefined;
-  Chats: undefined;
+  ChatList: undefined;
   Welcome: undefined;
   Explore: undefined;
   Leaderboard: undefined;
@@ -23,7 +23,7 @@ export type AuthParams = {
 };
 
 export type ChatParams = {
-  ChatList: undefined;
+  Chats: undefined;
   IndividualChat: {
     id: string;
   };
