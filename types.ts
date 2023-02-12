@@ -37,13 +37,28 @@ export type IndividualChatScreenNavigationProp = NativeStackNavigationProp<
 
 export type LocalUser = {
   authToken: string;
-  username: string;
+  userId: number;
 };
 
 export type Challenge = {
   name: string;
   description: string;
   active: boolean;
+};
+
+export type Profile = {
+  userId: number;
+  name: string;
+  biography: string;
+  rankings: Array<object>;
+  statistics: object;
+  friends: undefined;
+  friendStatus: undefined;
+};
+
+export type Statistic = {
+  name: string;
+  quantity: number;
 };
 
 export type Chat = {

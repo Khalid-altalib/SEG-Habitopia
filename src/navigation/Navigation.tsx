@@ -17,7 +17,7 @@ const Navigation = () => {
   const dispatch = useAppDispatch();
   dispatch(logInUserFromStorage());
 
-  // const localUser: LocalUser | null = useAppSelector(
+  // const localUser: LocalUser | undefined = useAppSelector(
   //   (state) => state.auth.user
   // );
 

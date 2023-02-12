@@ -22,7 +22,7 @@ const TabNavigation = () => {
       />
       <Tab.Screen name="Explore" component={Explore} />
       <Tab.Screen name="Leaderboard" component={Leaderboard} />
-      <Tab.Screen name="You" component={Profile} />
+      {/* <Tab.Screen name="You" component={Profile} /> */}
     </Tab.Navigator>
   );
 };

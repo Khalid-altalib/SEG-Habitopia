@@ -14,7 +14,7 @@ type AuthState = {
     email?: string;
     password?: string;
   };
-  user: LocalUser | null;
+  user: LocalUser | undefined;
   loading: boolean;
   error: string;
 };
@@ -67,7 +67,7 @@ export const logOutUser = createAsyncThunk(
 const initialState: AuthState = {
   signUpData: {},
   logInData: {},
-  user: null,
+  user: undefined,
   loading: false,
   error: "",
 };
@@ -88,7 +88,7 @@ const authenticationFulfilled = (
 
 const authenticationRejected = (state: AuthState, action: any) => {
   state.loading = false;
-  state.user = null;
+  state.user = undefined;
   state.error = action.payload;
 };
 
@@ -118,7 +118,7 @@ export const authSlice = createSlice({
     });
     builder.addCase(logOutUser.fulfilled, (state) => {
       state.loading = false;
-      state.user = null;
+      state.user = undefined;
     });
   },
 });
