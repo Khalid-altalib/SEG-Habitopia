@@ -27,7 +27,6 @@ export type ChatParams = {
   IndividualChat: {
     id: string;
   };
-  Test: undefined;
 };
 
 export type IndividualChatScreenNavigationProp = NativeStackNavigationProp<
