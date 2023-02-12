@@ -12,7 +12,8 @@
     "build-storybook": "build-storybook"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "testEnvironment": "jsdom"
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
@@ -21,6 +22,7 @@
     "@react-navigation/native-stack": "^6.1.0",
     "@reduxjs/toolkit": "^1.9.2",
     "aws-amplify-react-native": "^7.0.2",
+    "enzyme": "^3.11.0",
     "expo": "~47.0.12",
     "expo-asset": "^8.7.0",
     "expo-constants": "^14.0.2",
@@ -51,6 +53,9 @@
     "@storybook/addon-ondevice-knobs": "^5.3.26",
     "@storybook/react-native": "^5.3.27",
     "@storybook/react-native-server": "^5.3.23",
+    "@testing-library/react": "^13.4.0",
+    "@types/enzyme": "^3.10.12",
+    "@types/jest": "^29.4.0",
     "@types/react": "~18.0.24",
     "@types/react-native": "~0.70.6",
     "@typescript-eslint/eslint-plugin": "^5.49.0",
