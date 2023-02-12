@@ -13,7 +13,7 @@ export type NavigationParams = {
   Welcome: undefined;
   Explore: undefined;
   Leaderboard: undefined;
-  Profile: {
+  You: {
     userId: string;
   };
 };

@@ -22,7 +22,7 @@ import ProfileStatistics from "../features/profile/ProfileStatistics/ProfileStat
 
 const ProfileComponent = () => {
   const navigation = useNavigation<NavigationParams>();
-  const route = useRoute<RouteProp<NavigationParams, "Profile">>();
+  const route = useRoute<RouteProp<NavigationParams, "You">>();
 
   const { userId } = route.params;
 

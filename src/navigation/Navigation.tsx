@@ -1,5 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
-import React from "react";
+import React, { useEffect } from "react";
 
 import TabNavigation from "./flows/TabNavigation";
 import AuthNavigation from "./flows/AuthNavigation";
@@ -15,13 +15,14 @@ const Stack = createNativeStackNavigator<RootParams>();
 
 const Navigation = () => {
   const dispatch = useAppDispatch();
-  dispatch(logInUserFromStorage());
 
-  // const localUser: LocalUser | undefined = useAppSelector(
-  //   (state) => state.auth.user
-  // );
+  useEffect(() => {
+    dispatch(logInUserFromStorage());
+  }, []);
 
-  const localUser = true;
+  const localUser: LocalUser | undefined = useAppSelector(
+    (state) => state.auth.user
+  );
 
   return (
     <NavigationContainer>

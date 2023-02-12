@@ -6,10 +6,14 @@ import Leaderboard from "../../screens/Leaderboard";
 import Profile from "../../screens/Profile";
 import { NavigationParams } from "../../../types";
 import ChatNavigation from "./ChatNavigation";
+import { useAppSelector } from "../../app/hooks";
 
 const Tab = createBottomTabNavigator<NavigationParams>();
 
 const TabNavigation = () => {
+  const { profile } = useAppSelector((state) => state.profile);
+  const user = useAppSelector((state) => state.auth!.user);
+
   return (
     <Tab.Navigator initialRouteName="Home" screenOptions={{}}>
       <Tab.Screen name="Home" component={Home} />
@@ -23,9 +27,10 @@ const TabNavigation = () => {
       <Tab.Screen name="Explore" component={Explore} />
       <Tab.Screen name="Leaderboard" component={Leaderboard} />
       <Tab.Screen
-        name="Profile"
+        name="You"
         component={Profile}
-        initialParams={{ userId: "testUser" }}
+        initialParams={{ userId: user!.userId }}
+        options={() => ({ title: profile?.name })}
       />
     </Tab.Navigator>
   );

@@ -51,9 +51,14 @@ export const logInUser = createAsyncThunk<
   { rejectValue: string }
 >("auth/login", async (_, thunkAPI) => {
   try {
+    const user = { authToken: "test", userId: "testId" };
+    await AsyncStorage.setItem("user", JSON.stringify(user));
+    return user;
+
     const state = thunkAPI.getState() as RootState;
     const { email, password } = state.auth.logInData;
     const { Session } = await Auth.signIn(email as string, password); //  BACKEND PLACEHOLDER
+
     console.log(Session, email);
     return { authToken: Session, userId: email } as LocalUser;
   } catch (error: any) {
@@ -68,10 +73,10 @@ export const logInUserFromStorage = createAsyncThunk<
   { rejectValue: string }
 >("auth/logInFromStorage", async (_, thunkAPI) => {
   const data = await AsyncStorage.getItem("user");
-  if (data === null) {
-    return thunkAPI.rejectWithValue("Please log in again");
-  } else {
+  if (data) {
     return JSON.parse(data) as LocalUser;
+  } else {
+    return thunkAPI.rejectWithValue("Please log in again");
   }
 });
 
@@ -101,7 +106,6 @@ const authenticationFulfilled = (
   state.loading = false;
   state.user = action.payload;
   state.error = "";
-  localStorage.set("user", JSON.stringify(action.payload));
 };
 
 const authenticationRejected = (state: AuthState, action: any) => {
