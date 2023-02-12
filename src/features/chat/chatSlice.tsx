@@ -1,9 +1,10 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import chat from "../../../assets/data/chat.json";
 import { Chat } from "../../../types";
 
 type ChatState = {
   chats: Chat[];
+  headerOption: boolean;
 };
 
 export const fetchChats = createAsyncThunk<
@@ -30,12 +31,19 @@ const initialState: ChatState = {
       time: item.lastMessage.createdAt,
     };
   }),
+  headerOption: true,
 };
 
 export const chatSlice = createSlice({
   name: "chats",
   initialState,
-  reducers: {},
+  reducers: {
+    changeHeaderOption: (state, action) => {
+      state.headerOption = action.payload;
+    },
+  },
 });
+
+export const { changeHeaderOption } = chatSlice.actions;
 
 export default chatSlice.reducer;

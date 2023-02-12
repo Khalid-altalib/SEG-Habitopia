@@ -9,19 +9,15 @@ const ChatList = (props: Props) => {
   const { chats } = useAppSelector((state) => state.chats);
 
   return (
-    /*
-        <FlatList data={chats} renderItem({item} => <ChatItem/>)/>
-    */
-
     <FlatList
       data={chats}
-      renderItem={(item) => (
+      renderItem={({item}) => (
         <ChatItem
-          id={item.item.id}
-          name={item.item.name}
-          image={item.item.image}
-          text={item.item.text}
-          time={item.item.time}
+          id={item.id}
+          name={item.name}
+          image={item.image}
+          text={item.text}
+          time={item.time}
         />
       )}
     />

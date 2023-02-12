@@ -14,7 +14,6 @@ export type ProfileParams = {
   Explore: undefined;
   Leaderboard: undefined;
   You: undefined;
-  Chat: ChatParams;
 };
 
 export type AuthParams = {
@@ -24,14 +23,17 @@ export type AuthParams = {
 };
 
 export type ChatParams = {
-  ChatList: undefined
+  ChatList: undefined;
   IndividualChat: {
-    id: string
-  }
-  Test: undefined
+    id: string;
+  };
+  Test: undefined;
 };
 
-export type IndividualChatScreenNavigationProp = NativeStackNavigationProp<ChatParams, 'IndividualChat'>;
+export type IndividualChatScreenNavigationProp = NativeStackNavigationProp<
+  ChatParams,
+  "IndividualChat"
+>;
 
 export type LocalUser = {
   authToken: string;

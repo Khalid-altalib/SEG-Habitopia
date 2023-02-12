@@ -1,17 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ImageBackground, StyleSheet, FlatList, Text } from "react-native";
 import data from "../../../assets/data/messages.json";
 import Message from "../../features/chat/Message";
 import InputBox from "../../features/chat/InputBox";
-import { RouteProp, useRoute } from "@react-navigation/native";
-import { ChatParams, RootParams } from "../../../types";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { ChatParams, ProfileParams, RootParams } from "../../../types";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { changeHeaderOption } from "../../features/chat/chatSlice";
 
 type Props = {};
 
 const ChatScreen = (props: Props) => {
-  const route = useRoute<RouteProp<ChatParams, 'IndividualChat'>>();
-  const {id} = route.params;
-  console.log(id)
+  const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
+  const route = useRoute<RouteProp<ChatParams, "IndividualChat">>();
+  const { chats } = useAppSelector((store) => store.chats);
+  const { id } = route.params;
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(changeHeaderOption(false));
+    const chat = chats.filter((chat) => chat.id == id)[0];
+    navigation.setOptions({ title: chat.name, headerShown: true });
+    navigation.addListener("beforeRemove", (e) => {
+      dispatch(changeHeaderOption(true));
+      navigation.dispatch(e.data.action);
+    });
+  }, [route.params.id]);
   return (
     <ImageBackground
       source={{ uri: "https://placeholder.com" }}
@@ -29,7 +43,7 @@ const ChatScreen = (props: Props) => {
         style={styles.flatList}
         inverted
       />
-      
+
       <InputBox />
     </ImageBackground>
   );
