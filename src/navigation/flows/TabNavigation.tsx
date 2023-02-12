@@ -10,7 +10,7 @@ import { useAppSelector } from "../../app/hooks";
 
 const Tab = createBottomTabNavigator<ProfileParams>();
 
-const MainNavigation = () => {
+const TabNavigation = () => {
   const { headerOption } = useAppSelector((store) => store.chats);
   return (
     <Tab.Navigator initialRouteName="Home" screenOptions={{}}>
@@ -27,4 +27,4 @@ const MainNavigation = () => {
   );
 };
 
-export default MainNavigation;
+export default TabNavigation;

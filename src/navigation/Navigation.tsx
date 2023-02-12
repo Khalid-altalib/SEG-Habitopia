@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 
-import MainNavigation from "./flows/MainNavigation";
+import TabNavigation from "./flows/TabNavigation";
 import AuthNavigation from "./flows/AuthNavigation";
 import ChatNavigation from "./flows/ChatNavigation";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -29,7 +29,7 @@ const Navigation = () => {
         {localUser ? (
           <Stack.Screen
             name="Existing"
-            component={MainNavigation}
+            component={TabNavigation}
             options={{ headerShown: false }}
           />
         ) : (
