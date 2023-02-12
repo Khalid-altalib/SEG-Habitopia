@@ -1,23 +1,27 @@
-import React from 'react'
-import { FlatList } from 'react-native'
-import styles from "../../constants/Styles";
-import ChatItem from '../../features/chat/ChatItem';
-import chat from '../../../assets/data/chat.json'
+import React from "react";
+import { FlatList } from "react-native";
+import ChatItem from "../../features/chat/ChatItem";
+import { useAppSelector } from "../../app/hooks";
 
-type Props = {}
+type Props = {};
 
 const ChatList = (props: Props) => {
+  const { chats } = useAppSelector((state) => state.chats);
+
   return (
-    /*
-        <FlatList data={chats} renderItem({item} => <ChatItem/>)/>
-    */
+    <FlatList
+      data={chats}
+      renderItem={({ item }) => (
+        <ChatItem
+          id={item.id}
+          name={item.name}
+          image={item.image}
+          text={item.text}
+          time={item.time}
+        />
+      )}
+    />
+  );
+};
 
-    <FlatList data={chat} renderItem={(item => <ChatItem name={item.item.user.name} 
-      image={item.item.user.image}
-      text={item.item.lastMessage.text}
-      time={item.item.lastMessage.createdAt}
-      />)}/>
-  )
-}
-
-export default ChatList
+export default ChatList;
