@@ -4,6 +4,7 @@ import { LocalUser } from "../../../types";
 import { Auth } from "aws-amplify";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RootState } from "../../app/store";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 type AuthState = {
   signUpData: {
@@ -74,6 +75,11 @@ export const logInUserFromStorage = createAsyncThunk<
 >("auth/logInFromStorage", async (_, thunkAPI) => {
   const data = await AsyncStorage.getItem("user");
   if (data) {
+    Toast.show({
+      type: "success",
+      text1: "Welcome back! 👋",
+      text2: "We've logged you in from your previous session",
+    });
     return JSON.parse(data) as LocalUser;
   } else {
     return thunkAPI.rejectWithValue("Please log in again");

@@ -6,6 +6,7 @@ import { Amplify } from "aws-amplify";
 import Navigation from "./src/navigation/Navigation";
 import store from "./src/app/store";
 import awsExports from "./src/aws-exports";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 Amplify.configure(awsExports);
 
@@ -16,6 +17,7 @@ export default function App() {
         <SafeAreaProvider>
           <StatusBar />
           <Navigation />
+          <Toast />
         </SafeAreaProvider>
       </NativeBaseProvider>
     </Provider>
