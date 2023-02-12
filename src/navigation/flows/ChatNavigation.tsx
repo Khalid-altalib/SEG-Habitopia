@@ -5,6 +5,7 @@ import { ChatParams } from "../../../types";
 import Profile from "../../screens/Profile";
 import ContactIcon from "../../screens/Chat/ContactIcon";
 
+
 export const ChatStack = createNativeStackNavigator<ChatParams>();
 
 const ChatNavigation = () => {
