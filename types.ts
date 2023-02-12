@@ -7,13 +7,15 @@ export type RootParams = {
   Chat: undefined;
 };
 
-export type ProfileParams = {
+export type NavigationParams = {
   Home: undefined;
   ChatList: undefined;
   Welcome: undefined;
   Explore: undefined;
   Leaderboard: undefined;
-  You: undefined;
+  Profile: {
+    userId: string;
+  };
 };
 
 export type AuthParams = {

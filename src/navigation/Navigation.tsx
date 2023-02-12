@@ -21,7 +21,7 @@ const Navigation = () => {
   //   (state) => state.auth.user
   // );
 
-  const localUser = false;
+  const localUser = true;
 
   return (
     <NavigationContainer>

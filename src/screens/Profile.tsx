@@ -1,3 +1,4 @@
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import {
   Avatar,
   Button,
@@ -11,7 +12,7 @@ import {
   VStack,
 } from "native-base";
 import React, { useEffect } from "react";
-import { LocalUser, Profile } from "../../types";
+import { LocalUser, NavigationParams, Profile } from "../../types";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import RegularLayout from "../components/RegularLayout/RegularLayout";
 import StatusContainer from "../components/StatusContainer/StatusContainer";
@@ -19,12 +20,11 @@ import ProfileHeader from "../features/profile/ProfileHeader/ProfileHeader";
 import { fetchProfile } from "../features/profile/profileSlice";
 import ProfileStatistics from "../features/profile/ProfileStatistics/ProfileStatistics";
 
-type Props = {
-  userId: number;
-};
+const ProfileComponent = () => {
+  const navigation = useNavigation<NavigationParams>();
+  const route = useRoute<RouteProp<NavigationParams, "Profile">>();
 
-const ProfileComponent = (props: Props) => {
-  const { userId } = props;
+  const { userId } = route.params;
 
   const dispatch = useAppDispatch();
 
