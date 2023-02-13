@@ -48,3 +48,8 @@ export enum ButtonType {
   Primary,
   Secondary,
 }
+export type Challenge = {
+  name: string;
+  description: string;
+  active: boolean;
+};

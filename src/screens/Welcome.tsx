@@ -3,7 +3,7 @@ import { ImageBackground, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Box, Heading, ZStack, Image } from "native-base";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import PaddedLayout from "../components/PaddedLayout";
+import FlowLayout from "../components/FlowLayout/FlowLayout";
 import Layout from "../constants/Layout";
 import styles from "../constants/Styles";
 import { AuthParams, ButtonType, TextType } from "../../types";
@@ -18,8 +18,6 @@ function Welcome(): JSX.Element {
 
   const BACKGROUND_IMAGE_PATH: string = `https://picsum.photos/id/65/${WINDOW_WIDTH}/${WINDOW_HEIGHT}`;
   const HABITOPIA_LOGO_IMAGE_PATH: string = `https://picsum.photos/id/237/60`;
-
-  const insets = useSafeAreaInsets();
 
   const navigation = useNavigation<NavigationProp<AuthParams>>();
 
