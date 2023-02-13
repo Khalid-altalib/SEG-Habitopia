@@ -4,6 +4,9 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 export type RootParams = {
   Auth: undefined;
   Existing: undefined;
+  MOoal: {
+    name: string;
+  };
   Chat: undefined;
   Modal: {
     children: React.ReactNode;
@@ -11,12 +14,17 @@ export type RootParams = {
 };
 
 export type ProfileParams = {
+  userId: string;
+};
+
+export type NavigationParams = {
   Home: undefined;
   ChatList: undefined;
   Welcome: undefined;
   Explore: undefined;
   Leaderboard: undefined;
-  You: undefined;
+  You: ProfileParams;
+  Profile: ProfileParams;
 };
 
 export type AuthParams = {
@@ -37,7 +45,6 @@ export type ChatParams = {
     id: string;
   };
 };
-
 
 export type IndividualChatScreenNavigationProp = NativeStackNavigationProp<
   ChatParams,

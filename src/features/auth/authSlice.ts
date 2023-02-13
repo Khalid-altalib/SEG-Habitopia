@@ -2,8 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { LocalUser } from "../../../types";
 import { Auth } from "aws-amplify";
-import { AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RootState } from "../../app/store";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 type AuthState = {
   signUpData: {
@@ -70,6 +71,11 @@ export const logInUser = createAsyncThunk<
   { rejectValue: string }
 >("auth/login", async (_, thunkAPI) => {
   try {
+    const user = { authToken: "test", userId: "testId" };
+    await AsyncStorage.setItem("user", JSON.stringify(user));
+
+    return user; // PLACEHOLDER
+
     const state = thunkAPI.getState() as RootState;
     const { email, password } = state.auth.logInData;
     const response = await Auth.signIn(email as string, password);
@@ -92,19 +98,21 @@ export const logInUserFromStorage = createAsyncThunk<
   { rejectValue: string }
 >("auth/logInFromStorage", async (_, thunkAPI) => {
   const data = await AsyncStorage.getItem("user");
-  if (data === null) {
-    return thunkAPI.rejectWithValue("Please log in again");
-  } else {
+  if (data) {
+    Toast.show({
+      type: "success",
+      text1: "Welcome back! 👋",
+      text2: "We've logged you in from your previous session",
+    });
     return JSON.parse(data) as LocalUser;
+  } else {
+    return thunkAPI.rejectWithValue("Please log in again");
   }
 });
 
-export const logOutUser = createAsyncThunk(
-  "auth/logOutUser",
-  async (_, thunkAPI) => {
-    return await AsyncStorage.removeItem("user");
-  }
-);
+export const logOutUser = createAsyncThunk("auth/logOutUser", async () => {
+  return await AsyncStorage.removeItem("user");
+});
 
 const initialState: AuthState = {
   signUpData: { email: "", password: "", name: "", confirmationCode: "" },
@@ -125,7 +133,6 @@ const authenticationFulfilled = (
   state.loading = false;
   state.user = action.payload;
   state.error = "";
-  //localStorage.set("user", JSON.stringify(action.payload));
 };
 
 const authenticationRejected = (state: AuthState, action: any) => {

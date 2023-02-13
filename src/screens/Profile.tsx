@@ -1,4 +1,11 @@
 import {
+  RouteProp,
+  useIsFocused,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import {
   Avatar,
   Button,
   Divider,
@@ -11,7 +18,7 @@ import {
   VStack,
 } from "native-base";
 import React, { useEffect } from "react";
-import { LocalUser, Profile } from "../../types";
+import { LocalUser, NavigationParams, Profile } from "../../types";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import RegularLayout from "../components/RegularLayout/RegularLayout";
 import StatusContainer from "../components/StatusContainer/StatusContainer";
@@ -19,14 +26,15 @@ import ProfileHeader from "../features/profile/ProfileHeader/ProfileHeader";
 import { fetchProfile } from "../features/profile/profileSlice";
 import ProfileStatistics from "../features/profile/ProfileStatistics/ProfileStatistics";
 
-type Props = {
-  userId: number;
-};
+const ProfileComponent = () => {
+  const route = useRoute<RouteProp<NavigationParams, "You" | "Profile">>();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<NavigationParams>>();
 
-const ProfileComponent = (props: Props) => {
-  const { userId } = props;
+  let { userId } = route.params;
 
   const dispatch = useAppDispatch();
+  const isFocused = useIsFocused();
 
   const localUser: LocalUser | undefined = useAppSelector(
     (state) => state.auth.user
@@ -37,8 +45,16 @@ const ProfileComponent = (props: Props) => {
   const { error, loading, profile } = useAppSelector((state) => state.profile);
 
   useEffect(() => {
-    dispatch(fetchProfile(userId));
-  }, []);
+    fetchData();
+  }, [isFocused]);
+
+  const fetchData = async () => {
+    await dispatch(fetchProfile(userId));
+  };
+
+  useEffect(() => {
+    navigation.setOptions({ title: profile?.name || "" });
+  }, [profile]);
 
   return (
     <ScrollView>
@@ -47,6 +63,14 @@ const ProfileComponent = (props: Props) => {
           <ProfileHeader isLocalUserProfile={isLocalUserProfile} />
           <Divider my={4} />
           <ProfileStatistics />
+          <Button
+            onPress={() => {
+              navigation.push("Profile", { userId: "a" });
+            }}
+            mt={4}
+          >
+            Visit Stacked Profile (Placeholder)
+          </Button>
         </StatusContainer>
       </RegularLayout>
     </ScrollView>

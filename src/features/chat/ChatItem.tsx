@@ -5,7 +5,7 @@ import {
   Chat,
   ChatParams,
   IndividualChatScreenNavigationProp,
-  ProfileParams,
+  NavigationParams,
 } from "../../../types";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
