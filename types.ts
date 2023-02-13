@@ -5,6 +5,9 @@ export type RootParams = {
   Auth: undefined;
   Existing: undefined;
   Chat: undefined;
+  Modal: {
+    children: React.ReactNode;
+  };
 };
 
 export type ProfileParams = {
@@ -35,6 +38,7 @@ export type ChatParams = {
   };
 };
 
+
 export type IndividualChatScreenNavigationProp = NativeStackNavigationProp<
   ChatParams,
   "IndividualChat"
@@ -60,6 +64,8 @@ export type Challenge = {
   name: string;
   description: string;
   active: boolean;
+  color: string;
+  image: string;
 };
 
 export type Profile = {
