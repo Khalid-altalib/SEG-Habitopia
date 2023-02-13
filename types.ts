@@ -4,7 +4,13 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 export type RootParams = {
   Auth: undefined;
   Existing: undefined;
-  Chat: undefined;
+  MOdal: {
+    name: string;
+  };
+};
+
+export type ProfileParams = {
+  userId: string;
 };
 
 export type NavigationParams = {
@@ -13,9 +19,8 @@ export type NavigationParams = {
   Welcome: undefined;
   Explore: undefined;
   Leaderboard: undefined;
-  You: {
-    userId: string;
-  };
+  You: ProfileParams;
+  Profile: ProfileParams;
 };
 
 export type AuthParams = {

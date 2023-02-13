@@ -1,4 +1,10 @@
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import {
+  RouteProp,
+  useIsFocused,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {
   Avatar,
   Button,
@@ -21,12 +27,14 @@ import { fetchProfile } from "../features/profile/profileSlice";
 import ProfileStatistics from "../features/profile/ProfileStatistics/ProfileStatistics";
 
 const ProfileComponent = () => {
-  const navigation = useNavigation<NavigationParams>();
-  const route = useRoute<RouteProp<NavigationParams, "You">>();
+  const route = useRoute<RouteProp<NavigationParams, "You" | "Profile">>();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<NavigationParams>>();
 
-  const { userId } = route.params;
+  let { userId } = route.params;
 
   const dispatch = useAppDispatch();
+  const isFocused = useIsFocused();
 
   const localUser: LocalUser | undefined = useAppSelector(
     (state) => state.auth.user
@@ -37,8 +45,14 @@ const ProfileComponent = () => {
   const { error, loading, profile } = useAppSelector((state) => state.profile);
 
   useEffect(() => {
-    dispatch(fetchProfile(userId));
-  }, []);
+    fetchData();
+  }, [isFocused]);
+
+  const fetchData = async () => {
+    await dispatch(fetchProfile(userId));
+  };
+
+  navigation.setOptions({ title: profile?.name || "" });
 
   return (
     <ScrollView>

@@ -86,12 +86,9 @@ export const logInUserFromStorage = createAsyncThunk<
   }
 });
 
-export const logOutUser = createAsyncThunk(
-  "auth/logOutUser",
-  async (_, thunkAPI) => {
-    return await AsyncStorage.removeItem("user");
-  }
-);
+export const logOutUser = createAsyncThunk("auth/logOutUser", async () => {
+  return await AsyncStorage.removeItem("user");
+});
 
 const initialState: AuthState = {
   signUpData: {},

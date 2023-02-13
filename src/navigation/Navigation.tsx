@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { logInUserFromStorage } from "../features/auth/authSlice";
 
 import { RootParams } from "../../types";
+import ProfileComponent from "../screens/Profile";
 
 const Stack = createNativeStackNavigator<RootParams>();
 
@@ -20,9 +21,7 @@ const Navigation = () => {
     dispatch(logInUserFromStorage());
   }, []);
 
-  const localUser: LocalUser | undefined = useAppSelector(
-    (state) => state.auth.user
-  );
+  const localUser = useAppSelector((state) => state.auth!.user);
 
   return (
     <NavigationContainer>
@@ -41,6 +40,7 @@ const Navigation = () => {
           />
         )}
         <Stack.Screen name="Chat" component={ChatNavigation} />
+        <Stack.Screen name="Profile" component={ProfileComponent} />
       </Stack.Navigator>
     </NavigationContainer>
   );

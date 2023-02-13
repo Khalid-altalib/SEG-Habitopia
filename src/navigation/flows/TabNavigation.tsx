@@ -11,8 +11,7 @@ import { useAppSelector } from "../../app/hooks";
 const Tab = createBottomTabNavigator<NavigationParams>();
 
 const TabNavigation = () => {
-  const { profile } = useAppSelector((state) => state.profile);
-  const user = useAppSelector((state) => state.auth!.user);
+  const localUser = useAppSelector((state) => state.auth!.user);
 
   return (
     <Tab.Navigator initialRouteName="Home" screenOptions={{}}>
@@ -29,8 +28,8 @@ const TabNavigation = () => {
       <Tab.Screen
         name="You"
         component={Profile}
-        initialParams={{ userId: user!.userId }}
-        options={() => ({ title: profile?.name })}
+        initialParams={{ userId: localUser!.userId }}
+        options={() => ({ title: "You" })}
       />
     </Tab.Navigator>
   );
