@@ -6,6 +6,13 @@ import SignUp from "../../screens/SignUp/SignUp";
 import LogIn from "../../screens/LogIn";
 
 import { AuthParams } from "../../../types";
+import Password from "../../screens/SignUp/Password";
+import ConfirmationCode from "../../screens/SignUp/ConfirmationCode";
+import Name from "../../screens/SignUp/Name";
+import EmailAddress from "../../screens/SignUp/EmailAddress";
+import SelectAvatar from "../../screens/SignUp/SelectAvatar";
+import SelectInstagram from "../../screens/SignUp/SelectInstagram";
+import SelectChallenges from "../../screens/SignUp/SelectChallenges";
 
 export const AuthStack = createNativeStackNavigator<AuthParams>();
 
@@ -20,9 +27,53 @@ const AuthNavigation = () => {
 
       {/* Sign Up Flow */}
       <AuthStack.Screen
-        name="SignUp"
-        component={SignUp}
-        options={{ headerTitle: "Sign up" }}
+        name="Password"
+        component={Password}
+        options={{
+          headerTitle: "Password",
+        }}
+      />
+      <AuthStack.Screen
+        name="ConfirmationCode"
+        component={ConfirmationCode}
+        options={{
+          headerTitle: "Confirmation code",
+        }}
+      />
+      <AuthStack.Screen
+        name="Name"
+        component={Name}
+        options={{
+          headerTitle: "Name",
+        }}
+      />
+      <AuthStack.Screen
+        name="EmailAddress"
+        component={EmailAddress}
+        options={{
+          headerTitle: "Email address",
+        }}
+      />
+      <AuthStack.Screen
+        name="SelectAvatar"
+        component={SelectAvatar}
+        options={{
+          headerTitle: "Avatar",
+        }}
+      />
+      <AuthStack.Screen
+        name="SelectInstagram"
+        component={SelectInstagram}
+        options={{
+          headerTitle: "Instagram handle",
+        }}
+      />
+      <AuthStack.Screen
+        name="SelectChallenges"
+        component={SelectChallenges}
+        options={{
+          headerTitle: "Challenges",
+        }}
       />
 
       {/* Log In Flow */}
