@@ -10,10 +10,14 @@ import Button from "../../../components/Button";
 import { useAppDispatch } from "../../../app/hooks";
 import { signUpUser } from "../../../features/auth/authSlice";
 
-const ChallengeButton = (props: { title: string }) => {
+/**
+ * @param title The label to put inside the button.
+ * @returns A button representing a challenge type.
+ */
+const ChallengeButton = ({ title }: { title: string }) => {
   return (
     <Button style={{ marginTop: 20 }} type={ButtonType.Secondary} isFullWidth>
-      {props.title}
+      {title}
     </Button>
   );
 };
