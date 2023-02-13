@@ -1,13 +1,19 @@
 import React from "react";
+import { View } from "react-native";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+
 import { AuthParams, ButtonType, TextType } from "../../../../types";
 import Text from "../../../components/Text";
 import PaddedContainer from "../../../components/PaddedContainer";
 import Background from "../../../components/Background";
-import { View } from "react-native";
 import styles from "../../../constants/Styles";
 import Button from "../../../components/Button";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
 
+/**
+ * @returns A React component representing the page where the user selects
+ * what kind of avatar they want to use (from their camera, gallery, or
+ * Instagram account) for their profile.
+ */
 const SelectAvatar = () => {
   const navigation = useNavigation<NavigationProp<AuthParams>>();
 

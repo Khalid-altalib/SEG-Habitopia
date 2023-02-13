@@ -1,12 +1,18 @@
 import React from "react";
+import { View } from "react-native";
+
 import { TextType } from "../../../../types";
 import Text from "../../../components/Text";
 import PaddedContainer from "../../../components/PaddedContainer";
 import Background from "../../../components/Background";
-import { View } from "react-native";
 import styles from "../../../constants/Styles";
 import EmailAddressForm from "../../../features/auth/EmailAddressForm";
 
+/**
+ * @returns A React component representing the screen where the user enters
+ * their email address into the system, along with whether or not they'd
+ * like to receive marketing communications from Habitopia.
+ */
 const EmailAddress = () => {
   return (
     <Background>
