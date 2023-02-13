@@ -32,7 +32,7 @@ const ChallengeBox = (props: Props) => {
   }
   return (
     <>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onPress}>
         <Box style={boxStyle} backgroundColor={color} width={"100%"} flex={1}>
           <HStack>
             <Box style={{ justifyContent: "center", padding: 10 }}>
