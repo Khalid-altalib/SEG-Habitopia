@@ -38,7 +38,6 @@ export type ChatParams = {
   };
 };
 
-
 export type IndividualChatScreenNavigationProp = NativeStackNavigationProp<
   ChatParams,
   "IndividualChat"
@@ -89,4 +88,10 @@ export type Chat = {
   image: string;
   text: string;
   time: string;
+};
+
+export type Settings = {
+  email: string;
+  name: string;
+  notifications: boolean;
 };
