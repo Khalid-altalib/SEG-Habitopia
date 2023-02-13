@@ -45,7 +45,7 @@ function Welcome(): JSX.Element {
           <View>
             <Button
               type={ButtonType.Primary}
-              onPress={() => navigation.navigate("PhoneNumber")}
+              onPress={() => navigation.navigate("Name")}
               isFullWidth
             >
               Create account

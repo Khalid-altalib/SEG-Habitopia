@@ -12,22 +12,20 @@ import { View } from "react-native";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 type formData = {
-  emailAddress: string;
-  willReceiveMarketing: boolean;
+  email: string;
 };
 
 const EmailAddressForm = () => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      emailAddress: "",
-      willReceiveMarketing: false,
+      email: "",
     },
   });
   const dispatch = useAppDispatch();
 
   const onSubmit = async (data: formData) => {
-    console.log(data);
     dispatch(addSignUpData(data));
+    navigation.navigate("Password");
   };
 
   const navigation = useNavigation<NavigationProp<AuthParams>>();
@@ -42,25 +40,10 @@ const EmailAddressForm = () => {
         render={({ field: { onChange, value } }) => (
           <Input onChangeText={onChange} value={value} size="xl" />
         )}
-        name="emailAddress"
-      />
-      <Controller
-        control={control}
-        render={({ field: { onChange, value } }) => (
-          <Checkbox onChange={onChange} isChecked={value} size="sm" value="1">
-            <Text type={TextType.Subtle} style={{ marginTop: 20 }}>
-              I do not wish to receive marketing communications about Habitopia
-              products and services.
-            </Text>
-          </Checkbox>
-        )}
-        name="willReceiveMarketing"
+        name="email"
       />
       <Button
-        onPress={() => {
-          handleSubmit(onSubmit);
-          navigation.navigate("SelectAvatar");
-        }}
+        onPress={handleSubmit(onSubmit)}
         type={ButtonType.Primary}
         style={{ marginTop: 20 }}
         isFullWidth

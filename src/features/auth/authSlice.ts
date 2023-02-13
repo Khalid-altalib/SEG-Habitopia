@@ -7,13 +7,9 @@ import { RootState } from "../../app/store";
 
 type AuthState = {
   signUpData: {
-    phoneNumber: string;
-    willReceiveMarketingCommunications: false;
-    avatar: string;
-    email: string;
-    password: string;
-    starterChallenges: string[];
-    name: string;
+    email?: string;
+    password?: string;
+    name?: string;
   };
   logInData: {
     email?: string;
@@ -119,6 +115,7 @@ export const authSlice = createSlice({
   reducers: {
     addSignUpData: (state, action: PayloadAction<object>) => {
       state.signUpData = { ...state.signUpData, ...action.payload };
+      console.log(state.signUpData);
     },
     addLogInData: (state, action: PayloadAction<object>) => {
       state.logInData = { ...state.logInData, ...action.payload };

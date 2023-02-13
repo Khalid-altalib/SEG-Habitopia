@@ -62,7 +62,13 @@ const Button = ({
         },
       ]}
     >
-      <TouchableOpacity activeOpacity={0.7} onPress={onPress} style={style}>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() => {
+          onPress === undefined ? null : onPress();
+        }}
+        style={style}
+      >
         <LinearGradient
           colors={typeStyles[additionalStyle].backgroundColors}
           start={[0, 0]}

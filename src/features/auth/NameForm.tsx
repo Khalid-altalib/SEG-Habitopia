@@ -10,6 +10,7 @@ import Text from "../../components/Text";
 import { AuthParams, ButtonType, TextType } from "../../../types";
 import { View } from "react-native";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { Button as TButton } from "native-base";
 
 type formData = {
   name: string;
@@ -24,8 +25,8 @@ const NameForm = () => {
   const dispatch = useAppDispatch();
 
   const onSubmit = async (data: formData) => {
-    console.log(data);
     dispatch(addSignUpData(data));
+    navigation.navigate("EmailAddress");
   };
 
   const navigation = useNavigation<NavigationProp<AuthParams>>();
@@ -43,10 +44,7 @@ const NameForm = () => {
         name="name"
       />
       <Button
-        onPress={() => {
-          handleSubmit(onSubmit);
-          navigation.navigate("EmailAddress");
-        }}
+        onPress={handleSubmit(onSubmit)}
         type={ButtonType.Primary}
         style={{ marginTop: 20 }}
         isFullWidth

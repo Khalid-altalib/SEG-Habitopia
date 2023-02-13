@@ -6,7 +6,7 @@ import SignUp from "../../screens/SignUp/SignUp";
 import LogIn from "../../screens/LogIn";
 
 import { AuthParams } from "../../../types";
-import PhoneNumber from "../../screens/SignUp/PhoneNumber";
+import Password from "../../screens/SignUp/Password";
 import ConfirmationCode from "../../screens/SignUp/ConfirmationCode";
 import Name from "../../screens/SignUp/Name";
 import EmailAddress from "../../screens/SignUp/EmailAddress";
@@ -27,10 +27,10 @@ const AuthNavigation = () => {
 
       {/* Sign Up Flow */}
       <AuthStack.Screen
-        name="PhoneNumber"
-        component={PhoneNumber}
+        name="Password"
+        component={Password}
         options={{
-          headerTitle: "Phone number",
+          headerTitle: "Password",
         }}
       />
       <AuthStack.Screen

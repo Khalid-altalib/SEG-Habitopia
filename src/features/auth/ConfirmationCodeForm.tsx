@@ -51,7 +51,7 @@ const ConfirmationCodeForm = () => {
       <Button
         onPress={() => {
           handleSubmit(onSubmit);
-          navigation.navigate("Name");
+          navigation.navigate("SelectAvatar");
         }}
         type={ButtonType.Primary}
         style={{ marginTop: 20 }}

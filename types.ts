@@ -18,7 +18,7 @@ export type ProfileParams = {
 
 export type AuthParams = {
   Welcome: undefined;
-  PhoneNumber: undefined;
+  Password: undefined;
   ConfirmationCode: undefined;
   Name: undefined;
   EmailAddress: undefined;

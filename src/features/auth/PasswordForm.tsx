@@ -12,20 +12,20 @@ import { View } from "react-native";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 type formData = {
-  phoneNumber: string;
+  password: string;
 };
 
-const PhoneNumberForm = () => {
+const PasswordForm = () => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      phoneNumber: "",
+      password: "",
     },
   });
   const dispatch = useAppDispatch();
 
   const onSubmit = async (data: formData) => {
-    console.log(data);
     dispatch(addSignUpData(data));
+    navigation.navigate("ConfirmationCode");
   };
 
   const navigation = useNavigation<NavigationProp<AuthParams>>();
@@ -33,24 +33,21 @@ const PhoneNumberForm = () => {
   return (
     <View>
       <Text style={{ marginBottom: 5 }} type={TextType.Subtle}>
-        Phone Number
+        Password
       </Text>
       <Controller
         control={control}
         render={({ field: { onChange, value } }) => (
           <Input onChangeText={onChange} value={value} size="xl" />
         )}
-        name="phoneNumber"
+        name="password"
       />
       <Button
         style={{ marginTop: 20 }}
         isFullWidth
         icon={<AntDesign name="arrowright" size={20} color="white" />}
         type={ButtonType.Primary}
-        onPress={() => {
-          handleSubmit(onSubmit);
-          navigation.navigate("ConfirmationCode");
-        }}
+        onPress={handleSubmit(onSubmit)}
       >
         Continue
       </Button>
@@ -58,4 +55,4 @@ const PhoneNumberForm = () => {
   );
 };
 
-export default PhoneNumberForm;
+export default PasswordForm;
