@@ -6,7 +6,7 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 import { View } from "react-native";
 
-import { addSignUpData } from "./authSlice";
+import { addSignUpData, sendConfirmationCode } from "./authSlice";
 import { useAppDispatch } from "../../app/hooks";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
@@ -28,8 +28,9 @@ const ConfirmationCodeForm = () => {
   const dispatch = useAppDispatch();
 
   const onSubmit = async (data: formData) => {
-    console.log(data);
     dispatch(addSignUpData(data));
+    await dispatch(sendConfirmationCode());
+    navigation.navigate("SelectAvatar");
   };
 
   // React Navigation
@@ -49,10 +50,7 @@ const ConfirmationCodeForm = () => {
         name="confirmationCode"
       />
       <Button
-        onPress={() => {
-          handleSubmit(onSubmit);
-          navigation.navigate("SelectAvatar");
-        }}
+        onPress={handleSubmit(onSubmit)}
         type={ButtonType.Primary}
         style={{ marginTop: 20 }}
         isFullWidth

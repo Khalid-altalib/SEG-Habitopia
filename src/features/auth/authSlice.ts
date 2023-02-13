@@ -7,9 +7,10 @@ import { RootState } from "../../app/store";
 
 type AuthState = {
   signUpData: {
-    email?: string;
-    password?: string;
-    name?: string;
+    email: string;
+    password: string;
+    name: string;
+    confirmationCode: string;
   };
   logInData: {
     email?: string;
@@ -27,16 +28,35 @@ export const signUpUser = createAsyncThunk<
 >("auth/signUp", async (_, thunkAPI) => {
   try {
     const state = thunkAPI.getState() as RootState;
-    const { email, password } = state.auth.signUpData;
-    console.log(email, password);
+    const { email, password, name } = state.auth.signUpData;
+    console.log(email, password, name);
     const { user } = await Auth.signUp({
       username: email as string,
       password: password as string,
       attributes: {
-        name: "Test test",
+        name: name,
       },
     });
+    console.log(user);
     return {} as LocalUser;
+  } catch (error: any) {
+    const message = error.message;
+    console.log(error);
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+export const sendConfirmationCode = createAsyncThunk<
+  void,
+  void,
+  { rejectValue: string }
+>("auth/confirmation", async (_, thunkAPI) => {
+  try {
+    const state = thunkAPI.getState() as RootState;
+    const { email, confirmationCode } = state.auth.signUpData;
+    await Auth.confirmSignUp(email, confirmationCode);
+    console.log(email, confirmationCode);
+    console.log("confirmed sign up");
   } catch (error: any) {
     const message = error.message;
     console.log(error);
@@ -52,11 +72,16 @@ export const logInUser = createAsyncThunk<
   try {
     const state = thunkAPI.getState() as RootState;
     const { email, password } = state.auth.logInData;
-    const { Session } = await Auth.signIn(email as string, password); //  BACKEND PLACEHOLDER
-    console.log(Session, email);
-    return { authToken: Session, userId: email } as LocalUser;
+    const response = await Auth.signIn(email as string, password);
+
+    return {
+      authToken: response.signInUserSession.accessToken.jwtToken,
+      userId: email,
+    } as LocalUser;
   } catch (error: any) {
     const message = error.message;
+
+    console.log(message);
     return thunkAPI.rejectWithValue(message);
   }
 });
@@ -82,7 +107,7 @@ export const logOutUser = createAsyncThunk(
 );
 
 const initialState: AuthState = {
-  signUpData: {},
+  signUpData: { email: "", password: "", name: "", confirmationCode: "" },
   logInData: {},
   user: undefined,
   loading: false,
@@ -100,7 +125,7 @@ const authenticationFulfilled = (
   state.loading = false;
   state.user = action.payload;
   state.error = "";
-  localStorage.set("user", JSON.stringify(action.payload));
+  //localStorage.set("user", JSON.stringify(action.payload));
 };
 
 const authenticationRejected = (state: AuthState, action: any) => {

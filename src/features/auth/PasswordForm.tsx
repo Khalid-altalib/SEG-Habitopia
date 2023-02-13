@@ -3,7 +3,12 @@ import { Input } from "native-base";
 import { useForm, Controller } from "react-hook-form";
 import { AntDesign } from "@expo/vector-icons";
 
-import { addLogInData, addSignUpData, logInUser } from "./authSlice";
+import {
+  addLogInData,
+  addSignUpData,
+  logInUser,
+  signUpUser,
+} from "./authSlice";
 import { useAppDispatch } from "../../app/hooks";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
@@ -25,6 +30,7 @@ const PasswordForm = () => {
 
   const onSubmit = async (data: formData) => {
     dispatch(addSignUpData(data));
+    await dispatch(signUpUser());
     navigation.navigate("ConfirmationCode");
   };
 
