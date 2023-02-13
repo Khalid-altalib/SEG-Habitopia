@@ -10,6 +10,8 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { logInUserFromStorage } from "../features/auth/authSlice";
 
 import { RootParams } from "../../types";
+import Modal from "../screens/Modal";
+import ChallengeModal from "../features/challenges/ChallengeModal/ChallengeModal";
 
 const Stack = createNativeStackNavigator<RootParams>();
 
@@ -26,7 +28,7 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {localUser ? (
+        {true ? (
           <Stack.Screen
             name="Existing"
             component={TabNavigation}
@@ -40,6 +42,11 @@ const Navigation = () => {
           />
         )}
         <Stack.Screen name="Chat" component={ChatNavigation} />
+        <Stack.Screen
+          name="Modal"
+          component={Modal}
+          options={{ animation: "slide_from_bottom" }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
