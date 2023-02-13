@@ -1,10 +1,16 @@
 import React from "react";
-import { ImageBackground } from "react-native";
-import { Button, Box, Heading, ZStack, Image } from "native-base";
+import { ImageBackground, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Box, Heading, ZStack, Image } from "native-base";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import FlowLayout from "../components/FlowLayout/FlowLayout";
 import Layout from "../constants/Layout";
-import { AuthParams } from "../../types";
+import styles from "../constants/Styles";
+import { AuthParams, ButtonType, TextType } from "../../types";
+import Background from "../components/Background";
+import PaddedContainer from "../components/PaddedContainer";
+import Text from "../components/Text";
+import Button from "../components/Button";
 
 function Welcome(): JSX.Element {
   const WINDOW_WIDTH: number = Math.round(Layout.window.width);
@@ -16,65 +22,46 @@ function Welcome(): JSX.Element {
   const navigation = useNavigation<NavigationProp<AuthParams>>();
 
   return (
-    <ZStack>
-      <ImageBackground
-        source={{ uri: BACKGROUND_IMAGE_PATH }}
-        // style={{ width: "100%", height: "100%" }}
-      />
-      <FlowLayout>
-        <Box
-          style={{
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexDirection: "column",
-            height: "100%",
-          }}
+    <Background>
+      <PaddedContainer>
+        <View
+          style={[
+            styles.maxSize,
+            {
+              paddingTop: "30%",
+              paddingBottom: "20%",
+              justifyContent: "space-between",
+            },
+          ]}
         >
-          <Box style={{ width: "100%", alignItems: "center" }}>
-            <Box
-              style={{
-                flexDirection: "row",
-                width: "100%",
-                justifyContent: "space-evenly",
-              }}
-            >
-              <Image
-                source={{ uri: HABITOPIA_LOGO_IMAGE_PATH }}
-                style={{
-                  width: 60,
-                  height: 60,
-                  borderRadius: 30,
-                }}
-                alt="The Habitopia logo"
-              />
-              <Heading size="3xl">Habitopia</Heading>
-            </Box>
-            <Heading style={{ textAlign: "center", marginTop: 15 }} size="md">
+          <View style={{ alignItems: "center" }}>
+            <Text type={TextType.Heading} style={{ marginBottom: "3%" }}>
+              Habitopia.
+            </Text>
+            <Text type={TextType.Subtle} style={{ marginBottom: "3%" }}>
               Unlimited accountability to beat procrastination.
-            </Heading>
-          </Box>
-          <Box style={{ width: "100%" }}>
+            </Text>
+          </View>
+          <View>
             <Button
-              style={{ width: "100%" }}
-              size="lg"
-              colorScheme="blue"
-              onPress={() => navigation.navigate("SignUp")}
+              type={ButtonType.Primary}
+              onPress={() => navigation.navigate("Name")}
+              isFullWidth
             >
-              Sign up
+              Create account
             </Button>
             <Button
-              style={{ width: "100%", marginTop: 25 }}
-              size="lg"
-              colorScheme="dark"
-              variant="subtle"
+              type={ButtonType.Secondary}
+              style={{ marginTop: 20 }}
               onPress={() => navigation.navigate("LogIn")}
+              isFullWidth
             >
-              Log in
+              Sign in
             </Button>
-          </Box>
-        </Box>
-      </FlowLayout>
-    </ZStack>
+          </View>
+        </View>
+      </PaddedContainer>
+    </Background>
   );
 }
 

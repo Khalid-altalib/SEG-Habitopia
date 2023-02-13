@@ -18,7 +18,13 @@ export type ProfileParams = {
 
 export type AuthParams = {
   Welcome: undefined;
-  SignUp: undefined;
+  Password: undefined;
+  ConfirmationCode: undefined;
+  Name: undefined;
+  EmailAddress: undefined;
+  SelectAvatar: undefined;
+  SelectInstagram: undefined;
+  SelectChallenges: undefined;
   LogIn: undefined;
 };
 
@@ -39,6 +45,17 @@ export type LocalUser = {
   userId: string;
 };
 
+export enum TextType {
+  Regular,
+  Subtle,
+  Heading,
+  Button,
+}
+
+export enum ButtonType {
+  Primary,
+  Secondary,
+}
 export type Challenge = {
   name: string;
   description: string;
