@@ -19,7 +19,6 @@ const LogInForm = () => {
   const dispatch = useAppDispatch();
 
   const onSubmit = async (data: logInCredentials) => {
-    console.log(data);
     dispatch(addLogInData(data));
     await dispatch(logInUser());
   };
