@@ -1,7 +1,9 @@
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { VStack } from "native-base";
 import React, { useEffect, useState } from "react";
 import { GestureResponderEvent } from "react-native";
-import { Challenge } from "../../../../types";
+import { Challenge, RootParams } from "../../../../types";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import StatusContainer from "../../../components/StatusContainer/StatusContainer";
 import ChallengeBox from "../ChallengeBox/ChallengeBox";
@@ -11,6 +13,7 @@ import { fetchChallenges } from "../challengesSlice";
 type Props = {};
 
 const ChallengeBoxes = (props: Props) => {
+  const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
   const { challenges, loading, error } = useAppSelector(
     (state) => state.challenges
   );
@@ -22,68 +25,67 @@ const ChallengeBoxes = (props: Props) => {
       description: "Study everyday for a minimum of 5 hours or u not sigma lol",
       active: true,
       color: "cornflowerblue",
-      image: "https://media.tenor.com/qr1kVztk6uwAAAAM/sleepy-bed-time.gif",
+      image: "https://picsum.photos/200",
     },
     {
       name: "Food",
       description: "Sleep earlier or u not sigma lol",
       active: true,
       color: "limegreen",
-      image:
-        "https://blog.bareminerals.com/wp-content/uploads/2019/07/BareBlog_CleanMealPlans_animation-2.gif",
+      image: "https://picsum.photos/200",
     },
     {
       name: "Fitness",
       description: "jim or u not sigma lol",
       active: false,
       color: "black",
-      image:
-        "https://media.tenor.com/7WEoh2-8BxsAAAAC/free-weights-dumbbell.gif",
+      image: "https://picsum.photos/200",
     },
     {
       name: "Sleep",
       description: "Study everyday for a minimum of 5 hours or u not sigma lol",
       active: true,
       color: "cornflowerblue",
-      image: "https://media.tenor.com/qr1kVztk6uwAAAAM/sleepy-bed-time.gif",
+      image: "https://picsum.photos/200",
     },
     {
       name: "Food",
       description: "Sleep earlier or u not sigma lol",
       active: true,
       color: "limegreen",
-      image:
-        "https://blog.bareminerals.com/wp-content/uploads/2019/07/BareBlog_CleanMealPlans_animation-2.gif",
+      image: "https://picsum.photos/200",
     },
     {
       name: "Fitness",
       description: "jim or u not sigma lol",
       active: false,
       color: "black",
-      image:
-        "https://media.tenor.com/7WEoh2-8BxsAAAAC/free-weights-dumbbell.gif",
+      image: "https://picsum.photos/200",
     },
   ]; // useAppSelector((state) => state.challenges.challenges); BACKEND_PLACEHOLDER
 
-  useEffect(() => {
-    dispatch(fetchChallenges());
-  });
+  // useEffect(() => {
+  //   dispatch(fetchChallenges());
+  // });
 
   return (
     <StatusContainer loading={loading} error={error} data={allChallenges}>
       <VStack space={3} width={"100%"}>
         {allChallenges.map((entry, index) => (
-          <>
-            <ChallengeBox
-              name={entry.name}
-              onGoing={entry.active}
-              color={entry.color}
-              image={entry.image}
-              onPress={() => setModalVisible(true)}
-              key={index}
-            />
-            <ChallengeModal />
-          </>
+          <ChallengeBox
+            name={entry.name}
+            onGoing={entry.active}
+            color={entry.color}
+            image={entry.image}
+            key={index}
+            onPress={() =>
+              navigation.navigate("Modal", {
+                children: (
+                  <ChallengeModal challengeDescription={entry.description} />
+                ),
+              })
+            }
+          />
         ))}
       </VStack>
     </StatusContainer>
