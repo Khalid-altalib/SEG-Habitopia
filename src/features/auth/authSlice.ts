@@ -8,10 +8,10 @@ import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 type AuthState = {
   signUpData: {
-    email?: string;
-    password?: string;
-    starterChallenges?: string[];
-    name?: string;
+    email: string;
+    password: string;
+    name: string;
+    confirmationCode: string;
   };
   logInData: {
     email?: string;
@@ -29,16 +29,35 @@ export const signUpUser = createAsyncThunk<
 >("auth/signUp", async (_, thunkAPI) => {
   try {
     const state = thunkAPI.getState() as RootState;
-    const { email, password } = state.auth.signUpData;
-    console.log(email, password);
+    const { email, password, name } = state.auth.signUpData;
+    console.log(email, password, name);
     const { user } = await Auth.signUp({
       username: email as string,
       password: password as string,
       attributes: {
-        name: "Test test",
+        name: name,
       },
     });
+    console.log(user);
     return {} as LocalUser;
+  } catch (error: any) {
+    const message = error.message;
+    console.log(error);
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+export const sendConfirmationCode = createAsyncThunk<
+  void,
+  void,
+  { rejectValue: string }
+>("auth/confirmation", async (_, thunkAPI) => {
+  try {
+    const state = thunkAPI.getState() as RootState;
+    const { email, confirmationCode } = state.auth.signUpData;
+    await Auth.confirmSignUp(email, confirmationCode);
+    console.log(email, confirmationCode);
+    console.log("confirmed sign up");
   } catch (error: any) {
     const message = error.message;
     console.log(error);
@@ -54,16 +73,21 @@ export const logInUser = createAsyncThunk<
   try {
     const user = { authToken: "test", userId: "testId" };
     await AsyncStorage.setItem("user", JSON.stringify(user));
-    return user;
+
+    return user; // PLACEHOLDER
 
     const state = thunkAPI.getState() as RootState;
     const { email, password } = state.auth.logInData;
-    const { Session } = await Auth.signIn(email as string, password); //  BACKEND PLACEHOLDER
+    const response = await Auth.signIn(email as string, password);
 
-    console.log(Session, email);
-    return { authToken: Session, userId: email } as LocalUser;
+    return {
+      authToken: response.signInUserSession.accessToken.jwtToken,
+      userId: email,
+    } as LocalUser;
   } catch (error: any) {
     const message = error.message;
+
+    console.log(message);
     return thunkAPI.rejectWithValue(message);
   }
 });
@@ -91,7 +115,7 @@ export const logOutUser = createAsyncThunk("auth/logOutUser", async () => {
 });
 
 const initialState: AuthState = {
-  signUpData: {},
+  signUpData: { email: "", password: "", name: "", confirmationCode: "" },
   logInData: {},
   user: undefined,
   loading: false,
@@ -123,6 +147,7 @@ export const authSlice = createSlice({
   reducers: {
     addSignUpData: (state, action: PayloadAction<object>) => {
       state.signUpData = { ...state.signUpData, ...action.payload };
+      console.log(state.signUpData);
     },
     addLogInData: (state, action: PayloadAction<object>) => {
       state.logInData = { ...state.logInData, ...action.payload };

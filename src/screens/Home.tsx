@@ -5,6 +5,7 @@ import React from "react";
 import { NavigationParams } from "../../types";
 
 import styles from "../constants/Styles";
+import Challenges from "./Challenges";
 
 function Home() {
   const navigation =
@@ -13,13 +14,8 @@ function Home() {
   return (
     <View style={[styles.maxSize, styles.centeredContent]}>
       <Text>HomeScreen</Text>
-      <Button
-        onPress={() => {
-          navigation.push("Profile", { userId: "a" });
-        }}
-      >
-        Visit Ihtasham's Profile (Placeholder)
-      </Button>
+
+      <Challenges />
     </View>
   );
 }

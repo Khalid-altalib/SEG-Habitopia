@@ -4,8 +4,12 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 export type RootParams = {
   Auth: undefined;
   Existing: undefined;
-  MOdal: {
+  MOoal: {
     name: string;
+  };
+  Chat: undefined;
+  Modal: {
+    children: React.ReactNode;
   };
 };
 
@@ -25,7 +29,13 @@ export type NavigationParams = {
 
 export type AuthParams = {
   Welcome: undefined;
-  SignUp: undefined;
+  Password: undefined;
+  ConfirmationCode: undefined;
+  Name: undefined;
+  EmailAddress: undefined;
+  SelectAvatar: undefined;
+  SelectInstagram: undefined;
+  SelectChallenges: undefined;
   LogIn: undefined;
 };
 
@@ -46,10 +56,23 @@ export type LocalUser = {
   userId: string;
 };
 
+export enum TextType {
+  Regular,
+  Subtle,
+  Heading,
+  Button,
+}
+
+export enum ButtonType {
+  Primary,
+  Secondary,
+}
 export type Challenge = {
   name: string;
   description: string;
   active: boolean;
+  color: string;
+  image: string;
 };
 
 export type Profile = {

@@ -1,3 +1,4 @@
+import { background, border } from "native-base/lib/typescript/theme/styled-system";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -8,6 +9,9 @@ const styles = StyleSheet.create({
   centeredContent: {
     alignItems: "center",
     justifyContent: "center",
+  },
+  paddedContent: {
+    padding: 30,
   },
 });
 

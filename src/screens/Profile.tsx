@@ -52,7 +52,9 @@ const ProfileComponent = () => {
     await dispatch(fetchProfile(userId));
   };
 
-  navigation.setOptions({ title: profile?.name || "" });
+  useEffect(() => {
+    navigation.setOptions({ title: profile?.name || "" });
+  }, [profile]);
 
   return (
     <ScrollView>
@@ -61,6 +63,14 @@ const ProfileComponent = () => {
           <ProfileHeader isLocalUserProfile={isLocalUserProfile} />
           <Divider my={4} />
           <ProfileStatistics />
+          <Button
+            onPress={() => {
+              navigation.push("Profile", { userId: "a" });
+            }}
+            mt={4}
+          >
+            Visit Stacked Profile (Placeholder)
+          </Button>
         </StatusContainer>
       </RegularLayout>
     </ScrollView>
