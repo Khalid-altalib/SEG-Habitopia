@@ -7,12 +7,28 @@ import PaddedContainer from "../../../components/PaddedContainer";
 import Background from "../../../components/Background";
 import styles from "../../../constants/Styles";
 import Button from "../../../components/Button";
+import { useAppDispatch } from "../../../app/hooks";
+import { signUpUser } from "../../../features/auth/authSlice";
+
+const ChallengeButton = (props: { title: string }) => {
+  return (
+    <Button style={{ marginTop: 20 }} type={ButtonType.Secondary} isFullWidth>
+      {props.title}
+    </Button>
+  );
+};
 
 /**
  * @returns A React component representing the screen where the user must select
  * some of the challenges they want to overcome by using Habitopia.
  */
 const SelectChallenges = () => {
+  const dispatch = useAppDispatch();
+
+  const onSubmit = async () => {
+    await dispatch(signUpUser());
+  };
+
   return (
     <Background>
       <PaddedContainer>
@@ -26,48 +42,12 @@ const SelectChallenges = () => {
           >
             You will be able to change them later.
           </Text>
-          <Button
-            style={{ marginTop: 20 }}
-            type={ButtonType.Secondary}
-            isFullWidth
-          >
-            Waking up at the same time
-          </Button>
-          <Button
-            style={{ marginTop: 20 }}
-            type={ButtonType.Secondary}
-            isFullWidth
-          >
-            Working out / sports
-          </Button>
-          <Button
-            style={{ marginTop: 20 }}
-            type={ButtonType.Secondary}
-            isFullWidth
-          >
-            Studying
-          </Button>
-          <Button
-            style={{ marginTop: 20 }}
-            type={ButtonType.Secondary}
-            isFullWidth
-          >
-            Meditation
-          </Button>
-          <Button
-            style={{ marginTop: 20 }}
-            type={ButtonType.Secondary}
-            isFullWidth
-          >
-            Learning an instrument
-          </Button>
-          <Button
-            style={{ marginTop: 20 }}
-            type={ButtonType.Secondary}
-            isFullWidth
-          >
-            Eating healthy meals
-          </Button>
+          <ChallengeButton title="Waking up at the same time" />
+          <ChallengeButton title="Working out / sports" />
+          <ChallengeButton title="Studying" />
+          <ChallengeButton title="Meditation" />
+          <ChallengeButton title="Learning an instrument" />
+          <ChallengeButton title="Eating healthy meals" />
         </View>
       </PaddedContainer>
     </Background>

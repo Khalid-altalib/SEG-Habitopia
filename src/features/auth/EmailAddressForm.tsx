@@ -3,7 +3,7 @@ import { Checkbox, Input } from "native-base";
 import { useForm, Controller } from "react-hook-form";
 import { AntDesign } from "@expo/vector-icons";
 
-import { addLogInData, logInUser } from "./authSlice";
+import { addLogInData, addSignUpData, logInUser } from "./authSlice";
 import { useAppDispatch } from "../../app/hooks";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
@@ -27,8 +27,7 @@ const EmailAddressForm = () => {
 
   const onSubmit = async (data: formData) => {
     console.log(data);
-    dispatch(addLogInData(data));
-    await dispatch(logInUser());
+    dispatch(addSignUpData(data));
   };
 
   const navigation = useNavigation<NavigationProp<AuthParams>>();

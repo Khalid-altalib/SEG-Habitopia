@@ -2,35 +2,40 @@ import React from "react";
 import { Input } from "native-base";
 import { useForm, Controller } from "react-hook-form";
 import { AntDesign } from "@expo/vector-icons";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 
-import { addLogInData, logInUser } from "./authSlice";
+import { View } from "react-native";
+
+import { addSignUpData } from "./authSlice";
 import { useAppDispatch } from "../../app/hooks";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
 import { AuthParams, ButtonType, TextType } from "../../../types";
-import { View } from "react-native";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 type formData = {
   confirmationCode: string;
 };
 
 const ConfirmationCodeForm = () => {
+  // Initial form state
   const { control, handleSubmit } = useForm({
     defaultValues: {
       confirmationCode: "",
     },
   });
+
+  // onSubmit handler
   const dispatch = useAppDispatch();
 
   const onSubmit = async (data: formData) => {
     console.log(data);
-    dispatch(addLogInData(data));
-    await dispatch(logInUser());
+    dispatch(addSignUpData(data));
   };
 
+  // React Navigation
   const navigation = useNavigation<NavigationProp<AuthParams>>();
 
+  // JSX
   return (
     <View>
       <Text style={{ marginBottom: 5 }} type={TextType.Subtle}>
