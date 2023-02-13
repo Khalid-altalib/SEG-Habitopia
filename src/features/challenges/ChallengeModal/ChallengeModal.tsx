@@ -1,29 +1,22 @@
-import { Button, HStack, Text, View, Alert, Modal } from "native-base";
-import React, { useState } from "react";
-import { set } from "react-hook-form";
-import { Challenge, ChallengeParams } from "../../../../types";
-import styles from "../../../constants/Styles";
+import { Button, HStack, Text, View, Alert, Modal, VStack } from "native-base";
+import React from "react";
 import challengeModalStyles from "./ChallengeModalStyles";
-import Navigation from "../../../navigation/Navigation";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-
-type Props = {};
-
-const navigation = useNavigation<NativeStackNavigationProp<ChallengeParams>>();
+type Props = {
+  challengeDescription: string;
+};
 
 const ChallengeModal = (props: Props) => {
+  const { challengeDescription } = props;
   return (
     <View>
-      <View style={challengeModalStyles.challengeModal}>
-        <Text>.</Text>
-        <HStack>
-          <Button onPress={() => navigation.goBack()}>Back</Button>
-          <Button>Join</Button>
-        </HStack>
-      </View>
+      <VStack justifyContent={"center"}>
+        <Text>{challengeDescription}</Text>
+        <Text>Would you like to take on this challenge? 💪💪</Text>
+        <Button width={"100%"}>Join</Button>
+      </VStack>
     </View>
   );
 };
 
 export default ChallengeModal;
+//style={challengeModalStyles.challengeModal}
