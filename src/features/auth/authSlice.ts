@@ -1,7 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { LocalUser } from "../../../types";
+import { Auth } from "aws-amplify";
 import { AsyncStorage } from "react-native";
+import { RootState } from "../../app/store";
 
 type AuthState = {
   signUpData: {
@@ -14,35 +16,51 @@ type AuthState = {
     email?: string;
     password?: string;
   };
-  user: LocalUser | null;
+  user: LocalUser | undefined;
   loading: boolean;
   error: string;
 };
 
-const createAsyncThunkForAuthentication = (name: string, endpoint: string) => {
-  return createAsyncThunk<LocalUser, void, { rejectValue: string }>(
-    name,
-    async (_, thunkAPI) => {
-      try {
-        const response = await fetch(endpoint); //  BACKEND PLACEHOLDER
-        return (await response.json()) as LocalUser;
-      } catch (error: any) {
-        const message = error.message;
-        return thunkAPI.rejectWithValue(message);
-      }
-    }
-  );
-};
+export const signUpUser = createAsyncThunk<
+  LocalUser,
+  void,
+  { rejectValue: string }
+>("auth/signUp", async (_, thunkAPI) => {
+  try {
+    const state = thunkAPI.getState() as RootState;
+    const { email, password } = state.auth.signUpData;
+    console.log(email, password);
+    const { user } = await Auth.signUp({
+      username: email as string,
+      password: password as string,
+      attributes: {
+        name: "Test test",
+      },
+    });
+    return {} as LocalUser;
+  } catch (error: any) {
+    const message = error.message;
+    console.log(error);
+    return thunkAPI.rejectWithValue(message);
+  }
+});
 
-export const logInUser = createAsyncThunkForAuthentication(
-  "auth/login",
-  "https://test/api/login"
-);
-
-export const signUpUser = createAsyncThunkForAuthentication(
-  "auth/signup",
-  "https://test/api/signup"
-);
+export const logInUser = createAsyncThunk<
+  LocalUser,
+  void,
+  { rejectValue: string }
+>("auth/login", async (_, thunkAPI) => {
+  try {
+    const state = thunkAPI.getState() as RootState;
+    const { email, password } = state.auth.logInData;
+    const { Session } = await Auth.signIn(email as string, password); //  BACKEND PLACEHOLDER
+    console.log(Session, email);
+    return { authToken: Session, userId: email } as LocalUser;
+  } catch (error: any) {
+    const message = error.message;
+    return thunkAPI.rejectWithValue(message);
+  }
+});
 
 export const logInUserFromStorage = createAsyncThunk<
   LocalUser,
@@ -67,7 +85,7 @@ export const logOutUser = createAsyncThunk(
 const initialState: AuthState = {
   signUpData: {},
   logInData: {},
-  user: null,
+  user: undefined,
   loading: false,
   error: "",
 };
@@ -88,7 +106,7 @@ const authenticationFulfilled = (
 
 const authenticationRejected = (state: AuthState, action: any) => {
   state.loading = false;
-  state.user = null;
+  state.user = undefined;
   state.error = action.payload;
 };
 
@@ -118,7 +136,7 @@ export const authSlice = createSlice({
     });
     builder.addCase(logOutUser.fulfilled, (state) => {
       state.loading = false;
-      state.user = null;
+      state.user = undefined;
     });
   },
 });

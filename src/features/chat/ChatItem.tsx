@@ -1,75 +1,72 @@
-import { NavigationProp, useNavigation } from '@react-navigation/native'
-import React from 'react'
-import { View, Pressable, Text, Image, StyleSheet } from 'react-native'
-import { RootParams } from '../../../types'
-
-
-
-
-type Chat = {
-    name: string,
-    image: string,
-    text: string,
-    time: string
-}
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import React from "react";
+import { View, Pressable, Text, Image, StyleSheet } from "react-native";
+import {
+  Chat,
+  ChatParams,
+  IndividualChatScreenNavigationProp,
+  ProfileParams,
+} from "../../../types";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 const ChatItem = (chat: Chat) => {
-  const navigation = useNavigation<NavigationProp<RootParams>>()
+  const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
 
   return (
-    <Pressable onPress={() => navigation.navigate('Chat')}style={chatstyles.chatContainer}>
-        <Image source={{uri: chat.image}} style={chatstyles.image}/>
-        <View style={chatstyles.container}>
-            <View style={chatstyles.row}>
-                <Text style={chatstyles.name} numberOfLines={1}>
-                    {chat.name}
-                </Text>
-                <Text>{chat.time}</Text>
-            </View>
-            <View>
-                <Text numberOfLines={2} style={chatstyles.lastMessage}>
-                    {chat.text}
-                </Text>
-            </View>
+    <Pressable
+      onPress={() => {
+        navigation.push("IndividualChat", { id: chat.id });
+      }}
+      style={chatstyles.chatContainer}
+    >
+      <Image source={{ uri: chat.image }} style={chatstyles.image} />
+      <View style={chatstyles.container}>
+        <View style={chatstyles.row}>
+          <Text style={chatstyles.name} numberOfLines={1}>
+            {chat.name}
+          </Text>
+          <Text>{chat.time}</Text>
         </View>
+        <View>
+          <Text numberOfLines={2} style={chatstyles.lastMessage}>
+            {chat.text}
+          </Text>
+        </View>
+      </View>
     </Pressable>
-  )
-}
+  );
+};
 
 const chatstyles = StyleSheet.create({
+  chatContainer: {
+    flexDirection: "row",
+    marginHorizontal: 10,
+    marginVertical: 5,
+    height: 60,
+  },
 
-    chatContainer: {
-        flexDirection: 'row',
-        marginHorizontal: 10,
-        marginVertical: 5,
-        height: 60,
+  image: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginRight: 10,
+  },
 
-    },
+  container: {
+    flex: 1,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
 
-    image: {
-        width: 60,
-        height: 60,
-        borderRadius: 30,
-        marginRight: 10
-    },
+  row: {
+    flexDirection: "row",
+    marginBottom: 5,
+  },
 
-    container: {
-        flex: 1,
-        borderBottomWidth: StyleSheet.hairlineWidth,
-    },
+  name: {
+    flex: 1,
+  },
 
-    row:{
-        flexDirection: 'row',
-        marginBottom: 5,
-    },
+  lastMessage: {},
+});
 
-    name:{
-        flex: 1,
-    },
-    
-    lastMessage:{
-
-    }
-})
-
-export default ChatItem
+export default ChatItem;

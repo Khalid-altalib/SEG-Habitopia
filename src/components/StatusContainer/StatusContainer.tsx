@@ -31,7 +31,7 @@ const StatusContainer = (props: Props) => {
           icon={<WarningOutlineIcon />}
         />
       );
-    } else if (data && data.length === 0) {
+    } else if (data && Array.isArray(data) && data.length === 0) {
       return (
         <StatusIcon label="No results found" icon={<QuestionOutlineIcon />} />
       );
@@ -40,7 +40,7 @@ const StatusContainer = (props: Props) => {
 
   return (
     <View>
-      <View>{children}</View>
+      {data && <View>{children}</View>}
       <Center>{renderStatusDisplay()}</Center>
     </View>
   );

@@ -2,7 +2,6 @@ import { Button, TextInput, View, StyleSheet } from 'react-native'
 import React from 'react'
 import { Checkin } from '../../models/index.js';
 import { DataStore } from '@aws-amplify/datastore';
-import axios from 'axios';
 
 // how to get USER ID of the user pressing check in and how to get groupID
 
@@ -43,26 +42,25 @@ const InputBox = (props: Props) => {
         <Button title='check in'  onPress = {handleCheckIn}></Button>
 
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        padding: 10,
-        paddingHorizontal: 10,
-        alignItems: 'center'
-    },
-   
+  container: {
+    flexDirection: "row",
+    padding: 10,
+    paddingHorizontal: 10,
+    alignItems: "center",
+  },
 
-    input:{
-        flex: 1,
-        backgroundColor: 'white',
-        padding: 5,
-        borderRadius: 15,
-        paddingHorizontal: 10,
-        overflow: 'scroll'
-    }
-})
+  input: {
+    flex: 1,
+    backgroundColor: "white",
+    padding: 5,
+    borderRadius: 15,
+    paddingHorizontal: 10,
+    overflow: "scroll",
+  },
+});
 
-export default InputBox
+export default InputBox;
