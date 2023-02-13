@@ -2,10 +2,12 @@ import { Button, TextInput, View, StyleSheet } from 'react-native'
 import React from 'react'
 import { Checkin } from '../../models/index.js';
 import { DataStore } from '@aws-amplify/datastore';
+import axios from 'axios';
 
-// AWS.config.update({ region: 'eu-west-2' });
+// how to get USER ID of the user pressing check in and how to get groupID
 
 type Props = {}
+
 
 const getData = async () => {
     try {
@@ -21,9 +23,9 @@ const handleCheckIn = async () => {
     getData();
     await DataStore.save(
         new Checkin({
-            "timeStamp": "1970-01-01T12:30:23.999Z",
-            "userID": "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
-            "groupID": "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d"
+            timeStamp: "1970-01-01T12:30:23.999Z",
+            userID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
+            chatroomID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d"
         })
     );
     console.log('Check in saved');
