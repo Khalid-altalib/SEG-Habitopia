@@ -5,6 +5,9 @@ export type RootParams = {
   Auth: undefined;
   Existing: undefined;
   Chat: undefined;
+  Modal: {
+    children: React.ReactNode;
+  };
 };
 
 export type ProfileParams = {
@@ -28,6 +31,7 @@ export type ChatParams = {
     id: string;
   };
 };
+
 
 export type IndividualChatScreenNavigationProp = NativeStackNavigationProp<
   ChatParams,
