@@ -45,7 +45,11 @@ const Navigation = () => {
         <Stack.Screen
           name="Modal"
           component={Modal}
-          options={{ animation: "slide_from_bottom" }}
+          options={{
+            animation: "slide_from_bottom",
+            headerBackVisible: false,
+            title: "Join Challenge?",
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

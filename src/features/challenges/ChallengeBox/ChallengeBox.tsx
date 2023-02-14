@@ -55,12 +55,9 @@ const ChallengeBox = (props: Props) => {
         height={100}
       >
         <HStack justifyContent="space-between" height="100%">
-          <Box>
+          <Box justifyContent="space-between">
             <Heading>{name}</Heading>
-            <ChallengeOnGoingText
-              onGoing={active}
-              style={challengeBoxStyles.onGoingText}
-            />
+            <ChallengeOnGoingText onGoing={active} />
           </Box>
           <Box borderRadius={3}>
             <Image

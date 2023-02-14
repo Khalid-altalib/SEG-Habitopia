@@ -16,7 +16,7 @@ function ChallengeLayout(props: Props) {
     <ScrollView>
       <RegularLayout>
         <Center>
-          <Heading mb={4}>Pick a category 🚀</Heading>
+          <Heading mb={4}>Pick a Challenge! 🚀</Heading>
         </Center>
 
         <VStack space={3} width={"100%"}>
