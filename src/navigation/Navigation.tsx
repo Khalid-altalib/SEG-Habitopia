@@ -18,8 +18,6 @@ import { AsyncStorage } from "@aws-amplify/core";
 const Stack = createNativeStackNavigator<RootParams>();
 
 const Navigation = () => {
-  AsyncStorage.clear(); // DEBUG
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
