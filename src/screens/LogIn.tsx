@@ -1,19 +1,24 @@
 import React from "react";
 import styles from "../constants/Styles";
 import LogInForm from "../features/auth/LogInForm";
-import { Box, Text, View, Center, Image } from "native-base";
-import FlowLayout from "../components/FlowLayout/FlowLayout";
+import Background from "../components/Background";
+import PaddedContainer from "../components/PaddedContainer";
+import { View } from "react-native";
+import Text from "../components/Text";
+import { TextType } from "../../types";
 
 const LogIn = () => {
   return (
-    <View style={[styles.maxSize, styles.centeredContent]}>
-      <FlowLayout>
-        <Center mb={"4"}>Welcome back! Log In to your account</Center>
-        <Box>
+    <Background>
+      <PaddedContainer>
+        <View style={[styles.maxSize, { paddingTop: "10%" }]}>
+          <Text type={TextType.Heading} style={{ marginBottom: "10%" }}>
+            Welcome back!
+          </Text>
           <LogInForm />
-        </Box>
-      </FlowLayout>
-    </View>
+        </View>
+      </PaddedContainer>
+    </Background>
   );
 };
 
