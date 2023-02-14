@@ -6,7 +6,7 @@ import {
   getByTestId,
 } from "@testing-library/react";
 import { Provider } from "react-redux";
-import LogInForm from "./LogInForm";
+import LogInForm from "../LogInForm/LogInForm";
 import { shallow } from "enzyme";
 import React from "react";
 import store from "../../../app/store";

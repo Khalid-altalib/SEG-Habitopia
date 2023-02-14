@@ -26,7 +26,7 @@ const Navigation = () => {
     dispatch(logInUserFromStorage());
   }, []);
 
-  const localUser = useAppSelector((state) => state.auth!.user);
+  const localUser = true;
 
   return (
     <NavigationContainer>

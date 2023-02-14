@@ -1,9 +1,31 @@
 import React from "react";
-import FlowLayout from "../../components/FlowLayout/FlowLayout";
-import { Input, Text, VStack } from "native-base";
+import {
+  FlatList,
+  Input,
+  Text,
+  Pressable,
+  List,
+  Switch,
+  Box,
+  VStack,
+} from "native-base";
+import SettingsItem from "./SettingsItem";
+import NotificationToggle from "./NotificationToggle";
 
 const SettingsPage = () => {
-  return <></>;
+  const settingEntries = [
+    { type: "Name" },
+    { type: "Email" },
+    { type: "Password" },
+  ];
+  return (
+    <VStack space={5}>
+      {settingEntries.map((entry, index) => (
+        <SettingsItem type={entry.type} />
+      ))}
+      <NotificationToggle />
+    </VStack>
+  );
 };
 
 export default SettingsPage;
