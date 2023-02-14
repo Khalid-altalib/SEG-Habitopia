@@ -28,8 +28,7 @@ export const signUpUser = createAsyncThunk<void, void, { rejectValue: string }>(
     try {
       const state = thunkAPI.getState() as RootState;
       const { email, password, name } = state.auth.signUpData;
-      console.log(email, password, name);
-      const { user } = await Auth.signUp({
+      await Auth.signUp({
         username: email as string,
         password: password as string,
         attributes: {
@@ -53,7 +52,6 @@ export const sendConfirmationCode = createAsyncThunk<
     const state = thunkAPI.getState() as RootState;
     const { email, password, confirmationCode } = state.auth.signUpData;
     await Auth.confirmSignUp(email, confirmationCode);
-    console.log("confirmed sign up");
     const user = await logInHelper(email, password);
     return user as LocalUser;
   } catch (error: any) {
@@ -85,7 +83,6 @@ export const logInUser = createAsyncThunk<
     return user as LocalUser;
   } catch (error: any) {
     const message = error.message;
-
     console.log(message);
     return thunkAPI.rejectWithValue(message);
   }
@@ -110,7 +107,8 @@ export const logInUserFromStorage = createAsyncThunk<
 });
 
 export const logOutUser = createAsyncThunk("auth/logOutUser", async () => {
-  return await AsyncStorage.removeItem("user");
+  await AsyncStorage.removeItem("user");
+  return undefined;
 });
 
 const initialState: AuthState = {
@@ -146,7 +144,6 @@ export const authSlice = createSlice({
   reducers: {
     addSignUpData: (state, action: PayloadAction<object>) => {
       state.signUpData = { ...state.signUpData, ...action.payload };
-      console.log(state.signUpData);
     },
     addLogInData: (state, action: PayloadAction<object>) => {
       state.logInData = { ...state.logInData, ...action.payload };
