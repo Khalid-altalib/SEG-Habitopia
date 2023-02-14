@@ -3,7 +3,6 @@ import React from 'react'
 import { Checkin } from '../../models/index.js';
 import { DataStore } from '@aws-amplify/datastore';
 
-// how to get USER ID of the user pressing check in and how to get groupID
 
 type Props = {}
 
@@ -31,7 +30,6 @@ const handleCheckIn = async () => {
     } catch (error) {
         console.log("Error saving check in", error);
         }
-    // update the database with values such as userID, timestamp, date, group chat ID
 
 }
 const InputBox = (props: Props) => {
