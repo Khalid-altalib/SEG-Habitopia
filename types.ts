@@ -94,4 +94,5 @@ export type Settings = {
   email: string;
   name: string;
   notifications: boolean;
+  password: string;
 };
