@@ -7,9 +7,9 @@ type Props = {
   style?: StyleProp<TextStyle>;
 };
 
-const ChallngeOnGoingText = (props: Props) => {
+const ChallengeOnGoingText = (props: Props) => {
   const { onGoing, style } = props;
   return onGoing ? <Text style={style}>On-going</Text> : <></>;
 };
 
-export default ChallngeOnGoingText;
+export default ChallengeOnGoingText;
