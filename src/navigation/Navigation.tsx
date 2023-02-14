@@ -42,6 +42,7 @@ const Navigation = () => {
             options={{ headerShown: false }}
           />
         )}
+        <Stack.Screen name="Profile" component={ProfileComponent} />
         <Stack.Screen
           name="ChallengePrompt"
           component={ChallengePrompt}
