@@ -30,7 +30,7 @@ const ConfirmationCodeForm = () => {
   const onSubmit = async (data: formData) => {
     dispatch(addSignUpData(data));
     await dispatch(sendConfirmationCode());
-    navigation.navigate("LogIn");
+    navigation.navigate("SignIn");
   };
 
   // React Navigation

@@ -19,7 +19,12 @@ import SubmitButton from "./SubmitButton";
  * @returns The component representing the form.
  */
 const SignInForm = () => {
-  const { control, handleSubmit } = useForm<SignInFormValues>();
+  const { control, handleSubmit } = useForm<SignInFormValues>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
   return (
     <View>
