@@ -21,6 +21,7 @@ export type NavigationParams = {
   Leaderboard: undefined;
   You: ProfileParams;
   Profile: ProfileParams;
+  Settings: undefined;
 };
 
 export type AuthParams = {

@@ -4,6 +4,7 @@ import Home from "../../screens/Home";
 import Explore from "../../screens/Explore";
 import Leaderboard from "../../screens/Leaderboard";
 import Profile from "../../screens/Profile";
+import Settings from "../../screens/Settings";
 import { NavigationParams } from "../../../types";
 import ChatNavigation from "./ChatNavigation";
 import { useAppSelector } from "../../app/hooks";
@@ -31,6 +32,7 @@ const TabNavigation = () => {
         initialParams={{ userId: localUser!.userId }}
         options={() => ({ title: "You" })}
       />
+      <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
   );
 };
