@@ -3,17 +3,12 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Box, Heading, HStack } from "native-base";
 import React from "react";
 import { TouchableOpacity, Image } from "react-native";
-import { RootParams } from "../../../../types";
+import { Challenge, RootParams } from "../../../../types";
 import { challengeMappings } from "../challengeMappings";
 import ChallengeOnGoingText from "../ChallengeOnGoingText/ChallengeOnGoingText";
-import challengeBoxStyles from "./ChallengeBoxStyles";
 
 type Props = {
-  challenge: {
-    name: string;
-    active: boolean;
-    description: string;
-  };
+  challenge: Challenge;
 };
 
 const ChallengeBox = (props: Props) => {
@@ -24,10 +19,6 @@ const ChallengeBox = (props: Props) => {
 
   const { color: cardColor, image: cardImage } =
     challengeMappings[name] || challengeMappings["fallback"];
-
-  let boxStyle = active
-    ? challengeBoxStyles.activeChallengeBox
-    : challengeBoxStyles.unactiveChallengeBox;
 
   const handlePress = () =>
     navigation.navigate("ChallengePrompt", {
@@ -50,7 +41,7 @@ const ChallengeBox = (props: Props) => {
           </Box>
           <Box borderRadius={3}>
             <Image
-              source={{ uri: image }}
+              source={{ uri: cardImage }}
               borderRadius={6}
               style={{ height: "100%", width: 80 }}
             />
