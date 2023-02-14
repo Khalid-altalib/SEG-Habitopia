@@ -13,17 +13,15 @@ import ButtonSection from "./ButtonSection";
  *
  * @returns The component representing the screen.
  */
-const Welcome = (): JSX.Element => {
-  return (
-    <Background>
-      <PaddedContainer>
-        <SectionsContainer>
-          <TitleSection />
-          <ButtonSection />
-        </SectionsContainer>
-      </PaddedContainer>
-    </Background>
-  );
-};
+const Welcome = (): JSX.Element => (
+  <Background>
+    <PaddedContainer>
+      <SectionsContainer>
+        <TitleSection />
+        <ButtonSection />
+      </SectionsContainer>
+    </PaddedContainer>
+  </Background>
+);
 
 export default Welcome;

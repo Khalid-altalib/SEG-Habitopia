@@ -13,7 +13,7 @@ import Button from "../../../components/Button";
 const SignInButton = (): JSX.Element => {
   const navigation = useNavigation<NavigationProp<AuthParams>>();
 
-  const signInScreen = "LogIn";
+  const signInScreen = "SignIn";
 
   return (
     <Button
