@@ -41,8 +41,6 @@ const Navigation = () => {
             options={{ headerShown: false }}
           />
         )}
-        <Stack.Screen name="Chat" component={ChatNavigation} />
-        <Stack.Screen name="Profile" component={ProfileComponent} />
         <Stack.Screen
           name="Modal"
           component={Modal}

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text as RnText } from "react-native";
 import { theme, useColorModeValue } from "native-base";
-import { useFonts } from "expo-font";
+import * as Font from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 
 import { TextType } from "../../../types";
 
@@ -12,10 +13,41 @@ type Props = {
 };
 
 const Text = ({ type, style, children }: any) => {
-  const [fontsLoaded] = useFonts({
-    "Roboto Black": require("../../../assets/fonts/Roboto/Black.ttf"),
-    "Roboto Medium": require("../../../assets/fonts/Roboto/Medium.ttf"),
-  });
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  const loadFonts = async () => {
+    try {
+      await Font.loadAsync({
+        "Roboto Black": require("../../../assets/fonts/Roboto/Black.ttf"),
+        "Roboto Medium": require("../../../assets/fonts/Roboto/Medium.ttf"),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+    setFontsLoaded(true);
+  };
+
+  useEffect(() => {
+    async function loading() {
+      await loadFonts();
+      setFontsLoaded(true);
+    }
+    loading();
+  }, []);
+
+  useEffect(() => {
+    async function hideSplashScreen() {
+      if (fontsLoaded) {
+        try {
+          await SplashScreen.hideAsync();
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
+    hideSplashScreen();
+  }, [fontsLoaded]);
 
   if (type == undefined) type = TextType.Regular;
 
