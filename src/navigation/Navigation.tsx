@@ -13,10 +13,13 @@ import { RootParams } from "../../types";
 import ProfileComponent from "../screens/Profile";
 import Modal from "../screens/Modal";
 import ChallengeModal from "../features/challenges/ChallengeModal/ChallengeModal";
+import { AsyncStorage } from "@aws-amplify/core";
 
 const Stack = createNativeStackNavigator<RootParams>();
 
 const Navigation = () => {
+  AsyncStorage.clear(); // DEBUG
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {

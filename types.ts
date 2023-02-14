@@ -32,7 +32,7 @@ export type AuthParams = {
   SelectAvatar: undefined;
   SelectInstagram: undefined;
   SelectChallenges: undefined;
-  LogIn: undefined;
+  SignIn: undefined;
 };
 
 export type ChatParams = {
@@ -92,4 +92,9 @@ export type Chat = {
   image: string;
   text: string;
   time: string;
+};
+
+export type SignInFormValues = {
+  email: string;
+  password: string;
 };
