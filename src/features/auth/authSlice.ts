@@ -2,8 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { LocalUser } from "../../../types";
 import { Auth } from "aws-amplify";
-import { AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RootState } from "../../app/store";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 type AuthState = {
   signUpData: {
@@ -13,32 +14,46 @@ type AuthState = {
     confirmationCode: string;
   };
   logInData: {
-    email?: string;
-    password?: string;
+    email: string;
+    password: string;
   };
   user: LocalUser | undefined;
   loading: boolean;
   error: string;
 };
 
-export const signUpUser = createAsyncThunk<
+export const signUpUser = createAsyncThunk<void, void, { rejectValue: string }>(
+  "auth/signUp",
+  async (_, thunkAPI) => {
+    try {
+      const state = thunkAPI.getState() as RootState;
+      const { email, password, name } = state.auth.signUpData;
+      await Auth.signUp({
+        username: email as string,
+        password: password as string,
+        attributes: {
+          name: name,
+        },
+      });
+    } catch (error: any) {
+      const message = error.message;
+      console.log(error);
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const sendConfirmationCode = createAsyncThunk<
   LocalUser,
   void,
   { rejectValue: string }
->("auth/signUp", async (_, thunkAPI) => {
+>("auth/confirmation", async (_, thunkAPI) => {
   try {
     const state = thunkAPI.getState() as RootState;
-    const { email, password, name } = state.auth.signUpData;
-    console.log(email, password, name);
-    const { user } = await Auth.signUp({
-      username: email as string,
-      password: password as string,
-      attributes: {
-        name: name,
-      },
-    });
-    console.log(user);
-    return {} as LocalUser;
+    const { email, password, confirmationCode } = state.auth.signUpData;
+    await Auth.confirmSignUp(email, confirmationCode);
+    const user = await logInHelper(email, password);
+    return user as LocalUser;
   } catch (error: any) {
     const message = error.message;
     console.log(error);
@@ -46,23 +61,15 @@ export const signUpUser = createAsyncThunk<
   }
 });
 
-export const sendConfirmationCode = createAsyncThunk<
-  void,
-  void,
-  { rejectValue: string }
->("auth/confirmation", async (_, thunkAPI) => {
-  try {
-    const state = thunkAPI.getState() as RootState;
-    const { email, confirmationCode } = state.auth.signUpData;
-    await Auth.confirmSignUp(email, confirmationCode);
-    console.log(email, confirmationCode);
-    console.log("confirmed sign up");
-  } catch (error: any) {
-    const message = error.message;
-    console.log(error);
-    return thunkAPI.rejectWithValue(message);
-  }
-});
+const logInHelper = async (email: string, password: string) => {
+  const { signInUserSession, username } = await Auth.signIn(email, password);
+  const user = {
+    authToken: signInUserSession.idToken.jwtToken,
+    userId: username,
+  };
+  await AsyncStorage.setItem("user", JSON.stringify(user));
+  return user;
+};
 
 export const logInUser = createAsyncThunk<
   LocalUser,
@@ -72,15 +79,10 @@ export const logInUser = createAsyncThunk<
   try {
     const state = thunkAPI.getState() as RootState;
     const { email, password } = state.auth.logInData;
-    const response = await Auth.signIn(email as string, password);
-
-    return {
-      authToken: response.signInUserSession.accessToken.jwtToken,
-      userId: email,
-    } as LocalUser;
+    const user = await logInHelper(email, password);
+    return user as LocalUser;
   } catch (error: any) {
     const message = error.message;
-
     console.log(message);
     return thunkAPI.rejectWithValue(message);
   }
@@ -92,23 +94,26 @@ export const logInUserFromStorage = createAsyncThunk<
   { rejectValue: string }
 >("auth/logInFromStorage", async (_, thunkAPI) => {
   const data = await AsyncStorage.getItem("user");
-  if (data === null) {
-    return thunkAPI.rejectWithValue("Please log in again");
-  } else {
+  if (data) {
+    Toast.show({
+      type: "success",
+      text1: "Welcome back! 👋",
+      text2: "We've logged you in from your previous session",
+    });
     return JSON.parse(data) as LocalUser;
+  } else {
+    return thunkAPI.rejectWithValue("Please log in again");
   }
 });
 
-export const logOutUser = createAsyncThunk(
-  "auth/logOutUser",
-  async (_, thunkAPI) => {
-    return await AsyncStorage.removeItem("user");
-  }
-);
+export const logOutUser = createAsyncThunk("auth/logOutUser", async () => {
+  await AsyncStorage.removeItem("user");
+  return undefined;
+});
 
 const initialState: AuthState = {
   signUpData: { email: "", password: "", name: "", confirmationCode: "" },
-  logInData: {},
+  logInData: { email: "", password: "" },
   user: undefined,
   loading: false,
   error: "",
@@ -125,7 +130,6 @@ const authenticationFulfilled = (
   state.loading = false;
   state.user = action.payload;
   state.error = "";
-  //localStorage.set("user", JSON.stringify(action.payload));
 };
 
 const authenticationRejected = (state: AuthState, action: any) => {
@@ -140,7 +144,6 @@ export const authSlice = createSlice({
   reducers: {
     addSignUpData: (state, action: PayloadAction<object>) => {
       state.signUpData = { ...state.signUpData, ...action.payload };
-      console.log(state.signUpData);
     },
     addLogInData: (state, action: PayloadAction<object>) => {
       state.logInData = { ...state.logInData, ...action.payload };
@@ -150,9 +153,9 @@ export const authSlice = createSlice({
     builder.addCase(logInUser.pending, authenticationPending);
     builder.addCase(logInUser.fulfilled, authenticationFulfilled);
     builder.addCase(logInUser.rejected, authenticationRejected);
-    builder.addCase(signUpUser.pending, authenticationPending);
-    builder.addCase(signUpUser.fulfilled, authenticationFulfilled);
-    builder.addCase(signUpUser.rejected, authenticationRejected);
+    builder.addCase(sendConfirmationCode.pending, authenticationPending);
+    builder.addCase(sendConfirmationCode.fulfilled, authenticationFulfilled);
+    builder.addCase(sendConfirmationCode.rejected, authenticationRejected);
     builder.addCase(logInUserFromStorage.pending, authenticationPending);
     builder.addCase(logInUserFromStorage.fulfilled, authenticationFulfilled);
     builder.addCase(logInUserFromStorage.rejected, authenticationRejected);

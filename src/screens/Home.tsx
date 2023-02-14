@@ -13,6 +13,8 @@ function Home() {
 
   return (
     <View style={[styles.maxSize, styles.centeredContent]}>
+      <Text>HomeScreen</Text>
+
       <Challenges />
     </View>
   );
