@@ -64,8 +64,8 @@ const ChallengeBoxes = (props: Props) => {
   return (
     <StatusContainer loading={loading} error={error} data={allChallenges}>
       <VStack space={4} width={"100%"}>
-        {allChallenges.map((entry, index) => (
-          <ChallengeBox key={index} entry={entry} />
+        {allChallenges.map((challenge, index) => (
+          <ChallengeBox key={index} challenge={challenge} />
         ))}
       </VStack>
     </StatusContainer>

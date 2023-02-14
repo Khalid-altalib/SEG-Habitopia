@@ -11,7 +11,7 @@ import { logInUserFromStorage } from "../features/auth/authSlice";
 
 import { RootParams } from "../../types";
 import ProfileComponent from "../screens/Profile";
-import Modal from "../screens/Modal";
+import ChallengePrompt from "../screens/ChallengePrompt";
 import ChallengeModal from "../features/challenges/ChallengeModal/ChallengeModal";
 import { AsyncStorage } from "@aws-amplify/core";
 
@@ -43,8 +43,8 @@ const Navigation = () => {
           />
         )}
         <Stack.Screen
-          name="Modal"
-          component={Modal}
+          name="ChallengePrompt"
+          component={ChallengePrompt}
           options={{
             animation: "slide_from_bottom",
             headerBackVisible: false,

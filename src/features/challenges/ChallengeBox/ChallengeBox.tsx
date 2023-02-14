@@ -1,48 +1,37 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Box, Card, Heading, HStack } from "native-base";
+import { Box, Heading, HStack } from "native-base";
 import React from "react";
-import {
-  GestureResponderEvent,
-  TouchableOpacity,
-  Text,
-  Image,
-} from "react-native";
-import { Challenge, RootParams } from "../../../../types";
-import ChallengeModal from "../ChallengeModal/ChallengeModal";
+import { TouchableOpacity, Image } from "react-native";
+import { RootParams } from "../../../../types";
+import { challengeMappings } from "../challengeMappings";
 import ChallengeOnGoingText from "../ChallengeOnGoingText/ChallengeOnGoingText";
 import challengeBoxStyles from "./ChallengeBoxStyles";
 
 type Props = {
-  entry: {
-    image: string;
+  challenge: {
     name: string;
     active: boolean;
     description: string;
   };
 };
 
-const challengeColorMappings: { [key: string]: string } = {
-  Sleep: "blue.400",
-  Food: "green.400",
-  Fitness: "amber.400",
-};
-
 const ChallengeBox = (props: Props) => {
-  const { entry } = props;
-  const { name, active, image, description } = entry;
+  const { challenge } = props;
+  const { name, active, description } = challenge;
 
   const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
 
-  const cardColor = challengeColorMappings[name];
+  const { color: cardColor, image: cardImage } =
+    challengeMappings[name] || challengeMappings["fallback"];
 
   let boxStyle = active
     ? challengeBoxStyles.activeChallengeBox
     : challengeBoxStyles.unactiveChallengeBox;
 
   const handlePress = () =>
-    navigation.navigate("Modal", {
-      children: <ChallengeModal challengeDescription={description} />,
+    navigation.navigate("ChallengePrompt", {
+      challenge: challenge,
     });
 
   return (
