@@ -9,7 +9,7 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { AuthParams, ButtonType, TextType } from "../../../types";
 import { AntDesign } from "@expo/vector-icons";
 
-type logInCredentials = {
+type LogInCredentials = {
   email: string;
   password: string;
 };
@@ -24,7 +24,7 @@ const LogInForm = () => {
 
   const dispatch = useAppDispatch();
 
-  const onSubmit = async (data: logInCredentials) => {
+  const onSubmit = async (data: LogInCredentials) => {
     dispatch(addLogInData(data));
     await dispatch(logInUser());
   };
