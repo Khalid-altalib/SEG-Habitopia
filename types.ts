@@ -4,22 +4,35 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 export type RootParams = {
   Auth: undefined;
   Existing: undefined;
-  Chat: undefined;
+  Modal: {
+    children: React.ReactNode;
+  };
 };
 
 export type ProfileParams = {
+  userId: string;
+};
+
+export type NavigationParams = {
   Home: undefined;
   ChatList: undefined;
   Welcome: undefined;
   Explore: undefined;
   Leaderboard: undefined;
-  You: undefined;
+  You: ProfileParams;
+  Profile: ProfileParams;
 };
 
 export type AuthParams = {
   Welcome: undefined;
-  SignUp: undefined;
-  LogIn: undefined;
+  Password: undefined;
+  ConfirmationCode: undefined;
+  Name: undefined;
+  EmailAddress: undefined;
+  SelectAvatar: undefined;
+  SelectInstagram: undefined;
+  SelectChallenges: undefined;
+  SignIn: undefined;
 };
 
 export type ChatParams = {
@@ -39,10 +52,23 @@ export type LocalUser = {
   userId: string;
 };
 
+export enum TextType {
+  Regular,
+  Subtle,
+  Heading,
+  Button,
+}
+
+export enum ButtonType {
+  Primary,
+  Secondary,
+}
 export type Challenge = {
   name: string;
   description: string;
   active: boolean;
+  color: string;
+  image: string;
 };
 
 export type Profile = {
@@ -66,4 +92,9 @@ export type Chat = {
   image: string;
   text: string;
   time: string;
+};
+
+export type SignInFormValues = {
+  email: string;
+  password: string;
 };

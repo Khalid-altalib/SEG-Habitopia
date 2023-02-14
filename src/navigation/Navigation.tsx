@@ -1,5 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
-import React from "react";
+import React, { useEffect } from "react";
 
 import TabNavigation from "./flows/TabNavigation";
 import AuthNavigation from "./flows/AuthNavigation";
@@ -10,18 +10,23 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { logInUserFromStorage } from "../features/auth/authSlice";
 
 import { RootParams } from "../../types";
+import ProfileComponent from "../screens/Profile";
+import Modal from "../screens/Modal";
+import ChallengeModal from "../features/challenges/ChallengeModal/ChallengeModal";
+import { AsyncStorage } from "@aws-amplify/core";
 
 const Stack = createNativeStackNavigator<RootParams>();
 
 const Navigation = () => {
+  AsyncStorage.clear(); // DEBUG
+
   const dispatch = useAppDispatch();
-  dispatch(logInUserFromStorage());
 
-  // const localUser: LocalUser | undefined = useAppSelector(
-  //   (state) => state.auth.user
-  // );
+  useEffect(() => {
+    dispatch(logInUserFromStorage());
+  }, []);
 
-  const localUser = false;
+  const localUser = useAppSelector((state) => state.auth!.user);
 
   return (
     <NavigationContainer>
@@ -39,7 +44,11 @@ const Navigation = () => {
             options={{ headerShown: false }}
           />
         )}
-        <Stack.Screen name="Chat" component={ChatNavigation} />
+        <Stack.Screen
+          name="Modal"
+          component={Modal}
+          options={{ animation: "slide_from_bottom" }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

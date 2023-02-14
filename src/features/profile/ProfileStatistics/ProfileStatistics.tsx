@@ -21,8 +21,8 @@ const ProfileStatistics = (props: Props) => {
     <VStack>
       <Heading mb={4}>Statistics</Heading>
       <View flexWrap="wrap" flexDirection={"row"}>
-        {statistics.map((statistic) => (
-          <ProfileStatistic statistic={statistic} />
+        {statistics.map((statistic, i) => (
+          <ProfileStatistic statistic={statistic} key={i} />
         ))}
       </View>
     </VStack>
