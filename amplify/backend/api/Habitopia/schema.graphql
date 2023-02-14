@@ -1,0 +1,51 @@
+type Challenge @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  ChallengeType: ChallengeType! @hasOne
+  Users: [User] @manyToMany(relationName: "ChallengeUser")
+  started: AWSDateTime
+  ChatRoom: ChatRoom @hasOne
+  userCount: Int
+  finished: AWSDateTime
+}
+
+type ChallengeType @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  imag: String
+  duration: Int!
+  reward: Int
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  image: String
+  Messages: [Message] @hasMany(indexName: "byUser", fields: ["id"])
+  ChatRooms: [ChatRoom] @manyToMany(relationName: "UserChatRoom")
+  Checkins: [Checkin] @hasMany(indexName: "byUser", fields: ["id"])
+  challengeID: ID! @index(name: "byChallenge")
+  challenges: [Challenge] @manyToMany(relationName: "ChallengeUser")
+}
+
+type Message @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  text: String
+  chatroomID: ID! @index(name: "byChatRoom")
+  userID: ID! @index(name: "byUser")
+}
+
+type ChatRoom @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Messages: [Message] @hasMany(indexName: "byChatRoom", fields: ["id"])
+  users: [User] @manyToMany(relationName: "UserChatRoom")
+  Checkins: [Checkin] @hasMany(indexName: "byChatRoom", fields: ["id"])
+  LastMessage: Message @hasOne
+}
+
+type Checkin @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  timeStamp: AWSDateTime
+  userID: ID! @index(name: "byUser")
+  chatroomID: ID! @index(name: "byChatRoom")
+}
+ 
