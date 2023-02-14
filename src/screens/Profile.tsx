@@ -25,6 +25,7 @@ import StatusContainer from "../components/StatusContainer/StatusContainer";
 import ProfileHeader from "../features/profile/ProfileHeader/ProfileHeader";
 import { fetchProfile } from "../features/profile/profileSlice";
 import ProfileStatistics from "../features/profile/ProfileStatistics/ProfileStatistics";
+import { logOutUser } from "../features/auth/authSlice";
 
 const ProfileComponent = () => {
   const route = useRoute<RouteProp<NavigationParams, "You" | "Profile">>();
@@ -70,6 +71,13 @@ const ProfileComponent = () => {
             mt={4}
           >
             Visit Stacked Profile (Placeholder)
+          </Button>
+          <Button
+            onPress={() => {
+              dispatch(logOutUser());
+            }}
+          >
+            Log Out
           </Button>
         </StatusContainer>
       </RegularLayout>

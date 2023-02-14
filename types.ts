@@ -4,10 +4,6 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 export type RootParams = {
   Auth: undefined;
   Existing: undefined;
-  MOoal: {
-    name: string;
-  };
-  Chat: undefined;
   Modal: {
     children: React.ReactNode;
   };
