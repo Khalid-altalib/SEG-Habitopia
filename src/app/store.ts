@@ -4,6 +4,7 @@ import leaderboardReducer from "../features/leaderboard/leaderboardSlice";
 import challengesReducer from "../features/challenges/challengesSlice";
 import profileReducer from "../features/profile/profileSlice";
 import chatsReducer from "../features/chat/chatSlice";
+import settingsReducer from "../features/settings/settingsSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     leaderboard: leaderboardReducer,
     profile: profileReducer,
     chats: chatsReducer,
+    settings: settingsReducer,
   },
 });
 

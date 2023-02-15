@@ -93,6 +93,13 @@ export type Chat = {
   time: string;
 };
 
+export type Settings = {
+  email: string;
+  name: string;
+  notifications: boolean;
+  password: string;
+};
+
 export type SignInFormValues = {
   email: string;
   password: string;
