@@ -4,8 +4,9 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 export type RootParams = {
   Auth: undefined;
   Existing: undefined;
-  Modal: {
-    children: React.ReactNode;
+  Profile: undefined;
+  ChallengePrompt: {
+    challenge: Challenge;
   };
 };
 
@@ -67,8 +68,6 @@ export type Challenge = {
   name: string;
   description: string;
   active: boolean;
-  color: string;
-  image: string;
 };
 
 export type Profile = {

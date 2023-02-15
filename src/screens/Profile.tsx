@@ -68,7 +68,7 @@ const ProfileComponent = () => {
             onPress={() => {
               navigation.push("Profile", { userId: "a" });
             }}
-            mt={4}
+            my={4}
           >
             Visit Stacked Profile (Placeholder)
           </Button>

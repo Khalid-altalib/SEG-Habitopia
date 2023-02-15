@@ -11,15 +11,13 @@ import { logInUserFromStorage } from "../features/auth/authSlice";
 
 import { RootParams } from "../../types";
 import ProfileComponent from "../screens/Profile";
-import Modal from "../screens/Modal";
+import ChallengePrompt from "../screens/ChallengePrompt";
 import ChallengeModal from "../features/challenges/ChallengeModal/ChallengeModal";
 import { AsyncStorage } from "@aws-amplify/core";
 
 const Stack = createNativeStackNavigator<RootParams>();
 
 const Navigation = () => {
-  AsyncStorage.clear(); // DEBUG
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -27,7 +25,7 @@ const Navigation = () => {
   }, []);
 
   const localUser = useAppSelector((state) => state.auth!.user);
-  console.log(localUser);
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -44,10 +42,15 @@ const Navigation = () => {
             options={{ headerShown: false }}
           />
         )}
+        <Stack.Screen name="Profile" component={ProfileComponent} />
         <Stack.Screen
-          name="Modal"
-          component={Modal}
-          options={{ animation: "slide_from_bottom" }}
+          name="ChallengePrompt"
+          component={ChallengePrompt}
+          options={{
+            animation: "slide_from_bottom",
+            headerBackVisible: false,
+            title: "Join Challenge?",
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -12,9 +12,7 @@ function Home() {
     useNavigation<NativeStackNavigationProp<NavigationParams>>();
 
   return (
-    <View style={[styles.maxSize, styles.centeredContent]}>
-      <Text>HomeScreen</Text>
-
+    <View>
       <Challenges />
     </View>
   );
