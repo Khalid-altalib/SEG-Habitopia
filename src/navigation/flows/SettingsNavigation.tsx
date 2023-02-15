@@ -9,7 +9,11 @@ export const SettingsStack = createNativeStackNavigator<SettingsParams>();
 const SettingsNavigation = () => {
   return (
     <SettingsStack.Navigator initialRouteName="Settings">
-      <SettingsStack.Screen name="Settings" component={Settings} />
+      <SettingsStack.Screen
+        name="Settings"
+        component={Settings}
+        options={{ headerShown: false }}
+      />
       <SettingsStack.Screen
         name="SettingDetails"
         component={SettingDetails}

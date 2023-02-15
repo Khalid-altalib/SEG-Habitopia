@@ -9,7 +9,7 @@ import {
   Box,
   VStack,
 } from "native-base";
-import SettingsItem from "./SettingsItem";
+import SettingsItem from "./SettingsItem/SettingsItem";
 import NotificationToggle from "./NotificationToggle";
 
 const SettingsPage = () => {
@@ -21,7 +21,9 @@ const SettingsPage = () => {
   return (
     <VStack space={5}>
       {settingEntries.map((entry, index) => (
-        <SettingsItem type={entry.type} />
+        <Box paddingBottom="5" borderBottomWidth={"1px"}>
+          <SettingsItem type={entry.type} />
+        </Box>
       ))}
       <NotificationToggle />
     </VStack>
