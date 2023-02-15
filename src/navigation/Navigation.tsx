@@ -25,7 +25,7 @@ const Navigation = () => {
   }, []);
 
   const localUser = useAppSelector((state) => state.auth!.user);
-  console.log(localUser);
+
   return (
     <NavigationContainer>
       <Stack.Navigator>

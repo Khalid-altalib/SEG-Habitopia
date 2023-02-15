@@ -12,7 +12,6 @@ type Props = {};
 const ChallengePrompt = (props: Props) => {
   const route = useRoute<RouteProp<RootParams, "ChallengePrompt">>();
   const { challenge } = route.params;
-  console.log(challenge);
 
   return (
     <FlowLayout>
