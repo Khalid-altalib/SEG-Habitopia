@@ -43,6 +43,13 @@ export type ChatParams = {
   };
 };
 
+export type SettingsParams = {
+  Settings: undefined;
+  SettingDetails: {
+    settingType: string;
+  }
+}
+
 export type IndividualChatScreenNavigationProp = NativeStackNavigationProp<
   ChatParams,
   "IndividualChat"
