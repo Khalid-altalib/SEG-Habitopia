@@ -4,8 +4,9 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 export type RootParams = {
   Auth: undefined;
   Existing: undefined;
-  Modal: {
-    children: React.ReactNode;
+  Profile: undefined;
+  ChallengePrompt: {
+    challenge: Challenge;
   };
 };
 
@@ -75,8 +76,6 @@ export type Challenge = {
   name: string;
   description: string;
   active: boolean;
-  color: string;
-  image: string;
 };
 
 export type Profile = {
@@ -100,6 +99,13 @@ export type Chat = {
   image: string;
   text: string;
   time: string;
+};
+
+export type Settings = {
+  email: string;
+  name: string;
+  notifications: boolean;
+  password: string;
 };
 
 export type SignInFormValues = {

@@ -67,6 +67,7 @@ const logInHelper = async (email: string, password: string) => {
     authToken: signInUserSession.idToken.jwtToken,
     userId: username,
   };
+
   await AsyncStorage.setItem("user", JSON.stringify(user));
   return user;
 };
@@ -94,6 +95,7 @@ export const logInUserFromStorage = createAsyncThunk<
   { rejectValue: string }
 >("auth/logInFromStorage", async (_, thunkAPI) => {
   const data = await AsyncStorage.getItem("user");
+
   if (data) {
     Toast.show({
       type: "success",
