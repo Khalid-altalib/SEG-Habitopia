@@ -1,8 +1,19 @@
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Button, HStack, Text, View, Alert, Modal, VStack } from "native-base";
+import {
+  Button,
+  HStack,
+  Text,
+  View,
+  Alert,
+  Modal,
+  VStack,
+  Image,
+  Heading,
+} from "native-base";
 import React from "react";
 import { Challenge, RootParams } from "../../../../types";
+import { challengeMappings } from "../challengeMappings";
 
 type Props = {
   challenge: Challenge;
@@ -10,17 +21,36 @@ type Props = {
 
 const ChallengeModal = (props: Props) => {
   const { challenge } = props;
+  const { name, description } = challenge;
+
+  const { image } = challengeMappings[name] || challengeMappings["fallback"];
 
   const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
 
   return (
     <View>
-      <VStack justifyContent={"center"}>
-        <Text>{challenge.description}</Text>
+      <VStack space={3} alignItems="center">
+        <Heading size="3xl">{name}</Heading>
+        <Image
+          width={100}
+          height={100}
+          alt="Challenge Image"
+          borderRadius="lg"
+          source={{ uri: image }}
+        />
+        <Text fontSize="xl" textAlign="center">
+          {challenge.description}
+        </Text>
 
-        <Button onPress={() => navigation.goBack()}>Close</Button>
-        <Text>Would you like to take on this challenge? 💪💪</Text>
-        <Button width={"100%"}>Join</Button>
+        <HStack space={3}>
+          <Button backgroundColor="amber.500">Join Challenge!</Button>
+          <Button
+            backgroundColor="gray.400"
+            onPress={() => navigation.goBack()}
+          >
+            Not now
+          </Button>
+        </HStack>
       </VStack>
     </View>
   );

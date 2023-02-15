@@ -4,6 +4,7 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 export type RootParams = {
   Auth: undefined;
   Existing: undefined;
+  Profile: undefined;
   ChallengePrompt: {
     challenge: Challenge;
   };
