@@ -38,24 +38,25 @@ export const fetchSettings = createAsyncThunk<
   }
 });
 
-export const setSettings = createAsyncThunk<any, void, { rejectValue: string }>(
-  "settings/set",
-  async (settings, thunkAPI) => {
-    try {
-      await fetch("https://test/api/settings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: getAuthTokenFromThunk(thunkAPI),
-        },
-      }); //  BACKEND PLACEHOLDER
-      return settings;
-    } catch (error: any) {
-      const message = error.message;
-      return thunkAPI.rejectWithValue(message);
-    }
+export const setSettings = createAsyncThunk<
+  void,
+  object,
+  { rejectValue: string }
+>("settings/set", async (settings: any, thunkAPI) => {
+  try {
+    await fetch("https://test/api/settings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: getAuthTokenFromThunk(thunkAPI),
+      },
+    }); //  BACKEND PLACEHOLDER
+    return settings;
+  } catch (error: any) {
+    const message = error.message;
+    return thunkAPI.rejectWithValue(message);
   }
-);
+});
 
 export const settingsSlice = createSlice({
   name: "settings",

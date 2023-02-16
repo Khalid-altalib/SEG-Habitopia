@@ -11,8 +11,8 @@ import {
 } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { SettingsParams } from "../../../../types";
 import { TouchableOpacity } from "react-native";
+import { RootParams } from "../../../../types";
 
 type Props = {
   type: string;
@@ -21,31 +21,24 @@ type Props = {
 //add placeholder text
 //password - enter new, confirme
 function SettingsItem(props: Props) {
-  const navigation = useNavigation<NativeStackNavigationProp<SettingsParams>>();
+  const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
   const { type, value } = props;
 
   return (
-    <Pressable
-      onPress={() => navigation.push("SettingDetails", { settingType: type })}
-    >
+    <Box>
       <HStack display={"flex"} alignItems={"flex-start"}>
         <Box flex={1}>{type} </Box>
         <Box borderBottomWidth={"1px"} paddingBottom="3" flex={3}>
-          {type === "Password" ? (
-            <Input
-              type="password"
-              variant="unstyled"
-              editable={false}
-              maxW="50%"
-            >
-              {value}
-            </Input>
-          ) : (
-            <Text>{value}</Text>
-          )}
+          <TouchableOpacity
+            onPress={() =>
+              navigation.push("SettingDetails", { settingType: type })
+            }
+          >
+            {type === "Password" ? <Text>*******</Text> : <Text>{value}</Text>}
+          </TouchableOpacity>
         </Box>
       </HStack>
-    </Pressable>
+    </Box>
   );
 }
 
