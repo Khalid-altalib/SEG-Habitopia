@@ -1,6 +1,6 @@
 import React from "react";
 import RegularLayout from "../../components/RegularLayout/RegularLayout";
-import SettingsPage from "../../features/settings/SettingsPage";
+import SettingsPage from "../../features/settings/SettingsPage/SettingsPage";
 import styles from "../../constants/Styles";
 import { ScrollView, View } from "native-base";
 import Background from "../../components/Background";

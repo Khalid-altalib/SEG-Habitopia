@@ -1,33 +1,50 @@
 import React from "react";
-import { Box, Pressable, Text, TextArea, TextField } from "native-base";
+import {
+  Box,
+  HStack,
+  Input,
+  Pressable,
+  Text,
+  TextArea,
+  TextField,
+  View,
+} from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SettingsParams } from "../../../../types";
-import { TextBase } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 type Props = {
   type: string;
+  value: string;
 };
 //add placeholder text
 //password - enter new, confirme
 function SettingsItem(props: Props) {
   const navigation = useNavigation<NativeStackNavigationProp<SettingsParams>>();
-  const { type } = props;
+  const { type, value } = props;
 
   return (
     <Pressable
       onPress={() => navigation.push("SettingDetails", { settingType: type })}
     >
-      <Box display={"flex"} flexDirection="row" alignItems="center">
-        <Text>{type}: </Text>
-        <TextArea
-          h={8}
-          placeholder="Text Area Placeholder"
-          w="75%"
-          autoCompleteType={"off"}
-          isDisabled
-        />
-      </Box>
+      <HStack display={"flex"} alignItems={"flex-start"}>
+        <Box flex={1}>{type} </Box>
+        <Box borderBottomWidth={"1px"} paddingBottom="3" flex={3}>
+          {type === "Password" ? (
+            <Input
+              type="password"
+              variant="unstyled"
+              editable={false}
+              maxW="50%"
+            >
+              {value}
+            </Input>
+          ) : (
+            <Text>{value}</Text>
+          )}
+        </Box>
+      </HStack>
     </Pressable>
   );
 }

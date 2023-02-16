@@ -19,7 +19,7 @@ const NameSetting = (props: Props) => {
   return (
     <View>
       <View>
-        <Text style={{ marginBottom: 5 }}>Name</Text>
+        <Text mb={5}>Name</Text>
         <Controller
           control={control}
           render={({ field: { onChange, value } }) => (
@@ -29,7 +29,7 @@ const NameSetting = (props: Props) => {
         />
       </View>
       <View>
-        <Button onPress={handleSubmit(onSubmit)} style={{ marginTop: 20 }}>
+        <Button onPress={handleSubmit(onSubmit)} mt={20}>
           Done
         </Button>
       </View>

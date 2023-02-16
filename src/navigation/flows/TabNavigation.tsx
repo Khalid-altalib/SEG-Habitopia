@@ -27,12 +27,12 @@ const TabNavigation = () => {
       />
       <Tab.Screen name="Explore" component={Explore} />
       <Tab.Screen name="Leaderboard" component={Leaderboard} />
-      {/* <Tab.Screen
+      <Tab.Screen
         name="You"
         component={Profile}
         initialParams={{ userId: localUser!.userId }}
         options={() => ({ title: "You" })}
-      /> */}
+      />
       <Tab.Screen name="Settings" component={SettingsNavigation} />
     </Tab.Navigator>
   );

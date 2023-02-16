@@ -19,7 +19,7 @@ const EmailSetting = (props: Props) => {
   return (
     <View>
       <View>
-        <Text style={{ marginBottom: 5 }}>Email Address</Text>
+        <Text mb={5}>Email Address</Text>
         <Controller
           control={control}
           render={({ field: { onChange, value } }) => (
@@ -27,7 +27,7 @@ const EmailSetting = (props: Props) => {
           )}
           name="email"
         />
-        <Button onPress={handleSubmit(onSubmit)} style={{ marginTop: 20 }}>
+        <Button onPress={handleSubmit(onSubmit)} mt={20}>
           Done
         </Button>
       </View>
