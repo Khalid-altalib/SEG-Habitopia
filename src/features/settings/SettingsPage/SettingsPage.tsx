@@ -17,7 +17,7 @@ const SettingsPage = () => {
   return (
     <VStack>
       {settingEntries.map((entry, index) => (
-        <Box paddingBottom="3">
+        <Box paddingBottom="3" key={index}>
           <SettingsItem type={entry.type} value={entry.value} />
         </Box>
       ))}

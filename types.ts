@@ -8,6 +8,10 @@ export type RootParams = {
   ChallengePrompt: {
     challenge: Challenge;
   };
+  Settings: undefined;
+  SettingDetails: {
+    settingType: string;
+  };
 };
 
 export type ProfileParams = {
@@ -43,13 +47,6 @@ export type ChatParams = {
     id: string;
   };
 };
-
-export type SettingsParams = {
-  Settings: undefined;
-  SettingDetails: {
-    settingType: string;
-  }
-}
 
 export type IndividualChatScreenNavigationProp = NativeStackNavigationProp<
   ChatParams,

@@ -1,6 +1,6 @@
 import React from "react";
 import { useRoute, RouteProp } from "@react-navigation/native";
-import { SettingsParams } from "../../../types";
+import { RootParams } from "../../../types";
 import EmailSetting from "../../features/settings/EmailSetting/EmailSetting";
 import { View } from "native-base";
 import Background from "../../components/Background";
@@ -11,7 +11,7 @@ import PasswordSetting from "../../features/settings/PasswordSetting/PasswordSet
 type Props = {};
 
 const SettingDetails = (props: Props) => {
-  const route = useRoute<RouteProp<SettingsParams, "SettingDetails">>();
+  const route = useRoute<RouteProp<RootParams, "SettingDetails">>();
 
   const { settingType } = route.params;
 
