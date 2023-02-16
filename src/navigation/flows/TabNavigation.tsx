@@ -4,9 +4,11 @@ import Home from "../../screens/Home";
 import Explore from "../../screens/Explore";
 import Leaderboard from "../../screens/Leaderboard";
 import Profile from "../../screens/Profile";
+import Settings from "../../screens/Settings/Settings";
 import { NavigationParams } from "../../../types";
 import ChatNavigation from "./ChatNavigation";
 import { useAppSelector } from "../../app/hooks";
+import SettingsNavigation from "./SettingsNavigation";
 
 const Tab = createBottomTabNavigator<NavigationParams>();
 
@@ -31,6 +33,7 @@ const TabNavigation = () => {
         initialParams={{ userId: localUser!.userId }}
         options={() => ({ title: "You" })}
       />
+      <Tab.Screen name="Settings" component={SettingsNavigation} />
     </Tab.Navigator>
   );
 };

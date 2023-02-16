@@ -22,6 +22,7 @@ export type NavigationParams = {
   Leaderboard: undefined;
   You: ProfileParams;
   Profile: ProfileParams;
+  Settings: undefined;
 };
 
 export type AuthParams = {
@@ -42,6 +43,13 @@ export type ChatParams = {
     id: string;
   };
 };
+
+export type SettingsParams = {
+  Settings: undefined;
+  SettingDetails: {
+    settingType: string;
+  }
+}
 
 export type IndividualChatScreenNavigationProp = NativeStackNavigationProp<
   ChatParams,
