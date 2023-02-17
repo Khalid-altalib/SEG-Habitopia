@@ -11,6 +11,7 @@ export type RootParams = {
   Settings: undefined;
   SettingDetails: {
     settingType: string;
+    defaultValue: string;
   };
 };
 
@@ -103,6 +104,7 @@ export type Settings = {
   name: string;
   notifications: boolean;
   password: string;
+  [key: string]: string | boolean;
 };
 
 export type SignInFormValues = {

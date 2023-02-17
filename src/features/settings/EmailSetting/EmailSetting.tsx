@@ -1,15 +1,17 @@
 import { Button, Input, Text, View } from "native-base";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useAppDispatch } from "../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import DoneButton from "../DoneButton.tsx/DoneButton";
 
-type Props = {};
+type Props = {
+  defaultValue: string;
+};
 
 const EmailSetting = (props: Props) => {
   const { control, getValues } = useForm({
     defaultValues: {
-      email: "example@email.org",
+      email: props.defaultValue,
     },
   });
 

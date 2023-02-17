@@ -3,15 +3,17 @@ import { Button, Input, Text, View } from "native-base";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { RootParams } from "../../../../types";
-import { useAppDispatch } from "../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import DoneButton from "../DoneButton.tsx/DoneButton";
 
-type Props = {};
+type Props = {
+  defaultValue: string;
+};
 
 const NameSetting = (props: Props) => {
   const { control, getValues } = useForm({
     defaultValues: {
-      name: "",
+      name: props.defaultValue,
     },
   });
 

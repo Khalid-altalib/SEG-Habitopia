@@ -31,7 +31,10 @@ function SettingsItem(props: Props) {
         <Box borderBottomWidth={"1px"} paddingBottom="3" flex={3}>
           <TouchableOpacity
             onPress={() =>
-              navigation.push("SettingDetails", { settingType: type })
+              navigation.push("SettingDetails", {
+                settingType: type,
+                defaultValue: value,
+              })
             }
           >
             {type === "Password" ? <Text>*******</Text> : <Text>{value}</Text>}

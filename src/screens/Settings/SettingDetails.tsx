@@ -13,14 +13,14 @@ type Props = {};
 const SettingDetails = (props: Props) => {
   const route = useRoute<RouteProp<RootParams, "SettingDetails">>();
 
-  const { settingType } = route.params;
+  const { settingType, defaultValue } = route.params;
 
   const displaySettingDetailsContent = () => {
     switch (settingType) {
       case "Email":
-        return <EmailSetting />;
+        return <EmailSetting defaultValue={defaultValue} />;
       case "Name":
-        return <NameSetting />;
+        return <NameSetting defaultValue={defaultValue} />;
       case "Password":
         return <PasswordSetting />;
       default:

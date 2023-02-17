@@ -37,12 +37,18 @@ export const fetchSettings = createAsyncThunk<
   { rejectValue: string }
 >("settings/fetch", async (_, thunkAPI) => {
   try {
+    return {
+      email: "tareitanawaz@outlook.com",
+      password: "Password.123",
+      name: "Tareita Nawaz",
+      notifications: true,
+    }; //  BACKEND PLACEHOLDER
     const response = await fetch("https://test/api/settings", {
       headers: {
         "Content-Type": "application/json",
         Authorization: getAuthTokenFromThunk(thunkAPI),
       },
-    }); //  BACKEND PLACEHOLDER
+    });
     return (await response.json()) as Settings;
   } catch (error: any) {
     const message = error.message;
@@ -55,8 +61,8 @@ export const setSettings = createAsyncThunk<
   object,
   { rejectValue: string }
 >("settings/set", async (settings: any, thunkAPI) => {
-  console.log(settings);
   try {
+    return settings; // BACKEND_PLACEHOLDER
     await fetch("https://test/api/settings", {
       method: "POST",
       headers: {
@@ -99,11 +105,16 @@ export const settingsSlice = createSlice({
       setSettings.fulfilled,
       (state: SettingsState, action: PayloadAction<any>) => {
         state.settings = { ...state.settings, ...action.payload };
+        console.log("new settings");
+        console.log(state.settings);
         state.setSettings.loading = false;
       }
     );
     builder.addCase(setSettings.pending, (state: SettingsState) => {
       state.setSettings.loading = true;
+    });
+    builder.addCase(setSettings.rejected, (state: SettingsState) => {
+      state.setSettings.loading = false;
     });
   },
 });

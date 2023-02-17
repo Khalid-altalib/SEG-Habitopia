@@ -1,36 +1,62 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, VStack, Button } from "native-base";
 import SettingsItem from "../SettingsItem/SettingsItem";
 import NotificationToggle from "../NotificationToggle/NotificationToggle";
-import { useAppDispatch } from "../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { logOutUser } from "../../auth/authSlice";
+import StatusContainer from "../../../components/StatusContainer/StatusContainer";
+import { fetchSettings } from "../settingsSlice";
+
+type SettingEntry = {
+  type: string;
+  key: string;
+};
 
 const SettingsPage = () => {
-  const settingEntries = [
-    { type: "Name", value: "Tareita Nawaz" },
-    { type: "Email", value: "tareita@example.org" },
-    { type: "Password", value: "Password123" },
+  const settingEntries: SettingEntry[] = [
+    { type: "Name", key: "name" },
+    { type: "Email", key: "email" },
+    { type: "Password", key: "password" },
   ];
+
+  const { settings, fetchSettings: requestStatus } = useAppSelector(
+    (state) => state.settings
+  );
 
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    dispatch(fetchSettings());
+  }, []);
+
+  // console.log(settings);
+
   return (
-    <VStack>
-      {settingEntries.map((entry, index) => (
-        <Box paddingBottom="3" key={index}>
-          <SettingsItem type={entry.type} value={entry.value} />
-        </Box>
-      ))}
-      <NotificationToggle />
-      <Button
-        onPress={() => {
-          dispatch(logOutUser());
-        }}
-        my={10}
-      >
-        Log Out
-      </Button>
-    </VStack>
+    <StatusContainer
+      loading={requestStatus.loading}
+      error={requestStatus.error}
+      data={settings}
+    >
+      <VStack>
+        {settingEntries.map((entry, index) => (
+          <Box paddingBottom="3" key={index}>
+            <SettingsItem
+              type={entry.type}
+              value={settings[entry.key] as string}
+            />
+          </Box>
+        ))}
+        <NotificationToggle />
+        <Button
+          onPress={() => {
+            dispatch(logOutUser());
+          }}
+          my={10}
+        >
+          Log Out
+        </Button>
+      </VStack>
+    </StatusContainer>
   );
 };
 
