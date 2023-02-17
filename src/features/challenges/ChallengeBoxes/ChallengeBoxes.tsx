@@ -4,9 +4,12 @@ import { useAppSelector } from "../../../app/hooks";
 import StatusContainer from "../../../components/StatusContainer/StatusContainer";
 import ChallengeBox from "../ChallengeBox/ChallengeBox";
 
-type Props = {};
+type Props = {
+  boxCount?: number;
+};
 
 const ChallengeBoxes = (props: Props) => {
+  const { boxCount } = props;
   const { challenges, loading, error } = useAppSelector(
     (state) => state.challenges
   );
@@ -51,9 +54,11 @@ const ChallengeBoxes = (props: Props) => {
   return (
     <StatusContainer loading={loading} error={error} data={allChallenges}>
       <VStack space={4} width={"100%"}>
-        {allChallenges.map((challenge, index) => (
-          <ChallengeBox key={index} challenge={challenge} />
-        ))}
+        {allChallenges
+          .slice(0, boxCount || allChallenges.length)
+          .map((challenge, index) => (
+            <ChallengeBox key={index} challenge={challenge} />
+          ))}
       </VStack>
     </StatusContainer>
   );
