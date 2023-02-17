@@ -4,8 +4,14 @@ import { getAuthTokenFromThunk } from "../../app/util";
 
 export type SettingsState = {
   settings: Settings;
-  loading: boolean;
-  error: string;
+  fetchSettings: {
+    loading: boolean;
+    error: string;
+  };
+  setSettings: {
+    loading: boolean;
+    error: string;
+  };
 };
 
 const initialState: SettingsState = {
@@ -15,8 +21,14 @@ const initialState: SettingsState = {
     notifications: false,
     name: "",
   },
-  loading: false,
-  error: "",
+  fetchSettings: {
+    loading: false,
+    error: "",
+  },
+  setSettings: {
+    loading: false,
+    error: "",
+  },
 };
 
 export const fetchSettings = createAsyncThunk<
@@ -43,6 +55,7 @@ export const setSettings = createAsyncThunk<
   object,
   { rejectValue: string }
 >("settings/set", async (settings: any, thunkAPI) => {
+  console.log(settings);
   try {
     await fetch("https://test/api/settings", {
       method: "POST",
@@ -67,27 +80,31 @@ export const settingsSlice = createSlice({
       fetchSettings.fulfilled,
       (state: SettingsState, action: PayloadAction<Settings>) => {
         state.settings = action.payload;
-        state.loading = false;
-        state.error = "";
+        state.fetchSettings.loading = false;
+        state.fetchSettings.error = "";
       }
     );
     builder.addCase(fetchSettings.pending, (state: SettingsState) => {
-      state.loading = true;
-      state.error = "";
+      state.fetchSettings.loading = true;
+      state.fetchSettings.error = "";
     });
     builder.addCase(
       fetchSettings.rejected,
       (state: SettingsState, action: PayloadAction<any>) => {
-        state.loading = false;
-        state.error = action.payload.message;
+        state.fetchSettings.loading = false;
+        state.fetchSettings.error = action.payload.message;
       }
     );
     builder.addCase(
       setSettings.fulfilled,
       (state: SettingsState, action: PayloadAction<any>) => {
         state.settings = { ...state.settings, ...action.payload };
+        state.setSettings.loading = false;
       }
     );
+    builder.addCase(setSettings.pending, (state: SettingsState) => {
+      state.setSettings.loading = true;
+    });
   },
 });
 
