@@ -1,11 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Button, Text, View } from "native-base";
+import { View } from "native-base";
 import React from "react";
 import { NavigationParams } from "../../types";
-
-import styles from "../constants/Styles";
-import Challenges from "./Challenges";
+import ChallengeWidget from "../features/challenges/ChallengeWidget/ChallengeWidget";
 
 function Home() {
   const navigation =
@@ -13,7 +11,7 @@ function Home() {
 
   return (
     <View>
-      <Challenges />
+      <ChallengeWidget />
     </View>
   );
 }
