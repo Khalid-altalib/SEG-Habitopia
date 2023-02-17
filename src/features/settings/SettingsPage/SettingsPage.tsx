@@ -29,8 +29,6 @@ const SettingsPage = () => {
     dispatch(fetchSettings());
   }, []);
 
-  console.log(settings);
-
   return (
     <StatusContainer
       loading={requestStatus.loading}
