@@ -14,6 +14,7 @@ import {
 import React from "react";
 import { Challenge, RootParams } from "../../../../types";
 import { challengeMappings } from "../challengeMappings";
+import { joinChallenge } from "../challengesSlice";
 
 type Props = {
   challenge: Challenge;
@@ -26,6 +27,8 @@ const ChallengeModal = (props: Props) => {
   const { image } = challengeMappings[name] || challengeMappings["fallback"];
 
   const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
+
+  // const handlePress =  () => joinChallenge("challenge"); BACKEND_PLACEHOLDER
 
   return (
     <View>
@@ -57,4 +60,3 @@ const ChallengeModal = (props: Props) => {
 };
 
 export default ChallengeModal;
-//style={challengeModalStyles.challengeModal}
