@@ -8,6 +8,11 @@ export type RootParams = {
   ChallengePrompt: {
     challenge: Challenge;
   };
+  Settings: undefined;
+  SettingDetails: {
+    settingType: string;
+    defaultValue: string;
+  };
 };
 
 export type ProfileParams = {
@@ -22,6 +27,7 @@ export type NavigationParams = {
   Leaderboard: undefined;
   You: ProfileParams;
   Profile: ProfileParams;
+  Settings: undefined;
 };
 
 export type AuthParams = {
@@ -98,6 +104,7 @@ export type Settings = {
   name: string;
   notifications: boolean;
   password: string;
+  [key: string]: string | boolean;
 };
 
 export type SignInFormValues = {
