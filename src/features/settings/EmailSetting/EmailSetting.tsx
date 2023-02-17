@@ -25,7 +25,7 @@ const EmailSetting = (props: Props) => {
         )}
         name="email"
       />
-      <DoneButton getValues={getValues} valueName="name" />
+      <DoneButton getValues={getValues} valueName="email" />
     </View>
   );
 };

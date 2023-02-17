@@ -4,14 +4,12 @@ import { Switch } from "react-native";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { setSettings } from "../settingsSlice";
 
-type Props = {};
+type Props = {
+  defaultValue: boolean;
+};
 
 const NotificationToggle = (props: Props) => {
-  const notificationsEnabled = useAppSelector(
-    (state) => state.settings.settings.notifications
-  );
-
-  const [switchEnabled, setSwitchEnabled] = useState(notificationsEnabled);
+  const [switchEnabled, setSwitchEnabled] = useState(props.defaultValue);
   const dispatch = useAppDispatch();
 
   const handleSwitchChange = () => {

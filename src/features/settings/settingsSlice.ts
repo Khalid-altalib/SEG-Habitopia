@@ -105,8 +105,6 @@ export const settingsSlice = createSlice({
       setSettings.fulfilled,
       (state: SettingsState, action: PayloadAction<any>) => {
         state.settings = { ...state.settings, ...action.payload };
-        console.log("new settings");
-        console.log(state.settings);
         state.setSettings.loading = false;
       }
     );

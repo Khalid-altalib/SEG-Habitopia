@@ -29,13 +29,13 @@ const SettingsPage = () => {
     dispatch(fetchSettings());
   }, []);
 
-  // console.log(settings);
+  console.log(settings);
 
   return (
     <StatusContainer
       loading={requestStatus.loading}
       error={requestStatus.error}
-      data={settings}
+      data={settings.email.length > 0}
     >
       <VStack>
         {settingEntries.map((entry, index) => (
@@ -46,7 +46,7 @@ const SettingsPage = () => {
             />
           </Box>
         ))}
-        <NotificationToggle />
+        <NotificationToggle defaultValue={settings.notifications} />
         <Button
           onPress={() => {
             dispatch(logOutUser());
