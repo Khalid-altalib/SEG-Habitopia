@@ -16,14 +16,19 @@ const DoneButton = (props: Props) => {
   const { getValues, disabled, valueName } = props;
   const dispatch = useAppDispatch();
 
-  const handlePress = () => {
-    dispatch(setSettings({ [valueName]: getValues(valueName) }));
+  const handlePress = async () => {
+    await dispatch(setSettings({ [valueName]: getValues(valueName) }));
     navigation.goBack();
   };
 
   return (
     <View>
-      <Button onPress={handlePress} mt={8} disabled={disabled}>
+      <Button
+        onPress={handlePress}
+        mt={8}
+        isDisabled={disabled}
+        isLoading={false}
+      >
         Done
       </Button>
     </View>

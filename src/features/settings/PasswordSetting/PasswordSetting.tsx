@@ -1,52 +1,50 @@
 import { Button, Input, Text, View } from "native-base";
 import React, { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import DoneButton from "../DoneButton.tsx/DoneButton";
 
 type Props = {};
 
 const PasswordSetting = (props: Props) => {
-  const [formValues, setFormValues] = useState({
-    newPassword: "",
-    confirmPassword: "",
+  const { control, getValues, watch } = useForm({
+    defaultValues: {
+      password: "",
+      confirmPassword: "",
+    },
   });
 
-  const onSubmit = () => {
-    console.log("Hi");
-  };
+  watch();
 
-  const handleInputChange = (key: string, value: string) => {
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [key]: value,
-    }));
-  };
+  const arePasswordsNotEqual = () =>
+    getValues("password") !== getValues("confirmPassword");
 
   return (
     <View>
       <View marginBottom={5}>
         <Text mb={5}>New Password</Text>
-        <Input
-          onChangeText={(text) => handleInputChange("newPassword", text)}
-          value={formValues.newPassword}
-          size="xl"
+        <Controller
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <Input onChangeText={onChange} value={value} size="xl" />
+          )}
+          name="password"
         />
       </View>
       <View>
         <Text mb={5}>Confirm Password</Text>
-        <Input
-          onChangeText={(text) => handleInputChange("confirmPassword", text)}
-          value={formValues.confirmPassword}
-          size="xl"
+        <Controller
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <Input onChangeText={onChange} value={value} size="xl" />
+          )}
+          name="confirmPassword"
         />
       </View>
-      <View>
-        <Button
-          onPress={onSubmit}
-          mt={20}
-          disabled={formValues.newPassword !== formValues.confirmPassword}
-        >
-          Done
-        </Button>
-      </View>
+      <DoneButton
+        getValues={getValues}
+        valueName="password"
+        disabled={arePasswordsNotEqual()}
+      />
     </View>
   );
 };

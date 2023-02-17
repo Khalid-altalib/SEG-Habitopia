@@ -9,7 +9,7 @@ import DoneButton from "../DoneButton.tsx/DoneButton";
 type Props = {};
 
 const NameSetting = (props: Props) => {
-  const { control, handleSubmit, getValues } = useForm({
+  const { control, getValues } = useForm({
     defaultValues: {
       name: "",
     },
@@ -17,16 +17,14 @@ const NameSetting = (props: Props) => {
 
   return (
     <View>
-      <View>
-        <Text mb={5}>Name</Text>
-        <Controller
-          control={control}
-          render={({ field: { onChange, value } }) => (
-            <Input onChangeText={onChange} value={value} size="xl" />
-          )}
-          name="name"
-        />
-      </View>
+      <Text mb={5}>Name</Text>
+      <Controller
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <Input onChangeText={onChange} value={value} size="xl" />
+        )}
+        name="name"
+      />
       <DoneButton getValues={getValues} valueName="name" />
     </View>
   );
