@@ -14,6 +14,7 @@ import ProfileComponent from "../screens/Profile";
 import ChallengePrompt from "../screens/ChallengePrompt";
 import ChallengeModal from "../features/challenges/ChallengeModal/ChallengeModal";
 import { AsyncStorage } from "@aws-amplify/core";
+import Challenges from "../screens/Challenges";
 
 const Stack = createNativeStackNavigator<RootParams>();
 
@@ -52,6 +53,7 @@ const Navigation = () => {
             title: "Join Challenge?",
           }}
         />
+        <Stack.Screen name="Challenges" component={Challenges} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -8,6 +8,7 @@ export type RootParams = {
   ChallengePrompt: {
     challenge: Challenge;
   };
+  Challenges: undefined
 };
 
 export type ProfileParams = {
