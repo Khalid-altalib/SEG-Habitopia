@@ -1,21 +1,20 @@
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { Button, Input, Text, View } from "native-base";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
+import { RootParams } from "../../../../types";
 import { useAppDispatch } from "../../../app/hooks";
+import DoneButton from "../DoneButton.tsx/DoneButton";
 
 type Props = {};
 
 const NameSetting = (props: Props) => {
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, getValues } = useForm({
     defaultValues: {
       name: "",
     },
   });
-  const dispatch = useAppDispatch();
 
-  const onSubmit = () => {
-    console.log("Hi");
-  };
   return (
     <View>
       <View>
@@ -28,11 +27,7 @@ const NameSetting = (props: Props) => {
           name="name"
         />
       </View>
-      <View>
-        <Button onPress={handleSubmit(onSubmit)} mt={20}>
-          Done
-        </Button>
-      </View>
+      <DoneButton getValues={getValues} valueName="name" />
     </View>
   );
 };
