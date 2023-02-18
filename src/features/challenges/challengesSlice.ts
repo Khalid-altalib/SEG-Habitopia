@@ -15,6 +15,43 @@ export const fetchChallenges = createAsyncThunk<
   { rejectValue: string }
 >("challenges/fetch", async (_, thunkAPI) => {
   try {
+    const challenges = [
+      {
+        name: "Sleep",
+        description:
+          "Study everyday for a minimum of 5 hours or u not sigma lol",
+        active: true,
+      },
+      {
+        name: "Food",
+        description: "Sleep earlier or u not sigma lol",
+        active: true,
+      },
+      {
+        name: "Fitness",
+        description: "jim or u not sigma lol",
+        active: false,
+      },
+      {
+        name: "Sleep",
+        description:
+          "Study everyday for a minimum of 5 hours or u not sigma lol",
+        active: true,
+      },
+      {
+        name: "Food",
+        description: "Sleep earlier or u not sigma lol",
+        active: true,
+      },
+      {
+        name: "Fitness",
+        description: "jim or u not sigma lol",
+        active: false,
+      },
+    ];
+
+    return challenges;
+
     const response = await fetch("https://test/api/challenges", {
       headers: {
         "Content-Type": "application/json",
