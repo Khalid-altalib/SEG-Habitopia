@@ -1,7 +1,12 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { DataStore } from "@aws-amplify/datastore";
 import { Challenge, LocalUser } from "../../../types";
 import { RootState } from "../../app/store";
 import { getAuthTokenFromThunk } from "../../app/util";
+import {
+  ChallengeType as ChallengeTypeModel,
+  Challenge as ChallengeModel,
+} from "../../models";
 
 type ChallengesState = {
   challenges: Challenge[];
@@ -21,50 +26,9 @@ export const fetchChallenges = createAsyncThunk<
   { rejectValue: string }
 >("challenges/fetch", async (_, thunkAPI) => {
   try {
-    const challenges = [
-      {
-        name: "Sleep",
-        description:
-          "Study everyday for a minimum of 5 hours or u not sigma lol",
-        active: true,
-      },
-      {
-        name: "Food",
-        description: "Sleep earlier or u not sigma lol",
-        active: true,
-      },
-      {
-        name: "Fitness",
-        description: "jim or u not sigma lol",
-        active: false,
-      },
-      {
-        name: "Sleep",
-        description:
-          "Study everyday for a minimum of 5 hours or u not sigma lol",
-        active: true,
-      },
-      {
-        name: "Food",
-        description: "Sleep earlier or u not sigma lol",
-        active: true,
-      },
-      {
-        name: "Fitness",
-        description: "jim or u not sigma lol",
-        active: false,
-      },
-    ];
-
-    return challenges;
-
-    const response = await fetch("https://test/api/challenges", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: getAuthTokenFromThunk(thunkAPI),
-      },
-    }); //  BACKEND PLACEHOLDER
-    return (await response.json()) as Challenge[];
+    const response = await DataStore.query(ChallengeTypeModel);
+    const data = response.map((item) => (item = { ...item }));
+    return data;
   } catch (error: any) {
     const message = error.message;
     return thunkAPI.rejectWithValue(message);
@@ -77,15 +41,19 @@ export const joinChallenge = createAsyncThunk<
   { rejectValue: string; state: RootState }
 >("challenges/join", async (challengeName: string, thunkAPI) => {
   try {
-    const response = await fetch("https://test/api/challenges/join", {
-      method: "POST",
-      body: JSON.stringify({ challengeName }),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: getAuthTokenFromThunk(thunkAPI),
-      },
-    }); //  BACKEND PLACEHOLDER
-    return await response.json();
+    const ChallengeTypeInst = await DataStore.query(ChallengeTypeModel, (c) =>
+      c.name.eq(challengeName)
+    );
+
+    const response = await DataStore.query(ChallengeModel, (c) =>
+      c.and((c) => [
+        c.ChallengeType.id.eq(ChallengeTypeInst[0].id),
+        c.userCount.lt(15),
+      ])
+    );
+
+    const data = response.map((item) => (item = { ...item }));
+    return data;
   } catch (error: any) {
     const message = error.message;
     return thunkAPI.rejectWithValue(message);
