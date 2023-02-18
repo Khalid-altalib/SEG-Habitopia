@@ -5,8 +5,14 @@ import { getAuthTokenFromThunk } from "../../app/util";
 
 type ChallengesState = {
   challenges: Challenge[];
-  loading: boolean;
-  error: string;
+  fetchChallenges: {
+    loading: boolean;
+    error: string;
+  };
+  joinChallenge: {
+    loading: boolean;
+    error: string;
+  };
 };
 
 export const fetchChallenges = createAsyncThunk<
@@ -88,8 +94,14 @@ export const joinChallenge = createAsyncThunk<
 
 const initialState: ChallengesState = {
   challenges: [],
-  loading: false,
-  error: "",
+  fetchChallenges: {
+    loading: false,
+    error: "",
+  },
+  joinChallenge: {
+    loading: false,
+    error: "",
+  },
 };
 
 export const challengesSlice = createSlice({
@@ -98,22 +110,22 @@ export const challengesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchChallenges.pending, (state) => {
-      state.loading = true;
+      state.fetchChallenges.loading = true;
     });
     builder.addCase(
       fetchChallenges.fulfilled,
       (state, action: PayloadAction<Challenge[]>) => {
         state.challenges = action.payload;
-        state.loading = false;
+        state.fetchChallenges.loading = false;
       }
     );
     builder.addCase(fetchChallenges.rejected, (state, action: any) => {
       state.challenges = [];
-      state.loading = false;
-      state.error = action.payload;
+      state.fetchChallenges.loading = false;
+      state.fetchChallenges.error = action.payload;
     });
     builder.addCase(joinChallenge.pending, (state) => {
-      state.loading = true;
+      state.joinChallenge.loading = true;
     });
     builder.addCase(
       joinChallenge.fulfilled,
@@ -126,14 +138,14 @@ export const challengesSlice = createSlice({
             return challenge;
           }
         });
-        state.loading = false;
-        state.error = "";
+        state.joinChallenge.loading = false;
+        state.joinChallenge.error = "";
       }
     );
     builder.addCase(joinChallenge.rejected, (state, action: any) => {
       state.challenges = [];
-      state.loading = false;
-      state.error = action.payload;
+      state.joinChallenge.loading = false;
+      state.joinChallenge.error = action.payload;
     });
   },
 });

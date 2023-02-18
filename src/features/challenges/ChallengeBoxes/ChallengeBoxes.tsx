@@ -8,9 +8,11 @@ import { fetchChallenges } from "../challengesSlice";
 type Props = {};
 
 const ChallengeBoxes = (props: Props) => {
-  const { challenges, loading, error } = useAppSelector(
+  const { challenges, joinChallenge: requestStatus } = useAppSelector(
     (state) => state.challenges
   );
+
+  const { error, loading } = requestStatus;
 
   const dispatch = useAppDispatch();
 
