@@ -36,8 +36,9 @@ const ChallengeModal = (props: Props) => {
 
   const dispatch = useAppDispatch();
 
-  const handleButtonClick = () => {
-    dispatch(joinChallenge(name));
+  const handleButtonClick = async () => {
+    await dispatch(joinChallenge(name));
+    navigation.pop();
   };
 
   return (
