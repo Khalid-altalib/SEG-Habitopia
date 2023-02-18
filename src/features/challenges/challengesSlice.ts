@@ -143,7 +143,6 @@ export const challengesSlice = createSlice({
       }
     );
     builder.addCase(joinChallenge.rejected, (state, action: any) => {
-      state.challenges = [];
       state.joinChallenge.loading = false;
       state.joinChallenge.error = action.payload;
     });

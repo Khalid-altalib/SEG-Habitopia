@@ -8,7 +8,7 @@ import { fetchChallenges } from "../challengesSlice";
 type Props = {};
 
 const ChallengeBoxes = (props: Props) => {
-  const { challenges, joinChallenge: requestStatus } = useAppSelector(
+  const { challenges, fetchChallenges: requestStatus } = useAppSelector(
     (state) => state.challenges
   );
 
