@@ -1,7 +1,9 @@
 type SettingEntries = {
-  [key: string]: {
-    name: string;
-  };
+  [key: string]: SettingEntry;
+};
+
+export type SettingEntry = {
+  name: string;
 };
 
 const settingEntries: SettingEntries = {

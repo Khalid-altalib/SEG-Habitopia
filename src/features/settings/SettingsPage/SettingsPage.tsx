@@ -26,9 +26,13 @@ const SettingsPage = () => {
       data={settings.email.length > 0}
     >
       <VStack>
-        {Object.keys(settingEntries).forEach((key) => (
+        {Object.keys(settingEntries).map((key) => (
           <Box paddingBottom="3" key={key}>
-            <SettingsItem type={key} value={settings[key] as string} />
+            <SettingsItem
+              type={key}
+              entry={settingEntries[key]}
+              value={settings[key] as string}
+            />
           </Box>
         ))}
         <NotificationToggle defaultValue={settings.notifications} />

@@ -20,6 +20,7 @@ const initialState: SettingsState = {
     password: "",
     notifications: false,
     name: "",
+    biography: "",
   },
   fetchSettings: {
     loading: false,
@@ -42,6 +43,7 @@ export const fetchSettings = createAsyncThunk<
       password: "Password.123",
       name: "Tareita Nawaz",
       notifications: true,
+      biography: "Hello, my name is test user and this is my bio!",
     }; //  BACKEND PLACEHOLDER
     const response = await fetch("https://test/api/settings", {
       headers: {

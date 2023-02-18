@@ -104,6 +104,7 @@ export type Settings = {
   name: string;
   notifications: boolean;
   password: string;
+  biography: string;
   [key: string]: string | boolean;
 };
 
