@@ -18,8 +18,7 @@ type Props = {
   type: string;
   value: string;
 };
-//add placeholder text
-//password - enter new, confirme
+
 function SettingsItem(props: Props) {
   const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
   const { type, value } = props;

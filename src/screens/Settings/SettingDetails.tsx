@@ -17,11 +17,11 @@ const SettingDetails = (props: Props) => {
 
   const displaySettingDetailsContent = () => {
     switch (settingType) {
-      case "Email":
+      case "email":
         return <EmailSetting defaultValue={defaultValue} />;
-      case "Name":
+      case "name":
         return <NameSetting defaultValue={defaultValue} />;
-      case "Password":
+      case "password":
         return <PasswordSetting />;
       default:
         break;

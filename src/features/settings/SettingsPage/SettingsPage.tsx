@@ -6,19 +6,9 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { logOutUser } from "../../auth/authSlice";
 import StatusContainer from "../../../components/StatusContainer/StatusContainer";
 import { fetchSettings } from "../settingsSlice";
-
-type SettingEntry = {
-  type: string;
-  key: string;
-};
+import settingEntries from "../settingEntries";
 
 const SettingsPage = () => {
-  const settingEntries: SettingEntry[] = [
-    { type: "Name", key: "name" },
-    { type: "Email", key: "email" },
-    { type: "Password", key: "password" },
-  ];
-
   const { settings, fetchSettings: requestStatus } = useAppSelector(
     (state) => state.settings
   );
@@ -36,12 +26,9 @@ const SettingsPage = () => {
       data={settings.email.length > 0}
     >
       <VStack>
-        {settingEntries.map((entry, index) => (
-          <Box paddingBottom="3" key={index}>
-            <SettingsItem
-              type={entry.type}
-              value={settings[entry.key] as string}
-            />
+        {Object.keys(settingEntries).forEach((key) => (
+          <Box paddingBottom="3" key={key}>
+            <SettingsItem type={key} value={settings[key] as string} />
           </Box>
         ))}
         <NotificationToggle defaultValue={settings.notifications} />
