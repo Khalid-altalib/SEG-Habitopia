@@ -71,6 +71,7 @@ export enum ButtonType {
   Secondary,
 }
 export type Challenge = {
+  id: string;
   name: string;
   description: string;
   active: boolean;
@@ -104,6 +105,7 @@ export type Settings = {
   name: string;
   notifications: boolean;
   password: string;
+  biography: string;
   [key: string]: string | boolean;
 };
 

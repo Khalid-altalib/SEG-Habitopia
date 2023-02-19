@@ -20,7 +20,7 @@ const DoneButton = (props: Props) => {
   const dispatch = useAppDispatch();
 
   const handlePress = async () => {
-    await dispatch(setSettings({ [valueName]: getValues(valueName) }));
+    await dispatch(setSettings({ [valueName]: getValues("formValue") }));
     navigation.goBack();
   };
 

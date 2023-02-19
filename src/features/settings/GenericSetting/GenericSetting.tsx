@@ -1,35 +1,40 @@
-import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { Button, Input, Text, View } from "native-base";
+import { Button, Input, Text, TextArea, View } from "native-base";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import { RootParams } from "../../../../types";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import DoneButton from "../DoneButton.tsx/DoneButton";
+import settingEntries from "../settingEntries";
 
 type Props = {
   defaultValue: string;
+  settingType: string;
 };
 
-const NameSetting = (props: Props) => {
+const GenericSetting = (props: Props) => {
+  const { defaultValue, settingType } = props;
+
   const { control, getValues } = useForm({
     defaultValues: {
-      name: props.defaultValue,
+      formValue: defaultValue,
     },
   });
 
+  const settingTitle = settingEntries[settingType].name;
+
   return (
     <View>
-      <Text mb={5}>Name</Text>
+      <Text mb={5}>{settingTitle}</Text>
+
       <Controller
         control={control}
         render={({ field: { onChange, value } }) => (
           <Input onChangeText={onChange} value={value} size="xl" />
         )}
-        name="name"
+        name="formValue"
       />
-      <DoneButton getValues={getValues} valueName="name" />
+      <DoneButton getValues={getValues} valueName={settingType} />
     </View>
   );
 };
 
-export default NameSetting;
+export default GenericSetting;
