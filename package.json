@@ -56,7 +56,8 @@
     "react-native-toast-message": "^2.1.5",
     "react-native-web": "~0.18.9",
     "react-redux": "^8.0.5",
-    "redux": "^4.2.1"
+    "redux": "^4.2.1",
+    "redux-mock-store": "^1.5.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -74,6 +75,7 @@
     "@types/jest": "^29.4.0",
     "@types/react": "~18.0.24",
     "@types/react-native": "~0.70.6",
+    "@types/redux-mock-store": "^1.0.3",
     "@typescript-eslint/eslint-plugin": "^5.49.0",
     "@typescript-eslint/parser": "^5.49.0",
     "babel-loader": "^8.3.0",
