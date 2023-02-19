@@ -16,6 +16,7 @@ import { ButtonType, SignInFormValues } from "../../../../../types";
  * @param props The properties passed to the component.
  * @returns The component representing the submit button.
  */
+
 const SubmitButton = ({ handleSubmit }: Props) => {
   const dispatch = useAppDispatch();
 

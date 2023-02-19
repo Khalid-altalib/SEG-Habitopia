@@ -1,0 +1,20 @@
+import { render, screen } from "@testing-library/react";
+import DoneButton from "./DoneButton";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { NavigationContainer } from "@react-navigation/native";
+
+jest.mock("../../../app/hooks");
+const valueName = "example";
+const getValues = jest.fn(() => "example value");
+
+describe("DoneButton", () => {
+  it("renders done button", () => {
+    render(
+      <NavigationContainer>
+        <DoneButton valueName={valueName} getValues={getValues} />
+      </NavigationContainer>
+    );
+    const done = screen.getByText("Done");
+    expect(done).toBeDefined();
+  });
+});

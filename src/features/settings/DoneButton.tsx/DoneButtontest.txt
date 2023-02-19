@@ -1,0 +1,40 @@
+import { NavigationContainer } from "@react-navigation/native";
+import { fireEvent, render, waitFor } from "@testing-library/react-native";
+import { NativeBaseProvider } from "native-base";
+import { NativeBaseConfigProvider } from "native-base/lib/typescript/core/NativeBaseContext";
+import { Provider } from "react-redux";
+import configureStore from "redux-mock-store";
+import DoneButton from "./DoneButton";
+
+const mockStore = configureStore([]);
+
+describe("DoneButton", () => {
+  test("dispatches setSettings action on button press", async () => {
+    const store = mockStore({});
+    const valueName = "example";
+    const getValues = jest.fn(() => "example value");
+
+    const { getByText, debug } = render(
+      <Provider store={store}>
+        <NavigationContainer>
+          <DoneButton getValues={getValues} valueName={valueName} />
+        </NavigationContainer>
+      </Provider>
+    );
+    debug();
+    console.log(getByText("Done"));
+
+    await waitFor(() => {
+      expect(getByText("Done")).toBeDefined();
+    });
+
+    fireEvent.press(getByText("Done"));
+
+    await waitFor(() => {
+      expect(store.getActions()).toEqual([
+        { type: "settings/setSettings/pending" },
+        { type: "settings/setSettings/fulfilled" },
+      ]);
+    });
+  });
+});

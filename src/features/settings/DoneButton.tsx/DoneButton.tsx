@@ -1,5 +1,5 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { Button, View } from "native-base";
+import { Button, NativeBaseProvider, View } from "native-base";
 import React from "react";
 import { RootParams } from "../../../../types";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
@@ -15,7 +15,7 @@ const DoneButton = (props: Props) => {
   const navigation = useNavigation<NavigationProp<RootParams>>();
   const { getValues, disabled, valueName } = props;
 
-  const { loading } = useAppSelector((state) => state.settings.setSettings);
+  // const { loading } = useAppSelector((state) => state.settings.setSettings);
 
   const dispatch = useAppDispatch();
 
@@ -30,7 +30,7 @@ const DoneButton = (props: Props) => {
         onPress={handlePress}
         mt={8}
         isDisabled={disabled}
-        isLoading={loading}
+        // isLoading={loading}
       >
         Done
       </Button>

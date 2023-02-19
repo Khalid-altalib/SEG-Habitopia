@@ -1,0 +1,55 @@
+// // Import necessary packages and components
+// import React, { BaseSyntheticEvent } from "react";
+// import { fireEvent, render, waitFor } from "@testing-library/react-native";
+// import { Provider } from "react-redux";
+// import configureStore from "redux-mock-store";
+// import SubmitButton from "../SubmitButton";
+// import { SignInFormValues } from "../../../../../types";
+// import { addLogInData, logInUser } from "../../authSlice";
+
+// // Create a mock store with the desired state
+// const mockStore = configureStore([]);
+// const store = mockStore({
+//   // Add any necessary initial state here
+// });
+
+// const mockHandleSubmit = jest
+//   .fn()
+//   .mockImplementation((onSubmit: (data: SignInFormValues) => Promise<void>) => {
+//     return async (event?: BaseSyntheticEvent<object, any, any>) => {
+//       await onSubmit({
+//         email: "test@example.com",
+//         password: "testpassword",
+//       });
+//     };
+//   });
+
+// describe("SubmitButton", () => {
+//   test("calls addLogInData and logInUser actions when submitted", async () => {
+//     const dispatch = jest.fn();
+//     const wrapper = render(<SubmitButton handleSubmit={mockHandleSubmit} />, {
+//       wrapper: ({ children }) => <Provider store={store}>{children}</Provider>,
+//     });
+
+//     await fireEvent.press(wrapper.getByText("Continue"));
+
+//     expect(dispatch).toHaveBeenCalledWith(
+//       addLogInData({ email: "test@example.com", password: "testpassword" })
+//     );
+//     expect(dispatch).toHaveBeenCalledWith(logInUser());
+//   });
+//   it("should call the onSubmit function when the button is pressed", async () => {
+//     const mockHandleSubmit = jest.fn().mockImplementation((onSubmit) => {
+//       return async () => {
+//         await onSubmit({ email: "test@example.com", password: "password" });
+//       };
+//     });
+//     const { getByText } = render(
+//       <SubmitButton handleSubmit={mockHandleSubmit} />
+//     );
+//     const button = getByText("Continue");
+//     fireEvent.press(button);
+//     await waitFor(() => expect(mockHandleSubmit).toHaveBeenCalledTimes(1));
+//     expect(mockHandleSubmit.mock.calls[0][0]).toBeInstanceOf(Function);
+//   });
+// });

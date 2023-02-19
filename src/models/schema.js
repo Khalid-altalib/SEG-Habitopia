@@ -156,25 +156,18 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "imag": {
-                    "name": "imag",
+                "description": {
+                    "name": "description",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "duration": {
-                    "name": "duration",
-                    "isArray": false,
-                    "type": "Int",
                     "isRequired": true,
                     "attributes": []
                 },
-                "reward": {
-                    "name": "reward",
+                "active": {
+                    "name": "active",
                     "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
+                    "type": "Boolean",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "createdAt": {
@@ -672,6 +665,86 @@ export const schema = {
                 }
             ]
         },
+        "UserSettings": {
+            "name": "UserSettings",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "userID": {
+                    "name": "userID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "password": {
+                    "name": "password",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "notifications": {
+                    "name": "notifications",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "UserSettings",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "ChallengeUser": {
             "name": "ChallengeUser",
             "fields": {
@@ -872,5 +945,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "9bc2199104801fb8d7b423db4789e141"
+    "version": "4b251c8c838865d91e5b9cf92f1ee6e6"
 };
