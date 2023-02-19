@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`works 1`] = `
+<View
+  style={
+    [
+      {
+        "borderRadius": 10,
+        "shadowColor": "black",
+        "shadowOffset": {
+          "height": 5,
+          "width": 5,
+        },
+        "shadowOpacity": 0.15,
+      },
+    ]
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.7}
+    onPress={[Function]}
+  >
+    <LinearGradient
+      colors={
+        [
+          "#0077e6",
+          "#7e22ce",
+        ]
+      }
+      end={
+        [
+          1,
+          1,
+        ]
+      }
+      start={
+        [
+          0,
+          0,
+        ]
+      }
+      style={
+        [
+          {
+            "alignItems": "center",
+            "borderRadius": 10,
+            "justifyContent": "center",
+            "paddingHorizontal": 40,
+            "paddingVertical": 15,
+          },
+          {
+            "alignSelf": "flex-start",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text
+          style={null}
+          type={3}
+        />
+      </View>
+    </LinearGradient>
+  </TouchableOpacity>
+</View>
+`;
