@@ -231,6 +231,7 @@ type EagerUserSettings = {
   readonly user?: User | null;
   readonly email?: string | null;
   readonly password?: string | null;
+  readonly biography?: string | null;
   readonly notifications?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -246,6 +247,7 @@ type LazyUserSettings = {
   readonly user: AsyncItem<User | undefined>;
   readonly email?: string | null;
   readonly password?: string | null;
+  readonly biography?: string | null;
   readonly notifications?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

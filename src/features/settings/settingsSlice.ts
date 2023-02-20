@@ -1,6 +1,10 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { DataStore } from "aws-amplify";
 import { Settings } from "../../../types";
 import { getAuthTokenFromThunk } from "../../app/util";
+import { getUserSettings } from "../../graphql/queries";
+import { UserSettings, User } from "../../models";
+
 
 export type SettingsState = {
   settings: Settings;
@@ -31,6 +35,31 @@ const initialState: SettingsState = {
     error: "",
   },
 };
+const getUserSettingsFromDB = async (thunkAPI: any) => {
+  try {
+    // get values from dynamodb
+    const response = await DataStore.query(UserSettings, (c) => c.user.id.eq("13b0df6d-d214-42dc-a5f9-d649fa3fd3e1")); //  current placeholder for user id
+    // console.log(response[0]);
+    return response;
+  } catch (error: any) {
+  const message = error.message;
+  return thunkAPI.rejectWithValue(message);
+}    
+}
+
+const getUserFromDB = async (thunkAPI: any) => {
+  try {
+    // get values from dynamodb
+
+    const response = await DataStore.query(User, (c) => c.id.eq("13b0df6d-d214-42dc-a5f9-d649fa3fd3e1")); //  current placeholder for user id
+    // console.log(response);
+    return response;
+
+  } catch (error: any) {
+  const message = error.message;
+  return thunkAPI.rejectWithValue(message);
+}
+}
 
 export const fetchSettings = createAsyncThunk<
   Settings,
@@ -38,20 +67,19 @@ export const fetchSettings = createAsyncThunk<
   { rejectValue: string }
 >("settings/fetch", async (_, thunkAPI) => {
   try {
-    return {
-      email: "tareitanawaz@outlook.com",
-      password: "Password.123",
-      name: "Tareita Nawaz",
-      notifications: true,
-      biography: "Hello, my name is test user and this is my bio!",
-    }; //  BACKEND PLACEHOLDER
-    const response = await fetch("https://test/api/settings", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: getAuthTokenFromThunk(thunkAPI),
-      },
-    });
-    return (await response.json()) as Settings;
+    const settings = await getUserSettingsFromDB(thunkAPI);
+    const userData  = await getUserFromDB(thunkAPI);
+
+    const response =  {
+      email: settings[0].email,
+      password: settings[0].password,
+      name: userData[0].name, // gets user name from user table 
+      notifications: settings[0].notifications,
+      biography: settings[0].biography,
+      // could add a way to represent image here next sprint
+    };
+   
+    return (await response) as Settings;
   } catch (error: any) {
     const message = error.message;
     return thunkAPI.rejectWithValue(message);
@@ -64,6 +92,7 @@ export const setSettings = createAsyncThunk<
   { rejectValue: string }
 >("settings/set", async (settings: any, thunkAPI) => {
   try {
+    // console.log(settings);
     return settings; // BACKEND_PLACEHOLDER
     await fetch("https://test/api/settings", {
       method: "POST",
