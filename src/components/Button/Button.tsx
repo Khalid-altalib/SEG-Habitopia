@@ -41,7 +41,7 @@ const Button = ({
     },
     secondary: {
       backgroundColors: useColorModeValue(
-        [theme.colors.gray[500], theme.colors.gray[400]],
+        [theme.colors.gray[200], theme.colors.gray[300]],
         [theme.colors.blueGray[600], theme.colors.blueGray[700]]
       ),
     },
@@ -81,6 +81,7 @@ const Button = ({
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text
               type={TextType.Button}
+              textColor="dark"
               style={icon == undefined ? null : { marginRight: 5 }}
             >
               {children}

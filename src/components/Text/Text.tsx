@@ -72,6 +72,10 @@ const Text = ({ type, style, children }: any) => {
       fontSize: 40,
       fontFamily: fontsLoaded ? "Roboto Black" : undefined,
     },
+    subheading: {
+      fontSize: 23,
+      fontFamily: fontsLoaded ? "Roboto Black" : undefined,
+    },
     button: {
       color: useColorModeValue(theme.colors.gray[200], theme.colors.gray[200]),
       fontSize: 19,
