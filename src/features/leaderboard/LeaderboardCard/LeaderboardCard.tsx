@@ -29,12 +29,27 @@ const LeaderboardCard = (props: Props) => {
         <HStack space={4}>
           <Avatar />
           <View>
-            <Text type={TextType.Subheading}>{name}</Text>
-            <Text type={TextType.Regular}>{wins} wins</Text>
+            <Text
+              type={TextType.Subheading}
+              color={cardColor ? theme.colors.blueGray[900] : undefined}
+            >
+              {name}
+            </Text>
+            <Text
+              type={TextType.Regular}
+              color={cardColor ? theme.colors.blueGray[900] : undefined}
+            >
+              {wins} wins
+            </Text>
           </View>
         </HStack>
         <View>
-          <Text type={TextType.Subheading}>#{place + 1}</Text>
+          <Text
+            type={TextType.Subheading}
+            color={cardColor ? theme.colors.blueGray[900] : undefined}
+          >
+            #{place + 1}
+          </Text>
         </View>
       </HStack>
     </Card>
