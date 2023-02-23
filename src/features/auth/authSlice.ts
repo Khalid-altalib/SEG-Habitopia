@@ -73,6 +73,7 @@ const logInHelper = async (email: string, password: string) => {
   const user = {
     authToken: signInUserSession.idToken.jwtToken,
     userId: username,
+    email: email,
   };
 
   await AsyncStorage.setItem("user", JSON.stringify(user));

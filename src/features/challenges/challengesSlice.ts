@@ -6,7 +6,11 @@ import { getAuthTokenFromThunk } from "../../app/util";
 import {
   ChallengeType as ChallengeTypeModel,
   Challenge as ChallengeModel,
+  ChatRoom,
+  User,
+  UserChatRoom,
 } from "../../models";
+import { useAppSelector } from "../../app/hooks";
 
 type ChallengesState = {
   challenges: Challenge[];
@@ -51,7 +55,32 @@ export const joinChallenge = createAsyncThunk<
         c.userCount.lt(15),
       ])
     );
+    console.log(response);
+    const originalChatRoom = await DataStore.query(ChatRoom, (c) =>
+      c.id.eq(response[0].challengeChatRoomId as string)
+    );
+    console.log(originalChatRoom);
 
+    const user = await DataStore.query(User, (c) =>
+      c.email.eq("litomimy@brand-app.biz")
+    );
+
+    console.log(user);
+    const userChatRoom = await DataStore.save(
+      new UserChatRoom({
+        chatRoom: originalChatRoom[0],
+        user: user[0],
+      })
+    );
+
+    console.log(userChatRoom);
+    await DataStore.save(
+      ChatRoom.copyOf(originalChatRoom[0], (updated) => {
+        updated.users?.push(userChatRoom);
+      })
+    );
+
+    console.log(response);
     const data = response.map((item) => (item = { ...item }));
     return data;
   } catch (error: any) {

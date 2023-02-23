@@ -57,6 +57,7 @@ export type IndividualChatScreenNavigationProp = NativeStackNavigationProp<
 export type LocalUser = {
   authToken: string;
   userId: string;
+  email: string;
 };
 
 export enum TextType {
