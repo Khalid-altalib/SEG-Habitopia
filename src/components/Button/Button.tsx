@@ -1,30 +1,66 @@
-import React from "react";
+// React Native
 import { StyleSheet, TouchableOpacity, View, ViewStyle } from "react-native";
 
-import Text from "../Text";
-import { ButtonType, TextType } from "../../../types";
-import { theme, useColorModeValue } from "native-base";
+// Expo Linear Gradient
 import { LinearGradient } from "expo-linear-gradient";
 
+// Native Base
+import { useColorModeValue } from "native-base";
+
+// Habitopia
+import Text from "../Text";
+import { ButtonType, TextType } from "../../../types";
+import Theme from "../../constants/Theme";
+import BoxWithShadow from "../BoxWithShadow";
+
 type Props = {
+  /** Additional styling information to apply to the button, e.g. padding. */
   style?: ViewStyle;
+  /** Whether the button should take up the full horizontal space available to it. */
   isFullWidth?: boolean;
+  /** A callback for when the button is pressed. */
   onPress?: () => void;
+  /** The type of button, which affects the default styling. */
   type: ButtonType;
+  /** Any icon to display to the right of the button text. */
   icon?: JSX.Element;
+  /** The text to display within the button. */
   children: string;
 };
 
-const Button = ({
-  style,
-  isFullWidth = false,
-  onPress,
-  type,
-  icon,
-  children,
-}: Props) => {
-  if (type == undefined) type = ButtonType.Primary;
+/**
+ * A pressable button which can take on different default styles, custom styles, and
+ * call callbacks on press.
+ *
+ * @param props The properties passed to the component.
+ * @returns The button component.
+ */
+const Button = (props: Props) => {
+  return (
+    <BoxWithShadow>
+      <TouchableBox onPress={props.onPress} style={props.style}>
+        <GradientBox type={props.type} isFullWidth={props.isFullWidth}>
+          <ButtonText>{props.children}</ButtonText>
+          {props.icon}
+        </GradientBox>
+      </TouchableBox>
+    </BoxWithShadow>
+  );
+};
 
+const TouchableBox = ({ children, onPress, style }: any) => (
+  <TouchableOpacity
+    activeOpacity={0.7}
+    onPress={() => {
+      onPress === undefined ? null : onPress();
+    }}
+    style={style}
+  >
+    {children}
+  </TouchableOpacity>
+);
+
+const GradientBox = ({ children, type, isFullWidth }: any): JSX.Element => {
   const styles = StyleSheet.create({
     base: {
       borderRadius: 10,
@@ -35,63 +71,40 @@ const Button = ({
     },
   });
 
-  const typeStyles = {
-    primary: {
-      backgroundColors: [theme.colors.darkBlue[500], theme.colors.purple[700]],
-    },
-    secondary: {
-      backgroundColors: useColorModeValue(
-        [theme.colors.gray[400], theme.colors.gray[500]],
-        [theme.colors.blueGray[600], theme.colors.blueGray[700]]
-      ),
-    },
-  };
+  // Convert the enum to a string so we can use it as a key
+  const buttonType: string = ButtonType[type].toString().toLowerCase();
 
-  const additionalStyle = ButtonType[type]
-    .toString()
-    .toLowerCase() as keyof typeof typeStyles;
+  const gradientColors = useColorModeValue(
+    Theme.button[buttonType].gradientColors.lightMode,
+    Theme.button[buttonType].gradientColors.darkMode
+  );
 
   return (
-    <View
+    <LinearGradient
+      colors={gradientColors}
+      start={[0, 0]}
+      end={[1, 1]}
       style={[
-        {
-          shadowColor: "black",
-          shadowOffset: { width: 5, height: 5 },
-          shadowOpacity: 0.15,
-          borderRadius: 10,
-        },
+        styles.base,
+        isFullWidth ? { width: "100%" } : { alignSelf: "flex-start" },
       ]}
     >
-      <TouchableOpacity
-        activeOpacity={0.7}
-        onPress={() => {
-          onPress === undefined ? null : onPress();
-        }}
-        style={style}
-      >
-        <LinearGradient
-          colors={typeStyles[additionalStyle].backgroundColors}
-          start={[0, 0]}
-          end={[1, 1]}
-          style={[
-            styles.base,
-            isFullWidth ? { width: "100%" } : { alignSelf: "flex-start" },
-          ]}
-        >
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text
-              type={TextType.Button}
-              textColor="dark"
-              style={icon == undefined ? null : { marginRight: 5 }}
-            >
-              {children}
-            </Text>
-            {icon}
-          </View>
-        </LinearGradient>
-      </TouchableOpacity>
-    </View>
+      {children}
+    </LinearGradient>
   );
 };
+
+const ButtonText = ({ children, icon }: any) => (
+  <Text
+    type={TextType.Button}
+    textColor="dark"
+    style={[
+      icon == undefined ? null : { marginRight: 5 },
+      { alignSelf: "center" },
+    ]}
+  >
+    {children}
+  </Text>
+);
 
 export default Button;

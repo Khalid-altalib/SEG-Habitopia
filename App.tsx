@@ -11,7 +11,7 @@ Amplify.configure(awsExports);
 export default function App() {
   const config = {
     useSystemColorMode: false,
-    initialColorMode: "light",
+    initialColorMode: "dark",
   };
 
   const customTheme = extendTheme({ config });
