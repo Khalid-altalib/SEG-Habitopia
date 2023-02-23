@@ -54,6 +54,9 @@ type UserSettings @model @auth(rules: [{ allow: public }]) {
   user: User @hasOne
   email: String
   password: String
+<<<<<<< HEAD
   biography: String
+=======
+>>>>>>> dev
   notifications: Boolean
 }

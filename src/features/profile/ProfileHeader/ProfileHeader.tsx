@@ -1,3 +1,5 @@
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {
   Avatar,
   Button,
@@ -8,7 +10,7 @@ import {
   VStack,
 } from "native-base";
 import React from "react";
-import { Profile } from "../../../../types";
+import { Profile, RootParams } from "../../../../types";
 import { useAppSelector } from "../../../app/hooks";
 import StatusContainer from "../../../components/StatusContainer/StatusContainer";
 
@@ -20,6 +22,8 @@ const ProfileHeader = (props: Props) => {
   const { isLocalUserProfile } = props;
   const { profile } = useAppSelector((state) => state.profile);
 
+  const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
+
   return (
     <View>
       <HStack space={4} pb={4}>
@@ -30,7 +34,9 @@ const ProfileHeader = (props: Props) => {
           </View>
 
           {isLocalUserProfile ? (
-            <Button>Edit Profile</Button>
+            <Button onPress={() => navigation.push("Settings")}>
+              Edit Profile/Settings
+            </Button>
           ) : (
             <Button>Send Friend Request</Button>
           )}

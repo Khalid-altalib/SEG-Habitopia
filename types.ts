@@ -4,8 +4,14 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 export type RootParams = {
   Auth: undefined;
   Existing: undefined;
-  Modal: {
-    children: React.ReactNode;
+  Profile: undefined;
+  ChallengePrompt: {
+    challenge: Challenge;
+  };
+  Settings: undefined;
+  SettingDetails: {
+    settingType: string;
+    defaultValue: string;
   };
 };
 
@@ -21,6 +27,7 @@ export type NavigationParams = {
   Leaderboard: undefined;
   You: ProfileParams;
   Profile: ProfileParams;
+  Settings: undefined;
 };
 
 export type AuthParams = {
@@ -64,11 +71,10 @@ export enum ButtonType {
   Secondary,
 }
 export type Challenge = {
+  id: string;
   name: string;
   description: string;
   active: boolean;
-  color: string;
-  image: string;
 };
 
 export type Profile = {
@@ -99,6 +105,8 @@ export type Settings = {
   name: string;
   notifications: boolean;
   password: string;
+  biography: string;
+  [key: string]: string | boolean;
 };
 
 export type SignInFormValues = {

@@ -4,6 +4,7 @@ import Home from "../../screens/Home";
 import Explore from "../../screens/Explore";
 import Leaderboard from "../../screens/Leaderboard";
 import Profile from "../../screens/Profile";
+import Settings from "../../screens/Settings/Settings";
 import { NavigationParams } from "../../../types";
 import ChatNavigation from "./ChatNavigation";
 import { useAppSelector } from "../../app/hooks";
