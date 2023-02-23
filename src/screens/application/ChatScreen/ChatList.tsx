@@ -1,17 +1,23 @@
-// React
-import React from "react";
-
-// React Native
+import React, { useEffect } from "react";
 import { FlatList } from "react-native";
-
-// Habitopia
-import { useSelector } from "@app/hooks";
 import ChatItem from "@features/chat/ChatItem";
+import { useDispatch, useSelector } from "@app/hooks";
+import { fetchChats } from "@features/chat/chatSlice";
 
 type Props = {};
 
 const ChatList = (props: Props) => {
-  const { chats } = useSelector((state) => state.chats);
+  const { chats, fetchChats: requestStatus } = useSelector(
+    (state) => state.chats
+  );
+
+  const { error, loading } = requestStatus;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchChats());
+  }, []);
 
   return (
     <FlatList

@@ -1,9 +1,15 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import chat from "../../../assets/data/chat.json";
 import { Chat } from "../../../types";
+import { DataStore } from "aws-amplify";
+import { ChatRoom, User } from "../../models";
 
 type ChatState = {
   chats: Chat[];
+  fetchChats: {
+    loading: boolean;
+    error: string;
+  };
 };
 
 export const fetchChats = createAsyncThunk<
@@ -12,8 +18,19 @@ export const fetchChats = createAsyncThunk<
   { rejectValue: string }
 >("chats/fetch", async (_, thunkAPI) => {
   try {
-    const response = await fetch("https://test/api/challenges"); //  BACKEND PLACEHOLDER
-    return (await response.json()) as Chat[];
+    const response = await DataStore.query(User, (c) =>
+      c.email.eq("litomimy@brand-app.biz")
+    );
+    const chats = await DataStore.query(ChatRoom);
+    const chatRooms = await response[0].ChatRooms.toArray();
+    chatRooms.forEach((item) =>
+      chats.filter((c) => {
+        c.id === item.chatRoomId;
+      })
+    );
+    const data = chats.map((item) => (item = { ...item }));
+    console.log(data);
+    return data;
   } catch (error: any) {
     const message = error.message;
     return thunkAPI.rejectWithValue(message);
@@ -21,21 +38,34 @@ export const fetchChats = createAsyncThunk<
 });
 
 const initialState: ChatState = {
-  chats: chat.map((item) => {
-    return {
-      id: item.id,
-      name: item.user.name,
-      image: item.user.image,
-      text: item.lastMessage.text,
-      time: item.lastMessage.createdAt,
-    };
-  }),
+  chats: [],
+  fetchChats: {
+    loading: false,
+    error: "",
+  },
 };
 
 export const chatSlice = createSlice({
   name: "chats",
   initialState,
   reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchChats.pending, (state) => {
+      state.fetchChats.loading = true;
+    });
+    builder.addCase(
+      fetchChats.fulfilled,
+      (state, action: PayloadAction<Chat[]>) => {
+        state.chats = action.payload;
+        state.fetchChats.loading = false;
+      }
+    );
+    builder.addCase(fetchChats.rejected, (state, action: any) => {
+      state.chats = [];
+      state.fetchChats.loading = false;
+      state.fetchChats.error = action.payload;
+    });
+  },
 });
 
 export const {} = chatSlice.actions;
