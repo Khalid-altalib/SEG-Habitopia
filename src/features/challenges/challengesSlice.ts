@@ -74,11 +74,6 @@ export const joinChallenge = createAsyncThunk<
     );
 
     console.log(userChatRoom);
-    await DataStore.save(
-      ChatRoom.copyOf(originalChatRoom[0], (updated) => {
-        updated.users?.push(userChatRoom);
-      })
-    );
 
     console.log(response);
     const data = response.map((item) => (item = { ...item }));

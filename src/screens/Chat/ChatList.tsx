@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FlatList } from "react-native";
 import ChatItem from "../../features/chat/ChatItem";
-import { useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { fetchChats } from "../../features/chat/chatSlice";
 
 type Props = {};
 
 const ChatList = (props: Props) => {
-  const { chats } = useAppSelector((state) => state.chats);
+  const { chats, fetchChats: requestStatus } = useAppSelector(
+    (state) => state.chats
+  );
+
+  const { error, loading } = requestStatus;
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchChats());
+  }, []);
 
   return (
     <FlatList

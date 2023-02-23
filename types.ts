@@ -96,10 +96,10 @@ export type Statistic = {
 
 export type Chat = {
   id: string;
-  name: string;
-  image: string;
-  text: string;
-  time: string;
+  name?: string;
+  image?: string;
+  text?: string;
+  time?: string;
 };
 
 export type Settings = {
