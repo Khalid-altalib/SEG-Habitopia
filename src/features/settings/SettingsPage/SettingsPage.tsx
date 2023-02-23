@@ -7,7 +7,6 @@ import { logOutUser } from "../../auth/authSlice";
 import StatusContainer from "../../../components/StatusContainer/StatusContainer";
 import { fetchSettings } from "../settingsSlice";
 import settingEntries from "../settingEntries";
-import { Auth } from "aws-amplify";
 
 const SettingsPage = () => {
   const { settings, fetchSettings: requestStatus } = useSelector(
