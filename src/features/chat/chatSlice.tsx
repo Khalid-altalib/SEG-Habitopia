@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import chat from "../../../assets/data/chat.json";
 import { Chat } from "../../../types";
 import { DataStore } from "aws-amplify";
-import { ChatRoom, User } from "../../models";
+import { ChatRoom, Message, User } from "../../models";
 
 type ChatState = {
   chats: Chat[];
@@ -28,7 +28,15 @@ export const fetchChats = createAsyncThunk<
         c.id === item.chatRoomId;
       })
     );
-    const data = chats.map((item) => (item = { ...item }));
+    const data: Chat[] = [];
+    chats.forEach(async (item) => {
+      data.push({
+        id: item.id,
+        name: "",
+        image:
+          "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/lukas.jpeg",
+      } as Chat);
+    });
     console.log(data);
     return data;
   } catch (error: any) {
