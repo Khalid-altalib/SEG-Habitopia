@@ -6,10 +6,11 @@ import {
   ChallengeType as ChallengeTypeModel,
   Challenge as ChallengeModel,
   ChatRoom,
-  User,
   UserChatRoom,
+  ChallengeUser,
+  User,
 } from "../../models";
-import { useAppSelector } from "../../app/hooks";
+import { getUserFromDatabase } from "../../app/util";
 
 type ChallengesState = {
   challenges: Challenge[];
@@ -39,49 +40,75 @@ export const fetchChallenges = createAsyncThunk<
 });
 
 export const joinChallenge = createAsyncThunk<
-  object,
+  void,
   string,
   { rejectValue: string; state: RootState }
 >("challenges/join", async (challengeName: string, thunkAPI) => {
   try {
-    const ChallengeTypeInst = await DataStore.query(ChallengeTypeModel, (c) =>
-      c.name.eq(challengeName)
-    );
+    const challengeToJoin = await findChallengeToJoin(challengeName);
+    const user = await getUserFromDatabase(thunkAPI);
 
-    const response = await DataStore.query(ChallengeModel, (c) =>
-      c.and((c) => [
-        c.ChallengeType.id.eq(ChallengeTypeInst[0].id),
-        c.userCount.lt(15),
-      ])
-    );
-    console.log(response);
-    const originalChatRoom = await DataStore.query(ChatRoom, (c) =>
-      c.id.eq(response[0].challengeChatRoomId as string)
-    );
-    console.log(originalChatRoom);
-
-    const user = await DataStore.query(User, (c) =>
-      c.email.eq("litomimy@brand-app.biz")
-    );
-
-    console.log(user);
-    const userChatRoom = await DataStore.save(
-      new UserChatRoom({
-        chatRoom: originalChatRoom[0],
-        user: user[0],
+    await DataStore.save(
+      new ChallengeUser({
+        user: user,
+        challenge: challengeToJoin,
       })
     );
 
-    console.log(userChatRoom);
-
-    console.log(response);
-    const data = response.map((item) => (item = { ...item }));
-    return data;
+    await addUserToChatRoom(challengeToJoin, user);
   } catch (error: any) {
     const message = error.message;
     return thunkAPI.rejectWithValue(message);
   }
 });
+
+const findChallengeToJoin = async (challengeName: string) => {
+  const ChallengeTypeInst = (
+    await DataStore.query(ChallengeTypeModel, (challengeNames) =>
+      challengeNames.name.eq(challengeName)
+    )
+  )[0];
+
+  const availableChallenges = await DataStore.query(
+    ChallengeModel,
+    (allChallenges) =>
+      allChallenges.and((toJoinChallenge) => [
+        toJoinChallenge.ChallengeType.id.eq(ChallengeTypeInst.id),
+        toJoinChallenge.userCount.lt(15),
+      ])
+  );
+
+  if (availableChallenges.length == 0) {
+    const newChatRoom = await DataStore.save(new ChatRoom({}));
+    const toJoin = await DataStore.save(
+      new ChallengeModel({
+        ChatRoom: newChatRoom,
+        ChallengeType: ChallengeTypeInst,
+        challengeChallengeTypeId: ChallengeTypeInst.id,
+      })
+    );
+    return toJoin;
+  }
+
+  return availableChallenges[0];
+};
+
+const addUserToChatRoom = async (
+  challengeToJoin: ChallengeModel,
+  user: User
+) => {
+  const chatRoomToJoin = (
+    await DataStore.query(ChatRoom, (chatRoom) =>
+      chatRoom.id.eq(challengeToJoin.challengeChatRoomId || "")
+    )
+  )[0];
+  await DataStore.save(
+    new UserChatRoom({
+      chatRoom: chatRoomToJoin,
+      user: user,
+    })
+  );
+};
 
 const initialState: ChallengesState = {
   challenges: [],
