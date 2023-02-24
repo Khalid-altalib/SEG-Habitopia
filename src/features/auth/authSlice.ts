@@ -66,15 +66,14 @@ export const sendConfirmationCode = createAsyncThunk<
 });
 
 const logInHelper = async (email: string, password: string, name?: string) => {
-  const response = await Auth.signIn(email, password);
-  console.log(response);
+  const { signInUserSession, attributes } = await Auth.signIn(email, password);
   const user = {
-    authToken: response.signInUserSession.idToken.jwtToken,
-    userId: response.attributes.sub,
+    authToken: signInUserSession.idToken.jwtToken,
+    userId: attributes.sub,
   };
 
   await AsyncStorage.setItem("user", JSON.stringify(user));
-  await createUserInDatabase(response.attributes.sub, email, name);
+  await createUserInDatabase(attributes.sub, email, name);
   console.log(user);
   return user;
 };
@@ -88,7 +87,7 @@ const createUserInDatabase = async (
   if (userQuery.length == 0) {
     try {
       const user: CreateUserInput = { id: userId, name: name, email: email };
-      const response = await API.graphql<GraphQLQuery<CreateUserMutation>>({
+      await API.graphql<GraphQLQuery<CreateUserMutation>>({
         query: createUser,
         variables: { input: user },
       });
