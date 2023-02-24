@@ -288,6 +288,8 @@ export const onCreateUser = /* GraphQL */ `
       name
       image
       biography
+      email
+      notifications
       Messages {
         items {
           id
@@ -332,7 +334,6 @@ export const onCreateUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      challengeID
       challenges {
         items {
           id
@@ -362,6 +363,8 @@ export const onUpdateUser = /* GraphQL */ `
       name
       image
       biography
+      email
+      notifications
       Messages {
         items {
           id
@@ -406,7 +409,6 @@ export const onUpdateUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      challengeID
       challenges {
         items {
           id
@@ -436,6 +438,8 @@ export const onDeleteUser = /* GraphQL */ `
       name
       image
       biography
+      email
+      notifications
       Messages {
         items {
           id
@@ -480,7 +484,6 @@ export const onDeleteUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      challengeID
       challenges {
         items {
           id
@@ -797,147 +800,6 @@ export const onDeleteCheckin = /* GraphQL */ `
     }
   }
 `;
-export const onCreateUserSettings = /* GraphQL */ `
-  subscription OnCreateUserSettings(
-    $filter: ModelSubscriptionUserSettingsFilterInput
-  ) {
-    onCreateUserSettings(filter: $filter) {
-      id
-      user {
-        id
-        name
-        image
-        biography
-        Messages {
-          nextToken
-          startedAt
-        }
-        ChatRooms {
-          nextToken
-          startedAt
-        }
-        Checkins {
-          nextToken
-          startedAt
-        }
-        challengeID
-        challenges {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      email
-      password
-      biography
-      notifications
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      userSettingsUserId
-    }
-  }
-`;
-export const onUpdateUserSettings = /* GraphQL */ `
-  subscription OnUpdateUserSettings(
-    $filter: ModelSubscriptionUserSettingsFilterInput
-  ) {
-    onUpdateUserSettings(filter: $filter) {
-      id
-      user {
-        id
-        name
-        image
-        biography
-        Messages {
-          nextToken
-          startedAt
-        }
-        ChatRooms {
-          nextToken
-          startedAt
-        }
-        Checkins {
-          nextToken
-          startedAt
-        }
-        challengeID
-        challenges {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      email
-      password
-      biography
-      notifications
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      userSettingsUserId
-    }
-  }
-`;
-export const onDeleteUserSettings = /* GraphQL */ `
-  subscription OnDeleteUserSettings(
-    $filter: ModelSubscriptionUserSettingsFilterInput
-  ) {
-    onDeleteUserSettings(filter: $filter) {
-      id
-      user {
-        id
-        name
-        image
-        biography
-        Messages {
-          nextToken
-          startedAt
-        }
-        ChatRooms {
-          nextToken
-          startedAt
-        }
-        Checkins {
-          nextToken
-          startedAt
-        }
-        challengeID
-        challenges {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      email
-      password
-      biography
-      notifications
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      userSettingsUserId
-    }
-  }
-`;
 export const onCreateChallengeUser = /* GraphQL */ `
   subscription OnCreateChallengeUser(
     $filter: ModelSubscriptionChallengeUserFilterInput
@@ -988,6 +850,8 @@ export const onCreateChallengeUser = /* GraphQL */ `
         name
         image
         biography
+        email
+        notifications
         Messages {
           nextToken
           startedAt
@@ -1000,7 +864,6 @@ export const onCreateChallengeUser = /* GraphQL */ `
           nextToken
           startedAt
         }
-        challengeID
         challenges {
           nextToken
           startedAt
@@ -1069,6 +932,8 @@ export const onUpdateChallengeUser = /* GraphQL */ `
         name
         image
         biography
+        email
+        notifications
         Messages {
           nextToken
           startedAt
@@ -1081,7 +946,6 @@ export const onUpdateChallengeUser = /* GraphQL */ `
           nextToken
           startedAt
         }
-        challengeID
         challenges {
           nextToken
           startedAt
@@ -1150,6 +1014,8 @@ export const onDeleteChallengeUser = /* GraphQL */ `
         name
         image
         biography
+        email
+        notifications
         Messages {
           nextToken
           startedAt
@@ -1162,7 +1028,6 @@ export const onDeleteChallengeUser = /* GraphQL */ `
           nextToken
           startedAt
         }
-        challengeID
         challenges {
           nextToken
           startedAt
@@ -1194,6 +1059,8 @@ export const onCreateUserChatRoom = /* GraphQL */ `
         name
         image
         biography
+        email
+        notifications
         Messages {
           nextToken
           startedAt
@@ -1206,7 +1073,6 @@ export const onCreateUserChatRoom = /* GraphQL */ `
           nextToken
           startedAt
         }
-        challengeID
         challenges {
           nextToken
           startedAt
@@ -1270,6 +1136,8 @@ export const onUpdateUserChatRoom = /* GraphQL */ `
         name
         image
         biography
+        email
+        notifications
         Messages {
           nextToken
           startedAt
@@ -1282,7 +1150,6 @@ export const onUpdateUserChatRoom = /* GraphQL */ `
           nextToken
           startedAt
         }
-        challengeID
         challenges {
           nextToken
           startedAt
@@ -1346,6 +1213,8 @@ export const onDeleteUserChatRoom = /* GraphQL */ `
         name
         image
         biography
+        email
+        notifications
         Messages {
           nextToken
           startedAt
@@ -1358,7 +1227,6 @@ export const onDeleteUserChatRoom = /* GraphQL */ `
           nextToken
           startedAt
         }
-        challengeID
         challenges {
           nextToken
           startedAt

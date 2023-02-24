@@ -2,8 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { DataStore } from "aws-amplify";
 import { Settings } from "../../../types";
 import { getAuthTokenFromThunk } from "../../app/util";
-import { getUserSettings } from "../../graphql/queries";
-import { UserSettings, User } from "../../models";
+import { User } from "../../models";
 
 
 export type SettingsState = {
@@ -35,17 +34,6 @@ const initialState: SettingsState = {
     error: "",
   },
 };
-const getUserSettingsFromDB = async (thunkAPI: any) => {
-  try {
-    // get values from dynamodb
-    const response = await DataStore.query(UserSettings, (c) => c.user.id.eq("b5c0baaf-9cfc-4f75-8f4c-61a39eea57d2")); //  current placeholder for user id
-    // console.log(response[0]);
-    return response;
-  } catch (error: any) {
-  const message = error.message;
-  return thunkAPI.rejectWithValue(message);
-}    
-}
 
 const getUserFromDB = async (thunkAPI: any) => {
   try {
@@ -67,15 +55,15 @@ export const fetchSettings = createAsyncThunk<
   { rejectValue: string }
 >("settings/fetch", async (_, thunkAPI) => {
   try {
-    const settings = await getUserSettingsFromDB(thunkAPI);
     const userData  = await getUserFromDB(thunkAPI);
 
     const response =  {
       email: userData[0].email,
-      password: settings[0].password,
       name: userData[0].name, // gets user name from user table 
-      notifications: settings[0].notifications,
+      notifications: userData[0].notifications,
       biography: userData[0].biography,
+      // password: settings[0].password,
+
       // could add a way to represent image here next sprint
     };
    
@@ -85,22 +73,6 @@ export const fetchSettings = createAsyncThunk<
     return thunkAPI.rejectWithValue(message);
   }
 });
-
-const updateSettingsInDB = async (thunkAPI: any, settingToChange: any) => {
-  try {
-    // set values from dynamodb
-    var user = (await getUserFromDB(thunkAPI))[0];
-    const response = await DataStore.save(
-      User.copyOf(user, (updated) => {
-        updated.name = settingToChange;
-        })
-    );
-    return response;
-  } catch (error: any) {
-  const message = error.message;
-  return thunkAPI.rejectWithValue(message);
-}
-}
 
 
 export const setSettings = createAsyncThunk<
@@ -136,13 +108,14 @@ export const setSettings = createAsyncThunk<
           updated.email = email;
         }));
     }
-   
+
     if (notifications !== undefined) {
       await DataStore.save(
-        UserSettings.copyOf(user, (updated) => {
+        User.copyOf(user, (updated) => {
           updated.notifications = notifications;
         }));
     }
+
     if (biography !== undefined) {
       await DataStore.save(
         User.copyOf(user, (updated) => {
@@ -156,10 +129,7 @@ export const setSettings = createAsyncThunk<
      // if (password !== undefined) {
     //   // update the password in the user settings table
     // }
-
     
-    
-
     return settings; 
   } catch (error: any) {
     const message = error.message;

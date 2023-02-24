@@ -254,6 +254,8 @@ export const getUser = /* GraphQL */ `
       name
       image
       biography
+      email
+      notifications
       Messages {
         items {
           id
@@ -298,7 +300,6 @@ export const getUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      challengeID
       challenges {
         items {
           id
@@ -333,6 +334,8 @@ export const listUsers = /* GraphQL */ `
         name
         image
         biography
+        email
+        notifications
         Messages {
           nextToken
           startedAt
@@ -345,7 +348,6 @@ export const listUsers = /* GraphQL */ `
           nextToken
           startedAt
         }
-        challengeID
         challenges {
           nextToken
           startedAt
@@ -379,6 +381,8 @@ export const syncUsers = /* GraphQL */ `
         name
         image
         biography
+        email
+        notifications
         Messages {
           nextToken
           startedAt
@@ -391,55 +395,6 @@ export const syncUsers = /* GraphQL */ `
           nextToken
           startedAt
         }
-        challengeID
-        challenges {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const usersByChallengeID = /* GraphQL */ `
-  query UsersByChallengeID(
-    $challengeID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelUserFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    usersByChallengeID(
-      challengeID: $challengeID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        name
-        image
-        biography
-        Messages {
-          nextToken
-          startedAt
-        }
-        ChatRooms {
-          nextToken
-          startedAt
-        }
-        Checkins {
-          nextToken
-          startedAt
-        }
-        challengeID
         challenges {
           nextToken
           startedAt
@@ -875,131 +830,6 @@ export const checkinsByChatroomID = /* GraphQL */ `
     }
   }
 `;
-export const getUserSettings = /* GraphQL */ `
-  query GetUserSettings($id: ID!) {
-    getUserSettings(id: $id) {
-      id
-      user {
-        id
-        name
-        image
-        biography
-        Messages {
-          nextToken
-          startedAt
-        }
-        ChatRooms {
-          nextToken
-          startedAt
-        }
-        Checkins {
-          nextToken
-          startedAt
-        }
-        challengeID
-        challenges {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      email
-      password
-      biography
-      notifications
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      userSettingsUserId
-    }
-  }
-`;
-export const listUserSettings = /* GraphQL */ `
-  query ListUserSettings(
-    $filter: ModelUserSettingsFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUserSettings(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        user {
-          id
-          name
-          image
-          biography
-          challengeID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        email
-        password
-        biography
-        notifications
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        userSettingsUserId
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncUserSettings = /* GraphQL */ `
-  query SyncUserSettings(
-    $filter: ModelUserSettingsFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncUserSettings(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        user {
-          id
-          name
-          image
-          biography
-          challengeID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        email
-        password
-        biography
-        notifications
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        userSettingsUserId
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
 export const getChallengeUser = /* GraphQL */ `
   query GetChallengeUser($id: ID!) {
     getChallengeUser(id: $id) {
@@ -1048,6 +878,8 @@ export const getChallengeUser = /* GraphQL */ `
         name
         image
         biography
+        email
+        notifications
         Messages {
           nextToken
           startedAt
@@ -1060,7 +892,6 @@ export const getChallengeUser = /* GraphQL */ `
           nextToken
           startedAt
         }
-        challengeID
         challenges {
           nextToken
           startedAt
@@ -1108,7 +939,8 @@ export const listChallengeUsers = /* GraphQL */ `
           name
           image
           biography
-          challengeID
+          email
+          notifications
           createdAt
           updatedAt
           _version
@@ -1161,7 +993,8 @@ export const syncChallengeUsers = /* GraphQL */ `
           name
           image
           biography
-          challengeID
+          email
+          notifications
           createdAt
           updatedAt
           _version
@@ -1216,7 +1049,8 @@ export const challengeUsersByChallengeId = /* GraphQL */ `
           name
           image
           biography
-          challengeID
+          email
+          notifications
           createdAt
           updatedAt
           _version
@@ -1271,7 +1105,8 @@ export const challengeUsersByUserId = /* GraphQL */ `
           name
           image
           biography
-          challengeID
+          email
+          notifications
           createdAt
           updatedAt
           _version
@@ -1300,6 +1135,8 @@ export const getUserChatRoom = /* GraphQL */ `
         name
         image
         biography
+        email
+        notifications
         Messages {
           nextToken
           startedAt
@@ -1312,7 +1149,6 @@ export const getUserChatRoom = /* GraphQL */ `
           nextToken
           startedAt
         }
-        challengeID
         challenges {
           nextToken
           startedAt
@@ -1379,7 +1215,8 @@ export const listUserChatRooms = /* GraphQL */ `
           name
           image
           biography
-          challengeID
+          email
+          notifications
           createdAt
           updatedAt
           _version
@@ -1428,7 +1265,8 @@ export const syncUserChatRooms = /* GraphQL */ `
           name
           image
           biography
-          challengeID
+          email
+          notifications
           createdAt
           updatedAt
           _version
@@ -1479,7 +1317,8 @@ export const userChatRoomsByUserId = /* GraphQL */ `
           name
           image
           biography
-          challengeID
+          email
+          notifications
           createdAt
           updatedAt
           _version
@@ -1530,7 +1369,8 @@ export const userChatRoomsByChatRoomId = /* GraphQL */ `
           name
           image
           biography
-          challengeID
+          email
+          notifications
           createdAt
           updatedAt
           _version

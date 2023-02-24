@@ -90,6 +90,7 @@ type EagerUser = {
   readonly image?: string | null;
   readonly biography?: string | null;
   readonly email?: string | null;
+  readonly notifications?: boolean | null;
   readonly Messages?: (Message | null)[] | null;
   readonly ChatRooms?: (UserChatRoom | null)[] | null;
   readonly Checkins?: (Checkin | null)[] | null;
@@ -108,6 +109,7 @@ type LazyUser = {
   readonly image?: string | null;
   readonly biography?: string | null;
   readonly email?: string | null;
+  readonly notifications?: boolean | null;
   readonly Messages: AsyncCollection<Message>;
   readonly ChatRooms: AsyncCollection<UserChatRoom>;
   readonly Checkins: AsyncCollection<Checkin>;
@@ -220,42 +222,6 @@ export declare type Checkin = LazyLoading extends LazyLoadingDisabled ? EagerChe
 
 export declare const Checkin: (new (init: ModelInit<Checkin>) => Checkin) & {
   copyOf(source: Checkin, mutator: (draft: MutableModel<Checkin>) => MutableModel<Checkin> | void): Checkin;
-}
-
-type EagerUserSettings = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<UserSettings, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly user?: User | null;
-  readonly email?: string | null;
-  readonly password?: string | null;
-  readonly notifications?: boolean | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  readonly userSettingsUserId?: string | null;
-}
-
-type LazyUserSettings = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<UserSettings, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly user: AsyncItem<User | undefined>;
-  readonly email?: string | null;
-  readonly password?: string | null;
-  readonly notifications?: boolean | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  readonly userSettingsUserId?: string | null;
-}
-
-export declare type UserSettings = LazyLoading extends LazyLoadingDisabled ? EagerUserSettings : LazyUserSettings
-
-export declare const UserSettings: (new (init: ModelInit<UserSettings>) => UserSettings) & {
-  copyOf(source: UserSettings, mutator: (draft: MutableModel<UserSettings>) => MutableModel<UserSettings> | void): UserSettings;
 }
 
 type EagerChallengeUser = {
