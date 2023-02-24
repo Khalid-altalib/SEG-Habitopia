@@ -38,7 +38,7 @@ const initialState: SettingsState = {
 const getUserSettingsFromDB = async (thunkAPI: any) => {
   try {
     // get values from dynamodb
-    const response = await DataStore.query(UserSettings, (c) => c.user.id.eq("13b0df6d-d214-42dc-a5f9-d649fa3fd3e1")); //  current placeholder for user id
+    const response = await DataStore.query(UserSettings, (c) => c.user.id.eq("b5c0baaf-9cfc-4f75-8f4c-61a39eea57d2")); //  current placeholder for user id
     // console.log(response[0]);
     return response;
   } catch (error: any) {
@@ -51,8 +51,8 @@ const getUserFromDB = async (thunkAPI: any) => {
   try {
     // get values from dynamodb
 
-    const response = await DataStore.query(User, (c) => c.id.eq("13b0df6d-d214-42dc-a5f9-d649fa3fd3e1")); //  current placeholder for user id
-    // console.log(response);
+    const response = await DataStore.query(User, (c) => c.id.eq("b5c0baaf-9cfc-4f75-8f4c-61a39eea57d2")); //  current placeholder for user id
+    // console.log(response[0]);
     return response;
 
   } catch (error: any) {
@@ -71,11 +71,11 @@ export const fetchSettings = createAsyncThunk<
     const userData  = await getUserFromDB(thunkAPI);
 
     const response =  {
-      email: settings[0].email,
+      email: userData[0].email,
       password: settings[0].password,
       name: userData[0].name, // gets user name from user table 
       notifications: settings[0].notifications,
-      biography: settings[0].biography,
+      biography: userData[0].biography,
       // could add a way to represent image here next sprint
     };
    
@@ -86,22 +86,81 @@ export const fetchSettings = createAsyncThunk<
   }
 });
 
+const updateSettingsInDB = async (thunkAPI: any, settingToChange: any) => {
+  try {
+    // set values from dynamodb
+    var user = (await getUserFromDB(thunkAPI))[0];
+    const response = await DataStore.save(
+      User.copyOf(user, (updated) => {
+        updated.name = settingToChange;
+        })
+    );
+    return response;
+  } catch (error: any) {
+  const message = error.message;
+  return thunkAPI.rejectWithValue(message);
+}
+}
+
+
 export const setSettings = createAsyncThunk<
   void,
   object,
   { rejectValue: string }
 >("settings/set", async (settings: any, thunkAPI) => {
   try {
-    // console.log(settings);
-    return settings; // BACKEND_PLACEHOLDER
-    await fetch("https://test/api/settings", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: getAuthTokenFromThunk(thunkAPI),
-      },
-    }); //  BACKEND PLACEHOLDER
-    return settings;
+    console.log(settings);
+
+    const name = settings.name;
+    const email = settings.email;
+    const notifications = settings.notifications;
+    const biography = settings.biography;
+    // const image = settings.image;
+    // const password = settings.password;
+
+
+    var user = (await getUserFromDB(thunkAPI))[0];
+
+    // find out which one is not null, and update that one
+
+    if (name !== undefined) {
+      // update the name in the user table
+      await DataStore.save(
+        User.copyOf(user, (updated) => {
+          updated.name = name;
+        }));
+    }
+    if (email !== undefined) {
+      await DataStore.save(
+        User.copyOf(user, (updated) => {
+          updated.email = email;
+        }));
+    }
+   
+    if (notifications !== undefined) {
+      await DataStore.save(
+        UserSettings.copyOf(user, (updated) => {
+          updated.notifications = notifications;
+        }));
+    }
+    if (biography !== undefined) {
+      await DataStore.save(
+        User.copyOf(user, (updated) => {
+          updated.biography = biography;
+        }));
+    }
+
+    // if (image !== undefined) {
+    //   // update the image in the user table
+    // }
+     // if (password !== undefined) {
+    //   // update the password in the user settings table
+    // }
+
+    
+    
+
+    return settings; 
   } catch (error: any) {
     const message = error.message;
     return thunkAPI.rejectWithValue(message);

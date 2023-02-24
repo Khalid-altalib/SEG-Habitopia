@@ -243,6 +243,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "Messages": {
                     "name": "Messages",
                     "isArray": true,
@@ -291,13 +298,6 @@ export const schema = {
                         ]
                     }
                 },
-                "challengeID": {
-                    "name": "challengeID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "challenges": {
                     "name": "challenges",
                     "isArray": true,
@@ -337,15 +337,6 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byChallenge",
-                        "fields": [
-                            "challengeID"
-                        ]
-                    }
                 },
                 {
                     "type": "auth",
@@ -714,13 +705,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "biography": {
-                    "name": "biography",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
                 "notifications": {
                     "name": "notifications",
                     "isArray": false,
@@ -977,5 +961,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "739e7bff68154e8b9e5a0316427958e4"
+    "version": "a714796de7ff3508162f4c41b05fe5d7"
 };

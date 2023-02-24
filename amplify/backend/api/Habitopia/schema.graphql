@@ -20,10 +20,10 @@ type User @model @auth(rules: [{ allow: public }]) {
   name: String
   image: String
   biography: String
+  email: String
   Messages: [Message] @hasMany(indexName: "byUser", fields: ["id"])
   ChatRooms: [ChatRoom] @manyToMany(relationName: "UserChatRoom")
   Checkins: [Checkin] @hasMany(indexName: "byUser", fields: ["id"])
-  challengeID: ID! @index(name: "byChallenge")
   challenges: [Challenge] @manyToMany(relationName: "ChallengeUser")
 }
 
@@ -54,6 +54,5 @@ type UserSettings @model @auth(rules: [{ allow: public }]) {
   user: User @hasOne
   email: String
   password: String
-  biography: String
   notifications: Boolean
 }
