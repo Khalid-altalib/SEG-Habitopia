@@ -41,7 +41,7 @@ const Button = (props: Props) => {
       <TouchableBox onPress={props.onPress} style={props.style}>
         <GradientBox type={props.type} isFullWidth={props.isFullWidth}>
           <ButtonText>{props.children}</ButtonText>
-          {props.icon}
+          <View style={{ marginLeft: 5 }}>{props.icon}</View>
         </GradientBox>
       </TouchableBox>
     </BoxWithShadow>
@@ -68,6 +68,7 @@ const GradientBox = ({ children, type, isFullWidth }: any): JSX.Element => {
       paddingHorizontal: 40,
       alignItems: "center",
       justifyContent: "center",
+      flexDirection: "row",
     },
   });
 
