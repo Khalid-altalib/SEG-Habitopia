@@ -28,14 +28,26 @@ export const fetchChats = createAsyncThunk<
         c.id === item.chatRoomId;
       })
     );
-    const data: Chat[] = [];
+
+    let data: Chat[] = [];
     chats.forEach(async (item) => {
-      data.push({
-        id: item.id,
-        name: "",
-        image:
-          "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/lukas.jpeg",
-      } as Chat);
+      try {
+        const lastMessage = await DataStore.query(Message, (c) =>
+          c.id.eq(item.chatRoomLastMessageId || "")
+        );
+
+        data.push({
+          id: item.id,
+          name: "",
+          image:
+            "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/lukas.jpeg",
+          text: lastMessage[0].text,
+        } as Chat);
+      } catch (error: any) {
+        const message = error.message;
+        console.log(message);
+        return thunkAPI.rejectWithValue(message);
+      }
     });
     console.log(data);
     return data;

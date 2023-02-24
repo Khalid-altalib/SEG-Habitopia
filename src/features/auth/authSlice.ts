@@ -1,11 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { LocalUser } from "../../../types";
-import { Auth, DataStore } from "aws-amplify";
+import { GraphQLQuery } from "@aws-amplify/api";
+import { API, Auth, DataStore, graphqlOperation } from "aws-amplify";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RootState } from "../../app/store";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { User } from "../../models";
+import { CreateUserInput, CreateUserMutation } from "../../API";
+import { createUser } from "../../graphql/mutations";
 
 type AuthState = {
   signUpData: {
@@ -53,13 +56,7 @@ export const sendConfirmationCode = createAsyncThunk<
     const state = thunkAPI.getState() as RootState;
     const { email, password, confirmationCode, name } = state.auth.signUpData;
     await Auth.confirmSignUp(email, confirmationCode);
-    const user = await logInHelper(email, password);
-    await DataStore.save(
-      new User({
-        name: name,
-        email: email,
-      })
-    );
+    const user = await logInHelper(email, password, name);
     return user as LocalUser;
   } catch (error: any) {
     const message = error.message;
@@ -68,16 +65,37 @@ export const sendConfirmationCode = createAsyncThunk<
   }
 });
 
-const logInHelper = async (email: string, password: string) => {
-  const { signInUserSession, username } = await Auth.signIn(email, password);
+const logInHelper = async (email: string, password: string, name?: string) => {
+  const response = await Auth.signIn(email, password);
+  console.log(response);
   const user = {
-    authToken: signInUserSession.idToken.jwtToken,
-    userId: username,
-    email: email,
+    authToken: response.signInUserSession.idToken.jwtToken,
+    userId: response.attributes.sub,
   };
 
   await AsyncStorage.setItem("user", JSON.stringify(user));
+  await createUserInDatabase(response.attributes.sub, email, name);
+  console.log(user);
   return user;
+};
+
+const createUserInDatabase = async (
+  userId: string,
+  email?: string,
+  name?: string
+) => {
+  const userQuery = await DataStore.query(User, (user) => user.id.eq(userId));
+  if (userQuery.length == 0) {
+    try {
+      const user: CreateUserInput = { id: userId, name: name, email: email };
+      const response = await API.graphql<GraphQLQuery<CreateUserMutation>>({
+        query: createUser,
+        variables: { input: user },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 };
 
 export const logInUser = createAsyncThunk<
