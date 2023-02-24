@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { DataStore } from "@aws-amplify/datastore";
-import { Challenge, LocalUser } from "../../../types";
+import { Challenge } from "../../../types";
 import { RootState } from "../../app/store";
 import {
   ChallengeType as ChallengeTypeModel,
@@ -40,12 +40,17 @@ export const fetchChallenges = createAsyncThunk<
 });
 
 export const joinChallenge = createAsyncThunk<
-  void,
+  Challenge,
   string,
   { rejectValue: string; state: RootState }
 >("challenges/join", async (challengeName: string, thunkAPI) => {
   try {
-    const challengeToJoin = await findChallengeToJoin(challengeName);
+    const challengeTypeInstance = (
+      await DataStore.query(ChallengeTypeModel, (challengeNames) =>
+        challengeNames.name.eq(challengeName)
+      )
+    )[0];
+    const challengeToJoin = await findChallengeToJoin(challengeTypeInstance);
     const user = await getUserFromDatabase(thunkAPI);
 
     await DataStore.save(
@@ -56,58 +61,63 @@ export const joinChallenge = createAsyncThunk<
     );
 
     await addUserToChatRoom(challengeToJoin, user);
+    return { ...challengeTypeInstance };
   } catch (error: any) {
     const message = error.message;
     return thunkAPI.rejectWithValue(message);
   }
 });
 
-const findChallengeToJoin = async (challengeName: string) => {
-  const ChallengeTypeInst = (
-    await DataStore.query(ChallengeTypeModel, (challengeNames) =>
-      challengeNames.name.eq(challengeName)
-    )
-  )[0];
-
-  const availableChallenges = await DataStore.query(
-    ChallengeModel,
-    (allChallenges) =>
-      allChallenges.and((toJoinChallenge) => [
-        toJoinChallenge.ChallengeType.id.eq(ChallengeTypeInst.id),
-        toJoinChallenge.userCount.lt(15),
-      ])
-  );
-
-  if (availableChallenges.length == 0) {
-    const newChatRoom = await DataStore.save(new ChatRoom({}));
-    const toJoin = await DataStore.save(
-      new ChallengeModel({
-        ChatRoom: newChatRoom,
-        ChallengeType: ChallengeTypeInst,
-        challengeChallengeTypeId: ChallengeTypeInst.id,
-      })
+const findChallengeToJoin = async (
+  challengeTypeInstance: ChallengeTypeModel
+) => {
+  try {
+    const availableChallenges = await DataStore.query(
+      ChallengeModel,
+      (allChallenges) =>
+        allChallenges.and((toJoinChallenge) => [
+          toJoinChallenge.ChallengeType.id.eq(challengeTypeInstance.id),
+          toJoinChallenge.userCount.lt(15),
+        ])
     );
-    return toJoin;
-  }
 
-  return availableChallenges[0];
+    if (availableChallenges.length == 0) {
+      const newChatRoom = await DataStore.save(new ChatRoom({}));
+      const toJoin = await DataStore.save(
+        new ChallengeModel({
+          ChatRoom: newChatRoom,
+          ChallengeType: challengeTypeInstance,
+          challengeChallengeTypeId: challengeTypeInstance.id,
+        })
+      );
+      return toJoin;
+    }
+
+    return availableChallenges[0];
+  } catch (error) {
+    throw new Error("Challenge not found");
+  }
 };
 
 const addUserToChatRoom = async (
   challengeToJoin: ChallengeModel,
   user: User
 ) => {
-  const chatRoomToJoin = (
-    await DataStore.query(ChatRoom, (chatRoom) =>
-      chatRoom.id.eq(challengeToJoin.challengeChatRoomId || "")
-    )
-  )[0];
-  await DataStore.save(
-    new UserChatRoom({
-      chatRoom: chatRoomToJoin,
-      user: user,
-    })
-  );
+  try {
+    const chatRoomToJoin = (
+      await DataStore.query(ChatRoom, (chatRoom) =>
+        chatRoom.id.eq(challengeToJoin.challengeChatRoomId || "")
+      )
+    )[0];
+    await DataStore.save(
+      new UserChatRoom({
+        chatRoom: chatRoomToJoin,
+        user: user,
+      })
+    );
+  } catch (error) {
+    throw new Error("Unable to join chat");
+  }
 };
 
 const initialState: ChallengesState = {
@@ -148,7 +158,7 @@ export const challengesSlice = createSlice({
     builder.addCase(
       joinChallenge.fulfilled,
       (state, action: PayloadAction<any>) => {
-        const joinedChallengeName = action.payload.challengeName;
+        const joinedChallengeName = action.payload.name;
         state.challenges = state.challenges.map((challenge) => {
           if (challenge.name == joinedChallengeName) {
             return { ...challenge, active: true };
