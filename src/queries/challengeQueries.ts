@@ -24,15 +24,13 @@ export const joinChallengeQuery = async (
     })
   );
 
+  await addUserToChatRoom(challengeToJoin, user);
+
   await DataStore.save(
     ChallengeModel.copyOf(challengeToJoin, (updated) => {
-      if (updated.userCount) {
-        updated.userCount += 1;
-      }
+      updated.userCount += 1;
     })
   );
-
-  await addUserToChatRoom(challengeToJoin, user);
 };
 
 const isUserPartOfChallenge = async (
@@ -74,6 +72,7 @@ const findChallengeToJoin = async (
           ChatRoom: newChatRoom,
           ChallengeType: challengeTypeInstance,
           challengeChallengeTypeId: challengeTypeInstance.id,
+          userCount: 0,
         })
       );
       return toJoin;
