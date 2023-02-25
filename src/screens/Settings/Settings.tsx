@@ -1,20 +1,17 @@
 import React from "react";
-import RegularLayout from "../../components/RegularLayout/RegularLayout";
 import SettingsPage from "../../features/settings/SettingsPage/SettingsPage";
-import styles from "../../constants/Styles";
-import { ScrollView, View } from "native-base";
+import { ScrollView } from "native-base";
 import Background from "../../components/Background";
 import PaddedContainer from "../../components/PaddedContainer";
-import Colors from "../../constants/Colors";
 
 const Settings = () => {
   return (
     <Background>
-      <RegularLayout>
+      <PaddedContainer>
         <ScrollView>
           <SettingsPage />
         </ScrollView>
-      </RegularLayout>
+      </PaddedContainer>
     </Background>
   );
 };

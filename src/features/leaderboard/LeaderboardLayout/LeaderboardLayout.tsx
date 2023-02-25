@@ -1,8 +1,8 @@
 import { ScrollView, VStack } from "native-base";
 import React from "react";
 import { useDispatch } from "../../../app/hooks";
-import RegularLayout from "../../../components/RegularLayout/RegularLayout";
 import { fetchLeaderboard } from "../leaderboardSlice";
+import PaddedContainer from "../../../components/PaddedContainer";
 
 type Props = {
   children: React.ReactNode;
@@ -33,9 +33,9 @@ const LeaderboardLayout = (props: Props) => {
 
   return (
     <ScrollView scrollEventThrottle={2000} onScroll={handleScrollBottom}>
-      <RegularLayout>
+      <PaddedContainer>
         <VStack space={4}>{children}</VStack>
-      </RegularLayout>
+      </PaddedContainer>
     </ScrollView>
   );
 };

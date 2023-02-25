@@ -1,10 +1,8 @@
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Button, Center, View } from "native-base";
+import { RouteProp, useRoute } from "@react-navigation/native";
+import { View } from "native-base";
 import React from "react";
 import { RootParams } from "../../types";
 import FlowLayout from "../components/FlowLayout/FlowLayout";
-import RegularLayout from "../components/RegularLayout/RegularLayout";
 import ChallengeModal from "../features/challenges/ChallengeModal/ChallengeModal";
 
 type Props = {};

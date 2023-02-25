@@ -3,9 +3,9 @@ import { useRoute, RouteProp } from "@react-navigation/native";
 import { RootParams } from "../../../types";
 import { View } from "native-base";
 import Background from "../../components/Background";
-import RegularLayout from "../../components/RegularLayout/RegularLayout";
 import PasswordSetting from "../../features/settings/PasswordSetting/PasswordSetting";
 import GenericSetting from "../../features/settings/GenericSetting/GenericSetting";
+import PaddedContainer from "../../components/PaddedContainer";
 
 type Props = {};
 
@@ -27,9 +27,9 @@ const SettingDetails = (props: Props) => {
   };
   return (
     <Background>
-      <RegularLayout>
+      <PaddedContainer>
         <View>{displaySettingDetailsContent()}</View>
-      </RegularLayout>
+      </PaddedContainer>
     </Background>
   );
 };
