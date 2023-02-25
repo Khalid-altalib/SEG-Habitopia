@@ -1,5 +1,5 @@
 import { DataStore } from "@aws-amplify/datastore";
-import { getUserFromDatabase } from "../app/util";
+import { getUserFromDatabase } from "../../app/util";
 import {
   ChallengeType as ChallengeTypeModel,
   Challenge as ChallengeModel,
@@ -7,7 +7,7 @@ import {
   UserChatRoom,
   ChallengeUser,
   User,
-} from "../models";
+} from "../../models";
 
 export const joinChallengeQuery = async (
   challengeTypeInstance: ChallengeTypeModel,

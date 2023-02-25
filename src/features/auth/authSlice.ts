@@ -5,7 +5,7 @@ import { LocalUser } from "../../../types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RootState } from "../../app/store";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
-import { createUserInDatabase } from "../../queries/userQueries";
+import { createUserInDatabase } from "./authQueries";
 import { Auth } from "aws-amplify";
 
 type AuthState = {

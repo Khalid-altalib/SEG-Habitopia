@@ -1,8 +1,8 @@
 import { GraphQLQuery } from "@aws-amplify/api";
 import { API, Auth, DataStore } from "aws-amplify";
-import { User } from "../models";
-import { CreateUserInput, CreateUserMutation } from "../API";
-import { createUser } from "../graphql/mutations";
+import { User } from "../../models";
+import { CreateUserInput, CreateUserMutation } from "../../API";
+import { createUser } from "../../graphql/mutations";
 
 export const createUserInDatabase = async (
   userId: string,
