@@ -2,15 +2,8 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { DataStore } from "@aws-amplify/datastore";
 import { Challenge } from "../../../types";
 import { RootState } from "../../app/store";
-import {
-  ChallengeType as ChallengeTypeModel,
-  Challenge as ChallengeModel,
-  ChatRoom,
-  UserChatRoom,
-  ChallengeUser,
-  User,
-} from "../../models";
-import { getUserFromDatabase } from "../../app/util";
+import { ChallengeType as ChallengeTypeModel } from "../../models";
+import { joinChallengeQuery } from "../../queries/challengeQueries";
 
 type ChallengesState = {
   challenges: Challenge[];
@@ -50,75 +43,16 @@ export const joinChallenge = createAsyncThunk<
         challengeNames.name.eq(challengeName)
       )
     )[0];
-    const challengeToJoin = await findChallengeToJoin(challengeTypeInstance);
-    const user = await getUserFromDatabase(thunkAPI);
 
-    await DataStore.save(
-      new ChallengeUser({
-        user: user,
-        challenge: challengeToJoin,
-      })
-    );
+    await joinChallengeQuery(challengeTypeInstance, thunkAPI);
 
-    await addUserToChatRoom(challengeToJoin, user);
     return { ...challengeTypeInstance };
   } catch (error: any) {
     const message = error.message;
+    console.log(message);
     return thunkAPI.rejectWithValue(message);
   }
 });
-
-const findChallengeToJoin = async (
-  challengeTypeInstance: ChallengeTypeModel
-) => {
-  try {
-    const availableChallenges = await DataStore.query(
-      ChallengeModel,
-      (allChallenges) =>
-        allChallenges.and((toJoinChallenge) => [
-          toJoinChallenge.ChallengeType.id.eq(challengeTypeInstance.id),
-          toJoinChallenge.userCount.lt(15),
-        ])
-    );
-
-    if (availableChallenges.length == 0) {
-      const newChatRoom = await DataStore.save(new ChatRoom({}));
-      const toJoin = await DataStore.save(
-        new ChallengeModel({
-          ChatRoom: newChatRoom,
-          ChallengeType: challengeTypeInstance,
-          challengeChallengeTypeId: challengeTypeInstance.id,
-        })
-      );
-      return toJoin;
-    }
-
-    return availableChallenges[0];
-  } catch (error) {
-    throw new Error("Challenge not found");
-  }
-};
-
-const addUserToChatRoom = async (
-  challengeToJoin: ChallengeModel,
-  user: User
-) => {
-  try {
-    const chatRoomToJoin = (
-      await DataStore.query(ChatRoom, (chatRoom) =>
-        chatRoom.id.eq(challengeToJoin.challengeChatRoomId || "")
-      )
-    )[0];
-    await DataStore.save(
-      new UserChatRoom({
-        chatRoom: chatRoomToJoin,
-        user: user,
-      })
-    );
-  } catch (error) {
-    throw new Error("Unable to join chat");
-  }
-};
 
 const initialState: ChallengesState = {
   challenges: [],
