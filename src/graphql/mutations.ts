@@ -298,6 +298,7 @@ export const createUser = /* GraphQL */ `
       image
       biography
       email
+      notifications
       Messages {
         items {
           id
@@ -375,6 +376,7 @@ export const updateUser = /* GraphQL */ `
       image
       biography
       email
+      notifications
       Messages {
         items {
           id
@@ -452,6 +454,7 @@ export const deleteUser = /* GraphQL */ `
       image
       biography
       email
+      notifications
       Messages {
         items {
           id
@@ -839,147 +842,6 @@ export const deleteCheckin = /* GraphQL */ `
     }
   }
 `;
-export const createUserSettings = /* GraphQL */ `
-  mutation CreateUserSettings(
-    $input: CreateUserSettingsInput!
-    $condition: ModelUserSettingsConditionInput
-  ) {
-    createUserSettings(input: $input, condition: $condition) {
-      id
-      user {
-        id
-        name
-        image
-        biography
-        email
-        Messages {
-          nextToken
-          startedAt
-        }
-        ChatRooms {
-          nextToken
-          startedAt
-        }
-        Checkins {
-          nextToken
-          startedAt
-        }
-        challenges {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      email
-      password
-      notifications
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      userSettingsUserId
-    }
-  }
-`;
-export const updateUserSettings = /* GraphQL */ `
-  mutation UpdateUserSettings(
-    $input: UpdateUserSettingsInput!
-    $condition: ModelUserSettingsConditionInput
-  ) {
-    updateUserSettings(input: $input, condition: $condition) {
-      id
-      user {
-        id
-        name
-        image
-        biography
-        email
-        Messages {
-          nextToken
-          startedAt
-        }
-        ChatRooms {
-          nextToken
-          startedAt
-        }
-        Checkins {
-          nextToken
-          startedAt
-        }
-        challenges {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      email
-      password
-      notifications
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      userSettingsUserId
-    }
-  }
-`;
-export const deleteUserSettings = /* GraphQL */ `
-  mutation DeleteUserSettings(
-    $input: DeleteUserSettingsInput!
-    $condition: ModelUserSettingsConditionInput
-  ) {
-    deleteUserSettings(input: $input, condition: $condition) {
-      id
-      user {
-        id
-        name
-        image
-        biography
-        email
-        Messages {
-          nextToken
-          startedAt
-        }
-        ChatRooms {
-          nextToken
-          startedAt
-        }
-        Checkins {
-          nextToken
-          startedAt
-        }
-        challenges {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      email
-      password
-      notifications
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      userSettingsUserId
-    }
-  }
-`;
 export const createChallengeUser = /* GraphQL */ `
   mutation CreateChallengeUser(
     $input: CreateChallengeUserInput!
@@ -1032,6 +894,7 @@ export const createChallengeUser = /* GraphQL */ `
         image
         biography
         email
+        notifications
         Messages {
           nextToken
           startedAt
@@ -1114,6 +977,7 @@ export const updateChallengeUser = /* GraphQL */ `
         image
         biography
         email
+        notifications
         Messages {
           nextToken
           startedAt
@@ -1196,6 +1060,7 @@ export const deleteChallengeUser = /* GraphQL */ `
         image
         biography
         email
+        notifications
         Messages {
           nextToken
           startedAt
@@ -1241,6 +1106,7 @@ export const createUserChatRoom = /* GraphQL */ `
         image
         biography
         email
+        notifications
         Messages {
           nextToken
           startedAt
@@ -1318,6 +1184,7 @@ export const updateUserChatRoom = /* GraphQL */ `
         image
         biography
         email
+        notifications
         Messages {
           nextToken
           startedAt
@@ -1395,6 +1262,7 @@ export const deleteUserChatRoom = /* GraphQL */ `
         image
         biography
         email
+        notifications
         Messages {
           nextToken
           startedAt
