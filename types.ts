@@ -120,8 +120,8 @@ export type SignInFormValues = {
 
 export type Message = {
   id?: string;
-  text: string;
+  text?: string | undefined | null;
   chatRoomId?: string;
-  createdAt: string;
-  userId: string;
+  createdAt?: string | undefined | null;
+  userID: string;
 };

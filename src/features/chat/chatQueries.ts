@@ -30,13 +30,7 @@ export const fetchChatMessages = async (chatId: string) => {
   );
   let messages: MessageType[] = [];
   for await (const chatMessage of chatMessages) {
-    messages.push({
-      id: chatMessage.id,
-      text: chatMessage.text,
-      chatRoomId: chatMessage.chatroomID,
-      createdAt: chatMessage.createdAt,
-      userId: chatMessage.userID,
-    } as MessageType);
+    messages.push({ ...chatMessage });
   }
   return messages;
 };

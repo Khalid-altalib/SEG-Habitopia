@@ -82,7 +82,6 @@ export const chatSlice = createSlice({
       (state, action: PayloadAction<{ id: string; messages: Message[] }>) => {
         const chat = state.chats.find((chat) => chat.id === action.payload.id);
         if (chat) {
-          console.log(action.payload.messages);
           chat.messages = action.payload.messages;
         }
         state.fetchMessages.loading = false;
