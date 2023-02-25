@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { DataStore } from "aws-amplify";
 import { Settings } from "../../../types";
 import { getAuthTokenFromThunk } from "../../app/util";
+import { getUserFromDatabase } from "../../app/util";
 import { User } from "../../models";
-
 
 export type SettingsState = {
   settings: Settings;
@@ -35,34 +35,19 @@ const initialState: SettingsState = {
   },
 };
 
-const getUserFromDB = async (thunkAPI: any) => {
-  try {
-    // get values from dynamodb
-    const response = await DataStore.query(User, (c) => c.id.eq("b5c0baaf-9cfc-4f75-8f4c-61a39eea57d2")); //  current placeholder for user id
-    // console.log(response[0]);
-    return response;
-  } catch (error: any) {
-  const message = error.message;
-  return thunkAPI.rejectWithValue(message);
-}
-}
-
 export const fetchSettings = createAsyncThunk<
   Settings,
   void,
   { rejectValue: string }
 >("settings/fetch", async (_, thunkAPI) => {
   try {
-    const userData  = await getUserFromDB(thunkAPI);
+    const userData  = await getUserFromDatabase(thunkAPI);
 
     const response =  {
-      email: userData[0].email,
-      name: userData[0].name,
-      notifications: userData[0].notifications,
-      biography: userData[0].biography,
-      // password: settings[0].password,
-
-      // could add a way to represent image here next sprint
+      email: userData.email,
+      name: userData.name,
+      notifications: userData.notifications,
+      biography: userData.biography,
     };
    
     return (await response) as Settings;
@@ -83,48 +68,26 @@ export const setSettings = createAsyncThunk<
     const email = settings.email;
     const notifications = settings.notifications;
     const biography = settings.biography;
-    // const image = settings.image;
-    // const password = settings.password;
+    const user = await getUserFromDatabase(thunkAPI);
+    // update the one that is not null
 
-
-    var user = (await getUserFromDB(thunkAPI))[0];
-
-    // find out which one is not null, and update that one
-
-    if (name !== undefined) {
-      await DataStore.save(
-        User.copyOf(user, (updated) => {
+    await DataStore.save(
+      User.copyOf(user, (updated) => {
+        if (name !== undefined) {
           updated.name = name;
-        }));
-    }
-    if (email !== undefined) {
-      await DataStore.save(
-        User.copyOf(user, (updated) => {
+        }
+        if (email !== undefined) {
           updated.email = email;
-        }));
-    }
-
-    if (notifications !== undefined) {
-      await DataStore.save(
-        User.copyOf(user, (updated) => {
+        }
+        if (notifications !== undefined) {
           updated.notifications = notifications;
-        }));
-    }
-
-    if (biography !== undefined) {
-      await DataStore.save(
-        User.copyOf(user, (updated) => {
+        }
+        if (biography !== undefined) {
           updated.biography = biography;
-        }));
-    }
+        }
+      }));
 
-    // if (image !== undefined) {
-    //   // update the image in the user table
-    // }
-     // if (password !== undefined) {
-    //   // update the password in the user settings table
-    // }
-    
+    // could add image and password in future
     return settings; 
   } catch (error: any) {
     const message = error.message;
