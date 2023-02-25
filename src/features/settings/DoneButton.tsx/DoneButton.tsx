@@ -31,6 +31,7 @@ const DoneButton = (props: Props) => {
         mt={8}
         isDisabled={disabled}
         isLoading={loading}
+        testID="button"
       >
         Done
       </Button>

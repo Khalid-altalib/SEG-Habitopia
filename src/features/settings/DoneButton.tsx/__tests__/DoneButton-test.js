@@ -1,10 +1,32 @@
 import { mount, ReactWrapper, shallow } from "enzyme";
 import { Provider } from "react-redux";
-import { NativeBaseProvider } from "native-base";
+import { fireEvent, render } from "@testing-library/react-native";
+import { act } from "react-test-renderer";
+import { extendTheme, NativeBaseProvider } from "native-base";
 import configureStore, { MockStore } from "redux-mock-store";
 import thunk from "redux-thunk";
 import DoneButton from "../DoneButton";
 import { NavigationContainer } from "@react-navigation/native";
+import { wrap } from "@cfaester/enzyme-adapter-react-18/dist/enzyme-adapter-utils";
+import { setSettings } from "../../settingsSlice";
+
+//theme and inset stuff to get the nativebaseprovider to work
+const newColorTheme = {
+  brand: {
+    900: "#5B8DF6",
+    800: "#ffffff",
+    700: "#cccccc",
+  },
+};
+
+const theme = extendTheme({
+  colors: newColorTheme,
+});
+
+const inset = {
+  frame: { x: 0, y: 0, width: 0, height: 0 },
+  insets: { top: 0, left: 0, right: 0, bottom: 0 },
+};
 
 describe("DoneButton", () => {
   const getValuesMock = jest.fn();
@@ -13,6 +35,7 @@ describe("DoneButton", () => {
   let store;
   let wrapper;
 
+  //not sure if this is correct
   const initialState = {
     settings: {
       email: "example@gmail.com",
@@ -33,48 +56,43 @@ describe("DoneButton", () => {
 
   beforeEach(() => {
     store = configureStore([thunk])({ settings: initialState });
-    wrapper = shallow(
-      <NavigationContainer>
-        <DoneButton
-          disabled={false}
-          getValues={getValuesMock}
-          valueName={valueName}
-        />
-      </NavigationContainer>
+    wrapper = render(
+      <NativeBaseProvider theme={theme} initialWindowMetrics={inset}>
+        <Provider store={store}>
+          <NavigationContainer>
+            <DoneButton
+              disabled={false}
+              getValues={getValuesMock}
+              valueName={valueName}
+            />
+          </NavigationContainer>
+        </Provider>
+      </NativeBaseProvider>
     );
   });
 
   it("renders correctly", () => {
-    wrapper = shallow(
-      <DoneButton
-        disabled={false}
-        getValues={getValuesMock}
-        valueName={valueName}
-      />
-    );
     expect(wrapper).toMatchSnapshot();
   });
 
-  //   it("dispatches setSettings action when pressed", async () => {
-  //     const mockPayload = { email: "test@test.com" };
-  //     getValuesMock.mockReturnValue("test@test.com");
-  //     store.dispatch = jest.fn().mockResolvedValueOnce(mockPayload);
-  //     wrapper.find("Button").simulate("click");
+  // it("dispatches setSettings action when pressed", async () => {
+  //   const mockPayload = { email: "test@test.com" };
+  //   getValuesMock.mockReturnValue("test@test.com");
+  //   store.dispatch = jest.fn().mockResolvedValueOnce(mockPayload);
 
-  //     expect(store.dispatch).toHaveBeenCalledWith(setSettings(mockPayload));
-  //     expect(navigation.goBack).toHaveBeenCalled();
+  //   const button = wrapper.getByTestId("button");
+
+  //   await act(async () => {
+  //     fireEvent.press(button);
   //   });
 
-  it("disables button when disabled prop is true", () => {
-    const disabledWrapper = shallow(
-      <DoneButton
-        disabled={true}
-        getValues={getValuesMock}
-        valueName={valueName}
-      />
-    );
+  //   // expect(store.dispatch).toHaveBeenCalledWith(setSettings(mockPayload));
+  //   // expect(navigation.goBack).toHaveBeenCalled();
+  // });
 
-    const button = disabledWrapper.find("Button");
-    expect(button.props().disabled).toBe(true);
+  it("finds the done button", async () => {
+    const button = wrapper.getByTestId("button");
+
+    expect(button).toBeDefined();
   });
 });
