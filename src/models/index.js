@@ -4,14 +4,14 @@ import { schema } from './schema';
 
 
 
-const { Leaderboard, Checkin, User, Message, ChatRoom, Challenge, ChallengeType, UserChatRoom, ChallengeUser } = initSchema(schema);
+const { Leaderboard, User, Message, ChatRoom, Checkin, Challenge, ChallengeType, UserChatRoom, ChallengeUser } = initSchema(schema);
 
 export {
   Leaderboard,
-  Checkin,
   User,
   Message,
   ChatRoom,
+  Checkin,
   Challenge,
   ChallengeType,
   UserChatRoom,
