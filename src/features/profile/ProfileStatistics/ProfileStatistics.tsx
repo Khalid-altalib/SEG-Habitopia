@@ -49,6 +49,7 @@ const ProfileStatistics = (props: Props) => {
     ]);
   }, [checkinCount]);
 
+  // TODO add functionality to get the statistics from the backend
 
   const { error, loading, profile } = useAppSelector((state) => state.profile);
   //   const { statistics } = profile; // BACKEND_PLACEHOLDER
