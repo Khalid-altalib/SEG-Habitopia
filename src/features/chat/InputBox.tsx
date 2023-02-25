@@ -7,23 +7,13 @@ import { DataStore } from '@aws-amplify/datastore';
 type Props = {}
 
 
-const getData = async () => {
-    try {
-        const checkins = await DataStore.query(Checkin);
-        console.log("Current check-in table: ", JSON.stringify(checkins, null, 2));
-      } catch (error) {
-        console.log("Error retrieving posts", error);
-      }
-}
-
 const handleCheckIn = async () => {
     try{
-    getData();
-    await DataStore.save(
-        new Checkin({
-            timeStamp: "1970-01-01T12:30:23.999Z",
-            userID: "a3f4095e-39de-43d2-baf4-f8c16f0f6f4d",
-            chatroomID: "a5r4192g-39de-43d2-baf4-f8c16f0f6f4d"
+    await DataStore.save( // random data
+        new Checkin({ // get time now as a string
+            timeStamp: new Date().getTime().toString(),
+            userID: "b5c0baaf-9cfc-4f75-8f4c-61a39eea57d2", // PLACEHOLDER FOR CURRENT USER
+            chatroomID: "a36d9934-b05a-4765-af1d-79619d468eb3" // PLACEHOLDER FOR CURRENT CHATROOM
         })
     );
     console.log('Check in saved');
