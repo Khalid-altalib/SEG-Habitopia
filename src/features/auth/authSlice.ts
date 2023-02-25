@@ -1,12 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { LocalUser } from "../../../types";
-
+import { Auth } from "aws-amplify";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RootState } from "../../app/store";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
-import { createUserInDatabase } from "./authQueries";
-import { Auth } from "aws-amplify";
 
 type AuthState = {
   signUpData: {
@@ -52,9 +50,9 @@ export const sendConfirmationCode = createAsyncThunk<
 >("auth/confirmation", async (_, thunkAPI) => {
   try {
     const state = thunkAPI.getState() as RootState;
-    const { email, password, confirmationCode, name } = state.auth.signUpData;
+    const { email, password, confirmationCode } = state.auth.signUpData;
     await Auth.confirmSignUp(email, confirmationCode);
-    const user = await logInHelper(email, password, name);
+    const user = await logInHelper(email, password);
     return user as LocalUser;
   } catch (error: any) {
     const message = error.message;
@@ -63,16 +61,14 @@ export const sendConfirmationCode = createAsyncThunk<
   }
 });
 
-const logInHelper = async (email: string, password: string, name?: string) => {
-  const { signInUserSession, attributes } = await Auth.signIn(email, password);
+const logInHelper = async (email: string, password: string) => {
+  const { signInUserSession, username } = await Auth.signIn(email, password);
   const user = {
     authToken: signInUserSession.idToken.jwtToken,
-    userId: attributes.sub,
+    userId: username,
   };
 
   await AsyncStorage.setItem("user", JSON.stringify(user));
-  await createUserInDatabase(attributes.sub, email, name);
-  console.log(user);
   return user;
 };
 

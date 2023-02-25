@@ -8,12 +8,10 @@ import { useDispatch, useSelector } from "../app/hooks";
 import { logInUserFromStorage } from "../features/auth/authSlice";
 
 import { RootParams } from "../../types";
-import ProfileScreen from "@screens/application/ProfileScreen";
-import ChallengePromptScreen from "@screens/application/ChallengePromptScreen";
-import SettingsScreen from "@screens/application/SettingsScreen";
-import SettingDetailsScreen from "@screens/application/SettingsDetailsScreen";
-import ChallengeModal from "@features/challenges/ChallengeModal/ChallengeModal";
-import { AsyncStorage } from "@aws-amplify/core";
+import ProfileComponent from "../screens/application/ProfileScreen/ProfileScreen";
+import ChallengePrompt from "../screens/application/ChallengePromptScreen/ChallengePromptScreen";
+import SettingDetails from "../screens/application/SettingsDetailsScreen/SettingDetailsScreen";
+import Settings from "../screens/application/SettingsScreen/SettingsScreen";
 import { selectUser } from "../app/selectors";
 
 const Stack = createNativeStackNavigator<RootParams>();
@@ -43,20 +41,20 @@ const Navigation = () => {
             options={{ headerShown: false }}
           />
         )}
-        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="Profile" component={ProfileComponent} />
         <Stack.Screen
           name="ChallengePrompt"
-          component={ChallengePromptScreen}
+          component={ChallengePrompt}
           options={{
             animation: "slide_from_bottom",
             headerBackVisible: false,
             title: "Join Challenge?",
           }}
         />
-        <Stack.Screen name="Settings" component={SettingsScreen} />
+        <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen
           name="SettingDetails"
-          component={SettingDetailsScreen}
+          component={SettingDetails}
           options={{
             headerTitle: "Edit",
           }}

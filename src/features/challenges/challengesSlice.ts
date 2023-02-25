@@ -2,8 +2,10 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { DataStore } from "@aws-amplify/datastore";
 import { Challenge } from "../../../types";
 import { RootState } from "../../app/store";
-import { ChallengeType as ChallengeTypeModel } from "../../models";
-import { joinChallengeQuery } from "./challengeQueries";
+import {
+  ChallengeType as ChallengeTypeModel,
+  Challenge as ChallengeModel,
+} from "../../models";
 
 type ChallengesState = {
   challenges: Challenge[];
@@ -33,23 +35,26 @@ export const fetchChallenges = createAsyncThunk<
 });
 
 export const joinChallenge = createAsyncThunk<
-  Challenge,
+  object,
   string,
   { rejectValue: string; state: RootState }
 >("challenges/join", async (challengeName: string, thunkAPI) => {
   try {
-    const challengeTypeInstance = (
-      await DataStore.query(ChallengeTypeModel, (challengeNames) =>
-        challengeNames.name.eq(challengeName)
-      )
-    )[0];
+    const ChallengeTypeInst = await DataStore.query(ChallengeTypeModel, (c) =>
+      c.name.eq(challengeName)
+    );
 
-    await joinChallengeQuery(challengeTypeInstance, thunkAPI);
+    const response = await DataStore.query(ChallengeModel, (c) =>
+      c.and((c) => [
+        c.ChallengeType.id.eq(ChallengeTypeInst[0].id),
+        c.userCount.lt(15),
+      ])
+    );
 
-    return { ...challengeTypeInstance };
+    const data = response.map((item) => (item = { ...item }));
+    return data;
   } catch (error: any) {
     const message = error.message;
-    console.log(message);
     return thunkAPI.rejectWithValue(message);
   }
 });
@@ -92,7 +97,7 @@ export const challengesSlice = createSlice({
     builder.addCase(
       joinChallenge.fulfilled,
       (state, action: PayloadAction<any>) => {
-        const joinedChallengeName = action.payload.name;
+        const joinedChallengeName = action.payload.challengeName;
         state.challenges = state.challenges.map((challenge) => {
           if (challenge.name == joinedChallengeName) {
             return { ...challenge, active: true };
