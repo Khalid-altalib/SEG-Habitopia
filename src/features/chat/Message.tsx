@@ -1,14 +1,11 @@
 import { is } from "immer/dist/internal";
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
+import { Message as MessageType } from "../../../types";
 
-type message = {
-  text: string;
-  createdAt: string;
-  userId: string;
-};
 
-const Message = (message: message) => {
+
+const Message = (message: MessageType) => {
   function isMessage() {
     return message.userId === "u1";
   }

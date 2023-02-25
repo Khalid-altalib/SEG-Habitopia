@@ -4,9 +4,10 @@ import data from "../../../assets/data/messages.json";
 import Message from "../../features/chat/Message";
 import InputBox from "../../features/chat/InputBox";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
-import { ChatParams } from "../../../types";
-import { useAppSelector } from "../../app/hooks";
+import { Chat, ChatParams } from "../../../types";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { fetchMessages } from "../../features/chat/chatSlice";
 
 type Props = {};
 
@@ -15,10 +16,12 @@ const ChatScreen = (props: Props) => {
   const route = useRoute<RouteProp<ChatParams, "IndividualChat">>();
   const { chats } = useAppSelector((store) => store.chats);
   const { id } = route.params;
+  const dispatch = useAppDispatch();
+  let chat = chats.filter((chat) => chat.id == id)[0];
 
   useEffect(() => {
-    const chat = chats.filter((chat) => chat.id == id)[0];
     navigation.setOptions({ title: chat.name, headerShown: true });
+    dispatch(fetchMessages(chat.id));
   }, [route.params.id]);
 
   return (
@@ -27,12 +30,12 @@ const ChatScreen = (props: Props) => {
       style={styles.bg}
     >
       <FlatList
-        data={data}
-        renderItem={(item) => (
+        data={chat.messages}
+        renderItem={({ item }) => (
           <Message
-            text={item.item.text}
-            createdAt={item.item.createdAt}
-            userId={item.item.user.id}
+            text={item.text}
+            createdAt={item.createdAt}
+            userId={item.userId}
           ></Message>
         )}
         style={styles.flatList}

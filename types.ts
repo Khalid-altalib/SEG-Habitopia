@@ -101,6 +101,7 @@ export type Chat = {
   image?: string;
   text?: string;
   time?: string;
+  messages?: Message[];
 };
 
 export type Settings = {
@@ -115,4 +116,12 @@ export type Settings = {
 export type SignInFormValues = {
   email: string;
   password: string;
+};
+
+export type Message = {
+  id?: string;
+  text: string;
+  chatRoomId?: string;
+  createdAt: string;
+  userId: string;
 };
