@@ -12,45 +12,17 @@ type Props = {};
 
 const getCheckins = async () => {
   const checkins = await DataStore.query(User, (c) => c.id.eq("b5c0baaf-9cfc-4f75-8f4c-61a39eea57d2")); // need to get the user profile that we want
-  console.log("hello");
   var checkinCount = 0;
-  // get number of items in the array
-  // console.log(checkins[0].Checkins.toArray())
-  // console.log(checkins[0].ChatRooms.toArray())
+  // get number of items in the array of user Checkins
 
-  // AsyncCollection {
-  //   "values": Promise {
-  //     "_A": null,
-  //     "_x": 0,
-  //     "_y": 3,
-  //     "_z": Promise {
-  //       "_A": null,
-  //       "_x": 0,
-  //       "_y": 0,
-  //       "_z": null,
-  //     },
-  //   },
-  // }
-  // currently this is what it looks like, and it looks exactly like this for the other arrays, even when the array is empty or full...
-
-  // console.log(checkins[0].challenges.toArray()) // there must be some way to access the array of CheckIn objects, just to count it
-  
   for await (const checkin of checkins[0].Checkins) {
+    // console.log(checkin);
+    // console.log("hi");
     checkinCount++;
   }
-  console.log("ho");
-  console.log(checkinCount);
 
-  await checkinCount;
   return checkinCount;
   
-};
-
-const getGetCheckins = async () => {
-  await getCheckins();
-  console.log("hi");
-  console.log(getCheckins());
-
 };
 
 const ProfileStatistics = (props: Props) => {
@@ -64,8 +36,6 @@ const ProfileStatistics = (props: Props) => {
 
   useEffect(() => {
     getCheckins().then((checkinCount) => {
-      console.log("hey");
-      console.log(checkinCount);
       setCheckinCount(checkinCount);
     });
   }, []);
