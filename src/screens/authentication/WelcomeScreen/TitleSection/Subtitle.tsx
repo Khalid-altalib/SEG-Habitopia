@@ -1,6 +1,6 @@
 // Habitopia
-import Text from "../../../../components/Text";
-import { TextType } from "../../../../../types";
+import Text from "@components/Text";
+import { TextType } from "types";
 
 /**
  * A subtitle for the welcome screen.

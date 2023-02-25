@@ -1,11 +1,11 @@
 import React from "react";
 import { View } from "react-native";
 
-import { TextType } from "../../../../types";
-import Text from "../../../components/Text";
-import PaddedContainer from "../../../components/PaddedContainer";
-import Background from "../../../components/Background";
-import SelectInstagramForm from "../../../features/auth/SelectInstagramForm";
+import { TextType } from "types";
+import PaddedContainer from "@components/PaddedContainer";
+import Text from "@components/Text";
+import Background from "@components/Background";
+import SelectInstagramForm from "@features/auth/SelectInstagramForm";
 
 /**
  * @returns A React component which represents the screen where the user must

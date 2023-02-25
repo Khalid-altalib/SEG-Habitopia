@@ -1,11 +1,11 @@
 import React from "react";
 import { useRoute, RouteProp } from "@react-navigation/native";
-import { RootParams } from "../../../../types";
+import { RootParams } from "types";
 import { View } from "native-base";
-import Background from "../../../components/Background";
-import PasswordSetting from "../../../features/settings/PasswordSetting/PasswordSetting";
-import GenericSetting from "../../../features/settings/GenericSetting/GenericSetting";
-import PaddedContainer from "../../../components/PaddedContainer";
+import Background from "@components/Background";
+import PasswordSetting from "@features/settings/PasswordSetting/PasswordSetting";
+import GenericSetting from "@features/settings/GenericSetting/GenericSetting";
+import PaddedContainer from "@components/PaddedContainer";
 
 type Props = {};
 

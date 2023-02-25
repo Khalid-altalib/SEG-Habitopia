@@ -1,7 +1,12 @@
+// React
 import React from "react";
+
+// React Native
 import { FlatList } from "react-native";
-import ChatItem from "../../../features/chat/ChatItem";
-import { useSelector } from "../../../app/hooks";
+
+// Habitopia
+import { useSelector } from "@app/hooks";
+import ChatItem from "@features/chat/ChatItem";
 
 type Props = {};
 

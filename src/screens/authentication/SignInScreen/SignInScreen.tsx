@@ -5,11 +5,11 @@ import React from "react";
 import { View } from "react-native";
 
 // Habitopia
-import Background from "../../../components/Background";
-import PaddedContainer from "../../../components/PaddedContainer";
-import Text from "../../../components/Text";
-import { TextType } from "../../../../types";
-import SignInForm from "../../../features/auth/SignInForm";
+import Background from "@components/Background";
+import PaddedContainer from "@components/PaddedContainer";
+import Text from "@components/Text";
+import { TextType } from "types";
+import SignInForm from "@features/auth/SignInForm";
 
 /**
  * A sign in screen to allow the user to sign into their account.

@@ -1,11 +1,11 @@
 import React from "react";
 import { View } from "react-native";
 
-import { TextType } from "../../../../types";
-import Text from "../../../components/Text";
-import PaddedContainer from "../../../components/PaddedContainer";
-import Background from "../../../components/Background";
-import NameForm from "../../../features/auth/NameForm";
+import { TextType } from "types";
+import Background from "@components/Background";
+import PaddedContainer from "@components/PaddedContainer";
+import Text from "@components/Text";
+import NameForm from "@features/auth/NameForm";
 
 /**
  * @returns A React component representing the screen where the user enters their

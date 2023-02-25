@@ -1,11 +1,11 @@
 import React from "react";
 import { View } from "react-native";
 
-import { TextType } from "../../../../types";
-import Text from "../../../components/Text";
-import PaddedContainer from "../../../components/PaddedContainer";
-import Background from "../../../components/Background";
-import PasswordForm from "../../../features/auth/PasswordForm";
+import { TextType } from "types";
+import Background from "@components/Background";
+import PaddedContainer from "@components/PaddedContainer";
+import Text from "@components/Text";
+import PasswordForm from "@features/auth/PasswordForm";
 
 const PasswordScreen = () => {
   return (

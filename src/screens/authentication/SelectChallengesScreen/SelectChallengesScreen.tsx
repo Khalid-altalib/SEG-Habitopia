@@ -1,13 +1,13 @@
 import React from "react";
 import { View } from "react-native";
 
-import { ButtonType, TextType } from "../../../../types";
-import Text from "../../../components/Text";
-import PaddedContainer from "../../../components/PaddedContainer";
-import Background from "../../../components/Background";
-import Button from "../../../components/Button";
-import { useDispatch } from "../../../app/hooks";
-import { signUpUser } from "../../../features/auth/authSlice";
+import { ButtonType, TextType } from "types";
+import Text from "@components/Text";
+import { useDispatch } from "@app/hooks";
+import { signUpUser } from "@features/auth/authSlice";
+import Background from "@components/Background";
+import Button from "@components/Button";
+import PaddedContainer from "@components/PaddedContainer";
 
 /**
  * @param title The label to put inside the button.

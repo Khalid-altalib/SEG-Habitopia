@@ -2,8 +2,8 @@
 import React from "react";
 
 // Habitopia
-import Background from "../../../components/Background";
-import PaddedContainer from "../../../components/PaddedContainer";
+import Background from "@components/Background";
+import PaddedContainer from "@components/PaddedContainer";
 import SectionsContainer from "./SectionsContainer";
 import TitleSection from "./TitleSection";
 import ButtonSection from "./ButtonSection";

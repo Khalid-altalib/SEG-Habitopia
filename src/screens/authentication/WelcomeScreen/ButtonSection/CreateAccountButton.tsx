@@ -2,8 +2,8 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 // Habitopia
-import { AuthParams, ButtonType } from "../../../../../types";
-import Button from "../../../../components/Button";
+import { AuthParams, ButtonType } from "types";
+import Button from "@components/Button";
 
 /**
  * A button that navigates the user to the screen for creating an account.

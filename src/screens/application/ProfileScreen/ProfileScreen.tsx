@@ -7,14 +7,14 @@ import {
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Button, Divider, ScrollView } from "native-base";
 import React, { useEffect } from "react";
-import { LocalUser, NavigationParams } from "../../../../types";
-import { useDispatch, useSelector } from "../../../app/hooks";
-import { selectProfile, selectUser } from "../../../app/selectors";
-import StatusContainer from "../../../components/StatusContainer/StatusContainer";
-import ProfileHeader from "../../../features/profile/ProfileHeader/ProfileHeader";
-import { fetchProfile } from "../../../features/profile/profileSlice";
-import ProfileStatistics from "../../../features/profile/ProfileStatistics/ProfileStatistics";
-import PaddedContainer from "../../../components/PaddedContainer";
+import { LocalUser, NavigationParams } from "types";
+import { useDispatch, useSelector } from "@app/hooks";
+import { selectProfile, selectUser } from "@app/selectors";
+import StatusContainer from "@components/StatusContainer/StatusContainer";
+import ProfileHeader from "@features/profile/ProfileHeader/ProfileHeader";
+import { fetchProfile } from "@features/profile/profileSlice";
+import ProfileStatistics from "@features/profile/ProfileStatistics/ProfileStatistics";
+import PaddedContainer from "@components/PaddedContainer";
 
 const ProfileScreen = () => {
   const route = useRoute<RouteProp<NavigationParams, "You" | "Profile">>();

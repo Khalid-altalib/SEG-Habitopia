@@ -1,8 +1,8 @@
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { View } from "native-base";
 import React from "react";
-import { RootParams } from "../../../../types";
-import ChallengeModal from "../../../features/challenges/ChallengeModal/ChallengeModal";
+import { RootParams } from "types";
+import ChallengeModal from "@features/challenges/ChallengeModal/ChallengeModal";
 
 type Props = {};
 

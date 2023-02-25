@@ -1,12 +1,19 @@
+// React
 import React, { useEffect } from "react";
-import { ImageBackground, StyleSheet, FlatList, Text } from "react-native";
-import data from "../../../../assets/data/messages.json";
-import Message from "../../../features/chat/Message";
-import InputBox from "../../../features/chat/InputBox";
+
+// React Native
+import { ImageBackground, StyleSheet, FlatList } from "react-native";
+
+// React Navigation
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
-import { ChatParams } from "../../../../types";
-import { useSelector } from "../../../app/hooks";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+// Habitopia
+import data from "@assets/data/messages.json";
+import { useSelector } from "@app/hooks";
+import Message from "@features/chat/Message";
+import InputBox from "@features/chat/InputBox";
+import { ChatParams } from "types";
 
 type Props = {};
 

@@ -1,6 +1,6 @@
 import React from "react";
-import ChallengeBoxes from "../../../features/challenges/ChallengeBoxes/ChallengeBoxes";
-import ChallengeLayout from "../../../features/challenges/ChallengeLayout/ChallengeLayout";
+import ChallengeBoxes from "@features/challenges/ChallengeBoxes/ChallengeBoxes";
+import ChallengeLayout from "@features/challenges/ChallengeLayout/ChallengeLayout";
 
 type Props = {};
 

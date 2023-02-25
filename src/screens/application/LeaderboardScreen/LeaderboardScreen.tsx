@@ -1,8 +1,8 @@
 import React from "react";
-import LeaderboardCards from "../../../features/leaderboard/LeaderboardCards/LeaderboardCards";
-import LeaderboardLayout from "../../../features/leaderboard/LeaderboardLayout/LeaderboardLayout";
-import LeaderboardSettings from "../../../features/leaderboard/LeaderboardSettings/LeaderboardSettings";
-import Background from "../../../components/Background";
+import LeaderboardCards from "@features/leaderboard/LeaderboardCards/LeaderboardCards";
+import LeaderboardLayout from "@features/leaderboard/LeaderboardLayout/LeaderboardLayout";
+import LeaderboardSettings from "@features/leaderboard/LeaderboardSettings/LeaderboardSettings";
+import Background from "@components/Background";
 
 type Props = {};
 
