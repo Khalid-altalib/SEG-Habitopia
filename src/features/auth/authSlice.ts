@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { LocalUser } from "../../../types";
-import { Auth } from "aws-amplify";
+import { Auth, DataStore } from "aws-amplify";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RootState } from "../../app/store";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
+import { User } from "../../models";
 
 type AuthState = {
   signUpData: {
@@ -50,9 +51,15 @@ export const sendConfirmationCode = createAsyncThunk<
 >("auth/confirmation", async (_, thunkAPI) => {
   try {
     const state = thunkAPI.getState() as RootState;
-    const { email, password, confirmationCode } = state.auth.signUpData;
+    const { email, password, confirmationCode, name } = state.auth.signUpData;
     await Auth.confirmSignUp(email, confirmationCode);
     const user = await logInHelper(email, password);
+    await DataStore.save(
+      new User({
+        name: name,
+        email: email,
+      })
+    );
     return user as LocalUser;
   } catch (error: any) {
     const message = error.message;

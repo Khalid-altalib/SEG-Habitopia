@@ -89,10 +89,10 @@ type EagerUser = {
   readonly name?: string | null;
   readonly image?: string | null;
   readonly biography?: string | null;
+  readonly email?: string | null;
   readonly Messages?: (Message | null)[] | null;
   readonly ChatRooms?: (UserChatRoom | null)[] | null;
   readonly Checkins?: (Checkin | null)[] | null;
-  readonly challengeID: string;
   readonly challenges?: (ChallengeUser | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -107,10 +107,10 @@ type LazyUser = {
   readonly name?: string | null;
   readonly image?: string | null;
   readonly biography?: string | null;
+  readonly email?: string | null;
   readonly Messages: AsyncCollection<Message>;
   readonly ChatRooms: AsyncCollection<UserChatRoom>;
   readonly Checkins: AsyncCollection<Checkin>;
-  readonly challengeID: string;
   readonly challenges: AsyncCollection<ChallengeUser>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

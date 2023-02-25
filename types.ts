@@ -81,6 +81,7 @@ export type Challenge = {
 export type Profile = {
   userId: number;
   name: string;
+  email: string;
   biography: string;
   rankings: Array<object>;
   statistics: object;
