@@ -1,12 +1,12 @@
 import React from "react";
 import { FlatList } from "react-native";
 import ChatItem from "../../features/chat/ChatItem";
-import { useAppSelector } from "../../app/hooks";
+import { useSelector } from "../../app/hooks";
 
 type Props = {};
 
 const ChatList = (props: Props) => {
-  const { chats } = useAppSelector((state) => state.chats);
+  const { chats } = useSelector((state) => state.chats);
 
   return (
     <FlatList

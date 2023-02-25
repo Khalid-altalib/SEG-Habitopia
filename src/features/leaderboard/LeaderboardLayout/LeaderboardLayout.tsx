@@ -1,7 +1,6 @@
 import { ScrollView, VStack } from "native-base";
 import React from "react";
-import { useDispatch } from "react-redux";
-import { useAppDispatch } from "../../../app/hooks";
+import { useDispatch } from "../../../app/hooks";
 import RegularLayout from "../../../components/RegularLayout/RegularLayout";
 import { fetchLeaderboard } from "../leaderboardSlice";
 
@@ -24,7 +23,7 @@ const isCloseToBottom = ({
 const LeaderboardLayout = (props: Props) => {
   const { children } = props;
 
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const handleScrollBottom = async ({ nativeEvent }: any) => {
     if (isCloseToBottom(nativeEvent)) {

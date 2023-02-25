@@ -5,7 +5,7 @@ import Message from "../../features/chat/Message";
 import InputBox from "../../features/chat/InputBox";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { ChatParams } from "../../../types";
-import { useAppSelector } from "../../app/hooks";
+import { useSelector } from "../../app/hooks";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type Props = {};
@@ -13,7 +13,7 @@ type Props = {};
 const ChatScreen = (props: Props) => {
   const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
   const route = useRoute<RouteProp<ChatParams, "IndividualChat">>();
-  const { chats } = useAppSelector((store) => store.chats);
+  const { chats } = useSelector((store) => store.chats);
   const { id } = route.params;
 
   useEffect(() => {

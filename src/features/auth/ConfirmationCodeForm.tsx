@@ -7,7 +7,7 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { View } from "react-native";
 
 import { addSignUpData, sendConfirmationCode } from "./authSlice";
-import { useAppDispatch } from "../../app/hooks";
+import { useDispatch } from "../../app/hooks";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
 import { AuthParams, ButtonType, TextType } from "../../../types";
@@ -25,7 +25,7 @@ const ConfirmationCodeForm = () => {
   });
 
   // onSubmit handler
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const onSubmit = async (data: formData) => {
     dispatch(addSignUpData(data));

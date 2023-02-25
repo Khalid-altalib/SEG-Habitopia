@@ -7,7 +7,7 @@ import PaddedContainer from "../../../components/PaddedContainer";
 import Background from "../../../components/Background";
 import styles from "../../../constants/Styles";
 import Button from "../../../components/Button";
-import { useAppDispatch } from "../../../app/hooks";
+import { useDispatch } from "../../../app/hooks";
 import { signUpUser } from "../../../features/auth/authSlice";
 
 /**
@@ -27,7 +27,7 @@ const ChallengeButton = ({ title }: { title: string }) => {
  * some of the challenges they want to overcome by using Habitopia.
  */
 const SelectChallenges = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const onSubmit = async () => {
     await dispatch(signUpUser());

@@ -19,7 +19,8 @@ import {
 } from "native-base";
 import React, { useEffect } from "react";
 import { LocalUser, NavigationParams, Profile } from "../../types";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { useDispatch, useSelector } from "../app/hooks";
+import { selectProfile, selectUser } from "../app/selectors";
 import RegularLayout from "../components/RegularLayout/RegularLayout";
 import StatusContainer from "../components/StatusContainer/StatusContainer";
 import ProfileHeader from "../features/profile/ProfileHeader/ProfileHeader";
@@ -33,16 +34,14 @@ const ProfileComponent = () => {
 
   let { userId } = route.params;
 
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const isFocused = useIsFocused();
 
-  const localUser: LocalUser | undefined = useAppSelector(
-    (state) => state.auth.user
-  );
+  const localUser: LocalUser | undefined = useSelector(selectUser);
 
   const isLocalUserProfile = localUser?.userId === userId;
 
-  const { error, loading, profile } = useAppSelector((state) => state.profile);
+  const { error, loading, profile } = useSelector(selectProfile);
 
   useEffect(() => {
     fetchData();

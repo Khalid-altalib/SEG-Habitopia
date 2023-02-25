@@ -1,8 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { DataStore } from "@aws-amplify/datastore";
-import { Challenge, LocalUser } from "../../../types";
+import { Challenge } from "../../../types";
 import { RootState } from "../../app/store";
-import { getAuthTokenFromThunk } from "../../app/util";
 import {
   ChallengeType as ChallengeTypeModel,
   Challenge as ChallengeModel,

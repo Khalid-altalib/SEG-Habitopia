@@ -1,6 +1,7 @@
 import { VStack } from "native-base";
 import React, { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { useDispatch, useSelector } from "../../../app/hooks";
+import { selectChallenges } from "../../../app/selectors";
 import StatusContainer from "../../../components/StatusContainer/StatusContainer";
 import ChallengeBox from "../ChallengeBox/ChallengeBox";
 import { fetchChallenges } from "../challengesSlice";
@@ -8,13 +9,12 @@ import { fetchChallenges } from "../challengesSlice";
 type Props = {};
 
 const ChallengeBoxes = (props: Props) => {
-  const { challenges, fetchChallenges: requestStatus } = useAppSelector(
-    (state) => state.challenges
-  );
+  const { challenges, fetchChallenges: requestStatus } =
+    useSelector(selectChallenges);
 
   const { error, loading } = requestStatus;
 
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchChallenges());
