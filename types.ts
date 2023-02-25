@@ -57,6 +57,7 @@ export type IndividualChatScreenNavigationProp = NativeStackNavigationProp<
 export type LocalUser = {
   authToken: string;
   userId: string;
+  email: string;
 };
 
 export enum TextType {
@@ -81,6 +82,7 @@ export type Challenge = {
 export type Profile = {
   userId: number;
   name: string;
+  email: string;
   biography: string;
   rankings: Array<object>;
   statistics: object;
@@ -95,10 +97,10 @@ export type Statistic = {
 
 export type Chat = {
   id: string;
-  name: string;
-  image: string;
-  text: string;
-  time: string;
+  name?: string;
+  image?: string;
+  text?: string;
+  time?: string;
 };
 
 export type Settings = {
