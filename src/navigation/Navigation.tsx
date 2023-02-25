@@ -3,19 +3,15 @@ import React, { useEffect } from "react";
 
 import TabNavigation from "./flows/TabNavigation";
 import AuthNavigation from "./flows/AuthNavigation";
-import ChatNavigation from "./flows/ChatNavigation";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { LocalUser } from "../../types";
 import { useDispatch, useSelector } from "../app/hooks";
 import { logInUserFromStorage } from "../features/auth/authSlice";
 
 import { RootParams } from "../../types";
-import ProfileComponent from "../screens/Profile";
-import ChallengePrompt from "../screens/ChallengePrompt";
-import ChallengeModal from "../features/challenges/ChallengeModal/ChallengeModal";
-import { AsyncStorage } from "@aws-amplify/core";
-import SettingDetails from "../screens/Settings/SettingDetails";
-import Settings from "../screens/Settings/Settings";
+import ProfileComponent from "../screens/application/ProfileScreen/ProfileScreen";
+import ChallengePrompt from "../screens/application/ChallengePromptScreen/ChallengePromptScreen";
+import SettingDetails from "../screens/application/SettingsDetailsScreen/SettingDetailsScreen";
+import Settings from "../screens/application/SettingsScreen/SettingsScreen";
 import { selectUser } from "../app/selectors";
 
 const Stack = createNativeStackNavigator<RootParams>();

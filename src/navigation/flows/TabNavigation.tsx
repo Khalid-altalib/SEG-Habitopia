@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import Home from "../../screens/Home";
-import Explore from "../../screens/Explore";
-import Leaderboard from "../../screens/Leaderboard";
-import Profile from "../../screens/Profile";
-import Settings from "../../screens/Settings/Settings";
+import Home from "../../screens/application/HomeScreen/HomeScreen";
+import Explore from "../../screens/application/ExploreScreen/ExploreScreen";
+import Leaderboard from "../../screens/application/LeaderboardScreen/LeaderboardScreen";
+import Profile from "../../screens/application/ProfileScreen/ProfileScreen";
+import Settings from "../../screens/application/SettingsScreen/SettingsScreen";
 import { NavigationParams } from "../../../types";
 import ChatNavigation from "./ChatNavigation";
 import { useSelector } from "../../app/hooks";

@@ -1,18 +1,18 @@
+// React Navigation
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import Welcome from "../../screens/Welcome/Welcome";
-
-import SignUp from "../../screens/SignUp/SignUp";
-import SignIn from "../../screens/SignIn";
-
+// Habitopia
 import { AuthParams } from "../../../types";
-import Password from "../../screens/SignUp/Password";
-import ConfirmationCode from "../../screens/SignUp/ConfirmationCode";
-import Name from "../../screens/SignUp/Name";
-import EmailAddress from "../../screens/SignUp/EmailAddress";
-import SelectAvatar from "../../screens/SignUp/SelectAvatar";
-import SelectInstagram from "../../screens/SignUp/SelectInstagram";
-import SelectChallenges from "../../screens/SignUp/SelectChallenges";
+
+import WelcomeScreen from "../../screens/authentication/WelcomeScreen";
+import PasswordScreen from "../../screens/authentication/PasswordScreen";
+import ConfirmationCodeScreen from "../../screens/authentication/ConfirmationCodeScreen";
+import NameScreen from "../../screens/authentication/NameScreen";
+import EmailScreen from "../../screens/authentication/EmailScreen";
+import SelectAvatarScreen from "../../screens/authentication/SelectAvatarScreen";
+import SelectChallengesScreen from "../../screens/authentication/SelectChallengesScreen";
+import SelectInstagramScreen from "../../screens/authentication/SelectInstagramScreen";
+import SignInScreen from "../../screens/authentication/SignInScreen";
 
 export const AuthStack = createNativeStackNavigator<AuthParams>();
 
@@ -21,56 +21,56 @@ const AuthNavigation = () => {
     <AuthStack.Navigator initialRouteName="Welcome">
       <AuthStack.Screen
         name="Welcome"
-        component={Welcome}
+        component={WelcomeScreen}
         options={{ headerShown: false }}
       />
 
       {/* Sign Up Flow */}
       <AuthStack.Screen
         name="Password"
-        component={Password}
+        component={PasswordScreen}
         options={{
           headerTitle: "Password",
         }}
       />
       <AuthStack.Screen
         name="ConfirmationCode"
-        component={ConfirmationCode}
+        component={ConfirmationCodeScreen}
         options={{
           headerTitle: "Confirmation code",
         }}
       />
       <AuthStack.Screen
         name="Name"
-        component={Name}
+        component={NameScreen}
         options={{
           headerTitle: "Name",
         }}
       />
       <AuthStack.Screen
         name="EmailAddress"
-        component={EmailAddress}
+        component={EmailScreen}
         options={{
           headerTitle: "Email address",
         }}
       />
       <AuthStack.Screen
         name="SelectAvatar"
-        component={SelectAvatar}
+        component={SelectAvatarScreen}
         options={{
           headerTitle: "Avatar",
         }}
       />
       <AuthStack.Screen
         name="SelectInstagram"
-        component={SelectInstagram}
+        component={SelectInstagramScreen}
         options={{
           headerTitle: "Instagram handle",
         }}
       />
       <AuthStack.Screen
         name="SelectChallenges"
-        component={SelectChallenges}
+        component={SelectChallengesScreen}
         options={{
           headerTitle: "Challenges",
         }}
@@ -79,7 +79,7 @@ const AuthNavigation = () => {
       {/* Sign In Flow */}
       <AuthStack.Screen
         name="SignIn"
-        component={SignIn}
+        component={SignInScreen}
         options={{ headerTitle: "Sign in" }}
       />
     </AuthStack.Navigator>
