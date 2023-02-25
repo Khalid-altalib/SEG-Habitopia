@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "Challenge": {
-            "name": "Challenge",
+        "Leaderboard": {
+            "name": "Leaderboard",
             "fields": {
                 "id": {
                     "name": "id",
@@ -10,11 +10,34 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "ChallengeType": {
-                    "name": "ChallengeType",
+                "Checkins": {
+                    "name": "Checkins",
+                    "isArray": true,
+                    "type": {
+                        "model": "Checkin"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "leaderboardID"
+                        ]
+                    }
+                },
+                "numberOfCheckins": {
+                    "name": "numberOfCheckins",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "User": {
+                    "name": "User",
                     "isArray": false,
                     "type": {
-                        "model": "ChallengeType"
+                        "model": "User"
                     },
                     "isRequired": true,
                     "attributes": [],
@@ -24,64 +47,9 @@ export const schema = {
                             "id"
                         ],
                         "targetNames": [
-                            "challengeChallengeTypeId"
+                            "leaderboardUserId"
                         ]
                     }
-                },
-                "Users": {
-                    "name": "Users",
-                    "isArray": true,
-                    "type": {
-                        "model": "ChallengeUser"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": [
-                            "challenge"
-                        ]
-                    }
-                },
-                "started": {
-                    "name": "started",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "ChatRoom": {
-                    "name": "ChatRoom",
-                    "isArray": false,
-                    "type": {
-                        "model": "ChatRoom"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": [
-                            "id"
-                        ],
-                        "targetNames": [
-                            "challengeChatRoomId"
-                        ]
-                    }
-                },
-                "userCount": {
-                    "name": "userCount",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "finished": {
-                    "name": "finished",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -99,23 +67,16 @@ export const schema = {
                     "attributes": [],
                     "isReadOnly": true
                 },
-                "challengeChallengeTypeId": {
-                    "name": "challengeChallengeTypeId",
+                "leaderboardUserId": {
+                    "name": "leaderboardUserId",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": true,
                     "attributes": []
-                },
-                "challengeChatRoomId": {
-                    "name": "challengeChatRoomId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
                 }
             },
             "syncable": true,
-            "pluralName": "Challenges",
+            "pluralName": "Leaderboards",
             "attributes": [
                 {
                     "type": "model",
@@ -139,8 +100,8 @@ export const schema = {
                 }
             ]
         },
-        "ChallengeType": {
-            "name": "ChallengeType",
+        "Checkin": {
+            "name": "Checkin",
             "fields": {
                 "id": {
                     "name": "id",
@@ -149,24 +110,31 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "name": {
-                    "name": "name",
+                "timeStamp": {
+                    "name": "timeStamp",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "userID": {
+                    "name": "userID",
+                    "isArray": false,
+                    "type": "ID",
                     "isRequired": true,
                     "attributes": []
                 },
-                "description": {
-                    "name": "description",
+                "chatroomID": {
+                    "name": "chatroomID",
                     "isArray": false,
-                    "type": "String",
+                    "type": "ID",
                     "isRequired": true,
                     "attributes": []
                 },
-                "active": {
-                    "name": "active",
+                "leaderboardID": {
+                    "name": "leaderboardID",
                     "isArray": false,
-                    "type": "Boolean",
+                    "type": "ID",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -188,11 +156,38 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "ChallengeTypes",
+            "pluralName": "Checkins",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUser",
+                        "fields": [
+                            "userID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byChatRoom",
+                        "fields": [
+                            "chatroomID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byLeaderboard",
+                        "fields": [
+                            "leaderboardID"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -240,6 +235,20 @@ export const schema = {
                     "name": "biography",
                     "isArray": false,
                     "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "notifications": {
+                    "name": "notifications",
+                    "isArray": false,
+                    "type": "Boolean",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -291,13 +300,6 @@ export const schema = {
                         ]
                     }
                 },
-                "challengeID": {
-                    "name": "challengeID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "challenges": {
                     "name": "challenges",
                     "isArray": true,
@@ -337,15 +339,6 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byChallenge",
-                        "fields": [
-                            "challengeID"
-                        ]
-                    }
                 },
                 {
                     "type": "auth",
@@ -581,8 +574,8 @@ export const schema = {
                 }
             ]
         },
-        "Checkin": {
-            "name": "Checkin",
+        "Challenge": {
+            "name": "Challenge",
             "fields": {
                 "id": {
                     "name": "id",
@@ -591,102 +584,52 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "timeStamp": {
-                    "name": "timeStamp",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "userID": {
-                    "name": "userID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "chatroomID": {
-                    "name": "chatroomID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "Checkins",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byUser",
-                        "fields": [
-                            "userID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byChatRoom",
-                        "fields": [
-                            "chatroomID"
-                        ]
-                    }
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "UserSettings": {
-            "name": "UserSettings",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "user": {
-                    "name": "user",
+                "ChallengeType": {
+                    "name": "ChallengeType",
                     "isArray": false,
                     "type": {
-                        "model": "User"
+                        "model": "ChallengeType"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": [
+                            "id"
+                        ],
+                        "targetNames": [
+                            "challengeChallengeTypeId"
+                        ]
+                    }
+                },
+                "Users": {
+                    "name": "Users",
+                    "isArray": true,
+                    "type": {
+                        "model": "ChallengeUser"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "challenge"
+                        ]
+                    }
+                },
+                "started": {
+                    "name": "started",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "ChatRoom": {
+                    "name": "ChatRoom",
+                    "isArray": false,
+                    "type": {
+                        "model": "ChatRoom"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -696,35 +639,21 @@ export const schema = {
                             "id"
                         ],
                         "targetNames": [
-                            "userSettingsUserId"
+                            "challengeChatRoomId"
                         ]
                     }
                 },
-                "email": {
-                    "name": "email",
+                "userCount": {
+                    "name": "userCount",
                     "isArray": false,
-                    "type": "String",
+                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 },
-                "password": {
-                    "name": "password",
+                "finished": {
+                    "name": "finished",
                     "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "biography": {
-                    "name": "biography",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "notifications": {
-                    "name": "notifications",
-                    "isArray": false,
-                    "type": "Boolean",
+                    "type": "AWSDateTime",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -744,8 +673,15 @@ export const schema = {
                     "attributes": [],
                     "isReadOnly": true
                 },
-                "userSettingsUserId": {
-                    "name": "userSettingsUserId",
+                "challengeChallengeTypeId": {
+                    "name": "challengeChallengeTypeId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "challengeChatRoomId": {
+                    "name": "challengeChatRoomId",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": false,
@@ -753,7 +689,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "UserSettings",
+            "pluralName": "Challenges",
             "attributes": [
                 {
                     "type": "model",
@@ -777,8 +713,8 @@ export const schema = {
                 }
             ]
         },
-        "ChallengeUser": {
-            "name": "ChallengeUser",
+        "ChallengeType": {
+            "name": "ChallengeType",
             "fields": {
                 "id": {
                     "name": "id",
@@ -787,49 +723,26 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "challengeId": {
-                    "name": "challengeId",
+                "name": {
+                    "name": "name",
                     "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
+                    "type": "String",
+                    "isRequired": true,
                     "attributes": []
                 },
-                "userId": {
-                    "name": "userId",
+                "description": {
+                    "name": "description",
                     "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
+                    "type": "String",
+                    "isRequired": true,
                     "attributes": []
                 },
-                "challenge": {
-                    "name": "challenge",
+                "active": {
+                    "name": "active",
                     "isArray": false,
-                    "type": {
-                        "model": "Challenge"
-                    },
+                    "type": "Boolean",
                     "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetNames": [
-                            "challengeId"
-                        ]
-                    }
-                },
-                "user": {
-                    "name": "user",
-                    "isArray": false,
-                    "type": {
-                        "model": "User"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetNames": [
-                            "userId"
-                        ]
-                    }
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -849,27 +762,25 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "ChallengeUsers",
+            "pluralName": "ChallengeTypes",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
                 },
                 {
-                    "type": "key",
+                    "type": "auth",
                     "properties": {
-                        "name": "byChallenge",
-                        "fields": [
-                            "challengeId"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byUser",
-                        "fields": [
-                            "userId"
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
                         ]
                     }
                 }
@@ -972,10 +883,108 @@ export const schema = {
                     }
                 }
             ]
+        },
+        "ChallengeUser": {
+            "name": "ChallengeUser",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "userId": {
+                    "name": "userId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "challengeId": {
+                    "name": "challengeId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "user": {
+                    "name": "user",
+                    "isArray": false,
+                    "type": {
+                        "model": "User"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "userId"
+                        ]
+                    }
+                },
+                "challenge": {
+                    "name": "challenge",
+                    "isArray": false,
+                    "type": {
+                        "model": "Challenge"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "challengeId"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "ChallengeUsers",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUser",
+                        "fields": [
+                            "userId"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byChallenge",
+                        "fields": [
+                            "challengeId"
+                        ]
+                    }
+                }
+            ]
         }
     },
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "739e7bff68154e8b9e5a0316427958e4"
+    "version": "3c2ed8597bbc78f4cae32ce3116e0561"
 };

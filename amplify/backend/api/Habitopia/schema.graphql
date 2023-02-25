@@ -1,4 +1,11 @@
-type Challenge @model @auth(rules: [{ allow: public }]) {
+type Leaderboard @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Checkins: [Checkin] @hasMany(indexName: "byLeaderboard", fields: ["id"])
+  numberOfCheckins: Int!
+  User: User! @hasOne
+}
+
+type Challenge @model @auth(rules: [{allow: public}]) {
   id: ID!
   ChallengeType: ChallengeType! @hasOne
   Users: [User] @manyToMany(relationName: "ChallengeUser")
@@ -8,33 +15,34 @@ type Challenge @model @auth(rules: [{ allow: public }]) {
   finished: AWSDateTime
 }
 
-type ChallengeType @model @auth(rules: [{ allow: public }]) {
+type ChallengeType @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!
   description: String!
   active: Boolean!
 }
 
-type User @model @auth(rules: [{ allow: public }]) {
+type User @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String
   image: String
   biography: String
+  email: String
+  notifications: Boolean
   Messages: [Message] @hasMany(indexName: "byUser", fields: ["id"])
   ChatRooms: [ChatRoom] @manyToMany(relationName: "UserChatRoom")
   Checkins: [Checkin] @hasMany(indexName: "byUser", fields: ["id"])
-  challengeID: ID! @index(name: "byChallenge")
   challenges: [Challenge] @manyToMany(relationName: "ChallengeUser")
 }
 
-type Message @model @auth(rules: [{ allow: public }]) {
+type Message @model @auth(rules: [{allow: public}]) {
   id: ID!
   text: String
   chatroomID: ID! @index(name: "byChatRoom")
   userID: ID! @index(name: "byUser")
 }
 
-type ChatRoom @model @auth(rules: [{ allow: public }]) {
+type ChatRoom @model @auth(rules: [{allow: public}]) {
   id: ID!
   Messages: [Message] @hasMany(indexName: "byChatRoom", fields: ["id"])
   users: [User] @manyToMany(relationName: "UserChatRoom")
@@ -42,18 +50,11 @@ type ChatRoom @model @auth(rules: [{ allow: public }]) {
   LastMessage: Message @hasOne
 }
 
-type Checkin @model @auth(rules: [{ allow: public }]) {
+type Checkin @model @auth(rules: [{allow: public}]) {
   id: ID!
   timeStamp: AWSDateTime
   userID: ID! @index(name: "byUser")
   chatroomID: ID! @index(name: "byChatRoom")
+  leaderboardID: ID! @index(name: "byLeaderboard")
 }
-
-type UserSettings @model @auth(rules: [{ allow: public }]) {
-  id: ID!
-  user: User @hasOne
-  email: String
-  password: String
-  biography: String
-  notifications: Boolean
-}
+ 
