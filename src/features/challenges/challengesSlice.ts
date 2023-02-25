@@ -3,7 +3,7 @@ import { DataStore } from "@aws-amplify/datastore";
 import { Challenge } from "../../../types";
 import { RootState } from "../../app/store";
 import { ChallengeType as ChallengeTypeModel } from "../../models";
-import { joinChallengeQuery } from "../../queries/challengeQueries";
+import { joinChallengeQuery } from "./challengeQueries";
 
 type ChallengesState = {
   challenges: Challenge[];
