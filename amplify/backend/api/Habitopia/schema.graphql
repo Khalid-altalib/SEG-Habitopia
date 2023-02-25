@@ -50,3 +50,15 @@ type Checkin @model @auth(rules: [{ allow: public }]) {
   userID: ID! @index(name: "byUser")
   chatroomID: ID! @index(name: "byChatRoom")
 }
+<<<<<<< HEAD
+=======
+
+type UserSettings @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  user: User @hasOne
+  email: String
+  password: String
+  biography: String
+  notifications: Boolean
+}
+>>>>>>> dev
