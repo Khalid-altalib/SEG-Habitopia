@@ -38,11 +38,9 @@ const initialState: SettingsState = {
 const getUserFromDB = async (thunkAPI: any) => {
   try {
     // get values from dynamodb
-
     const response = await DataStore.query(User, (c) => c.id.eq("b5c0baaf-9cfc-4f75-8f4c-61a39eea57d2")); //  current placeholder for user id
     // console.log(response[0]);
     return response;
-
   } catch (error: any) {
   const message = error.message;
   return thunkAPI.rejectWithValue(message);
@@ -59,7 +57,7 @@ export const fetchSettings = createAsyncThunk<
 
     const response =  {
       email: userData[0].email,
-      name: userData[0].name, // gets user name from user table 
+      name: userData[0].name,
       notifications: userData[0].notifications,
       biography: userData[0].biography,
       // password: settings[0].password,
@@ -81,8 +79,6 @@ export const setSettings = createAsyncThunk<
   { rejectValue: string }
 >("settings/set", async (settings: any, thunkAPI) => {
   try {
-    console.log(settings);
-
     const name = settings.name;
     const email = settings.email;
     const notifications = settings.notifications;
@@ -96,7 +92,6 @@ export const setSettings = createAsyncThunk<
     // find out which one is not null, and update that one
 
     if (name !== undefined) {
-      // update the name in the user table
       await DataStore.save(
         User.copyOf(user, (updated) => {
           updated.name = name;
