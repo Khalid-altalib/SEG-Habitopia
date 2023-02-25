@@ -1,14 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { LocalUser } from "../../../types";
-import { GraphQLQuery } from "@aws-amplify/api";
-import { API, Auth, DataStore, graphqlOperation } from "aws-amplify";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RootState } from "../../app/store";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
-import { User } from "../../models";
-import { CreateUserInput, CreateUserMutation } from "../../API";
-import { createUser } from "../../graphql/mutations";
+import { createUserInDatabase } from "../../queries/userQueries";
+import { Auth } from "aws-amplify";
 
 type AuthState = {
   signUpData: {
@@ -76,25 +74,6 @@ const logInHelper = async (email: string, password: string, name?: string) => {
   await createUserInDatabase(attributes.sub, email, name);
   console.log(user);
   return user;
-};
-
-const createUserInDatabase = async (
-  userId: string,
-  email?: string,
-  name?: string
-) => {
-  const userQuery = await DataStore.query(User, (user) => user.id.eq(userId));
-  if (userQuery.length == 0) {
-    try {
-      const user: CreateUserInput = { id: userId, name: name, email: email };
-      await API.graphql<GraphQLQuery<CreateUserMutation>>({
-        query: createUser,
-        variables: { input: user },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }
 };
 
 export const logInUser = createAsyncThunk<

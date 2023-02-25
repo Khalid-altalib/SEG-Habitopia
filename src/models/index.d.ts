@@ -112,6 +112,7 @@ type EagerUser = {
   readonly image?: string | null;
   readonly biography?: string | null;
   readonly email?: string | null;
+  readonly notifications?: boolean | null;
   readonly Messages?: (Message | null)[] | null;
   readonly ChatRooms?: (UserChatRoom | null)[] | null;
   readonly Checkins?: (Checkin | null)[] | null;
@@ -125,11 +126,12 @@ type LazyUser = {
     identifier: ManagedIdentifier<User, "id">;
     readOnlyFields: "createdAt" | "updatedAt";
   };
-  readonly id: string | null;
+  readonly id: string;
   readonly name?: string | null;
   readonly image?: string | null;
   readonly biography?: string | null;
   readonly email?: string | null;
+  readonly notifications?: boolean | null;
   readonly Messages: AsyncCollection<Message>;
   readonly ChatRooms: AsyncCollection<UserChatRoom>;
   readonly Checkins: AsyncCollection<Checkin>;

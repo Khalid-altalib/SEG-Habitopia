@@ -21,6 +21,8 @@ type User @model @auth(rules: [{ allow: public }]) {
   image: String
   biography: String
   email: String
+  notifications: Boolean
+
   Messages: [Message] @hasMany(indexName: "byUser", fields: ["id"])
   ChatRooms: [ChatRoom] @manyToMany(relationName: "UserChatRoom")
   Checkins: [Checkin] @hasMany(indexName: "byUser", fields: ["id"])
@@ -54,6 +56,5 @@ type UserSettings @model @auth(rules: [{ allow: public }]) {
   user: User @hasOne
   email: String
   password: String
-  biography: String
   notifications: Boolean
 }
