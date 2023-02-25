@@ -27,7 +27,6 @@ const SelectInstagramForm = () => {
   const navigation = useNavigation<NavigationProp<AuthParams>>();
 
   const onSubmit = async (data: formData) => {
-    console.log(data);
     dispatch(addSignUpData(data));
   };
 

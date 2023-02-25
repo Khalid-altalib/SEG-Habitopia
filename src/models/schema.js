@@ -156,25 +156,18 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "imag": {
-                    "name": "imag",
+                "description": {
+                    "name": "description",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "duration": {
-                    "name": "duration",
-                    "isArray": false,
-                    "type": "Int",
                     "isRequired": true,
                     "attributes": []
                 },
-                "reward": {
-                    "name": "reward",
+                "active": {
+                    "name": "active",
                     "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
+                    "type": "Boolean",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "createdAt": {
@@ -243,6 +236,27 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "biography": {
+                    "name": "biography",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "notifications": {
+                    "name": "notifications",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "Messages": {
                     "name": "Messages",
                     "isArray": true,
@@ -291,13 +305,6 @@ export const schema = {
                         ]
                     }
                 },
-                "challengeID": {
-                    "name": "challengeID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "challenges": {
                     "name": "challenges",
                     "isArray": true,
@@ -337,15 +344,6 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byChallenge",
-                        "fields": [
-                            "challengeID"
-                        ]
-                    }
                 },
                 {
                     "type": "auth",
@@ -872,5 +870,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "9bc2199104801fb8d7b423db4789e141"
+    "version": "a6da98e09ed4d207468d5c9fd4b87caa"
 };

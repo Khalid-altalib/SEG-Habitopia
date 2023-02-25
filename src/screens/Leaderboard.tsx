@@ -4,15 +4,18 @@ import RegularLayout from "../components/RegularLayout/RegularLayout";
 import LeaderboardCards from "../features/leaderboard/LeaderboardCards/LeaderboardCards";
 import LeaderboardLayout from "../features/leaderboard/LeaderboardLayout/LeaderboardLayout";
 import LeaderboardSettings from "../features/leaderboard/LeaderboardSettings/LeaderboardSettings";
+import Background from "../components/Background";
 
 type Props = {};
 
 const Leaderboard = (props: Props) => {
   return (
-    <LeaderboardLayout>
-      <LeaderboardSettings />
-      <LeaderboardCards />
-    </LeaderboardLayout>
+    <Background>
+      <LeaderboardLayout>
+        <LeaderboardSettings />
+        <LeaderboardCards />
+      </LeaderboardLayout>
+    </Background>
   );
 };
 

@@ -16,7 +16,7 @@ type EagerChallenge = {
   readonly Users?: (ChallengeUser | null)[] | null;
   readonly started?: string | null;
   readonly ChatRoom?: ChatRoom | null;
-  readonly userCount?: number | null;
+  readonly userCount: number | 0;
   readonly finished?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -34,7 +34,7 @@ type LazyChallenge = {
   readonly Users: AsyncCollection<ChallengeUser>;
   readonly started?: string | null;
   readonly ChatRoom: AsyncItem<ChatRoom | undefined>;
-  readonly userCount?: number | null;
+  readonly userCount: number | 0;
   readonly finished?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -55,9 +55,8 @@ type EagerChallengeType = {
   };
   readonly id: string;
   readonly name: string;
-  readonly imag?: string | null;
-  readonly duration: number;
-  readonly reward?: number | null;
+  readonly description: string;
+  readonly active: boolean;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -69,9 +68,8 @@ type LazyChallengeType = {
   };
   readonly id: string;
   readonly name: string;
-  readonly imag?: string | null;
-  readonly duration: number;
-  readonly reward?: number | null;
+  readonly description: string;
+  readonly active: boolean;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -90,10 +88,12 @@ type EagerUser = {
   readonly id: string;
   readonly name?: string | null;
   readonly image?: string | null;
+  readonly biography?: string | null;
+  readonly email?: string | null;
+  readonly notifications?: boolean | null;
   readonly Messages?: (Message | null)[] | null;
   readonly ChatRooms?: (UserChatRoom | null)[] | null;
   readonly Checkins?: (Checkin | null)[] | null;
-  readonly challengeID: string;
   readonly challenges?: (ChallengeUser | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -107,10 +107,12 @@ type LazyUser = {
   readonly id: string;
   readonly name?: string | null;
   readonly image?: string | null;
+  readonly biography?: string | null;
+  readonly email?: string | null;
+  readonly notifications?: boolean | null;
   readonly Messages: AsyncCollection<Message>;
   readonly ChatRooms: AsyncCollection<UserChatRoom>;
   readonly Checkins: AsyncCollection<Checkin>;
-  readonly challengeID: string;
   readonly challenges: AsyncCollection<ChallengeUser>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

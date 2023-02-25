@@ -12,7 +12,8 @@
     "build-storybook": "build-storybook"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "testEnvironment": "jsdom"
   },
   "dependencies": {
     "@aws-amplify/datastore": "^4.0.14",
@@ -27,6 +28,7 @@
     "aws-amplify": "^5.0.14",
     "aws-amplify-react-native": "^7.0.2",
     "aws-sdk": "^2.1313.0",
+    "enzyme": "^3.11.0",
     "expo": "~47.0.12",
     "expo-app-loading": "^2.1.1",
     "expo-asset": "^8.7.0",
@@ -43,6 +45,7 @@
     "react-dom": "18.1.0",
     "react-hook-form": "^7.43.0",
     "react-native": "0.70.5",
+    "react-native-hide-show-password-input": "^1.2.0",
     "react-native-phone-number-input": "^2.1.0",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "~3.18.0",
@@ -61,6 +64,9 @@
     "@storybook/addon-ondevice-knobs": "^5.3.26",
     "@storybook/react-native": "^5.3.27",
     "@storybook/react-native-server": "^5.3.23",
+    "@testing-library/react": "^13.4.0",
+    "@types/enzyme": "^3.10.12",
+    "@types/jest": "^29.4.0",
     "@types/react": "~18.0.24",
     "@types/react-native": "~0.70.6",
     "@typescript-eslint/eslint-plugin": "^5.49.0",

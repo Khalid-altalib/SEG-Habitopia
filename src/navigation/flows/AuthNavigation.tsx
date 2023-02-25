@@ -1,8 +1,9 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import Welcome from "../../screens/Welcome";
+import Welcome from "../../screens/Welcome/Welcome";
 
-import LogIn from "../../screens/LogIn";
+import SignUp from "../../screens/SignUp/SignUp";
+import SignIn from "../../screens/SignIn";
 
 import { AuthParams } from "../../../types";
 import Password from "../../screens/SignUp/Password";
@@ -75,11 +76,11 @@ const AuthNavigation = () => {
         }}
       />
 
-      {/* Log In Flow */}
+      {/* Sign In Flow */}
       <AuthStack.Screen
-        name="LogIn"
-        component={LogIn}
-        options={{ headerTitle: "Log in" }}
+        name="SignIn"
+        component={SignIn}
+        options={{ headerTitle: "Sign in" }}
       />
     </AuthStack.Navigator>
   );

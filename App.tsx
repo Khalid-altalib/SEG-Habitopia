@@ -1,4 +1,4 @@
-import { NativeBaseProvider, extendTheme, StatusBar } from "native-base";
+import { NativeBaseProvider, extendTheme, StatusBar, Box } from "native-base";
 import { Provider } from "react-redux";
 import { Amplify } from "aws-amplify";
 import Navigation from "./src/navigation/Navigation";
@@ -11,7 +11,7 @@ Amplify.configure(awsExports);
 export default function App() {
   const config = {
     useSystemColorMode: false,
-    initialColorMode: "dark",
+    initialColorMode: "light",
   };
 
   const customTheme = extendTheme({ config });

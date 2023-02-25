@@ -1,59 +1,54 @@
-import { Box, HStack } from "native-base";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { Box, Heading, HStack } from "native-base";
 import React from "react";
-import {
-  GestureResponderEvent,
-  TouchableOpacity,
-  Text,
-  Image,
-} from "react-native";
-import { Challenge } from "../../../../types";
-import ChallngeOnGoingText from "../ChallengeOnGoingText/ChallngeOnGoingText";
-import challengeBoxStyles from "./ChallengeBoxStyles";
+import { TouchableOpacity, Image } from "react-native";
+import { Challenge, RootParams } from "../../../../types";
+import { challengeMappings } from "../challengeMappings";
+import ChallengeOnGoingText from "../ChallengeOnGoingText/ChallengeOnGoingText";
 
 type Props = {
-  name: string;
-  onGoing: boolean;
-  color: string;
-  image: string;
-  onPress: (event: GestureResponderEvent) => void;
+  challenge: Challenge;
 };
 
 const ChallengeBox = (props: Props) => {
-  const { name, onGoing, color, image, onPress } = props;
-  let textColor = color;
-  if (textColor === "black" || "#000000") {
-    textColor = "white";
-  }
-  let boxStyle;
-  if (onGoing) {
-    boxStyle = challengeBoxStyles.activeChallengeBox;
-  } else {
-    boxStyle = challengeBoxStyles.unactiveChallengeBox;
-  }
+  const { challenge } = props;
+  const { name, active } = challenge;
+
+  const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
+
+  const { color: cardColor, image: cardImage } =
+    challengeMappings[name] || challengeMappings["fallback"];
+
+  const handlePress = () =>
+    navigation.navigate("ChallengePrompt", {
+      challenge: challenge,
+    });
+
   return (
-    <>
-      <TouchableOpacity onPress={onPress}>
-        <Box style={boxStyle} backgroundColor={color} width={"100%"} flex={1}>
-          <HStack>
-            <Box style={{ justifyContent: "center", padding: 10 }}>
-              <Text
-                style={[challengeBoxStyles.challengeText, { color: textColor }]}
-              >
-                {name}
-              </Text>
-              <ChallngeOnGoingText
-                onGoing={onGoing}
-                style={challengeBoxStyles.onGoingText}
-              />
-            </Box>
+    <TouchableOpacity onPress={handlePress}>
+      <Box
+        backgroundColor={cardColor}
+        borderRadius={"md"}
+        shadow={3}
+        padding={3}
+        height={100}
+      >
+        <HStack justifyContent="space-between" height="100%">
+          <Box justifyContent="space-between">
+            <Heading>{name}</Heading>
+            <ChallengeOnGoingText onGoing={active} />
+          </Box>
+          <Box borderRadius={3}>
             <Image
-              source={{ uri: image }}
-              style={challengeBoxStyles.challengeImage}
+              source={{ uri: cardImage }}
+              borderRadius={6}
+              style={{ height: "100%", width: 80 }}
             />
-          </HStack>
-        </Box>
-      </TouchableOpacity>
-    </>
+          </Box>
+        </HStack>
+      </Box>
+    </TouchableOpacity>
   );
 };
 

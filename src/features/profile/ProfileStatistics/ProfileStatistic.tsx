@@ -11,8 +11,8 @@ const ProfileStatistic = (props: Props) => {
   const { name, quantity } = statistic;
 
   return (
-    <Box shadow="3" width="50%" padding={2}>
-      <Card backgroundColor="blue.100">
+    <Box shadow="3" width="50%" style={{ padding: 10 }}>
+      <Card backgroundColor="blue.300">
         <Heading>{quantity}</Heading>
         <Text>{name}</Text>
       </Card>

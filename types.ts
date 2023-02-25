@@ -4,8 +4,14 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 export type RootParams = {
   Auth: undefined;
   Existing: undefined;
-  Modal: {
-    children: React.ReactNode;
+  Profile: undefined;
+  ChallengePrompt: {
+    challenge: Challenge;
+  };
+  Settings: undefined;
+  SettingDetails: {
+    settingType: string;
+    defaultValue: string;
   };
 };
 
@@ -21,6 +27,7 @@ export type NavigationParams = {
   Leaderboard: undefined;
   You: ProfileParams;
   Profile: ProfileParams;
+  Settings: undefined;
 };
 
 export type AuthParams = {
@@ -32,7 +39,7 @@ export type AuthParams = {
   SelectAvatar: undefined;
   SelectInstagram: undefined;
   SelectChallenges: undefined;
-  LogIn: undefined;
+  SignIn: undefined;
 };
 
 export type ChatParams = {
@@ -50,12 +57,14 @@ export type IndividualChatScreenNavigationProp = NativeStackNavigationProp<
 export type LocalUser = {
   authToken: string;
   userId: string;
+  email: string;
 };
 
 export enum TextType {
   Regular,
   Subtle,
   Heading,
+  Subheading,
   Button,
 }
 
@@ -64,16 +73,16 @@ export enum ButtonType {
   Secondary,
 }
 export type Challenge = {
+  id: string;
   name: string;
   description: string;
   active: boolean;
-  color: string;
-  image: string;
 };
 
 export type Profile = {
   userId: number;
   name: string;
+  email: string;
   biography: string;
   rankings: Array<object>;
   statistics: object;
@@ -88,8 +97,22 @@ export type Statistic = {
 
 export type Chat = {
   id: string;
+  name?: string;
+  image?: string;
+  text?: string;
+  time?: string;
+};
+
+export type Settings = {
+  email: string;
   name: string;
-  image: string;
-  text: string;
-  time: string;
+  notifications: boolean;
+  password: string;
+  biography: string;
+  [key: string]: string | boolean;
+};
+
+export type SignInFormValues = {
+  email: string;
+  password: string;
 };
