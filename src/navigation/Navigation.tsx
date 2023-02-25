@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 import TabNavigation from "./flows/TabNavigation";
 import AuthNavigation from "./flows/AuthNavigation";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { LocalUser } from "../../types";
 import { useDispatch, useSelector } from "../app/hooks";
 import { logInUserFromStorage } from "../features/auth/authSlice";
 
