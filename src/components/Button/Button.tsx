@@ -10,8 +10,8 @@ import { useColorModeValue } from "native-base";
 // Habitopia
 import Text from "../Text";
 import { ButtonType, TextType } from "../../../types";
-import Theme from "../../constants/Theme";
 import BoxWithShadow from "../BoxWithShadow";
+import Theme from "../../app/theme";
 
 type Props = {
   /** Additional styling information to apply to the button, e.g. padding. */

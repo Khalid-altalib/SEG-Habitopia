@@ -5,7 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useColorModeValue } from "native-base";
 
 // Habitopia
-import Theme from "../../constants/Theme";
+import Theme from "../../app/theme";
 
 type Props = {
   /** The components to display on top of the background. */
