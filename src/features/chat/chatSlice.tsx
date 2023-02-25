@@ -21,7 +21,6 @@ export const fetchChats = createAsyncThunk<
 >("chats/fetch", async (_, thunkAPI) => {
   try {
     const chats = await fetchUserChats(thunkAPI)
-    
     return chats;
   } catch (error: any) {
     const message = error.message;

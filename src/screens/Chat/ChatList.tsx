@@ -17,7 +17,6 @@ const ChatList = (props: Props) => {
 
   useEffect(() => {
     dispatch(fetchChats());
-    console.log(chats);
   }, []);
 
   return (
