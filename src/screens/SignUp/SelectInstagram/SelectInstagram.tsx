@@ -5,7 +5,6 @@ import { TextType } from "../../../../types";
 import Text from "../../../components/Text";
 import PaddedContainer from "../../../components/PaddedContainer";
 import Background from "../../../components/Background";
-import styles from "../../../constants/Styles";
 import SelectInstagramForm from "../../../features/auth/SelectInstagramForm";
 
 /**
@@ -17,7 +16,7 @@ const SelectInstagram = () => {
   return (
     <Background>
       <PaddedContainer>
-        <View style={[styles.maxSize, { paddingTop: "10%" }]}>
+        <View style={{ width: "100%", height: "100%", paddingTop: "10%" }}>
           <Text type={TextType.Heading}>What's your Instagram handle?</Text>
           <Text
             type={TextType.Subtle}

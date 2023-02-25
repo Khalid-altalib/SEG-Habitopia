@@ -5,7 +5,6 @@ import { ButtonType, TextType } from "../../../../types";
 import Text from "../../../components/Text";
 import PaddedContainer from "../../../components/PaddedContainer";
 import Background from "../../../components/Background";
-import styles from "../../../constants/Styles";
 import Button from "../../../components/Button";
 import { useDispatch } from "../../../app/hooks";
 import { signUpUser } from "../../../features/auth/authSlice";
@@ -36,7 +35,7 @@ const SelectChallenges = () => {
   return (
     <Background>
       <PaddedContainer>
-        <View style={[styles.maxSize, { paddingTop: "10%" }]}>
+        <View style={{ width: "100%", height: "100%", paddingTop: "10%" }}>
           <Text type={TextType.Heading}>
             Which of these do you want help with?
           </Text>
