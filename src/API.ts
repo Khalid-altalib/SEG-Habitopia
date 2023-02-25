@@ -150,6 +150,7 @@ export type User = {
   image?: string | null,
   biography?: string | null,
   email?: string | null,
+  notifications?: boolean | null,
   Messages?: ModelMessageConnection | null,
   ChatRooms?: ModelUserChatRoomConnection | null,
   Checkins?: ModelCheckinConnection | null,
@@ -295,6 +296,7 @@ export type CreateUserInput = {
   image?: string | null,
   biography?: string | null,
   email?: string | null,
+  notifications?: boolean | null,
   _version?: number | null,
 };
 
@@ -303,6 +305,7 @@ export type ModelUserConditionInput = {
   image?: ModelStringInput | null,
   biography?: ModelStringInput | null,
   email?: ModelStringInput | null,
+  notifications?: ModelBooleanInput | null,
   and?: Array< ModelUserConditionInput | null > | null,
   or?: Array< ModelUserConditionInput | null > | null,
   not?: ModelUserConditionInput | null,
@@ -314,6 +317,7 @@ export type UpdateUserInput = {
   image?: string | null,
   biography?: string | null,
   email?: string | null,
+  notifications?: boolean | null,
   _version?: number | null,
 };
 
@@ -402,54 +406,6 @@ export type UpdateCheckinInput = {
 };
 
 export type DeleteCheckinInput = {
-  id: string,
-  _version?: number | null,
-};
-
-export type CreateUserSettingsInput = {
-  id?: string | null,
-  email?: string | null,
-  password?: string | null,
-  notifications?: boolean | null,
-  _version?: number | null,
-  userSettingsUserId?: string | null,
-};
-
-export type ModelUserSettingsConditionInput = {
-  email?: ModelStringInput | null,
-  password?: ModelStringInput | null,
-  notifications?: ModelBooleanInput | null,
-  and?: Array< ModelUserSettingsConditionInput | null > | null,
-  or?: Array< ModelUserSettingsConditionInput | null > | null,
-  not?: ModelUserSettingsConditionInput | null,
-  userSettingsUserId?: ModelIDInput | null,
-};
-
-export type UserSettings = {
-  __typename: "UserSettings",
-  id: string,
-  user?: User | null,
-  email?: string | null,
-  password?: string | null,
-  notifications?: boolean | null,
-  createdAt: string,
-  updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
-  userSettingsUserId?: string | null,
-};
-
-export type UpdateUserSettingsInput = {
-  id: string,
-  email?: string | null,
-  password?: string | null,
-  notifications?: boolean | null,
-  _version?: number | null,
-  userSettingsUserId?: string | null,
-};
-
-export type DeleteUserSettingsInput = {
   id: string,
   _version?: number | null,
 };
@@ -550,6 +506,7 @@ export type ModelUserFilterInput = {
   image?: ModelStringInput | null,
   biography?: ModelStringInput | null,
   email?: ModelStringInput | null,
+  notifications?: ModelBooleanInput | null,
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
   not?: ModelUserFilterInput | null,
@@ -601,24 +558,6 @@ export type ModelCheckinFilterInput = {
   and?: Array< ModelCheckinFilterInput | null > | null,
   or?: Array< ModelCheckinFilterInput | null > | null,
   not?: ModelCheckinFilterInput | null,
-};
-
-export type ModelUserSettingsFilterInput = {
-  id?: ModelIDInput | null,
-  email?: ModelStringInput | null,
-  password?: ModelStringInput | null,
-  notifications?: ModelBooleanInput | null,
-  and?: Array< ModelUserSettingsFilterInput | null > | null,
-  or?: Array< ModelUserSettingsFilterInput | null > | null,
-  not?: ModelUserSettingsFilterInput | null,
-  userSettingsUserId?: ModelIDInput | null,
-};
-
-export type ModelUserSettingsConnection = {
-  __typename: "ModelUserSettingsConnection",
-  items:  Array<UserSettings | null >,
-  nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelChallengeUserFilterInput = {
@@ -710,6 +649,7 @@ export type ModelSubscriptionUserFilterInput = {
   image?: ModelSubscriptionStringInput | null,
   biography?: ModelSubscriptionStringInput | null,
   email?: ModelSubscriptionStringInput | null,
+  notifications?: ModelSubscriptionBooleanInput | null,
   and?: Array< ModelSubscriptionUserFilterInput | null > | null,
   or?: Array< ModelSubscriptionUserFilterInput | null > | null,
 };
@@ -736,15 +676,6 @@ export type ModelSubscriptionCheckinFilterInput = {
   chatroomID?: ModelSubscriptionIDInput | null,
   and?: Array< ModelSubscriptionCheckinFilterInput | null > | null,
   or?: Array< ModelSubscriptionCheckinFilterInput | null > | null,
-};
-
-export type ModelSubscriptionUserSettingsFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  email?: ModelSubscriptionStringInput | null,
-  password?: ModelSubscriptionStringInput | null,
-  notifications?: ModelSubscriptionBooleanInput | null,
-  and?: Array< ModelSubscriptionUserSettingsFilterInput | null > | null,
-  or?: Array< ModelSubscriptionUserSettingsFilterInput | null > | null,
 };
 
 export type ModelSubscriptionChallengeUserFilterInput = {
@@ -1097,6 +1028,7 @@ export type CreateUserMutation = {
     image?: string | null,
     biography?: string | null,
     email?: string | null,
+    notifications?: boolean | null,
     Messages?:  {
       __typename: "ModelMessageConnection",
       items:  Array< {
@@ -1184,6 +1116,7 @@ export type UpdateUserMutation = {
     image?: string | null,
     biography?: string | null,
     email?: string | null,
+    notifications?: boolean | null,
     Messages?:  {
       __typename: "ModelMessageConnection",
       items:  Array< {
@@ -1271,6 +1204,7 @@ export type DeleteUserMutation = {
     image?: string | null,
     biography?: string | null,
     email?: string | null,
+    notifications?: boolean | null,
     Messages?:  {
       __typename: "ModelMessageConnection",
       items:  Array< {
@@ -1705,168 +1639,6 @@ export type DeleteCheckinMutation = {
   } | null,
 };
 
-export type CreateUserSettingsMutationVariables = {
-  input: CreateUserSettingsInput,
-  condition?: ModelUserSettingsConditionInput | null,
-};
-
-export type CreateUserSettingsMutation = {
-  createUserSettings?:  {
-    __typename: "UserSettings",
-    id: string,
-    user?:  {
-      __typename: "User",
-      id: string,
-      name?: string | null,
-      image?: string | null,
-      biography?: string | null,
-      email?: string | null,
-      Messages?:  {
-        __typename: "ModelMessageConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      ChatRooms?:  {
-        __typename: "ModelUserChatRoomConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      Checkins?:  {
-        __typename: "ModelCheckinConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      challenges?:  {
-        __typename: "ModelChallengeUserConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null,
-    email?: string | null,
-    password?: string | null,
-    notifications?: boolean | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    userSettingsUserId?: string | null,
-  } | null,
-};
-
-export type UpdateUserSettingsMutationVariables = {
-  input: UpdateUserSettingsInput,
-  condition?: ModelUserSettingsConditionInput | null,
-};
-
-export type UpdateUserSettingsMutation = {
-  updateUserSettings?:  {
-    __typename: "UserSettings",
-    id: string,
-    user?:  {
-      __typename: "User",
-      id: string,
-      name?: string | null,
-      image?: string | null,
-      biography?: string | null,
-      email?: string | null,
-      Messages?:  {
-        __typename: "ModelMessageConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      ChatRooms?:  {
-        __typename: "ModelUserChatRoomConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      Checkins?:  {
-        __typename: "ModelCheckinConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      challenges?:  {
-        __typename: "ModelChallengeUserConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null,
-    email?: string | null,
-    password?: string | null,
-    notifications?: boolean | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    userSettingsUserId?: string | null,
-  } | null,
-};
-
-export type DeleteUserSettingsMutationVariables = {
-  input: DeleteUserSettingsInput,
-  condition?: ModelUserSettingsConditionInput | null,
-};
-
-export type DeleteUserSettingsMutation = {
-  deleteUserSettings?:  {
-    __typename: "UserSettings",
-    id: string,
-    user?:  {
-      __typename: "User",
-      id: string,
-      name?: string | null,
-      image?: string | null,
-      biography?: string | null,
-      email?: string | null,
-      Messages?:  {
-        __typename: "ModelMessageConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      ChatRooms?:  {
-        __typename: "ModelUserChatRoomConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      Checkins?:  {
-        __typename: "ModelCheckinConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      challenges?:  {
-        __typename: "ModelChallengeUserConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null,
-    email?: string | null,
-    password?: string | null,
-    notifications?: boolean | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    userSettingsUserId?: string | null,
-  } | null,
-};
-
 export type CreateChallengeUserMutationVariables = {
   input: CreateChallengeUserInput,
   condition?: ModelChallengeUserConditionInput | null,
@@ -1926,6 +1698,7 @@ export type CreateChallengeUserMutation = {
       image?: string | null,
       biography?: string | null,
       email?: string | null,
+      notifications?: boolean | null,
       Messages?:  {
         __typename: "ModelMessageConnection",
         nextToken?: string | null,
@@ -2019,6 +1792,7 @@ export type UpdateChallengeUserMutation = {
       image?: string | null,
       biography?: string | null,
       email?: string | null,
+      notifications?: boolean | null,
       Messages?:  {
         __typename: "ModelMessageConnection",
         nextToken?: string | null,
@@ -2112,6 +1886,7 @@ export type DeleteChallengeUserMutation = {
       image?: string | null,
       biography?: string | null,
       email?: string | null,
+      notifications?: boolean | null,
       Messages?:  {
         __typename: "ModelMessageConnection",
         nextToken?: string | null,
@@ -2164,6 +1939,7 @@ export type CreateUserChatRoomMutation = {
       image?: string | null,
       biography?: string | null,
       email?: string | null,
+      notifications?: boolean | null,
       Messages?:  {
         __typename: "ModelMessageConnection",
         nextToken?: string | null,
@@ -2253,6 +2029,7 @@ export type UpdateUserChatRoomMutation = {
       image?: string | null,
       biography?: string | null,
       email?: string | null,
+      notifications?: boolean | null,
       Messages?:  {
         __typename: "ModelMessageConnection",
         nextToken?: string | null,
@@ -2342,6 +2119,7 @@ export type DeleteUserChatRoomMutation = {
       image?: string | null,
       biography?: string | null,
       email?: string | null,
+      notifications?: boolean | null,
       Messages?:  {
         __typename: "ModelMessageConnection",
         nextToken?: string | null,
@@ -2694,6 +2472,7 @@ export type GetUserQuery = {
     image?: string | null,
     biography?: string | null,
     email?: string | null,
+    notifications?: boolean | null,
     Messages?:  {
       __typename: "ModelMessageConnection",
       items:  Array< {
@@ -2784,6 +2563,7 @@ export type ListUsersQuery = {
       image?: string | null,
       biography?: string | null,
       email?: string | null,
+      notifications?: boolean | null,
       Messages?:  {
         __typename: "ModelMessageConnection",
         nextToken?: string | null,
@@ -2832,6 +2612,7 @@ export type SyncUsersQuery = {
       image?: string | null,
       biography?: string | null,
       email?: string | null,
+      notifications?: boolean | null,
       Messages?:  {
         __typename: "ModelMessageConnection",
         nextToken?: string | null,
@@ -3301,140 +3082,6 @@ export type CheckinsByChatroomIDQuery = {
   } | null,
 };
 
-export type GetUserSettingsQueryVariables = {
-  id: string,
-};
-
-export type GetUserSettingsQuery = {
-  getUserSettings?:  {
-    __typename: "UserSettings",
-    id: string,
-    user?:  {
-      __typename: "User",
-      id: string,
-      name?: string | null,
-      image?: string | null,
-      biography?: string | null,
-      email?: string | null,
-      Messages?:  {
-        __typename: "ModelMessageConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      ChatRooms?:  {
-        __typename: "ModelUserChatRoomConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      Checkins?:  {
-        __typename: "ModelCheckinConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      challenges?:  {
-        __typename: "ModelChallengeUserConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null,
-    email?: string | null,
-    password?: string | null,
-    notifications?: boolean | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    userSettingsUserId?: string | null,
-  } | null,
-};
-
-export type ListUserSettingsQueryVariables = {
-  filter?: ModelUserSettingsFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListUserSettingsQuery = {
-  listUserSettings?:  {
-    __typename: "ModelUserSettingsConnection",
-    items:  Array< {
-      __typename: "UserSettings",
-      id: string,
-      user?:  {
-        __typename: "User",
-        id: string,
-        name?: string | null,
-        image?: string | null,
-        biography?: string | null,
-        email?: string | null,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-      } | null,
-      email?: string | null,
-      password?: string | null,
-      notifications?: boolean | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      userSettingsUserId?: string | null,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncUserSettingsQueryVariables = {
-  filter?: ModelUserSettingsFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncUserSettingsQuery = {
-  syncUserSettings?:  {
-    __typename: "ModelUserSettingsConnection",
-    items:  Array< {
-      __typename: "UserSettings",
-      id: string,
-      user?:  {
-        __typename: "User",
-        id: string,
-        name?: string | null,
-        image?: string | null,
-        biography?: string | null,
-        email?: string | null,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-      } | null,
-      email?: string | null,
-      password?: string | null,
-      notifications?: boolean | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      userSettingsUserId?: string | null,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
 export type GetChallengeUserQueryVariables = {
   id: string,
 };
@@ -3493,6 +3140,7 @@ export type GetChallengeUserQuery = {
       image?: string | null,
       biography?: string | null,
       email?: string | null,
+      notifications?: boolean | null,
       Messages?:  {
         __typename: "ModelMessageConnection",
         nextToken?: string | null,
@@ -3562,6 +3210,7 @@ export type ListChallengeUsersQuery = {
         image?: string | null,
         biography?: string | null,
         email?: string | null,
+        notifications?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -3615,6 +3264,7 @@ export type SyncChallengeUsersQuery = {
         image?: string | null,
         biography?: string | null,
         email?: string | null,
+        notifications?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -3669,6 +3319,7 @@ export type ChallengeUsersByChallengeIdQuery = {
         image?: string | null,
         biography?: string | null,
         email?: string | null,
+        notifications?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -3723,6 +3374,7 @@ export type ChallengeUsersByUserIdQuery = {
         image?: string | null,
         biography?: string | null,
         email?: string | null,
+        notifications?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -3757,6 +3409,7 @@ export type GetUserChatRoomQuery = {
       image?: string | null,
       biography?: string | null,
       email?: string | null,
+      notifications?: boolean | null,
       Messages?:  {
         __typename: "ModelMessageConnection",
         nextToken?: string | null,
@@ -3849,6 +3502,7 @@ export type ListUserChatRoomsQuery = {
         image?: string | null,
         biography?: string | null,
         email?: string | null,
+        notifications?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -3898,6 +3552,7 @@ export type SyncUserChatRoomsQuery = {
         image?: string | null,
         biography?: string | null,
         email?: string | null,
+        notifications?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -3948,6 +3603,7 @@ export type UserChatRoomsByUserIdQuery = {
         image?: string | null,
         biography?: string | null,
         email?: string | null,
+        notifications?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -3998,6 +3654,7 @@ export type UserChatRoomsByChatRoomIdQuery = {
         image?: string | null,
         biography?: string | null,
         email?: string | null,
+        notifications?: boolean | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4352,6 +4009,7 @@ export type OnCreateUserSubscription = {
     image?: string | null,
     biography?: string | null,
     email?: string | null,
+    notifications?: boolean | null,
     Messages?:  {
       __typename: "ModelMessageConnection",
       items:  Array< {
@@ -4438,6 +4096,7 @@ export type OnUpdateUserSubscription = {
     image?: string | null,
     biography?: string | null,
     email?: string | null,
+    notifications?: boolean | null,
     Messages?:  {
       __typename: "ModelMessageConnection",
       items:  Array< {
@@ -4524,6 +4183,7 @@ export type OnDeleteUserSubscription = {
     image?: string | null,
     biography?: string | null,
     email?: string | null,
+    notifications?: boolean | null,
     Messages?:  {
       __typename: "ModelMessageConnection",
       items:  Array< {
@@ -4949,165 +4609,6 @@ export type OnDeleteCheckinSubscription = {
   } | null,
 };
 
-export type OnCreateUserSettingsSubscriptionVariables = {
-  filter?: ModelSubscriptionUserSettingsFilterInput | null,
-};
-
-export type OnCreateUserSettingsSubscription = {
-  onCreateUserSettings?:  {
-    __typename: "UserSettings",
-    id: string,
-    user?:  {
-      __typename: "User",
-      id: string,
-      name?: string | null,
-      image?: string | null,
-      biography?: string | null,
-      email?: string | null,
-      Messages?:  {
-        __typename: "ModelMessageConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      ChatRooms?:  {
-        __typename: "ModelUserChatRoomConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      Checkins?:  {
-        __typename: "ModelCheckinConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      challenges?:  {
-        __typename: "ModelChallengeUserConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null,
-    email?: string | null,
-    password?: string | null,
-    notifications?: boolean | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    userSettingsUserId?: string | null,
-  } | null,
-};
-
-export type OnUpdateUserSettingsSubscriptionVariables = {
-  filter?: ModelSubscriptionUserSettingsFilterInput | null,
-};
-
-export type OnUpdateUserSettingsSubscription = {
-  onUpdateUserSettings?:  {
-    __typename: "UserSettings",
-    id: string,
-    user?:  {
-      __typename: "User",
-      id: string,
-      name?: string | null,
-      image?: string | null,
-      biography?: string | null,
-      email?: string | null,
-      Messages?:  {
-        __typename: "ModelMessageConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      ChatRooms?:  {
-        __typename: "ModelUserChatRoomConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      Checkins?:  {
-        __typename: "ModelCheckinConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      challenges?:  {
-        __typename: "ModelChallengeUserConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null,
-    email?: string | null,
-    password?: string | null,
-    notifications?: boolean | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    userSettingsUserId?: string | null,
-  } | null,
-};
-
-export type OnDeleteUserSettingsSubscriptionVariables = {
-  filter?: ModelSubscriptionUserSettingsFilterInput | null,
-};
-
-export type OnDeleteUserSettingsSubscription = {
-  onDeleteUserSettings?:  {
-    __typename: "UserSettings",
-    id: string,
-    user?:  {
-      __typename: "User",
-      id: string,
-      name?: string | null,
-      image?: string | null,
-      biography?: string | null,
-      email?: string | null,
-      Messages?:  {
-        __typename: "ModelMessageConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      ChatRooms?:  {
-        __typename: "ModelUserChatRoomConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      Checkins?:  {
-        __typename: "ModelCheckinConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      challenges?:  {
-        __typename: "ModelChallengeUserConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null,
-    email?: string | null,
-    password?: string | null,
-    notifications?: boolean | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    userSettingsUserId?: string | null,
-  } | null,
-};
-
 export type OnCreateChallengeUserSubscriptionVariables = {
   filter?: ModelSubscriptionChallengeUserFilterInput | null,
 };
@@ -5166,6 +4667,7 @@ export type OnCreateChallengeUserSubscription = {
       image?: string | null,
       biography?: string | null,
       email?: string | null,
+      notifications?: boolean | null,
       Messages?:  {
         __typename: "ModelMessageConnection",
         nextToken?: string | null,
@@ -5258,6 +4760,7 @@ export type OnUpdateChallengeUserSubscription = {
       image?: string | null,
       biography?: string | null,
       email?: string | null,
+      notifications?: boolean | null,
       Messages?:  {
         __typename: "ModelMessageConnection",
         nextToken?: string | null,
@@ -5350,6 +4853,7 @@ export type OnDeleteChallengeUserSubscription = {
       image?: string | null,
       biography?: string | null,
       email?: string | null,
+      notifications?: boolean | null,
       Messages?:  {
         __typename: "ModelMessageConnection",
         nextToken?: string | null,
@@ -5401,6 +4905,7 @@ export type OnCreateUserChatRoomSubscription = {
       image?: string | null,
       biography?: string | null,
       email?: string | null,
+      notifications?: boolean | null,
       Messages?:  {
         __typename: "ModelMessageConnection",
         nextToken?: string | null,
@@ -5489,6 +4994,7 @@ export type OnUpdateUserChatRoomSubscription = {
       image?: string | null,
       biography?: string | null,
       email?: string | null,
+      notifications?: boolean | null,
       Messages?:  {
         __typename: "ModelMessageConnection",
         nextToken?: string | null,
@@ -5577,6 +5083,7 @@ export type OnDeleteUserChatRoomSubscription = {
       image?: string | null,
       biography?: string | null,
       email?: string | null,
+      notifications?: boolean | null,
       Messages?:  {
         __typename: "ModelMessageConnection",
         nextToken?: string | null,
