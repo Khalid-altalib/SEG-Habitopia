@@ -20,8 +20,11 @@ const ChatScreen = (props: Props) => {
 
   useEffect(() => {
     navigation.setOptions({ title: chat.name, headerShown: true });
-    dispatch(fetchMessages(chat.id));
   }, [route.params.id]);
+
+  useEffect(() => {
+    dispatch(fetchMessages(chat.id));
+  }, [chat.messages]);
 
   return (
     <ImageBackground
@@ -38,9 +41,10 @@ const ChatScreen = (props: Props) => {
           ></Message>
         )}
         style={styles.flatList}
+        inverted={true}
       />
 
-      <InputBox />
+      <InputBox chatRoomID={chat.id} />
     </ImageBackground>
   );
 };

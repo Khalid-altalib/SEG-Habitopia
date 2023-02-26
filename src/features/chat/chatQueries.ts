@@ -1,6 +1,6 @@
 import { DataStore } from "aws-amplify";
 import { Chat } from "../../../types";
-import { getUserFromDatabase } from "../../app/util";
+import { getUserFromDatabase, getUserIdFromThunk } from "../../app/util";
 import { ChatRoom, Message } from "../../models";
 import { Message as MessageType } from "../../../types";
 
@@ -32,5 +32,21 @@ export const fetchChatMessages = async (chatId: string) => {
   for await (const chatMessage of chatMessages) {
     messages.push({ ...chatMessage } as MessageType);
   }
-  return messages;
+  return messages.reverse();
+};
+
+export const sendChatMessage = async (
+  message: string,
+  chatroomID: string,
+  thunkAPI: any
+) => {
+  const userID = getUserIdFromThunk(thunkAPI);
+  const newMessage = await DataStore.save(
+    new Message({
+      chatroomID: chatroomID,
+      userID: userID,
+      text: message,
+    })
+  );
+  return { ...newMessage } as MessageType;
 };

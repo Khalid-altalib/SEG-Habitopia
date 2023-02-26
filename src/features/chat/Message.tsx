@@ -2,12 +2,12 @@ import { is } from "immer/dist/internal";
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { Message as MessageType } from "../../../types";
-
-
+import { useSelector } from "@app/hooks";
 
 const Message = (message: MessageType) => {
+  const { user } = useSelector((store) => store.auth);
   function isMessage() {
-    return message.userId === "u1";
+    return message.userID === user?.userId;
   }
 
   return (

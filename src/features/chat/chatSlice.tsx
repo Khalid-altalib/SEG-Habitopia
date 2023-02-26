@@ -1,6 +1,10 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { Chat, Message } from "../../../types";
-import { fetchChatMessages, fetchUserChats } from "./chatQueries";
+import {
+  fetchChatMessages,
+  fetchUserChats,
+  sendChatMessage,
+} from "./chatQueries";
 
 type ChatState = {
   chats: Chat[];
@@ -9,6 +13,10 @@ type ChatState = {
     error: string;
   };
   fetchMessages: {
+    loading: boolean;
+    error: string;
+  };
+  sendMessage: {
     loading: boolean;
     error: string;
   };
@@ -42,6 +50,27 @@ export const fetchMessages = createAsyncThunk<
   }
 });
 
+export const sendMessage = createAsyncThunk<
+  Message,
+  any,
+  { rejectValue: string }
+>(
+  "messages/send",
+  async (message: { message: string; chatRoomID: string }, thunkAPI) => {
+    try {
+      const newMessage = await sendChatMessage(
+        message.message,
+        message.chatRoomID,
+        thunkAPI
+      );
+      return newMessage;
+    } catch (error: any) {
+      const message = error.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 const initialState: ChatState = {
   chats: [],
   fetchChats: {
@@ -49,6 +78,10 @@ const initialState: ChatState = {
     error: "",
   },
   fetchMessages: {
+    loading: false,
+    error: "",
+  },
+  sendMessage: {
     loading: false,
     error: "",
   },
@@ -92,6 +125,25 @@ export const chatSlice = createSlice({
       if (chat) chat.messages = [];
       state.fetchMessages.loading = false;
       state.fetchMessages.error = action.payload;
+    });
+    builder.addCase(sendMessage.pending, (state) => {
+      state.sendMessage.loading = true;
+    });
+    builder.addCase(
+      sendMessage.fulfilled,
+      (state, action: PayloadAction<Message>) => {
+        const chat = state.chats.find(
+          (chat) => chat.id === action.payload.chatRoomId
+        );
+        if (chat) {
+          chat.messages?.push(action.payload);
+        }
+        state.fetchMessages.loading = false;
+      }
+    );
+    builder.addCase(sendMessage.rejected, (state, action: any) => {
+      state.sendMessage.loading = false;
+      state.sendMessage.error = action.payload;
     });
   },
 });
