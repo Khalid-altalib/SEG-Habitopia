@@ -1,8 +1,11 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { DataStore } from "aws-amplify";
-import { Profile } from "../../../types";
+import { Profile, Statistic } from "../../../types";
 import { getAuthTokenFromThunk } from "../../app/util";
 import { User } from "../../models";
+import { getUserFromDatabase } from "../../app/util";
+import { useState, useEffect } from "react";
+import { getCheckIns } from "./statisticsQueries";
 
 export type ProfileState = {
   profile?: Profile;
@@ -18,28 +21,37 @@ const initialState: ProfileState = {
 
 let requestPromise: any = undefined;
 
+
+
 export const fetchProfile = createAsyncThunk<
   string,
   any,
   { rejectValue: string }
 >("profile/fetch", async (thunkAPI) => {
   try {
-    // fetch profile from backend, possibly use props?
-    const user = (await DataStore.query(User, (c) => c.id.eq("b5c0baaf-9cfc-4f75-8f4c-61a39eea57d2")))[0]; // PLACEHOLDER PROFILE
+    const user = (await DataStore.query(User, (userProfile) => userProfile.id.eq("b5c0baaf-9cfc-4f75-8f4c-61a39eea57d2")))[0]; // PLACEHOLDER PROFILE);
+    // const user = await getUserFromDatabase(thunkAPI);
+    const checkinCount = await getCheckIns(thunkAPI);
 
+    const statistics = [
+      { name: "Streak", quantity: 5 },
+      { name: "Wins", quantity: 1 },
+      { name: "Check Ins", quantity: checkinCount },
+      { name: "Level", quantity: 8 },
+    ];
 
     const profile = {
       userId: user.id,
       name: user.name,
       biography: user.biography,
-      // profilePicture: user.profilePicture,
-      }; 
+      statistics: statistics,
+    }; 
 
     return profile;
 
   } catch (error: any) {
     const message = error.message;
-    return thunkAPI.rejectWithValue(message);
+    return thunkAPI.rejectWithValue("an error occurred");
   }
 });
 
@@ -66,7 +78,7 @@ export const profileSlice = createSlice({
       (state: ProfileState, action: PayloadAction<any>) => {
         state.profile = undefined;
         state.loading = false;
-        state.error = action.payload.message;
+        state.error = action.payload;
       }
     );
   },
