@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { DataStore, Predicates, SortDirection } from 'aws-amplify';
+import { DataStore, Predicates, SortDirection, API, graphqlOperation } from 'aws-amplify';
 import { Leaderboard, User } from '../../models';
+import { GraphQLResult } from '@aws-amplify/api-graphql';
 
 export type LeaderboardState = {
   loading: boolean;
@@ -23,9 +24,20 @@ const initialState: LeaderboardState = {
   entries: [{}],
 };
 
+async function countLeaderboardEntries(): Promise<number> {
+  const query = `
+    query CountLeaderboardEntries {
+      countLeaderboard {
+        count
+      }
+    }
+  `;
+  const response = await API.graphql(graphqlOperation(query)) as GraphQLResult<{ countLeaderboard: { count: number } }>;
+  return response.data?.countLeaderboard?.count || 0;
+}
 
 export const fetchLeaderboard = createAsyncThunk<
-  void,
+  any,
   void,
   { rejectValue: string }
 >("leaderboard/fetch", async (_, thunkAPI) => {
@@ -44,11 +56,16 @@ export const fetchLeaderboard = createAsyncThunk<
           checkins: entry.numberOfCheckins,
         };
       });
-      const values = mappedLeaderboard.map((entry) => [entry.id, entry.checkins]);
-      console.log(values);
+      const namedPeopleLeaderboard = await Promise.all(mappedLeaderboard.map(async (entry) => {
+        const user = await DataStore.query(User, entry.id);
+        return {
+          name: user?.name,
+          checkins: entry.checkins,
+        };
+      }));
+      console.log(namedPeopleLeaderboard);
+      return namedPeopleLeaderboard;
 
-      const response2 = await fetch("https://test/api/leaderboard"); //  BACKEND PLACEHOLDER
-      return await response2.json();
     } catch (error: any) {
       const message = error.message;
       return thunkAPI.rejectWithValue(message);
