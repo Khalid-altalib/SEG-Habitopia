@@ -24,18 +24,14 @@ const initialState: LeaderboardState = {
   entries: [{}],
 };
 
-async function countLeaderboardEntries(): Promise<number> {
-  const query = `
-    query CountLeaderboardEntries {
-      countLeaderboard {
-        count
-      }
-    }
-  `;
-  const response = await API.graphql(graphqlOperation(query)) as GraphQLResult<{ countLeaderboard: { count: number } }>;
-  return response.data?.countLeaderboard?.count || 0;
-}
 
+
+/**
+ * Fetches the leaderboard entries from the database
+ * @returns {Promise<GraphQLResult<Leaderboard>>} The leaderboard entries as  {id: string, checkins: number}
+ * @throws {Error} If the leaderboard entries could not be fetched
+ * @async
+ */
 export const fetchLeaderboard = createAsyncThunk<
   any,
   void,
@@ -43,28 +39,28 @@ export const fetchLeaderboard = createAsyncThunk<
 >("leaderboard/fetch", async (_, thunkAPI) => {
     try {
       const state = thunkAPI.getState() as RootState;
-      const { challengeType, timeInterval, page } = state.leaderboard;
-      const fetchedLeaderboard = await DataStore.query(Leaderboard, Predicates.ALL, {
+      const { challengeType, page } = state.leaderboard;
+      const data = await DataStore.query(Leaderboard, Predicates.ALL, {
         page: page as number,
         limit: 10,
         sort: (s) => s.numberOfCheckins(SortDirection.DESCENDING)
       });
 
-      const mappedLeaderboard = fetchedLeaderboard.map((entry) => {
+      const leaderboard = data.map((entry) => {
         return {
           id: entry.leaderboardUserId,
           checkins: entry.numberOfCheckins,
         };
-      });
-      const namedPeopleLeaderboard = await Promise.all(mappedLeaderboard.map(async (entry) => {
+      }); //filters the data to only include the id and number of checkins
+      const result = await Promise.all(leaderboard.map(async (entry) => {
         const user = await DataStore.query(User, entry.id);
         return {
           name: user?.name,
           checkins: entry.checkins,
         };
-      }));
-      console.log(namedPeopleLeaderboard);
-      return namedPeopleLeaderboard;
+      })); //maps the leaderboard to include the name of the user
+      console.log(result);
+      return result;
 
     } catch (error: any) {
       const message = error.message;
