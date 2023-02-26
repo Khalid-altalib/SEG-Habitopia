@@ -75,10 +75,11 @@ const updateLastMessageInChat = async (
 
 export const addChatSubscription = (chatID: string) => {
   const filter = (message: Message) => message.chatroomID === chatID;
-  const subscription = DataStore.observe(Message).subscribe((message) => {
-    if (message.element.chatroomID === chatID) {
-      console.log(message);
-    }
+  const subscription = DataStore.observeQuery(Message, (message) =>
+    message.chatroomID.eq(chatID)
+  ).subscribe((snapshot) => {
+    const { items, isSynced } = snapshot;
+    console.log(items);
   });
   return subscription;
 };

@@ -23,6 +23,7 @@ const ChatScreen = (props: Props) => {
     dispatch(fetchMessages(chat.id));
     navigation.setOptions({ title: chat.name, headerShown: true });
     const subscription = addChatSubscription(id);
+    console.log("use effect happened");
     return () => subscription.unsubscribe();
   }, [id]);
 
