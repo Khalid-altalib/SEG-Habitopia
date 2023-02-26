@@ -7,7 +7,8 @@ export const getCheckIns = async (
   thunkAPI: any
 ) => {
   try {
-    const user = (await DataStore.query(User, (c) => c.id.eq("b5c0baaf-9cfc-4f75-8f4c-61a39eea57d2")))[0]; // PLACEHOLDER PROFILE
+    const user = (await DataStore.query(User, (userProfile) => userProfile.id.eq("b5c0baaf-9cfc-4f75-8f4c-61a39eea57d2")))[0]; // PLACEHOLDER PROFILE
+    // const user = await getUserFromDatabase(thunkAPI);
     var checkinCount = 0;
     // get number of items in the array of user Checkins
     for await (const checkin of user.Checkins) {
