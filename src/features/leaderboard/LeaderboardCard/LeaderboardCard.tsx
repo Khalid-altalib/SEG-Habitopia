@@ -23,7 +23,7 @@ const LeaderboardCard = (props: Props) => {
             <Avatar />
             <View>
               <Heading>{name}</Heading>
-              <Text>{wins} wins</Text>
+              <Text>{wins} check-ins</Text>
             </View>
           </HStack>
           <View>
