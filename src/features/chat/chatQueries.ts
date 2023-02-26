@@ -21,6 +21,13 @@ export const fetchUserChats = async (thunkAPI: any) => {
       time: lastMessage?.createdAt || "",
     } as Chat);
   }
+  chats.sort((a: Chat, b: Chat) => {
+    if (a.time && b.time) {
+      return b.time?.localeCompare(a.time);
+    } else {
+      return 0;
+    }
+  });
   return chats;
 };
 
@@ -48,5 +55,20 @@ export const sendChatMessage = async (
       text: message,
     })
   );
+  await updateLastMessageInChat(newMessage.id, chatroomID);
   return { ...newMessage } as MessageType;
+};
+
+const updateLastMessageInChat = async (
+  messageID: string,
+  chatroomID: string
+) => {
+  const chatRoom = (
+    await DataStore.query(ChatRoom, (chatRoom) => chatRoom.id.eq(chatroomID))
+  )[0];
+  await DataStore.save(
+    ChatRoom.copyOf(chatRoom, (updated) => {
+      updated.chatRoomLastMessageId = messageID;
+    })
+  );
 };
