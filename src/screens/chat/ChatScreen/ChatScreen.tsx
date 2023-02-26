@@ -7,26 +7,50 @@ import { ChatParams } from "../../../../types";
 import { useDispatch, useSelector } from "../../../app/hooks";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { fetchMessages } from "../../../features/chat/chatSlice";
-import { addChatSubscription } from "@features/chat/chatQueries";
+import { GraphQLSubscription } from "@aws-amplify/api";
+import {
+  OnCreateMessageSubscription,
+  OnCreateMessageSubscriptionVariables,
+} from "src/API";
+import { onCreateMessage } from "../../../graphql/subscriptions";
+import { addMessageToChat } from "../../../features/chat/chatSlice";
+import { API, graphqlOperation } from "aws-amplify";
+import { Message as MessageType } from "../../../../types";
 
 type Props = {};
 
 const ChatScreen = (props: Props) => {
+  const addChatSubscription = (chatID: string) => {
+    const variables: OnCreateMessageSubscriptionVariables = {
+      filter: {
+        chatroomID: { eq: chatID },
+      },
+    };
+    const subscription = API.graphql<
+      GraphQLSubscription<OnCreateMessageSubscription>
+    >(graphqlOperation(onCreateMessage, variables)).subscribe({
+      next: ({ value }) => {
+        const message = { ...value.data?.onCreateMessage } as MessageType;
+        dispatch(addMessageToChat({ chatID, message }));
+      },
+      error: (error) => console.warn(error),
+    });
+    return subscription;
+  };
+
   const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
   const route = useRoute<RouteProp<ChatParams, "IndividualChat">>();
   const { chats } = useSelector((store) => store.chats);
   const { id } = route.params;
   const dispatch = useDispatch();
   let chat = chats.filter((chat) => chat.id == id)[0];
-
+  console.log("rerender");
   useEffect(() => {
     dispatch(fetchMessages(chat.id));
     navigation.setOptions({ title: chat.name, headerShown: true });
     const subscription = addChatSubscription(id);
-    console.log("use effect happened");
     return () => subscription.unsubscribe();
   }, [id]);
-
   return (
     <ImageBackground
       source={{ uri: "https://placeholder.com" }}

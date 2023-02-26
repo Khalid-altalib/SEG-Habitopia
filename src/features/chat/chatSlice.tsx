@@ -98,7 +98,8 @@ export const chatSlice = createSlice({
       const { chatID, message } = action.payload;
       const chat = state.chats.find((chat) => chat.id === chatID);
       if (chat) {
-        chat.messages?.push(message);
+        chat.messages?.unshift(message);
+        console.log(chat.messages);
       }
     },
   },
@@ -140,18 +141,6 @@ export const chatSlice = createSlice({
     builder.addCase(sendMessage.pending, (state) => {
       state.sendMessage.loading = true;
     });
-    builder.addCase(
-      sendMessage.fulfilled,
-      (state, action: PayloadAction<Message>) => {
-        const chat = state.chats.find(
-          (chat) => chat.id === action.payload.chatRoomId
-        );
-        if (chat) {
-          chat.messages?.push(action.payload);
-        }
-        state.fetchMessages.loading = false;
-      }
-    );
     builder.addCase(sendMessage.rejected, (state, action: any) => {
       state.sendMessage.loading = false;
       state.sendMessage.error = action.payload;
