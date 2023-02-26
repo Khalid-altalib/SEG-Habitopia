@@ -5,7 +5,7 @@ import { User } from "../../../models";
 import { getUserFromDatabase } from "../../../app/util";
 
 import { Statistic } from "../../../../types";
-import { useAppSelector } from "../../../app/hooks";
+import { useSelector } from "../../../app/hooks";
 import ProfileStatistic from "./ProfileStatistic";
 import { useState, useEffect } from "react";
 import { getCheckIns } from "../statisticsQueries";
@@ -15,7 +15,7 @@ type Props = {};
 
 const ProfileStatistics = (props: Props) => {
   
-  const { error, loading, profile } = useAppSelector((state) => state.profile);
+  const { error, loading, profile } = useSelector((state) => state.profile);
   return (
     <VStack>
       <Heading mb={4}>Statistics</Heading>

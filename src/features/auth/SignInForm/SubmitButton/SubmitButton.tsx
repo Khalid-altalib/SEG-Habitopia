@@ -7,7 +7,7 @@ import { AntDesign } from "@expo/vector-icons";
 // Habitopia
 import Button from "../../../../components/Button";
 import { addLogInData, logInUser } from "../../authSlice";
-import { useAppDispatch } from "../../../../app/hooks";
+import { useDispatch } from "../../../../app/hooks";
 import { ButtonType, SignInFormValues } from "../../../../../types";
 
 /**
@@ -17,7 +17,7 @@ import { ButtonType, SignInFormValues } from "../../../../../types";
  * @returns The component representing the submit button.
  */
 const SubmitButton = ({ handleSubmit }: Props) => {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const onSubmit = async (data: SignInFormValues) => {
     dispatch(addLogInData(data));
