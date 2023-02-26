@@ -14,7 +14,7 @@ import {
 } from "native-base";
 import React from "react";
 import { Challenge, RootParams } from "../../../../types";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { useDispatch, useSelector } from "../../../app/hooks";
 import { challengeMappings } from "../challengeMappings";
 import { joinChallenge } from "../challengesSlice";
 
@@ -25,7 +25,7 @@ type Props = {
 const ChallengeModal = (props: Props) => {
   const { challenge } = props;
   const { name, description } = challenge;
-  const { joinChallenge: requestStatus } = useAppSelector(
+  const { joinChallenge: requestStatus } = useSelector(
     (state) => state.challenges
   );
   const { loading } = requestStatus;
@@ -34,7 +34,7 @@ const ChallengeModal = (props: Props) => {
 
   const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
 
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const handleButtonClick = async () => {
     await dispatch(joinChallenge(name));
