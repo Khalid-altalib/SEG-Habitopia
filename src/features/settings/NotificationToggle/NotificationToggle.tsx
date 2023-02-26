@@ -1,7 +1,7 @@
 import { Box, HStack, Text } from "native-base";
 import React, { useState } from "react";
 import { Switch } from "react-native";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { useDispatch, useSelector } from "../../../app/hooks";
 import { setSettings } from "../settingsSlice";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 
 const NotificationToggle = (props: Props) => {
   const [switchEnabled, setSwitchEnabled] = useState(props.defaultValue);
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const handleSwitchChange = () => {
     const invertedSwitchValue = !switchEnabled;

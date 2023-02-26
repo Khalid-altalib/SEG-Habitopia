@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ChatScreen from "../../screens/Chat/ChatScreen";
-import ChatList from "../../screens/Chat/ChatList";
 import { ChatParams } from "../../../types";
-import ContactIcon from "../../screens/Chat/ContactIcon";
+import ChatList from "../../screens/application/ChatScreen/ChatList";
+import ContactIcon from "../../features/chat/ContactIcon";
+import ChatScreen from "../../screens/application/ChatScreen";
 
 export const ChatStack = createNativeStackNavigator<ChatParams>();
 

@@ -4,7 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import { AntDesign } from "@expo/vector-icons";
 
 import { addSignUpData } from "./authSlice";
-import { useAppDispatch } from "../../app/hooks";
+import { useDispatch } from "../../app/hooks";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
 import { AuthParams, ButtonType, TextType } from "../../../types";
@@ -22,7 +22,7 @@ const SelectInstagramForm = () => {
     },
   });
 
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const navigation = useNavigation<NavigationProp<AuthParams>>();
 

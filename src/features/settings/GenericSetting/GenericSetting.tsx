@@ -1,7 +1,7 @@
 import { Button, Input, Text, TextArea, View } from "native-base";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { useDispatch, useSelector } from "../../../app/hooks";
 import DoneButton from "../DoneButton.tsx/DoneButton";
 import settingEntries from "../settingEntries";
 

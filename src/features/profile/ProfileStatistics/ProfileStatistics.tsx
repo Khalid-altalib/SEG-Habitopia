@@ -1,13 +1,13 @@
 import { FlatList, Heading, View, VStack } from "native-base";
 import React from "react";
 import { Statistic } from "../../../../types";
-import { useAppSelector } from "../../../app/hooks";
+import { useSelector } from "../../../app/hooks";
 import ProfileStatistic from "./ProfileStatistic";
 
 type Props = {};
 
 const ProfileStatistics = (props: Props) => {
-  const { error, loading, profile } = useAppSelector((state) => state.profile);
+  const { error, loading, profile } = useSelector((state) => state.profile);
   //   const { statistics } = profile; // BACKEND_PLACEHOLDER
 
   const statistics: Statistic[] = [

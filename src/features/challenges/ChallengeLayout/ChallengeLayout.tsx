@@ -1,10 +1,6 @@
-import { Box, Center, Heading, ScrollView, VStack } from "native-base";
+import { Center, Heading, ScrollView, VStack } from "native-base";
 import React from "react";
-import { View, FlatList, Text } from "react-native";
-import RegularLayout from "../../../components/RegularLayout/RegularLayout";
-import styles from "../../../constants/Styles";
-import ChallengeBox from "../ChallengeBox/challengeBox";
-import ChallengeBoxes from "../ChallengeBoxes/challengeBoxes";
+import PaddedContainer from "../../../components/PaddedContainer";
 
 type Props = {
   children: React.ReactNode;
@@ -14,7 +10,7 @@ function ChallengeLayout(props: Props) {
   const { children } = props;
   return (
     <ScrollView>
-      <RegularLayout>
+      <PaddedContainer>
         <Center>
           <Heading mb={4}>Pick a Challenge! 🚀</Heading>
         </Center>
@@ -22,7 +18,7 @@ function ChallengeLayout(props: Props) {
         <VStack space={3} width={"100%"}>
           {children}
         </VStack>
-      </RegularLayout>
+      </PaddedContainer>
     </ScrollView>
   );
 }
