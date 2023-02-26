@@ -72,3 +72,11 @@ const updateLastMessageInChat = async (
     })
   );
 };
+
+export const addChatSubscription = (chatID: string) => {
+  const filter = (message: Message) => message.chatroomID === chatID;
+  const subscription = DataStore.observe(Message).subscribe((message) =>
+    console.log(message)
+  );
+  return subscription;
+};

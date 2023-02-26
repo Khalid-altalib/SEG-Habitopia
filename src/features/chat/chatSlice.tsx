@@ -90,7 +90,18 @@ const initialState: ChatState = {
 export const chatSlice = createSlice({
   name: "chats",
   initialState,
-  reducers: {},
+  reducers: {
+    addMessageToChat: (
+      state,
+      action: PayloadAction<{ chatID: string; message: Message }>
+    ) => {
+      const { chatID, message } = action.payload;
+      const chat = state.chats.find((chat) => chat.id === chatID);
+      if (chat) {
+        chat.messages?.push(message);
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchChats.pending, (state) => {
       state.fetchChats.loading = true;
@@ -148,6 +159,6 @@ export const chatSlice = createSlice({
   },
 });
 
-export const {} = chatSlice.actions;
+export const { addMessageToChat } = chatSlice.actions;
 
 export default chatSlice.reducer;

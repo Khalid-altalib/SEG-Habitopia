@@ -7,6 +7,7 @@ import { ChatParams } from "../../../../types";
 import { useDispatch, useSelector } from "../../../app/hooks";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { fetchMessages } from "../../../features/chat/chatSlice";
+import { addChatSubscription } from "@features/chat/chatQueries";
 
 type Props = {};
 
@@ -19,12 +20,11 @@ const ChatScreen = (props: Props) => {
   let chat = chats.filter((chat) => chat.id == id)[0];
 
   useEffect(() => {
-    navigation.setOptions({ title: chat.name, headerShown: true });
-  }, [route.params.id]);
-
-  useEffect(() => {
     dispatch(fetchMessages(chat.id));
-  }, [chat.messages]);
+    navigation.setOptions({ title: chat.name, headerShown: true });
+    const subscription = addChatSubscription(id);
+    return () => subscription.unsubscribe();
+  }, [id]);
 
   return (
     <ImageBackground
