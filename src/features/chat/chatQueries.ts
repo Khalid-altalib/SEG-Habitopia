@@ -1,8 +1,14 @@
-import { DataStore } from "aws-amplify";
+import { API, DataStore, graphqlOperation } from "aws-amplify";
 import { Chat } from "../../../types";
 import { getUserFromDatabase, getUserIdFromThunk } from "../../app/util";
 import { ChatRoom, Message } from "../../models";
 import { Message as MessageType } from "../../../types";
+import { GraphQLSubscription } from "@aws-amplify/api";
+import {
+  OnCreateMessageSubscription,
+  OnCreateMessageSubscriptionVariables,
+} from "src/API";
+import { onCreateMessage } from "../../graphql/subscriptions";
 
 export const fetchUserChats = async (thunkAPI: any) => {
   const userChatRooms = (await getUserFromDatabase(thunkAPI)).ChatRooms;
@@ -75,11 +81,17 @@ const updateLastMessageInChat = async (
 
 export const addChatSubscription = (chatID: string) => {
   const filter = (message: Message) => message.chatroomID === chatID;
-  const subscription = DataStore.observeQuery(Message, (message) =>
-    message.chatroomID.eq(chatID)
-  ).subscribe((snapshot) => {
-    const { items, isSynced } = snapshot;
-    console.log(items);
+  const variables: OnCreateMessageSubscriptionVariables = {
+    filter: {
+      // Only receive Todo messages where the "type" field is "Personal"
+      chatroomID: { eq: chatID },
+    },
+  };
+  const subscription = API.graphql<
+    GraphQLSubscription<OnCreateMessageSubscription>
+  >(graphqlOperation(onCreateMessage)).subscribe({
+    next: ({ provider, value }) => console.log({ provider, value }),
+    error: (error) => console.warn(error),
   });
   return subscription;
 };
