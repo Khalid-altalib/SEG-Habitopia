@@ -16,7 +16,6 @@ const handleCheckIn = async () => {
             chatroomID: "a36d9934-b05a-4765-af1d-79619d468eb3" // PLACEHOLDER FOR CURRENT CHATROOM
         })
     );
-    console.log('Check in saved');
     } catch (error) {
         console.log("Error saving check in", error);
         }
