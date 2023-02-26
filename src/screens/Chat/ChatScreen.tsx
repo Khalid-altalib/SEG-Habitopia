@@ -35,7 +35,7 @@ const ChatScreen = (props: Props) => {
           <Message
             text={item.text}
             createdAt={item.createdAt}
-            userId={item.userId}
+            userID={item.userID}
           ></Message>
         )}
         style={styles.flatList}
