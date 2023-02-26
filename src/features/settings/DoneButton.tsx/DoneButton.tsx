@@ -2,7 +2,7 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { Button, View } from "native-base";
 import React from "react";
 import { RootParams } from "../../../../types";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { useDispatch, useSelector } from "../../../app/hooks";
 import { setSettings } from "../settingsSlice";
 
 type Props = {
@@ -15,9 +15,9 @@ const DoneButton = (props: Props) => {
   const navigation = useNavigation<NavigationProp<RootParams>>();
   const { getValues, disabled, valueName } = props;
 
-  const { loading } = useAppSelector((state) => state.settings.setSettings);
+  const { loading } = useSelector((state) => state.settings.setSettings);
 
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const handlePress = async () => {
     await dispatch(setSettings({ [valueName]: getValues("formValue") }));
