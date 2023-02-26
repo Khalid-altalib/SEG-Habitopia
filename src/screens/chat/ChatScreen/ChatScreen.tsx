@@ -1,25 +1,12 @@
-// React
 import React, { useEffect } from "react";
-
-// React Native
-import { ImageBackground, StyleSheet, FlatList } from "react-native";
-
-// React Navigation
+import { ImageBackground, StyleSheet, FlatList, Text } from "react-native";
+import Message from "../../../features/chat/Message";
+import InputBox from "../../../features/chat/InputBox";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
-<<<<<<< HEAD:src/screens/Chat/ChatScreen.tsx
-import { Chat, ChatParams } from "../../../types";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-=======
->>>>>>> aa5dbfec91653e51bdaac120103ec8fd26e28616:src/screens/application/ChatScreen/ChatScreen.tsx
+import { ChatParams } from "../../../../types";
+import { useDispatch, useSelector } from "../../../app/hooks";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { fetchMessages } from "../../features/chat/chatSlice";
-
-// Habitopia
-import data from "@assets/data/messages.json";
-import { useSelector } from "@app/hooks";
-import Message from "@features/chat/Message";
-import InputBox from "@features/chat/InputBox";
-import { ChatParams } from "types";
+import { fetchMessages } from "../../../features/chat/chatSlice";
 
 type Props = {};
 
@@ -28,7 +15,7 @@ const ChatScreen = (props: Props) => {
   const route = useRoute<RouteProp<ChatParams, "IndividualChat">>();
   const { chats } = useSelector((store) => store.chats);
   const { id } = route.params;
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   let chat = chats.filter((chat) => chat.id == id)[0];
 
   useEffect(() => {
@@ -51,7 +38,6 @@ const ChatScreen = (props: Props) => {
           ></Message>
         )}
         style={styles.flatList}
-        inverted
       />
 
       <InputBox />

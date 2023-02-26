@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { FlatList } from "react-native";
-import ChatItem from "../../features/chat/ChatItem";
-import { useDispatch, useSelector } from "../../app/hooks";
-import { fetchChats } from "../../features/chat/chatSlice";
+import ChatItem from "../../../features/chat/ChatItem";
+import { useDispatch, useSelector } from "../../../app/hooks";
+import { fetchChats } from "../../../features/chat/chatSlice";
 
 type Props = {};
 
-const ChatList = (props: Props) => {
+const ChatListScreen = (props: Props) => {
   const { chats, fetchChats: requestStatus } = useSelector(
     (state) => state.chats
   );
@@ -35,4 +35,4 @@ const ChatList = (props: Props) => {
   );
 };
 
-export default ChatList;
+export default ChatListScreen;

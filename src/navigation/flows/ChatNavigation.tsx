@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ChatParams } from "../../../types";
-import ChatList from "../../screens/application/ChatScreen/ChatList";
+import ChatListScreen from "@screens/chat/ChatListScreen/ChatListScreen";
 import ContactIcon from "../../features/chat/ContactIcon";
-import ChatScreen from "../../screens/application/ChatScreen";
+import ChatScreen from "@screens/chat/ChatScreen/ChatScreen";
 
 export const ChatStack = createNativeStackNavigator<ChatParams>();
 
@@ -11,7 +11,7 @@ const ChatNavigation = () => {
     <ChatStack.Navigator initialRouteName="Chats">
       <ChatStack.Screen
         name="Chats"
-        component={ChatList}
+        component={ChatListScreen}
         options={{
           headerRight: () => {
             return <ContactIcon />;
