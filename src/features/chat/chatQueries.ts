@@ -1,4 +1,4 @@
-import { API, DataStore, graphqlOperation } from "aws-amplify";
+import { DataStore } from "aws-amplify";
 import { Chat } from "../../../types";
 import { getUserFromDatabase, getUserIdFromThunk } from "../../app/util";
 import { ChatRoom, Message } from "../../models";
