@@ -1,10 +1,12 @@
-const initialState = {
+import { SettingsState } from "./settingsSlice";
+
+const settingsMockState: SettingsState = {
   settings: {
     email: "example@gmail.com",
     password: "",
     notifications: true,
     name: "John Doe",
-    biography: "hello my name is john doe and i have severe autism",
+    biography: "Hello, I'm John Doe.",
   },
   fetchSettings: {
     loading: false,
@@ -16,4 +18,4 @@ const initialState = {
   },
 };
 
-export default initialState;
+export default settingsMockState;

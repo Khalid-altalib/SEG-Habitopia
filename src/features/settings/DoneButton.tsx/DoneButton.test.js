@@ -3,11 +3,12 @@ import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import TestingWrapper from "../../../app/TestingWrapper";
 import DoneButton from "./DoneButton";
-import initialState from "../settingsInitialStateMock";
-
-const store = configureStore([thunk])({ settings: initialState });
+import settingsMockState from "../settingsMockState";
 
 describe("DoneButton", () => {
+  const mockState = { settings: settingsMockState };
+  const defaultStore = configureStore([thunk])(mockState);
+
   const getValuesMock = jest.fn();
   const defaultProps = {
     disabled: false,
@@ -17,7 +18,7 @@ describe("DoneButton", () => {
 
   it("renders correctly", () => {
     const tree = render(
-      <TestingWrapper store={store}>
+      <TestingWrapper store={defaultStore}>
         <DoneButton {...defaultProps} />
       </TestingWrapper>
     );
@@ -25,9 +26,9 @@ describe("DoneButton", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("finds the done button", async () => {
+  it("finds the done button", () => {
     const tree = render(
-      <TestingWrapper store={store}>
+      <TestingWrapper store={defaultStore}>
         <DoneButton {...defaultProps} />
       </TestingWrapper>
     );
@@ -36,19 +37,4 @@ describe("DoneButton", () => {
 
     expect(button).toBeDefined();
   });
-
-  // it("dispatches setSettings action when pressed", async () => {
-  //   const mockPayload = { email: "test@test.com" };
-  //   getValuesMock.mockReturnValue("test@test.com");
-  //   store.dispatch = jest.fn().mockResolvedValueOnce(mockPayload);
-
-  //   const button = wrapper.getByTestId("button");
-
-  //   await act(async () => {
-  //     fireEvent.press(button);
-  //   });
-
-  //   // expect(store.dispatch).toHaveBeenCalledWith(setSettings(mockPayload));
-  //   // expect(navigation.goBack).toHaveBeenCalled();
-  // });
 });
