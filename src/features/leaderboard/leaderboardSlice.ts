@@ -2,9 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { DataStore, Predicates, SortDirection, API, graphqlOperation } from 'aws-amplify';
 import { Leaderboard, User, Checkin } from '../../models';
-import { GraphQLSubscription } from '@aws-amplify/api';
-import * as subscriptions from '../../graphql/subscriptions';
-import { OnCreateCheckinSubscription } from '../../API';
+
 
 export type LeaderboardState = {
   loading: boolean;
@@ -25,27 +23,6 @@ const initialState: LeaderboardState = {
   page_count: undefined,
   entries: [{}],
 };
-
-
-/**
- * Subscribes to the checkin model and then updates the leaderboard model when the user checks in
- */
-const subscriptionToCheckin = API.graphql<GraphQLSubscription<OnCreateCheckinSubscription>>(
-  graphqlOperation(subscriptions.onCreateCheckin, {
-    filter: {
-      userID: { eq: "insert user id here" }
-    }
-  }))
-  .subscribe({
-    next: (eventData) => {
-      console.log(eventData);
-      // then create or update a leaderboard entry for the user
-    },
-    error: (error) => {
-      console.log(error);
-    }
-  });
-  
 
   /**
    * Subscribes to the checkin model and updates the leaderboard model when the user checks in
