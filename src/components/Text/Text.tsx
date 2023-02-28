@@ -10,9 +10,10 @@ type Props = {
   type?: TextType;
   style: StyleSheet;
   children: string;
+  color?: string;
 };
 
-const Text = ({ type, style, children }: any) => {
+const Text = ({ type, style, children, color }: any) => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
   const loadFonts = async () => {
@@ -57,7 +58,9 @@ const Text = ({ type, style, children }: any) => {
 
   const styles = StyleSheet.create({
     base: {
-      color: useColorModeValue(theme.colors.gray[900], theme.colors.gray[200]),
+      color:
+        color ||
+        useColorModeValue(theme.colors.gray[900], theme.colors.gray[200]),
     },
     regular: {
       fontSize: 19,
@@ -65,11 +68,17 @@ const Text = ({ type, style, children }: any) => {
     },
     subtle: {
       fontSize: 15,
-      color: useColorModeValue(theme.colors.gray[500], theme.colors.gray[400]),
+      color:
+        color ||
+        useColorModeValue(theme.colors.gray[500], theme.colors.gray[400]),
       fontFamily: fontsLoaded ? "Roboto Medium" : undefined,
     },
     heading: {
       fontSize: 40,
+      fontFamily: fontsLoaded ? "Roboto Black" : undefined,
+    },
+    subheading: {
+      fontSize: 23,
       fontFamily: fontsLoaded ? "Roboto Black" : undefined,
     },
     button: {

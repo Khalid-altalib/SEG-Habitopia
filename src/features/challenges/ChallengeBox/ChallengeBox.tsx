@@ -13,7 +13,7 @@ type Props = {
 
 const ChallengeBox = (props: Props) => {
   const { challenge } = props;
-  const { name, active, description } = challenge;
+  const { name, active } = challenge;
 
   const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
 

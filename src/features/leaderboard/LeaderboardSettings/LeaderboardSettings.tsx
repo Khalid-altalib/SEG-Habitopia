@@ -1,7 +1,7 @@
 import { HStack, Select } from "native-base";
 import React from "react";
 import { Challenge } from "../../../../types";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { useDispatch, useSelector } from "../../../app/hooks";
 import { fetchChallenges } from "../../challenges/challengesSlice";
 import { changeSetting, LeaderboardState } from "../leaderboardSlice";
 
@@ -10,15 +10,11 @@ type Props = {};
 const timeIntervals = ["Weekly", "Monthly", "All Time"];
 
 const LeaderboardSettings = (props: Props) => {
-  const timeInterval = useAppSelector(
-    (state) => state.leaderboard.timeInterval
-  );
+  const timeInterval = useSelector((state) => state.leaderboard.timeInterval);
 
-  const challengeType = useAppSelector(
-    (state) => state.leaderboard.challengeType
-  );
+  const challengeType = useSelector((state) => state.leaderboard.challengeType);
 
-  // const challenges = useAppSelector((state) => state.challenges.challenges); BACKEND_PLACEHOLDER
+  // const challenges = useSelector((state) => state.challenges.challenges); BACKEND_PLACEHOLDER
 
   // const challengeTypes = challenges.map(
   //   (challenge: Challenge) => challenge.name
@@ -26,7 +22,7 @@ const LeaderboardSettings = (props: Props) => {
 
   const challengeTypes = ["Sleep", "Gym", "Diet"];
 
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const handleChange = async (settingName: string, value: string) => {
     dispatch(changeSetting({ name: settingName, value: value }));
