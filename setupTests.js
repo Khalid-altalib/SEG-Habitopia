@@ -1,5 +1,3 @@
-import Enzyme from "enzyme";
-
-import Adapter from "@cfaester/enzyme-adapter-react-18";
-
-Enzyme.configure({ adapter: new Adapter() });
+jest.mock("@react-native-async-storage/async-storage", () =>
+  require("@react-native-async-storage/async-storage/jest/async-storage-mock")
+);

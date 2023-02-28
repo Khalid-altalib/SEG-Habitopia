@@ -17,7 +17,7 @@
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],
-    "setupFilesAfterEnv": [
+    "setupFiles": [
       "./setupTests.js"
     ]
   },
