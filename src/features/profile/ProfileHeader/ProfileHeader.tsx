@@ -11,7 +11,7 @@ import {
 } from "native-base";
 import React from "react";
 import { Profile, RootParams } from "../../../../types";
-import { useAppSelector } from "../../../app/hooks";
+import { useSelector } from "../../../app/hooks";
 import StatusContainer from "../../../components/StatusContainer/StatusContainer";
 
 type Props = {
@@ -20,7 +20,7 @@ type Props = {
 
 const ProfileHeader = (props: Props) => {
   const { isLocalUserProfile } = props;
-  const { profile } = useAppSelector((state) => state.profile);
+  const { profile } = useSelector((state) => state.profile);
 
   const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
 

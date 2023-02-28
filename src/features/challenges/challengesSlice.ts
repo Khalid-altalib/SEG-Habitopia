@@ -1,12 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { DataStore } from "@aws-amplify/datastore";
-import { Challenge, LocalUser } from "../../../types";
+import { Challenge } from "../../../types";
 import { RootState } from "../../app/store";
-import { getAuthTokenFromThunk } from "../../app/util";
-import {
-  ChallengeType as ChallengeTypeModel,
-  Challenge as ChallengeModel,
-} from "../../models";
+import { ChallengeType as ChallengeTypeModel } from "../../models";
+import { joinChallengeQuery } from "./challengeQueries";
 
 type ChallengesState = {
   challenges: Challenge[];
@@ -36,26 +33,23 @@ export const fetchChallenges = createAsyncThunk<
 });
 
 export const joinChallenge = createAsyncThunk<
-  object,
+  Challenge,
   string,
   { rejectValue: string; state: RootState }
 >("challenges/join", async (challengeName: string, thunkAPI) => {
   try {
-    const ChallengeTypeInst = await DataStore.query(ChallengeTypeModel, (c) =>
-      c.name.eq(challengeName)
-    );
+    const challengeTypeInstance = (
+      await DataStore.query(ChallengeTypeModel, (challengeNames) =>
+        challengeNames.name.eq(challengeName)
+      )
+    )[0];
 
-    const response = await DataStore.query(ChallengeModel, (c) =>
-      c.and((c) => [
-        c.ChallengeType.id.eq(ChallengeTypeInst[0].id),
-        c.userCount.lt(15),
-      ])
-    );
+    await joinChallengeQuery(challengeTypeInstance, thunkAPI);
 
-    const data = response.map((item) => (item = { ...item }));
-    return data;
+    return { ...challengeTypeInstance };
   } catch (error: any) {
     const message = error.message;
+    console.log(message);
     return thunkAPI.rejectWithValue(message);
   }
 });
@@ -98,7 +92,7 @@ export const challengesSlice = createSlice({
     builder.addCase(
       joinChallenge.fulfilled,
       (state, action: PayloadAction<any>) => {
-        const joinedChallengeName = action.payload.challengeName;
+        const joinedChallengeName = action.payload.name;
         state.challenges = state.challenges.map((challenge) => {
           if (challenge.name == joinedChallengeName) {
             return { ...challenge, active: true };

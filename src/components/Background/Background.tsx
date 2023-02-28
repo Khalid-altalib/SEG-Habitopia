@@ -1,8 +1,14 @@
-import React from "react";
+// Expo Linear Gradient
 import { LinearGradient } from "expo-linear-gradient";
-import { theme, useColorModeValue } from "native-base";
+
+// Native Base
+import { useColorModeValue } from "native-base";
+
+// Habitopia
+import Theme from "../../app/theme";
 
 type Props = {
+  /** The components to display on top of the background. */
   children: any;
 };
 
@@ -13,21 +19,13 @@ type Props = {
  * @returns The background component.
  */
 const Background = (props: Props) => {
-  const LIGHT_MODE_GRADIENT = [theme.colors.gray[200], theme.colors.gray[100]];
-  const DARK_MODE_GRADIENT = [
-    theme.colors.blueGray[900],
-    theme.colors.blueGray[800],
-  ];
+  const gradientColors = useColorModeValue(
+    Theme.background.gradientColors.lightMode,
+    Theme.background.gradientColors.darkMode
+  );
 
   return (
-    <LinearGradient
-      colors={useColorModeValue(LIGHT_MODE_GRADIENT, DARK_MODE_GRADIENT)}
-      style={{
-        flex: 1, // Make the background fill all of the space available to it
-      }}
-    >
-      {props.children}
-    </LinearGradient>
+    <LinearGradient colors={gradientColors}>{props.children}</LinearGradient>
   );
 };
 

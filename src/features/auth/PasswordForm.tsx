@@ -9,7 +9,7 @@ import {
   logInUser,
   signUpUser,
 } from "./authSlice";
-import { useAppDispatch } from "../../app/hooks";
+import { useDispatch } from "../../app/hooks";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
 import { AuthParams, ButtonType, TextType } from "../../../types";
@@ -26,7 +26,7 @@ const PasswordForm = () => {
       password: "",
     },
   });
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const onSubmit = async (data: formData) => {
     dispatch(addSignUpData(data));

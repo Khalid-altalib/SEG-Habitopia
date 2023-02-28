@@ -1,5 +1,9 @@
-import { Avatar, Box, Card, Heading, HStack, Text, View } from "native-base";
+import { Avatar, Box, Heading, HStack, theme, View } from "native-base";
+
 import React from "react";
+import Card from "../../../components/Card";
+import Text from "../../../components/Text";
+import { TextType } from "../../../../types";
 
 type Props = {
   name: string;
@@ -7,31 +11,48 @@ type Props = {
   place: number;
 };
 
-const rankedColors = ["amber.200", "light.200", "orange.200"];
+const rankedColors: [string, string][] = [
+  [theme.colors.amber[400], theme.colors.amber[300]],
+  [theme.colors.orange[400], theme.colors.orange[300]],
+  [theme.colors.coolGray[400], theme.colors.coolGray[300]],
+];
 
 const LeaderboardCard = (props: Props) => {
   const { name, wins, place } = props;
 
   const cardColor =
-    place < rankedColors.length ? rankedColors[place] : "light.100";
+    place < rankedColors.length ? rankedColors[place] : undefined;
 
   return (
-    <Box shadow="3">
-      <Card backgroundColor={cardColor}>
-        <HStack justifyContent={"space-between"} alignItems="center">
-          <HStack space={4}>
-            <Avatar />
-            <View>
-              <Heading>{name}</Heading>
-              <Text>{wins} wins</Text>
-            </View>
-          </HStack>
+    <Card backgroundColorGradient={cardColor}>
+      <HStack justifyContent={"space-between"} alignItems="center">
+        <HStack space={4}>
+          <Avatar />
           <View>
-            <Heading>#{place + 1}</Heading>
+            <Text
+              type={TextType.Subheading}
+              color={cardColor ? theme.colors.blueGray[900] : undefined}
+            >
+              {name}
+            </Text>
+            <Text
+              type={TextType.Regular}
+              color={cardColor ? theme.colors.blueGray[900] : undefined}
+            >
+              {wins} wins
+            </Text>
           </View>
         </HStack>
-      </Card>
-    </Box>
+        <View>
+          <Text
+            type={TextType.Subheading}
+            color={cardColor ? theme.colors.blueGray[900] : undefined}
+          >
+            #{place + 1}
+          </Text>
+        </View>
+      </HStack>
+    </Card>
   );
 };
 

@@ -4,7 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import { AntDesign } from "@expo/vector-icons";
 
 import { addLogInData, addSignUpData, logInUser } from "./authSlice";
-import { useAppDispatch } from "../../app/hooks";
+import { useDispatch } from "../../app/hooks";
 import Button from "../../components/Button";
 import Text from "../../components/Text";
 import { AuthParams, ButtonType, TextType } from "../../../types";
@@ -21,7 +21,7 @@ const NameForm = () => {
       name: "",
     },
   });
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const onSubmit = async (data: formData) => {
     dispatch(addSignUpData(data));

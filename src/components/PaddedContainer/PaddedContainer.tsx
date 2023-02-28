@@ -14,7 +14,11 @@ type Props = {
 const PaddedContainer = (props: Props) => {
   const PADDING = 25;
 
-  return <View style={{ padding: PADDING }}>{props.children}</View>;
+  return (
+    <View style={{ padding: PADDING, width: "100%", height: "100%" }}>
+      {props.children}
+    </View>
+  );
 };
 
 export default PaddedContainer;
