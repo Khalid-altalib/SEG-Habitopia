@@ -1,14 +1,11 @@
 import { mount, ReactWrapper, shallow } from "enzyme";
 import { Provider } from "react-redux";
 import { fireEvent, render } from "@testing-library/react-native";
-import { act } from "react-test-renderer";
 import { extendTheme, NativeBaseProvider } from "native-base";
 import configureStore, { MockStore } from "redux-mock-store";
 import thunk from "redux-thunk";
 import DoneButton from "../DoneButton";
 import { NavigationContainer } from "@react-navigation/native";
-import { wrap } from "@cfaester/enzyme-adapter-react-18/dist/enzyme-adapter-utils";
-import { setSettings } from "../../settingsSlice";
 
 //theme and inset stuff to get the nativebaseprovider to work
 const newColorTheme = {
