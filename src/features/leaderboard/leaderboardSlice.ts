@@ -11,7 +11,7 @@ export type LeaderboardState = {
   timeInterval: string;
   page: number;
   page_count: number | undefined;
-  entries: Array<object>;
+  entries: Array<{name: string, checkins: number}>;
 };
 
 const initialState: LeaderboardState = {
@@ -21,41 +21,42 @@ const initialState: LeaderboardState = {
   timeInterval: "Weekly",
   page: 0,
   page_count: undefined,
-  entries: [{}],
+  entries: [],
 };
 
   /**
    * Subscribes to the checkin model and updates the leaderboard model when the user checks in
    */
-  const subscription = DataStore.observe(Checkin).subscribe({
-    next: async (msg) => {
-      if (msg.opType === 'INSERT') {
-        const checkin = msg.element as Checkin;
-        const { userID } = checkin;
+  /**
+const subscription = DataStore.observe(Checkin).subscribe({
+  next: async (msg) => {
+    if (msg.opType === 'INSERT') {
+      const checkin = msg.element as Checkin;
+      const { userID } = checkin;
   
-        // Retrieve the current number of checkins for the user from the leaderboard
-        const [leaderboardEntry] = await DataStore.query(Leaderboard, (entry) =>
-          entry.leaderboardUserId.eq(userID)
-        );
-        const currentCheckins = leaderboardEntry?.numberOfCheckins ?? 0;
-  
-        // Update the user's checkins in the leaderboard
-        const newCheckins = currentCheckins + 1;
-        await DataStore.save(
-          Leaderboard.copyOf(leaderboardEntry, (updated) => {
-            updated.numberOfCheckins = newCheckins;
-          })
-        );
-      }
-    },
-    error: (err) => console.error(err),
-    complete: () => console.log('Leaderboard update complete'),
-  });
+      // Retrieve the current number of checkins for the user from the leaderboard
+      const [leaderboardEntry] = await DataStore.query(Leaderboard, (entry) =>
+        entry.leaderboardUserId.eq(userID)
+      );
+      const currentCheckins = leaderboardEntry?.numberOfCheckins ?? 0;
 
+      // Update the user's checkins in the leaderboard
+      const newCheckins = currentCheckins + 1;
+      await DataStore.save(
+        Leaderboard.copyOf(leaderboardEntry, (updated) => {
+          updated.numberOfCheckins = newCheckins;
+        })
+      );
+    }
+  },
+  error: (err) => console.error(err),
+  complete: () => console.log('Leaderboard update complete'),
+});
+*/
   
 /**
  * Fetches the leaderboard entries from the database
- * @returns {Promise<GraphQLResult<Leaderboard>>} The leaderboard entries as  {id: string, checkins: number}
+ * @returns {Promise<GraphQLResult<Leaderboard>>} The leaderboard entries as  {name: string, checkins: number}
  * @throws {Error} If the leaderboard entries could not be fetched
  * @async
  */
@@ -87,8 +88,12 @@ export const fetchLeaderboard = createAsyncThunk<
         };
       })); //maps the leaderboard to include the name of the user
       console.log(result);
-      return result;
-
+      result.forEach((item) => {console.log(item)});
+      const serializableResult = [...result.map((item) => {
+        return {checkins: item.checkins, name: item.name}})];
+      console.log(serializableResult);
+      return serializableResult;
+      
     } catch (error: any) {
       const message = error.message;
       return thunkAPI.rejectWithValue(message);
@@ -139,7 +144,8 @@ export const leaderboardSlice = createSlice({
         state.page += 1;
         state.loading = false;
         state.error = "";
-        state.entries = action.payload.entries;
+        console.log(action.payload);
+        state.entries = action.payload;
       }
     );
     builder.addCase(fetchLeaderboard.pending, (state) => {
