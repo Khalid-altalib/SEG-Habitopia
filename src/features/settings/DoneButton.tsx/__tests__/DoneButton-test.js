@@ -6,22 +6,22 @@ import thunk from "redux-thunk";
 import DoneButton from "../DoneButton";
 import { NavigationContainer } from "@react-navigation/native";
 
-//theme and inset stuff to get the nativebaseprovider to work
-const newColorTheme = {
-  brand: {
-    900: "#5B8DF6",
-    800: "#ffffff",
-    700: "#cccccc",
+const initialState = {
+  settings: {
+    email: "example@gmail.com",
+    password: "",
+    notifications: true,
+    name: "John Doe",
+    biography: "hello my name is john doe and i have severe autism",
   },
-};
-
-const theme = extendTheme({
-  colors: newColorTheme,
-});
-
-const inset = {
-  frame: { x: 0, y: 0, width: 0, height: 0 },
-  insets: { top: 0, left: 0, right: 0, bottom: 0 },
+  fetchSettings: {
+    loading: false,
+    error: "",
+  },
+  setSettings: {
+    loading: false,
+    error: "",
+  },
 };
 
 describe("DoneButton", () => {
@@ -32,38 +32,15 @@ describe("DoneButton", () => {
   let wrapper;
 
   //not sure if this is correct
-  const initialState = {
-    settings: {
-      email: "example@gmail.com",
-      password: "",
-      notifications: true,
-      name: "John Doe",
-      biography: "hello my name is john doe and i have severe autism",
-    },
-    fetchSettings: {
-      loading: false,
-      error: "",
-    },
-    setSettings: {
-      loading: false,
-      error: "",
-    },
-  };
 
   beforeEach(() => {
     store = configureStore([thunk])({ settings: initialState });
     wrapper = render(
-      <NativeBaseProvider theme={theme} initialWindowMetrics={inset}>
-        <Provider store={store}>
-          <NavigationContainer>
-            <DoneButton
-              disabled={false}
-              getValues={getValuesMock}
-              valueName={valueName}
-            />
-          </NavigationContainer>
-        </Provider>
-      </NativeBaseProvider>
+      <DoneButton
+        disabled={false}
+        getValues={getValuesMock}
+        valueName={valueName}
+      />
     );
   });
 
