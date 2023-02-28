@@ -1,8 +1,10 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { DataStore, Predicates, SortDirection, API, graphqlOperation } from 'aws-amplify';
-import { Leaderboard, User } from '../../models';
-import { GraphQLResult } from '@aws-amplify/api-graphql';
+import { Leaderboard, User, Checkin } from '../../models';
+import { GraphQLSubscription } from '@aws-amplify/api';
+import * as subscriptions from '../../graphql/subscriptions';
+import { OnCreateCheckinSubscription } from '../../API';
 
 export type LeaderboardState = {
   loading: boolean;
@@ -25,7 +27,55 @@ const initialState: LeaderboardState = {
 };
 
 
+/**
+ * Subscribes to the checkin model and then updates the leaderboard model when the user checks in
+ */
+const subscriptionToCheckin = API.graphql<GraphQLSubscription<OnCreateCheckinSubscription>>(
+  graphqlOperation(subscriptions.onCreateCheckin, {
+    filter: {
+      userID: { eq: "insert user id here" }
+    }
+  }))
+  .subscribe({
+    next: (eventData) => {
+      console.log(eventData);
+      // then create or update a leaderboard entry for the user
+    },
+    error: (error) => {
+      console.log(error);
+    }
+  });
+  
 
+  /**
+   * Subscribes to the checkin model and updates the leaderboard model when the user checks in
+   */
+  const subscription = DataStore.observe(Checkin).subscribe({
+    next: async (msg) => {
+      if (msg.opType === 'INSERT') {
+        const checkin = msg.element as Checkin;
+        const { userID } = checkin;
+  
+        // Retrieve the current number of checkins for the user from the leaderboard
+        const [leaderboardEntry] = await DataStore.query(Leaderboard, (entry) =>
+          entry.leaderboardUserId.eq(userID)
+        );
+        const currentCheckins = leaderboardEntry?.numberOfCheckins ?? 0;
+  
+        // Update the user's checkins in the leaderboard
+        const newCheckins = currentCheckins + 1;
+        await DataStore.save(
+          Leaderboard.copyOf(leaderboardEntry, (updated) => {
+            updated.numberOfCheckins = newCheckins;
+          })
+        );
+      }
+    },
+    error: (err) => console.error(err),
+    complete: () => console.log('Leaderboard update complete'),
+  });
+
+  
 /**
  * Fetches the leaderboard entries from the database
  * @returns {Promise<GraphQLResult<Leaderboard>>} The leaderboard entries as  {id: string, checkins: number}
