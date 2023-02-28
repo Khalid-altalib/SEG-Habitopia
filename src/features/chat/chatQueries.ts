@@ -1,4 +1,4 @@
-import { DataStore } from "aws-amplify";
+import { DataStore, Predicates, SortDirection } from "aws-amplify";
 import { Chat } from "../../../types";
 import { getUserFromDatabase, getUserIdFromThunk } from "../../app/util";
 import { ChatRoom, Message } from "../../models";
@@ -32,14 +32,17 @@ export const fetchUserChats = async (thunkAPI: any) => {
 };
 
 export const fetchChatMessages = async (chatId: string) => {
-  const chatMessages = await DataStore.query(Message, (message) =>
-    message.chatroomID.eq(chatId)
+  const chatMessages = await DataStore.query(
+    Message,
+    (message) => message.chatroomID.eq(chatId),
+    { sort: (messaage) => messaage.createdAt(SortDirection.DESCENDING) }
   );
   let messages: MessageType[] = [];
   for await (const chatMessage of chatMessages) {
     messages.push({ ...chatMessage } as MessageType);
   }
-  return messages.reverse();
+  console.log(messages);
+  return messages;
 };
 
 export const sendChatMessage = async (
