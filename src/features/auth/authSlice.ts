@@ -13,6 +13,7 @@ type AuthState = {
     email: string;
     password: string;
     name: string;
+    bio: string;
     confirmationCode: string;
   };
   logInData: {
@@ -118,7 +119,13 @@ export const logOutUser = createAsyncThunk("auth/logOutUser", async () => {
 });
 
 const initialState: AuthState = {
-  signUpData: { email: "", password: "", name: "", confirmationCode: "" },
+  signUpData: {
+    email: "",
+    password: "",
+    name: "",
+    confirmationCode: "",
+    bio: "",
+  },
   logInData: { email: "", password: "" },
   user: undefined,
   loading: false,

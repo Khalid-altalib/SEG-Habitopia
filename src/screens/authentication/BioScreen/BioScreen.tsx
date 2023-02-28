@@ -5,6 +5,7 @@ import { View } from "native-base";
 import Background from "@components/Background";
 import PaddedContainer from "@components/PaddedContainer";
 import Text from "@components/Text";
+import BioForm from "@features/auth/BioForm";
 import { TextType } from "types";
 
 /**
@@ -20,6 +21,7 @@ const BioScreen = () => {
           <Text type={TextType.Heading} style={{ marginBottom: "10%" }}>
             What would you like your bio to be?
           </Text>
+          <BioForm />
         </View>
       </PaddedContainer>
     </Background>
