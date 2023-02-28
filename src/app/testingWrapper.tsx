@@ -9,23 +9,23 @@ const inset = {
 
 const theme = extendTheme({});
 
-import React, { Children } from "react";
+import React from "react";
 
 type Props = {
-  initialState: any;
+  store: any;
   children: React.ReactNode;
 };
 
-const testingWrapper = (props: Props) => {
-  const { initialState, children } = props;
+const TestingWrapper = (props: Props) => {
+  const { store, children } = props;
 
   return (
     <NativeBaseProvider theme={theme} initialWindowMetrics={inset}>
-      <Provider store={initialState}>
+      <Provider store={store}>
         <NavigationContainer>{children}</NavigationContainer>
       </Provider>
     </NativeBaseProvider>
   );
 };
 
-export default testingWrapper;
+export default TestingWrapper;
