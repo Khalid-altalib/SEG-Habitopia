@@ -28,7 +28,12 @@ const GenericSetting = (props: Props) => {
       <Controller
         control={control}
         render={({ field: { onChange, value } }) => (
-          <Input onChangeText={onChange} value={value} size="xl" />
+          <Input
+            onChangeText={onChange}
+            value={value}
+            size="xl"
+            testID="input"
+          />
         )}
         name="formValue"
       />
