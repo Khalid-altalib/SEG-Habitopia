@@ -34,6 +34,7 @@ export type AuthParams = {
   Welcome: undefined;
   Password: undefined;
   ConfirmationCode: undefined;
+  Bio: undefined;
   Name: undefined;
   EmailAddress: undefined;
   SelectAvatar: undefined;
