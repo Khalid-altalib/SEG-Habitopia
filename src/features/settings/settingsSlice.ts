@@ -4,6 +4,7 @@ import { Settings } from "../../../types";
 import { getAuthTokenFromThunk } from "../../app/util";
 import { getUserFromDatabase } from "../../app/util";
 import { User } from "../../models";
+import { updatePassword } from "../auth/authSlice";
 
 export type SettingsState = {
   settings: Settings;
@@ -64,13 +65,15 @@ export const setSettings = createAsyncThunk<
   { rejectValue: string }
 >("settings/set", async (settings: any, thunkAPI) => {
   try {
+    // console.log("settings", settings);
+
     const name = settings.name;
     const email = settings.email;
     const notifications = settings.notifications;
     const biography = settings.biography;
+    const password = settings.password;
     const user = await getUserFromDatabase(thunkAPI);
     // update the one that is not null
-
     await DataStore.save(
       User.copyOf(user, (updated) => {
         if (name !== undefined) {
@@ -84,6 +87,9 @@ export const setSettings = createAsyncThunk<
         }
         if (biography !== undefined) {
           updated.biography = biography;
+        }
+        if (password !== undefined) {
+          updatePassword(password, thunkAPI);
         }
       }));
 
