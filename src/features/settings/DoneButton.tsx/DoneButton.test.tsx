@@ -7,7 +7,7 @@ import settingsMockState from "../settingsMockState";
 
 describe("DoneButton", () => {
   const mockState = { settings: settingsMockState };
-  const defaultStore = configureStore([thunk])(mockState);
+  const mockStore = configureStore([thunk])(mockState);
 
   const getValuesMock = jest.fn();
   const defaultProps = {
@@ -18,7 +18,7 @@ describe("DoneButton", () => {
 
   it("renders correctly", () => {
     const tree = render(
-      <TestingWrapper store={defaultStore}>
+      <TestingWrapper store={mockStore}>
         <DoneButton {...defaultProps} />
       </TestingWrapper>
     );
@@ -28,7 +28,7 @@ describe("DoneButton", () => {
 
   it("finds the done button", () => {
     const tree = render(
-      <TestingWrapper store={defaultStore}>
+      <TestingWrapper store={mockStore}>
         <DoneButton {...defaultProps} />
       </TestingWrapper>
     );

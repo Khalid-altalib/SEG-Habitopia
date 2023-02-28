@@ -7,7 +7,7 @@ import GenericSetting from "./GenericSetting";
 
 describe("GenericSetting", () => {
   const mockState = { settings: settingsMockState };
-  const defaultStore = configureStore([thunk])(mockState);
+  const mockStore = configureStore([thunk])(mockState);
 
   const defaultProps = {
     defaultValue: "example@email.com",
@@ -16,7 +16,7 @@ describe("GenericSetting", () => {
 
   it("renders correctly", () => {
     const tree = render(
-      <TestingWrapper store={defaultStore}>
+      <TestingWrapper store={mockStore}>
         <GenericSetting {...defaultProps} />
       </TestingWrapper>
     );
@@ -26,7 +26,7 @@ describe("GenericSetting", () => {
 
   it("finds the input", () => {
     const tree = render(
-      <TestingWrapper store={defaultStore}>
+      <TestingWrapper store={mockStore}>
         <GenericSetting {...defaultProps} />
       </TestingWrapper>
     );
