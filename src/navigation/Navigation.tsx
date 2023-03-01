@@ -3,29 +3,27 @@ import React, { useEffect } from "react";
 
 import TabNavigation from "./flows/TabNavigation";
 import AuthNavigation from "./flows/AuthNavigation";
-import ChatNavigation from "./flows/ChatNavigation";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { LocalUser } from "../../types";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { useDispatch, useSelector } from "../app/hooks";
 import { logInUserFromStorage } from "../features/auth/authSlice";
 
 import { RootParams } from "../../types";
-import ProfileComponent from "../screens/Profile";
-import ChallengePrompt from "../screens/ChallengePrompt";
-import ChallengeModal from "../features/challenges/ChallengeModal/ChallengeModal";
-import { AsyncStorage } from "@aws-amplify/core";
-import Challenges from "../screens/Challenges";
+import ProfileComponent from "../screens/application/ProfileScreen/ProfileScreen";
+import ChallengePrompt from "../screens/application/ChallengePromptScreen/ChallengePromptScreen";
+import SettingDetails from "../screens/application/SettingsDetailsScreen/SettingDetailsScreen";
+import Settings from "../screens/application/SettingsScreen/SettingsScreen";
+import { selectUser } from "../app/selectors";
 
 const Stack = createNativeStackNavigator<RootParams>();
 
 const Navigation = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(logInUserFromStorage());
   }, []);
 
-  const localUser = useAppSelector((state) => state.auth!.user);
+  const localUser = useSelector(selectUser);
 
   return (
     <NavigationContainer>
@@ -54,6 +52,14 @@ const Navigation = () => {
           }}
         />
         <Stack.Screen name="Challenges" component={Challenges} />
+        <Stack.Screen name="Settings" component={Settings} />
+        <Stack.Screen
+          name="SettingDetails"
+          component={SettingDetails}
+          options={{
+            headerTitle: "Edit",
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

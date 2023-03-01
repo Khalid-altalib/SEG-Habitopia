@@ -1,5 +1,6 @@
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { isLoading } from "expo-font";
 import {
   Button,
   HStack,
@@ -13,6 +14,7 @@ import {
 } from "native-base";
 import React from "react";
 import { Challenge, RootParams } from "../../../../types";
+import { useDispatch, useSelector } from "../../../app/hooks";
 import { challengeMappings } from "../challengeMappings";
 import { joinChallenge } from "../challengesSlice";
 
@@ -23,12 +25,14 @@ type Props = {
 const ChallengeModal = (props: Props) => {
   const { challenge } = props;
   const { name, description } = challenge;
+  const { joinChallenge: requestStatus } = useSelector(
+    (state) => state.challenges
+  );
+  const { loading } = requestStatus;
 
   const { image } = challengeMappings[name] || challengeMappings["fallback"];
 
   const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
-
-  // const handlePress =  () => joinChallenge("challenge"); BACKEND_PLACEHOLDER
 
   return (
     <View>
@@ -42,11 +46,17 @@ const ChallengeModal = (props: Props) => {
           source={{ uri: image }}
         />
         <Text fontSize="xl" textAlign="center">
-          {challenge.description}
+          {description}
         </Text>
 
         <HStack space={3}>
-          <Button backgroundColor="amber.500">Join Challenge!</Button>
+          <Button
+            backgroundColor="amber.500"
+            onPress={handleButtonClick}
+            isLoading={loading}
+          >
+            Join Challenge!
+          </Button>
           <Button
             backgroundColor="gray.400"
             onPress={() => navigation.goBack()}

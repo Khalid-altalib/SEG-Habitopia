@@ -8,6 +8,11 @@ export type RootParams = {
   ChallengePrompt: {
     challenge: Challenge;
   };
+  Settings: undefined;
+  SettingDetails: {
+    settingType: string;
+    defaultValue: string;
+  };
   Challenges: undefined
 };
 
@@ -23,6 +28,7 @@ export type NavigationParams = {
   Leaderboard: undefined;
   You: ProfileParams;
   Profile: ProfileParams;
+  Settings: undefined;
 };
 
 export type AuthParams = {
@@ -52,12 +58,14 @@ export type IndividualChatScreenNavigationProp = NativeStackNavigationProp<
 export type LocalUser = {
   authToken: string;
   userId: string;
+  email: string;
 };
 
 export enum TextType {
   Regular,
   Subtle,
   Heading,
+  Subheading,
   Button,
 }
 
@@ -66,6 +74,7 @@ export enum ButtonType {
   Secondary,
 }
 export type Challenge = {
+  id: string;
   name: string;
   description: string;
   active: boolean;
@@ -74,6 +83,7 @@ export type Challenge = {
 export type Profile = {
   userId: number;
   name: string;
+  email: string;
   biography: string;
   rankings: Array<object>;
   statistics: object;
@@ -88,10 +98,10 @@ export type Statistic = {
 
 export type Chat = {
   id: string;
-  name: string;
-  image: string;
-  text: string;
-  time: string;
+  name?: string;
+  image?: string;
+  text?: string;
+  time?: string;
 };
 
 export type Settings = {
@@ -99,6 +109,8 @@ export type Settings = {
   name: string;
   notifications: boolean;
   password: string;
+  biography: string;
+  [key: string]: string | boolean;
 };
 
 export type SignInFormValues = {

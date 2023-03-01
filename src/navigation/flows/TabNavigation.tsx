@@ -1,17 +1,19 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import Home from "../../screens/Home";
-import Explore from "../../screens/Explore";
-import Leaderboard from "../../screens/Leaderboard";
-import Profile from "../../screens/Profile";
+import Home from "../../screens/application/HomeScreen/HomeScreen";
+import Explore from "../../screens/application/ExploreScreen/ExploreScreen";
+import Leaderboard from "../../screens/application/LeaderboardScreen/LeaderboardScreen";
+import Profile from "../../screens/application/ProfileScreen/ProfileScreen";
+import Settings from "../../screens/application/SettingsScreen/SettingsScreen";
 import { NavigationParams } from "../../../types";
 import ChatNavigation from "./ChatNavigation";
-import { useAppSelector } from "../../app/hooks";
+import { useSelector } from "../../app/hooks";
+import { selectUser } from "../../app/selectors";
 
 const Tab = createBottomTabNavigator<NavigationParams>();
 
 const TabNavigation = () => {
-  const localUser = useAppSelector((state) => state.auth!.user);
+  const localUser = useSelector(selectUser);
 
   return (
     <Tab.Navigator initialRouteName="Home" screenOptions={{}}>

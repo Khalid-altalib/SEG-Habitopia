@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DoneButton renders correctly 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    dataSet={{}}
+    style={{}}
+  >
+    <View
+      accessibilityRole="button"
+      accessible={true}
+      collapsable={false}
+      colorScheme="primary"
+      dataSet={{}}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#0891b2",
+          "borderRadius": 4,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "marginTop": 32,
+          "paddingBottom": 10,
+          "paddingLeft": 12,
+          "paddingRight": 12,
+          "paddingTop": 10,
+        }
+      }
+      testID="button"
+    >
+      <View
+        dataSet={{}}
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+        test={true}
+      >
+        <View
+          dataSet={{}}
+          style={{}}
+        >
+          <Text
+            dataSet={{}}
+            style={
+              {
+                "backgroundColor": undefined,
+                "color": "#fafafa",
+                "fontFamily": undefined,
+                "fontSize": 14,
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "letterSpacing": 0,
+                "lineHeight": 21,
+                "textDecorationLine": undefined,
+              }
+            }
+          >
+            Done
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
