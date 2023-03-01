@@ -1,7 +1,7 @@
 import { Button, Input, Text, View } from "native-base";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import DoneButton from "../DoneButton.tsx/DoneButton";
+import DoneButton from "../DoneButton/DoneButton";
 
 type Props = {};
 
