@@ -99,7 +99,6 @@ export const chatSlice = createSlice({
       const chat = state.chats.find((chat) => chat.id === chatID);
       if (chat) {
         chat.messages?.unshift(message);
-        console.log(chat.messages);
       }
     },
   },

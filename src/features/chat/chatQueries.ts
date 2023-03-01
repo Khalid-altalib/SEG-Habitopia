@@ -41,7 +41,6 @@ export const fetchChatMessages = async (chatId: string) => {
   for await (const chatMessage of chatMessages) {
     messages.push({ ...chatMessage } as MessageType);
   }
-  console.log(messages);
   return messages;
 };
 
