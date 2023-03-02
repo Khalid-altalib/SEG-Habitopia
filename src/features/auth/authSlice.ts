@@ -63,6 +63,24 @@ export const sendConfirmationCode = createAsyncThunk<
   }
 });
 
+export const updatePassword = async (password: string, thunkAPI: any) => {
+  console.log("updating password");
+  console.log(password);
+  const oldPassword = "Password.123";
+  const state = thunkAPI.getState() as RootState;
+  // console.log(state);
+  const email = state.settings.settings.email;
+  console.log(email);
+
+  Auth.currentAuthenticatedUser()
+  .then((user) => {
+    return Auth.changePassword(user, oldPassword, password);
+  })
+  .then((data) => console.log(data))
+  .catch((err) => console.log(err));
+  
+};
+
 const logInHelper = async (email: string, password: string, name?: string) => {
   const { signInUserSession, attributes } = await Auth.signIn(email, password);
   const user = {
