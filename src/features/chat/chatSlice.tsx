@@ -1,12 +1,22 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import chat from "../../../assets/data/chat.json";
-import { Chat } from "../../../types";
-import { DataStore } from "aws-amplify";
-import { ChatRoom, Message, User } from "../../models";
+import { Chat, Message } from "../../../types";
+import {
+  fetchChatMessages,
+  fetchUserChats,
+  sendChatMessage,
+} from "./chatQueries";
 
 type ChatState = {
   chats: Chat[];
   fetchChats: {
+    loading: boolean;
+    error: string;
+  };
+  fetchMessages: {
+    loading: boolean;
+    error: string;
+  };
+  sendMessage: {
     loading: boolean;
     error: string;
   };
@@ -18,48 +28,60 @@ export const fetchChats = createAsyncThunk<
   { rejectValue: string }
 >("chats/fetch", async (_, thunkAPI) => {
   try {
-    const response = await DataStore.query(User, (c) =>
-      c.email.eq("litomimy@brand-app.biz")
-    );
-    const chats = await DataStore.query(ChatRoom);
-    const chatRooms = await response[0].ChatRooms.toArray();
-    chatRooms.forEach((item) =>
-      chats.filter((c) => {
-        c.id === item.chatRoomId;
-      })
-    );
-
-    let data: Chat[] = [];
-    chats.forEach(async (item) => {
-      try {
-        const lastMessage = await DataStore.query(Message, (c) =>
-          c.id.eq(item.chatRoomLastMessageId || "")
-        );
-
-        data.push({
-          id: item.id,
-          name: "",
-          image:
-            "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/lukas.jpeg",
-          text: lastMessage[0].text,
-        } as Chat);
-      } catch (error: any) {
-        const message = error.message;
-        console.log(message);
-        return thunkAPI.rejectWithValue(message);
-      }
-    });
-    console.log(data);
-    return data;
+    const chats = await fetchUserChats(thunkAPI);
+    return chats;
   } catch (error: any) {
     const message = error.message;
     return thunkAPI.rejectWithValue(message);
   }
 });
 
+export const fetchMessages = createAsyncThunk<
+  any,
+  string,
+  { rejectValue: string }
+>("messages/fetch", async (chatId: string, thunkAPI) => {
+  try {
+    const messages = await fetchChatMessages(chatId);
+    return { id: chatId, messages: messages };
+  } catch (error: any) {
+    const message = error.message;
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+export const sendMessage = createAsyncThunk<
+  Message,
+  any,
+  { rejectValue: string }
+>(
+  "messages/send",
+  async (message: { message: string; chatRoomID: string }, thunkAPI) => {
+    try {
+      const newMessage = await sendChatMessage(
+        message.message,
+        message.chatRoomID,
+        thunkAPI
+      );
+      return newMessage;
+    } catch (error: any) {
+      const message = error.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 const initialState: ChatState = {
   chats: [],
   fetchChats: {
+    loading: false,
+    error: "",
+  },
+  fetchMessages: {
+    loading: false,
+    error: "",
+  },
+  sendMessage: {
     loading: false,
     error: "",
   },
@@ -68,7 +90,18 @@ const initialState: ChatState = {
 export const chatSlice = createSlice({
   name: "chats",
   initialState,
-  reducers: {},
+  reducers: {
+    addMessageToChat: (
+      state,
+      action: PayloadAction<{ chatID: string; message: Message }>
+    ) => {
+      const { chatID, message } = action.payload;
+      const chat = state.chats.find((chat) => chat.id === chatID);
+      if (chat) {
+        chat.messages?.unshift(message);
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchChats.pending, (state) => {
       state.fetchChats.loading = true;
@@ -85,9 +118,35 @@ export const chatSlice = createSlice({
       state.fetchChats.loading = false;
       state.fetchChats.error = action.payload;
     });
+    builder.addCase(fetchMessages.pending, (state) => {
+      state.fetchMessages.loading = true;
+    });
+    builder.addCase(
+      fetchMessages.fulfilled,
+      (state, action: PayloadAction<{ id: string; messages: Message[] }>) => {
+        const chat = state.chats.find((chat) => chat.id === action.payload.id);
+        if (chat) {
+          chat.messages = action.payload.messages;
+        }
+        state.fetchMessages.loading = false;
+      }
+    );
+    builder.addCase(fetchMessages.rejected, (state, action: any) => {
+      const chat = state.chats.find((chat) => chat.id === action.payload.id);
+      if (chat) chat.messages = [];
+      state.fetchMessages.loading = false;
+      state.fetchMessages.error = action.payload;
+    });
+    builder.addCase(sendMessage.pending, (state) => {
+      state.sendMessage.loading = true;
+    });
+    builder.addCase(sendMessage.rejected, (state, action: any) => {
+      state.sendMessage.loading = false;
+      state.sendMessage.error = action.payload;
+    });
   },
 });
 
-export const {} = chatSlice.actions;
+export const { addMessageToChat } = chatSlice.actions;
 
 export default chatSlice.reducer;
