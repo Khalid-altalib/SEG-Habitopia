@@ -65,8 +65,6 @@ export const setSettings = createAsyncThunk<
   { rejectValue: string }
 >("settings/set", async (settings: any, thunkAPI) => {
   try {
-    // console.log("settings", settings);
-
     const name = settings.name;
     const email = settings.email;
     const notifications = settings.notifications;
