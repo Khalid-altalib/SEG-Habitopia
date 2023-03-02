@@ -65,11 +65,8 @@ export const setSettings = createAsyncThunk<
   { rejectValue: string }
 >("settings/set", async (settings: any, thunkAPI) => {
   try {
-    const name = settings.name;
-    const email = settings.email;
-    const notifications = settings.notifications;
-    const biography = settings.biography;
-    const password = settings.password;
+    // console.log("settings", settings)
+    const {name, email, notifications, biography, password, oldPassword} = settings;
     const user = await getUserFromDatabase(thunkAPI);
     // update the one that is not null
     await DataStore.save(
@@ -87,7 +84,7 @@ export const setSettings = createAsyncThunk<
           updated.biography = biography;
         }
         if (password !== undefined) {
-          updatePassword(password, thunkAPI);
+          updatePassword(password, oldPassword, thunkAPI);
         }
       }));
 
@@ -95,6 +92,7 @@ export const setSettings = createAsyncThunk<
     return settings; 
   } catch (error: any) {
     const message = error.message;
+    // look into using toastify
     return thunkAPI.rejectWithValue(message);
   }
 });

@@ -62,10 +62,11 @@ export const sendConfirmationCode = createAsyncThunk<
   }
 });
 
-export const updatePassword = async (password: string, thunkAPI: any) => {
+export const updatePassword = async (password: string,oldPassword: string, thunkAPI: any) => {
   console.log("updating password");
   console.log(password);
-  const oldPassword = "Password.123";
+  console.log(oldPassword);
+  // const oldPassword = "Password.123";
   const state = thunkAPI.getState() as RootState;
   // console.log(state);
   const email = state.settings.settings.email;
@@ -76,7 +77,6 @@ export const updatePassword = async (password: string, thunkAPI: any) => {
     return Auth.changePassword(user, oldPassword, password);
   })
   .then((data) => console.log(data))
-  .catch((err) => console.log(err));
   
 };
 
