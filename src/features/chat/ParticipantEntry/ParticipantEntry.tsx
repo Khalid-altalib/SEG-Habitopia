@@ -1,5 +1,14 @@
 import Avatar from "@components/Avatar/Avatar";
-import { Box, Card, HStack, Image, Text } from "native-base";
+import {
+  Box,
+  Button,
+  Card,
+  Heading,
+  HStack,
+  Image,
+  Text,
+  VStack,
+} from "native-base";
 import React from "react";
 
 type Props = {
@@ -12,9 +21,12 @@ const ParticipantEntry = (props: Props) => {
 
   return (
     <Box backgroundColor="info.600" mb={3} padding={3} borderRadius={8}>
-      <HStack justifyContent={"space-between"} alignItems="center">
+      <HStack space={2} alignItems="center">
         <Avatar name={name} />
-        <Text fontSize="xl">{name}</Text>
+        <HStack flex={1} justifyContent="space-between" alignItems="center">
+          <Heading fontSize="xl">{name}</Heading>
+          <Button backgroundColor={"amber.500"}>View Profile</Button>
+        </HStack>
       </HStack>
     </Box>
   );

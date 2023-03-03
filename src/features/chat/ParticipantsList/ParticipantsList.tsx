@@ -10,10 +10,9 @@ const ParticipantsList = (props: Props) => {
   return (
     <VStack>
       <Heading mb={4}>Participants</Heading>
-      <FlatList
-        data={data}
-        renderItem={({ item }) => <ParticipantEntry participant={item} />}
-      />
+      {data.map((item, i) => (
+        <ParticipantEntry participant={item} key={i} />
+      ))}
     </VStack>
   );
 };
