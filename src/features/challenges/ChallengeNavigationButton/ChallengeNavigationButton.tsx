@@ -8,10 +8,10 @@ type Props = {};
 
 function ChallengeNavigationButton({}: Props) {
   const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
-  const handlePress = () => navigation.navigate("Challenges");
+  const handlePress = () => {};
   return (
-    <Button backgroundColor={"amber.500"} onPress={handlePress}>
-      Show all
+    <Button variant={"subtle"} onPress={handlePress}>
+      Discover More!
     </Button>
   );
 }
