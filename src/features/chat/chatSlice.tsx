@@ -135,6 +135,10 @@ export const chatSlice = createSlice({
         chat.messages?.unshift(message);
       }
     },
+    setCurrentChatId: (state, action: PayloadAction<string>) => {
+      const chatId = action.payload;
+      state.currentChatId = chatId;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchChats.pending, (state) => {
@@ -197,6 +201,6 @@ export const chatSlice = createSlice({
   },
 });
 
-export const { addMessageToChat } = chatSlice.actions;
+export const { addMessageToChat, setCurrentChatId } = chatSlice.actions;
 
 export default chatSlice.reducer;

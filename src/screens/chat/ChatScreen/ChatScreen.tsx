@@ -6,7 +6,10 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { ChatParams } from "../../../../types";
 import { useDispatch, useSelector } from "../../../app/hooks";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { fetchMessages } from "../../../features/chat/chatSlice";
+import {
+  fetchMessages,
+  setCurrentChatId,
+} from "../../../features/chat/chatSlice";
 import { GraphQLSubscription } from "@aws-amplify/api";
 import {
   OnCreateMessageSubscription,
@@ -48,6 +51,7 @@ const ChatScreen = (props: Props) => {
 
   useEffect(() => {
     dispatch(fetchMessages(chat.id));
+    dispatch(setCurrentChatId(chat.id));
     navigation.setOptions({ title: chat.name, headerShown: true });
     const subscription = addChatSubscription(id);
     return () => subscription.unsubscribe();

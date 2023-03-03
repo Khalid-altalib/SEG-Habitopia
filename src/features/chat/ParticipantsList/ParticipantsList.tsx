@@ -6,8 +6,6 @@ import ParticipantEntry from "../ParticipantEntry/ParticipantEntry";
 type Props = {};
 
 const ParticipantsList = (props: Props) => {
-  const data = [{ name: "bob" }, { name: "tom" }];
-
   const participants = useSelector(
     (state) => state.chats.details?.participants
   );
