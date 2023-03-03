@@ -43,13 +43,16 @@ const ChatScreen = (props: Props) => {
   const { chats } = useSelector((store) => store.chats);
   const { id } = route.params;
   const dispatch = useDispatch();
+
   let chat = chats.filter((chat) => chat.id == id)[0];
+
   useEffect(() => {
     dispatch(fetchMessages(chat.id));
     navigation.setOptions({ title: chat.name, headerShown: true });
     const subscription = addChatSubscription(id);
     return () => subscription.unsubscribe();
   }, [id]);
+
   return (
     <ImageBackground
       source={{ uri: "https://placeholder.com" }}
