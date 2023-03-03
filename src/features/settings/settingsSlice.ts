@@ -66,16 +66,13 @@ export const setSettings = createAsyncThunk<
 >("settings/set", async (settings: any, thunkAPI) => {
   try {
     // console.log("settings", settings)
-    const {name, email, notifications, biography, password, oldPassword} = settings;
+    const {name, notifications, biography, password, oldPassword} = settings;
     const user = await getUserFromDatabase(thunkAPI);
     // update the one that is not null
     await DataStore.save(
       User.copyOf(user, (updated) => {
         if (name !== undefined) {
           updated.name = name;
-        }
-        if (email !== undefined) {
-          updated.email = email;
         }
         if (notifications !== undefined) {
           updated.notifications = notifications;
@@ -84,7 +81,7 @@ export const setSettings = createAsyncThunk<
           updated.biography = biography;
         }
         if (password !== undefined) {
-          updatePassword(password, oldPassword, thunkAPI);
+          updatePassword(password, oldPassword);
         }
       }));
 
