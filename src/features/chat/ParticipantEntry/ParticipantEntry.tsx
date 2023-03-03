@@ -1,4 +1,5 @@
-import { Avatar, Box, Card, HStack, Image, Text } from "native-base";
+import Avatar from "@components/Avatar/Avatar";
+import { Box, Card, HStack, Image, Text } from "native-base";
 import React from "react";
 
 type Props = {
@@ -10,9 +11,9 @@ const ParticipantEntry = (props: Props) => {
   const { name } = participant;
 
   return (
-    <Box backgroundColor="info.400" mb={3} padding={3} borderRadius={8}>
+    <Box backgroundColor="info.600" mb={3} padding={3} borderRadius={8}>
       <HStack justifyContent={"space-between"} alignItems="center">
-        <Avatar source={{ uri: `https://robohash.org/${name}` }} />
+        <Avatar name={name} />
         <Text fontSize="xl">{name}</Text>
       </HStack>
     </Box>
