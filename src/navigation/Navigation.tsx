@@ -51,7 +51,6 @@ const Navigation = () => {
             title: "Join Challenge?",
           }}
         />
-        <Stack.Screen name="Challenges" component={Challenges} />
         <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen
           name="SettingDetails"
