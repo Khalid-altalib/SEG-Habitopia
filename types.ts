@@ -13,7 +13,6 @@ export type RootParams = {
     settingType: string;
     defaultValue: string;
   };
-  Challenges: undefined
 };
 
 export type ProfileParams = {
@@ -65,6 +64,7 @@ export enum TextType {
   Regular,
   Subtle,
   Heading,
+  Small,
   Subheading,
   Button,
 }
@@ -102,6 +102,7 @@ export type Chat = {
   image?: string;
   text?: string;
   time?: string;
+  messages?: Message[];
 };
 
 export type Settings = {
@@ -116,4 +117,12 @@ export type Settings = {
 export type SignInFormValues = {
   email: string;
   password: string;
+};
+
+export type Message = {
+  id?: string;
+  text: string;
+  chatRoomId?: string;
+  createdAt: string;
+  userID: string;
 };
