@@ -30,17 +30,12 @@ const Statistics = () => {
   const statistics = useSelector((state) => state.chats.details?.statistics);
 
   return (
-    <HStack space={2} justifyContent="center">
-      {statistics && (
-        <Box>
-          <StatisticBox
-            timestamp={statistics.started}
-            statisticType="Started"
-          />
-          <StatisticBox timestamp={statistics.ending} statisticType="Ending" />
-        </Box>
-      )}
-    </HStack>
+    statistics && (
+      <HStack space={2} justifyContent="center">
+        <StatisticBox timestamp={statistics.started} statisticType="Started" />
+        <StatisticBox timestamp={statistics.ending} statisticType="Ending" />
+      </HStack>
+    )
   );
 };
 
