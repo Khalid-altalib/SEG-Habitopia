@@ -1,13 +1,48 @@
 import { Button, TextInput, View, StyleSheet } from "react-native";
 import React from "react";
+import { useDispatch } from "@app/hooks";
+import { Controller, useForm } from "react-hook-form";
+import { sendMessage } from "./chatSlice";
 
-type Props = {};
+type InputBoxProps = {
+  chatRoomID: string;
+};
 
-const InputBox = (props: Props) => {
+type message = {
+  message: string;
+};
+
+const InputBox = (props: InputBoxProps) => {
+  const dispatch = useDispatch();
+
+  const { control, handleSubmit, reset } = useForm({
+    defaultValues: {
+      message: "",
+    },
+  });
+
+  const onSubmit = async (data: message) => {
+    const chatRoomID = props.chatRoomID;
+    const message = data.message;
+    dispatch(sendMessage({ message, chatRoomID }));
+    reset();
+  };
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} placeholder="type your message" />
-      <Button title="send"></Button>
+      <Controller
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <TextInput
+            onChangeText={onChange}
+            style={styles.input}
+            placeholder="type your message"
+            value={value}
+          />
+        )}
+        name="message"
+      />
+
+      <Button title="send" onPress={handleSubmit(onSubmit)}></Button>
       <Button title="check in"></Button>
     </View>
   );

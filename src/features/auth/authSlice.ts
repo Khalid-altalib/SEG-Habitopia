@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { LocalUser } from "../../../types";
-
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RootState } from "../../app/store";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
@@ -73,7 +72,6 @@ const logInHelper = async (email: string, password: string, name?: string) => {
 
   await AsyncStorage.setItem("user", JSON.stringify(user));
   await createUserInDatabase(attributes.sub, email, name);
-  console.log(user);
   return user;
 };
 
@@ -156,6 +154,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     addSignUpData: (state, action: PayloadAction<object>) => {
+      console.log(state, action);
       state.signUpData = { ...state.signUpData, ...action.payload };
     },
     addLogInData: (state, action: PayloadAction<object>) => {
