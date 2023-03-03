@@ -13,6 +13,7 @@ export type RootParams = {
     settingType: string;
     defaultValue: string;
   };
+  ChatDetails: undefined;
 };
 
 export type ProfileParams = {
