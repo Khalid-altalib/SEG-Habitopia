@@ -20,6 +20,10 @@ type ChatState = {
     loading: boolean;
     error: string;
   };
+  fetchDetails: {
+    loading: boolean;
+    error: string;
+  };
 };
 
 export const fetchChats = createAsyncThunk<
@@ -82,6 +86,10 @@ const initialState: ChatState = {
     error: "",
   },
   sendMessage: {
+    loading: false,
+    error: "",
+  },
+  fetchDetails: {
     loading: false,
     error: "",
   },
