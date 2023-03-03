@@ -1,5 +1,6 @@
-import { useDispatch } from "@app/hooks";
+import { useDispatch, useSelector } from "@app/hooks";
 import PaddedContainer from "@components/PaddedContainer";
+import StatusContainer from "@components/StatusContainer/StatusContainer";
 import { fetchDetails } from "@features/chat/chatSlice";
 import Header from "@features/chat/Header/Header";
 import ParticipantsList from "@features/chat/ParticipantsList/ParticipantsList";
@@ -16,6 +17,9 @@ const ChatDetailsScreen = (props: Props) => {
 
   const dispatch = useDispatch();
 
+  const { loading, error } = useSelector((state) => state.chats.fetchDetails);
+  const { details } = useSelector((state) => state.chats);
+
   useEffect(() => {
     dispatch(fetchDetails(chatId));
   }, []);
@@ -23,9 +27,11 @@ const ChatDetailsScreen = (props: Props) => {
   return (
     <Box backgroundColor={"black"}>
       <PaddedContainer>
-        <Header />
-        <Statistics />
-        <ParticipantsList />
+        <StatusContainer loading={loading} error={error} data={details}>
+          <Header />
+          <Statistics />
+          <ParticipantsList />
+        </StatusContainer>
       </PaddedContainer>
     </Box>
   );
