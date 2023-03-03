@@ -1,6 +1,4 @@
-import PaddedContainer from "@components/PaddedContainer";
-import SafeAreaContainer from "@components/SafeAreaContainer";
-import { Center, Heading, ScrollView, VStack } from "native-base";
+import { Center, Heading, View, VStack } from "native-base";
 import React from "react";
 
 type Props = {
@@ -10,18 +8,16 @@ type Props = {
 const ChallengeWidgetLayout = (props: Props) => {
   const { children } = props;
   return (
-    <>
+    <View>
       <Center>
         <Heading mb={4} shadow={1}>
           Pick a Challenge! 🚀
         </Heading>
       </Center>
-      <ScrollView height={"25%"} showsVerticalScrollIndicator={false}>
-        <VStack space={4} paddingLeft={3} paddingRight={3}>
-          {children}
-        </VStack>
-      </ScrollView>
-    </>
+      <VStack space={4} paddingLeft={3} paddingRight={3}>
+        {children}
+      </VStack>
+    </View>
   );
 };
 
