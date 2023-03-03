@@ -2,7 +2,13 @@
 import { Switch } from "react-native";
 
 // Native Base
-import { Box, HStack, theme, useColorMode } from "native-base";
+import {
+  Box,
+  HStack,
+  theme,
+  useColorMode,
+  useColorModeValue,
+} from "native-base";
 
 // Habitopia
 import Text from "@components/Text";
@@ -32,6 +38,7 @@ const ColorModeToggle = () => {
           value={colorMode === "light"}
           onChange={toggleColorMode}
           trackColor={{ true: theme.colors.purple[700] }}
+          thumbColor="white"
         />
       </Box>
     </HStack>

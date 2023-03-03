@@ -40,6 +40,7 @@ const NotificationToggle = (props: Props) => {
           value={switchEnabled}
           onChange={handleSwitchChange}
           trackColor={{ true: theme.colors.purple[700] }}
+          thumbColor="white"
         />
       </Box>
     </HStack>
