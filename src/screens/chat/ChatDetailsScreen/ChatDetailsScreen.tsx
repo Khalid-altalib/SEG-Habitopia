@@ -5,15 +5,15 @@ import { fetchDetails } from "@features/chat/chatSlice";
 import Header from "@features/chat/Header/Header";
 import ParticipantsList from "@features/chat/ParticipantsList/ParticipantsList";
 import Statistics from "@features/chat/Statistics/Statistics";
+import { RouteProp, useRoute } from "@react-navigation/native";
 import { Box } from "native-base";
 import React, { useEffect } from "react";
+import { RootParams } from "types";
 
-type Props = {
-  chatId: string;
-};
+type Props = {};
 
 const ChatDetailsScreen = (props: Props) => {
-  const { chatId } = props;
+  const { currentChatId } = useSelector((state) => state.chats);
 
   const dispatch = useDispatch();
 
@@ -21,7 +21,7 @@ const ChatDetailsScreen = (props: Props) => {
   const { details } = useSelector((state) => state.chats);
 
   useEffect(() => {
-    dispatch(fetchDetails(chatId));
+    currentChatId && dispatch(fetchDetails(currentChatId));
   }, []);
 
   return (

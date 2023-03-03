@@ -1,3 +1,4 @@
+import { useSelector } from "@app/hooks";
 import { Box, Center, Heading, HStack, Text } from "native-base";
 import React from "react";
 
@@ -26,10 +27,19 @@ const StatisticBox = (props: StatisticBoxProps) => {
 };
 
 const Statistics = () => {
+  const statistics = useSelector((state) => state.chats.details?.statistics);
+
   return (
     <HStack space={2} justifyContent="center">
-      <StatisticBox timestamp={"test"} statisticType="Started" />
-      <StatisticBox timestamp={"test"} statisticType="Ending" />
+      {statistics && (
+        <Box>
+          <StatisticBox
+            timestamp={statistics.started}
+            statisticType="Started"
+          />
+          <StatisticBox timestamp={statistics.ending} statisticType="Ending" />
+        </Box>
+      )}
     </HStack>
   );
 };

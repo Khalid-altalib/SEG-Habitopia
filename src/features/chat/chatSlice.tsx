@@ -25,6 +25,7 @@ type ChatState = {
     error: string;
   };
   details?: ChatDetails;
+  currentChatId?: string;
 };
 
 export const fetchDetails = createAsyncThunk<
@@ -117,6 +118,7 @@ const initialState: ChatState = {
     error: "",
   },
   details: undefined,
+  currentChatId: undefined,
 };
 
 export const chatSlice = createSlice({
