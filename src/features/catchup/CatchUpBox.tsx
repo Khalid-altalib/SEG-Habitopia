@@ -25,7 +25,7 @@ const CatchUpBox = (props: Props) => {
           onPress={onHeartPressed}
           _icon={{
             as: AntDesign,
-            name: isLiked ? "hearto" : "heart",
+            name: isLiked ? "heart" : "hearto",
           }}
         />
       </ZStack>
