@@ -90,6 +90,7 @@ export const setSettings = createAsyncThunk<
   } catch (error: any) {
     const message = error.message;
     // look into using toastify
+    console.log("fortnite", error)
     return thunkAPI.rejectWithValue(message);
   }
 });

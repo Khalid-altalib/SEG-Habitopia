@@ -68,6 +68,10 @@ export const updatePassword = async (password: string,oldPassword: string) => {
     return Auth.changePassword(user, oldPassword, password);
   })
   .then((data) => console.log(data))
+  .catch((err) => Toast.show({
+    type: "error",
+    text1: err.message.includes("previousPassword") ? "Your old password is incorrect." : "The requested password does not fit the criteria for a password", // the error can contain either "previousPassword" or "proposedPassword" depending on the error
+  }));
 };
 
 const logInHelper = async (email: string, password: string, name?: string) => {
