@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Box, VStack, Button } from "native-base";
+import { Box, VStack } from "native-base";
 import SettingsItem from "../SettingsItem/SettingsItem";
 import NotificationToggle from "../NotificationToggle/NotificationToggle";
 import { useDispatch, useSelector } from "../../../app/hooks";
@@ -7,6 +7,8 @@ import { logOutUser } from "../../auth/authSlice";
 import StatusContainer from "../../../components/StatusContainer/StatusContainer";
 import { fetchSettings } from "../settingsSlice";
 import settingEntries from "../settingEntries";
+import Button from "@components/Button";
+import { ButtonType } from "types";
 
 const SettingsPage = () => {
   const { settings, fetchSettings: requestStatus } = useSelector(
@@ -40,9 +42,11 @@ const SettingsPage = () => {
           onPress={() => {
             dispatch(logOutUser());
           }}
-          my={10}
+          style={{ marginTop: 40 }}
+          isFullWidth
+          type={ButtonType.Primary}
         >
-          Log Out
+          Log out
         </Button>
       </VStack>
     </StatusContainer>
