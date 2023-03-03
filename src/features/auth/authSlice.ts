@@ -62,16 +62,44 @@ export const sendConfirmationCode = createAsyncThunk<
   }
 });
 
+const displayErrorMessage = (err: any) => {
+  let x = "";
+  // looked into error messages and found what is presented for the different errors
+  if (err.message.includes("previousPassword")) {
+    x = "Your password does not match the correct format.";
+  } else if (err.message.includes("proposedPassword")) {
+    x = "The requested password does not fit the criteria for a password";
+  } else if (err.message.includes("Incorrect username or password")) {
+    x = "Your old password is incorrect.";
+  } else {
+    x = err.message;
+    console.log(x);
+  }
+  Toast.show({
+    type: "error",
+    text1: x,
+  });
+};
+
 export const updatePassword = async (password: string,oldPassword: string) => {
+  if (password === oldPassword) {
+    Toast.show({
+      type: "error",
+      text1: "New password cannot be the same as the old password",
+    });
+    return;
+  }
+  
   Auth.currentAuthenticatedUser()
   .then((user) => {
     return Auth.changePassword(user, oldPassword, password);
   })
-  .then((data) => console.log(data))
-  .catch((err) => Toast.show({
-    type: "error",
-    text1: err.message.includes("previousPassword") ? "Your old password is incorrect." : "The requested password does not fit the criteria for a password", // the error can contain either "previousPassword" or "proposedPassword" depending on the error
-  }));
+  .then((data) => 
+  Toast.show({
+    type: "success",
+    text1: "Password Updated Successfully",
+  }))
+  .catch((err) => displayErrorMessage(err));
 };
 
 const logInHelper = async (email: string, password: string, name?: string) => {
