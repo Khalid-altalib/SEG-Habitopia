@@ -9,6 +9,7 @@ import { fetchSettings } from "../settingsSlice";
 import settingEntries from "../settingEntries";
 import Button from "@components/Button";
 import { ButtonType } from "types";
+import ColorModeToggle from "@features/settings/ColorModeToggle";
 
 const SettingsPage = () => {
   const { settings, fetchSettings: requestStatus } = useSelector(
@@ -38,6 +39,7 @@ const SettingsPage = () => {
           </Box>
         ))}
         <NotificationToggle defaultValue={settings.notifications} />
+        <ColorModeToggle />
         <Button
           onPress={() => {
             dispatch(logOutUser());

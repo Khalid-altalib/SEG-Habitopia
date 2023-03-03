@@ -25,6 +25,11 @@ const NotificationToggle = (props: Props) => {
       display={"flex"}
       justifyContent={"space-between"}
       alignItems="center"
+      flexDirection="row"
+      borderBottomWidth={1}
+      _light={{ borderColor: "gray.300" }}
+      _dark={{ borderColor: "blueGray.700" }}
+      paddingBottom={3}
     >
       <Box>
         <Text type={TextType.Small}>Notifications </Text>
