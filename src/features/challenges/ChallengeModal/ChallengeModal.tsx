@@ -34,6 +34,13 @@ const ChallengeModal = (props: Props) => {
 
   const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
 
+  const dispatch = useDispatch();
+
+  const handleButtonClick = async () => {
+    await dispatch(joinChallenge(name));
+    navigation.pop();
+  };
+
   return (
     <View>
       <VStack space={3} alignItems="center">
