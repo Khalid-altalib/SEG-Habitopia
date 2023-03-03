@@ -62,13 +62,12 @@ export const sendConfirmationCode = createAsyncThunk<
   }
 });
 
-export const updatePassword = async (password: string,oldPassword: string, thunkAPI: any) => {
+export const updatePassword = async (password: string,oldPassword: string) => {
   Auth.currentAuthenticatedUser()
   .then((user) => {
     return Auth.changePassword(user, oldPassword, password);
   })
   .then((data) => console.log(data))
-  
 };
 
 const logInHelper = async (email: string, password: string, name?: string) => {
