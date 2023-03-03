@@ -65,6 +65,7 @@ export enum TextType {
   Regular,
   Subtle,
   Heading,
+  Small,
   Subheading,
   Button,
 }

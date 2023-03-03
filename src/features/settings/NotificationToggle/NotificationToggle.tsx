@@ -1,8 +1,10 @@
-import { Box, HStack, Text } from "native-base";
+import { Box, HStack, theme } from "native-base";
 import React, { useState } from "react";
 import { Switch } from "react-native";
 import { useDispatch, useSelector } from "../../../app/hooks";
 import { setSettings } from "../settingsSlice";
+import Text from "@components/Text";
+import { TextType } from "types";
 
 type Props = {
   defaultValue: boolean;
@@ -25,11 +27,15 @@ const NotificationToggle = (props: Props) => {
       alignItems="center"
     >
       <Box>
-        <Text>Notifications </Text>
-        <Text fontSize="xs">Enable/Disable Notifications on this app</Text>
+        <Text type={TextType.Small}>Notifications </Text>
+        <Text type={TextType.Subtle}>Choose to receive notifications</Text>
       </Box>
       <Box>
-        <Switch value={switchEnabled} onChange={handleSwitchChange} />
+        <Switch
+          value={switchEnabled}
+          onChange={handleSwitchChange}
+          trackColor={{ true: theme.colors.purple[700] }}
+        />
       </Box>
     </HStack>
   );

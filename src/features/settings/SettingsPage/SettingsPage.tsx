@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Box, VStack, Button } from "native-base";
+import { Box, VStack } from "native-base";
 import SettingsItem from "../SettingsItem/SettingsItem";
 import NotificationToggle from "../NotificationToggle/NotificationToggle";
 import { useDispatch, useSelector } from "../../../app/hooks";
@@ -7,13 +7,10 @@ import { logOutUser } from "../../auth/authSlice";
 import StatusContainer from "../../../components/StatusContainer/StatusContainer";
 import { fetchSettings } from "../settingsSlice";
 import settingEntries from "../settingEntries";
-import {
-  NavigationProp,
-  useNavigation,
-  CommonActions,
-  StackActions,
-} from "@react-navigation/native";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RootParams } from "types";
+import Button from "@components/Button";
+import { ButtonType } from "types";
 
 const SettingsPage = () => {
   const navigation = useNavigation<NavigationProp<RootParams>>();
@@ -50,8 +47,13 @@ const SettingsPage = () => {
           </Box>
         ))}
         <NotificationToggle defaultValue={settings.notifications} />
-        <Button onPress={handleLogOut} my={10}>
-          Log Out
+        <Button
+          onPress={handleLogOut}
+          style={{ marginTop: 40 }}
+          isFullWidth
+          type={ButtonType.Primary}
+        >
+          Log out
         </Button>
       </VStack>
     </StatusContainer>
