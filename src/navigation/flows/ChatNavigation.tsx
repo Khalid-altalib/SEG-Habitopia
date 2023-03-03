@@ -29,6 +29,7 @@ const ChatNavigation = () => {
           headerRight: () => {
             return (
               <Button
+                size="sm"
                 onPress={() => {
                   navigation.navigate("ChatDetails");
                 }}
