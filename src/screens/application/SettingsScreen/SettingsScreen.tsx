@@ -7,11 +7,11 @@ import PaddedContainer from "@components/PaddedContainer";
 const SettingsScreen = () => {
   return (
     <Background>
-      <PaddedContainer>
-        <ScrollView>
+      <ScrollView height="100%">
+        <PaddedContainer>
           <SettingsPage />
-        </ScrollView>
-      </PaddedContainer>
+        </PaddedContainer>
+      </ScrollView>
     </Background>
   );
 };

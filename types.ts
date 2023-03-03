@@ -13,6 +13,7 @@ export type RootParams = {
     settingType: string;
     defaultValue: string;
   };
+  ChatDetails: undefined;
 };
 
 export type ProfileParams = {
@@ -64,6 +65,7 @@ export enum TextType {
   Regular,
   Subtle,
   Heading,
+  Small,
   Subheading,
   Button,
 }
@@ -124,4 +126,15 @@ export type Message = {
   chatRoomId?: string;
   createdAt: string;
   userID: string;
+};
+
+export type ChatDetails = {
+  statistics: {
+    started: string;
+    ending: string;
+  };
+  participants: {
+    userId: string;
+    name: string;
+  }[];
 };

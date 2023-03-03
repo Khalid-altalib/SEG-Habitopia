@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Box, VStack, Button } from "native-base";
+import { Box, VStack } from "native-base";
 import SettingsItem from "../SettingsItem/SettingsItem";
 import NotificationToggle from "../NotificationToggle/NotificationToggle";
 import { useDispatch, useSelector } from "../../../app/hooks";
@@ -7,8 +7,14 @@ import { logOutUser } from "../../auth/authSlice";
 import StatusContainer from "../../../components/StatusContainer/StatusContainer";
 import { fetchSettings } from "../settingsSlice";
 import settingEntries from "../settingEntries";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { RootParams } from "types";
+import Button from "@components/Button";
+import { ButtonType } from "types";
 
 const SettingsPage = () => {
+  const navigation = useNavigation<NavigationProp<RootParams>>();
+
   const { settings, fetchSettings: requestStatus } = useSelector(
     (state) => state.settings
   );
@@ -18,6 +24,11 @@ const SettingsPage = () => {
   useEffect(() => {
     dispatch(fetchSettings());
   }, []);
+
+  const handleLogOut = async () => {
+    dispatch(logOutUser());
+    navigation.goBack();
+  };
 
   return (
     <StatusContainer
@@ -37,12 +48,12 @@ const SettingsPage = () => {
         ))}
         <NotificationToggle defaultValue={settings.notifications} />
         <Button
-          onPress={() => {
-            dispatch(logOutUser());
-          }}
-          my={10}
+          onPress={handleLogOut}
+          style={{ marginTop: 40 }}
+          isFullWidth
+          type={ButtonType.Primary}
         >
-          Log Out
+          Log out
         </Button>
       </VStack>
     </StatusContainer>

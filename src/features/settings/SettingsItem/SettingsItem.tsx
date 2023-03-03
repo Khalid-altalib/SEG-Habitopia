@@ -4,7 +4,6 @@ import {
   HStack,
   Input,
   Pressable,
-  Text,
   TextArea,
   TextField,
   View,
@@ -12,8 +11,9 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { TouchableOpacity } from "react-native";
-import { RootParams } from "../../../../types";
+import { RootParams, TextType } from "../../../../types";
 import { SettingEntry } from "../settingEntries";
+import Text from "@components/Text";
 
 type Props = {
   type: string;
@@ -28,18 +28,30 @@ function SettingsItem(props: Props) {
   return (
     <Box>
       <HStack display={"flex"} alignItems={"flex-start"}>
-        <Box flex={1}>{entry.name}</Box>
-        <Box borderBottomWidth={"1px"} paddingBottom="3" flex={3}>
-          <TouchableOpacity
-            onPress={() =>
-              navigation.push("SettingDetails", {
-                settingType: type,
-                defaultValue: value,
-              })
-            }
-          >
-            {type === "password" ? <Text>*******</Text> : <Text>{value}</Text>}
-          </TouchableOpacity>
+        <Box
+          flexDirection="row"
+          borderBottomWidth={1}
+          _dark={{ borderColor: "blueGray.700" }}
+        >
+          <Text style={{ flex: 1 }} type={TextType.Small}>
+            {entry.name}
+          </Text>
+          <Box paddingBottom="3" flex={3}>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.push("SettingDetails", {
+                  settingType: type,
+                  defaultValue: value,
+                })
+              }
+            >
+              {type === "password" ? (
+                <Text type={TextType.Subtle}>*******</Text>
+              ) : (
+                <Text type={TextType.Subtle}>{value}</Text>
+              )}
+            </TouchableOpacity>
+          </Box>
         </Box>
       </HStack>
     </Box>
