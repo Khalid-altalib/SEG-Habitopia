@@ -106,6 +106,7 @@ export const sendCheckIn = createAsyncThunk<
     return newCheckIn;
   } catch (error: any) {
     const message = error.message;
+    console.log(message);
     return thunkAPI.rejectWithValue(message);
   }
 });

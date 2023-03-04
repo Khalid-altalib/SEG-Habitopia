@@ -128,19 +128,23 @@ export const sendChatCheckIn = async (chatID: string, thunkAPI: any) => {
   const lastCheckIn = await getLastCheckIn(chatID, thunkAPI);
 
   if (lastCheckIn) {
-    console.log("test");
     const timeElapsed = Math.floor(
-      (new Date().getTime() - new Date(lastCheckIn.createdAt).getTime()) /
+      (new Date().getTime() - new Date(lastCheckIn.createdAt || "").getTime()) /
         86400000
     );
-    console.log(timeElapsed);
     if (timeElapsed < 1) {
       throw new Error(
         `Already Checked in for the day at ${lastCheckIn.createdAt}! You have ${lastCheckIn.validationCount} validations!`
       );
+    } else {
+      return createCheckIn(chatID, userID);
     }
+  } else {
+    return createCheckIn(chatID, userID);
   }
+};
 
+const createCheckIn = async (chatID: string, userID: string) => {
   const checkIn = await DataStore.save(
     new Checkin({
       chatroomID: chatID,
@@ -178,6 +182,5 @@ const getLastCheckIn = async (chatID: string, thunkAPI: any) => {
       }
     )
   )[0];
-  console.log(lastCheckInByUser);
   return lastCheckInByUser;
 };
