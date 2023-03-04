@@ -7,6 +7,7 @@ import {
   Challenge,
   User,
   ChallengeType,
+  MessageEnum,
 } from "../../models";
 import { Message as MessageType } from "../../../types";
 
@@ -47,6 +48,7 @@ export const fetchChatMessages = async (chatId: string) => {
   for await (const chatMessage of chatMessages) {
     messages.push({ ...chatMessage } as MessageType);
   }
+  console.log(messages);
   return messages;
 };
 
@@ -61,6 +63,7 @@ export const sendChatMessage = async (
       chatroomID: chatroomID,
       userID: userID,
       text: message,
+      messageType: MessageEnum.TEXT,
     })
   );
   await updateLastMessageInChat(newMessage.id, chatroomID);

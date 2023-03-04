@@ -120,13 +120,21 @@ export type SignInFormValues = {
   password: string;
 };
 
-export type Message = {
+export interface Message {
   id?: string;
-  text: string;
   chatRoomId?: string;
   createdAt: string;
   userID: string;
-};
+}
+
+export interface TextMessage extends Message {
+  text: string;
+}
+
+export interface CheckIn extends Message {
+  validationCount: number;
+  isValidated: boolean;
+}
 
 export type ChatDetails = {
   challengeName: string;

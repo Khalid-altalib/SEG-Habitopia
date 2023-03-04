@@ -277,7 +277,7 @@ type EagerUserChatRoom = {
   };
   readonly id: string;
   readonly userId?: string | null;
-  readonly chatRoomId?: string | null;
+  readonly chatRoomId: string;
   readonly user: User;
   readonly chatRoom: ChatRoom;
   readonly createdAt?: string | null;
@@ -291,7 +291,7 @@ type LazyUserChatRoom = {
   };
   readonly id: string;
   readonly userId?: string | null;
-  readonly chatRoomId?: string | null;
+  readonly chatRoomId: string;
   readonly user: AsyncItem<User>;
   readonly chatRoom: AsyncItem<ChatRoom>;
   readonly createdAt?: string | null;
