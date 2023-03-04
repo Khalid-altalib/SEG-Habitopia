@@ -27,8 +27,6 @@ const initialState: ProfileState = {
   },
 };
 
-let requestPromise: any = undefined;
-
 export const fetchFollowList = createAsyncThunk(
   "profile/fetch-follow-list",
   async (followListMode: string) => {
