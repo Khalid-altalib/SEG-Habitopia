@@ -1,26 +1,17 @@
 import Avatar from "@components/Avatar/Avatar";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import {
-  Box,
-  Button,
-  Card,
-  Heading,
-  HStack,
-  Image,
-  Text,
-  VStack,
-} from "native-base";
+import { Box, Button, Heading, HStack } from "native-base";
 import React from "react";
-import { NavigationParams } from "types";
+import { NavigationParams, User } from "types";
 
 type Props = {
-  participant: any;
+  user: User;
 };
 
-const ParticipantEntry = (props: Props) => {
-  const { participant } = props;
-  const { name, userId } = participant;
+const UserCard = (props: Props) => {
+  const { user } = props;
+  const { name, userId } = user;
 
   const navigation =
     useNavigation<NativeStackNavigationProp<NavigationParams>>();
@@ -44,4 +35,4 @@ const ParticipantEntry = (props: Props) => {
   );
 };
 
-export default ParticipantEntry;
+export default UserCard;

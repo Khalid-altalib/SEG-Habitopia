@@ -128,13 +128,15 @@ export type Message = {
   userID: string;
 };
 
+export type User = {
+  userId: string;
+  name: string;
+};
+
 export type ChatDetails = {
   statistics: {
     started: string;
     ending: string;
   };
-  participants: {
-    userId: string;
-    name: string;
-  }[];
+  participants: User[];
 };
