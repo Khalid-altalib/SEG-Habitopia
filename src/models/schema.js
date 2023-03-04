@@ -277,7 +277,7 @@ export const schema = {
                     "name": "isValidated",
                     "isArray": false,
                     "type": "Boolean",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "createdAt": {
@@ -1011,5 +1011,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "a1b1a6829ada9baf88fbc86b8a244e55"
+    "version": "62add913e601db03458dbb8633ae70d6"
 };
