@@ -15,7 +15,7 @@ export type RootParams = {
   };
   ChatDetails: undefined;
   FollowList: {
-    followType: string;
+    followListMode: string;
   };
 };
 

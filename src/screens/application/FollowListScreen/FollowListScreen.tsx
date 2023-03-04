@@ -1,14 +1,29 @@
-import { useSelector } from "@app/hooks";
+import { useDispatch, useSelector } from "@app/hooks";
 import PaddedContainer from "@components/PaddedContainer";
 import StatusContainer from "@components/StatusContainer/StatusContainer";
 import UserList from "@components/UserList/UserList";
-import React from "react";
+import React, { useEffect } from "react";
+import { fetchFollowList } from "@features/profile/profileSlice";
+import { RouteProp, useRoute } from "@react-navigation/native";
+import { RootParams } from "types";
 
 type Props = {};
 
 const FollowListScreen = (props: Props) => {
-  const { followList, fetchFollowList } = useSelector((state) => state.profile);
-  const { loading, error } = fetchFollowList;
+  const route = useRoute<RouteProp<RootParams, "FollowList">>();
+  const { followListMode } = route.params;
+
+  const { followList, fetchFollowList: requestStatus } = useSelector(
+    (state) => state.profile
+  );
+
+  const { loading, error } = requestStatus;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchFollowList(followListMode));
+  }, []);
 
   return (
     <PaddedContainer>

@@ -26,6 +26,29 @@ const initialState: ProfileState = {
 
 let requestPromise: any = undefined;
 
+export const fetchFollowList = createAsyncThunk(
+  "profile/fetch-follow-list",
+  async (followListMode: string) => {
+    let followList = undefined;
+
+    if (followListMode === "following") {
+      followList = [
+        { name: "Bob", userId: "123" },
+        { name: "Tom", userId: "124" },
+      ];
+    } else if (followListMode === "follower") {
+      followList = [
+        { name: "Bob", userId: "123" },
+        { name: "Tom", userId: "124" },
+      ];
+    }
+
+    // BACKEND_PLACEHOLDER
+
+    return followList;
+  }
+);
+
 export const fetchProfile = createAsyncThunk<
   string,
   any,
