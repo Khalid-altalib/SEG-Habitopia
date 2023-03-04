@@ -63,21 +63,21 @@ export const sendConfirmationCode = createAsyncThunk<
 });
 
 const displayErrorMessage = (err: any) => {
-  let x = "";
+  let errorMessage = "";
   // looked into error messages and found what is presented for the different errors
   if (err.message.includes("previousPassword")) {
-    x = "Your password does not match the correct format.";
+    errorMessage = "Your password does not match the correct format.";
   } else if (err.message.includes("proposedPassword")) {
-    x = "The requested password does not fit the criteria for a password";
+    errorMessage = "The requested password does not fit the criteria for a password";
   } else if (err.message.includes("Incorrect username or password")) {
-    x = "Your old password is incorrect.";
+    errorMessage = "Your old password is incorrect.";
   } else {
-    x = err.message;
-    console.log(x);
+    errorMessage = err.message;
+    console.log(errorMessage);
   }
   Toast.show({
     type: "error",
-    text1: x,
+    text1: errorMessage,
   });
 };
 
