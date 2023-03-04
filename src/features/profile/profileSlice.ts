@@ -1,17 +1,27 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { Profile } from "../../../types";
+import { Profile, User } from "../../../types";
 import { getAuthTokenFromThunk } from "../../app/util";
 
 export type ProfileState = {
   profile?: Profile;
+  followList?: User[];
   loading: boolean;
   error: string;
+  fetchFollowList: {
+    loading: boolean;
+    error: string;
+  };
 };
 
 const initialState: ProfileState = {
   profile: undefined,
   loading: false,
   error: "",
+  followList: undefined,
+  fetchFollowList: {
+    loading: false,
+    error: "",
+  },
 };
 
 let requestPromise: any = undefined;

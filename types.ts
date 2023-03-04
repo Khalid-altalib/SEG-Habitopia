@@ -14,6 +14,9 @@ export type RootParams = {
     defaultValue: string;
   };
   ChatDetails: undefined;
+  FollowList: {
+    followType: string;
+  };
 };
 
 export type ProfileParams = {
