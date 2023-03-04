@@ -3,6 +3,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {
   Avatar,
   Button,
+  Center,
   Heading,
   HStack,
   Text,
@@ -13,6 +14,7 @@ import React from "react";
 import { Profile, RootParams } from "../../../../types";
 import { useSelector } from "../../../app/hooks";
 import StatusContainer from "../../../components/StatusContainer/StatusContainer";
+import FollowListDisplay from "../FollowListDisplay/FollowListDisplay";
 
 type Props = {
   isLocalUserProfile: boolean;
@@ -29,9 +31,10 @@ const ProfileHeader = (props: Props) => {
       <HStack space={4} pb={4}>
         <Avatar size={100} />
         <VStack flex={1} justifyContent={"space-between"}>
-          <View flex={1} justifyContent="center">
-            <Heading>152 Friends</Heading>
-          </View>
+          <HStack flex={1} justifyContent="center" paddingBottom={3} space={3}>
+            <FollowListDisplay followListMode={"follower"} followCount={30} />
+            <FollowListDisplay followListMode={"following"} followCount={41} />
+          </HStack>
 
           {isLocalUserProfile ? (
             <Button onPress={() => navigation.push("Settings")}>
