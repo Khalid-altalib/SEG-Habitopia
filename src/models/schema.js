@@ -133,7 +133,7 @@ export const schema = {
                     "name": "Messages",
                     "isArray": true,
                     "type": {
-                        "model": "Message"
+                        "model": "Checkin"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -235,8 +235,8 @@ export const schema = {
                 }
             ]
         },
-        "Message": {
-            "name": "Message",
+        "Checkin": {
+            "name": "Checkin",
             "fields": {
                 "id": {
                     "name": "id",
@@ -245,11 +245,18 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "text": {
-                    "name": "text",
+                "timeStamp": {
+                    "name": "timeStamp",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSDateTime",
                     "isRequired": false,
+                    "attributes": []
+                },
+                "userID": {
+                    "name": "userID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "chatroomID": {
@@ -259,10 +266,17 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "userID": {
-                    "name": "userID",
+                "validationCount": {
+                    "name": "validationCount",
                     "isArray": false,
-                    "type": "ID",
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "isValidated": {
+                    "name": "isValidated",
+                    "isArray": false,
+                    "type": "Boolean",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -284,7 +298,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Messages",
+            "pluralName": "Checkins",
             "attributes": [
                 {
                     "type": "model",
@@ -293,18 +307,18 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byChatRoom",
+                        "name": "byUser",
                         "fields": [
-                            "chatroomID"
+                            "userID"
                         ]
                     }
                 },
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byUser",
+                        "name": "byChatRoom",
                         "fields": [
-                            "userID"
+                            "chatroomID"
                         ]
                     }
                 },
@@ -340,7 +354,7 @@ export const schema = {
                     "name": "Messages",
                     "isArray": true,
                     "type": {
-                        "model": "Message"
+                        "model": "Checkin"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -451,8 +465,8 @@ export const schema = {
                 }
             ]
         },
-        "Checkin": {
-            "name": "Checkin",
+        "Message": {
+            "name": "Message",
             "fields": {
                 "id": {
                     "name": "id",
@@ -461,11 +475,18 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "timeStamp": {
-                    "name": "timeStamp",
+                "text": {
+                    "name": "text",
                     "isArray": false,
-                    "type": "AWSDateTime",
+                    "type": "String",
                     "isRequired": false,
+                    "attributes": []
+                },
+                "chatroomID": {
+                    "name": "chatroomID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "userID": {
@@ -475,12 +496,32 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "chatroomID": {
-                    "name": "chatroomID",
+                "messageType": {
+                    "name": "messageType",
                     "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
+                    "type": {
+                        "enum": "MessageEnum"
+                    },
+                    "isRequired": false,
                     "attributes": []
+                },
+                "getCheckin": {
+                    "name": "getCheckin",
+                    "isArray": false,
+                    "type": {
+                        "model": "Checkin"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": [
+                            "id"
+                        ],
+                        "targetNames": [
+                            "messageGetCheckinId"
+                        ]
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -497,10 +538,17 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
+                },
+                "messageGetCheckinId": {
+                    "name": "messageGetCheckinId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
-            "pluralName": "Checkins",
+            "pluralName": "Messages",
             "attributes": [
                 {
                     "type": "model",
@@ -509,18 +557,18 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byUser",
+                        "name": "byChatRoom",
                         "fields": [
-                            "userID"
+                            "chatroomID"
                         ]
                     }
                 },
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byChatRoom",
+                        "name": "byUser",
                         "fields": [
-                            "chatroomID"
+                            "userID"
                         ]
                     }
                 },
@@ -951,8 +999,17 @@ export const schema = {
             ]
         }
     },
-    "enums": {},
+    "enums": {
+        "MessageEnum": {
+            "name": "MessageEnum",
+            "values": [
+                "TEXT",
+                "CHECKIN",
+                "VALIDATION"
+            ]
+        }
+    },
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "229e1c9b67ced0499a28537fd8e2654c"
+    "version": "a1b1a6829ada9baf88fbc86b8a244e55"
 };
