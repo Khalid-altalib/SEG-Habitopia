@@ -4,7 +4,7 @@ import {
 } from "@react-navigation/native-stack";
 import { ChatParams, RootParams } from "../../../types";
 import ChatListScreen from "@screens/chat/ChatListScreen";
-import ContactIcon from "../../features/chat/ContactIcon";
+import ContactIcon from "../../features/chat/ContactIcon/ContactIcon";
 import ChatScreen from "@screens/chat/ChatScreen";
 import { Button } from "native-base";
 import { NavigationProp, useNavigation } from "@react-navigation/native";

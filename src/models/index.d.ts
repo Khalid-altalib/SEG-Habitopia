@@ -206,7 +206,7 @@ type EagerChallenge = {
   readonly Users?: (ChallengeUser | null)[] | null;
   readonly started?: string | null;
   readonly ChatRoom?: ChatRoom | null;
-  readonly userCount?: number | null;
+  readonly userCount: number | 0;
   readonly finished?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -224,7 +224,7 @@ type LazyChallenge = {
   readonly Users: AsyncCollection<ChallengeUser>;
   readonly started?: string | null;
   readonly ChatRoom: AsyncItem<ChatRoom | undefined>;
-  readonly userCount?: number | null;
+  readonly userCount: number | 0;
   readonly finished?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

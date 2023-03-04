@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { ImageBackground, StyleSheet, FlatList, Text } from "react-native";
-import Message from "../../../features/chat/Message";
-import InputBox from "../../../features/chat/InputBox";
+import Message from "../../../features/chat/Message/Message";
+import InputBox from "../../../features/chat/InputBox/InputBox";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { ChatParams } from "../../../../types";
 import { useDispatch, useSelector } from "../../../app/hooks";

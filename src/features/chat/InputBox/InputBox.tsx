@@ -2,7 +2,7 @@ import { Button, TextInput, View, StyleSheet } from "react-native";
 import React from "react";
 import { useDispatch } from "@app/hooks";
 import { Controller, useForm } from "react-hook-form";
-import { sendMessage } from "./chatSlice";
+import { sendMessage } from "../chatSlice";
 
 type InputBoxProps = {
   chatRoomID: string;
