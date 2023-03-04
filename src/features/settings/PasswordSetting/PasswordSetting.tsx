@@ -10,6 +10,7 @@ const PasswordSetting = (props: Props) => {
     defaultValues: {
       formValue: "",
       confirmPassword: "",
+      oldPassword: "",
     },
   });
 
@@ -20,6 +21,16 @@ const PasswordSetting = (props: Props) => {
 
   return (
     <View>
+      <View marginBottom={5}>
+        <Text mb={5}>Old Password</Text>
+        <Controller
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <Input onChangeText={onChange} value={value} size="xl" />
+          )}
+          name="oldPassword"
+        />
+      </View>
       <View marginBottom={5}>
         <Text mb={5}>New Password</Text>
         <Controller
@@ -44,6 +55,7 @@ const PasswordSetting = (props: Props) => {
         getValues={getValues}
         valueName="password"
         disabled={arePasswordsNotEqual()}
+        oldPassword={getValues("oldPassword")}
       />
     </View>
   );

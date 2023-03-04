@@ -10,9 +10,6 @@ const settingEntries: SettingEntries = {
   name: {
     name: "Name",
   },
-  email: {
-    name: "Email",
-  },
   password: {
     name: "Password",
   },

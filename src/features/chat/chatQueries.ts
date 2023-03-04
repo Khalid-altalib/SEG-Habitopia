@@ -1,7 +1,13 @@
 import { DataStore, Predicates, SortDirection } from "aws-amplify";
-import { Chat } from "../../../types";
+import { Chat, ChatDetails } from "../../../types";
 import { getUserFromDatabase, getUserIdFromThunk } from "../../app/util";
-import { ChatRoom, Message } from "../../models";
+import {
+  ChatRoom,
+  Message,
+  Challenge,
+  User,
+  ChallengeType,
+} from "../../models";
 import { Message as MessageType } from "../../../types";
 
 export const fetchUserChats = async (thunkAPI: any) => {
@@ -73,4 +79,41 @@ const updateLastMessageInChat = async (
       updated.chatRoomLastMessageId = messageID;
     })
   );
+};
+
+export const getChatDetails = async (chatId: string) => {
+  const challegeDetail = (
+    await DataStore.query(Challenge, (challenge) =>
+      challenge.challengeChatRoomId.eq(chatId)
+    )
+  )[0];
+
+  const challengeTypeDetails = (
+    await DataStore.query(ChallengeType, (challengeType) =>
+      challengeType.id.eq(challegeDetail.challengeChallengeTypeId)
+    )
+  )[0];
+
+  const users: { userId: string; name: string }[] = [];
+  for await (const participant of challegeDetail.Users) {
+    const user = (
+      await DataStore.query(User, (user) =>
+        user.id.eq(participant.userId || "")
+      )
+    )[0];
+    users.push({
+      userId: user.id,
+      name: user.name || "",
+    });
+  }
+  const chatDetails = {
+    challengeName: challengeTypeDetails.name,
+    description: challengeTypeDetails.description,
+    statistics: {
+      started: challegeDetail.started || "Yet to start",
+      ending: challegeDetail.finished || "Yet to end",
+    },
+    participants: users,
+  } as ChatDetails;
+  return chatDetails;
 };

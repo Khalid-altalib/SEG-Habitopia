@@ -137,6 +137,8 @@ export type User = {
 };
 
 export type ChatDetails = {
+  challengeName: string;
+  description: string;
   statistics: {
     started: string;
     ending: string;

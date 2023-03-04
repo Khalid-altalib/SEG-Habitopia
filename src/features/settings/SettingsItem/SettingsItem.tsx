@@ -31,6 +31,7 @@ function SettingsItem(props: Props) {
         <Box
           flexDirection="row"
           borderBottomWidth={1}
+          _light={{ borderColor: "gray.300" }}
           _dark={{ borderColor: "blueGray.700" }}
         >
           <Text style={{ flex: 1 }} type={TextType.Small}>
