@@ -25,6 +25,11 @@ const NotificationToggle = (props: Props) => {
       display={"flex"}
       justifyContent={"space-between"}
       alignItems="center"
+      flexDirection="row"
+      borderBottomWidth={1}
+      _light={{ borderColor: "gray.300" }}
+      _dark={{ borderColor: "blueGray.700" }}
+      paddingBottom={3}
     >
       <Box>
         <Text type={TextType.Small}>Notifications </Text>
@@ -35,6 +40,7 @@ const NotificationToggle = (props: Props) => {
           value={switchEnabled}
           onChange={handleSwitchChange}
           trackColor={{ true: theme.colors.purple[700] }}
+          thumbColor="white"
         />
       </Box>
     </HStack>

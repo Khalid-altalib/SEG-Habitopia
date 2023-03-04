@@ -11,6 +11,7 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RootParams } from "types";
 import Button from "@components/Button";
 import { ButtonType } from "types";
+import ColorModeToggle from "@features/settings/ColorModeToggle";
 
 const SettingsPage = () => {
   const navigation = useNavigation<NavigationProp<RootParams>>();
@@ -47,6 +48,7 @@ const SettingsPage = () => {
           </Box>
         ))}
         <NotificationToggle defaultValue={settings.notifications} />
+        <ColorModeToggle />
         <Button
           onPress={handleLogOut}
           style={{ marginTop: 40 }}
