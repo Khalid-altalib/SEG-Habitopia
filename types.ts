@@ -13,6 +13,7 @@ export type RootParams = {
     settingType: string;
     defaultValue: string;
   };
+  ChatDetails: undefined;
 };
 
 export type ProfileParams = {
@@ -125,4 +126,17 @@ export type Message = {
   chatRoomId?: string;
   createdAt: string;
   userID: string;
+};
+
+export type ChatDetails = {
+  challengeName: string;
+  description: string;
+  statistics: {
+    started: string;
+    ending: string;
+  };
+  participants: {
+    userId: string;
+    name: string;
+  }[];
 };
