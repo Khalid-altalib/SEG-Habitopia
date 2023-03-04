@@ -3,6 +3,7 @@ import { Chat, ChatDetails, Message } from "../../../types";
 import {
   fetchChatMessages,
   fetchUserChats,
+  getChatDetails,
   sendChatMessage,
 } from "./chatQueries";
 
@@ -34,16 +35,18 @@ export const fetchDetails = createAsyncThunk<
   { rejectValue: string }
 >("chats/fetch-details", async (chatId, thunkAPI) => {
   try {
-    return {
-      statistics: {
-        started: "04/03/22",
-        ending: "19/03/22",
-      },
-      participants: [
-        { userId: "1", name: "Bob" },
-        { userId: "2", name: "Tom" },
-      ],
-    };
+    const chatDetails = await getChatDetails(chatId);
+    // return {
+    //   statistics: {
+    //     started: "04/03/22",
+    //     ending: "19/03/22",
+    //   },
+    //   participants: [
+    //     { userId: "1", name: "Bob" },
+    //     { userId: "2", name: "Tom" },
+    //   ],
+    // };
+    return chatDetails;
     // BACKEND PLACEHOLDER
   } catch (error: any) {
     return thunkAPI.rejectWithValue("An error has occured");
