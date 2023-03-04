@@ -112,6 +112,27 @@ export const profileSlice = createSlice({
         state.error = action.payload.message;
       }
     );
+    builder.addCase(
+      fetchFollowList.fulfilled,
+      (state: ProfileState, action: PayloadAction<any>) => {
+        state.followList = action.payload;
+        state.loading = false;
+        state.error = "";
+      }
+    );
+    builder.addCase(fetchFollowList.pending, (state: ProfileState) => {
+      state.followList = undefined;
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(
+      fetchFollowList.rejected,
+      (state: ProfileState, action: PayloadAction<any>) => {
+        state.followList = undefined;
+        state.loading = false;
+        state.error = "An error has occured";
+      }
+    );
   },
 });
 
