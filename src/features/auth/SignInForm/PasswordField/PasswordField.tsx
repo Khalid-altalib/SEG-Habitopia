@@ -47,6 +47,7 @@ const FieldInput = ({ control }: Props) => (
         value={value}
         size="xl"
         placeholder="Password"
+        type="password"
       />
     )}
     name="password"

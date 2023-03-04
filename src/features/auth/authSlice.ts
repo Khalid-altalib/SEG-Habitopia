@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { LocalUser } from "../../../types";
-
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RootState } from "../../app/store";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
@@ -63,6 +62,46 @@ export const sendConfirmationCode = createAsyncThunk<
   }
 });
 
+const displayErrorMessage = (err: any) => {
+  let errorMessage = "";
+  // looked into error messages and found what is presented for the different errors
+  if (err.message.includes("previousPassword")) {
+    errorMessage = "Your password does not match the correct format.";
+  } else if (err.message.includes("proposedPassword")) {
+    errorMessage = "The requested password does not fit the criteria for a password";
+  } else if (err.message.includes("Incorrect username or password")) {
+    errorMessage = "Your old password is incorrect.";
+  } else {
+    errorMessage = err.message;
+    console.log(errorMessage);
+  }
+  Toast.show({
+    type: "error",
+    text1: errorMessage,
+  });
+};
+
+export const updatePassword = async (password: string,oldPassword: string) => {
+  if (password === oldPassword) {
+    Toast.show({
+      type: "error",
+      text1: "New password cannot be the same as the old password",
+    });
+    return;
+  }
+  
+  Auth.currentAuthenticatedUser()
+  .then((user) => {
+    return Auth.changePassword(user, oldPassword, password);
+  })
+  .then((data) => 
+  Toast.show({
+    type: "success",
+    text1: "Password Updated Successfully",
+  }))
+  .catch((err) => displayErrorMessage(err));
+};
+
 const logInHelper = async (email: string, password: string, name?: string) => {
   const { signInUserSession, attributes } = await Auth.signIn(email, password);
   const user = {
@@ -72,7 +111,6 @@ const logInHelper = async (email: string, password: string, name?: string) => {
 
   await AsyncStorage.setItem("user", JSON.stringify(user));
   await createUserInDatabase(attributes.sub, email, name);
-  console.log(user);
   return user;
 };
 
@@ -149,6 +187,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     addSignUpData: (state, action: PayloadAction<object>) => {
+      console.log(state, action);
       state.signUpData = { ...state.signUpData, ...action.payload };
     },
     addLogInData: (state, action: PayloadAction<object>) => {

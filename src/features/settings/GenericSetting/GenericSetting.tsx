@@ -1,9 +1,11 @@
-import { Button, Input, Text, TextArea, View } from "native-base";
+import { Button, Input, TextArea, View } from "native-base";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "../../../app/hooks";
-import DoneButton from "../DoneButton.tsx/DoneButton";
+import DoneButton from "../DoneButton/DoneButton";
 import settingEntries from "../settingEntries";
+import Text from "@components/Text";
+import { TextType } from "types";
 
 type Props = {
   defaultValue: string;
@@ -23,12 +25,19 @@ const GenericSetting = (props: Props) => {
 
   return (
     <View>
-      <Text mb={5}>{settingTitle}</Text>
+      <Text style={{ marginBottom: 10 }} type={TextType.Regular}>
+        {settingTitle}
+      </Text>
 
       <Controller
         control={control}
         render={({ field: { onChange, value } }) => (
-          <Input onChangeText={onChange} value={value} size="xl" />
+          <Input
+            onChangeText={onChange}
+            value={value}
+            size="xl"
+            testID="input"
+          />
         )}
         name="formValue"
       />

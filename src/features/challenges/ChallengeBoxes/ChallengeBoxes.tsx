@@ -6,9 +6,13 @@ import StatusContainer from "../../../components/StatusContainer/StatusContainer
 import ChallengeBox from "../ChallengeBox/ChallengeBox";
 import { fetchChallenges } from "../challengesSlice";
 
-type Props = {};
+type Props = {
+  boxCount?: number;
+};
 
 const ChallengeBoxes = (props: Props) => {
+  const { boxCount } = props;
+
   const { challenges, fetchChallenges: requestStatus } =
     useSelector(selectChallenges);
 
@@ -23,9 +27,11 @@ const ChallengeBoxes = (props: Props) => {
   return (
     <StatusContainer loading={loading} error={error} data={challenges}>
       <VStack space={4} width={"100%"}>
-        {challenges.map((challenge, index) => (
-          <ChallengeBox key={index} challenge={challenge} />
-        ))}
+        {challenges
+          .slice(0, boxCount || challenges.length)
+          .map((challenge, index) => (
+            <ChallengeBox key={index} challenge={challenge} />
+          ))}
       </VStack>
     </StatusContainer>
   );
