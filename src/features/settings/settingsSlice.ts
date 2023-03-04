@@ -1,6 +1,10 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { DataStore } from "aws-amplify";
 import { Settings } from "../../../types";
 import { getAuthTokenFromThunk } from "../../app/util";
+import { getUserFromDatabase } from "../../app/util";
+import { User } from "../../models";
+import { updatePassword } from "../auth/authSlice";
 
 export type SettingsState = {
   settings: Settings;
@@ -38,25 +42,22 @@ export const fetchSettings = createAsyncThunk<
   { rejectValue: string }
 >("settings/fetch", async (_, thunkAPI) => {
   try {
-    return {
-      email: "tareitanawaz@outlook.com",
-      password: "Password.123",
-      name: "Tareita Nawaz",
-      notifications: true,
-      biography: "Hello, my name is test user and this is my bio!",
-    }; //  BACKEND PLACEHOLDER
-    const response = await fetch("https://test/api/settings", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: getAuthTokenFromThunk(thunkAPI),
-      },
-    });
-    return (await response.json()) as Settings;
+    const userData  = await getUserFromDatabase(thunkAPI);
+
+    const response =  {
+      email: userData.email,
+      name: userData.name,
+      notifications: userData.notifications,
+      biography: userData.biography,
+    };
+   
+    return (await response) as Settings;
   } catch (error: any) {
     const message = error.message;
     return thunkAPI.rejectWithValue(message);
   }
 });
+
 
 export const setSettings = createAsyncThunk<
   void,
@@ -64,15 +65,27 @@ export const setSettings = createAsyncThunk<
   { rejectValue: string }
 >("settings/set", async (settings: any, thunkAPI) => {
   try {
-    return settings; // BACKEND_PLACEHOLDER
-    await fetch("https://test/api/settings", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: getAuthTokenFromThunk(thunkAPI),
-      },
-    }); //  BACKEND PLACEHOLDER
-    return settings;
+    const {name, notifications, biography, password, oldPassword} = settings;
+    const user = await getUserFromDatabase(thunkAPI);
+    // update the one that is not null
+    await DataStore.save(
+      User.copyOf(user, (updated) => {
+        if (name !== undefined) {
+          updated.name = name;
+        }
+        if (notifications !== undefined) {
+          updated.notifications = notifications;
+        }
+        if (biography !== undefined) {
+          updated.biography = biography;
+        }
+        if (password !== undefined) {
+          updatePassword(password, oldPassword);
+        }
+      }));
+
+    // could add image and password in future
+    return settings; 
   } catch (error: any) {
     const message = error.message;
     return thunkAPI.rejectWithValue(message);

@@ -9,18 +9,19 @@ type Props = {
   disabled?: boolean;
   getValues: (valueName: string) => string;
   valueName: string;
+  oldPassword?: string;
 };
 
 const DoneButton = (props: Props) => {
   const navigation = useNavigation<NavigationProp<RootParams>>();
-  const { getValues, disabled, valueName } = props;
+  const { getValues, disabled, valueName, oldPassword } = props;
 
   const { loading } = useSelector((state) => state.settings.setSettings);
 
   const dispatch = useDispatch();
 
   const handlePress = async () => {
-    await dispatch(setSettings({ [valueName]: getValues("formValue") }));
+    await dispatch(setSettings({ [valueName]: getValues("formValue"), oldPassword: oldPassword }));
     navigation.goBack();
   };
 

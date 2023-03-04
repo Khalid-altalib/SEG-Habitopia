@@ -13,6 +13,7 @@ import ChallengePrompt from "../screens/application/ChallengePromptScreen/Challe
 import SettingDetails from "../screens/application/SettingsDetailsScreen/SettingDetailsScreen";
 import Settings from "../screens/application/SettingsScreen/SettingsScreen";
 import { selectUser } from "../app/selectors";
+import ChatDetailsScreen from "@screens/chat/ChatDetailsScreen/ChatDetailsScreen";
 
 const Stack = createNativeStackNavigator<RootParams>();
 
@@ -58,6 +59,11 @@ const Navigation = () => {
           options={{
             headerTitle: "Edit",
           }}
+        />
+        <Stack.Screen
+          name="ChatDetails"
+          component={ChatDetailsScreen}
+          options={{ headerTitle: "Chat Info" }}
         />
       </Stack.Navigator>
     </NavigationContainer>

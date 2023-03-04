@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { Chat, Message } from "../../../types";
+import { Chat, ChatDetails, Message } from "../../../types";
 import {
   fetchChatMessages,
   fetchUserChats,
+  getChatDetails,
   sendChatMessage,
 } from "./chatQueries";
 
@@ -20,7 +21,37 @@ type ChatState = {
     loading: boolean;
     error: string;
   };
+  fetchDetails: {
+    loading: boolean;
+    error: string;
+  };
+  details?: ChatDetails;
+  currentChatId?: string;
 };
+
+export const fetchDetails = createAsyncThunk<
+  ChatDetails,
+  string,
+  { rejectValue: string }
+>("chats/fetch-details", async (chatId, thunkAPI) => {
+  try {
+    const chatDetails = await getChatDetails(chatId);
+    // return {
+    //   statistics: {
+    //     started: "04/03/22",
+    //     ending: "19/03/22",
+    //   },
+    //   participants: [
+    //     { userId: "1", name: "Bob" },
+    //     { userId: "2", name: "Tom" },
+    //   ],
+    // };
+    return chatDetails;
+    // BACKEND PLACEHOLDER
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue("An error has occured");
+  }
+});
 
 export const fetchChats = createAsyncThunk<
   Chat[],
@@ -85,6 +116,12 @@ const initialState: ChatState = {
     loading: false,
     error: "",
   },
+  fetchDetails: {
+    loading: false,
+    error: "",
+  },
+  details: undefined,
+  currentChatId: undefined,
 };
 
 export const chatSlice = createSlice({
@@ -100,6 +137,10 @@ export const chatSlice = createSlice({
       if (chat) {
         chat.messages?.unshift(message);
       }
+    },
+    setCurrentChatId: (state, action: PayloadAction<string>) => {
+      const chatId = action.payload;
+      state.currentChatId = chatId;
     },
   },
   extraReducers: (builder) => {
@@ -144,9 +185,25 @@ export const chatSlice = createSlice({
       state.sendMessage.loading = false;
       state.sendMessage.error = action.payload;
     });
+    builder.addCase(
+      fetchDetails.fulfilled,
+      (state, action: PayloadAction<ChatDetails>) => {
+        state.fetchDetails.loading = false;
+        state.fetchDetails.error = "";
+        state.details = action.payload;
+      }
+    );
+    builder.addCase(fetchDetails.pending, (state) => {
+      state.fetchDetails.loading = true;
+      state.details = undefined;
+    });
+    builder.addCase(fetchDetails.rejected, (state) => {
+      state.fetchDetails.loading = false;
+      state.fetchDetails.error = "An error has occured";
+    });
   },
 });
 
-export const { addMessageToChat } = chatSlice.actions;
+export const { addMessageToChat, setCurrentChatId } = chatSlice.actions;
 
 export default chatSlice.reducer;
