@@ -28,7 +28,10 @@ const ChatDetailsScreen = (props: Props) => {
     <Box backgroundColor={"black"}>
       <PaddedContainer>
         <StatusContainer loading={loading} error={error} data={details}>
-          <Header />
+          <Header
+            name={details?.challengeName || "Erro"}
+            description={details?.description || "Error"}
+          />
           <Statistics />
           <ParticipantsList />
         </StatusContainer>

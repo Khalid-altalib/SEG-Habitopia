@@ -129,6 +129,8 @@ export type Message = {
 };
 
 export type ChatDetails = {
+  challengeName: string;
+  description: string;
   statistics: {
     started: string;
     ending: string;
