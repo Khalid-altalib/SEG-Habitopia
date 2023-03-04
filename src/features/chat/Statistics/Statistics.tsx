@@ -29,13 +29,25 @@ const StatisticBox = (props: StatisticBoxProps) => {
 const Statistics = () => {
   const statistics = useSelector((state) => state.chats.details?.statistics);
 
-  return (
-    statistics && (
-      <HStack space={2} justifyContent="center">
-        <StatisticBox timestamp={statistics.started} statisticType="Started" />
-        <StatisticBox timestamp={statistics.ending} statisticType="Ending" />
-      </HStack>
-    )
+  return statistics ? (
+    <HStack space={2} justifyContent="center">
+      <StatisticBox timestamp={statistics.started} statisticType="Started" />
+      <StatisticBox timestamp={statistics.ending} statisticType="Ending" />
+    </HStack>
+  ) : (
+    <HStack space={1} justifyContent="center">
+      <Box
+        padding={3}
+        borderRadius={8}
+        backgroundColor="info.600"
+        margin={3}
+        width="150px"
+      >
+        <Center>
+          <Text fontSize="lg">No info found</Text>
+        </Center>
+      </Box>
+    </HStack>
   );
 };
 
