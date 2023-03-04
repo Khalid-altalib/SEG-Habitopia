@@ -65,7 +65,6 @@ export const setSettings = createAsyncThunk<
   { rejectValue: string }
 >("settings/set", async (settings: any, thunkAPI) => {
   try {
-    // console.log("settings", settings)
     const {name, notifications, biography, password, oldPassword} = settings;
     const user = await getUserFromDatabase(thunkAPI);
     // update the one that is not null
@@ -89,8 +88,6 @@ export const setSettings = createAsyncThunk<
     return settings; 
   } catch (error: any) {
     const message = error.message;
-    // look into using toastify
-    console.log("fortnite", error)
     return thunkAPI.rejectWithValue(message);
   }
 });
