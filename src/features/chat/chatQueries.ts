@@ -1,5 +1,5 @@
-import { DataStore, Predicates, SortDirection } from "aws-amplify";
-import { Chat, ChatDetails } from "../../../types";
+import { Amplify, DataStore, Predicates, SortDirection } from "aws-amplify";
+import { Chat, ChatDetails, CheckIn } from "../../../types";
 import { getUserFromDatabase, getUserIdFromThunk } from "../../app/util";
 import {
   ChatRoom,
@@ -8,6 +8,7 @@ import {
   User,
   ChallengeType,
   MessageEnum,
+  Checkin,
 } from "../../models";
 import { Message as MessageType } from "../../../types";
 
@@ -42,7 +43,7 @@ export const fetchChatMessages = async (chatId: string) => {
   const chatMessages = await DataStore.query(
     Message,
     (message) => message.chatroomID.eq(chatId),
-    { sort: (messaage) => messaage.createdAt(SortDirection.DESCENDING) }
+    { sort: (message) => message.createdAt(SortDirection.DESCENDING) }
   );
   let messages: MessageType[] = [];
   for await (const chatMessage of chatMessages) {
@@ -119,4 +120,64 @@ export const getChatDetails = async (chatId: string) => {
     participants: users,
   } as ChatDetails;
   return chatDetails;
+};
+
+export const sendChatCheckIn = async (chatID: string, thunkAPI: any) => {
+  const userID = getUserIdFromThunk(thunkAPI);
+
+  const lastCheckIn = await getLastCheckIn(chatID, thunkAPI);
+
+  if (lastCheckIn) {
+    console.log("test");
+    const timeElapsed = Math.floor(
+      (new Date().getTime() - new Date(lastCheckIn.createdAt).getTime()) /
+        86400000
+    );
+    console.log(timeElapsed);
+    if (timeElapsed < 1) {
+      throw new Error(
+        `Already Checked in for the day at ${lastCheckIn.createdAt}! You have ${lastCheckIn.validationCount} validations!`
+      );
+    }
+  }
+
+  const checkIn = await DataStore.save(
+    new Checkin({
+      chatroomID: chatID,
+      userID: userID,
+      validationCount: 0,
+      isValidated: false,
+    })
+  );
+
+  const checkInMessage = await DataStore.save(
+    new Message({
+      chatroomID: chatID,
+      userID: userID,
+      messageType: MessageEnum.CHECKIN,
+      getCheckin: checkIn,
+      text: "This is a check in",
+    })
+  );
+
+  return { ...checkInMessage } as CheckIn;
+};
+
+const getLastCheckIn = async (chatID: string, thunkAPI: any) => {
+  const userID = await getUserIdFromThunk(thunkAPI);
+  const lastCheckInByUser = (
+    await DataStore.query(
+      Checkin,
+      (checkIn) =>
+        checkIn.and((checkIn) => [
+          checkIn.userID.eq(userID),
+          checkIn.chatroomID.eq(chatID),
+        ]),
+      {
+        sort: (checkIn) => checkIn.createdAt(SortDirection.DESCENDING),
+      }
+    )
+  )[0];
+  console.log(lastCheckInByUser);
+  return lastCheckInByUser;
 };

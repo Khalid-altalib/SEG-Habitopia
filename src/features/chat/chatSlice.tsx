@@ -4,6 +4,7 @@ import {
   fetchChatMessages,
   fetchUserChats,
   getChatDetails,
+  sendChatCheckIn,
   sendChatMessage,
 } from "./chatQueries";
 
@@ -25,6 +26,10 @@ type ChatState = {
     loading: boolean;
     error: string;
   };
+  sendCheckIn: {
+    loading: boolean;
+    error: string;
+  };
   details?: ChatDetails;
   currentChatId?: string;
 };
@@ -36,18 +41,7 @@ export const fetchDetails = createAsyncThunk<
 >("chats/fetch-details", async (chatId, thunkAPI) => {
   try {
     const chatDetails = await getChatDetails(chatId);
-    // return {
-    //   statistics: {
-    //     started: "04/03/22",
-    //     ending: "19/03/22",
-    //   },
-    //   participants: [
-    //     { userId: "1", name: "Bob" },
-    //     { userId: "2", name: "Tom" },
-    //   ],
-    // };
     return chatDetails;
-    // BACKEND PLACEHOLDER
   } catch (error: any) {
     return thunkAPI.rejectWithValue("An error has occured");
   }
@@ -102,6 +96,20 @@ export const sendMessage = createAsyncThunk<
   }
 );
 
+export const sendCheckIn = createAsyncThunk<
+  Message,
+  string,
+  { rejectValue: string }
+>("checkIn/send", async (chatID: string, thunkAPI) => {
+  try {
+    const newCheckIn = await sendChatCheckIn(chatID, thunkAPI);
+    return newCheckIn;
+  } catch (error: any) {
+    const message = error.message;
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 const initialState: ChatState = {
   chats: [],
   fetchChats: {
@@ -117,6 +125,10 @@ const initialState: ChatState = {
     error: "",
   },
   fetchDetails: {
+    loading: false,
+    error: "",
+  },
+  sendCheckIn: {
     loading: false,
     error: "",
   },
@@ -200,6 +212,13 @@ export const chatSlice = createSlice({
     builder.addCase(fetchDetails.rejected, (state) => {
       state.fetchDetails.loading = false;
       state.fetchDetails.error = "An error has occured";
+    });
+    builder.addCase(sendCheckIn.pending, (state) => {
+      state.sendCheckIn.loading = true;
+    });
+    builder.addCase(sendCheckIn.rejected, (state, action: any) => {
+      state.sendCheckIn.loading = false;
+      state.sendCheckIn.error = action.payload;
     });
   },
 });

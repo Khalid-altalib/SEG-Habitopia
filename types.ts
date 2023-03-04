@@ -132,8 +132,8 @@ export interface TextMessage extends Message {
 }
 
 export interface CheckIn extends Message {
-  validationCount: number;
-  isValidated: boolean;
+  validationCount?: number | 0;
+  isValidated?: boolean | false;
 }
 
 export type ChatDetails = {
