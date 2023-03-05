@@ -189,6 +189,7 @@ const createCheckIn = async (chatID: string, userID: string, thunkAPI: any) => {
   return {
     ...checkInMessage,
     userName: userFromDatabase.name,
+    messageType: MessageEnum.CHECKIN,
   } as MessageType;
 };
 
