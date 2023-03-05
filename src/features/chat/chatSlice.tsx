@@ -182,6 +182,7 @@ export const chatSlice = createSlice({
         }
       });
       if (chat && !updatedChat) {
+        console.log("updating");
         chat.messages = updatedChat;
       }
     },
