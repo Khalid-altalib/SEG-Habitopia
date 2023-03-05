@@ -10,7 +10,6 @@ import Text from "../../components/Text";
 import { AuthParams, ButtonType, TextType } from "../../../types";
 import { View } from "react-native";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { Button as TButton } from "native-base";
 
 type formData = {
   name: string;

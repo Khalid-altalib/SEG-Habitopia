@@ -96,6 +96,7 @@ const addUserToChatRoom = async (
     )[0];
     await DataStore.save(
       new UserChatRoom({
+        chatRoomId: chatRoomToJoin.id,
         chatRoom: chatRoomToJoin,
         user: user,
       })

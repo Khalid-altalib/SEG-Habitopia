@@ -66,6 +66,10 @@ const Text = ({ type, style, children, color }: any) => {
       fontSize: 19,
       fontFamily: fontsLoaded ? "Roboto Medium" : undefined,
     },
+    small: {
+      fontSize: 15,
+      fontFamily: fontsLoaded ? "Roboto Medium" : undefined,
+    },
     subtle: {
       fontSize: 15,
       color:

@@ -38,6 +38,7 @@ const AuthNavigation = () => {
         component={ConfirmationCodeScreen}
         options={{
           headerTitle: "Confirmation code",
+          headerBackVisible: false, // The user should not be able to go back as they have already entered their details.
         }}
       />
       <AuthStack.Screen

@@ -1,25 +1,36 @@
 import { Button, Input, Text, View } from "native-base";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import DoneButton from "../DoneButton.tsx/DoneButton";
+import DoneButton from "../DoneButton/DoneButton";
 
 type Props = {};
 
 const PasswordSetting = (props: Props) => {
   const { control, getValues, watch } = useForm({
     defaultValues: {
-      password: "",
+      formValue: "",
       confirmPassword: "",
+      oldPassword: "",
     },
   });
 
   watch();
 
   const arePasswordsNotEqual = () =>
-    getValues("password") !== getValues("confirmPassword");
+    getValues("formValue") !== getValues("confirmPassword");
 
   return (
     <View>
+      <View marginBottom={5}>
+        <Text mb={5}>Old Password</Text>
+        <Controller
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <Input onChangeText={onChange} value={value} size="xl" />
+          )}
+          name="oldPassword"
+        />
+      </View>
       <View marginBottom={5}>
         <Text mb={5}>New Password</Text>
         <Controller
@@ -27,7 +38,7 @@ const PasswordSetting = (props: Props) => {
           render={({ field: { onChange, value } }) => (
             <Input onChangeText={onChange} value={value} size="xl" />
           )}
-          name="password"
+          name="formValue"
         />
       </View>
       <View>
@@ -44,6 +55,7 @@ const PasswordSetting = (props: Props) => {
         getValues={getValues}
         valueName="password"
         disabled={arePasswordsNotEqual()}
+        oldPassword={getValues("oldPassword")}
       />
     </View>
   );
