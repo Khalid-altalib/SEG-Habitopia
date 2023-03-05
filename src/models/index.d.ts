@@ -1,14 +1,11 @@
 import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-amplify/datastore";
 // @ts-ignore
-import { LazyLoading, LazyLoadingDisabled, AsyncItem, AsyncCollection } from "@aws-amplify/datastore";
-
-export enum MessageEnum {
-  TEXT = "TEXT",
-  CHECKIN = "CHECKIN",
-  VALIDATION = "VALIDATION"
-}
-
-
+import {
+  LazyLoading,
+  LazyLoadingDisabled,
+  AsyncItem,
+  AsyncCollection,
+} from "@aws-amplify/datastore";
 
 type EagerLeaderboard = {
   readonly [__modelMeta__]: {
@@ -94,35 +91,28 @@ export declare const User: (new (init: ModelInit<User>) => User) & {
 
 type EagerCheckin = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Checkin, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
+    identifier: ManagedIdentifier<Message, "id">;
+    readOnlyFields: "createdAt" | "updatedAt";
   };
   readonly id: string;
   readonly timeStamp?: string | null;
   readonly userID: string;
   readonly chatroomID: string;
-  readonly validationCount?: number | null;
-  readonly isValidated?: boolean | null;
-  readonly validatedBy?: (UserValidatedCheckIn | null)[] | null;
-  readonly ChallengeType?: ChallengeType | null;
+  readonly userID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly checkinChallengeTypeId?: string | null;
 }
 
-type LazyCheckin = {
+type LazyMessage = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Checkin, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
+    identifier: ManagedIdentifier<Message, "id">;
+    readOnlyFields: "createdAt" | "updatedAt";
   };
   readonly id: string;
-  readonly timeStamp?: string | null;
-  readonly userID: string;
+  readonly text?: string | null;
   readonly chatroomID: string;
-  readonly validationCount?: number | null;
-  readonly isValidated?: boolean | null;
-  readonly validatedBy: AsyncCollection<UserValidatedCheckIn>;
-  readonly ChallengeType: AsyncItem<ChallengeType | undefined>;
+  readonly userID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly checkinChallengeTypeId?: string | null;
@@ -147,24 +137,16 @@ type EagerChallengeType = {
   readonly updatedAt?: string | null;
 }
 
-type LazyChallengeType = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<ChallengeType, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly name: string;
-  readonly description: string;
-  readonly active: boolean;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
+export declare type Message = LazyLoading extends LazyLoadingDisabled
+  ? EagerMessage
+  : LazyMessage;
 
-export declare type ChallengeType = LazyLoading extends LazyLoadingDisabled ? EagerChallengeType : LazyChallengeType
-
-export declare const ChallengeType: (new (init: ModelInit<ChallengeType>) => ChallengeType) & {
-  copyOf(source: ChallengeType, mutator: (draft: MutableModel<ChallengeType>) => MutableModel<ChallengeType> | void): ChallengeType;
-}
+export declare const Message: (new (init: ModelInit<Message>) => Message) & {
+  copyOf(
+    source: Message,
+    mutator: (draft: MutableModel<Message>) => MutableModel<Message> | void
+  ): Message;
+};
 
 type EagerChatRoom = {
   readonly [__modelMeta__]: {
@@ -204,8 +186,8 @@ export declare const ChatRoom: (new (init: ModelInit<ChatRoom>) => ChatRoom) & {
 
 type EagerMessage = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Message, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
+    identifier: ManagedIdentifier<Checkin, "id">;
+    readOnlyFields: "createdAt" | "updatedAt";
   };
   readonly id: string;
   readonly text?: string | null;
@@ -215,13 +197,12 @@ type EagerMessage = {
   readonly getCheckin?: Checkin | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly messageGetCheckinId?: string | null;
-}
+};
 
 type LazyMessage = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Message, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
+    identifier: ManagedIdentifier<Checkin, "id">;
+    readOnlyFields: "createdAt" | "updatedAt";
   };
   readonly id: string;
   readonly text?: string | null;
@@ -231,14 +212,18 @@ type LazyMessage = {
   readonly getCheckin: AsyncItem<Checkin | undefined>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly messageGetCheckinId?: string | null;
-}
+};
 
-export declare type Message = LazyLoading extends LazyLoadingDisabled ? EagerMessage : LazyMessage
+export declare type Checkin = LazyLoading extends LazyLoadingDisabled
+  ? EagerCheckin
+  : LazyCheckin;
 
-export declare const Message: (new (init: ModelInit<Message>) => Message) & {
-  copyOf(source: Message, mutator: (draft: MutableModel<Message>) => MutableModel<Message> | void): Message;
-}
+export declare const Checkin: (new (init: ModelInit<Checkin>) => Checkin) & {
+  copyOf(
+    source: Checkin,
+    mutator: (draft: MutableModel<Checkin>) => MutableModel<Checkin> | void
+  ): Checkin;
+};
 
 type EagerChallenge = {
   readonly [__modelMeta__]: {
@@ -278,9 +263,55 @@ type LazyChallenge = {
 
 export declare type Challenge = LazyLoading extends LazyLoadingDisabled ? EagerChallenge : LazyChallenge
 
-export declare const Challenge: (new (init: ModelInit<Challenge>) => Challenge) & {
-  copyOf(source: Challenge, mutator: (draft: MutableModel<Challenge>) => MutableModel<Challenge> | void): Challenge;
-}
+export declare const Challenge: (new (
+  init: ModelInit<Challenge>
+) => Challenge) & {
+  copyOf(
+    source: Challenge,
+    mutator: (draft: MutableModel<Challenge>) => MutableModel<Challenge> | void
+  ): Challenge;
+};
+
+type EagerChallengeType = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<ChallengeType, "id">;
+    readOnlyFields: "createdAt" | "updatedAt";
+  };
+  readonly id: string;
+  readonly name: string;
+  readonly description: string;
+  readonly active: boolean;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+};
+
+type LazyChallengeType = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<ChallengeType, "id">;
+    readOnlyFields: "createdAt" | "updatedAt";
+  };
+  readonly id: string;
+  readonly name: string;
+  readonly description: string;
+  readonly active: boolean;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+};
+
+export declare type ChallengeType = LazyLoading extends LazyLoadingDisabled
+  ? EagerChallengeType
+  : LazyChallengeType;
+
+export declare const ChallengeType: (new (
+  init: ModelInit<ChallengeType>
+) => ChallengeType) & {
+  copyOf(
+    source: ChallengeType,
+    mutator: (
+      draft: MutableModel<ChallengeType>
+    ) => MutableModel<ChallengeType> | void
+  ): ChallengeType;
+};
 
 type EagerUserChatRoom = {
   readonly [__modelMeta__]: {
@@ -364,21 +395,20 @@ type EagerUserValidatedCheckIn = {
   readonly updatedAt?: string | null;
 }
 
-type LazyUserValidatedCheckIn = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<UserValidatedCheckIn, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly userId?: string | null;
-  readonly checkinId?: string | null;
-  readonly user: AsyncItem<User>;
-  readonly checkin: AsyncItem<Checkin>;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
+export declare type ChallengeUser = LazyLoading extends LazyLoadingDisabled
+  ? EagerChallengeUser
+  : LazyChallengeUser;
 
-export declare type UserValidatedCheckIn = LazyLoading extends LazyLoadingDisabled ? EagerUserValidatedCheckIn : LazyUserValidatedCheckIn
+export declare const ChallengeUser: (new (
+  init: ModelInit<ChallengeUser>
+) => ChallengeUser) & {
+  copyOf(
+    source: ChallengeUser,
+    mutator: (
+      draft: MutableModel<ChallengeUser>
+    ) => MutableModel<ChallengeUser> | void
+  ): ChallengeUser;
+};
 
 export declare const UserValidatedCheckIn: (new (init: ModelInit<UserValidatedCheckIn>) => UserValidatedCheckIn) & {
   copyOf(source: UserValidatedCheckIn, mutator: (draft: MutableModel<UserValidatedCheckIn>) => MutableModel<UserValidatedCheckIn> | void): UserValidatedCheckIn;

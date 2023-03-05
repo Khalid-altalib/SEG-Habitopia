@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { FlatList } from "react-native";
-import ChatItem from "../../../features/chat/ChatItem";
+import ChatItem from "../../../features/chat/ChatItem/ChatItem";
 import { useDispatch, useSelector } from "../../../app/hooks";
 import { fetchChats } from "../../../features/chat/chatSlice";
 import { useNavigation } from "@react-navigation/native";
