@@ -186,6 +186,8 @@ const createCheckIn = async (chatID: string, userID: string, thunkAPI: any) => {
     })
   );
 
+  await updateLastMessageInChat(checkInMessage.id, chatID);
+
   return {
     ...checkInMessage,
     userName: userFromDatabase.name,
@@ -212,9 +214,16 @@ const getLastCheckIn = async (chatID: string, thunkAPI: any) => {
 };
 
 export const incrementCheckInValidation = async (messageId: string) => {
-  const checkIn = await (
+  console.log(messageId);
+  const checkInId = (
     await DataStore.query(Message, (message) => message.id.eq(messageId))
-  )[0].getCheckin;
+  )[0].messageGetCheckinId;
+
+  const checkIn = (
+    await DataStore.query(Checkin, (checkIn) => checkIn.id.eq(checkInId || ""))
+  )[0];
+
+  console.log(checkIn);
 
   if (checkIn) {
     const newCheckIn = await DataStore.save(
@@ -234,4 +243,11 @@ export const incrementCheckInValidation = async (messageId: string) => {
   } else {
     throw new Error("Could not validate!");
   }
+};
+
+export const getCheckInById = async (checkInId: string) => {
+  const checkIn = (
+    await DataStore.query(Checkin, (checkin) => checkin.id.eq(checkInId))
+  )[0];
+  return checkIn;
 };

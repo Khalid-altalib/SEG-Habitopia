@@ -40,7 +40,9 @@ const CheckInMessage = (message: Message) => {
             You have {message.validationCount} validations
           </Text>
         ) : (
-          <Text>Tap to validate</Text>
+          <Text>
+            Tap to validate, current validations: {message.validationCount}
+          </Text>
         )}
       </View>
     </Pressable>

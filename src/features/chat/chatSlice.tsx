@@ -118,7 +118,9 @@ export const validateCheckIn = createAsyncThunk<
   { rejectValue: string }
 >("checkIn/validate", async (messageId: string, thunkAPI) => {
   try {
+    console.log(messageId);
     const newCheckIn = await incrementCheckInValidation(messageId);
+    console.log(newCheckIn);
   } catch (error: any) {
     const message = error.message;
     console.log(message);

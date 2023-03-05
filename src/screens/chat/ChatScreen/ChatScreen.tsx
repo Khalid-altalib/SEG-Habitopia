@@ -21,6 +21,7 @@ import { MessageEnum } from "src/models";
 import TextMessage from "../../../features/chat/TextMessage/TextMessage";
 import { getUserFromDatabasebyID } from "@app/util";
 import CheckInMessage from "../../../features/chat/CheckInMessage/CheckInMessage";
+import { getCheckInById } from "@features/chat/chatQueries";
 
 type Props = {};
 
@@ -47,10 +48,21 @@ const ChatScreen = (props: Props) => {
           user?.userId || ""
         );
         const data = { ...value.data?.onCreateMessage };
-        const message = {
-          ...data,
-          userName: userFromDatabase.name,
-        } as MessageType;
+        let message: MessageType;
+        if (data.messageType === MessageEnum.CHECKIN) {
+          const checkIn = await getCheckInById(data.messageGetCheckinId || "");
+          message = {
+            ...data,
+            validationCount: checkIn.validationCount,
+            isValidated: checkIn.isValidated,
+            userName: userFromDatabase.name,
+          } as MessageType;
+        } else {
+          message = {
+            ...data,
+            userName: userFromDatabase.name,
+          } as MessageType;
+        }
         dispatch(addMessageToChat({ chatID, message }));
       },
       error: (error) => console.warn(error),
@@ -79,6 +91,7 @@ const ChatScreen = (props: Props) => {
           if (item.messageType === MessageEnum.TEXT) {
             return (
               <TextMessage
+                id={item.id}
                 userName={item.userName}
                 text={item.text}
                 createdAt={item.createdAt}
@@ -89,6 +102,7 @@ const ChatScreen = (props: Props) => {
           } else if (item.messageType === MessageEnum.CHECKIN) {
             return (
               <CheckInMessage
+                id={item.id}
                 validationCount={item.validationCount}
                 isValidated={item.isValidated}
                 userName={item.userName}
