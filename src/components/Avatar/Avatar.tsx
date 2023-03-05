@@ -2,15 +2,15 @@ import React from "react";
 import { Avatar as NativeBaseAvatar, Box } from "native-base";
 
 type Props = {
-  name: string;
+  userId: string;
 };
 
 const Avatar = (props: Props) => {
-  const { name } = props;
+  const { userId } = props;
   return (
     <NativeBaseAvatar
       backgroundColor={"white"}
-      source={{ uri: `https://robohash.org/${name}` }}
+      source={{ uri: `https://robohash.org/${userId}` }}
     />
   );
 };

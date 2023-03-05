@@ -1,5 +1,5 @@
-import { RouteProp } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { MessageEnum } from "src/models";
 
 export type RootParams = {
   Auth: undefined;
@@ -14,6 +14,9 @@ export type RootParams = {
     defaultValue: string;
   };
   ChatDetails: undefined;
+  FollowList: {
+    followListMode: string;
+  };
 };
 
 export type ProfileParams = {
@@ -82,14 +85,15 @@ export type Challenge = {
 };
 
 export type Profile = {
-  userId: number;
+  userId: string;
   name: string;
   email: string;
   biography: string;
   rankings: Array<object>;
   statistics: object;
-  friends: undefined;
-  friendStatus: undefined;
+  following: boolean;
+  followingCount: number;
+  followerCount: number;
 };
 
 export type Statistic = {
@@ -120,12 +124,21 @@ export type SignInFormValues = {
   password: string;
 };
 
-export type Message = {
+export interface Message {
   id?: string;
-  text: string;
   chatRoomId?: string;
   createdAt: string;
   userID: string;
+  userName?: string;
+  text: string;
+  validationCount?: number | 0;
+  isValidated?: boolean | false;
+  messageType: MessageEnum;
+}
+
+export type User = {
+  userId: string;
+  name: string;
 };
 
 export type ChatDetails = {
@@ -135,8 +148,5 @@ export type ChatDetails = {
     started: string;
     ending: string;
   };
-  participants: {
-    userId: string;
-    name: string;
-  }[];
+  participants: User[];
 };

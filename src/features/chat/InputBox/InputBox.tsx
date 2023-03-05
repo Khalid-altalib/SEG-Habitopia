@@ -2,7 +2,7 @@ import { Button, TextInput, View, StyleSheet } from "react-native";
 import React from "react";
 import { useDispatch } from "@app/hooks";
 import { Controller, useForm } from "react-hook-form";
-import { sendMessage } from "./chatSlice";
+import { sendCheckIn, sendMessage } from "../chatSlice";
 
 type InputBoxProps = {
   chatRoomID: string;
@@ -27,6 +27,10 @@ const InputBox = (props: InputBoxProps) => {
     dispatch(sendMessage({ message, chatRoomID }));
     reset();
   };
+
+  const makeCheckIn = () => {
+    dispatch(sendCheckIn(props.chatRoomID));
+  };
   return (
     <View style={styles.container}>
       <Controller
@@ -43,7 +47,7 @@ const InputBox = (props: InputBoxProps) => {
       />
 
       <Button title="send" onPress={handleSubmit(onSubmit)}></Button>
-      <Button title="check in"></Button>
+      <Button title="check in" onPress={makeCheckIn}></Button>
     </View>
   );
 };
