@@ -129,7 +129,7 @@ export const leaderboardSlice = createSlice({
       }
 
       state[name as keyof LeaderboardState] = value as never;
-      state.page = 0;
+      state.page = 1;
       state.entries = [];
       state.loading = false;
       state.error = "";
