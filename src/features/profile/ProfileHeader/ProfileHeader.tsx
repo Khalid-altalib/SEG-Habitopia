@@ -26,6 +26,12 @@ const ProfileHeader = (props: Props) => {
 
   const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
 
+  const biographyDisplay =
+    profile?.biography === "" || profile?.biography === null
+      ? "This user does not currently have a bio"
+      : profile?.biography;
+
+  console.log(profile);
   return (
     <View>
       <HStack space={4} pb={4}>
@@ -49,7 +55,7 @@ const ProfileHeader = (props: Props) => {
         <Text bold fontSize={"md"}>
           {profile!.name}
         </Text>
-        <Text fontSize={"md"}>{profile!.biography}</Text>
+        <Text fontSize={"md"}>{biographyDisplay}</Text>
       </View>
     </View>
   );
