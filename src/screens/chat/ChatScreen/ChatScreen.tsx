@@ -90,8 +90,12 @@ const ChatScreen = (props: Props) => {
     >(graphqlOperation(onUpdateCheckin, variable)).subscribe({
       next: async ({ value }) => {
         const data = { ...value.data?.onUpdateCheckin };
+        const user = await getUserFromDatabasebyID(data.userID || "");
         const message = {
           ...(await getMessageById(data.id || "")),
+          validationCount: data.validationCount,
+          isValidated: data.isValidated,
+          userName: user.name,
         } as MessageType;
         dispatch(updateCheckInMessage({ chatID, message }));
       },
