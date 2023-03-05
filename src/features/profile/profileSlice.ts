@@ -14,6 +14,10 @@ export type ProfileState = {
     loading: boolean;
     error: string;
   };
+  followUser: {
+    loading: boolean;
+    error: string;
+  };
 };
 
 const initialState: ProfileState = {
@@ -25,11 +29,17 @@ const initialState: ProfileState = {
     loading: false,
     error: "",
   },
+  followUser: {
+    loading: false,
+    error: "",
+  },
 };
 
 export const followUser = createAsyncThunk(
   "profile/follow",
-  async (_, thunkAPI) => {}
+  async (_, thunkAPI) => {
+    // Check if local user is following profile user id (get profile user id from thunkAPI)
+  }
 );
 
 export const fetchFollowList = createAsyncThunk(
