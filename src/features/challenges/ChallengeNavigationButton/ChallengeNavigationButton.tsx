@@ -1,3 +1,5 @@
+import { useDispatch } from "@app/hooks";
+import { logOutUser } from "@features/auth/authSlice";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Button } from "native-base";
