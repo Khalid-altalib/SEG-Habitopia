@@ -30,7 +30,7 @@ const initialState: LeaderboardState = {
 const subscription = DataStore.observe(Checkin).subscribe({
   next: async (msg) => {
     if (msg.opType === 'INSERT') {
-      const checkin = msg.element as Checkin;
+      const checkin = msg.element as unknown as Checkin;
       const { userID } = checkin;
   
       // Retrieve the current number of checkins for the user from the leaderboard
@@ -129,7 +129,7 @@ export const leaderboardSlice = createSlice({
       }
 
       state[name as keyof LeaderboardState] = value as never;
-      state.page = 1;
+      state.page = 0;
       state.entries = [];
       state.loading = false;
       state.error = "";
