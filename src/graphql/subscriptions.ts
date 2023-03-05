@@ -2,6 +2,141 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateLeaderboard = /* GraphQL */ `
+  subscription OnCreateLeaderboard(
+    $filter: ModelSubscriptionLeaderboardFilterInput
+  ) {
+    onCreateLeaderboard(filter: $filter) {
+      id
+      numberOfCheckins
+      User {
+        id
+        name
+        image
+        biography
+        email
+        notifications
+        Messages {
+          nextToken
+          startedAt
+        }
+        ChatRooms {
+          nextToken
+          startedAt
+        }
+        Checkins {
+          nextToken
+          startedAt
+        }
+        challenges {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      leaderboardUserId
+    }
+  }
+`;
+export const onUpdateLeaderboard = /* GraphQL */ `
+  subscription OnUpdateLeaderboard(
+    $filter: ModelSubscriptionLeaderboardFilterInput
+  ) {
+    onUpdateLeaderboard(filter: $filter) {
+      id
+      numberOfCheckins
+      User {
+        id
+        name
+        image
+        biography
+        email
+        notifications
+        Messages {
+          nextToken
+          startedAt
+        }
+        ChatRooms {
+          nextToken
+          startedAt
+        }
+        Checkins {
+          nextToken
+          startedAt
+        }
+        challenges {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      leaderboardUserId
+    }
+  }
+`;
+export const onDeleteLeaderboard = /* GraphQL */ `
+  subscription OnDeleteLeaderboard(
+    $filter: ModelSubscriptionLeaderboardFilterInput
+  ) {
+    onDeleteLeaderboard(filter: $filter) {
+      id
+      numberOfCheckins
+      User {
+        id
+        name
+        image
+        biography
+        email
+        notifications
+        Messages {
+          nextToken
+          startedAt
+        }
+        ChatRooms {
+          nextToken
+          startedAt
+        }
+        Checkins {
+          nextToken
+          startedAt
+        }
+        challenges {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      leaderboardUserId
+    }
+  }
+`;
 export const onCreateChallenge = /* GraphQL */ `
   subscription OnCreateChallenge(
     $filter: ModelSubscriptionChallengeFilterInput
@@ -53,11 +188,13 @@ export const onCreateChallenge = /* GraphQL */ `
           text
           chatroomID
           userID
+          messageType
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          messageGetCheckinId
         }
         createdAt
         updatedAt
@@ -129,11 +266,13 @@ export const onUpdateChallenge = /* GraphQL */ `
           text
           chatroomID
           userID
+          messageType
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          messageGetCheckinId
         }
         createdAt
         updatedAt
@@ -205,11 +344,13 @@ export const onDeleteChallenge = /* GraphQL */ `
           text
           chatroomID
           userID
+          messageType
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          messageGetCheckinId
         }
         createdAt
         updatedAt
@@ -293,9 +434,11 @@ export const onCreateUser = /* GraphQL */ `
       Messages {
         items {
           id
-          text
-          chatroomID
+          timeStamp
           userID
+          chatroomID
+          validationCount
+          isValidated
           createdAt
           updatedAt
           _version
@@ -325,6 +468,8 @@ export const onCreateUser = /* GraphQL */ `
           timeStamp
           userID
           chatroomID
+          validationCount
+          isValidated
           createdAt
           updatedAt
           _version
@@ -368,9 +513,11 @@ export const onUpdateUser = /* GraphQL */ `
       Messages {
         items {
           id
-          text
-          chatroomID
+          timeStamp
           userID
+          chatroomID
+          validationCount
+          isValidated
           createdAt
           updatedAt
           _version
@@ -400,6 +547,8 @@ export const onUpdateUser = /* GraphQL */ `
           timeStamp
           userID
           chatroomID
+          validationCount
+          isValidated
           createdAt
           updatedAt
           _version
@@ -443,9 +592,11 @@ export const onDeleteUser = /* GraphQL */ `
       Messages {
         items {
           id
-          text
-          chatroomID
+          timeStamp
           userID
+          chatroomID
+          validationCount
+          isValidated
           createdAt
           updatedAt
           _version
@@ -475,6 +626,8 @@ export const onDeleteUser = /* GraphQL */ `
           timeStamp
           userID
           chatroomID
+          validationCount
+          isValidated
           createdAt
           updatedAt
           _version
@@ -513,11 +666,26 @@ export const onCreateMessage = /* GraphQL */ `
       text
       chatroomID
       userID
+      messageType
+      getCheckin {
+        id
+        timeStamp
+        userID
+        chatroomID
+        validationCount
+        isValidated
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      messageGetCheckinId
     }
   }
 `;
@@ -528,11 +696,26 @@ export const onUpdateMessage = /* GraphQL */ `
       text
       chatroomID
       userID
+      messageType
+      getCheckin {
+        id
+        timeStamp
+        userID
+        chatroomID
+        validationCount
+        isValidated
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      messageGetCheckinId
     }
   }
 `;
@@ -543,11 +726,26 @@ export const onDeleteMessage = /* GraphQL */ `
       text
       chatroomID
       userID
+      messageType
+      getCheckin {
+        id
+        timeStamp
+        userID
+        chatroomID
+        validationCount
+        isValidated
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      messageGetCheckinId
     }
   }
 `;
@@ -558,9 +756,11 @@ export const onCreateChatRoom = /* GraphQL */ `
       Messages {
         items {
           id
-          text
-          chatroomID
+          timeStamp
           userID
+          chatroomID
+          validationCount
+          isValidated
           createdAt
           updatedAt
           _version
@@ -590,6 +790,8 @@ export const onCreateChatRoom = /* GraphQL */ `
           timeStamp
           userID
           chatroomID
+          validationCount
+          isValidated
           createdAt
           updatedAt
           _version
@@ -604,11 +806,26 @@ export const onCreateChatRoom = /* GraphQL */ `
         text
         chatroomID
         userID
+        messageType
+        getCheckin {
+          id
+          timeStamp
+          userID
+          chatroomID
+          validationCount
+          isValidated
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        messageGetCheckinId
       }
       createdAt
       updatedAt
@@ -626,9 +843,11 @@ export const onUpdateChatRoom = /* GraphQL */ `
       Messages {
         items {
           id
-          text
-          chatroomID
+          timeStamp
           userID
+          chatroomID
+          validationCount
+          isValidated
           createdAt
           updatedAt
           _version
@@ -658,6 +877,8 @@ export const onUpdateChatRoom = /* GraphQL */ `
           timeStamp
           userID
           chatroomID
+          validationCount
+          isValidated
           createdAt
           updatedAt
           _version
@@ -672,11 +893,26 @@ export const onUpdateChatRoom = /* GraphQL */ `
         text
         chatroomID
         userID
+        messageType
+        getCheckin {
+          id
+          timeStamp
+          userID
+          chatroomID
+          validationCount
+          isValidated
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        messageGetCheckinId
       }
       createdAt
       updatedAt
@@ -694,9 +930,11 @@ export const onDeleteChatRoom = /* GraphQL */ `
       Messages {
         items {
           id
-          text
-          chatroomID
+          timeStamp
           userID
+          chatroomID
+          validationCount
+          isValidated
           createdAt
           updatedAt
           _version
@@ -726,6 +964,8 @@ export const onDeleteChatRoom = /* GraphQL */ `
           timeStamp
           userID
           chatroomID
+          validationCount
+          isValidated
           createdAt
           updatedAt
           _version
@@ -740,11 +980,26 @@ export const onDeleteChatRoom = /* GraphQL */ `
         text
         chatroomID
         userID
+        messageType
+        getCheckin {
+          id
+          timeStamp
+          userID
+          chatroomID
+          validationCount
+          isValidated
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        messageGetCheckinId
       }
       createdAt
       updatedAt
@@ -762,6 +1017,8 @@ export const onCreateCheckin = /* GraphQL */ `
       timeStamp
       userID
       chatroomID
+      validationCount
+      isValidated
       createdAt
       updatedAt
       _version
@@ -777,6 +1034,8 @@ export const onUpdateCheckin = /* GraphQL */ `
       timeStamp
       userID
       chatroomID
+      validationCount
+      isValidated
       createdAt
       updatedAt
       _version
@@ -792,6 +1051,8 @@ export const onDeleteCheckin = /* GraphQL */ `
       timeStamp
       userID
       chatroomID
+      validationCount
+      isValidated
       createdAt
       updatedAt
       _version
@@ -1102,11 +1363,13 @@ export const onCreateUserChatRoom = /* GraphQL */ `
           text
           chatroomID
           userID
+          messageType
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          messageGetCheckinId
         }
         createdAt
         updatedAt
@@ -1179,11 +1442,13 @@ export const onUpdateUserChatRoom = /* GraphQL */ `
           text
           chatroomID
           userID
+          messageType
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          messageGetCheckinId
         }
         createdAt
         updatedAt
@@ -1256,11 +1521,13 @@ export const onDeleteUserChatRoom = /* GraphQL */ `
           text
           chatroomID
           userID
+          messageType
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          messageGetCheckinId
         }
         createdAt
         updatedAt
