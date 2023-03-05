@@ -25,9 +25,9 @@ const initialState: LeaderboardState = {
   entries: [],
 };
 
-  /**
-   * Subscribes to the checkin model and updates the leaderboard model when the user checks in
-   */
+/**
+ * Subscribes to the checkin model and updates the leaderboard model when the user checks in
+*/
 const subscription = DataStore.observe(Checkin).subscribe({
   next: async (msg) => {
     if (msg.opType === 'INSERT') {
@@ -63,8 +63,6 @@ const subscription = DataStore.observe(Checkin).subscribe({
 /**
  * Fetches the leaderboard entries from the database
  * @returns {Promise<GraphQLResult<Leaderboard>>} The leaderboard entries as  {name: string, checkins: number}
- * @throws {Error} If the leaderboard entries could not be fetched
- * @async
  */
 export const fetchLeaderboard = createAsyncThunk<
   any,
