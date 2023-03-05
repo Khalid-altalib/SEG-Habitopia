@@ -176,12 +176,14 @@ export const chatSlice = createSlice({
     ) => {
       const { chatID, message } = action.payload;
       const chat = state.chats.find((chat) => chat.id === chatID);
-      chat?.messages?.map((newMessage) => {
+      const updatedChat = chat?.messages?.map((newMessage) => {
         if (newMessage.id === message.id) {
           return message;
         }
       });
-      console.log(chat);
+      if (chat && !updatedChat) {
+        chat.messages = updatedChat;
+      }
     },
   },
   extraReducers: (builder) => {
