@@ -113,9 +113,7 @@ export const checkIn = createAsyncThunk<
   "checkin",
   async (chatroomID: string, thunkAPI) => {
     try {
-      console.log(chatroomID);
       const userID = (await getUserFromDatabase(thunkAPI)).id;
-      console.log(userID);
 
       await DataStore.save( 
       new Checkin({ // create AWSDateTime object
@@ -128,7 +126,6 @@ export const checkIn = createAsyncThunk<
 
     } catch (error: any) {
       const message = error.message;
-      console.log("failed to checkin");
       console.log(message);
       return thunkAPI.rejectWithValue(message);
     }
