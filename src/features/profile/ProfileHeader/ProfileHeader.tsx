@@ -1,19 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import {
-  Avatar,
-  Button,
-  Center,
-  Heading,
-  HStack,
-  Text,
-  View,
-  VStack,
-} from "native-base";
+import { Avatar, Button, HStack, Text, View, VStack } from "native-base";
 import React from "react";
-import { Profile, RootParams } from "../../../../types";
+import { RootParams } from "../../../../types";
 import { useSelector } from "../../../app/hooks";
-import StatusContainer from "../../../components/StatusContainer/StatusContainer";
+import FollowButton from "../FollowButton/FollowButton";
 import FollowListDisplay from "../FollowListDisplay/FollowListDisplay";
 
 type Props = {
@@ -46,7 +37,7 @@ const ProfileHeader = (props: Props) => {
               Edit Profile/Settings
             </Button>
           ) : (
-            <Button>Send Friend Request</Button>
+            <FollowButton />
           )}
         </VStack>
       </HStack>

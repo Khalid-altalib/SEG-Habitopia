@@ -27,6 +27,11 @@ const initialState: ProfileState = {
   },
 };
 
+export const followUser = createAsyncThunk(
+  "profile/follow",
+  async (_, thunkAPI) => {}
+);
+
 export const fetchFollowList = createAsyncThunk(
   "profile/fetch-follow-list",
   async (followListMode: string) => {

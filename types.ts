@@ -91,8 +91,7 @@ export type Profile = {
   biography: string;
   rankings: Array<object>;
   statistics: object;
-  friends: undefined;
-  friendStatus: undefined;
+  following: boolean;
 };
 
 export type Statistic = {
