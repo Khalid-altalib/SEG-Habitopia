@@ -23,7 +23,7 @@ const UserCard = (props: Props) => {
   return (
     <Box backgroundColor="info.600" mb={3} padding={3} borderRadius={8}>
       <HStack space={2} alignItems="center">
-        <Avatar name={name} />
+        <Avatar userId={userId} />
         <HStack flex={1} justifyContent="space-between" alignItems="center">
           <Heading fontSize="xl">{name}</Heading>
           <Button backgroundColor={"amber.500"} onPress={handleVisitProfile}>

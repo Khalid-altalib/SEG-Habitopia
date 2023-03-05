@@ -34,7 +34,7 @@ const ProfileScreen = () => {
 
   useEffect(() => {
     fetchData();
-  }, [isFocused]);
+  }, []);
 
   const fetchData = async () => {
     await dispatch(fetchProfile(userId));
