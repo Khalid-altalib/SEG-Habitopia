@@ -49,7 +49,6 @@ const ChatScreen = (props: Props) => {
         const data = { ...value.data?.onCreateMessage };
         const message = {
           ...data,
-          messageType: MessageEnum.TEXT,
           userName: userFromDatabase.name,
         } as MessageType;
         dispatch(addMessageToChat({ chatID, message }));
