@@ -23,7 +23,7 @@ describe("SignInForm", () => {
 
     fireEvent.changeText(emailInput, "tareitaa@outlook.com");
     fireEvent.changeText(passwordInput, "Password.123");
-    fireEvent.press(submitButton);
+    await fireEvent.press(submitButton);
 
     await waitFor(() => {
       expect(store.getActions()[0].type).toEqual("auth/addLogInData");
