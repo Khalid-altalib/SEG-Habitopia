@@ -27,7 +27,6 @@ const initialState: LeaderboardState = {
   /**
    * Subscribes to the checkin model and updates the leaderboard model when the user checks in
    */
-  /**
 const subscription = DataStore.observe(Checkin).subscribe({
   next: async (msg) => {
     if (msg.opType === 'INSERT') {
@@ -52,7 +51,6 @@ const subscription = DataStore.observe(Checkin).subscribe({
   error: (err) => console.error(err),
   complete: () => console.log('Leaderboard update complete'),
 });
-*/
   
 /**
  * Fetches the leaderboard entries from the database
