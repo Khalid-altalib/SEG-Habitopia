@@ -370,7 +370,7 @@ export const schema = {
                     "name": "Messages",
                     "isArray": true,
                     "type": {
-                        "model": "Message"
+                        "model": "Checkin"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -419,6 +419,22 @@ export const schema = {
                     "isArray": true,
                     "type": {
                         "model": "ChallengeUser"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "user"
+                        ]
+                    }
+                },
+                "validatedCheckIns": {
+                    "name": "validatedCheckIns",
+                    "isArray": true,
+                    "type": {
+                        "model": "UserValidatedCheckIn"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -503,6 +519,33 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "messageType": {
+                    "name": "messageType",
+                    "isArray": false,
+                    "type": {
+                        "enum": "MessageEnum"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "getCheckin": {
+                    "name": "getCheckin",
+                    "isArray": false,
+                    "type": {
+                        "model": "Checkin"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": [
+                            "id"
+                        ],
+                        "targetNames": [
+                            "messageGetCheckinId"
+                        ]
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -518,6 +561,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
+                },
+                "messageGetCheckinId": {
+                    "name": "messageGetCheckinId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -577,7 +627,7 @@ export const schema = {
                     "name": "Messages",
                     "isArray": true,
                     "type": {
-                        "model": "Message"
+                        "model": "Checkin"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -719,6 +769,54 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "validationCount": {
+                    "name": "validationCount",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "isValidated": {
+                    "name": "isValidated",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "validatedBy": {
+                    "name": "validatedBy",
+                    "isArray": true,
+                    "type": {
+                        "model": "UserValidatedCheckIn"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "checkin"
+                        ]
+                    }
+                },
+                "ChallengeType": {
+                    "name": "ChallengeType",
+                    "isArray": false,
+                    "type": {
+                        "model": "ChallengeType"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": [
+                            "id"
+                        ],
+                        "targetNames": [
+                            "checkinChallengeTypeId"
+                        ]
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -734,6 +832,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
+                },
+                "checkinChallengeTypeId": {
+                    "name": "checkinChallengeTypeId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -974,10 +1079,117 @@ export const schema = {
                     }
                 }
             ]
+        },
+        "UserValidatedCheckIn": {
+            "name": "UserValidatedCheckIn",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "userId": {
+                    "name": "userId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "checkinId": {
+                    "name": "checkinId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "user": {
+                    "name": "user",
+                    "isArray": false,
+                    "type": {
+                        "model": "User"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "userId"
+                        ]
+                    }
+                },
+                "checkin": {
+                    "name": "checkin",
+                    "isArray": false,
+                    "type": {
+                        "model": "Checkin"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "checkinId"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "UserValidatedCheckIns",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUser",
+                        "fields": [
+                            "userId"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byCheckin",
+                        "fields": [
+                            "checkinId"
+                        ]
+                    }
+                }
+            ]
         }
     },
-    "enums": {},
+    "enums": {
+        "MessageEnum": {
+            "name": "MessageEnum",
+            "values": [
+                "TEXT",
+                "CHECKIN",
+                "VALIDATION"
+            ]
+        }
+    },
     "nonModels": {},
     "codegenVersion": "3.3.6",
-    "version": "53d8949e40ab1979279c523d6f3ac6f1"
+    "version": "3b8ec3a53c69bbec560eab4c0f496028"
 };

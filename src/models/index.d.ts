@@ -2,7 +2,11 @@ import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-
 // @ts-ignore
 import { LazyLoading, LazyLoadingDisabled, AsyncItem, AsyncCollection } from "@aws-amplify/datastore";
 
-
+export enum MessageEnum {
+  TEXT = "TEXT",
+  CHECKIN = "CHECKIN",
+  VALIDATION = "VALIDATION"
+}
 
 
 
@@ -127,10 +131,11 @@ type EagerUser = {
   readonly biography?: string | null;
   readonly email?: string | null;
   readonly notifications?: boolean | null;
-  readonly Messages?: (Message | null)[] | null;
+  readonly Messages?: (Checkin | null)[] | null;
   readonly ChatRooms?: (UserChatRoom | null)[] | null;
   readonly Checkins?: (Checkin | null)[] | null;
   readonly challenges?: (ChallengeUser | null)[] | null;
+  readonly validatedCheckIns?: (UserValidatedCheckIn | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -146,10 +151,11 @@ type LazyUser = {
   readonly biography?: string | null;
   readonly email?: string | null;
   readonly notifications?: boolean | null;
-  readonly Messages: AsyncCollection<Message>;
+  readonly Messages: AsyncCollection<Checkin>;
   readonly ChatRooms: AsyncCollection<UserChatRoom>;
   readonly Checkins: AsyncCollection<Checkin>;
   readonly challenges: AsyncCollection<ChallengeUser>;
+  readonly validatedCheckIns: AsyncCollection<UserValidatedCheckIn>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -169,8 +175,11 @@ type EagerMessage = {
   readonly text?: string | null;
   readonly chatroomID: string;
   readonly userID: string;
+  readonly messageType?: MessageEnum | keyof typeof MessageEnum | null;
+  readonly getCheckin?: Checkin | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
+  readonly messageGetCheckinId?: string | null;
 }
 
 type LazyMessage = {
@@ -182,8 +191,11 @@ type LazyMessage = {
   readonly text?: string | null;
   readonly chatroomID: string;
   readonly userID: string;
+  readonly messageType?: MessageEnum | keyof typeof MessageEnum | null;
+  readonly getCheckin: AsyncItem<Checkin | undefined>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
+  readonly messageGetCheckinId?: string | null;
 }
 
 export declare type Message = LazyLoading extends LazyLoadingDisabled ? EagerMessage : LazyMessage
@@ -198,7 +210,7 @@ type EagerChatRoom = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly Messages?: (Message | null)[] | null;
+  readonly Messages?: (Checkin | null)[] | null;
   readonly users?: (UserChatRoom | null)[] | null;
   readonly Checkins?: (Checkin | null)[] | null;
   readonly LastMessage?: Message | null;
@@ -213,7 +225,7 @@ type LazyChatRoom = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly Messages: AsyncCollection<Message>;
+  readonly Messages: AsyncCollection<Checkin>;
   readonly users: AsyncCollection<UserChatRoom>;
   readonly Checkins: AsyncCollection<Checkin>;
   readonly LastMessage: AsyncItem<Message | undefined>;
@@ -237,8 +249,13 @@ type EagerCheckin = {
   readonly timeStamp?: string | null;
   readonly userID: string;
   readonly chatroomID: string;
+  readonly validationCount?: number | null;
+  readonly isValidated?: boolean | null;
+  readonly validatedBy?: (UserValidatedCheckIn | null)[] | null;
+  readonly ChallengeType?: ChallengeType | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
+  readonly checkinChallengeTypeId?: string | null;
 }
 
 type LazyCheckin = {
@@ -250,8 +267,13 @@ type LazyCheckin = {
   readonly timeStamp?: string | null;
   readonly userID: string;
   readonly chatroomID: string;
+  readonly validationCount?: number | null;
+  readonly isValidated?: boolean | null;
+  readonly validatedBy: AsyncCollection<UserValidatedCheckIn>;
+  readonly ChallengeType: AsyncItem<ChallengeType | undefined>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
+  readonly checkinChallengeTypeId?: string | null;
 }
 
 export declare type Checkin = LazyLoading extends LazyLoadingDisabled ? EagerCheckin : LazyCheckin
@@ -326,4 +348,38 @@ export declare type UserChatRoom = LazyLoading extends LazyLoadingDisabled ? Eag
 
 export declare const UserChatRoom: (new (init: ModelInit<UserChatRoom>) => UserChatRoom) & {
   copyOf(source: UserChatRoom, mutator: (draft: MutableModel<UserChatRoom>) => MutableModel<UserChatRoom> | void): UserChatRoom;
+}
+
+type EagerUserValidatedCheckIn = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<UserValidatedCheckIn, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly userId?: string | null;
+  readonly checkinId?: string | null;
+  readonly user: User;
+  readonly checkin: Checkin;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyUserValidatedCheckIn = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<UserValidatedCheckIn, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly userId?: string | null;
+  readonly checkinId?: string | null;
+  readonly user: AsyncItem<User>;
+  readonly checkin: AsyncItem<Checkin>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type UserValidatedCheckIn = LazyLoading extends LazyLoadingDisabled ? EagerUserValidatedCheckIn : LazyUserValidatedCheckIn
+
+export declare const UserValidatedCheckIn: (new (init: ModelInit<UserValidatedCheckIn>) => UserValidatedCheckIn) & {
+  copyOf(source: UserValidatedCheckIn, mutator: (draft: MutableModel<UserValidatedCheckIn>) => MutableModel<UserValidatedCheckIn> | void): UserValidatedCheckIn;
 }
