@@ -77,4 +77,3 @@ const ChallengeModal = (props: Props) => {
 };
 
 export default ChallengeModal;
-//style={challengeModalStyles.challengeModal}

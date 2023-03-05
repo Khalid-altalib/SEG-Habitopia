@@ -1,20 +1,18 @@
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-
-import { View } from "native-base";
+import CatchUpWidget from "@features/LandingPageWidgets/CatchUpWidget/CatchUpWidget";
+import ChallengeWidget from "@features/LandingPageWidgets/ChallengeWidget/ChallengeWidget";
+import CheckInWidget from "@features/LandingPageWidgets/CheckInWidget/CheckInWidget";
+import TitleSection from "@screens/authentication/WelcomeScreen/TitleSection";
+import { ScrollView } from "native-base";
 import React from "react";
-import { NavigationParams } from "types";
-
-import ChallengesScreen from "@screens/application/ChallengesScreen";
 
 function HomeScreen() {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<NavigationParams>>();
-
   return (
-    <View>
-      <ChallengesScreen />
-    </View>
+    <ScrollView mt={5} mb={5} showsVerticalScrollIndicator={false}>
+      <TitleSection />
+      <CheckInWidget />
+      <CatchUpWidget />
+      <ChallengeWidget />
+    </ScrollView>
   );
 }
 
