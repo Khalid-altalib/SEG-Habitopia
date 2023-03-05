@@ -8,20 +8,26 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {
   fetchMessages,
   setCurrentChatId,
+  updateCheckInMessage,
 } from "../../../features/chat/chatSlice";
 import { GraphQLSubscription } from "@aws-amplify/api";
 import {
   OnCreateMessageSubscription,
   OnCreateMessageSubscriptionVariables,
+  OnUpdateCheckinSubscription,
+  OnUpdateCheckinSubscriptionVariables,
 } from "src/API";
-import { onCreateMessage } from "../../../graphql/subscriptions";
+import {
+  onCreateMessage,
+  onUpdateCheckin,
+} from "../../../graphql/subscriptions";
 import { addMessageToChat } from "../../../features/chat/chatSlice";
 import { API, graphqlOperation } from "aws-amplify";
 import { MessageEnum } from "src/models";
 import TextMessage from "../../../features/chat/TextMessage/TextMessage";
 import { getUserFromDatabasebyID } from "@app/util";
 import CheckInMessage from "../../../features/chat/CheckInMessage/CheckInMessage";
-import { getCheckInById } from "@features/chat/chatQueries";
+import { getCheckInById, getMessageById } from "@features/chat/chatQueries";
 
 type Props = {};
 
@@ -70,14 +76,40 @@ const ChatScreen = (props: Props) => {
     return subscription;
   };
 
+  const addCheckInSubscription = (chatID: string) => {
+    const variable: OnUpdateCheckinSubscriptionVariables = {
+      filter: {
+        chatroomID: {
+          eq: chatID,
+        },
+      },
+    };
+
+    const subscription = API.graphql<
+      GraphQLSubscription<OnUpdateCheckinSubscription>
+    >(graphqlOperation(onUpdateCheckin, variable)).subscribe({
+      next: async ({ value }) => {
+        const data = { ...value.data?.onUpdateCheckin };
+        const message = {
+          ...(await getMessageById(data.id || "")),
+        } as MessageType;
+        dispatch(updateCheckInMessage({ chatID, message }));
+      },
+      error: (error) => console.warn(error),
+    });
+
+    return subscription;
+  };
+
   let chat = chats.filter((chat) => chat.id == id)[0];
 
   useEffect(() => {
     dispatch(fetchMessages(chat.id));
     dispatch(setCurrentChatId(chat.id));
     navigation.setOptions({ title: chat.name, headerShown: true });
-    const subscription = addChatSubscription(id);
-    return () => subscription.unsubscribe();
+    const chatSubscription = addChatSubscription(id);
+    const checkInSubscription = addCheckInSubscription(id);
+    return () => chatSubscription.unsubscribe();
   }, [id]);
 
   return (

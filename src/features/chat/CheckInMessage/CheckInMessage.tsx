@@ -18,6 +18,8 @@ const CheckInMessage = (message: Message) => {
     }
   };
 
+  useEffect(() => {}, [dispatch]);
+
   return (
     <Pressable onPress={validatingCheckIn}>
       <View

@@ -269,3 +269,12 @@ export const getCheckInById = async (checkInId: string) => {
   )[0];
   return checkIn;
 };
+
+export const getMessageById = async (checkInId: string) => {
+  const message = (
+    await DataStore.query(Message, (message) =>
+      message.messageGetCheckinId.eq(checkInId)
+    )
+  )[0];
+  return message;
+};
