@@ -66,12 +66,15 @@ export const fetchLeaderboard = createAsyncThunk<
     try {
       const state = thunkAPI.getState() as RootState;
       const { challengeType, page } = state.leaderboard;
-      const data = await DataStore.query(Leaderboard, Predicates.ALL, {
+      const data = await DataStore.query(
+        Leaderboard,
+        (c) => c.ChallengeType.name.eq(challengeType),
+        {
         page: page as number,
         limit: 10,
         sort: (s) => s.numberOfCheckins(SortDirection.DESCENDING)
-      });
-
+        }
+      );
       const leaderboard = data.map((entry) => {
         return {
           id: entry.leaderboardUserId,
@@ -129,7 +132,7 @@ export const leaderboardSlice = createSlice({
       }
 
       state[name as keyof LeaderboardState] = value as never;
-      state.page = 1;
+      state.page = 0;
       state.entries = [];
       state.loading = false;
       state.error = "";
