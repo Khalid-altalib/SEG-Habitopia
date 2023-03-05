@@ -31,7 +31,6 @@ const ProfileHeader = (props: Props) => {
       ? "This user does not currently have a bio"
       : profile?.biography;
 
-  console.log(profile);
   return (
     <View>
       <HStack space={4} pb={4}>

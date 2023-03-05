@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { DataStore } from "aws-amplify";
 import { Profile, Statistic, User } from "../../../types";
-import { getAuthTokenFromThunk } from "../../app/util";
+import { getAuthTokenFromThunk, getUserByIdFromDatabase } from "../../app/util";
 import { getUserFromDatabase } from "../../app/util";
 import { getCheckIns } from "./statisticsQueries";
 
@@ -54,10 +54,10 @@ export const fetchProfile = createAsyncThunk<
   any,
   string,
   { rejectValue: string }
->("profile/fetch", async (_, thunkAPI) => {
+>("profile/fetch", async (userId, thunkAPI) => {
   try {
-    const user = await getUserFromDatabase(thunkAPI);
-    const checkinCount = await getCheckIns(thunkAPI);
+    const user = await getUserByIdFromDatabase(userId);
+    const checkinCount = await getCheckIns(userId);
 
     const statistics = [
       { name: "Streak", quantity: 5 },

@@ -23,3 +23,8 @@ export const getUserFromDatabase = async (thunkAPI: any) => {
   const user = await DataStore.query(User, (user) => user.id.eq(userId));
   return user[0];
 };
+
+export const getUserByIdFromDatabase = async (userId: string) => {
+  const user = await DataStore.query(User, (user) => user.id.eq(userId));
+  return user[0];
+};
