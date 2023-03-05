@@ -31,12 +31,17 @@ const ProfileScreen = () => {
   const isLocalUserProfile = localUser?.userId === userId;
 
   const { error, loading, profile } = useSelector(selectProfile);
+  const { settings } = useSelector((state) => state.settings);
 
   useEffect(() => {
     if (!profile || profile.userId !== userId) {
       dispatch(fetchProfile(userId));
     }
   }, [isFocused]);
+
+  useEffect(() => {
+    dispatch(fetchProfile(userId));
+  }, [settings]);
 
   useEffect(() => {
     navigation.setOptions({ title: profile?.name || "" });
