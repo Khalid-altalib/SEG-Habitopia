@@ -40,7 +40,7 @@ const initialState: ProfileState = {
 export const followUser = createAsyncThunk(
   "profile/follow",
   async (_, thunkAPI) => {
-    // Check if local user is following profile user id (get profile user id from thunkAPI)
+    // BACKEND_PLACEHOLDER Check if local user is following profile user id (get profile user id from thunkAPI)
     return true;
   }
 );

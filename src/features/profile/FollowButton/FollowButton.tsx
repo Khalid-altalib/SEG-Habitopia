@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "@app/hooks";
 import { Button } from "native-base";
-import React from "react";
+import React, { useEffect } from "react";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { followUser } from "../profileSlice";
 
@@ -14,6 +14,9 @@ const FollowButton = (props: Props) => {
 
   const handleFollow = async () => {
     await dispatch(followUser());
+  };
+
+  useEffect(() => {
     if (profile) {
       if (profile.following == true) {
         Toast.show({
@@ -29,7 +32,7 @@ const FollowButton = (props: Props) => {
         });
       }
     }
-  };
+  }, [profile?.following]);
 
   const followButtonText = profile?.following ? "Following" : "Follow";
 
