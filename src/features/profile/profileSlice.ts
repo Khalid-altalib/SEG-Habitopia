@@ -89,6 +89,7 @@ export const fetchProfile = createAsyncThunk<
       name: user.name,
       biography: user.biography,
       statistics: statistics,
+      // BACKEND_PLACEHOLDER - get following, followerCount and followingCount
       following: false,
       followerCount: 0,
       followingCount: 0,
