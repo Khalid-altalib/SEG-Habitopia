@@ -28,7 +28,6 @@ const InputBox = (props: InputBoxProps) => {
   };
 
   const onCheckIn = async () => {
-    console.log("check in");
     const chatRoomID = props.chatRoomID;
     dispatch(checkIn(chatRoomID));
   };
