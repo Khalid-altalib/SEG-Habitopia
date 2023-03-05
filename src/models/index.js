@@ -8,17 +8,18 @@ const MessageEnum = {
   "VALIDATION": "VALIDATION"
 };
 
-const { Leaderboard, User, Checkin, ChatRoom, Message, Challenge, ChallengeType, UserChatRoom, ChallengeUser } = initSchema(schema);
+const { Leaderboard, User, Checkin, ChallengeType, ChatRoom, Message, Challenge, UserChatRoom, ChallengeUser, UserValidatedCheckIn } = initSchema(schema);
 
 export {
   Leaderboard,
   User,
   Checkin,
+  ChallengeType,
   ChatRoom,
   Message,
   Challenge,
-  ChallengeType,
   UserChatRoom,
   ChallengeUser,
+  UserValidatedCheckIn,
   MessageEnum
 };

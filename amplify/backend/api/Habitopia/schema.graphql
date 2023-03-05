@@ -4,13 +4,13 @@ enum MessageEnum {
   VALIDATION
 }
 
-type Leaderboard @model @auth(rules: [{allow: public}]) {
+type Leaderboard @model @auth(rules: [{ allow: public }]) {
   id: ID!
   numberOfCheckins: Int!
   User: User! @hasOne
 }
 
-type Challenge @model @auth(rules: [{allow: public}]) {
+type Challenge @model @auth(rules: [{ allow: public }]) {
   id: ID!
   ChallengeType: ChallengeType! @hasOne
   Users: [User] @manyToMany(relationName: "ChallengeUser")
@@ -20,14 +20,14 @@ type Challenge @model @auth(rules: [{allow: public}]) {
   finished: AWSDateTime
 }
 
-type ChallengeType @model @auth(rules: [{allow: public}]) {
+type ChallengeType @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String!
   description: String!
   active: Boolean!
 }
 
-type User @model @auth(rules: [{allow: public}]) {
+type User @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String
   image: String
@@ -38,9 +38,10 @@ type User @model @auth(rules: [{allow: public}]) {
   ChatRooms: [ChatRoom] @manyToMany(relationName: "UserChatRoom")
   Checkins: [Checkin] @hasMany(indexName: "byUser", fields: ["id"])
   challenges: [Challenge] @manyToMany(relationName: "ChallengeUser")
+  validatedCheckIns: [Checkin] @manyToMany(relationName: "UserValidatedCheckIn")
 }
 
-type Message @model @auth(rules: [{allow: public}]) {
+type Message @model @auth(rules: [{ allow: public }]) {
   id: ID!
   text: String
   chatroomID: ID! @index(name: "byChatRoom")
@@ -49,7 +50,7 @@ type Message @model @auth(rules: [{allow: public}]) {
   getCheckin: Checkin @hasOne
 }
 
-type ChatRoom @model @auth(rules: [{allow: public}]) {
+type ChatRoom @model @auth(rules: [{ allow: public }]) {
   id: ID!
   Messages: [Checkin] @hasMany(indexName: "byChatRoom", fields: ["id"])
   users: [User] @manyToMany(relationName: "UserChatRoom")
@@ -57,12 +58,13 @@ type ChatRoom @model @auth(rules: [{allow: public}]) {
   LastMessage: Message @hasOne
 }
 
-type Checkin @model @auth(rules: [{allow: public}]) {
+type Checkin @model @auth(rules: [{ allow: public }]) {
   id: ID!
   timeStamp: AWSDateTime
   userID: ID! @index(name: "byUser")
   chatroomID: ID! @index(name: "byChatRoom")
   validationCount: Int
   isValidated: Boolean
+  validatedBy: [User] @manyToMany(relationName: "UserValidatedCheckIn")
+  ChallengeType: ChallengeType @hasOne
 }
- 
