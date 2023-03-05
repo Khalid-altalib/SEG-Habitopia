@@ -35,6 +35,24 @@ export const schema = {
                         ]
                     }
                 },
+                "ChallengeType": {
+                    "name": "ChallengeType",
+                    "isArray": false,
+                    "type": {
+                        "model": "ChallengeType"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": [
+                            "id"
+                        ],
+                        "targetNames": [
+                            "leaderboardChallengeTypeId"
+                        ]
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -56,6 +74,13 @@ export const schema = {
                     "isArray": false,
                     "type": "ID",
                     "isRequired": true,
+                    "attributes": []
+                },
+                "leaderboardChallengeTypeId": {
+                    "name": "leaderboardChallengeTypeId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
                     "attributes": []
                 }
             },
@@ -1166,5 +1191,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "ce6705eae7007053c297e1808df00f9f"
+    "version": "3b8ec3a53c69bbec560eab4c0f496028"
 };

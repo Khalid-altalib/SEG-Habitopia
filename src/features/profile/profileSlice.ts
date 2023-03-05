@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { Profile, User } from "../../../types";
-import { getUserByIdFromDatabase } from "../../app/util";
+import { getUserFromDatabasebyID } from "../../app/util";
 import { getCheckIns } from "./statisticsQueries";
 
 export type ProfileState = {
@@ -74,7 +74,7 @@ export const fetchProfile = createAsyncThunk<
   { rejectValue: string }
 >("profile/fetch", async (userId, thunkAPI) => {
   try {
-    const user = await getUserByIdFromDatabase(userId);
+    const user = await getUserFromDatabasebyID(userId);
     const checkinCount = await getCheckIns(userId);
 
     const statistics = [
