@@ -6,7 +6,6 @@ import { useDispatch } from "../../../app/hooks";
 import { validateCheckIn } from "../chatSlice";
 
 const CheckInMessage = (message: Message) => {
-  const [validate, setValidate] = useState(false);
   const { user } = useSelector((store) => store.auth);
   function isMessage() {
     return message.userID === user?.userId;
@@ -14,13 +13,10 @@ const CheckInMessage = (message: Message) => {
   const dispatch = useDispatch();
 
   const validatingCheckIn = () => {
-    if (!isMessage() && !validate) {
+    if (!isMessage()) {
       dispatch(validateCheckIn(message.id || ""));
-      setValidate(true);
     }
   };
-
-  useEffect(() => {}, [validate]);
 
   return (
     <Pressable onPress={validatingCheckIn}>

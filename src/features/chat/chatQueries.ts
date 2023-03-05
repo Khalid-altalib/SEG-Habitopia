@@ -9,6 +9,7 @@ import {
   ChallengeType,
   MessageEnum,
   Checkin,
+  UserValidatedCheckIn,
 } from "../../models";
 import { Message as MessageType } from "../../../types";
 
@@ -213,8 +214,10 @@ const getLastCheckIn = async (chatID: string, thunkAPI: any) => {
   return lastCheckInByUser;
 };
 
-export const incrementCheckInValidation = async (messageId: string) => {
-  console.log(messageId);
+export const incrementCheckInValidation = async (
+  messageId: string,
+  thunkAPI: any
+) => {
   const checkInId = (
     await DataStore.query(Message, (message) => message.id.eq(messageId))
   )[0].messageGetCheckinId;
@@ -223,23 +226,38 @@ export const incrementCheckInValidation = async (messageId: string) => {
     await DataStore.query(Checkin, (checkIn) => checkIn.id.eq(checkInId || ""))
   )[0];
 
-  console.log(checkIn);
+  const user = await getUserFromDatabase(thunkAPI);
 
   if (checkIn) {
-    const newCheckIn = await DataStore.save(
-      Checkin.copyOf(checkIn, (updated) => {
-        updated.validationCount += 1;
-      })
+    const validatedBy = await checkIn.validatedBy.toArray();
+    const canValidate = validatedBy.filter(
+      (validateUser) => validateUser.userId === user.id
     );
-    if (checkIn.validationCount === 3) {
-      const validatedCheckIn = await DataStore.save(
-        Checkin.copyOf(checkIn, (updated) => {
-          updated.isValidated = true;
+    if (canValidate.length >= 1) {
+      throw new Error("already validated!");
+    } else {
+      await DataStore.save(
+        new UserValidatedCheckIn({
+          checkin: checkIn,
+          user: user,
         })
       );
-      return validatedCheckIn;
+      const newCheckIn = await DataStore.save(
+        Checkin.copyOf(checkIn, (updated) => {
+          updated.validationCount = validatedBy.length + 1;
+        })
+      );
+      if (checkIn.validationCount === 3) {
+        const validatedCheckIn = await DataStore.save(
+          Checkin.copyOf(checkIn, (updated) => {
+            updated.isValidated = true;
+          })
+        );
+        return validatedCheckIn;
+      } else {
+        return newCheckIn;
+      }
     }
-    return newCheckIn;
   } else {
     throw new Error("Could not validate!");
   }
