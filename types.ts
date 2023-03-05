@@ -1,5 +1,5 @@
-import { RouteProp } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { MessageEnum } from "src/models";
 
 export type RootParams = {
   Auth: undefined;
@@ -120,13 +120,17 @@ export type SignInFormValues = {
   password: string;
 };
 
-export type Message = {
+export interface Message {
   id?: string;
-  text: string;
   chatRoomId?: string;
   createdAt: string;
   userID: string;
-};
+  userName?: string;
+  text: string;
+  validationCount?: number | 0;
+  isValidated?: boolean | false;
+  messageType: MessageEnum;
+}
 
 export type ChatDetails = {
   challengeName: string;
