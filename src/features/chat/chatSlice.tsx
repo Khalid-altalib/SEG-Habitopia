@@ -1,3 +1,6 @@
+import {getUserFromDatabase} from '../../app/util';
+import { Checkin } from '../../models/index.js';
+import { DataStore } from '@aws-amplify/datastore';
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { Chat, ChatDetails, Message } from "../../../types";
 import {
@@ -97,6 +100,36 @@ export const sendMessage = createAsyncThunk<
       return newMessage;
     } catch (error: any) {
       const message = error.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const checkIn = createAsyncThunk<
+  any,
+  string,
+  { rejectValue: string }
+>(
+  "checkin",
+  async (chatroomID: string, thunkAPI) => {
+    try {
+      console.log(chatroomID);
+      const userID = (await getUserFromDatabase(thunkAPI)).id;
+      console.log(userID);
+
+      await DataStore.save( 
+      new Checkin({ // create AWSDateTime object
+          timeStamp:  new Date().toISOString(),
+          userID: userID,
+          chatroomID: chatroomID,
+      })
+  );
+  console.log("checkin saved")
+
+    } catch (error: any) {
+      const message = error.message;
+      console.log("failed to checkin");
+      console.log(message);
       return thunkAPI.rejectWithValue(message);
     }
   }

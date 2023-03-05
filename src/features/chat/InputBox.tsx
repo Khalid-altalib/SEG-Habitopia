@@ -2,25 +2,7 @@ import { Button, TextInput, View, StyleSheet } from "react-native";
 import React from "react";
 import { useDispatch } from "@app/hooks";
 import { Controller, useForm } from "react-hook-form";
-import { sendMessage } from "./chatSlice";
-import { Checkin } from '../../models/index.js';
-import { DataStore } from '@aws-amplify/datastore';
-
-const handleCheckIn = async () => {
-  try{
-  await DataStore.save( // random data
-      new Checkin({ // get time now as a string
-          timeStamp: new Date().getTime().toString(),
-          userID: "b5c0baaf-9cfc-4f75-8f4c-61a39eea57d2", // PLACEHOLDER FOR CURRENT USER
-          chatroomID: "a36d9934-b05a-4765-af1d-79619d468eb3" // PLACEHOLDER FOR CURRENT CHATROOM
-      })
-  );
-  } catch (error) {
-      console.log("Error saving check in", error);
-      }
-
-}
-
+import { sendMessage, checkIn } from "./chatSlice";
 type InputBoxProps = {
   chatRoomID: string;
 };
@@ -44,6 +26,12 @@ const InputBox = (props: InputBoxProps) => {
     dispatch(sendMessage({ message, chatRoomID }));
     reset();
   };
+
+  const onCheckIn = async () => {
+    console.log("check in");
+    const chatRoomID = props.chatRoomID;
+    dispatch(checkIn(chatRoomID));
+  };
   return (
     <View style={styles.container}>
       <Controller
@@ -60,7 +48,7 @@ const InputBox = (props: InputBoxProps) => {
       />
 
       <Button title="send" onPress={handleSubmit(onSubmit)}></Button>
-      <Button title="check in"></Button>
+      <Button title="check in" onPress={onCheckIn}></Button>
     </View>
   );
 };
