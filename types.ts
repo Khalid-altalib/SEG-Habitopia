@@ -14,6 +14,9 @@ export type RootParams = {
     defaultValue: string;
   };
   ChatDetails: undefined;
+  FollowList: {
+    followListMode: string;
+  };
 };
 
 export type ProfileParams = {
@@ -82,14 +85,15 @@ export type Challenge = {
 };
 
 export type Profile = {
-  userId: number;
+  userId: string;
   name: string;
   email: string;
   biography: string;
   rankings: Array<object>;
   statistics: object;
-  friends: undefined;
-  friendStatus: undefined;
+  following: boolean;
+  followingCount: number;
+  followerCount: number;
 };
 
 export type Statistic = {
@@ -132,6 +136,11 @@ export interface Message {
   messageType: MessageEnum;
 }
 
+export type User = {
+  userId: string;
+  name: string;
+};
+
 export type ChatDetails = {
   challengeName: string;
   description: string;
@@ -139,8 +148,5 @@ export type ChatDetails = {
     started: string;
     ending: string;
   };
-  participants: {
-    userId: string;
-    name: string;
-  }[];
+  participants: User[];
 };

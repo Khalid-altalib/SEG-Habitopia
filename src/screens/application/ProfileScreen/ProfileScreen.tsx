@@ -30,15 +30,23 @@ const ProfileScreen = () => {
 
   const isLocalUserProfile = localUser?.userId === userId;
 
-  const { error, loading, profile } = useSelector(selectProfile);
+  const { profile, fetchProfile: requestStatus } = useSelector(
+    (state) => state.profile
+  );
+
+  const { loading, error } = requestStatus;
+
+  const { settings } = useSelector((state) => state.settings);
 
   useEffect(() => {
-    fetchData();
+    if (!profile || profile.userId !== userId) {
+      dispatch(fetchProfile(userId));
+    }
   }, [isFocused]);
 
-  const fetchData = async () => {
-    await dispatch(fetchProfile(userId));
-  };
+  useEffect(() => {
+    dispatch(fetchProfile(userId));
+  }, [settings]);
 
   useEffect(() => {
     navigation.setOptions({ title: profile?.name || "" });
