@@ -7,6 +7,7 @@ import awsExports from "./src/aws-exports";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import colorModeManager from "@app/colorModeManager";
 
+Amplify.DataStore.clear();
 Amplify.configure(awsExports);
 
 export default function App() {

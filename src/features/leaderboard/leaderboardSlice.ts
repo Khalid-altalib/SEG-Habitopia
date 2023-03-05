@@ -52,18 +52,18 @@ const subscription = DataStore.observe(Checkin).subscribe({
   complete: () => console.log('Leaderboard update complete'),
 });
 
-/**
- * Changes to subscription to update the leaderboard based on the challenge type
+/*
 const subscription_ = DataStore.observe(Checkin).subscribe({
   next: async (msg) => {
     if (msg.opType === 'INSERT') {
       const checkin = msg.element as unknown as Checkin;
-      const { userID, challengeType } = checkin;
+      const { userID, checkinChallengeTypeId } = checkin;
 
       // Retrieve the current number of checkins for the user for a specific challenge type from the leaderboard
-      const [leaderboardEntry] = await DataStore.query(Leaderboard, (entry) =>
-        entry.leaderboardUserId.eq(userID).and(entry.challengeType.eq(challengeType))
-      );
+      const [leaderboardEntry] = await DataStore.query(Leaderboard, (e) => e.and(e => [
+        e.leaderboardUserId.eq(userID),
+        e.ChallengeType.id.eq(checkinChallengeTypeId as string)
+      ]));
       const currentCheckins = leaderboardEntry?.numberOfCheckins ?? 0;
 
       // Update the user's checkins in the leaderboard for the given challenge type
