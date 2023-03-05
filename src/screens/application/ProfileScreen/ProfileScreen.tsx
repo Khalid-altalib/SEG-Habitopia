@@ -33,12 +33,10 @@ const ProfileScreen = () => {
   const { error, loading, profile } = useSelector(selectProfile);
 
   useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    await dispatch(fetchProfile(userId));
-  };
+    if (!profile || profile.userId !== userId) {
+      dispatch(fetchProfile(userId));
+    }
+  }, [isFocused]);
 
   useEffect(() => {
     navigation.setOptions({ title: profile?.name || "" });
