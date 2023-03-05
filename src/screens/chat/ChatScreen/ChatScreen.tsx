@@ -109,7 +109,10 @@ const ChatScreen = (props: Props) => {
     navigation.setOptions({ title: chat.name, headerShown: true });
     const chatSubscription = addChatSubscription(id);
     const checkInSubscription = addCheckInSubscription(id);
-    return () => chatSubscription.unsubscribe();
+    return () => {
+      chatSubscription.unsubscribe();
+      checkInSubscription.unsubscribe();
+    };
   }, [id]);
 
   return (
