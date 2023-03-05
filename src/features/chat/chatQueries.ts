@@ -1,5 +1,5 @@
 import { Amplify, DataStore, Predicates, SortDirection } from "aws-amplify";
-import { Chat, ChatDetails, CheckIn } from "../../../types";
+import { Chat, ChatDetails } from "../../../types";
 import { getUserFromDatabase, getUserIdFromThunk } from "../../app/util";
 import {
   ChatRoom,
@@ -47,9 +47,26 @@ export const fetchChatMessages = async (chatId: string) => {
   );
   let messages: MessageType[] = [];
   for await (const chatMessage of chatMessages) {
-    messages.push({ ...chatMessage } as MessageType);
+    const messageChat = { ...chatMessage };
+    const user = (
+      await DataStore.query(User, (user) => user.id.eq(messageChat.userID))
+    )[0];
+    if (messageChat.messageType === MessageEnum.CHECKIN) {
+      const checkInDetails = (
+        await DataStore.query(Checkin, (checkin) =>
+          checkin.id.eq(messageChat.messageGetCheckinId || "")
+        )
+      )[0];
+      messages.push({
+        ...messageChat,
+        userName: user.name,
+        isValidated: checkInDetails.isValidated,
+        validationCount: checkInDetails.validationCount,
+      } as MessageType);
+    } else {
+      messages.push({ ...messageChat, userName: user.name } as MessageType);
+    }
   }
-  console.log(messages);
   return messages;
 };
 
@@ -59,6 +76,7 @@ export const sendChatMessage = async (
   thunkAPI: any
 ) => {
   const userID = getUserIdFromThunk(thunkAPI);
+  const userFromDatabase = getUserFromDatabase(thunkAPI);
   const newMessage = await DataStore.save(
     new Message({
       chatroomID: chatroomID,
@@ -68,7 +86,10 @@ export const sendChatMessage = async (
     })
   );
   await updateLastMessageInChat(newMessage.id, chatroomID);
-  return { ...newMessage } as MessageType;
+  return {
+    ...newMessage,
+    userName: (await userFromDatabase).name,
+  } as MessageType;
 };
 
 const updateLastMessageInChat = async (
@@ -137,14 +158,15 @@ export const sendChatCheckIn = async (chatID: string, thunkAPI: any) => {
         `Already Checked in for the day at ${lastCheckIn.createdAt}! You have ${lastCheckIn.validationCount} validations!`
       );
     } else {
-      return createCheckIn(chatID, userID);
+      return createCheckIn(chatID, userID, thunkAPI);
     }
   } else {
-    return createCheckIn(chatID, userID);
+    return createCheckIn(chatID, userID, thunkAPI);
   }
 };
 
-const createCheckIn = async (chatID: string, userID: string) => {
+const createCheckIn = async (chatID: string, userID: string, thunkAPI: any) => {
+  const userFromDatabase = await getUserFromDatabase(thunkAPI);
   const checkIn = await DataStore.save(
     new Checkin({
       chatroomID: chatID,
@@ -164,7 +186,10 @@ const createCheckIn = async (chatID: string, userID: string) => {
     })
   );
 
-  return { ...checkInMessage } as CheckIn;
+  return {
+    ...checkInMessage,
+    userName: userFromDatabase.name,
+  } as MessageType;
 };
 
 const getLastCheckIn = async (chatID: string, thunkAPI: any) => {

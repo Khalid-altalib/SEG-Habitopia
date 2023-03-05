@@ -1,9 +1,9 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
-import { TextMessage } from "../../../../types";
+import { Message } from "../../../../types";
 import { useSelector } from "@app/hooks";
 
-const Message = (message: TextMessage) => {
+const TextMessage = (message: Message) => {
   const { user } = useSelector((store) => store.auth);
   function isMessage() {
     return message.userID === user?.userId;
@@ -39,8 +39,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// const styles = StyleSheet.create({
-
-// })
-
-export default Message;
+export default TextMessage;
