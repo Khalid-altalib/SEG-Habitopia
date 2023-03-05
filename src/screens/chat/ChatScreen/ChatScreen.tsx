@@ -44,10 +44,10 @@ const ChatScreen = (props: Props) => {
       GraphQLSubscription<OnCreateMessageSubscription>
     >(graphqlOperation(onCreateMessage, variables)).subscribe({
       next: async ({ value }) => {
-        const userFromDatabase = await getUserFromDatabasebyID(
-          user?.userId || ""
-        );
         const data = { ...value.data?.onCreateMessage };
+        const userFromDatabase = await getUserFromDatabasebyID(
+          data.userID || ""
+        );
         let message: MessageType;
         if (data.messageType === MessageEnum.CHECKIN) {
           const checkIn = await getCheckInById(data.messageGetCheckinId || "");

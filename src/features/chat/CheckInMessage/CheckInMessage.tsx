@@ -16,7 +16,7 @@ const CheckInMessage = (message: Message) => {
   const validatingCheckIn = () => {
     if (!isMessage() && !validate) {
       dispatch(validateCheckIn(message.id || ""));
-      setValidate(!validate);
+      setValidate(true);
     }
   };
 
