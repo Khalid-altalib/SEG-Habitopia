@@ -1,15 +1,15 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { DataStore } from "aws-amplify";
-import { Profile, Statistic, User } from "../../../types";
-import { getAuthTokenFromThunk, getUserByIdFromDatabase } from "../../app/util";
-import { getUserFromDatabase } from "../../app/util";
+import { Profile, User } from "../../../types";
+import { getUserByIdFromDatabase } from "../../app/util";
 import { getCheckIns } from "./statisticsQueries";
 
 export type ProfileState = {
   profile?: Profile;
   followList?: User[];
-  loading: boolean;
-  error: string;
+  fetchProfile: {
+    loading: boolean;
+    error: string;
+  };
   fetchFollowList: {
     loading: boolean;
     error: string;
@@ -22,8 +22,10 @@ export type ProfileState = {
 
 const initialState: ProfileState = {
   profile: undefined,
-  loading: false,
-  error: "",
+  fetchProfile: {
+    loading: false,
+    error: "",
+  },
   followList: undefined,
   fetchFollowList: {
     loading: false,
@@ -39,6 +41,7 @@ export const followUser = createAsyncThunk(
   "profile/follow",
   async (_, thunkAPI) => {
     // Check if local user is following profile user id (get profile user id from thunkAPI)
+    return true;
   }
 );
 
@@ -86,6 +89,9 @@ export const fetchProfile = createAsyncThunk<
       name: user.name,
       biography: user.biography,
       statistics: statistics,
+      following: false,
+      followerCount: 0,
+      followingCount: 0,
     };
 
     return profile;
@@ -101,47 +107,62 @@ export const profileSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(
+      followUser.fulfilled,
+      (state: ProfileState, action: PayloadAction<boolean>) => {
+        if (state.profile) {
+          state.profile.following = action.payload;
+          if (action.payload == true) {
+            state.profile.followerCount += 1;
+          } else {
+            state.profile.followerCount -= 1;
+          }
+        }
+
+        state.followUser.loading = false;
+      }
+    );
+    builder.addCase(followUser.pending, (state: ProfileState) => {
+      state.followUser.loading = true;
+    });
+    builder.addCase(
       fetchProfile.fulfilled,
       (state: ProfileState, action: PayloadAction<any>) => {
         state.profile = action.payload;
-        state.loading = false;
-        state.error = "";
+        state.fetchProfile.loading = false;
+        state.fetchProfile.error = "";
       }
     );
     builder.addCase(fetchProfile.pending, (state: ProfileState) => {
       state.profile = undefined;
-      state.loading = true;
-      state.error = "";
+      state.fetchProfile.loading = true;
+      state.fetchProfile.error = "";
     });
     builder.addCase(
       fetchProfile.rejected,
       (state: ProfileState, action: PayloadAction<any>) => {
         state.profile = undefined;
-        state.loading = false;
-        state.error = action.payload;
+        state.fetchProfile.loading = false;
+        state.fetchProfile.error = action.payload;
       }
     );
     builder.addCase(
       fetchFollowList.fulfilled,
       (state: ProfileState, action: PayloadAction<any>) => {
         state.followList = action.payload;
-        state.loading = false;
-        state.error = "";
+        state.fetchFollowList.loading = false;
+        state.fetchFollowList.error = "";
       }
     );
     builder.addCase(fetchFollowList.pending, (state: ProfileState) => {
       state.followList = undefined;
-      state.loading = true;
-      state.error = "";
+      state.fetchFollowList.loading = true;
+      state.fetchFollowList.error = "";
     });
-    builder.addCase(
-      fetchFollowList.rejected,
-      (state: ProfileState, action: PayloadAction<any>) => {
-        state.followList = undefined;
-        state.loading = false;
-        state.error = "An error has occured";
-      }
-    );
+    builder.addCase(fetchFollowList.rejected, (state: ProfileState) => {
+      state.followList = undefined;
+      state.fetchFollowList.loading = false;
+      state.fetchFollowList.error = "An error has occured";
+    });
   },
 });
 

@@ -30,7 +30,12 @@ const ProfileScreen = () => {
 
   const isLocalUserProfile = localUser?.userId === userId;
 
-  const { error, loading, profile } = useSelector(selectProfile);
+  const { profile, fetchProfile: requestStatus } = useSelector(
+    (state) => state.profile
+  );
+
+  const { loading, error } = requestStatus;
+
   const { settings } = useSelector((state) => state.settings);
 
   useEffect(() => {

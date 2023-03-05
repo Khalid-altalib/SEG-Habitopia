@@ -92,6 +92,8 @@ export type Profile = {
   rankings: Array<object>;
   statistics: object;
   following: boolean;
+  followingCount: number;
+  followerCount: number;
 };
 
 export type Statistic = {

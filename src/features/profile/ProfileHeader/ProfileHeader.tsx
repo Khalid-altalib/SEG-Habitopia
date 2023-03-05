@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Avatar, Button, HStack, Text, View, VStack } from "native-base";
+import { Avatar, Box, Button, HStack, Text, View, VStack } from "native-base";
 import React from "react";
 import { RootParams } from "../../../../types";
 import { useSelector } from "../../../app/hooks";
@@ -24,29 +24,44 @@ const ProfileHeader = (props: Props) => {
 
   return (
     <View>
-      <HStack space={4} pb={4}>
-        <Avatar size={100} />
-        <VStack flex={1} justifyContent={"space-between"}>
-          <HStack flex={1} justifyContent="center" paddingBottom={3} space={3}>
-            <FollowListDisplay followListMode={"follower"} followCount={30} />
-            <FollowListDisplay followListMode={"following"} followCount={41} />
-          </HStack>
+      {profile && (
+        <Box>
+          <HStack space={4} pb={4}>
+            <Avatar size={100} />
+            <VStack flex={1} justifyContent={"space-between"}>
+              <HStack
+                flex={1}
+                justifyContent="center"
+                paddingBottom={3}
+                space={3}
+              >
+                <FollowListDisplay
+                  followListMode={"follower"}
+                  followCount={profile.followerCount}
+                />
+                <FollowListDisplay
+                  followListMode={"following"}
+                  followCount={profile.followingCount}
+                />
+              </HStack>
 
-          {isLocalUserProfile ? (
-            <Button onPress={() => navigation.push("Settings")}>
-              Edit Profile/Settings
-            </Button>
-          ) : (
-            <FollowButton />
-          )}
-        </VStack>
-      </HStack>
-      <View>
-        <Text bold fontSize={"md"}>
-          {profile!.name}
-        </Text>
-        <Text fontSize={"md"}>{biographyDisplay}</Text>
-      </View>
+              {isLocalUserProfile ? (
+                <Button onPress={() => navigation.push("Settings")}>
+                  Edit Profile/Settings
+                </Button>
+              ) : (
+                <FollowButton />
+              )}
+            </VStack>
+          </HStack>
+          <View>
+            <Text bold fontSize={"md"}>
+              {profile!.name}
+            </Text>
+            <Text fontSize={"md"}>{biographyDisplay}</Text>
+          </View>
+        </Box>
+      )}
     </View>
   );
 };
