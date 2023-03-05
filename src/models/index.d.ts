@@ -117,7 +117,7 @@ type EagerCheckin = {
   readonly timeStamp?: string | null;
   readonly userID: string;
   readonly chatroomID: string;
-  readonly validationCount?: number | null;
+  readonly validationCount: number | 0;
   readonly isValidated?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -132,7 +132,7 @@ type LazyCheckin = {
   readonly timeStamp?: string | null;
   readonly userID: string;
   readonly chatroomID: string;
-  readonly validationCount?: number | null;
+  readonly validationCount: number | 0;
   readonly isValidated?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

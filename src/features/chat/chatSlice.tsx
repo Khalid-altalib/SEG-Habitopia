@@ -4,6 +4,7 @@ import {
   fetchChatMessages,
   fetchUserChats,
   getChatDetails,
+  incrementCheckInValidation,
   sendChatCheckIn,
   sendChatMessage,
 } from "./chatQueries";
@@ -104,6 +105,20 @@ export const sendCheckIn = createAsyncThunk<
   try {
     const newCheckIn = await sendChatCheckIn(chatID, thunkAPI);
     return newCheckIn;
+  } catch (error: any) {
+    const message = error.message;
+    console.log(message);
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+export const validateCheckIn = createAsyncThunk<
+  void,
+  string,
+  { rejectValue: string }
+>("checkIn/validate", async (messageId: string, thunkAPI) => {
+  try {
+    const newCheckIn = await incrementCheckInValidation(messageId);
   } catch (error: any) {
     const message = error.message;
     console.log(message);

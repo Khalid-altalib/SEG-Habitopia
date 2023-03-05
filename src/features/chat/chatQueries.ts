@@ -209,3 +209,28 @@ const getLastCheckIn = async (chatID: string, thunkAPI: any) => {
   )[0];
   return lastCheckInByUser;
 };
+
+export const incrementCheckInValidation = async (messageId: string) => {
+  const checkIn = await (
+    await DataStore.query(Message, (message) => message.id.eq(messageId))
+  )[0].getCheckin;
+
+  if (checkIn) {
+    const newCheckIn = await DataStore.save(
+      Checkin.copyOf(checkIn, (updated) => {
+        updated.validationCount += 1;
+      })
+    );
+    if (checkIn.validationCount === 3) {
+      const validatedCheckIn = await DataStore.save(
+        Checkin.copyOf(checkIn, (updated) => {
+          updated.isValidated = true;
+        })
+      );
+      return validatedCheckIn;
+    }
+    return newCheckIn;
+  } else {
+    throw new Error("Could not validate!");
+  }
+};

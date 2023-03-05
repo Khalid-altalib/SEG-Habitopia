@@ -1,8 +1,9 @@
 import { Pressable, View, Text, StyleSheet } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Message } from "types";
 import { useSelector } from "@app/hooks";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../../app/hooks";
+import { validateCheckIn } from "../chatSlice";
 
 const CheckInMessage = (message: Message) => {
   const [validate, setValidate] = useState(false);
@@ -12,13 +13,17 @@ const CheckInMessage = (message: Message) => {
   }
   const dispatch = useDispatch();
 
-  const validateCheckIn = () => {
+  const validatingCheckIn = () => {
     if (!isMessage() && !validate) {
+      dispatch(validateCheckIn(message.id || ""));
+      setValidate(!validate);
     }
   };
 
+  useEffect(() => {}, [validate]);
+
   return (
-    <Pressable onPress={validateCheckIn}>
+    <Pressable onPress={validatingCheckIn}>
       <View
         style={[
           styles.container,
