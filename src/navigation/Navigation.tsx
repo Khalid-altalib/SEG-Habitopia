@@ -14,6 +14,7 @@ import SettingDetails from "../screens/application/SettingsDetailsScreen/Setting
 import Settings from "../screens/application/SettingsScreen/SettingsScreen";
 import { selectUser } from "../app/selectors";
 import ChatDetailsScreen from "@screens/chat/ChatDetailsScreen/ChatDetailsScreen";
+import FollowListScreen from "@screens/application/FollowListScreen/FollowListScreen";
 
 const Stack = createNativeStackNavigator<RootParams>();
 
@@ -65,6 +66,7 @@ const Navigation = () => {
           component={ChatDetailsScreen}
           options={{ headerTitle: "Chat Info" }}
         />
+        <Stack.Screen name="FollowList" component={FollowListScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

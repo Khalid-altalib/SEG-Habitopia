@@ -2,18 +2,24 @@
 import { initSchema } from '@aws-amplify/datastore';
 import { schema } from './schema';
 
+const MessageEnum = {
+  "TEXT": "TEXT",
+  "CHECKIN": "CHECKIN",
+  "VALIDATION": "VALIDATION"
+};
 
-
-const { Leaderboard, User, Message, ChatRoom, Checkin, Challenge, ChallengeType, UserChatRoom, ChallengeUser } = initSchema(schema);
+const { Leaderboard, User, Checkin, ChallengeType, ChatRoom, Message, Challenge, UserChatRoom, ChallengeUser, UserValidatedCheckIn } = initSchema(schema);
 
 export {
   Leaderboard,
   User,
-  Message,
-  ChatRoom,
   Checkin,
-  Challenge,
   ChallengeType,
+  ChatRoom,
+  Message,
+  Challenge,
   UserChatRoom,
-  ChallengeUser
+  ChallengeUser,
+  UserValidatedCheckIn,
+  MessageEnum
 };

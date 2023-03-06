@@ -1,34 +1,81 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { DataStore } from "aws-amplify";
-import { Profile, Statistic } from "../../../types";
-import { getAuthTokenFromThunk } from "../../app/util";
-import { getUserFromDatabase } from "../../app/util";
+import { Profile, User } from "../../../types";
+import { getUserFromDatabasebyID } from "../../app/util";
 import { getCheckIns } from "./statisticsQueries";
 
 export type ProfileState = {
   profile?: Profile;
-  loading: boolean;
-  error: string;
+  followList?: User[];
+  fetchProfile: {
+    loading: boolean;
+    error: string;
+  };
+  fetchFollowList: {
+    loading: boolean;
+    error: string;
+  };
+  followUser: {
+    loading: boolean;
+    error: string;
+  };
 };
 
 const initialState: ProfileState = {
   profile: undefined,
-  loading: false,
-  error: "",
+  fetchProfile: {
+    loading: false,
+    error: "",
+  },
+  followList: undefined,
+  fetchFollowList: {
+    loading: false,
+    error: "",
+  },
+  followUser: {
+    loading: false,
+    error: "",
+  },
 };
 
-let requestPromise: any = undefined;
+export const followUser = createAsyncThunk(
+  "profile/follow",
+  async (_, thunkAPI) => {
+    // BACKEND_PLACEHOLDER Check if local user is following profile user id (get profile user id from thunkAPI)
+    return true;
+  }
+);
 
+export const fetchFollowList = createAsyncThunk(
+  "profile/fetch-follow-list",
+  async (followListMode: string) => {
+    let followList = undefined;
 
+    if (followListMode === "following") {
+      followList = [
+        { name: "Bob", userId: "123" },
+        { name: "Tom", userId: "124" },
+      ];
+    } else if (followListMode === "follower") {
+      followList = [
+        { name: "Bob", userId: "123" },
+        { name: "Tom", userId: "124" },
+      ];
+    }
+
+    // BACKEND_PLACEHOLDER
+
+    return followList;
+  }
+);
 
 export const fetchProfile = createAsyncThunk<
   any,
   string,
   { rejectValue: string }
->("profile/fetch", async (_, thunkAPI) => {
+>("profile/fetch", async (userId, thunkAPI) => {
   try {
-    const user = await getUserFromDatabase(thunkAPI);
-    const checkinCount = await getCheckIns(thunkAPI);
+    const user = await getUserFromDatabasebyID(userId);
+    const checkinCount = await getCheckIns(userId);
 
     const statistics = [
       { name: "Streak", quantity: 5 },
@@ -36,16 +83,19 @@ export const fetchProfile = createAsyncThunk<
       { name: "Check Ins", quantity: checkinCount },
       { name: "Level", quantity: 8 },
     ];
-    
+
     const profile = {
       userId: user.id,
       name: user.name,
       biography: user.biography,
       statistics: statistics,
-    }; 
+      // BACKEND_PLACEHOLDER - get following, followerCount and followingCount
+      following: false,
+      followerCount: 0,
+      followingCount: 0,
+    };
 
     return profile;
-
   } catch (error: any) {
     const message = error.message;
     return thunkAPI.rejectWithValue(message);
@@ -58,26 +108,62 @@ export const profileSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(
+      followUser.fulfilled,
+      (state: ProfileState, action: PayloadAction<boolean>) => {
+        if (state.profile) {
+          state.profile.following = action.payload;
+          if (action.payload == true) {
+            state.profile.followerCount += 1;
+          } else {
+            state.profile.followerCount -= 1;
+          }
+        }
+
+        state.followUser.loading = false;
+      }
+    );
+    builder.addCase(followUser.pending, (state: ProfileState) => {
+      state.followUser.loading = true;
+    });
+    builder.addCase(
       fetchProfile.fulfilled,
       (state: ProfileState, action: PayloadAction<any>) => {
         state.profile = action.payload;
-        state.loading = false;
-        state.error = "";
+        state.fetchProfile.loading = false;
+        state.fetchProfile.error = "";
       }
     );
     builder.addCase(fetchProfile.pending, (state: ProfileState) => {
       state.profile = undefined;
-      state.loading = true;
-      state.error = "";
+      state.fetchProfile.loading = true;
+      state.fetchProfile.error = "";
     });
     builder.addCase(
       fetchProfile.rejected,
       (state: ProfileState, action: PayloadAction<any>) => {
         state.profile = undefined;
-        state.loading = false;
-        state.error = action.payload;
+        state.fetchProfile.loading = false;
+        state.fetchProfile.error = action.payload;
       }
     );
+    builder.addCase(
+      fetchFollowList.fulfilled,
+      (state: ProfileState, action: PayloadAction<any>) => {
+        state.followList = action.payload;
+        state.fetchFollowList.loading = false;
+        state.fetchFollowList.error = "";
+      }
+    );
+    builder.addCase(fetchFollowList.pending, (state: ProfileState) => {
+      state.followList = undefined;
+      state.fetchFollowList.loading = true;
+      state.fetchFollowList.error = "";
+    });
+    builder.addCase(fetchFollowList.rejected, (state: ProfileState) => {
+      state.followList = undefined;
+      state.fetchFollowList.loading = false;
+      state.fetchFollowList.error = "An error has occured";
+    });
   },
 });
 

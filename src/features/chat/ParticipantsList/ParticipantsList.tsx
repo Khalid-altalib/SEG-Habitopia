@@ -1,7 +1,7 @@
 import { useSelector } from "@app/hooks";
+import UserList from "@components/UserList/UserList";
 import { Box, FlatList, Heading, Text, VStack } from "native-base";
 import React from "react";
-import ParticipantEntry from "../ParticipantEntry/ParticipantEntry";
 
 type Props = {};
 
@@ -13,10 +13,7 @@ const ParticipantsList = (props: Props) => {
   return (
     <VStack>
       <Heading mb={4}>Participants</Heading>
-      {participants &&
-        participants.map((item, i) => (
-          <ParticipantEntry participant={item} key={i} />
-        ))}
+      <UserList users={participants} />
     </VStack>
   );
 };
