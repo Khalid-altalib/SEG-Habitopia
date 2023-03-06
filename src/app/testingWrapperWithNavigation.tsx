@@ -1,3 +1,4 @@
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { extendTheme, NativeBaseProvider } from "native-base";
 import { Provider } from "react-redux";
@@ -11,8 +12,6 @@ const inset = {
 };
 
 const theme = extendTheme({});
-
-import React from "react";
 
 type Props = {
   store: Store;
