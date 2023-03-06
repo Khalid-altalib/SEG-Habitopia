@@ -1,5 +1,5 @@
 import { fireEvent, render, waitFor } from "@testing-library/react-native";
-import configureStore, { MockStore } from "redux-mock-store";
+import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import DoneButton from "./DoneButton";
 import settingsMockState from "../settingsMockState";
