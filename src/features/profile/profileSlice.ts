@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { Profile, User } from "../../../types";
 import { getUserFromDatabasebyID } from "../../app/util";
-import { getCheckIns } from "./statisticsQueries";
+import { checkStreak, getCheckIns } from "./statisticsQueries";
 
 export type ProfileState = {
   profile?: Profile;
@@ -74,14 +74,14 @@ export const fetchProfile = createAsyncThunk<
   { rejectValue: string }
 >("profile/fetch", async (userId, thunkAPI) => {
   try {
+    console.log("fetching profile");
     const user = await getUserFromDatabasebyID(userId);
     const checkinCount = await getCheckIns(userId);
-
+    const streak = await checkStreak(userId);
     const statistics = [
-      { name: "Streak", quantity: 5 },
-      { name: "Wins", quantity: 1 },
+      { name: "Streak", quantity: streak },
+      { name: "Wins", quantity: 1 }, // challenges wins  - user challenges completed and what is inactive 
       { name: "Check Ins", quantity: checkinCount },
-      { name: "Level", quantity: 8 },
     ];
 
     const profile = {
