@@ -53,19 +53,21 @@ const query = /* GraphQL */ `
   }
 `;
 
-const mutation = /* GraphQL */ `
-mutation setChallengeInactive {
-  updateChallenge(input: {id: "68b263a4-0e18-4015-98ca-b22d49c019a0", status: INACTIVE}) {
-    id
-    status
-  }
-}
-`;
 // const mutation = /* GraphQL */ `
-// mutation setChallengeInactive($id: ID!) {
-//   updateChallenge(input: {id: $id, status: INACTIVE}) {
+// mutation setChallengeInactive {
+//   updateChallenge(input: {id: "68b263a4-0e18-4015-98ca-b22d49c019a0", status: INACTIVE}) {
+//     id
+//     status
+//   }
 // }
 // `;
+const mutation = /* GraphQL */ `
+mutation setChallengeInactive($id: ID!) {
+  updateChallenge(input: {id: $id, status: INACTIVE}) {
+    id
+    status
+}
+`;
 
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
@@ -110,27 +112,27 @@ mutation setChallengeInactive {
     if (body.data.challengesByStatus.items.length === 0) {
       console.log("No active challenges to end...");
     } else {
-      //for (i = 0; i < body.data.challengesByStatus.items.length; i++) {
+      for (i = 0; i < body.data.challengesByStatus.items.length; i++) {
 
-      const mutationRequestToBeSigned = new HttpRequest({
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          host: endpoint.host
-        },
-        hostname: endpoint.host,
-        body: JSON.stringify({ mutation, variables : {id: body.data.challengesByStatus.items[0].id}}),
-        path: endpoint.pathname
-      });
-    
-      const signedMutation = await signer.sign(mutationRequestToBeSigned);
-      const mutationRequest = new Request(endpoint, signedMutation);
+        const mutationRequestToBeSigned = new HttpRequest({
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            host: endpoint.host
+          },
+          hostname: endpoint.host,
+          body: JSON.stringify({ mutation, variables : {id: body.data.challengesByStatus.items[i].id}}),
+          path: endpoint.pathname
+        });
+      
+        const signedMutation = await signer.sign(mutationRequestToBeSigned);
+        const mutationRequest = new Request(endpoint, signedMutation);
 
-      mutationResponse = await fetch(mutationRequest);
-      body = await mutationResponse.json();
-      console.log(`BODY: ${JSON.stringify(body)}`);
-      if (body.errors) statusCode = 400;
-      //}
+        mutationResponse = await fetch(mutationRequest);
+        body = await mutationResponse.json();
+        console.log(`BODY: ${JSON.stringify(body)}`);
+        if (body.errors) statusCode = 400;
+      }
     }
 
   } catch (error) {

@@ -16,29 +16,21 @@ export const getLeaderboard = /* GraphQL */ `
         notifications
         Messages {
           nextToken
-          startedAt
         }
         ChatRooms {
           nextToken
-          startedAt
         }
         Checkins {
           nextToken
-          startedAt
         }
         challenges {
           nextToken
-          startedAt
         }
         validatedCheckIns {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       ChallengeType {
         id
@@ -47,15 +39,9 @@ export const getLeaderboard = /* GraphQL */ `
         active
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       leaderboardUserId
       leaderboardChallengeTypeId
     }
@@ -80,9 +66,6 @@ export const listLeaderboards = /* GraphQL */ `
           notifications
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         ChallengeType {
           id
@@ -91,73 +74,13 @@ export const listLeaderboards = /* GraphQL */ `
           active
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         leaderboardUserId
         leaderboardChallengeTypeId
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncLeaderboards = /* GraphQL */ `
-  query SyncLeaderboards(
-    $filter: ModelLeaderboardFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncLeaderboards(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        numberOfCheckins
-        User {
-          id
-          name
-          image
-          biography
-          email
-          notifications
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        ChallengeType {
-          id
-          name
-          description
-          active
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        leaderboardUserId
-        leaderboardChallengeTypeId
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -172,9 +95,6 @@ export const getChallenge = /* GraphQL */ `
         active
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       Users {
         items {
@@ -183,28 +103,22 @@ export const getChallenge = /* GraphQL */ `
           userId
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       status
+      started
       ChatRoom {
         id
         name
         Messages {
           nextToken
-          startedAt
         }
         users {
           nextToken
-          startedAt
         }
         Checkins {
           nextToken
-          startedAt
         }
         LastMessage {
           id
@@ -214,24 +128,15 @@ export const getChallenge = /* GraphQL */ `
           messageType
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           messageGetCheckinId
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         chatRoomLastMessageId
       }
       userCount
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       challengeChallengeTypeId
       challengeChatRoomId
     }
@@ -253,91 +158,26 @@ export const listChallenges = /* GraphQL */ `
           active
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         Users {
           nextToken
-          startedAt
         }
         status
+        started
         ChatRoom {
           id
           name
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           chatRoomLastMessageId
         }
         userCount
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         challengeChallengeTypeId
         challengeChatRoomId
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncChallenges = /* GraphQL */ `
-  query SyncChallenges(
-    $filter: ModelChallengeFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncChallenges(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        ChallengeType {
-          id
-          name
-          description
-          active
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        Users {
-          nextToken
-          startedAt
-        }
-        status
-        ChatRoom {
-          id
-          name
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          chatRoomLastMessageId
-        }
-        userCount
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        challengeChallengeTypeId
-        challengeChatRoomId
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -367,36 +207,26 @@ export const challengesByStatus = /* GraphQL */ `
           active
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         Users {
           nextToken
-          startedAt
         }
         status
+        started
         ChatRoom {
           id
           name
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           chatRoomLastMessageId
         }
         userCount
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         challengeChallengeTypeId
         challengeChatRoomId
       }
       nextToken
-      startedAt
     }
   }
 `;
@@ -409,9 +239,6 @@ export const getChallengeType = /* GraphQL */ `
       active
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -429,41 +256,8 @@ export const listChallengeTypes = /* GraphQL */ `
         active
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncChallengeTypes = /* GraphQL */ `
-  query SyncChallengeTypes(
-    $filter: ModelChallengeTypeFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncChallengeTypes(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        name
-        description
-        active
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -486,13 +280,9 @@ export const getUser = /* GraphQL */ `
           isValidated
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           checkinChallengeTypeId
         }
         nextToken
-        startedAt
       }
       ChatRooms {
         items {
@@ -501,12 +291,8 @@ export const getUser = /* GraphQL */ `
           chatRoomId
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       Checkins {
         items {
@@ -518,13 +304,9 @@ export const getUser = /* GraphQL */ `
           isValidated
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           checkinChallengeTypeId
         }
         nextToken
-        startedAt
       }
       challenges {
         items {
@@ -533,12 +315,8 @@ export const getUser = /* GraphQL */ `
           userId
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       validatedCheckIns {
         items {
@@ -547,18 +325,11 @@ export const getUser = /* GraphQL */ `
           checkinId
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -578,83 +349,23 @@ export const listUsers = /* GraphQL */ `
         notifications
         Messages {
           nextToken
-          startedAt
         }
         ChatRooms {
           nextToken
-          startedAt
         }
         Checkins {
           nextToken
-          startedAt
         }
         challenges {
           nextToken
-          startedAt
         }
         validatedCheckIns {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncUsers = /* GraphQL */ `
-  query SyncUsers(
-    $filter: ModelUserFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncUsers(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        name
-        image
-        biography
-        email
-        notifications
-        Messages {
-          nextToken
-          startedAt
-        }
-        ChatRooms {
-          nextToken
-          startedAt
-        }
-        Checkins {
-          nextToken
-          startedAt
-        }
-        challenges {
-          nextToken
-          startedAt
-        }
-        validatedCheckIns {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -675,7 +386,6 @@ export const getMessage = /* GraphQL */ `
         isValidated
         validatedBy {
           nextToken
-          startedAt
         }
         ChallengeType {
           id
@@ -684,22 +394,13 @@ export const getMessage = /* GraphQL */ `
           active
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         checkinChallengeTypeId
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       messageGetCheckinId
     }
   }
@@ -726,65 +427,13 @@ export const listMessages = /* GraphQL */ `
           isValidated
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           checkinChallengeTypeId
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         messageGetCheckinId
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncMessages = /* GraphQL */ `
-  query SyncMessages(
-    $filter: ModelMessageFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncMessages(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        text
-        chatroomID
-        userID
-        messageType
-        getCheckin {
-          id
-          timeStamp
-          userID
-          chatroomID
-          validationCount
-          isValidated
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          checkinChallengeTypeId
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        messageGetCheckinId
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -818,20 +467,13 @@ export const messagesByChatroomID = /* GraphQL */ `
           isValidated
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           checkinChallengeTypeId
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         messageGetCheckinId
       }
       nextToken
-      startedAt
     }
   }
 `;
@@ -865,20 +507,13 @@ export const messagesByUserID = /* GraphQL */ `
           isValidated
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           checkinChallengeTypeId
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         messageGetCheckinId
       }
       nextToken
-      startedAt
     }
   }
 `;
@@ -897,13 +532,9 @@ export const getChatRoom = /* GraphQL */ `
           isValidated
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           checkinChallengeTypeId
         }
         nextToken
-        startedAt
       }
       users {
         items {
@@ -912,12 +543,8 @@ export const getChatRoom = /* GraphQL */ `
           chatRoomId
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       Checkins {
         items {
@@ -929,13 +556,9 @@ export const getChatRoom = /* GraphQL */ `
           isValidated
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           checkinChallengeTypeId
         }
         nextToken
-        startedAt
       }
       LastMessage {
         id
@@ -952,23 +575,14 @@ export const getChatRoom = /* GraphQL */ `
           isValidated
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           checkinChallengeTypeId
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         messageGetCheckinId
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       chatRoomLastMessageId
     }
   }
@@ -985,15 +599,12 @@ export const listChatRooms = /* GraphQL */ `
         name
         Messages {
           nextToken
-          startedAt
         }
         users {
           nextToken
-          startedAt
         }
         Checkins {
           nextToken
-          startedAt
         }
         LastMessage {
           id
@@ -1003,73 +614,13 @@ export const listChatRooms = /* GraphQL */ `
           messageType
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           messageGetCheckinId
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         chatRoomLastMessageId
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncChatRooms = /* GraphQL */ `
-  query SyncChatRooms(
-    $filter: ModelChatRoomFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncChatRooms(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        name
-        Messages {
-          nextToken
-          startedAt
-        }
-        users {
-          nextToken
-          startedAt
-        }
-        Checkins {
-          nextToken
-          startedAt
-        }
-        LastMessage {
-          id
-          text
-          chatroomID
-          userID
-          messageType
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          messageGetCheckinId
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        chatRoomLastMessageId
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -1089,12 +640,8 @@ export const getCheckin = /* GraphQL */ `
           checkinId
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
       ChallengeType {
         id
@@ -1103,15 +650,9 @@ export const getCheckin = /* GraphQL */ `
         active
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       checkinChallengeTypeId
     }
   }
@@ -1132,7 +673,6 @@ export const listCheckins = /* GraphQL */ `
         isValidated
         validatedBy {
           nextToken
-          startedAt
         }
         ChallengeType {
           id
@@ -1141,66 +681,12 @@ export const listCheckins = /* GraphQL */ `
           active
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         checkinChallengeTypeId
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncCheckins = /* GraphQL */ `
-  query SyncCheckins(
-    $filter: ModelCheckinFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncCheckins(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        timeStamp
-        userID
-        chatroomID
-        validationCount
-        isValidated
-        validatedBy {
-          nextToken
-          startedAt
-        }
-        ChallengeType {
-          id
-          name
-          description
-          active
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        checkinChallengeTypeId
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -1228,7 +714,6 @@ export const checkinsByUserID = /* GraphQL */ `
         isValidated
         validatedBy {
           nextToken
-          startedAt
         }
         ChallengeType {
           id
@@ -1237,19 +722,12 @@ export const checkinsByUserID = /* GraphQL */ `
           active
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         checkinChallengeTypeId
       }
       nextToken
-      startedAt
     }
   }
 `;
@@ -1277,7 +755,6 @@ export const checkinsByChatroomID = /* GraphQL */ `
         isValidated
         validatedBy {
           nextToken
-          startedAt
         }
         ChallengeType {
           id
@@ -1286,19 +763,12 @@ export const checkinsByChatroomID = /* GraphQL */ `
           active
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         checkinChallengeTypeId
       }
       nextToken
-      startedAt
     }
   }
 `;
@@ -1317,31 +787,22 @@ export const getChallengeUser = /* GraphQL */ `
           active
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         Users {
           nextToken
-          startedAt
         }
         status
+        started
         ChatRoom {
           id
           name
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           chatRoomLastMessageId
         }
         userCount
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         challengeChallengeTypeId
         challengeChatRoomId
       }
@@ -1354,35 +815,24 @@ export const getChallengeUser = /* GraphQL */ `
         notifications
         Messages {
           nextToken
-          startedAt
         }
         ChatRooms {
           nextToken
-          startedAt
         }
         Checkins {
           nextToken
-          startedAt
         }
         challenges {
           nextToken
-          startedAt
         }
         validatedCheckIns {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -1400,12 +850,10 @@ export const listChallengeUsers = /* GraphQL */ `
         challenge {
           id
           status
+          started
           userCount
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           challengeChallengeTypeId
           challengeChatRoomId
         }
@@ -1418,71 +866,11 @@ export const listChallengeUsers = /* GraphQL */ `
           notifications
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncChallengeUsers = /* GraphQL */ `
-  query SyncChallengeUsers(
-    $filter: ModelChallengeUserFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncChallengeUsers(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        challengeId
-        userId
-        challenge {
-          id
-          status
-          userCount
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          challengeChallengeTypeId
-          challengeChatRoomId
-        }
-        user {
-          id
-          name
-          image
-          biography
-          email
-          notifications
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -1508,12 +896,10 @@ export const challengeUsersByChallengeId = /* GraphQL */ `
         challenge {
           id
           status
+          started
           userCount
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           challengeChallengeTypeId
           challengeChatRoomId
         }
@@ -1526,18 +912,11 @@ export const challengeUsersByChallengeId = /* GraphQL */ `
           notifications
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
   }
 `;
@@ -1563,12 +942,10 @@ export const challengeUsersByUserId = /* GraphQL */ `
         challenge {
           id
           status
+          started
           userCount
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           challengeChallengeTypeId
           challengeChatRoomId
         }
@@ -1581,18 +958,11 @@ export const challengeUsersByUserId = /* GraphQL */ `
           notifications
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
   }
 `;
@@ -1611,44 +981,33 @@ export const getUserChatRoom = /* GraphQL */ `
         notifications
         Messages {
           nextToken
-          startedAt
         }
         ChatRooms {
           nextToken
-          startedAt
         }
         Checkins {
           nextToken
-          startedAt
         }
         challenges {
           nextToken
-          startedAt
         }
         validatedCheckIns {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       chatRoom {
         id
         name
         Messages {
           nextToken
-          startedAt
         }
         users {
           nextToken
-          startedAt
         }
         Checkins {
           nextToken
-          startedAt
         }
         LastMessage {
           id
@@ -1658,23 +1017,14 @@ export const getUserChatRoom = /* GraphQL */ `
           messageType
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           messageGetCheckinId
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         chatRoomLastMessageId
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -1698,79 +1048,18 @@ export const listUserChatRooms = /* GraphQL */ `
           notifications
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         chatRoom {
           id
           name
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           chatRoomLastMessageId
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncUserChatRooms = /* GraphQL */ `
-  query SyncUserChatRooms(
-    $filter: ModelUserChatRoomFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncUserChatRooms(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        userId
-        chatRoomId
-        user {
-          id
-          name
-          image
-          biography
-          email
-          notifications
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        chatRoom {
-          id
-          name
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          chatRoomLastMessageId
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -1802,28 +1091,18 @@ export const userChatRoomsByUserId = /* GraphQL */ `
           notifications
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         chatRoom {
           id
           name
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           chatRoomLastMessageId
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
   }
 `;
@@ -1855,28 +1134,18 @@ export const userChatRoomsByChatRoomId = /* GraphQL */ `
           notifications
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         chatRoom {
           id
           name
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           chatRoomLastMessageId
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
   }
 `;
@@ -1895,29 +1164,21 @@ export const getUserValidatedCheckIn = /* GraphQL */ `
         notifications
         Messages {
           nextToken
-          startedAt
         }
         ChatRooms {
           nextToken
-          startedAt
         }
         Checkins {
           nextToken
-          startedAt
         }
         challenges {
           nextToken
-          startedAt
         }
         validatedCheckIns {
           nextToken
-          startedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       checkin {
         id
@@ -1928,7 +1189,6 @@ export const getUserValidatedCheckIn = /* GraphQL */ `
         isValidated
         validatedBy {
           nextToken
-          startedAt
         }
         ChallengeType {
           id
@@ -1937,22 +1197,13 @@ export const getUserValidatedCheckIn = /* GraphQL */ `
           active
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
         checkinChallengeTypeId
       }
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -1980,9 +1231,6 @@ export const listUserValidatedCheckIns = /* GraphQL */ `
           notifications
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         checkin {
           id
@@ -1993,74 +1241,12 @@ export const listUserValidatedCheckIns = /* GraphQL */ `
           isValidated
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           checkinChallengeTypeId
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncUserValidatedCheckIns = /* GraphQL */ `
-  query SyncUserValidatedCheckIns(
-    $filter: ModelUserValidatedCheckInFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncUserValidatedCheckIns(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        userId
-        checkinId
-        user {
-          id
-          name
-          image
-          biography
-          email
-          notifications
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        checkin {
-          id
-          timeStamp
-          userID
-          chatroomID
-          validationCount
-          isValidated
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          checkinChallengeTypeId
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -2092,9 +1278,6 @@ export const userValidatedCheckInsByUserId = /* GraphQL */ `
           notifications
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         checkin {
           id
@@ -2105,19 +1288,12 @@ export const userValidatedCheckInsByUserId = /* GraphQL */ `
           isValidated
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           checkinChallengeTypeId
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
   }
 `;
@@ -2149,9 +1325,6 @@ export const userValidatedCheckInsByCheckinId = /* GraphQL */ `
           notifications
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
         }
         checkin {
           id
@@ -2162,19 +1335,12 @@ export const userValidatedCheckInsByCheckinId = /* GraphQL */ `
           isValidated
           createdAt
           updatedAt
-          _version
-          _deleted
-          _lastChangedAt
           checkinChallengeTypeId
         }
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
   }
 `;
