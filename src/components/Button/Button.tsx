@@ -13,7 +13,7 @@ import { ButtonType, TextType } from "../../../types";
 import BoxWithShadow from "../BoxWithShadow";
 import Theme from "../../app/theme";
 
-type Props = {
+export type ButtonProps = {
   /** Additional styling information to apply to the button, e.g. padding. */
   style?: ViewStyle;
   /** Whether the button should take up the full horizontal space available to it. */
@@ -32,10 +32,10 @@ type Props = {
  * A pressable button which can take on different default styles, custom styles, and
  * call callbacks on press.
  *
- * @param props The properties passed to the component.
- * @returns The button component.
+ * @param props - The properties passed to the component.
+ * @returns - The button component.
  */
-const Button = (props: Props) => {
+const Button = (props: ButtonProps) => {
   return (
     <BoxWithShadow>
       <TouchableBox onPress={props.onPress} style={props.style}>
@@ -98,7 +98,6 @@ const GradientBox = ({ children, type, isFullWidth }: any): JSX.Element => {
 const ButtonText = ({ children, icon }: any) => (
   <Text
     type={TextType.Button}
-    textColor="dark"
     style={[
       icon == undefined ? null : { marginRight: 5 },
       { alignSelf: "center" },
