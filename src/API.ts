@@ -7,6 +7,7 @@ export type CreateLeaderboardInput = {
   numberOfCheckins: number,
   _version?: number | null,
   leaderboardUserId: string,
+  leaderboardChallengeTypeId?: string | null,
 };
 
 export type ModelLeaderboardConditionInput = {
@@ -15,6 +16,7 @@ export type ModelLeaderboardConditionInput = {
   or?: Array< ModelLeaderboardConditionInput | null > | null,
   not?: ModelLeaderboardConditionInput | null,
   leaderboardUserId?: ModelIDInput | null,
+  leaderboardChallengeTypeId?: ModelIDInput | null,
 };
 
 export type ModelIntInput = {
@@ -74,12 +76,14 @@ export type Leaderboard = {
   id: string,
   numberOfCheckins: number,
   User: User,
+  ChallengeType?: ChallengeType | null,
   createdAt: string,
   updatedAt: string,
   _version: number,
   _deleted?: boolean | null,
   _lastChangedAt: number,
   leaderboardUserId: string,
+  leaderboardChallengeTypeId?: string | null,
 };
 
 export type User = {
@@ -185,6 +189,7 @@ export type UserChatRoom = {
 export type ChatRoom = {
   __typename: "ChatRoom",
   id: string,
+  name: string,
   Messages?: ModelCheckinConnection | null,
   users?: ModelUserChatRoomConnection | null,
   Checkins?: ModelCheckinConnection | null,
@@ -246,10 +251,10 @@ export type Challenge = {
   id: string,
   ChallengeType: ChallengeType,
   Users?: ModelChallengeUserConnection | null,
+  status?: ChallengeStatusEnum | null,
   started?: string | null,
   ChatRoom?: ChatRoom | null,
   userCount?: number | null,
-  finished?: string | null,
   createdAt: string,
   updatedAt: string,
   _version: number,
@@ -259,11 +264,19 @@ export type Challenge = {
   challengeChatRoomId?: string | null,
 };
 
+export enum ChallengeStatusEnum {
+  ACTIVE = "ACTIVE",
+  INACTIVE = "INACTIVE",
+  COMPLETED = "COMPLETED",
+}
+
+
 export type UpdateLeaderboardInput = {
   id: string,
   numberOfCheckins?: number | null,
   _version?: number | null,
   leaderboardUserId?: string | null,
+  leaderboardChallengeTypeId?: string | null,
 };
 
 export type DeleteLeaderboardInput = {
@@ -273,23 +286,28 @@ export type DeleteLeaderboardInput = {
 
 export type CreateChallengeInput = {
   id?: string | null,
+  status?: ChallengeStatusEnum | null,
   started?: string | null,
   userCount?: number | null,
-  finished?: string | null,
   _version?: number | null,
   challengeChallengeTypeId: string,
   challengeChatRoomId?: string | null,
 };
 
 export type ModelChallengeConditionInput = {
+  status?: ModelChallengeStatusEnumInput | null,
   started?: ModelStringInput | null,
   userCount?: ModelIntInput | null,
-  finished?: ModelStringInput | null,
   and?: Array< ModelChallengeConditionInput | null > | null,
   or?: Array< ModelChallengeConditionInput | null > | null,
   not?: ModelChallengeConditionInput | null,
   challengeChallengeTypeId?: ModelIDInput | null,
   challengeChatRoomId?: ModelIDInput | null,
+};
+
+export type ModelChallengeStatusEnumInput = {
+  eq?: ChallengeStatusEnum | null,
+  ne?: ChallengeStatusEnum | null,
 };
 
 export type ModelStringInput = {
@@ -310,9 +328,9 @@ export type ModelStringInput = {
 
 export type UpdateChallengeInput = {
   id: string,
+  status?: ChallengeStatusEnum | null,
   started?: string | null,
   userCount?: number | null,
-  finished?: string | null,
   _version?: number | null,
   challengeChallengeTypeId?: string | null,
   challengeChatRoomId?: string | null,
@@ -439,11 +457,13 @@ export type DeleteMessageInput = {
 
 export type CreateChatRoomInput = {
   id?: string | null,
+  name: string,
   _version?: number | null,
   chatRoomLastMessageId?: string | null,
 };
 
 export type ModelChatRoomConditionInput = {
+  name?: ModelStringInput | null,
   and?: Array< ModelChatRoomConditionInput | null > | null,
   or?: Array< ModelChatRoomConditionInput | null > | null,
   not?: ModelChatRoomConditionInput | null,
@@ -452,6 +472,7 @@ export type ModelChatRoomConditionInput = {
 
 export type UpdateChatRoomInput = {
   id: string,
+  name?: string | null,
   _version?: number | null,
   chatRoomLastMessageId?: string | null,
 };
@@ -588,6 +609,7 @@ export type ModelLeaderboardFilterInput = {
   or?: Array< ModelLeaderboardFilterInput | null > | null,
   not?: ModelLeaderboardFilterInput | null,
   leaderboardUserId?: ModelIDInput | null,
+  leaderboardChallengeTypeId?: ModelIDInput | null,
 };
 
 export type ModelLeaderboardConnection = {
@@ -599,9 +621,9 @@ export type ModelLeaderboardConnection = {
 
 export type ModelChallengeFilterInput = {
   id?: ModelIDInput | null,
+  status?: ModelChallengeStatusEnumInput | null,
   started?: ModelStringInput | null,
   userCount?: ModelIntInput | null,
-  finished?: ModelStringInput | null,
   and?: Array< ModelChallengeFilterInput | null > | null,
   or?: Array< ModelChallengeFilterInput | null > | null,
   not?: ModelChallengeFilterInput | null,
@@ -615,6 +637,22 @@ export type ModelChallengeConnection = {
   nextToken?: string | null,
   startedAt?: number | null,
 };
+
+export type ModelIDKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
 
 export type ModelChallengeTypeFilterInput = {
   id?: ModelIDInput | null,
@@ -671,14 +709,9 @@ export type ModelMessageConnection = {
   startedAt?: number | null,
 };
 
-export enum ModelSortDirection {
-  ASC = "ASC",
-  DESC = "DESC",
-}
-
-
 export type ModelChatRoomFilterInput = {
   id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
   and?: Array< ModelChatRoomFilterInput | null > | null,
   or?: Array< ModelChatRoomFilterInput | null > | null,
   not?: ModelChatRoomFilterInput | null,
@@ -768,9 +801,9 @@ export type ModelSubscriptionIntInput = {
 
 export type ModelSubscriptionChallengeFilterInput = {
   id?: ModelSubscriptionIDInput | null,
+  status?: ModelSubscriptionStringInput | null,
   started?: ModelSubscriptionStringInput | null,
   userCount?: ModelSubscriptionIntInput | null,
-  finished?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionChallengeFilterInput | null > | null,
   or?: Array< ModelSubscriptionChallengeFilterInput | null > | null,
 };
@@ -827,6 +860,7 @@ export type ModelSubscriptionMessageFilterInput = {
 
 export type ModelSubscriptionChatRoomFilterInput = {
   id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionChatRoomFilterInput | null > | null,
   or?: Array< ModelSubscriptionChatRoomFilterInput | null > | null,
 };
@@ -915,12 +949,25 @@ export type CreateLeaderboardMutation = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
+    ChallengeType?:  {
+      __typename: "ChallengeType",
+      id: string,
+      name: string,
+      description: string,
+      active: boolean,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     leaderboardUserId: string,
+    leaderboardChallengeTypeId?: string | null,
   } | null,
 };
 
@@ -973,12 +1020,25 @@ export type UpdateLeaderboardMutation = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
+    ChallengeType?:  {
+      __typename: "ChallengeType",
+      id: string,
+      name: string,
+      description: string,
+      active: boolean,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     leaderboardUserId: string,
+    leaderboardChallengeTypeId?: string | null,
   } | null,
 };
 
@@ -1031,12 +1091,25 @@ export type DeleteLeaderboardMutation = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
+    ChallengeType?:  {
+      __typename: "ChallengeType",
+      id: string,
+      name: string,
+      description: string,
+      active: boolean,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     leaderboardUserId: string,
+    leaderboardChallengeTypeId?: string | null,
   } | null,
 };
 
@@ -1077,10 +1150,11 @@ export type CreateChallengeMutation = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
-    started?: string | null,
+    status?: ChallengeStatusEnum | null,
     ChatRoom?:  {
       __typename: "ChatRoom",
       id: string,
+      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -1118,7 +1192,6 @@ export type CreateChallengeMutation = {
       chatRoomLastMessageId?: string | null,
     } | null,
     userCount?: number | null,
-    finished?: string | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1166,10 +1239,11 @@ export type UpdateChallengeMutation = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
-    started?: string | null,
+    status?: ChallengeStatusEnum | null,
     ChatRoom?:  {
       __typename: "ChatRoom",
       id: string,
+      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -1207,7 +1281,6 @@ export type UpdateChallengeMutation = {
       chatRoomLastMessageId?: string | null,
     } | null,
     userCount?: number | null,
-    finished?: string | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1255,10 +1328,11 @@ export type DeleteChallengeMutation = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
-    started?: string | null,
+    status?: ChallengeStatusEnum | null,
     ChatRoom?:  {
       __typename: "ChatRoom",
       id: string,
+      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -1296,7 +1370,6 @@ export type DeleteChallengeMutation = {
       chatRoomLastMessageId?: string | null,
     } | null,
     userCount?: number | null,
-    finished?: string | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1868,6 +1941,7 @@ export type CreateChatRoomMutation = {
   createChatRoom?:  {
     __typename: "ChatRoom",
     id: string,
+    name: string,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -1971,6 +2045,7 @@ export type UpdateChatRoomMutation = {
   updateChatRoom?:  {
     __typename: "ChatRoom",
     id: string,
+    name: string,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -2074,6 +2149,7 @@ export type DeleteChatRoomMutation = {
   deleteChatRoom?:  {
     __typename: "ChatRoom",
     id: string,
+    name: string,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -2352,10 +2428,11 @@ export type CreateChallengeUserMutation = {
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-      started?: string | null,
+      status?: ChallengeStatusEnum | null,
       ChatRoom?:  {
         __typename: "ChatRoom",
         id: string,
+        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -2364,7 +2441,6 @@ export type CreateChallengeUserMutation = {
         chatRoomLastMessageId?: string | null,
       } | null,
       userCount?: number | null,
-      finished?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -2451,10 +2527,11 @@ export type UpdateChallengeUserMutation = {
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-      started?: string | null,
+      status?: ChallengeStatusEnum | null,
       ChatRoom?:  {
         __typename: "ChatRoom",
         id: string,
+        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -2463,7 +2540,6 @@ export type UpdateChallengeUserMutation = {
         chatRoomLastMessageId?: string | null,
       } | null,
       userCount?: number | null,
-      finished?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -2550,10 +2626,11 @@ export type DeleteChallengeUserMutation = {
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-      started?: string | null,
+      status?: ChallengeStatusEnum | null,
       ChatRoom?:  {
         __typename: "ChatRoom",
         id: string,
+        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -2562,7 +2639,6 @@ export type DeleteChallengeUserMutation = {
         chatRoomLastMessageId?: string | null,
       } | null,
       userCount?: number | null,
-      finished?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -2671,6 +2747,7 @@ export type CreateUserChatRoomMutation = {
     chatRoom:  {
       __typename: "ChatRoom",
       id: string,
+      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -2768,6 +2845,7 @@ export type UpdateUserChatRoomMutation = {
     chatRoom:  {
       __typename: "ChatRoom",
       id: string,
+      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -2865,6 +2943,7 @@ export type DeleteUserChatRoomMutation = {
     chatRoom:  {
       __typename: "ChatRoom",
       id: string,
+      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -3227,12 +3306,25 @@ export type GetLeaderboardQuery = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
+    ChallengeType?:  {
+      __typename: "ChallengeType",
+      id: string,
+      name: string,
+      description: string,
+      active: boolean,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     leaderboardUserId: string,
+    leaderboardChallengeTypeId?: string | null,
   } | null,
 };
 
@@ -3263,12 +3355,25 @@ export type ListLeaderboardsQuery = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
       },
+      ChallengeType?:  {
+        __typename: "ChallengeType",
+        id: string,
+        name: string,
+        description: string,
+        active: boolean,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
       leaderboardUserId: string,
+      leaderboardChallengeTypeId?: string | null,
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
@@ -3303,12 +3408,25 @@ export type SyncLeaderboardsQuery = {
         _deleted?: boolean | null,
         _lastChangedAt: number,
       },
+      ChallengeType?:  {
+        __typename: "ChallengeType",
+        id: string,
+        name: string,
+        description: string,
+        active: boolean,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
       leaderboardUserId: string,
+      leaderboardChallengeTypeId?: string | null,
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
@@ -3351,10 +3469,11 @@ export type GetChallengeQuery = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
-    started?: string | null,
+    status?: ChallengeStatusEnum | null,
     ChatRoom?:  {
       __typename: "ChatRoom",
       id: string,
+      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -3392,7 +3511,6 @@ export type GetChallengeQuery = {
       chatRoomLastMessageId?: string | null,
     } | null,
     userCount?: number | null,
-    finished?: string | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -3432,10 +3550,11 @@ export type ListChallengesQuery = {
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-      started?: string | null,
+      status?: ChallengeStatusEnum | null,
       ChatRoom?:  {
         __typename: "ChatRoom",
         id: string,
+        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -3444,7 +3563,6 @@ export type ListChallengesQuery = {
         chatRoomLastMessageId?: string | null,
       } | null,
       userCount?: number | null,
-      finished?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -3488,10 +3606,11 @@ export type SyncChallengesQuery = {
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-      started?: string | null,
+      status?: ChallengeStatusEnum | null,
       ChatRoom?:  {
         __typename: "ChatRoom",
         id: string,
+        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -3500,7 +3619,64 @@ export type SyncChallengesQuery = {
         chatRoomLastMessageId?: string | null,
       } | null,
       userCount?: number | null,
-      finished?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      challengeChallengeTypeId: string,
+      challengeChatRoomId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type ChallengesByStatusQueryVariables = {
+  status: ChallengeStatusEnum,
+  id?: ModelIDKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelChallengeFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ChallengesByStatusQuery = {
+  challengesByStatus?:  {
+    __typename: "ModelChallengeConnection",
+    items:  Array< {
+      __typename: "Challenge",
+      id: string,
+      ChallengeType:  {
+        __typename: "ChallengeType",
+        id: string,
+        name: string,
+        description: string,
+        active: boolean,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      },
+      Users?:  {
+        __typename: "ModelChallengeUserConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      status?: ChallengeStatusEnum | null,
+      ChatRoom?:  {
+        __typename: "ChatRoom",
+        id: string,
+        name: string,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        chatRoomLastMessageId?: string | null,
+      } | null,
+      userCount?: number | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -4040,6 +4216,7 @@ export type GetChatRoomQuery = {
   getChatRoom?:  {
     __typename: "ChatRoom",
     id: string,
+    name: string,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -4146,6 +4323,7 @@ export type ListChatRoomsQuery = {
     items:  Array< {
       __typename: "ChatRoom",
       id: string,
+      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -4200,6 +4378,7 @@ export type SyncChatRoomsQuery = {
     items:  Array< {
       __typename: "ChatRoom",
       id: string,
+      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -4510,10 +4689,11 @@ export type GetChallengeUserQuery = {
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-      started?: string | null,
+      status?: ChallengeStatusEnum | null,
       ChatRoom?:  {
         __typename: "ChatRoom",
         id: string,
+        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4522,7 +4702,6 @@ export type GetChallengeUserQuery = {
         chatRoomLastMessageId?: string | null,
       } | null,
       userCount?: number | null,
-      finished?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -4595,9 +4774,8 @@ export type ListChallengeUsersQuery = {
       challenge:  {
         __typename: "Challenge",
         id: string,
-        started?: string | null,
+        status?: ChallengeStatusEnum | null,
         userCount?: number | null,
-        finished?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4649,9 +4827,8 @@ export type SyncChallengeUsersQuery = {
       challenge:  {
         __typename: "Challenge",
         id: string,
-        started?: string | null,
+        status?: ChallengeStatusEnum | null,
         userCount?: number | null,
-        finished?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4704,9 +4881,8 @@ export type ChallengeUsersByChallengeIdQuery = {
       challenge:  {
         __typename: "Challenge",
         id: string,
-        started?: string | null,
+        status?: ChallengeStatusEnum | null,
         userCount?: number | null,
-        finished?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4759,9 +4935,8 @@ export type ChallengeUsersByUserIdQuery = {
       challenge:  {
         __typename: "Challenge",
         id: string,
-        started?: string | null,
+        status?: ChallengeStatusEnum | null,
         userCount?: number | null,
-        finished?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4847,6 +5022,7 @@ export type GetUserChatRoomQuery = {
     chatRoom:  {
       __typename: "ChatRoom",
       id: string,
+      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -4922,6 +5098,7 @@ export type ListUserChatRoomsQuery = {
       chatRoom:  {
         __typename: "ChatRoom",
         id: string,
+        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4972,6 +5149,7 @@ export type SyncUserChatRoomsQuery = {
       chatRoom:  {
         __typename: "ChatRoom",
         id: string,
+        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5023,6 +5201,7 @@ export type UserChatRoomsByUserIdQuery = {
       chatRoom:  {
         __typename: "ChatRoom",
         id: string,
+        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5074,6 +5253,7 @@ export type UserChatRoomsByChatRoomIdQuery = {
       chatRoom:  {
         __typename: "ChatRoom",
         id: string,
+        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5450,12 +5630,25 @@ export type OnCreateLeaderboardSubscription = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
+    ChallengeType?:  {
+      __typename: "ChallengeType",
+      id: string,
+      name: string,
+      description: string,
+      active: boolean,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     leaderboardUserId: string,
+    leaderboardChallengeTypeId?: string | null,
   } | null,
 };
 
@@ -5507,12 +5700,25 @@ export type OnUpdateLeaderboardSubscription = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
+    ChallengeType?:  {
+      __typename: "ChallengeType",
+      id: string,
+      name: string,
+      description: string,
+      active: boolean,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     leaderboardUserId: string,
+    leaderboardChallengeTypeId?: string | null,
   } | null,
 };
 
@@ -5564,12 +5770,25 @@ export type OnDeleteLeaderboardSubscription = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
+    ChallengeType?:  {
+      __typename: "ChallengeType",
+      id: string,
+      name: string,
+      description: string,
+      active: boolean,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     leaderboardUserId: string,
+    leaderboardChallengeTypeId?: string | null,
   } | null,
 };
 
@@ -5609,10 +5828,11 @@ export type OnCreateChallengeSubscription = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
-    started?: string | null,
+    status?: ChallengeStatusEnum | null,
     ChatRoom?:  {
       __typename: "ChatRoom",
       id: string,
+      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -5650,7 +5870,6 @@ export type OnCreateChallengeSubscription = {
       chatRoomLastMessageId?: string | null,
     } | null,
     userCount?: number | null,
-    finished?: string | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -5697,10 +5916,11 @@ export type OnUpdateChallengeSubscription = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
-    started?: string | null,
+    status?: ChallengeStatusEnum | null,
     ChatRoom?:  {
       __typename: "ChatRoom",
       id: string,
+      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -5738,7 +5958,6 @@ export type OnUpdateChallengeSubscription = {
       chatRoomLastMessageId?: string | null,
     } | null,
     userCount?: number | null,
-    finished?: string | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -5785,10 +6004,11 @@ export type OnDeleteChallengeSubscription = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
-    started?: string | null,
+    status?: ChallengeStatusEnum | null,
     ChatRoom?:  {
       __typename: "ChatRoom",
       id: string,
+      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -5826,7 +6046,6 @@ export type OnDeleteChallengeSubscription = {
       chatRoomLastMessageId?: string | null,
     } | null,
     userCount?: number | null,
-    finished?: string | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -6388,6 +6607,7 @@ export type OnCreateChatRoomSubscription = {
   onCreateChatRoom?:  {
     __typename: "ChatRoom",
     id: string,
+    name: string,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -6490,6 +6710,7 @@ export type OnUpdateChatRoomSubscription = {
   onUpdateChatRoom?:  {
     __typename: "ChatRoom",
     id: string,
+    name: string,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -6592,6 +6813,7 @@ export type OnDeleteChatRoomSubscription = {
   onDeleteChatRoom?:  {
     __typename: "ChatRoom",
     id: string,
+    name: string,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -6866,10 +7088,11 @@ export type OnCreateChallengeUserSubscription = {
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-      started?: string | null,
+      status?: ChallengeStatusEnum | null,
       ChatRoom?:  {
         __typename: "ChatRoom",
         id: string,
+        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -6878,7 +7101,6 @@ export type OnCreateChallengeUserSubscription = {
         chatRoomLastMessageId?: string | null,
       } | null,
       userCount?: number | null,
-      finished?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -6964,10 +7186,11 @@ export type OnUpdateChallengeUserSubscription = {
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-      started?: string | null,
+      status?: ChallengeStatusEnum | null,
       ChatRoom?:  {
         __typename: "ChatRoom",
         id: string,
+        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -6976,7 +7199,6 @@ export type OnUpdateChallengeUserSubscription = {
         chatRoomLastMessageId?: string | null,
       } | null,
       userCount?: number | null,
-      finished?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -7062,10 +7284,11 @@ export type OnDeleteChallengeUserSubscription = {
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-      started?: string | null,
+      status?: ChallengeStatusEnum | null,
       ChatRoom?:  {
         __typename: "ChatRoom",
         id: string,
+        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -7074,7 +7297,6 @@ export type OnDeleteChallengeUserSubscription = {
         chatRoomLastMessageId?: string | null,
       } | null,
       userCount?: number | null,
-      finished?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -7182,6 +7404,7 @@ export type OnCreateUserChatRoomSubscription = {
     chatRoom:  {
       __typename: "ChatRoom",
       id: string,
+      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7278,6 +7501,7 @@ export type OnUpdateUserChatRoomSubscription = {
     chatRoom:  {
       __typename: "ChatRoom",
       id: string,
+      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7374,6 +7598,7 @@ export type OnDeleteUserChatRoomSubscription = {
     chatRoom:  {
       __typename: "ChatRoom",
       id: string,
+      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,

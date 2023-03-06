@@ -19,5 +19,32 @@
         "Habitopia": {}
       }
     }
+  },
+  "challend": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-habitopia-challend-184819-authRole",
+      "UnauthRoleArn": "arn:aws:iam::281181984812:role/amplify-habitopia-challend-184819-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::281181984812:role/amplify-habitopia-challend-184819-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-habitopia-challend-184819-deployment",
+      "UnauthRoleName": "amplify-habitopia-challend-184819-unauthRole",
+      "StackName": "amplify-habitopia-challend-184819",
+      "StackId": "arn:aws:cloudformation:eu-west-2:281181984812:stack/amplify-habitopia-challend-184819/4ddec410-bb86-11ed-8662-06d4e0ca15ba",
+      "AmplifyAppId": "d2fz6on51wdtwq"
+    },
+    "categories": {
+      "auth": {
+        "Habitopia": {}
+      },
+      "api": {
+        "Habitopia": {}
+      },
+      "function": {
+        "challengeEnd": {
+          "deploymentBucketName": "amplify-habitopia-challend-184819-deployment",
+          "s3Key": "amplify-builds/challengeEnd-4e716f595a63774d574a-build.zip"
+        }
+      }
+    }
   }
 }

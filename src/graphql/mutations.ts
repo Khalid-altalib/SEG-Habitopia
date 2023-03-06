@@ -43,12 +43,24 @@ export const createLeaderboard = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
+      ChallengeType {
+        id
+        name
+        description
+        active
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
       leaderboardUserId
+      leaderboardChallengeTypeId
     }
   }
 `;
@@ -93,12 +105,24 @@ export const updateLeaderboard = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
+      ChallengeType {
+        id
+        name
+        description
+        active
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
       leaderboardUserId
+      leaderboardChallengeTypeId
     }
   }
 `;
@@ -143,12 +167,24 @@ export const deleteLeaderboard = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
+      ChallengeType {
+        id
+        name
+        description
+        active
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
       leaderboardUserId
+      leaderboardChallengeTypeId
     }
   }
 `;
@@ -184,9 +220,10 @@ export const createChallenge = /* GraphQL */ `
         nextToken
         startedAt
       }
-      started
+      status
       ChatRoom {
         id
+        name
         Messages {
           nextToken
           startedAt
@@ -220,7 +257,6 @@ export const createChallenge = /* GraphQL */ `
         chatRoomLastMessageId
       }
       userCount
-      finished
       createdAt
       updatedAt
       _version
@@ -263,9 +299,10 @@ export const updateChallenge = /* GraphQL */ `
         nextToken
         startedAt
       }
-      started
+      status
       ChatRoom {
         id
+        name
         Messages {
           nextToken
           startedAt
@@ -299,7 +336,6 @@ export const updateChallenge = /* GraphQL */ `
         chatRoomLastMessageId
       }
       userCount
-      finished
       createdAt
       updatedAt
       _version
@@ -342,9 +378,10 @@ export const deleteChallenge = /* GraphQL */ `
         nextToken
         startedAt
       }
-      started
+      status
       ChatRoom {
         id
+        name
         Messages {
           nextToken
           startedAt
@@ -378,7 +415,6 @@ export const deleteChallenge = /* GraphQL */ `
         chatRoomLastMessageId
       }
       userCount
-      finished
       createdAt
       updatedAt
       _version
@@ -891,6 +927,7 @@ export const createChatRoom = /* GraphQL */ `
   ) {
     createChatRoom(input: $input, condition: $condition) {
       id
+      name
       Messages {
         items {
           id
@@ -984,6 +1021,7 @@ export const updateChatRoom = /* GraphQL */ `
   ) {
     updateChatRoom(input: $input, condition: $condition) {
       id
+      name
       Messages {
         items {
           id
@@ -1077,6 +1115,7 @@ export const deleteChatRoom = /* GraphQL */ `
   ) {
     deleteChatRoom(input: $input, condition: $condition) {
       id
+      name
       Messages {
         items {
           id
@@ -1327,9 +1366,10 @@ export const createChallengeUser = /* GraphQL */ `
           nextToken
           startedAt
         }
-        started
+        status
         ChatRoom {
           id
+          name
           createdAt
           updatedAt
           _version
@@ -1338,7 +1378,6 @@ export const createChallengeUser = /* GraphQL */ `
           chatRoomLastMessageId
         }
         userCount
-        finished
         createdAt
         updatedAt
         _version
@@ -1414,9 +1453,10 @@ export const updateChallengeUser = /* GraphQL */ `
           nextToken
           startedAt
         }
-        started
+        status
         ChatRoom {
           id
+          name
           createdAt
           updatedAt
           _version
@@ -1425,7 +1465,6 @@ export const updateChallengeUser = /* GraphQL */ `
           chatRoomLastMessageId
         }
         userCount
-        finished
         createdAt
         updatedAt
         _version
@@ -1501,9 +1540,10 @@ export const deleteChallengeUser = /* GraphQL */ `
           nextToken
           startedAt
         }
-        started
+        status
         ChatRoom {
           id
+          name
           createdAt
           updatedAt
           _version
@@ -1512,7 +1552,6 @@ export const deleteChallengeUser = /* GraphQL */ `
           chatRoomLastMessageId
         }
         userCount
-        finished
         createdAt
         updatedAt
         _version
@@ -1606,6 +1645,7 @@ export const createUserChatRoom = /* GraphQL */ `
       }
       chatRoom {
         id
+        name
         Messages {
           nextToken
           startedAt
@@ -1690,6 +1730,7 @@ export const updateUserChatRoom = /* GraphQL */ `
       }
       chatRoom {
         id
+        name
         Messages {
           nextToken
           startedAt
@@ -1774,6 +1815,7 @@ export const deleteUserChatRoom = /* GraphQL */ `
       }
       chatRoom {
         id
+        name
         Messages {
           nextToken
           startedAt

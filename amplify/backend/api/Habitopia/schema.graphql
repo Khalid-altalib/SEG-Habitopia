@@ -1,79 +1,13 @@
-<<<<<<< HEAD
 enum MessageEnum {
   TEXT
   CHECKIN
   VALIDATION
 }
 
-type Leaderboard @model @auth(rules: [{ allow: public }]) {
-  id: ID!
-  numberOfCheckins: Int!
-  User: User! @hasOne
-}
-
-type Challenge @model @auth(rules: [{ allow: public }]) {
-  id: ID!
-  ChallengeType: ChallengeType! @hasOne
-  Users: [User] @manyToMany(relationName: "ChallengeUser")
-  started: AWSDateTime
-  ChatRoom: ChatRoom @hasOne
-  userCount: Int
-  finished: AWSDateTime
-}
-
-type ChallengeType @model @auth(rules: [{ allow: public }]) {
-  id: ID!
-  name: String!
-  description: String!
-  active: Boolean!
-}
-
-type User @model @auth(rules: [{ allow: public }]) {
-  id: ID!
-  name: String
-  image: String
-  biography: String
-  email: String
-  notifications: Boolean
-  Messages: [Checkin] @hasMany(indexName: "byUser", fields: ["id"])
-  ChatRooms: [ChatRoom] @manyToMany(relationName: "UserChatRoom")
-  Checkins: [Checkin] @hasMany(indexName: "byUser", fields: ["id"])
-  challenges: [Challenge] @manyToMany(relationName: "ChallengeUser")
-  validatedCheckIns: [Checkin] @manyToMany(relationName: "UserValidatedCheckIn")
-}
-
-type Message @model @auth(rules: [{ allow: public }]) {
-  id: ID!
-  text: String
-  chatroomID: ID! @index(name: "byChatRoom")
-  userID: ID! @index(name: "byUser")
-  messageType: MessageEnum
-  getCheckin: Checkin @hasOne
-}
-
-type ChatRoom @model @auth(rules: [{ allow: public }]) {
-  id: ID!
-  Messages: [Checkin] @hasMany(indexName: "byChatRoom", fields: ["id"])
-  users: [User] @manyToMany(relationName: "UserChatRoom")
-  Checkins: [Checkin] @hasMany(indexName: "byChatRoom", fields: ["id"])
-  LastMessage: Message @hasOne
-}
-
-type Checkin @model @auth(rules: [{ allow: public }]) {
-  id: ID!
-  timeStamp: AWSDateTime
-  userID: ID! @index(name: "byUser")
-  chatroomID: ID! @index(name: "byChatRoom")
-  validationCount: Int
-  isValidated: Boolean
-  validatedBy: [User] @manyToMany(relationName: "UserValidatedCheckIn")
-  ChallengeType: ChallengeType @hasOne
-}
-=======
-enum MessageEnum {
-  TEXT
-  CHECKIN
-  VALIDATION
+enum ChallengeStatusEnum {
+  ACTIVE
+  INACTIVE
+  COMPLETED
 }
 
 type Leaderboard @model @auth(rules: [{allow: public}]) {
@@ -87,10 +21,10 @@ type Challenge @model @auth(rules: [{allow: public}]) {
   id: ID!
   ChallengeType: ChallengeType! @hasOne
   Users: [User] @manyToMany(relationName: "ChallengeUser")
+  status: ChallengeStatusEnum @index(name: "byStatus", queryField: "challengesByStatus", sortKeyFields: ["id"])
   started: AWSDateTime
   ChatRoom: ChatRoom @hasOne
   userCount: Int
-  finished: AWSDateTime
 }
 
 type ChallengeType @model @auth(rules: [{allow: public}]) {
@@ -125,6 +59,7 @@ type Message @model @auth(rules: [{allow: public}]) {
 
 type ChatRoom @model @auth(rules: [{allow: public}]) {
   id: ID!
+  name: String!
   Messages: [Checkin] @hasMany(indexName: "byChatRoom", fields: ["id"])
   users: [User] @manyToMany(relationName: "UserChatRoom")
   Checkins: [Checkin] @hasMany(indexName: "byChatRoom", fields: ["id"])
@@ -142,4 +77,3 @@ type Checkin @model @auth(rules: [{allow: public}]) {
   ChallengeType: ChallengeType @hasOne
 }
  
->>>>>>> dev
