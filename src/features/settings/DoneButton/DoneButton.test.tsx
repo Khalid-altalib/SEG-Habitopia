@@ -30,7 +30,7 @@ describe("DoneButton", () => {
   });
 
   it("finds the done button", async () => {
-    const tree = await render(
+    const tree = render(
       <TestingWrapperNavigation store={mockStore}>
         <DoneButton {...defaultProps} />
       </TestingWrapperNavigation>
