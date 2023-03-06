@@ -154,6 +154,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "streak": {
+                    "name": "streak",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "Messages": {
                     "name": "Messages",
                     "isArray": true,
@@ -1191,5 +1198,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "3b8ec3a53c69bbec560eab4c0f496028"
+    "version": "1c91755df0c635cb4eea7ff07aa119af"
 };
