@@ -9,8 +9,7 @@ import {
   Auth,
 } from "aws-amplify";
 import { Leaderboard, User, Checkin } from "../../models";
-import authSlice from "@features/auth/authSlice";
-import { getUserFromDatabasebyID } from "@app/util";
+import { getUserFromDatabasebyID} from "@app/util";
 
 export type LeaderboardState = {
   loading: boolean;
@@ -39,38 +38,36 @@ const subscription = DataStore.observe(Checkin).subscribe({
   next: async (msg) => {
     if (msg.opType === "INSERT") {
       const checkin = msg.element as Checkin;
-      const { userID, checkinChallengeTypeId } = checkin;
-
+      const { userID, checkinChallengeTypeId, } = checkin;
       const user = await getUserFromDatabasebyID(userID);
-
       try {
         // Retrieve the current number of checkins for the user for a specific challenge type from the leaderboard
-        const [leaderboardEntry] = await DataStore.query(Leaderboard, (e) =>
-          e.and((e) => [
-            e.leaderboardUserId.eq(userID),
-            e.ChallengeType.id.eq(checkinChallengeTypeId as string),
+        const [leaderboardEntry] = await DataStore.query(Leaderboard, (entry) =>
+          entry.and((entry) => [
+            entry.leaderboardUserId.eq(userID),
+            entry.ChallengeType.id.eq(checkinChallengeTypeId as string),
           ])
         );
         const currentCheckins = leaderboardEntry?.numberOfCheckins ?? 0;
 
         // Update the user's checkins in the leaderboard for the given challenge type
-        if (currentCheckins == 0) {
+        const newCheckins = currentCheckins + 1;
+        if(!leaderboardEntry) {
           await DataStore.save(
             new Leaderboard({
-              numberOfCheckins: 1,
               leaderboardUserId: userID,
-              User: user,
-              leaderboardChallengeTypeId: checkinChallengeTypeId,
+              numberOfCheckins: newCheckins,
+              leaderboardChallengeTypeId: checkinChallengeTypeId as string,
+              User: user
+            })
+          );
+        } else {
+          await DataStore.save(
+            Leaderboard.copyOf(leaderboardEntry, (updated) => {
+              updated.numberOfCheckins = newCheckins;
             })
           );
         }
-        const newCheckins = currentCheckins + 1;
-        await DataStore.save(
-          Leaderboard.copyOf(leaderboardEntry, (updated) => {
-            updated.numberOfCheckins = newCheckins;
-          })
-        );
-
         console.log(
           `Leaderboard update for user ${userID} and challenge type ${checkinChallengeTypeId} complete.`
         );
@@ -124,15 +121,12 @@ export const fetchLeaderboard = createAsyncThunk<
           };
         })
       ); //maps the leaderboard to include the name of the user
-      result.forEach((item) => {
-        console.log(item);
-      });
       const serializableResult = [
         ...result.map((item) => {
           return { checkins: item.checkins, name: item.name };
         }),
       ];
-      console.log(serializableResult);
+      console.log("Leaderboard fetch: challenge type", challengeType, "page:", page, "serializable result:", serializableResult);
       return serializableResult;
     } catch (error: any) {
       const message = error.message;
