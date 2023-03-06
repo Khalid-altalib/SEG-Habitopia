@@ -1,9 +1,16 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { DataStore, Predicates, SortDirection, API, graphqlOperation, Auth } from 'aws-amplify';
-import { Leaderboard, User, Checkin } from '../../models';
+import {
+  DataStore,
+  Predicates,
+  SortDirection,
+  API,
+  graphqlOperation,
+  Auth,
+} from "aws-amplify";
+import { Leaderboard, User, Checkin } from "../../models";
 import authSlice from "@features/auth/authSlice";
-
+import { getUserFromDatabasebyID } from "@app/util";
 
 export type LeaderboardState = {
   loading: boolean;
@@ -12,7 +19,7 @@ export type LeaderboardState = {
   timeInterval: string;
   page: number;
   page_count: number | undefined;
-  entries: Array<{name: string, checkins: number}>;
+  entries: Array<{ name: string; checkins: number }>;
 };
 
 const initialState: LeaderboardState = {
@@ -27,22 +34,36 @@ const initialState: LeaderboardState = {
 
 /**
  * Subscribes to the checkin model and updates the leaderboard model when the user checks in
-*/
+ */
 const subscription = DataStore.observe(Checkin).subscribe({
   next: async (msg) => {
-    if (msg.opType === 'INSERT') {
+    if (msg.opType === "INSERT") {
       const checkin = msg.element as Checkin;
       const { userID, checkinChallengeTypeId } = checkin;
 
+      const user = await getUserFromDatabasebyID(userID);
+
       try {
         // Retrieve the current number of checkins for the user for a specific challenge type from the leaderboard
-        const [leaderboardEntry] = await DataStore.query(Leaderboard, (e) => e.and(e => [
-          e.leaderboardUserId.eq(userID),
-          e.ChallengeType.id.eq(checkinChallengeTypeId as string)
-        ]));
+        const [leaderboardEntry] = await DataStore.query(Leaderboard, (e) =>
+          e.and((e) => [
+            e.leaderboardUserId.eq(userID),
+            e.ChallengeType.id.eq(checkinChallengeTypeId as string),
+          ])
+        );
         const currentCheckins = leaderboardEntry?.numberOfCheckins ?? 0;
 
         // Update the user's checkins in the leaderboard for the given challenge type
+        if (currentCheckins == 0) {
+          await DataStore.save(
+            new Leaderboard({
+              numberOfCheckins: 1,
+              leaderboardUserId: userID,
+              User: user,
+              leaderboardChallengeTypeId: checkinChallengeTypeId,
+            })
+          );
+        }
         const newCheckins = currentCheckins + 1;
         await DataStore.save(
           Leaderboard.copyOf(leaderboardEntry, (updated) => {
@@ -50,14 +71,19 @@ const subscription = DataStore.observe(Checkin).subscribe({
           })
         );
 
-        console.log(`Leaderboard update for user ${userID} and challenge type ${checkinChallengeTypeId} complete.`);
+        console.log(
+          `Leaderboard update for user ${userID} and challenge type ${checkinChallengeTypeId} complete.`
+        );
       } catch (error) {
-        console.error(`Error updating leaderboard for user ${userID} and challenge type ${checkinChallengeTypeId}:`, error);
+        console.error(
+          `Error updating leaderboard for user ${userID} and challenge type ${checkinChallengeTypeId}:`,
+          error
+        );
       }
     }
   },
   error: (err) => console.error(err),
-  complete: () => console.log('Leaderboard update subscription complete.'),
+  complete: () => console.log("Leaderboard update subscription complete."),
 });
 
 /**
@@ -68,7 +94,9 @@ export const fetchLeaderboard = createAsyncThunk<
   any,
   void,
   { rejectValue: string }
->("leaderboard/fetch", async (_, thunkAPI) => {
+>(
+  "leaderboard/fetch",
+  async (_, thunkAPI) => {
     try {
       const state = thunkAPI.getState() as RootState;
       const { challengeType, page } = state.leaderboard;
@@ -76,9 +104,9 @@ export const fetchLeaderboard = createAsyncThunk<
         Leaderboard,
         (c) => c.ChallengeType.name.eq(challengeType),
         {
-        page: page as number,
-        limit: 10,
-        sort: (s) => s.numberOfCheckins(SortDirection.DESCENDING)
+          page: page as number,
+          limit: 10,
+          sort: (s) => s.numberOfCheckins(SortDirection.DESCENDING),
         }
       );
       const leaderboard = data.map((entry) => {
@@ -87,19 +115,25 @@ export const fetchLeaderboard = createAsyncThunk<
           checkins: entry.numberOfCheckins,
         };
       }); //filters the data to only include the id and number of checkins
-      const result = await Promise.all(leaderboard.map(async (entry) => {
-        const user = await DataStore.query(User, entry.id);
-        return {
-          name: user?.name,
-          checkins: entry.checkins,
-        };
-      })); //maps the leaderboard to include the name of the user
-      result.forEach((item) => {console.log(item)});
-      const serializableResult = [...result.map((item) => {
-        return {checkins: item.checkins, name: item.name}})];
+      const result = await Promise.all(
+        leaderboard.map(async (entry) => {
+          const user = await DataStore.query(User, entry.id);
+          return {
+            name: user?.name,
+            checkins: entry.checkins,
+          };
+        })
+      ); //maps the leaderboard to include the name of the user
+      result.forEach((item) => {
+        console.log(item);
+      });
+      const serializableResult = [
+        ...result.map((item) => {
+          return { checkins: item.checkins, name: item.name };
+        }),
+      ];
       console.log(serializableResult);
       return serializableResult;
-      
     } catch (error: any) {
       const message = error.message;
       return thunkAPI.rejectWithValue(message);
