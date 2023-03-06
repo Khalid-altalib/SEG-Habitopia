@@ -15,7 +15,7 @@ const theme = extendTheme({});
 import React from "react";
 
 type Props = {
-  store: any;
+  store: Store;
   children: React.ReactNode;
 };
 
