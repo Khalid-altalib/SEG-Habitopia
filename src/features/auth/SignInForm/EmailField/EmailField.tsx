@@ -47,6 +47,7 @@ const FieldInput = ({ control }: Props) => (
         value={value}
         size="xl"
         placeholder="Email"
+        testID="email-input"
       />
     )}
     name="email"
