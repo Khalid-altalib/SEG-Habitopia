@@ -46,7 +46,7 @@ describe("DoneButton", () => {
     const valueName = "name";
     const getValues = jest.fn().mockReturnValue("Jane Doe");
 
-    const wrapper = await render(
+    const wrapper = render(
       <TestingWrapperNavigation store={mockStore}>
         <DoneButton valueName={valueName} getValues={getValues} />
       </TestingWrapperNavigation>
