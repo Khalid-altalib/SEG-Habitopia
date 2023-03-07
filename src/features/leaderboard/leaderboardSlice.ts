@@ -177,7 +177,6 @@ export const leaderboardSlice = createSlice({
         state.page += 1;
         state.loading = false;
         state.error = "";
-        console.log(action.payload);
         state.entries = action.payload;
       }
     );

@@ -366,6 +366,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "streakStart": {
+                    "name": "streakStart",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "Messages": {
                     "name": "Messages",
                     "isArray": true,
@@ -1191,5 +1198,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.3.6",
-    "version": "3b8ec3a53c69bbec560eab4c0f496028"
+    "version": "2d02d2b22d15882c93449b7626442f1d"
 };
