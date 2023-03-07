@@ -382,6 +382,13 @@ type LazyUserValidatedCheckIn = {
 
 export declare type UserValidatedCheckIn = LazyLoading extends LazyLoadingDisabled ? EagerUserValidatedCheckIn : LazyUserValidatedCheckIn
 
-export declare const UserValidatedCheckIn: (new (init: ModelInit<UserValidatedCheckIn>) => UserValidatedCheckIn) & {
-  copyOf(source: UserValidatedCheckIn, mutator: (draft: MutableModel<UserValidatedCheckIn>) => MutableModel<UserValidatedCheckIn> | void): UserValidatedCheckIn;
-}
+export declare const UserValidatedCheckIn: (new (
+  init: ModelInit<UserValidatedCheckIn>
+) => UserValidatedCheckIn) & {
+  copyOf(
+    source: UserValidatedCheckIn,
+    mutator: (
+      draft: MutableModel<UserValidatedCheckIn>
+    ) => MutableModel<UserValidatedCheckIn> | void
+  ): UserValidatedCheckIn;
+};
