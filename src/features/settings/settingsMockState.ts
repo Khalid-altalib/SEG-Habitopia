@@ -2,11 +2,11 @@ import { SettingsState } from "./settingsSlice";
 
 const settingsMockState: SettingsState = {
   settings: {
-    email: "example@gmail.com",
-    password: "",
+    email: "test@test.com",
+    password: "password",
     notifications: true,
-    name: "John Doe",
-    biography: "Hello, I'm John Doe.",
+    name: "Test User",
+    biography: "Hello, I'm Test User.",
   },
   fetchSettings: {
     loading: false,
