@@ -44,49 +44,47 @@ const getLastCheckInByUserId = async (userId: string) => {
 
 export const checkStreak = async (userId: string) => {
   const user = await getUserFromDatabasebyID(userId);
+  const streakStart = user.streakStart;
+
   let newStreak = 0;
   const today = new Date();
 
-  const streakStart = user.streakStart;
   console.log("streakStart", streakStart);
+  const lastCheckInByUser = await getLastCheckInByUserId(userId);
 
   if (!streakStart) {
     console.log("no streak start found");
     updateStreakStart(user, today);
     return 0;
   }
-  const streakStartDateObj = new Date(streakStart);
-
- 
-  const lastCheckInByUser = await getLastCheckInByUserId(userId);
-
   if (!lastCheckInByUser || !lastCheckInByUser.createdAt) {
     console.log("no checkin found");
     updateStreakStart(user, today);
     return 0;
   }
   console.log("lastCheckInByUser", lastCheckInByUser.createdAt);
-
+  // convert to date objects
+  const streakStartDateObj = new Date(streakStart);
   const lastCheckInDateObj = new Date(lastCheckInByUser.createdAt);
-  const diffTime = (lastCheckInDateObj.getTime() - streakStartDateObj.getTime()) / 1000 / 60 // get in minutes the length of the streak
+  const minutesSinceLastCheckIn = (today.getTime() - lastCheckInDateObj.getTime()) / 1000 / 60 // get in minutes the length of the streak
 
   // streak is 0 if last checkin was more than 24 hours ago, and we reset the streakStart to today 
   // so whenever they check in again, it will be 1
   
   // otherwise streak is difference between today and streakStart in days
 
-  if (diffTime > 1440) {
+  if (minutesSinceLastCheckIn > 1440) {
     newStreak = 0;
     updateStreakStart(user, today);
   }else{
-    // check how many days its been since last check in 
-    const daysSinceLastCheckIn = diffTime / 1440; 
-    console.log("daysSinceLastCheckIn", daysSinceLastCheckIn);
+    // check how many days its been since the streak started.
+    const daysSinceStreakStart = (lastCheckInDateObj.getTime() - streakStartDateObj.getTime()) / 1000 / 60 / 1440; 
+    console.log("daysSinceLastCheckIn", daysSinceStreakStart);
 
-    if (daysSinceLastCheckIn < 0){
+    if (daysSinceStreakStart < 0){
       newStreak = 0;
     }else{
-      newStreak = Math.ceil(daysSinceLastCheckIn);
+      newStreak = Math.ceil(daysSinceStreakStart);
     }
   }
   return newStreak;
