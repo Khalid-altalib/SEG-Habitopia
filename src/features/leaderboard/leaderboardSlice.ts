@@ -27,7 +27,7 @@ const initialState: LeaderboardState = {
   challengeType: "Sleep",
   timeInterval: "Weekly",
   page: 0,
-  page_count: undefined,
+  page_count: 2,
   entries: [],
 };
 
@@ -49,10 +49,9 @@ const subscription = DataStore.observe(Checkin).subscribe({
           ])
         );
         const currentCheckins = leaderboardEntry?.numberOfCheckins ?? 0;
-
         // Update the user's checkins in the leaderboard for the given challenge type
         const newCheckins = currentCheckins + 1;
-        if(!leaderboardEntry) {
+        if(currentCheckins === 0) {
           await DataStore.save(
             new Leaderboard({
               leaderboardUserId: userID,
