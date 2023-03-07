@@ -18,11 +18,16 @@ export const getCheckIns = async (userId: string) => {
 export const checkStreak = async (userId: string) => {
   const user = await getUserFromDatabasebyID(userId);
   let newStreak = 0;
-  
-  var currentStreak = user.streak;
-  if (currentStreak == null || currentStreak == undefined) {
-    currentStreak = 0;
+  const streakStart = user.streakStart;
+  if (!streakStart) {
+    console.log("no streak start found");
+    return 0;
   }
+  // convert streakStart to date object
+  const streakStartDateObj = new Date(streakStart);
+
+  console.log("streakStart", streakStart);
+  // store start of streak in user
 
   // look in checkins to find all the checkins by this user, and sort it to find the most recent
   const lastCheckInByUser = (
@@ -41,8 +46,6 @@ export const checkStreak = async (userId: string) => {
   
   // get today's date in AWS format
   const today = new Date();
-  const todayAWS = today.toISOString().split("T")[0];
-  // if last check in is 24 hours before today, then return 1
 
   if (!lastCheckInByUser || !lastCheckInByUser.createdAt || lastCheckInByUser == null || lastCheckInByUser == undefined) {
     console.log("no checkin found");
@@ -51,21 +54,26 @@ export const checkStreak = async (userId: string) => {
     // check lastCheckInByUser is 24 hours before today
   console.log("lastCheckInByUser", lastCheckInByUser.createdAt);
   const lastCheckInDateObj = new Date(lastCheckInByUser.createdAt);
-  const diffTime = Math.abs(today.getTime() - lastCheckInDateObj.getTime());
-
-  if (diffTime > 86400000) {
+  const diffTime = (lastCheckInDateObj.getTime() - streakStartDateObj.getTime()) / 1000 / 60 // get in minutes the length of the streak
+  console.log("diffTime", diffTime);
+  // streak is 0 if last checkin was more than 24 hours ago
+  // otherwise streak is difference between today and last checkin mod 24 hours
+  if (diffTime > 1440) {
     newStreak = 0;
   }else{
-    // if we are here, then the last checkin was within 24 hours, so update the streak
-    newStreak = currentStreak + 1;
-    //PROBLEM everytime we call this function, it updates the streak if it has been less than 24 hours
+    // check how many days its been since last check in 
+    const daysSinceLastCheckIn = diffTime / 1440; 
+    console.log("daysSinceLastCheckIn", daysSinceLastCheckIn);
+    newStreak = Math.ceil(daysSinceLastCheckIn);
   }
 
-  await DataStore.save(
-    User.copyOf(user, (updated) => {
-      updated.streak = newStreak;
-    })
-  );
+  console.log("newStreak", newStreak);
+
+  // await DataStore.save(
+  //   User.copyOf(user, (updated) => {
+  //     updated.streak = newStreak;
+  //   })
+  // );
 
   return newStreak;
 };
