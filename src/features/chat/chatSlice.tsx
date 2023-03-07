@@ -81,20 +81,12 @@ export const fetchMessages = createAsyncThunk<
   }
 });
 
-export const sendMessage = createAsyncThunk<
-  Message,
-  any,
-  { rejectValue: string }
->(
+export const sendMessage = createAsyncThunk<void, any, { rejectValue: string }>(
   "messages/send",
-  async (message: { message: string; chatRoomID: string }, thunkAPI) => {
+  async (data: { message: string; chatRoomID: string }, thunkAPI) => {
     try {
-      const newMessage = await sendChatMessage(
-        message.message,
-        message.chatRoomID,
-        thunkAPI
-      );
-      return newMessage;
+      const { message, chatRoomID } = data;
+      await sendChatMessage(message, chatRoomID, thunkAPI);
     } catch (error: any) {
       const message = error.message;
       return thunkAPI.rejectWithValue(message);
@@ -103,13 +95,12 @@ export const sendMessage = createAsyncThunk<
 );
 
 export const sendCheckIn = createAsyncThunk<
-  Message,
+  void,
   string,
   { rejectValue: string }
 >("checkIn/send", async (chatID: string, thunkAPI) => {
   try {
-    const newCheckIn = await sendChatCheckIn(chatID, thunkAPI);
-    return newCheckIn;
+    await sendChatCheckIn(chatID, thunkAPI);
   } catch (error: any) {
     const message = error.message;
     console.log(message);

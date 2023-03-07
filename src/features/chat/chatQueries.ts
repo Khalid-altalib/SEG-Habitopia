@@ -84,7 +84,7 @@ export const sendChatMessage = async (
   thunkAPI: any
 ) => {
   const userID = getUserIdFromThunk(thunkAPI);
-  const userFromDatabase = getUserFromDatabase(thunkAPI);
+  const userFromDatabase = await getUserFromDatabase(thunkAPI);
   const newMessage = await DataStore.save(
     new Message({
       chatroomID: chatroomID,
@@ -93,10 +93,12 @@ export const sendChatMessage = async (
       messageType: MessageEnum.TEXT,
     })
   );
+
   await updateLastMessageInChat(newMessage.id, chatroomID);
+
   return {
     ...newMessage,
-    userName: (await userFromDatabase).name,
+    userName: userFromDatabase.name,
   } as MessageType;
 };
 
@@ -200,6 +202,8 @@ const createCheckIn = async (chatID: string, userID: string, thunkAPI: any) => {
     ...checkInMessage,
     userName: userFromDatabase.name,
     messageType: MessageEnum.CHECKIN,
+    validationCount: 0,
+    isValidated: false,
   } as MessageType;
 };
 

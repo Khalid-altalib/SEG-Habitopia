@@ -36,10 +36,10 @@ type Props = {};
 const ChatScreen = (props: Props) => {
   const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
   const route = useRoute<RouteProp<ChatParams, "IndividualChat">>();
-  const { chats, pageNumber } = useSelector((store) => store.chats);
+  const { user } = useSelector((store) => store.auth);
+  const { chats } = useSelector((store) => store.chats);
   const { id } = route.params;
   const dispatch = useDispatch();
-
   const addChatSubscription = (chatID: string) => {
     const variables: OnCreateMessageSubscriptionVariables = {
       filter: {
