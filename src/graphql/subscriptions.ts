@@ -16,7 +16,7 @@ export const onCreateLeaderboard = /* GraphQL */ `
         biography
         email
         notifications
-        streak
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -78,7 +78,7 @@ export const onUpdateLeaderboard = /* GraphQL */ `
         biography
         email
         notifications
-        streak
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -140,7 +140,7 @@ export const onDeleteLeaderboard = /* GraphQL */ `
         biography
         email
         notifications
-        streak
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -482,7 +482,7 @@ export const onCreateUser = /* GraphQL */ `
       biography
       email
       notifications
-      streak
+      streakStart
       Messages {
         items {
           id
@@ -578,7 +578,7 @@ export const onUpdateUser = /* GraphQL */ `
       biography
       email
       notifications
-      streak
+      streakStart
       Messages {
         items {
           id
@@ -674,7 +674,7 @@ export const onDeleteUser = /* GraphQL */ `
       biography
       email
       notifications
-      streak
+      streakStart
       Messages {
         items {
           id
@@ -1350,7 +1350,7 @@ export const onCreateChallengeUser = /* GraphQL */ `
         biography
         email
         notifications
-        streak
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1437,7 +1437,7 @@ export const onUpdateChallengeUser = /* GraphQL */ `
         biography
         email
         notifications
-        streak
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1524,7 +1524,7 @@ export const onDeleteChallengeUser = /* GraphQL */ `
         biography
         email
         notifications
-        streak
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1574,7 +1574,7 @@ export const onCreateUserChatRoom = /* GraphQL */ `
         biography
         email
         notifications
-        streak
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1658,7 +1658,7 @@ export const onUpdateUserChatRoom = /* GraphQL */ `
         biography
         email
         notifications
-        streak
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1742,7 +1742,7 @@ export const onDeleteUserChatRoom = /* GraphQL */ `
         biography
         email
         notifications
-        streak
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1826,7 +1826,7 @@ export const onCreateUserValidatedCheckIn = /* GraphQL */ `
         biography
         email
         notifications
-        streak
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1905,7 +1905,7 @@ export const onUpdateUserValidatedCheckIn = /* GraphQL */ `
         biography
         email
         notifications
-        streak
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1984,7 +1984,7 @@ export const onDeleteUserValidatedCheckIn = /* GraphQL */ `
         biography
         email
         notifications
-        streak
+        streakStart
         Messages {
           nextToken
           startedAt

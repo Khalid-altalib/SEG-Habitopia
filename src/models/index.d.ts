@@ -57,7 +57,7 @@ type EagerUser = {
   readonly biography?: string | null;
   readonly email?: string | null;
   readonly notifications?: boolean | null;
-  readonly streak?: number | null;
+  readonly streakStart?: string | null;
   readonly Messages?: (Checkin | null)[] | null;
   readonly ChatRooms?: (UserChatRoom | null)[] | null;
   readonly Checkins?: (Checkin | null)[] | null;
@@ -78,7 +78,7 @@ type LazyUser = {
   readonly biography?: string | null;
   readonly email?: string | null;
   readonly notifications?: boolean | null;
-  readonly streak?: number | null;
+  readonly streakStart?: string | null;
   readonly Messages: AsyncCollection<Checkin>;
   readonly ChatRooms: AsyncCollection<UserChatRoom>;
   readonly Checkins: AsyncCollection<Checkin>;

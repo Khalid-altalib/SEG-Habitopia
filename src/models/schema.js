@@ -154,10 +154,10 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "streak": {
-                    "name": "streak",
+                "streakStart": {
+                    "name": "streakStart",
                     "isArray": false,
-                    "type": "Int",
+                    "type": "AWSDateTime",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -1198,5 +1198,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "1c91755df0c635cb4eea7ff07aa119af"
+    "version": "2d02d2b22d15882c93449b7626442f1d"
 };

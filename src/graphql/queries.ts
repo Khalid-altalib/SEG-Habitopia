@@ -14,7 +14,7 @@ export const getLeaderboard = /* GraphQL */ `
         biography
         email
         notifications
-        streak
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -79,7 +79,7 @@ export const listLeaderboards = /* GraphQL */ `
           biography
           email
           notifications
-          streak
+          streakStart
           createdAt
           updatedAt
           _version
@@ -133,7 +133,7 @@ export const syncLeaderboards = /* GraphQL */ `
           biography
           email
           notifications
-          streak
+          streakStart
           createdAt
           updatedAt
           _version
@@ -420,7 +420,7 @@ export const getUser = /* GraphQL */ `
       biography
       email
       notifications
-      streak
+      streakStart
       Messages {
         items {
           id
@@ -521,7 +521,7 @@ export const listUsers = /* GraphQL */ `
         biography
         email
         notifications
-        streak
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -573,7 +573,7 @@ export const syncUsers = /* GraphQL */ `
         biography
         email
         notifications
-        streak
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1296,7 +1296,7 @@ export const getChallengeUser = /* GraphQL */ `
         biography
         email
         notifications
-        streak
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1362,7 +1362,7 @@ export const listChallengeUsers = /* GraphQL */ `
           biography
           email
           notifications
-          streak
+          streakStart
           createdAt
           updatedAt
           _version
@@ -1417,7 +1417,7 @@ export const syncChallengeUsers = /* GraphQL */ `
           biography
           email
           notifications
-          streak
+          streakStart
           createdAt
           updatedAt
           _version
@@ -1474,7 +1474,7 @@ export const challengeUsersByChallengeId = /* GraphQL */ `
           biography
           email
           notifications
-          streak
+          streakStart
           createdAt
           updatedAt
           _version
@@ -1531,7 +1531,7 @@ export const challengeUsersByUserId = /* GraphQL */ `
           biography
           email
           notifications
-          streak
+          streakStart
           createdAt
           updatedAt
           _version
@@ -1562,7 +1562,7 @@ export const getUserChatRoom = /* GraphQL */ `
         biography
         email
         notifications
-        streak
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1649,7 +1649,7 @@ export const listUserChatRooms = /* GraphQL */ `
           biography
           email
           notifications
-          streak
+          streakStart
           createdAt
           updatedAt
           _version
@@ -1700,7 +1700,7 @@ export const syncUserChatRooms = /* GraphQL */ `
           biography
           email
           notifications
-          streak
+          streakStart
           createdAt
           updatedAt
           _version
@@ -1753,7 +1753,7 @@ export const userChatRoomsByUserId = /* GraphQL */ `
           biography
           email
           notifications
-          streak
+          streakStart
           createdAt
           updatedAt
           _version
@@ -1806,7 +1806,7 @@ export const userChatRoomsByChatRoomId = /* GraphQL */ `
           biography
           email
           notifications
-          streak
+          streakStart
           createdAt
           updatedAt
           _version
@@ -1846,7 +1846,7 @@ export const getUserValidatedCheckIn = /* GraphQL */ `
         biography
         email
         notifications
-        streak
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1932,7 +1932,7 @@ export const listUserValidatedCheckIns = /* GraphQL */ `
           biography
           email
           notifications
-          streak
+          streakStart
           createdAt
           updatedAt
           _version
@@ -1988,7 +1988,7 @@ export const syncUserValidatedCheckIns = /* GraphQL */ `
           biography
           email
           notifications
-          streak
+          streakStart
           createdAt
           updatedAt
           _version
@@ -2046,7 +2046,7 @@ export const userValidatedCheckInsByUserId = /* GraphQL */ `
           biography
           email
           notifications
-          streak
+          streakStart
           createdAt
           updatedAt
           _version
@@ -2104,7 +2104,7 @@ export const userValidatedCheckInsByCheckinId = /* GraphQL */ `
           biography
           email
           notifications
-          streak
+          streakStart
           createdAt
           updatedAt
           _version
