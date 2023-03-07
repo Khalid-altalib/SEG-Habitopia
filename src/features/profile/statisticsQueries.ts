@@ -1,5 +1,5 @@
 import { DataStore, SortDirection } from "@aws-amplify/datastore";
-import { Checkin, User } from "../../models";
+import { Checkin, LazyUser, User } from "../../models";
 import { getUserFromDatabase, getUserFromDatabasebyID } from "../../app/util";
 
 export const getCheckIns = async (userId: string) => {
@@ -15,21 +15,17 @@ export const getCheckIns = async (userId: string) => {
   return checkinCount;
 };
 
-export const checkStreak = async (userId: string) => {
-  const user = await getUserFromDatabasebyID(userId);
-  let newStreak = 0;
-  const streakStart = user.streakStart;
-  if (!streakStart) {
-    console.log("no streak start found");
-    return 0;
-  }
-  // convert streakStart to date object
-  const streakStartDateObj = new Date(streakStart);
+const updateStreakStart = async (user: LazyUser, date : Date) => {
+  await DataStore.save(
+    User.copyOf(user, (updated) => {
+      updated.streakStart = date.toISOString();
+    })
+  );
+};
 
-  console.log("streakStart", streakStart);
-  // store start of streak in user
-
+const getLastCheckInByUserId = async (userId: string) => {
   // look in checkins to find all the checkins by this user, and sort it to find the most recent
+
   const lastCheckInByUser = (
     await DataStore.query(
       Checkin,
@@ -43,37 +39,55 @@ export const checkStreak = async (userId: string) => {
       }
     )
   )[0];
-  
-  // get today's date in AWS format
+  return lastCheckInByUser;
+};
+
+export const checkStreak = async (userId: string) => {
+  const user = await getUserFromDatabasebyID(userId);
+  let newStreak = 0;
   const today = new Date();
 
-  if (!lastCheckInByUser || !lastCheckInByUser.createdAt || lastCheckInByUser == null || lastCheckInByUser == undefined) {
-    console.log("no checkin found");
+  const streakStart = user.streakStart;
+  console.log("streakStart", streakStart);
+
+  if (!streakStart) {
+    console.log("no streak start found");
+    updateStreakStart(user, today);
     return 0;
   }
-    // check lastCheckInByUser is 24 hours before today
+  const streakStartDateObj = new Date(streakStart);
+
+ 
+  const lastCheckInByUser = await getLastCheckInByUserId(userId);
+
+  if (!lastCheckInByUser || !lastCheckInByUser.createdAt) {
+    console.log("no checkin found");
+    updateStreakStart(user, today);
+    return 0;
+  }
   console.log("lastCheckInByUser", lastCheckInByUser.createdAt);
+
   const lastCheckInDateObj = new Date(lastCheckInByUser.createdAt);
   const diffTime = (lastCheckInDateObj.getTime() - streakStartDateObj.getTime()) / 1000 / 60 // get in minutes the length of the streak
-  console.log("diffTime", diffTime);
-  // streak is 0 if last checkin was more than 24 hours ago
-  // otherwise streak is difference between today and last checkin mod 24 hours
+
+  // streak is 0 if last checkin was more than 24 hours ago, and we reset the streakStart to today 
+  // so whenever they check in again, it will be 1
+  
+  // otherwise streak is difference between today and streakStart in days
+
   if (diffTime > 1440) {
     newStreak = 0;
+    updateStreakStart(user, today);
   }else{
     // check how many days its been since last check in 
     const daysSinceLastCheckIn = diffTime / 1440; 
     console.log("daysSinceLastCheckIn", daysSinceLastCheckIn);
-    newStreak = Math.ceil(daysSinceLastCheckIn);
+
+    if (daysSinceLastCheckIn < 0){
+      newStreak = 0;
+    }else{
+      newStreak = Math.ceil(daysSinceLastCheckIn);
+    }
   }
-
-  console.log("newStreak", newStreak);
-
-  // await DataStore.save(
-  //   User.copyOf(user, (updated) => {
-  //     updated.streak = newStreak;
-  //   })
-  // );
-
   return newStreak;
 };
