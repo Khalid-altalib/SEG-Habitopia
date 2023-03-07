@@ -1,53 +1,46 @@
 import React from "react";
-import { Input } from "native-base";
+import { Checkbox, Input } from "native-base";
 import { useForm, Controller } from "react-hook-form";
 import { AntDesign } from "@expo/vector-icons";
+
+import { addLogInData, addSignUpData, logInUser } from "../authSlice";
+import { useDispatch } from "../../../app/hooks";
+import Button from "../../../components/Button";
+import Text from "../../../components/Text";
+import { AuthParams, ButtonType, TextType } from "../../../../types";
+import { View } from "react-native";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 
-import { View } from "react-native";
-
-import { addSignUpData, sendConfirmationCode } from "./authSlice";
-import { useDispatch } from "../../app/hooks";
-import Button from "../../components/Button";
-import Text from "../../components/Text";
-import { AuthParams, ButtonType, TextType } from "../../../types";
-
 type formData = {
-  confirmationCode: string;
+  email: string;
 };
 
-const ConfirmationCodeForm = () => {
-  // Initial form state
+const EmailAddressForm = () => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      confirmationCode: "",
+      email: "",
     },
   });
-
-  // onSubmit handler
   const dispatch = useDispatch();
 
   const onSubmit = async (data: formData) => {
     dispatch(addSignUpData(data));
-    await dispatch(sendConfirmationCode());
-    navigation.navigate("SignIn");
+    navigation.navigate("Password");
   };
 
-  // React Navigation
   const navigation = useNavigation<NavigationProp<AuthParams>>();
 
-  // JSX
   return (
     <View>
       <Text style={{ marginBottom: 5 }} type={TextType.Subtle}>
-        Confirmation Code
+        Email Address
       </Text>
       <Controller
         control={control}
         render={({ field: { onChange, value } }) => (
           <Input onChangeText={onChange} value={value} size="xl" />
         )}
-        name="confirmationCode"
+        name="email"
       />
       <Button
         onPress={handleSubmit(onSubmit)}
@@ -62,4 +55,4 @@ const ConfirmationCodeForm = () => {
   );
 };
 
-export default ConfirmationCodeForm;
+export default EmailAddressForm;

@@ -2,63 +2,59 @@ import React from "react";
 import { Input } from "native-base";
 import { useForm, Controller } from "react-hook-form";
 import { AntDesign } from "@expo/vector-icons";
-
-import {
-  addLogInData,
-  addSignUpData,
-  logInUser,
-  signUpUser,
-} from "./authSlice";
-import { useDispatch } from "../../app/hooks";
-import Button from "../../components/Button";
-import Text from "../../components/Text";
-import { AuthParams, ButtonType, TextType } from "../../../types";
-import { View } from "react-native";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 
+import { View } from "react-native";
+
+import { addSignUpData, sendConfirmationCode } from "../authSlice";
+import { useDispatch } from "../../../app/hooks";
+import Button from "../../../components/Button";
+import Text from "../../../components/Text";
+import { AuthParams, ButtonType, TextType } from "../../../../types";
+
 type formData = {
-  password: string;
+  confirmationCode: string;
 };
 
-const PasswordForm = () => {
+const ConfirmationCodeForm = () => {
+  // Initial form state
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      password: "",
+      confirmationCode: "",
     },
   });
+
+  // onSubmit handler
   const dispatch = useDispatch();
 
   const onSubmit = async (data: formData) => {
     dispatch(addSignUpData(data));
-    await dispatch(signUpUser());
-    navigation.navigate("ConfirmationCode");
+    await dispatch(sendConfirmationCode());
+    navigation.navigate("SignIn");
   };
 
+  // React Navigation
   const navigation = useNavigation<NavigationProp<AuthParams>>();
 
+  // JSX
   return (
     <View>
       <Text style={{ marginBottom: 5 }} type={TextType.Subtle}>
-        Password
+        Confirmation Code
       </Text>
       <Controller
         control={control}
         render={({ field: { onChange, value } }) => (
-          <Input
-            onChangeText={onChange}
-            value={value}
-            size="xl"
-            type="password"
-          />
+          <Input onChangeText={onChange} value={value} size="xl" />
         )}
-        name="password"
+        name="confirmationCode"
       />
       <Button
+        onPress={handleSubmit(onSubmit)}
+        type={ButtonType.Primary}
         style={{ marginTop: 20 }}
         isFullWidth
         icon={<AntDesign name="arrowright" size={20} color="white" />}
-        type={ButtonType.Primary}
-        onPress={handleSubmit(onSubmit)}
       >
         Continue
       </Button>
@@ -66,4 +62,4 @@ const PasswordForm = () => {
   );
 };
 
-export default PasswordForm;
+export default ConfirmationCodeForm;

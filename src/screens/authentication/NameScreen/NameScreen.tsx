@@ -5,7 +5,7 @@ import { TextType } from "types";
 import Background from "@components/Background";
 import PaddedContainer from "@components/PaddedContainer";
 import Text from "@components/Text";
-import NameForm from "@features/auth/NameForm";
+import NameForm from "@features/auth/NameForm/NameForm";
 
 /**
  * @returns A React component representing the screen where the user enters their

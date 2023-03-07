@@ -1,31 +1,31 @@
 import React from "react";
-import { Checkbox, Input } from "native-base";
+import { Input } from "native-base";
 import { useForm, Controller } from "react-hook-form";
 import { AntDesign } from "@expo/vector-icons";
 
-import { addLogInData, addSignUpData, logInUser } from "./authSlice";
-import { useDispatch } from "../../app/hooks";
-import Button from "../../components/Button";
-import Text from "../../components/Text";
-import { AuthParams, ButtonType, TextType } from "../../../types";
+import { addLogInData, addSignUpData, logInUser } from "../authSlice";
+import { useDispatch } from "../../../app/hooks";
+import Button from "../../../components/Button";
+import Text from "../../../components/Text";
+import { AuthParams, ButtonType, TextType } from "../../../../types";
 import { View } from "react-native";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 type formData = {
-  email: string;
+  name: string;
 };
 
-const EmailAddressForm = () => {
+const NameForm = () => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      email: "",
+      name: "",
     },
   });
   const dispatch = useDispatch();
 
   const onSubmit = async (data: formData) => {
     dispatch(addSignUpData(data));
-    navigation.navigate("Password");
+    navigation.navigate("EmailAddress");
   };
 
   const navigation = useNavigation<NavigationProp<AuthParams>>();
@@ -33,14 +33,14 @@ const EmailAddressForm = () => {
   return (
     <View>
       <Text style={{ marginBottom: 5 }} type={TextType.Subtle}>
-        Email Address
+        Name
       </Text>
       <Controller
         control={control}
         render={({ field: { onChange, value } }) => (
           <Input onChangeText={onChange} value={value} size="xl" />
         )}
-        name="email"
+        name="name"
       />
       <Button
         onPress={handleSubmit(onSubmit)}
@@ -55,4 +55,4 @@ const EmailAddressForm = () => {
   );
 };
 
-export default EmailAddressForm;
+export default NameForm;
