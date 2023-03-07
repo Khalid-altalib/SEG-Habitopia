@@ -8,6 +8,7 @@ import {
   sendChatCheckIn,
   sendChatMessage,
 } from "./chatQueries";
+import { RootState } from "@app/store";
 
 type ChatState = {
   chats: Chat[];
@@ -33,6 +34,7 @@ type ChatState = {
   };
   details?: ChatDetails;
   currentChatId?: string;
+  pageNumber: number;
 };
 
 export const fetchDetails = createAsyncThunk<
@@ -68,10 +70,13 @@ export const fetchMessages = createAsyncThunk<
   { rejectValue: string }
 >("messages/fetch", async (chatId: string, thunkAPI) => {
   try {
-    const messages = await fetchChatMessages(chatId);
+    const state = thunkAPI.getState() as RootState;
+    const { pageNumber } = state.chats;
+    const messages = await fetchChatMessages(chatId, pageNumber);
     return { id: chatId, messages: messages };
   } catch (error: any) {
     const message = error.message;
+    console.log(message);
     return thunkAPI.rejectWithValue(message);
   }
 });
@@ -150,6 +155,7 @@ const initialState: ChatState = {
   },
   details: undefined,
   currentChatId: undefined,
+  pageNumber: 0,
 };
 
 export const chatSlice = createSlice({
@@ -183,10 +189,12 @@ export const chatSlice = createSlice({
           return oldMessage;
         }
       });
-      console.log(updatedChat);
       if (chat) {
         chat.messages = updatedChat;
       }
+    },
+    resetPageNumber: (state) => {
+      state.pageNumber = 0;
     },
   },
   extraReducers: (builder) => {
@@ -212,9 +220,13 @@ export const chatSlice = createSlice({
       fetchMessages.fulfilled,
       (state, action: PayloadAction<{ id: string; messages: Message[] }>) => {
         const chat = state.chats.find((chat) => chat.id === action.payload.id);
+
         if (chat) {
-          chat.messages = action.payload.messages;
+          if (state.pageNumber == 0) chat.messages = action.payload.messages;
+          else chat.messages?.push(...action.payload.messages);
         }
+        state.pageNumber += 1;
+
         state.fetchMessages.loading = false;
       }
     );
@@ -257,7 +269,11 @@ export const chatSlice = createSlice({
   },
 });
 
-export const { addMessageToChat, setCurrentChatId, updateCheckInMessage } =
-  chatSlice.actions;
+export const {
+  addMessageToChat,
+  setCurrentChatId,
+  updateCheckInMessage,
+  resetPageNumber,
+} = chatSlice.actions;
 
 export default chatSlice.reducer;

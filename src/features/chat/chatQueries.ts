@@ -40,12 +40,19 @@ export const fetchUserChats = async (thunkAPI: any) => {
   return chats;
 };
 
-export const fetchChatMessages = async (chatId: string) => {
+export const fetchChatMessages = async (chatId: string, pageNumber: number) => {
   const chatMessages = await DataStore.query(
     Message,
     (message) => message.chatroomID.eq(chatId),
-    { sort: (message) => message.createdAt(SortDirection.DESCENDING) }
+    {
+      sort: (message) => message.createdAt(SortDirection.DESCENDING),
+      page: pageNumber,
+      limit: 100,
+    }
   );
+  if (chatMessages.length === 0) {
+    throw new Error("No more messages found!");
+  }
   let messages: MessageType[] = [];
   for await (const chatMessage of chatMessages) {
     const messageChat = { ...chatMessage };

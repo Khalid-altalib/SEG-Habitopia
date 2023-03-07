@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "../../../app/hooks";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {
   fetchMessages,
+  resetPageNumber,
   setCurrentChatId,
   updateCheckInMessage,
 } from "../../../features/chat/chatSlice";
@@ -28,17 +29,16 @@ import TextMessage from "../../../features/chat/TextMessage/TextMessage";
 import { getUserFromDatabasebyID } from "@app/util";
 import CheckInMessage from "../../../features/chat/CheckInMessage/CheckInMessage";
 import { getCheckInById, getMessageById } from "@features/chat/chatQueries";
+import { Button } from "react-native";
 
 type Props = {};
 
 const ChatScreen = (props: Props) => {
   const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
   const route = useRoute<RouteProp<ChatParams, "IndividualChat">>();
-  const { chats } = useSelector((store) => store.chats);
+  const { chats, pageNumber } = useSelector((store) => store.chats);
   const { id } = route.params;
   const dispatch = useDispatch();
-
-  const { user } = useSelector((store) => store.auth);
 
   const addChatSubscription = (chatID: string) => {
     const variables: OnCreateMessageSubscriptionVariables = {
@@ -114,16 +114,22 @@ const ChatScreen = (props: Props) => {
     const chatSubscription = addChatSubscription(id);
     const checkInSubscription = addCheckInSubscription(id);
     return () => {
+      dispatch(resetPageNumber());
       chatSubscription.unsubscribe();
       checkInSubscription.unsubscribe();
     };
   }, [id]);
+
+  const fetchMoreMessages = () => {
+    dispatch(fetchMessages(chat.id));
+  };
 
   return (
     <ImageBackground
       source={{ uri: "https://placeholder.com" }}
       style={styles.bg}
     >
+      <Button title="Load more" onPress={fetchMoreMessages} />
       <FlatList
         data={chat.messages}
         renderItem={({ item }) => {
