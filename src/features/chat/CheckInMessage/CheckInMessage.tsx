@@ -4,6 +4,7 @@ import { Message } from "types";
 import { useSelector } from "@app/hooks";
 import { useDispatch } from "../../../app/hooks";
 import { validateCheckIn } from "../chatSlice";
+import moment from "moment";
 
 const CheckInMessage = (message: Message) => {
   const { user } = useSelector((store) => store.auth);
@@ -32,7 +33,7 @@ const CheckInMessage = (message: Message) => {
       >
         <Text>{message.userName}</Text>
         <Text>{message.text}</Text>
-        <Text style={styles.time}>{message.createdAt}</Text>
+        <Text style={styles.time}>{moment(message.createdAt).fromNow()}</Text>
         {isMessage() ? (
           <Text style={styles.count}>
             You have {message.validationCount} validations

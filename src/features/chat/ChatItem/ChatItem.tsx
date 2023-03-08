@@ -1,13 +1,9 @@
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Pressable, Text, Image, StyleSheet } from "react-native";
-import {
-  Chat,
-  ChatParams,
-  IndividualChatScreenNavigationProp,
-  NavigationParams,
-} from "../../../../types";
+import { Chat, ChatParams } from "../../../../types";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import moment from "moment";
 
 const ChatItem = (chat: Chat) => {
   const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
@@ -25,7 +21,7 @@ const ChatItem = (chat: Chat) => {
           <Text style={chatstyles.name} numberOfLines={1}>
             {chat.name}
           </Text>
-          <Text>{chat.time}</Text>
+          <Text>{moment(chat.time).fromNow()}</Text>
         </View>
         <View>
           <Text numberOfLines={2} style={chatstyles.lastMessage}>

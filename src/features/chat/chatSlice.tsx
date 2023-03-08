@@ -81,12 +81,13 @@ export const fetchMessages = createAsyncThunk<
   }
 });
 
-export const sendMessage = createAsyncThunk<void, any, { rejectValue: string }>(
+export const sendMessage = createAsyncThunk<any, any, { rejectValue: string }>(
   "messages/send",
   async (data: { message: string; chatRoomID: string }, thunkAPI) => {
     try {
       const { message, chatRoomID } = data;
-      await sendChatMessage(message, chatRoomID, thunkAPI);
+      const newMessage = await sendChatMessage(message, chatRoomID, thunkAPI);
+      return { chatRoomId: chatRoomID, message: newMessage };
     } catch (error: any) {
       const message = error.message;
       return thunkAPI.rejectWithValue(message);
@@ -95,12 +96,13 @@ export const sendMessage = createAsyncThunk<void, any, { rejectValue: string }>(
 );
 
 export const sendCheckIn = createAsyncThunk<
-  void,
+  any,
   string,
   { rejectValue: string }
 >("checkIn/send", async (chatID: string, thunkAPI) => {
   try {
-    await sendChatCheckIn(chatID, thunkAPI);
+    const checkIn = await sendChatCheckIn(chatID, thunkAPI);
+    return { chatRoomId: chatID, checkIn: checkIn };
   } catch (error: any) {
     const message = error.message;
     console.log(message);
@@ -230,6 +232,21 @@ export const chatSlice = createSlice({
     builder.addCase(sendMessage.pending, (state) => {
       state.sendMessage.loading = true;
     });
+    builder.addCase(
+      sendMessage.fulfilled,
+      (
+        state,
+        action: PayloadAction<{ chatRoomId: string; message: Message }>
+      ) => {
+        const chat = state.chats.find(
+          (chat) => chat.id === action.payload.chatRoomId
+        );
+        if (chat) {
+          chat.messages?.unshift(action.payload.message);
+        }
+        state.fetchMessages.loading = false;
+      }
+    );
     builder.addCase(sendMessage.rejected, (state, action: any) => {
       state.sendMessage.loading = false;
       state.sendMessage.error = action.payload;
@@ -257,6 +274,21 @@ export const chatSlice = createSlice({
       state.sendCheckIn.loading = false;
       state.sendCheckIn.error = action.payload;
     });
+    builder.addCase(
+      sendCheckIn.fulfilled,
+      (
+        state,
+        action: PayloadAction<{ chatRoomId: string; checkIn: Message }>
+      ) => {
+        const chat = state.chats.find(
+          (chat) => chat.id === action.payload.chatRoomId
+        );
+        if (chat) {
+          chat.messages?.unshift(action.payload.checkIn);
+        }
+        state.fetchMessages.loading = false;
+      }
+    );
   },
 });
 

@@ -44,6 +44,9 @@ const ChatScreen = (props: Props) => {
     const variables: OnCreateMessageSubscriptionVariables = {
       filter: {
         chatroomID: { eq: chatID },
+        userID: {
+          ne: user?.userId,
+        },
       },
     };
     const subscription = API.graphql<

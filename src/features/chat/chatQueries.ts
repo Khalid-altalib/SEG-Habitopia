@@ -95,10 +95,11 @@ export const sendChatMessage = async (
   );
 
   await updateLastMessageInChat(newMessage.id, chatroomID);
-
+  const time = new Date().toISOString();
   return {
     ...newMessage,
     userName: userFromDatabase.name,
+    createdAt: time,
   } as MessageType;
 };
 
@@ -197,13 +198,14 @@ const createCheckIn = async (chatID: string, userID: string, thunkAPI: any) => {
   );
 
   await updateLastMessageInChat(checkInMessage.id, chatID);
-
+  const time = new Date().toISOString();
   return {
     ...checkInMessage,
     userName: userFromDatabase.name,
     messageType: MessageEnum.CHECKIN,
     validationCount: 0,
     isValidated: false,
+    createdAt: time,
   } as MessageType;
 };
 
@@ -258,7 +260,7 @@ export const incrementCheckInValidation = async (
           updated.validationCount = validatedBy.length + 1;
         })
       );
-      if (checkIn.validationCount === 3) {
+      if (newCheckIn.validationCount === 3) {
         const validatedCheckIn = await DataStore.save(
           Checkin.copyOf(checkIn, (updated) => {
             updated.isValidated = true;
