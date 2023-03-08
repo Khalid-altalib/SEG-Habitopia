@@ -1,8 +1,8 @@
 import { DataStore, SortDirection } from "@aws-amplify/datastore";
 import { Challenge, Checkin, LazyUser, User } from "../../models";
-import { getUserFromDatabase, getUserFromDatabasebyID } from "../../app/util";
+import { getUserFromDatabasebyID } from "../../app/util";
 
-export const getCheckIns = async (userId: string) => {
+const getCheckIns = async (userId: string) => {
   const user = await getUserFromDatabasebyID(userId);
   let checkinCount = 0;
   // get number of items in the array of user Checkins
@@ -42,7 +42,7 @@ const getLastCheckInByUserId = async (userId: string) => {
   return lastCheckInByUser;
 };
 
-export const checkStreak = async (userId: string) => {
+const checkStreak = async (userId: string) => {
   const user = await getUserFromDatabasebyID(userId);
   const streakStart = user.streakStart;
 
@@ -90,7 +90,7 @@ export const checkStreak = async (userId: string) => {
   return newStreak;
 };
 
-export const getWins = async (userId: string) => {
+const getWins = async (userId: string) => {
   const user = await getUserFromDatabasebyID(userId);
   let wins = 0;
   // query challenges where user id is in the list of users, so we get all the challenges the user is in
@@ -106,3 +106,10 @@ export const getWins = async (userId: string) => {
 
   return wins;
 };
+
+export const getStatistics = async (userId: string) => {
+  const checkIns = await getCheckIns(userId);
+  const wins = await getWins(userId);
+  const streak = await checkStreak(userId);
+  return { checkIns, wins, streak };
+}
