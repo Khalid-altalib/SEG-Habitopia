@@ -41,7 +41,6 @@ export type AuthParams = {
   Name: undefined;
   EmailAddress: undefined;
   SelectAvatar: undefined;
-  SelectInstagram: undefined;
   SelectChallenges: undefined;
   SignIn: undefined;
 };

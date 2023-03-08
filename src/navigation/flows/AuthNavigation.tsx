@@ -11,7 +11,6 @@ import NameScreen from "../../screens/authentication/NameScreen";
 import EmailScreen from "../../screens/authentication/EmailScreen";
 import SelectAvatarScreen from "../../screens/authentication/SelectAvatarScreen";
 import SelectChallengesScreen from "../../screens/authentication/SelectChallengesScreen";
-import SelectInstagramScreen from "../../screens/authentication/SelectInstagramScreen";
 import SignInScreen from "../../screens/authentication/SignInScreen";
 
 export const AuthStack = createNativeStackNavigator<AuthParams>();
@@ -60,13 +59,6 @@ const AuthNavigation = () => {
         component={SelectAvatarScreen}
         options={{
           headerTitle: "Avatar",
-        }}
-      />
-      <AuthStack.Screen
-        name="SelectInstagram"
-        component={SelectInstagramScreen}
-        options={{
-          headerTitle: "Instagram handle",
         }}
       />
       <AuthStack.Screen
