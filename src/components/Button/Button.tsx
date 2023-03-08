@@ -35,20 +35,43 @@ export type ButtonProps = {
  * @param props - The properties passed to the component.
  * @returns - The button component.
  */
-const Button = (props: ButtonProps) => {
+const Button = ({
+  style,
+  isFullWidth,
+  onPress,
+  type,
+  icon,
+  children,
+}: ButtonProps) => {
   return (
     <BoxWithShadow>
-      <TouchableBox onPress={props.onPress} style={props.style}>
-        <GradientBox type={props.type} isFullWidth={props.isFullWidth}>
-          <ButtonText>{props.children}</ButtonText>
-          <View style={{ marginLeft: 5 }}>{props.icon}</View>
+      <TouchableBox onPress={onPress} style={style}>
+        <GradientBox type={type} isFullWidth={isFullWidth}>
+          <ButtonText>{children}</ButtonText>
+          <View style={{ marginLeft: 5 }}>{icon}</View>
         </GradientBox>
       </TouchableBox>
     </BoxWithShadow>
   );
 };
 
-const TouchableBox = ({ children, onPress, style }: any) => (
+export type TouchableBoxProps = {
+  /** The components to show within the box. */
+  children: any;
+  /** A callback to be executed when the box is pressed. */
+  onPress?: () => void;
+  /** Any additional styles to apply to the box. */
+  style?: ViewStyle;
+};
+
+/**
+ * A touchable/pressable box which can take on additional styles and call a
+ * callback when pressed.
+ *
+ * @param props - The properties passed to the component.
+ * @returns - The touchable box component.
+ */
+const TouchableBox = ({ children, onPress, style }: TouchableBoxProps) => (
   <TouchableOpacity
     activeOpacity={0.7}
     onPress={() => {
@@ -60,7 +83,27 @@ const TouchableBox = ({ children, onPress, style }: any) => (
   </TouchableOpacity>
 );
 
-const GradientBox = ({ children, type, isFullWidth }: any): JSX.Element => {
+export type GradientBoxProps = {
+  /** The components to show within the box. */
+  children: any;
+  /** The type of the box which affects the colors used. */
+  type: ButtonType;
+  /** Whether the box should take up all of the horizontal space available. */
+  isFullWidth?: boolean;
+};
+
+/**
+ * A gradient box which shows a nice gradient which changes depending on
+ * the button type used.
+ *
+ * @param props - The properties passed to the component.
+ * @returns - The gradient box component.
+ */
+const GradientBox = ({
+  children,
+  type,
+  isFullWidth,
+}: GradientBoxProps): JSX.Element => {
   const styles = StyleSheet.create({
     base: {
       borderRadius: 10,
@@ -95,7 +138,21 @@ const GradientBox = ({ children, type, isFullWidth }: any): JSX.Element => {
   );
 };
 
-const ButtonText = ({ children, icon }: any) => (
+export type ButtonTextProps = {
+  /** The text to render. */
+  children: string;
+  /** Any icon to display to the right of the button text. */
+  icon?: JSX.Element;
+};
+
+/**
+ * Some text which can go over a button and can also show
+ * an optional icon.
+ *
+ * @param props - The properties passed to the component.
+ * @returns - The button text component.
+ */
+const ButtonText = ({ children, icon }: ButtonTextProps) => (
   <Text
     type={TextType.Button}
     style={[
