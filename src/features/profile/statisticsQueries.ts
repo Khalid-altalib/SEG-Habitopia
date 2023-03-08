@@ -49,7 +49,7 @@ const checkStreak = async (userId: string) => {
   let newStreak = 0;
   const today = new Date();
 
-  console.log("streakStart", streakStart);
+  // console.log("streakStart", streakStart);
   const lastCheckInByUser = await getLastCheckInByUserId(userId);
 
   if (!streakStart) {
@@ -58,11 +58,12 @@ const checkStreak = async (userId: string) => {
     return 0;
   }
   if (!lastCheckInByUser || !lastCheckInByUser.createdAt) {
-    console.log("no checkin found");
+    console.log("no previous checkins found");
     updateStreakStart(user, today);
     return 0;
   }
-  console.log("lastCheckInByUser", lastCheckInByUser.createdAt);
+  // console.log("lastCheckInByUser", lastCheckInByUser.createdAt);
+
   // convert to date objects
   const streakStartDateObj = new Date(streakStart);
   const lastCheckInDateObj = new Date(lastCheckInByUser.createdAt);
@@ -79,7 +80,7 @@ const checkStreak = async (userId: string) => {
   }else{
     // check how many days its been since the streak started.
     const daysSinceStreakStart = (lastCheckInDateObj.getTime() - streakStartDateObj.getTime()) / 1000 / 60 / 1440; 
-    console.log("daysSinceLastCheckIn", daysSinceStreakStart);
+    // console.log("daysSinceLastStreak", daysSinceStreakStart);
 
     if (daysSinceStreakStart < 0){
       newStreak = 0;
@@ -91,14 +92,12 @@ const checkStreak = async (userId: string) => {
 };
 
 const getWins = async (userId: string) => {
-  const user = await getUserFromDatabasebyID(userId);
   let wins = 0;
   // query challenges where user id is in the list of users, so we get all the challenges the user is in
   const userChallenges = await DataStore.query(Challenge, (c) => c.Users.user.id.eq(userId));
   // then we check if the challenge is completed
   
   for await (const challenge of userChallenges) {
-    console.log("challenge", challenge);
     if (challenge.finished) {
       wins++;
     }
