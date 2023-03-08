@@ -1,26 +1,45 @@
-import React from "react";
+// Native Base
 import { Input } from "native-base";
+
+// React Native
+import { View } from "react-native";
+
+// React Navigation
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+
+// React Hook Form
 import { useForm, Controller } from "react-hook-form";
+
+// Expo
 import { AntDesign } from "@expo/vector-icons";
 
-import { addLogInData, addSignUpData, logInUser } from "./authSlice";
-import { useDispatch } from "../../app/hooks";
-import Button from "../../components/Button";
-import Text from "../../components/Text";
-import { AuthParams, ButtonType, TextType } from "../../../types";
-import { View } from "react-native";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+// Habitopia
+import { addSignUpData } from "@features/auth/authSlice";
+import { useDispatch } from "@app/hooks";
+import Button from "@components/Button";
+import Text from "@components/Text";
+import { AuthParams, ButtonType, TextType } from "types";
 
 type formData = {
   name: string;
 };
 
+/**
+ * A form which allows the user to enter their name, adds that
+ * data to the Redux store, and then navigates to the email
+ * address screen.
+ *
+ * @returns - The name form component.
+ */
 const NameForm = () => {
+  // The initial state of the form data.
   const { control, handleSubmit } = useForm({
     defaultValues: {
       name: "",
     },
   });
+
+  // A handler for when the user submits the form.
   const dispatch = useDispatch();
 
   const onSubmit = async (data: formData) => {
