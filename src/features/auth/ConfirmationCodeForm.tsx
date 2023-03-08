@@ -28,20 +28,20 @@ type formData = {
  * A form which allows the user to enter the confirmation code which
  * is emailed to them, and then adds the entered code to the sign up
  * data in the Redux store so it can checked, before finally navigating
- * the user to the welcome page. (This page shouldn't be showed to
+ * the user to the welcome screen. (This screen shouldn't be showed to
  * them unless the code was wrong.)
  *
  * @returns - The confirmation code form component.
  */
 const ConfirmationCodeForm = () => {
-  // Initial form state
+  // The initial state of the form data.
   const { control, handleSubmit } = useForm({
     defaultValues: {
       confirmationCode: "",
     },
   });
 
-  // onSubmit handler
+  // A handler for when the user submits the form data.
   const dispatch = useDispatch();
 
   const onSubmit = async (data: formData) => {
