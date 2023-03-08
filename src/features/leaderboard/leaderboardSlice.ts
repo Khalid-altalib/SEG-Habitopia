@@ -1,15 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import {
-  DataStore,
-  Predicates,
-  SortDirection,
-  API,
-  graphqlOperation,
-  Auth,
-} from "aws-amplify";
-import { Leaderboard, User, Checkin } from "../../models";
-import { getUserFromDatabasebyID} from "@app/util";
+import { fetchLeaderboardData } from "./leaderboardQueries";
 
 export type LeaderboardState = {
   loading: boolean;
@@ -32,57 +23,6 @@ const initialState: LeaderboardState = {
 };
 
 /**
- * Subscribes to the checkin model and updates the leaderboard model when the user checks in
- */
-const subscription = DataStore.observe(Checkin).subscribe({
-  next: async (msg) => {
-    if (msg.opType === "INSERT") {
-      const checkin = msg.element as Checkin;
-      const { userID, checkinChallengeTypeId, } = checkin;
-      const user = await getUserFromDatabasebyID(userID);
-      try {
-        // Retrieve the current number of checkins for the user for a specific challenge type from the leaderboard
-        const [leaderboardEntry] = await DataStore.query(Leaderboard, (entry) =>
-          entry.and((entry) => [
-            entry.leaderboardUserId.eq(userID),
-            entry.ChallengeType.id.eq(checkinChallengeTypeId as string),
-          ])
-        );
-        const currentCheckins = leaderboardEntry?.numberOfCheckins ?? 0;
-        // Update the user's checkins in the leaderboard for the given challenge type
-        const newCheckins = currentCheckins + 1;
-        if(currentCheckins === 0) {
-          await DataStore.save(
-            new Leaderboard({
-              leaderboardUserId: userID,
-              numberOfCheckins: newCheckins,
-              leaderboardChallengeTypeId: checkinChallengeTypeId as string,
-              User: user
-            })
-          );
-        } else {
-          await DataStore.save(
-            Leaderboard.copyOf(leaderboardEntry, (updated) => {
-              updated.numberOfCheckins = newCheckins;
-            })
-          );
-        }
-        console.log(
-          `Leaderboard update for user ${userID} and challenge type ${checkinChallengeTypeId} complete.`
-        );
-      } catch (error) {
-        console.error(
-          `Error updating leaderboard for user ${userID} and challenge type ${checkinChallengeTypeId}:`,
-          error
-        );
-      }
-    }
-  },
-  error: (err) => console.error(err),
-  complete: () => console.log("Leaderboard update subscription complete."),
-});
-
-/**
  * Fetches the leaderboard entries from the database
  * @returns {Promise<GraphQLResult<Leaderboard>>} The leaderboard entries as  {name: string, checkins: number}
  */
@@ -96,37 +36,7 @@ export const fetchLeaderboard = createAsyncThunk<
     try {
       const state = thunkAPI.getState() as RootState;
       const { challengeType, page } = state.leaderboard;
-      const data = await DataStore.query(
-        Leaderboard,
-        (c) => c.ChallengeType.name.eq(challengeType),
-        {
-          page: page as number,
-          limit: 10,
-          sort: (s) => s.numberOfCheckins(SortDirection.DESCENDING),
-        }
-      );
-      const leaderboard = data.map((entry) => {
-        return {
-          id: entry.leaderboardUserId,
-          checkins: entry.numberOfCheckins,
-        };
-      }); //filters the data to only include the id and number of checkins
-      const result = await Promise.all(
-        leaderboard.map(async (entry) => {
-          const user = await DataStore.query(User, entry.id);
-          return {
-            name: user?.name,
-            checkins: entry.checkins,
-          };
-        })
-      ); //maps the leaderboard to include the name of the user
-      const serializableResult = [
-        ...result.map((item) => {
-          return { checkins: item.checkins, name: item.name };
-        }),
-      ];
-      console.log("Leaderboard fetch: challenge type", challengeType, "page:", page, "serializable result:", serializableResult);
-      return serializableResult;
+      return fetchLeaderboardData(challengeType, page);
     } catch (error: any) {
       const message = error.message;
       return thunkAPI.rejectWithValue(message);
