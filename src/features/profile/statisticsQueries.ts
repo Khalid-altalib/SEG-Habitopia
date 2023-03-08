@@ -1,10 +1,10 @@
 import { DataStore, SortDirection } from "@aws-amplify/datastore";
-import { Checkin, LazyUser, User } from "../../models";
+import { Challenge, Checkin, LazyUser, User } from "../../models";
 import { getUserFromDatabase, getUserFromDatabasebyID } from "../../app/util";
 
 export const getCheckIns = async (userId: string) => {
   const user = await getUserFromDatabasebyID(userId);
-  var checkinCount = 0;
+  let checkinCount = 0;
   // get number of items in the array of user Checkins
   for await (const checkin of user.Checkins) {
     if (checkin.isValidated){
@@ -88,4 +88,21 @@ export const checkStreak = async (userId: string) => {
     }
   }
   return newStreak;
+};
+
+export const getWins = async (userId: string) => {
+  const user = await getUserFromDatabasebyID(userId);
+  let wins = 0;
+  // query challenges where user id is in the list of users, so we get all the challenges the user is in
+  const userChallenges = await DataStore.query(Challenge, (c) => c.Users.user.id.eq(userId));
+  // then we check if the challenge is completed
+  
+  for await (const challenge of userChallenges) {
+    console.log("challenge", challenge);
+    if (challenge.finished) {
+      wins++;
+    }
+  }
+
+  return wins;
 };

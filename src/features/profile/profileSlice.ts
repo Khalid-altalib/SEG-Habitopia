@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { Profile, User } from "../../../types";
 import { getUserFromDatabasebyID } from "../../app/util";
-import { checkStreak, getCheckIns } from "./statisticsQueries";
+import { checkStreak, getCheckIns, getWins } from "./statisticsQueries";
 
 export type ProfileState = {
   profile?: Profile;
@@ -78,9 +78,13 @@ export const fetchProfile = createAsyncThunk<
     const user = await getUserFromDatabasebyID(userId);
     const checkinCount = await getCheckIns(userId);
     const streak = await checkStreak(userId);
+    const wins = await getWins(userId);
+
+    // const { checkinCount, streak, wins } = await getStatistics(userId);
+
     const statistics = [
       { name: "Streak", quantity: streak },
-      { name: "Wins", quantity: 1 }, // challenges wins  - user challenges completed and what is inactive 
+      { name: "Wins", quantity: wins}, // challenges wins  - user challenges completed and what is inactive 
       { name: "Check Ins", quantity: checkinCount },
     ];
 
