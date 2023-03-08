@@ -21,8 +21,15 @@ const DoneButton = (props: Props) => {
   const dispatch = useDispatch();
 
   const handlePress = async () => {
-    await dispatch(setSettings({ [valueName]: getValues("formValue"), oldPassword: oldPassword }));
-    navigation.goBack();
+    await dispatch(
+      setSettings({
+        [valueName]: getValues("formValue"),
+        oldPassword: oldPassword,
+      })
+    );
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    }
   };
 
   return (

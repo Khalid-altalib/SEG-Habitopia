@@ -4,6 +4,7 @@ import configureStore from "redux-mock-store";
 import SignInForm from "./SignInForm";
 import { logInUser } from "../authSlice";
 import TestingWrapper from "@app/testingWrapper";
+import SubmitButton from "./SubmitButton";
 
 const mockStore = configureStore([]);
 
@@ -18,14 +19,14 @@ describe("SignInForm", () => {
 
     const emailInput = wrapper.getByTestId("email-input");
     const passwordInput = wrapper.getByTestId("password-input");
-    const submitButton = wrapper.getByRole("SubmitButton");
+    const submitButton = wrapper.getByText("Continue");
 
-    fireEvent.changeText(emailInput, "diyex27008@iucake.com");
+    fireEvent.changeText(emailInput, "tareitaa@outlook.com");
     fireEvent.changeText(passwordInput, "Password.123");
-    fireEvent.press(submitButton);
+    await fireEvent.press(submitButton);
 
     await waitFor(() => {
-      expect(store.getActions()).toContainEqual(logInUser());
+      expect(store.getActions()[0].type).toEqual("auth/addLogInData");
     });
   });
 });
