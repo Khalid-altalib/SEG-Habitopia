@@ -55,7 +55,7 @@ type Message @model @auth(rules: [{ allow: public }]) {
 type ChatRoom @model @auth(rules: [{ allow: public }]) {
   id: ID!
   Messages: [Checkin] @hasMany(indexName: "byChatRoom", fields: ["id"])
-  users: [User] @manyToMany(relationName: "UserChatRoom")
+  users: [User] @manyToMany(relationName: "UserChatRoom") @connections(keyName: "byUser", fields: ["id"])
   Checkins: [Checkin] @hasMany(indexName: "byChatRoom", fields: ["id"])
   LastMessage: Message @hasOne
 }

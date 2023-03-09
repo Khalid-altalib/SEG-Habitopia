@@ -189,6 +189,7 @@ export const chatSlice = createSlice({
     resetPageNumber: (state) => {
       state.pageNumber = 0;
     },
+
   },
   extraReducers: (builder) => {
     builder.addCase(fetchChats.pending, (state) => {

@@ -6,7 +6,7 @@ import { fetchChats } from "../../../features/chat/chatSlice";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ChatParams } from "types";
-import { API, graphqlOperation } from "aws-amplify";
+import { API, DataStore, graphqlOperation } from "aws-amplify";
 import { GraphQLSubscription } from "@aws-amplify/api";
 import {
   ModelSubscriptionChatRoomFilterInput,
@@ -14,6 +14,8 @@ import {
   OnUpdateChatRoomSubscriptionVariables,
 } from "src/API";
 import { onUpdateChatRoom } from "../../../graphql/subscriptions";
+import { ZenObservable } from "zen-observable-ts";
+import { Message } from "src/models";
 
 type Props = {};
 
@@ -28,17 +30,19 @@ const ChatListScreen = (props: Props) => {
 
   const updateChatRoomSubscription = () => {
     const variables: OnUpdateChatRoomSubscriptionVariables = {
-      filter: {
-        
+      userFilter:{
+        id: {
+          eq: user?.userId
+        }
       }
     };
     const subscription = API.graphql<
       GraphQLSubscription<OnUpdateChatRoomSubscription>
     >(graphqlOperation(onUpdateChatRoom, variables)).subscribe({
-      next: ({ value }) => {
-        console.log(value);
+      next: async ({ value }) => {
+       
       },
-      error: (error) => console.warn(error),
+      error: ({error}) => console.warn(error.errors),
     });
     return subscription;
   };
@@ -46,11 +50,9 @@ const ChatListScreen = (props: Props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const subscription = updateChatRoomSubscription();
-    navigation.addListener("focus", () => {
-      dispatch(fetchChats());
-    });
-    () => subscription.unsubscribe();
+    let subscription: ZenObservable.Subscription;
+    
+    
   }, [navigation]);
 
   return (
