@@ -14,18 +14,7 @@ const LeaderboardCards = (props: Props) => {
   const error = useSelector((state) => state.leaderboard.error);
   const challengeType = useSelector((state) => state.leaderboard.challengeType);
   const timeInterval = useSelector((state) => state.leaderboard.timeInterval);
-
-  const leaderboardEntries = [
-    { name: "Ihtasham", wins: 63 },
-    { name: "Tom", wins: 43 },
-    { name: "Bob", wins: 35 },
-    { name: "Harry", wins: 29 },
-    { name: "George", wins: 27 },
-    { name: "Harry", wins: 29 },
-    { name: "George", wins: 27 },
-    { name: "Harry", wins: 29 },
-    { name: "George", wins: 27 },
-  ]; // useSelector((state) => state.leaderboard.entries); BACKEND_PLACEHOLDER
+  const leaderboardEntries = useSelector((state) => state.leaderboard.entries);
 
   useEffect(() => {
     dispatch(fetchLeaderboard());
@@ -37,7 +26,7 @@ const LeaderboardCards = (props: Props) => {
         {leaderboardEntries.map((entry, index) => (
           <LeaderboardCard
             name={entry.name}
-            wins={entry.wins}
+            wins={entry.checkins}
             key={index}
             place={index}
           />
