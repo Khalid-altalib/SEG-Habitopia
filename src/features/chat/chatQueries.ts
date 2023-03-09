@@ -6,10 +6,10 @@ import {
   Message,
   Challenge,
   User,
-  ChallengeType,
   MessageEnum,
   Checkin,
   UserValidatedCheckIn,
+  ChallengeType,
 } from "../../models";
 import { Message as MessageType } from "../../../types";
 
@@ -177,6 +177,16 @@ export const sendChatCheckIn = async (chatID: string, thunkAPI: any) => {
 };
 
 const createCheckIn = async (chatID: string, userID: string, thunkAPI: any) => {
+  const challengeTypeId = (
+    await DataStore.query(Challenge, (challenge) =>
+      challenge.challengeChatRoomId.eq(chatID)
+    )
+  )[0].challengeChallengeTypeId;
+  const challengeType = (
+    await DataStore.query(ChallengeType, (challengeType) =>
+      challengeType.id.eq(challengeTypeId)
+    )
+  )[0];
   const userFromDatabase = await getUserFromDatabase(thunkAPI);
   const checkIn = await DataStore.save(
     new Checkin({
@@ -184,6 +194,8 @@ const createCheckIn = async (chatID: string, userID: string, thunkAPI: any) => {
       userID: userID,
       validationCount: 0,
       isValidated: false,
+      checkinChallengeTypeId: challengeTypeId,
+      ChallengeType: challengeType,
     })
   );
 

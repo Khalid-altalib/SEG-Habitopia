@@ -1,6 +1,10 @@
 // Native Base
 import { theme } from "native-base";
 
+/**
+ * Contains theming information such as colors and gradients which is used
+ * throughout the app.
+ */
 const Theme: any = {
   background: {
     gradientColors: {

@@ -35,6 +35,7 @@ type User @model @auth(rules: [{ allow: public }]) {
   biography: String
   email: String
   notifications: Boolean
+  streakStart: AWSDateTime
   Messages: [Checkin] @hasMany(indexName: "byUser", fields: ["id"])
   ChatRooms: [ChatRoom] @manyToMany(relationName: "UserChatRoom")
   Checkins: [Checkin] @hasMany(indexName: "byUser", fields: ["id"])
