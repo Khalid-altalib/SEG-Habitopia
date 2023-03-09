@@ -51,12 +51,10 @@ const checkStreak = async (userId: string) => {
 
   //check that the user has a streak start date, and that they have checked in before
   if (!streakStart) {
-    console.log("no streak start found");
     updateStreakStart(user, today);
     return 0;
   }
   if (!lastCheckInByUser || !lastCheckInByUser.createdAt) {
-    console.log("no previous checkins found");
     updateStreakStart(user, today);
     return 0;
   }
