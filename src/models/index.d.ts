@@ -257,7 +257,7 @@ type EagerChallenge = {
   readonly ChallengeType: ChallengeType;
   readonly Users?: (ChallengeUser | null)[] | null;
   readonly status?: ChallengeStatusEnum | keyof typeof ChallengeStatusEnum | null;
-  readonly started?: string | null;
+  readonly started?: number | null;
   readonly ChatRoom?: ChatRoom | null;
   readonly userCount?: number | null;
   readonly createdAt?: string | null;
@@ -275,7 +275,7 @@ type LazyChallenge = {
   readonly ChallengeType: AsyncItem<ChallengeType>;
   readonly Users: AsyncCollection<ChallengeUser>;
   readonly status?: ChallengeStatusEnum | keyof typeof ChallengeStatusEnum | null;
-  readonly started?: string | null;
+  readonly started?: number | null;
   readonly ChatRoom: AsyncItem<ChatRoom | undefined>;
   readonly userCount?: number | null;
   readonly createdAt?: string | null;

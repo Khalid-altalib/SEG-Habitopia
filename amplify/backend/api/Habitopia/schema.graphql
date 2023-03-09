@@ -21,8 +21,8 @@ type Challenge @model @auth(rules: [{allow: public}]) {
   id: ID!
   ChallengeType: ChallengeType! @hasOne
   Users: [User] @manyToMany(relationName: "ChallengeUser")
-  status: ChallengeStatusEnum @index(name: "byStatus", queryField: "challengesByStatus", sortKeyFields: ["id"])
-  started: AWSDateTime
+  status: ChallengeStatusEnum @index(name: "byStatus", queryField: "challengesByStatus", sortKeyFields: ["started", "userCount"])
+  started: Int
   ChatRoom: ChatRoom @hasOne
   userCount: Int
 }

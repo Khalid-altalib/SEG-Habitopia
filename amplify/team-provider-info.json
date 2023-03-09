@@ -42,8 +42,9 @@
       "function": {
         "challengeEnd": {
           "deploymentBucketName": "amplify-habitopia-challend-184819-deployment",
-          "s3Key": "amplify-builds/challengeEnd-4e716f595a63774d574a-build.zip"
-        }
+          "s3Key": "amplify-builds/challengeEnd-2b584372305642366572-build.zip"
+        },
+        "challengeend": {}
       }
     }
   }

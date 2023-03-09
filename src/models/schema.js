@@ -808,7 +808,7 @@ export const schema = {
                 "started": {
                     "name": "started",
                     "isArray": false,
-                    "type": "AWSDateTime",
+                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -882,7 +882,8 @@ export const schema = {
                         "queryField": "challengesByStatus",
                         "fields": [
                             "status",
-                            "id"
+                            "started",
+                            "userCount"
                         ]
                     }
                 },
@@ -1219,5 +1220,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "2b83b01fb4f25decc126023fb3e5715c"
+    "version": "ce51412b9c56469e02e7249130cb14f8"
 };

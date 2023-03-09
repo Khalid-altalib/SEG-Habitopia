@@ -21,138 +21,193 @@
 	REGION
 Amplify Params - DO NOT EDIT */
 
-import crypto from '@aws-crypto/sha256-js';
-import { defaultProvider } from '@aws-sdk/credential-provider-node';
-import { SignatureV4 } from '@aws-sdk/signature-v4';
-import { HttpRequest } from '@aws-sdk/protocol-http';
-import { default as fetch, Request } from 'node-fetch';
+// import crypto from '@aws-crypto/sha256-js';
+// import { defaultProvider } from '@aws-sdk/credential-provider-node';
+// import { SignatureV4 } from '@aws-sdk/signature-v4';
+// import { HttpRequest } from '@aws-sdk/protocol-http';
+// import { default as fetch, Request } from 'node-fetch';
 
-const GRAPHQL_ENDPOINT = process.env.API_HABITOPIA_GRAPHQLAPIENDPOINTOUTPUT;
-const AWS_REGION = process.env.AWS_REGION || 'us-east-1';
-const { Sha256 } = crypto;
+// const GRAPHQL_ENDPOINT = process.env.API_HABITOPIA_GRAPHQLAPIENDPOINTOUTPUT;
+// const AWS_REGION = process.env.AWS_REGION || 'eu-west-2';
+// const { Sha256 } = crypto;
 
+// // const query = /* GraphQL */ `
+// //   query Active_Challenges {
+// //     listTodos {
+// //       items {
+// //         id
+// //         name
+// //         description
+// //       }
+// //     }
+// //   }
+// // `;
 // const query = /* GraphQL */ `
-//   query Active_Challenges {
-//     listTodos {
+//   query getActiveChallenges {
+//     challengesByStatus(status: ACTIVE) {
 //       items {
 //         id
-//         name
-//         description
+//         started
+//         _version
 //       }
 //     }
 //   }
 // `;
-const query = /* GraphQL */ `
-  query getActiveChallenges {
-    challengesByStatus(status: ACTIVE) {
-      items {
-        id
-        started
-      }
-    }
-  }
-`;
+
+// // const mutation = /* GraphQL */ `
+// // mutation setChallengeInactive {
+// //   updateChallenge(input: {id: "68b263a4-0e18-4015-98ca-b22d49c019a0", status: INACTIVE}) {
+// //     id
+// //     status
+// //   }
+// // }
+// // `;
 
 // const mutation = /* GraphQL */ `
-// mutation setChallengeInactive {
-//   updateChallenge(input: {id: "68b263a4-0e18-4015-98ca-b22d49c019a0", status: INACTIVE}) {
+// mutation setChallengeInactive($id: ID!, $versionIn: Int) {
+//   updateChallenge(input: {id: $id, status: INACTIVE, _version: $versionIn}) {
 //     id
 //     status
-//   }
+// 	}
 // }
 // `;
-const mutation = /* GraphQL */ `
-mutation setChallengeInactive($id: ID!) {
-  updateChallenge(input: {id: $id, status: INACTIVE}) {
-    id
-    status
-}
-`;
 
-/**
- * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
- */
+// /**
+//  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
+//  */
 
- export const handler = async (event) => {
-  console.log(`EVENT: ${JSON.stringify(event)}`);
+//  export const handler = async (event) => {
+//   console.log(`EVENT: ${JSON.stringify(event)}`);
 
-  const endpoint = new URL(GRAPHQL_ENDPOINT);
+//   const endpoint = new URL(GRAPHQL_ENDPOINT);
 
-  const signer = new SignatureV4({
-    credentials: defaultProvider(),
-    region: AWS_REGION,
-    service: 'appsync',
-    sha256: Sha256
-  });
+//   const signer = new SignatureV4({
+//     credentials: defaultProvider(),
+//     region: AWS_REGION,
+//     service: 'appsync',
+//     sha256: Sha256
+//   });
 
-  const queryRequestToBeSigned = new HttpRequest({
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      host: endpoint.host
-    },
-    hostname: endpoint.host,
-    body: JSON.stringify({ query }),
-    path: endpoint.pathname
-  });
+//   const queryRequestToBeSigned = new HttpRequest({
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       host: endpoint.host
+//     },
+//     hostname: endpoint.host,
+//     body: JSON.stringify({ query }),
+//     path: endpoint.pathname
+//   });
 
-  const signedQuery = await signer.sign(queryRequestToBeSigned);
-  const queryRequest = new Request(endpoint, signedQuery);
+//   const signedQuery = await signer.sign(queryRequestToBeSigned);
+//   const queryRequest = new Request(endpoint, signedQuery);
 
-  let statusCode = 200;
-  let body;
-  let response;
+//   let statusCode = 200;
+//   let body;
+//   let queryResponse;
+//   let mutationResponse;
 
-  try {
-    queryResponse = await fetch(queryRequest);
-    body = await queryResponse.json();
-    console.log(`BODY: ${JSON.stringify(body)}`);
-    if (body.errors) statusCode = 400;
+//   try {
+//     queryResponse = await fetch(queryRequest);
+//     body = await queryResponse.json();
+//     console.log(`BODY: ${JSON.stringify(body)}`);
+//     if (body.errors) statusCode = 400;
     
-    if (body.data.challengesByStatus.items.length === 0) {
-      console.log("No active challenges to end...");
-    } else {
-      for (i = 0; i < body.data.challengesByStatus.items.length; i++) {
+//     if (body.data.challengesByStatus.items.length === 0) {
+//       console.log("No active challenges to end...");
+//     } else {
+//       const mutationRequestToBeSigned = new HttpRequest({
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//           host: endpoint.host
+//         },
+//         hostname: endpoint.host,
+//         body: JSON.stringify({ mutation, variables : {id: body.data.challengesByStatus.items[0].id, versionIn: body.data.challengesByStatus.items[0]._version}}),
+//         path: endpoint.pathname
+//       });
+    
+//       const signedMutation = await signer.sign(mutationRequestToBeSigned);
+//       const mutationRequest = new Request(endpoint, signedMutation);
 
-        const mutationRequestToBeSigned = new HttpRequest({
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            host: endpoint.host
-          },
-          hostname: endpoint.host,
-          body: JSON.stringify({ mutation, variables : {id: body.data.challengesByStatus.items[i].id}}),
-          path: endpoint.pathname
-        });
+//       mutationResponse = await fetch(mutationRequest);
+//       body = await mutationResponse.json();
+//       console.log(`BODY: ${JSON.stringify(body)}`);
+//       if (body.errors) statusCode = 400;
+
+//       // for (i = 0; i < body.data.challengesByStatus.items.length; i++) {
+
+//       //   const mutationRequestToBeSigned = new HttpRequest({
+//       //     method: 'POST',
+//       //     headers: {
+//       //       'Content-Type': 'application/json',
+//       //       host: endpoint.host
+//       //     },
+//       //     hostname: endpoint.host,
+//       //     body: JSON.stringify({ mutation, variables : {id: body.data.challengesByStatus.items[i].id, versionIn: body.data.challengesByStatus.items[i]._version}}),
+//       //     path: endpoint.pathname
+//       //   });
       
-        const signedMutation = await signer.sign(mutationRequestToBeSigned);
-        const mutationRequest = new Request(endpoint, signedMutation);
+//       //   const signedMutation = await signer.sign(mutationRequestToBeSigned);
+//       //   const mutationRequest = new Request(endpoint, signedMutation);
 
-        mutationResponse = await fetch(mutationRequest);
-        body = await mutationResponse.json();
-        console.log(`BODY: ${JSON.stringify(body)}`);
-        if (body.errors) statusCode = 400;
-      }
-    }
+//       //   mutationResponse = await fetch(mutationRequest);
+//       //   body = await mutationResponse.json();
+//       //   console.log(`BODY: ${JSON.stringify(body)}`);
+//       //   if (body.errors) statusCode = 400;
 
-  } catch (error) {
-    statusCode = 500;
-    body = {
-      errors: [
-        {
-          message: error.message
-        }
-      ]
-    };
+//       // }
+//     }
+
+//   } catch (error) {
+//     statusCode = 500;
+//     body = {
+//       errors: [
+//         {
+//           message: error.message
+//         }
+//       ]
+//     };
+//   }
+
+//   return {
+//     statusCode,
+//     //  Uncomment below to enable CORS requests
+//     // headers: {
+//     //   "Access-Control-Allow-Origin": "*",
+//     //   "Access-Control-Allow-Headers": "*"
+//     // }, 
+//     body: JSON.stringify(body)
+//   };
+// };
+
+//----------------------------------------------------------------
+
+const AWS = require('aws-sdk');
+const docClient = new AWS.DynamoDB.DocumentClient();
+
+const params = {
+  TableName : 'Challenge',
+  /* Item properties will depend on your application concerns */
+  Key: {
+    id: '910e634f-1dff-4ad1-a791-3799984bb013'
   }
+}
 
-  return {
-    statusCode,
-    //  Uncomment below to enable CORS requests
-    // headers: {
-    //   "Access-Control-Allow-Origin": "*",
-    //   "Access-Control-Allow-Headers": "*"
-    // }, 
-    body: JSON.stringify(body)
-  };
-};
+async function getItem(){
+  try {
+    const data = await docClient.get(params).promise()
+    return data
+  } catch (err) {
+    return err
+  }
+}
+
+exports.handler = async (event, context) => {
+  try {
+    const data = await getItem()
+    return { body: JSON.stringify(data) }
+  } catch (err) {
+    return { error: err }
+  }
+}
