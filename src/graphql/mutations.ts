@@ -18,25 +18,94 @@ export const createLeaderboard = /* GraphQL */ `
         email
         notifications
         Messages {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         ChatRooms {
+          items {
+            id
+            userId
+            chatRoomId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         Checkins {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         challenges {
+          items {
+            id
+            challengeId
+            userId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         validatedCheckIns {
+          items {
+            id
+            userId
+            checkinId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      ChallengeType {
+        id
+        name
+        description
+        active
         createdAt
         updatedAt
         _version
@@ -49,6 +118,7 @@ export const createLeaderboard = /* GraphQL */ `
       _deleted
       _lastChangedAt
       leaderboardUserId
+      leaderboardChallengeTypeId
     }
   }
 `;
@@ -68,25 +138,94 @@ export const updateLeaderboard = /* GraphQL */ `
         email
         notifications
         Messages {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         ChatRooms {
+          items {
+            id
+            userId
+            chatRoomId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         Checkins {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         challenges {
+          items {
+            id
+            challengeId
+            userId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         validatedCheckIns {
+          items {
+            id
+            userId
+            checkinId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      ChallengeType {
+        id
+        name
+        description
+        active
         createdAt
         updatedAt
         _version
@@ -99,6 +238,7 @@ export const updateLeaderboard = /* GraphQL */ `
       _deleted
       _lastChangedAt
       leaderboardUserId
+      leaderboardChallengeTypeId
     }
   }
 `;
@@ -118,25 +258,94 @@ export const deleteLeaderboard = /* GraphQL */ `
         email
         notifications
         Messages {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         ChatRooms {
+          items {
+            id
+            userId
+            chatRoomId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         Checkins {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         challenges {
+          items {
+            id
+            challengeId
+            userId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         validatedCheckIns {
+          items {
+            id
+            userId
+            checkinId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      ChallengeType {
+        id
+        name
+        description
+        active
         createdAt
         updatedAt
         _version
@@ -149,6 +358,7 @@ export const deleteLeaderboard = /* GraphQL */ `
       _deleted
       _lastChangedAt
       leaderboardUserId
+      leaderboardChallengeTypeId
     }
   }
 `;
@@ -175,6 +385,32 @@ export const createChallenge = /* GraphQL */ `
           id
           challengeId
           userId
+          challenge {
+            id
+            started
+            userCount
+            finished
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            challengeChallengeTypeId
+            challengeChatRoomId
+          }
+          user {
+            id
+            name
+            image
+            biography
+            email
+            notifications
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -188,14 +424,52 @@ export const createChallenge = /* GraphQL */ `
       ChatRoom {
         id
         Messages {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         users {
+          items {
+            id
+            userId
+            chatRoomId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         Checkins {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
@@ -205,6 +479,20 @@ export const createChallenge = /* GraphQL */ `
           chatroomID
           userID
           messageType
+          getCheckin {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           createdAt
           updatedAt
           _version
@@ -254,6 +542,32 @@ export const updateChallenge = /* GraphQL */ `
           id
           challengeId
           userId
+          challenge {
+            id
+            started
+            userCount
+            finished
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            challengeChallengeTypeId
+            challengeChatRoomId
+          }
+          user {
+            id
+            name
+            image
+            biography
+            email
+            notifications
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -267,14 +581,52 @@ export const updateChallenge = /* GraphQL */ `
       ChatRoom {
         id
         Messages {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         users {
+          items {
+            id
+            userId
+            chatRoomId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         Checkins {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
@@ -284,6 +636,20 @@ export const updateChallenge = /* GraphQL */ `
           chatroomID
           userID
           messageType
+          getCheckin {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           createdAt
           updatedAt
           _version
@@ -333,6 +699,32 @@ export const deleteChallenge = /* GraphQL */ `
           id
           challengeId
           userId
+          challenge {
+            id
+            started
+            userCount
+            finished
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            challengeChallengeTypeId
+            challengeChatRoomId
+          }
+          user {
+            id
+            name
+            image
+            biography
+            email
+            notifications
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -346,14 +738,52 @@ export const deleteChallenge = /* GraphQL */ `
       ChatRoom {
         id
         Messages {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         users {
+          items {
+            id
+            userId
+            chatRoomId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         Checkins {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
@@ -363,6 +793,20 @@ export const deleteChallenge = /* GraphQL */ `
           chatroomID
           userID
           messageType
+          getCheckin {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           createdAt
           updatedAt
           _version
@@ -463,6 +907,21 @@ export const createUser = /* GraphQL */ `
           chatroomID
           validationCount
           isValidated
+          validatedBy {
+            nextToken
+            startedAt
+          }
+          ChallengeType {
+            id
+            name
+            description
+            active
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -478,6 +937,28 @@ export const createUser = /* GraphQL */ `
           id
           userId
           chatRoomId
+          user {
+            id
+            name
+            image
+            biography
+            email
+            notifications
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          chatRoom {
+            id
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            chatRoomLastMessageId
+          }
           createdAt
           updatedAt
           _version
@@ -495,6 +976,21 @@ export const createUser = /* GraphQL */ `
           chatroomID
           validationCount
           isValidated
+          validatedBy {
+            nextToken
+            startedAt
+          }
+          ChallengeType {
+            id
+            name
+            description
+            active
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -510,6 +1006,32 @@ export const createUser = /* GraphQL */ `
           id
           challengeId
           userId
+          challenge {
+            id
+            started
+            userCount
+            finished
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            challengeChallengeTypeId
+            challengeChatRoomId
+          }
+          user {
+            id
+            name
+            image
+            biography
+            email
+            notifications
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -524,6 +1046,33 @@ export const createUser = /* GraphQL */ `
           id
           userId
           checkinId
+          user {
+            id
+            name
+            image
+            biography
+            email
+            notifications
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          checkin {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           createdAt
           updatedAt
           _version
@@ -561,6 +1110,21 @@ export const updateUser = /* GraphQL */ `
           chatroomID
           validationCount
           isValidated
+          validatedBy {
+            nextToken
+            startedAt
+          }
+          ChallengeType {
+            id
+            name
+            description
+            active
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -576,6 +1140,28 @@ export const updateUser = /* GraphQL */ `
           id
           userId
           chatRoomId
+          user {
+            id
+            name
+            image
+            biography
+            email
+            notifications
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          chatRoom {
+            id
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            chatRoomLastMessageId
+          }
           createdAt
           updatedAt
           _version
@@ -593,6 +1179,21 @@ export const updateUser = /* GraphQL */ `
           chatroomID
           validationCount
           isValidated
+          validatedBy {
+            nextToken
+            startedAt
+          }
+          ChallengeType {
+            id
+            name
+            description
+            active
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -608,6 +1209,32 @@ export const updateUser = /* GraphQL */ `
           id
           challengeId
           userId
+          challenge {
+            id
+            started
+            userCount
+            finished
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            challengeChallengeTypeId
+            challengeChatRoomId
+          }
+          user {
+            id
+            name
+            image
+            biography
+            email
+            notifications
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -622,6 +1249,33 @@ export const updateUser = /* GraphQL */ `
           id
           userId
           checkinId
+          user {
+            id
+            name
+            image
+            biography
+            email
+            notifications
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          checkin {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           createdAt
           updatedAt
           _version
@@ -659,6 +1313,21 @@ export const deleteUser = /* GraphQL */ `
           chatroomID
           validationCount
           isValidated
+          validatedBy {
+            nextToken
+            startedAt
+          }
+          ChallengeType {
+            id
+            name
+            description
+            active
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -674,6 +1343,28 @@ export const deleteUser = /* GraphQL */ `
           id
           userId
           chatRoomId
+          user {
+            id
+            name
+            image
+            biography
+            email
+            notifications
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          chatRoom {
+            id
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            chatRoomLastMessageId
+          }
           createdAt
           updatedAt
           _version
@@ -691,6 +1382,21 @@ export const deleteUser = /* GraphQL */ `
           chatroomID
           validationCount
           isValidated
+          validatedBy {
+            nextToken
+            startedAt
+          }
+          ChallengeType {
+            id
+            name
+            description
+            active
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -706,6 +1412,32 @@ export const deleteUser = /* GraphQL */ `
           id
           challengeId
           userId
+          challenge {
+            id
+            started
+            userCount
+            finished
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            challengeChallengeTypeId
+            challengeChatRoomId
+          }
+          user {
+            id
+            name
+            image
+            biography
+            email
+            notifications
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -720,6 +1452,33 @@ export const deleteUser = /* GraphQL */ `
           id
           userId
           checkinId
+          user {
+            id
+            name
+            image
+            biography
+            email
+            notifications
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          checkin {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           createdAt
           updatedAt
           _version
@@ -756,6 +1515,16 @@ export const createMessage = /* GraphQL */ `
         validationCount
         isValidated
         validatedBy {
+          items {
+            id
+            userId
+            checkinId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
@@ -805,6 +1574,16 @@ export const updateMessage = /* GraphQL */ `
         validationCount
         isValidated
         validatedBy {
+          items {
+            id
+            userId
+            checkinId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
@@ -854,6 +1633,16 @@ export const deleteMessage = /* GraphQL */ `
         validationCount
         isValidated
         validatedBy {
+          items {
+            id
+            userId
+            checkinId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
@@ -899,6 +1688,21 @@ export const createChatRoom = /* GraphQL */ `
           chatroomID
           validationCount
           isValidated
+          validatedBy {
+            nextToken
+            startedAt
+          }
+          ChallengeType {
+            id
+            name
+            description
+            active
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -914,6 +1718,28 @@ export const createChatRoom = /* GraphQL */ `
           id
           userId
           chatRoomId
+          user {
+            id
+            name
+            image
+            biography
+            email
+            notifications
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          chatRoom {
+            id
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            chatRoomLastMessageId
+          }
           createdAt
           updatedAt
           _version
@@ -931,6 +1757,21 @@ export const createChatRoom = /* GraphQL */ `
           chatroomID
           validationCount
           isValidated
+          validatedBy {
+            nextToken
+            startedAt
+          }
+          ChallengeType {
+            id
+            name
+            description
+            active
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -954,6 +1795,21 @@ export const createChatRoom = /* GraphQL */ `
           chatroomID
           validationCount
           isValidated
+          validatedBy {
+            nextToken
+            startedAt
+          }
+          ChallengeType {
+            id
+            name
+            description
+            active
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -992,6 +1848,21 @@ export const updateChatRoom = /* GraphQL */ `
           chatroomID
           validationCount
           isValidated
+          validatedBy {
+            nextToken
+            startedAt
+          }
+          ChallengeType {
+            id
+            name
+            description
+            active
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -1007,6 +1878,28 @@ export const updateChatRoom = /* GraphQL */ `
           id
           userId
           chatRoomId
+          user {
+            id
+            name
+            image
+            biography
+            email
+            notifications
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          chatRoom {
+            id
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            chatRoomLastMessageId
+          }
           createdAt
           updatedAt
           _version
@@ -1024,6 +1917,21 @@ export const updateChatRoom = /* GraphQL */ `
           chatroomID
           validationCount
           isValidated
+          validatedBy {
+            nextToken
+            startedAt
+          }
+          ChallengeType {
+            id
+            name
+            description
+            active
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -1047,6 +1955,21 @@ export const updateChatRoom = /* GraphQL */ `
           chatroomID
           validationCount
           isValidated
+          validatedBy {
+            nextToken
+            startedAt
+          }
+          ChallengeType {
+            id
+            name
+            description
+            active
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -1085,6 +2008,21 @@ export const deleteChatRoom = /* GraphQL */ `
           chatroomID
           validationCount
           isValidated
+          validatedBy {
+            nextToken
+            startedAt
+          }
+          ChallengeType {
+            id
+            name
+            description
+            active
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -1100,6 +2038,28 @@ export const deleteChatRoom = /* GraphQL */ `
           id
           userId
           chatRoomId
+          user {
+            id
+            name
+            image
+            biography
+            email
+            notifications
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          chatRoom {
+            id
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            chatRoomLastMessageId
+          }
           createdAt
           updatedAt
           _version
@@ -1117,6 +2077,21 @@ export const deleteChatRoom = /* GraphQL */ `
           chatroomID
           validationCount
           isValidated
+          validatedBy {
+            nextToken
+            startedAt
+          }
+          ChallengeType {
+            id
+            name
+            description
+            active
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -1140,6 +2115,21 @@ export const deleteChatRoom = /* GraphQL */ `
           chatroomID
           validationCount
           isValidated
+          validatedBy {
+            nextToken
+            startedAt
+          }
+          ChallengeType {
+            id
+            name
+            description
+            active
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           createdAt
           updatedAt
           _version
@@ -1180,6 +2170,33 @@ export const createCheckin = /* GraphQL */ `
           id
           userId
           checkinId
+          user {
+            id
+            name
+            image
+            biography
+            email
+            notifications
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          checkin {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           createdAt
           updatedAt
           _version
@@ -1226,6 +2243,33 @@ export const updateCheckin = /* GraphQL */ `
           id
           userId
           checkinId
+          user {
+            id
+            name
+            image
+            biography
+            email
+            notifications
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          checkin {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           createdAt
           updatedAt
           _version
@@ -1272,6 +2316,33 @@ export const deleteCheckin = /* GraphQL */ `
           id
           userId
           checkinId
+          user {
+            id
+            name
+            image
+            biography
+            email
+            notifications
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          checkin {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           createdAt
           updatedAt
           _version
@@ -1324,12 +2395,47 @@ export const createChallengeUser = /* GraphQL */ `
           _lastChangedAt
         }
         Users {
+          items {
+            id
+            challengeId
+            userId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         started
         ChatRoom {
           id
+          Messages {
+            nextToken
+            startedAt
+          }
+          users {
+            nextToken
+            startedAt
+          }
+          Checkins {
+            nextToken
+            startedAt
+          }
+          LastMessage {
+            id
+            text
+            chatroomID
+            userID
+            messageType
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            messageGetCheckinId
+          }
           createdAt
           updatedAt
           _version
@@ -1355,22 +2461,80 @@ export const createChallengeUser = /* GraphQL */ `
         email
         notifications
         Messages {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         ChatRooms {
+          items {
+            id
+            userId
+            chatRoomId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         Checkins {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         challenges {
+          items {
+            id
+            challengeId
+            userId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         validatedCheckIns {
+          items {
+            id
+            userId
+            checkinId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
@@ -1411,12 +2575,47 @@ export const updateChallengeUser = /* GraphQL */ `
           _lastChangedAt
         }
         Users {
+          items {
+            id
+            challengeId
+            userId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         started
         ChatRoom {
           id
+          Messages {
+            nextToken
+            startedAt
+          }
+          users {
+            nextToken
+            startedAt
+          }
+          Checkins {
+            nextToken
+            startedAt
+          }
+          LastMessage {
+            id
+            text
+            chatroomID
+            userID
+            messageType
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            messageGetCheckinId
+          }
           createdAt
           updatedAt
           _version
@@ -1442,22 +2641,80 @@ export const updateChallengeUser = /* GraphQL */ `
         email
         notifications
         Messages {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         ChatRooms {
+          items {
+            id
+            userId
+            chatRoomId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         Checkins {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         challenges {
+          items {
+            id
+            challengeId
+            userId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         validatedCheckIns {
+          items {
+            id
+            userId
+            checkinId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
@@ -1498,12 +2755,47 @@ export const deleteChallengeUser = /* GraphQL */ `
           _lastChangedAt
         }
         Users {
+          items {
+            id
+            challengeId
+            userId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         started
         ChatRoom {
           id
+          Messages {
+            nextToken
+            startedAt
+          }
+          users {
+            nextToken
+            startedAt
+          }
+          Checkins {
+            nextToken
+            startedAt
+          }
+          LastMessage {
+            id
+            text
+            chatroomID
+            userID
+            messageType
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            messageGetCheckinId
+          }
           createdAt
           updatedAt
           _version
@@ -1529,22 +2821,80 @@ export const deleteChallengeUser = /* GraphQL */ `
         email
         notifications
         Messages {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         ChatRooms {
+          items {
+            id
+            userId
+            chatRoomId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         Checkins {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         challenges {
+          items {
+            id
+            challengeId
+            userId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         validatedCheckIns {
+          items {
+            id
+            userId
+            checkinId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
@@ -1579,22 +2929,80 @@ export const createUserChatRoom = /* GraphQL */ `
         email
         notifications
         Messages {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         ChatRooms {
+          items {
+            id
+            userId
+            chatRoomId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         Checkins {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         challenges {
+          items {
+            id
+            challengeId
+            userId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         validatedCheckIns {
+          items {
+            id
+            userId
+            checkinId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
@@ -1607,14 +3015,52 @@ export const createUserChatRoom = /* GraphQL */ `
       chatRoom {
         id
         Messages {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         users {
+          items {
+            id
+            userId
+            chatRoomId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         Checkins {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
@@ -1624,6 +3070,20 @@ export const createUserChatRoom = /* GraphQL */ `
           chatroomID
           userID
           messageType
+          getCheckin {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           createdAt
           updatedAt
           _version
@@ -1663,22 +3123,80 @@ export const updateUserChatRoom = /* GraphQL */ `
         email
         notifications
         Messages {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         ChatRooms {
+          items {
+            id
+            userId
+            chatRoomId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         Checkins {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         challenges {
+          items {
+            id
+            challengeId
+            userId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         validatedCheckIns {
+          items {
+            id
+            userId
+            checkinId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
@@ -1691,14 +3209,52 @@ export const updateUserChatRoom = /* GraphQL */ `
       chatRoom {
         id
         Messages {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         users {
+          items {
+            id
+            userId
+            chatRoomId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         Checkins {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
@@ -1708,6 +3264,20 @@ export const updateUserChatRoom = /* GraphQL */ `
           chatroomID
           userID
           messageType
+          getCheckin {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           createdAt
           updatedAt
           _version
@@ -1747,22 +3317,80 @@ export const deleteUserChatRoom = /* GraphQL */ `
         email
         notifications
         Messages {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         ChatRooms {
+          items {
+            id
+            userId
+            chatRoomId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         Checkins {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         challenges {
+          items {
+            id
+            challengeId
+            userId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         validatedCheckIns {
+          items {
+            id
+            userId
+            checkinId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
@@ -1775,14 +3403,52 @@ export const deleteUserChatRoom = /* GraphQL */ `
       chatRoom {
         id
         Messages {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         users {
+          items {
+            id
+            userId
+            chatRoomId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         Checkins {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
@@ -1792,6 +3458,20 @@ export const deleteUserChatRoom = /* GraphQL */ `
           chatroomID
           userID
           messageType
+          getCheckin {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           createdAt
           updatedAt
           _version
@@ -1831,22 +3511,80 @@ export const createUserValidatedCheckIn = /* GraphQL */ `
         email
         notifications
         Messages {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         ChatRooms {
+          items {
+            id
+            userId
+            chatRoomId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         Checkins {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         challenges {
+          items {
+            id
+            challengeId
+            userId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         validatedCheckIns {
+          items {
+            id
+            userId
+            checkinId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
@@ -1864,6 +3602,16 @@ export const createUserValidatedCheckIn = /* GraphQL */ `
         validationCount
         isValidated
         validatedBy {
+          items {
+            id
+            userId
+            checkinId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
@@ -1910,22 +3658,80 @@ export const updateUserValidatedCheckIn = /* GraphQL */ `
         email
         notifications
         Messages {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         ChatRooms {
+          items {
+            id
+            userId
+            chatRoomId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         Checkins {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         challenges {
+          items {
+            id
+            challengeId
+            userId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         validatedCheckIns {
+          items {
+            id
+            userId
+            checkinId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
@@ -1943,6 +3749,16 @@ export const updateUserValidatedCheckIn = /* GraphQL */ `
         validationCount
         isValidated
         validatedBy {
+          items {
+            id
+            userId
+            checkinId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
@@ -1989,22 +3805,80 @@ export const deleteUserValidatedCheckIn = /* GraphQL */ `
         email
         notifications
         Messages {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         ChatRooms {
+          items {
+            id
+            userId
+            chatRoomId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         Checkins {
+          items {
+            id
+            timeStamp
+            userID
+            chatroomID
+            validationCount
+            isValidated
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+            checkinChallengeTypeId
+          }
           nextToken
           startedAt
         }
         challenges {
+          items {
+            id
+            challengeId
+            userId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
         validatedCheckIns {
+          items {
+            id
+            userId
+            checkinId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }
@@ -2022,6 +3896,16 @@ export const deleteUserValidatedCheckIn = /* GraphQL */ `
         validationCount
         isValidated
         validatedBy {
+          items {
+            id
+            userId
+            checkinId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }

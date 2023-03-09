@@ -29,8 +29,14 @@ const ChatListScreen = (props: Props) => {
   const updateChatRoomSubscription = () => {
     const variables: OnUpdateChatRoomSubscriptionVariables = {
       filter: {
-        
-      }
+        users: [
+          {
+            id: {
+              contains: user?.userId,
+            }
+          },
+        ],
+      },
     };
     const subscription = API.graphql<
       GraphQLSubscription<OnUpdateChatRoomSubscription>
@@ -38,7 +44,7 @@ const ChatListScreen = (props: Props) => {
       next: ({ value }) => {
         console.log(value);
       },
-      error: (error) => console.warn(error),
+      error: ({ error }) => console.warn(error.errors),
     });
     return subscription;
   };
