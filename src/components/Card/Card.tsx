@@ -8,7 +8,7 @@ import { StyleSheet } from "react-native";
 // Expo Linear Gradient
 import { LinearGradient } from "expo-linear-gradient";
 
-type Props = {
+export type CardProps = {
   /** The background color gradient of the card. If undefined, then default colors are used. */
   backgroundColorGradient?: [string, string];
   /** The children to be displayed within the card. */
@@ -18,10 +18,10 @@ type Props = {
 /**
  * A card which can contain children.
  *
- * @param props The properties passed to the component.
- * @returns The component representing the card and its children.
+ * @param props - The properties passed to the component.
+ * @returns - The component representing the card and its children.
  */
-const Card = ({ backgroundColorGradient, children }: Props) => {
+const Card = ({ backgroundColorGradient, children }: CardProps) => {
   const LIGHT_MODE_GRADIENT = [theme.colors.white, theme.colors.gray[100]];
   const DARK_MODE_GRADIENT = [
     theme.colors.blueGray[700],
