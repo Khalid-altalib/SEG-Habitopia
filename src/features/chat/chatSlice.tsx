@@ -1,6 +1,3 @@
-import {getUserFromDatabase} from '../../app/util';
-import { Checkin } from '../../models/index.js';
-import { DataStore } from '@aws-amplify/datastore';
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { Chat, ChatDetails, Message } from "../../../types";
 import {

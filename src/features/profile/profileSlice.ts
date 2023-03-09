@@ -74,13 +74,12 @@ export const fetchProfile = createAsyncThunk<
   { rejectValue: string }
 >("profile/fetch", async (userId, thunkAPI) => {
   try {
-    // console.log("fetching profile");
     const user = await getUserFromDatabasebyID(userId);
     const { checkIns, streak, wins } = await getStatistics(userId);
 
     const statistics = [
       { name: "Streak", quantity: streak },
-      { name: "Wins", quantity: wins}, // challenges wins  - user challenges completed and what is inactive 
+      { name: "Wins", quantity: wins}, 
       { name: "Check Ins", quantity: checkIns },
     ];
 
