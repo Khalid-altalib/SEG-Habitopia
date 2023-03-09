@@ -189,7 +189,20 @@ export const chatSlice = createSlice({
     resetPageNumber: (state) => {
       state.pageNumber = 0;
     },
+    updateChatList: (state, action:PayloadAction<{chatID?: string, updatedAt?: string, lastMessage?: string}>) => {
+      const { chatID, updatedAt, lastMessage } = action.payload;
+      const chat = state.chats.find((chat) => chat.id === chatID);
 
+      if (chat) {
+        if(updatedAt !== undefined){
+          chat.time = updatedAt
+        }
+        if(lastMessage !== undefined && lastMessage !== ""){
+          chat.text = lastMessage
+        }
+        
+      }
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchChats.pending, (state) => {
@@ -298,6 +311,7 @@ export const {
   setCurrentChatId,
   updateCheckInMessage,
   resetPageNumber,
+  updateChatList
 } = chatSlice.actions;
 
 export default chatSlice.reducer;
