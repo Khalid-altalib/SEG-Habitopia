@@ -1,6 +1,14 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+// Native Base
 import { ColorMode, StorageManager } from "native-base";
 
+// React Native Async Storage
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+/**
+ * Manages storing and retrieving the color mode from asynchronous storage. This allows us
+ * to ensure that the color mode is persistent, even when the user closes the app and comes
+ * back later.
+ */
 const colorModeManager: StorageManager = {
   get: async () => {
     try {

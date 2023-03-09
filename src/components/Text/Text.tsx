@@ -1,19 +1,33 @@
+// React
 import React, { useEffect, useState } from "react";
+
+// React Native
 import { StyleSheet, Text as RnText } from "react-native";
+
+// Native Base
 import { theme, useColorModeValue } from "native-base";
+
+// Expo Font
 import * as Font from "expo-font";
+
+// Expo Splash Screen
 import * as SplashScreen from "expo-splash-screen";
 
-import { TextType } from "../../../types";
+// Habitopia
+import { TextType } from "types";
 
-type Props = {
+export type TextProps = {
+  /** The type of text. Affects font family, weight, etc. */
   type?: TextType;
-  style: StyleSheet;
-  children: string;
+  /** Any additional styles to apply to the text. */
+  style?: any;
+  /** The actual text itself, along with possibly an icon. */
+  children: any;
+  /** The color of the text. */
   color?: string;
 };
 
-const Text = ({ type, style, children, color }: any) => {
+const Text = ({ type, style, children, color }: TextProps) => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
   const loadFonts = async () => {
