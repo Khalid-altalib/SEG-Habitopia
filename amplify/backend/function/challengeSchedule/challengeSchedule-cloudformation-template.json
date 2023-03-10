@@ -63,12 +63,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "challengeEnd",
+            "challengeSchedule",
             {
               "Fn::Join": [
                 "",
                 [
-                  "challengeEnd",
+                  "challengeSchedule",
                   "-",
                   {
                     "Ref": "env"
@@ -288,7 +288,7 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "python3.8",
         "Layers": [],
         "Timeout": 25
       }
@@ -299,12 +299,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "habitopiaLambdaRole97ad4940",
+            "habitopiaLambdaRole4a1dc01f",
             {
               "Fn::Join": [
                 "",
                 [
-                  "habitopiaLambdaRole97ad4940",
+                  "habitopiaLambdaRole4a1dc01f",
                   "-",
                   {
                     "Ref": "env"

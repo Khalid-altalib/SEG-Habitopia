@@ -15,14 +15,6 @@
         "delete"
       ]
     },
-    "function": {
-      "challengeEnd": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ]
-    },
     "storage": {
       "Leaderboard:@model(appsync)": [
         "create",

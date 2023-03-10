@@ -40,11 +40,10 @@
         "Habitopia": {}
       },
       "function": {
-        "challengeEnd": {
+        "challengeSchedule": {
           "deploymentBucketName": "amplify-habitopia-challend-184819-deployment",
-          "s3Key": "amplify-builds/challengeEnd-2b584372305642366572-build.zip"
-        },
-        "challengeend": {}
+          "s3Key": "amplify-builds/challengeSchedule-6842453933386c4c2b7a-build.zip"
+        }
       }
     }
   }

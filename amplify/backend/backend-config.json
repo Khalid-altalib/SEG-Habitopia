@@ -57,7 +57,7 @@
     }
   },
   "function": {
-    "challengeEnd": {
+    "challengeSchedule": {
       "build": true,
       "dependsOn": [
         {
@@ -75,36 +75,6 @@
           ],
           "category": "auth",
           "resourceName": "Habitopia"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "challengeend": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ],
-          "category": "api",
-          "resourceName": "Habitopia"
-        },
-        {
-          "attributes": [
-            "UserPoolId"
-          ],
-          "category": "auth",
-          "resourceName": "Habitopia"
-        },
-        {
-          "attributes": [
-            "Name"
-          ],
-          "category": "function",
-          "resourceName": "challengeEnd"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -112,19 +82,19 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_challengeEnd_deploymentBucketName": {
+    "AMPLIFY_function_challengeSchedule_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "challengeEnd"
+          "resourceName": "challengeSchedule"
         }
       ]
     },
-    "AMPLIFY_function_challengeEnd_s3Key": {
+    "AMPLIFY_function_challengeSchedule_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "challengeEnd"
+          "resourceName": "challengeSchedule"
         }
       ]
     }
