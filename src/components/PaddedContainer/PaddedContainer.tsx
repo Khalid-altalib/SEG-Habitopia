@@ -1,17 +1,18 @@
-import React from "react";
+// React Native
 import { View } from "react-native";
 
-type Props = {
+export type PaddedContainerProps = {
+  /** The children to show within the container. */
   children: any;
 };
 
 /**
  * Displays children components in a container with predefined padding.
  *
- * @param props The children which are to be displayed within the container.
- * @returns The padded container with its children.
+ * @param props - The children which are to be displayed within the container.
+ * @returns - The padded container with its children.
  */
-const PaddedContainer = (props: Props) => {
+const PaddedContainer = (props: PaddedContainerProps) => {
   const PADDING = 25;
 
   return (

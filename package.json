@@ -8,6 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
+    "docs": "npx typedoc --tsconfig ./tsconfig.json",
     "storybook": "start-storybook -p 7007",
     "build-storybook": "build-storybook"
   },
@@ -19,6 +20,9 @@
     ],
     "setupFiles": [
       "./setupTests.js"
+    ],
+    "transformIgnorePatterns": [
+      "/node_modules/(?!aws-amplify)/"
     ]
   },
   "dependencies": {
@@ -67,6 +71,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@babel/plugin-proposal-private-methods": "^7.18.6",
     "@cfaester/enzyme-adapter-react-18": "^0.6.0",
     "@react-native-community/async-storage": "^1.12.1",
     "@storybook/addon-actions": "^5.3",
@@ -94,7 +99,8 @@
     "mock-async-storage": "^2.2.0",
     "react-test-renderer": "^18.1.0",
     "typescript": "^4.6.3",
-    "@types/aws-lambda": "^8.10.92"
+    "@types/aws-lambda": "^8.10.92",
+    "typedoc": "^0.24.0-beta.2"
   },
   "private": true
 }

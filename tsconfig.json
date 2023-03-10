@@ -1,5 +1,9 @@
 {
   "extends": "expo/tsconfig.base",
+  "typedocOptions": {
+    "out": "docs",
+    "entryPoints": ["src/**/*.ts", "src/**/*.tsx", "./App.tsx"]
+  },
   "compilerOptions": {
     "strict": true,
     "baseUrl": ".",

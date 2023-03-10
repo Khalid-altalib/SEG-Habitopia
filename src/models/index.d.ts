@@ -63,6 +63,7 @@ type EagerUser = {
   readonly biography?: string | null;
   readonly email?: string | null;
   readonly notifications?: boolean | null;
+  readonly streakStart?: string | null;
   readonly Messages?: (Checkin | null)[] | null;
   readonly ChatRooms?: (UserChatRoom | null)[] | null;
   readonly Checkins?: (Checkin | null)[] | null;
@@ -83,6 +84,7 @@ type LazyUser = {
   readonly biography?: string | null;
   readonly email?: string | null;
   readonly notifications?: boolean | null;
+  readonly streakStart?: string | null;
   readonly Messages: AsyncCollection<Checkin>;
   readonly ChatRooms: AsyncCollection<UserChatRoom>;
   readonly Checkins: AsyncCollection<Checkin>;
@@ -248,7 +250,7 @@ export declare const Message: (new (init: ModelInit<Message>) => Message) & {
   copyOf(source: Message, mutator: (draft: MutableModel<Message>) => MutableModel<Message> | void): Message;
 }
 
-type EagerChallenge = {
+type EagerChatRoom = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Challenge, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
@@ -266,7 +268,7 @@ type EagerChallenge = {
   readonly challengeChatRoomId?: string | null;
 }
 
-type LazyChallenge = {
+type LazyChatRoom = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Challenge, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';

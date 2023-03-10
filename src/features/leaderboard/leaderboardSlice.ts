@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
+import { fetchLeaderboardData } from "./leaderboardQueries";
 
 export type LeaderboardState = {
   loading: boolean;
@@ -8,7 +9,7 @@ export type LeaderboardState = {
   timeInterval: string;
   page: number;
   page_count: number | undefined;
-  entries: Array<object>;
+  entries: Array<{ name: string; checkins: number }>;
 };
 
 const initialState: LeaderboardState = {
@@ -16,21 +17,26 @@ const initialState: LeaderboardState = {
   error: "",
   challengeType: "Sleep",
   timeInterval: "Weekly",
-  page: 1,
-  page_count: undefined,
-  entries: [{}],
+  page: 0,
+  page_count: 2,
+  entries: [],
 };
 
+/**
+ * Fetches the leaderboard entries from the database
+ * @returns {Promise<GraphQLResult<Leaderboard>>} The leaderboard entries as  {name: string, checkins: number}
+ */
 export const fetchLeaderboard = createAsyncThunk<
-  void,
+  any,
   void,
   { rejectValue: string }
 >(
   "leaderboard/fetch",
   async (_, thunkAPI) => {
     try {
-      const response = await fetch("https://test/api/leaderboard"); //  BACKEND PLACEHOLDER
-      return await response.json();
+      const state = thunkAPI.getState() as RootState;
+      const { challengeType, page } = state.leaderboard;
+      return fetchLeaderboardData(challengeType, page);
     } catch (error: any) {
       const message = error.message;
       return thunkAPI.rejectWithValue(message);
@@ -68,7 +74,7 @@ export const leaderboardSlice = createSlice({
       }
 
       state[name as keyof LeaderboardState] = value as never;
-      state.page = 1;
+      state.page = 0;
       state.entries = [];
       state.loading = false;
       state.error = "";
@@ -81,7 +87,7 @@ export const leaderboardSlice = createSlice({
         state.page += 1;
         state.loading = false;
         state.error = "";
-        state.entries = action.payload.entries;
+        state.entries = action.payload;
       }
     );
     builder.addCase(fetchLeaderboard.pending, (state) => {
