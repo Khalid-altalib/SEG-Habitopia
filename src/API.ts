@@ -638,19 +638,13 @@ export type ModelChallengeConnection = {
   startedAt?: number | null,
 };
 
-export type ModelChallengeByStatusCompositeKeyConditionInput = {
-  eq?: ModelChallengeByStatusCompositeKeyInput | null,
-  le?: ModelChallengeByStatusCompositeKeyInput | null,
-  lt?: ModelChallengeByStatusCompositeKeyInput | null,
-  ge?: ModelChallengeByStatusCompositeKeyInput | null,
-  gt?: ModelChallengeByStatusCompositeKeyInput | null,
-  between?: Array< ModelChallengeByStatusCompositeKeyInput | null > | null,
-  beginsWith?: ModelChallengeByStatusCompositeKeyInput | null,
-};
-
-export type ModelChallengeByStatusCompositeKeyInput = {
-  started?: number | null,
-  userCount?: number | null,
+export type ModelIntKeyConditionInput = {
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
 };
 
 export enum ModelSortDirection {
@@ -3648,7 +3642,7 @@ export type SyncChallengesQuery = {
 
 export type ChallengesByStatusQueryVariables = {
   status: ChallengeStatusEnum,
-  startedUserCount?: ModelChallengeByStatusCompositeKeyConditionInput | null,
+  started?: ModelIntKeyConditionInput | null,
   sortDirection?: ModelSortDirection | null,
   filter?: ModelChallengeFilterInput | null,
   limit?: number | null,

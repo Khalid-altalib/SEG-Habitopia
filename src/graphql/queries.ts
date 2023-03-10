@@ -347,7 +347,7 @@ export const syncChallenges = /* GraphQL */ `
 export const challengesByStatus = /* GraphQL */ `
   query ChallengesByStatus(
     $status: ChallengeStatusEnum!
-    $startedUserCount: ModelChallengeByStatusCompositeKeyConditionInput
+    $started: ModelIntKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelChallengeFilterInput
     $limit: Int
@@ -355,7 +355,7 @@ export const challengesByStatus = /* GraphQL */ `
   ) {
     challengesByStatus(
       status: $status
-      startedUserCount: $startedUserCount
+      started: $started
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit

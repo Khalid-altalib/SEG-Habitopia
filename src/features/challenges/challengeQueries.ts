@@ -9,6 +9,12 @@ import {
   User,
 } from "../../models";
 
+enum ChallengeStatus {
+  ACTIVE,
+  INACTIVE,
+  COMPLETED
+}
+
 export const joinChallengeQuery = async (
   challengeTypeInstance: ChallengeTypeModel,
   thunkAPI: any
@@ -66,12 +72,13 @@ const findChallengeToJoin = async (
     );
 
     if (availableChallenges.length == 0) {
-      const newChatRoom = await DataStore.save(new ChatRoom({}));
+      const newChatRoom = await DataStore.save(new ChatRoom({name: challengeTypeInstance.name}));
       const toJoin = await DataStore.save(
         new ChallengeModel({
           ChatRoom: newChatRoom,
           ChallengeType: challengeTypeInstance,
           challengeChallengeTypeId: challengeTypeInstance.id,
+          status: "INACTIVE",
           userCount: 0,
         })
       );

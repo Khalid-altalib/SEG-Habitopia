@@ -42,7 +42,7 @@
       "function": {
         "challengeSchedule": {
           "deploymentBucketName": "amplify-habitopia-challend-184819-deployment",
-          "s3Key": "amplify-builds/challengeSchedule-6842453933386c4c2b7a-build.zip"
+          "s3Key": "amplify-builds/challengeSchedule-4d4263557a6f73677171-build.zip"
         }
       }
     }
