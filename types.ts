@@ -108,6 +108,7 @@ export type Chat = {
   text?: string;
   time?: string;
   messages?: Message[];
+  unreadMessages: number | 0;
 };
 
 export type Settings = {

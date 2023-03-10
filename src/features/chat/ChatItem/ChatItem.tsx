@@ -27,6 +27,7 @@ const ChatItem = (chat: Chat) => {
           <Text numberOfLines={2} style={chatstyles.lastMessage}>
             {chat.text}
           </Text>
+          <Text>Unread Messages: {chat.unreadMessages}</Text>
         </View>
       </View>
     </Pressable>

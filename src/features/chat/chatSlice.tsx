@@ -189,20 +189,31 @@ export const chatSlice = createSlice({
     resetPageNumber: (state) => {
       state.pageNumber = 0;
     },
-    updateChatList: (state, action:PayloadAction<{chatID?: string, updatedAt?: string, lastMessage?: string}>) => {
-      const { chatID, updatedAt, lastMessage } = action.payload;
+    updateChatList: (
+      state,
+      action: PayloadAction<{
+        chatID?: string;
+        updatedAt?: string;
+        lastMessage?: string;
+        incrementUnread?: boolean;
+      }>
+    ) => {
+      const { chatID, updatedAt, lastMessage, incrementUnread } =
+        action.payload;
       const chat = state.chats.find((chat) => chat.id === chatID);
 
       if (chat) {
-        if(updatedAt !== undefined){
-          chat.time = updatedAt
+        if (updatedAt !== undefined) {
+          chat.time = updatedAt;
         }
-        if(lastMessage !== undefined && lastMessage !== ""){
-          chat.text = lastMessage
+        if (lastMessage !== undefined && lastMessage !== "") {
+          chat.text = lastMessage;
         }
-        
+        if (incrementUnread) {
+          chat.unreadMessages += 1;
+        }
       }
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchChats.pending, (state) => {
@@ -231,6 +242,7 @@ export const chatSlice = createSlice({
         if (chat) {
           if (state.pageNumber == 0) chat.messages = action.payload.messages;
           else chat.messages?.push(...action.payload.messages);
+          chat.unreadMessages = 0;
         }
         state.pageNumber += 1;
 
@@ -311,7 +323,7 @@ export const {
   setCurrentChatId,
   updateCheckInMessage,
   resetPageNumber,
-  updateChatList
+  updateChatList,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

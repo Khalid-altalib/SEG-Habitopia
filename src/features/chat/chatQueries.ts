@@ -28,6 +28,7 @@ export const fetchUserChats = async (thunkAPI: any) => {
       name: "Chatroom",
       text: lastMessage?.text || "",
       time: lastMessage?.createdAt || "",
+      unreadMessages: 0,
     } as Chat);
   }
   chats.sort((a: Chat, b: Chat) => {
@@ -295,11 +296,18 @@ export const getCheckInById = async (checkInId: string) => {
   return checkIn;
 };
 
-export const getMessageById = async (checkInId: string) => {
+export const getMessageByCheckInId = async (checkInId: string) => {
   const message = (
     await DataStore.query(Message, (message) =>
       message.messageGetCheckinId.eq(checkInId)
     )
+  )[0];
+  return message;
+};
+
+export const getMessageById = async (id: string) => {
+  const message = (
+    await DataStore.query(Message, (message) => message.id.eq(id))
   )[0];
   return message;
 };

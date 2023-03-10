@@ -28,7 +28,10 @@ import { MessageEnum } from "src/models";
 import TextMessage from "../../../features/chat/TextMessage/TextMessage";
 import { getUserFromDatabasebyID } from "@app/util";
 import CheckInMessage from "../../../features/chat/CheckInMessage/CheckInMessage";
-import { getCheckInById, getMessageById } from "@features/chat/chatQueries";
+import {
+  getCheckInById,
+  getMessageByCheckInId,
+} from "@features/chat/chatQueries";
 import { Button } from "react-native";
 
 type Props = {};
@@ -95,7 +98,7 @@ const ChatScreen = (props: Props) => {
         const data = { ...value.data?.onUpdateCheckin };
         const user = await getUserFromDatabasebyID(data.userID || "");
         const message = {
-          ...(await getMessageById(data.id || "")),
+          ...(await getMessageByCheckInId(data.id || "")),
           validationCount: data.validationCount,
           isValidated: data.isValidated,
           userName: user.name,
