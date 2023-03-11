@@ -69,6 +69,12 @@ describe("leaderboardSlice", () => {
       expect(state.error).toEqual(undefined);
       expect(state.entries).toEqual([]);
     });
+
+    it("should handle when state is assigned a value", () => {
+      const action = changeSetting({ name: "challengeType", value: "Sleep" });
+      const state = leaderboardSlice.reducer(initialState, action);
+      expect(state.challengeType).toEqual("Sleep");
+    });
   });
 
   describe("fetchLeaderboard", () => {
@@ -96,10 +102,58 @@ describe("leaderboardSlice", () => {
       );
       expect(resultAction.type).toEqual(fetchLeaderboard.rejected.type);
     });
+
+    it("should not update state when page is out of bounds", async () => {
+      const state = {
+        ...initialState,
+        page: 2,
+      };
+      const getState = () => ({ leaderboard: state } as RootState);
+      const resultAction = await fetchLeaderboard()(
+        jest.fn(),
+        getState,
+        undefined
+      );
+      expect(resultAction.type).toEqual(fetchLeaderboard.rejected.type);
+    });
+
+    it("should update state when page is in bounds", async () => {
+      const state = {
+        ...initialState,
+        page: 1,
+      };
+      const getState = () => ({ leaderboard: state } as RootState);
+      const resultAction = await fetchLeaderboard()(
+        jest.fn(),
+        getState,
+        undefined
+      );
+      expect(resultAction.type).toEqual(fetchLeaderboard.fulfilled.type);
+    });
+
+    it("should not change state if there is an error", async () => {
+      const state = {
+        ...initialState,
+        error: "error",
+      };
+      const getState = () => ({ leaderboard: state } as RootState);
+      const resultAction = await fetchLeaderboard()(
+        jest.fn(),
+        getState,
+        undefined
+      );
+      expect(resultAction.type).toEqual(fetchLeaderboard.rejected.type);
+    });
+
+    it("should catch errors from fetching the leaderboard", async () => {
+      const error = Error("error");
+      (fetchLeaderboardData as jest.Mock).mockRejectedValue(error);
+      const resultAction = await fetchLeaderboard()(
+        jest.fn(),
+        getState,
+        undefined
+      );
+      expect(resultAction.type).toEqual(fetchLeaderboard.rejected.type);
+    });
   });
 });
-
-// not implemented yet
-//it("should update state when fetch succeeds", async () => {});
-//it("should not update state when page is out of bounds", async () => {});
-//it("should update state when page is in bounds", async () => {});
