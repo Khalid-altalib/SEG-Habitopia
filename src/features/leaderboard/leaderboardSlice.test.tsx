@@ -62,12 +62,12 @@ describe("leaderboardSlice", () => {
     });
 
     it("should handle fetchLeaderboard.rejected", () => {
-        const error = Error("error");
-        const action = fetchLeaderboard.rejected(error, "", undefined);
-        const state = leaderboardSlice.reducer(initialState, action);
-        expect(state.loading).toEqual(false);
-        expect(state.error).toEqual(undefined);
-        expect(state.entries).toEqual([]);
+      const error = Error("error");
+      const action = fetchLeaderboard.rejected(error, "", undefined);
+      const state = leaderboardSlice.reducer(initialState, action);
+      expect(state.loading).toEqual(false);
+      expect(state.error).toEqual(undefined);
+      expect(state.entries).toEqual([]);
     });
   });
 
@@ -99,9 +99,7 @@ describe("leaderboardSlice", () => {
   });
 });
 
-
-
-    // not implemented yet
-    //it("should update state when fetch succeeds", async () => {});
-    //it("should not update state when page is out of bounds", async () => {});
-    //it("should update state when page is in bounds", async () => {});
+// not implemented yet
+//it("should update state when fetch succeeds", async () => {});
+//it("should not update state when page is out of bounds", async () => {});
+//it("should update state when page is in bounds", async () => {});
