@@ -2,7 +2,6 @@ import configureStore, { MockStore } from "redux-mock-store";
 import thunk from "redux-thunk";
 import { fetchLeaderboard, leaderboardSlice } from "./leaderboardSlice";
 
-jest.mock("./authQueries");
 jest.mock("aws-amplify");
 
 const mockStore = configureStore([thunk]);
