@@ -1,7 +1,6 @@
 import React from "react";
 import { render, fireEvent, act } from "@testing-library/react-native";
 import NotificationToggle from "./NotificationToggle";
-import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import settingsMockState from "../settingsMockState";

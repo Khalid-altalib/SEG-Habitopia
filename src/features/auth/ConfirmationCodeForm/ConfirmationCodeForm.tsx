@@ -45,7 +45,12 @@ const ConfirmationCodeForm = () => {
       <Controller
         control={control}
         render={({ field: { onChange, value } }) => (
-          <Input onChangeText={onChange} value={value} size="xl" />
+          <Input
+            onChangeText={onChange}
+            value={value}
+            size="xl"
+            testID="confirmation-code-input"
+          />
         )}
         name="confirmationCode"
       />
