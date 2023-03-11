@@ -1,7 +1,7 @@
 // React Native
 import { View } from "react-native";
 
-type Props = {
+export type BoxWithShadowProps = {
   /** The components to show inside the box. */
   children: any;
 };
@@ -9,10 +9,10 @@ type Props = {
 /**
  * A box that has a shadow and can hold components inside it.
  *
- * @param props The properties passed to the component.
- * @returns The box.
+ * @param props - The properties passed to the component.
+ * @returns - The box.
  */
-const BoxWithShadow = ({ children }: Props) => (
+const BoxWithShadow = ({ children }: BoxWithShadowProps) => (
   <View
     style={[
       {

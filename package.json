@@ -8,6 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
+    "docs": "npx typedoc --tsconfig ./tsconfig.json",
     "storybook": "start-storybook -p 7007",
     "build-storybook": "build-storybook"
   },
@@ -93,6 +94,7 @@
     "jest-expo": "~47.0.1",
     "mock-async-storage": "^2.2.0",
     "react-test-renderer": "^18.1.0",
+    "typedoc": "^0.24.0-beta.2",
     "typescript": "^4.6.3"
   },
   "private": true
