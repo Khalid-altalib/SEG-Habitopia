@@ -1,4 +1,5 @@
 index.py
+pyproject.toml
 setup.py
 src.egg-info/PKG-INFO
 src.egg-info/SOURCES.txt
