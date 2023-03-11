@@ -8,7 +8,7 @@ export type LeaderboardState = {
   challengeType: string;
   timeInterval: string;
   page: number;
-  page_count: number | undefined;
+  pageCount: number | undefined;
   entries: Array<{ name: string; checkins: number }>;
 };
 
@@ -18,7 +18,7 @@ const initialState: LeaderboardState = {
   challengeType: "Sleep",
   timeInterval: "Weekly",
   page: 0,
-  page_count: 2,
+  pageCount: 2,
   entries: [],
 };
 
@@ -46,8 +46,8 @@ export const fetchLeaderboard = createAsyncThunk<
     condition: (_, { getState }) => {
       const { leaderboard } = getState() as RootState;
       if (
-        leaderboard.page_count &&
-        leaderboard.page == leaderboard.page_count
+        leaderboard.pageCount &&
+        leaderboard.page == leaderboard.pageCount
       ) {
         return false;
       }
