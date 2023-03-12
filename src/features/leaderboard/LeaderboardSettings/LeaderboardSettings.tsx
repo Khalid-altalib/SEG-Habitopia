@@ -1,9 +1,10 @@
-import { HStack, Select } from "native-base";
+import { Button, HStack, Select } from "native-base";
 import React from "react";
 import { Challenge } from "../../../../types";
 import { useDispatch, useSelector } from "../../../app/hooks";
 import { fetchChallenges } from "../../challenges/challengesSlice";
 import { changeSetting, LeaderboardState } from "../leaderboardSlice";
+import { useState, useEffect } from "react";
 
 type Props = {};
 
@@ -22,6 +23,10 @@ const LeaderboardSettings = (props: Props) => {
 
   const challengeTypes = ["Sleep", "Gym", "Diet"];
 
+  const [selectedChallengeType, setSelectedChallengeType] = useState(
+    challengeTypes[0]
+  );
+
   const dispatch = useDispatch();
 
   const handleChange = async (settingName: string, value: string) => {
@@ -29,26 +34,26 @@ const LeaderboardSettings = (props: Props) => {
     await dispatch(fetchChallenges());
   };
 
+  useEffect(() => {
+    handleChange("challengeType", selectedChallengeType);
+  }, [selectedChallengeType]);
+
   return (
     <HStack space={4}>
-      <Select
-        selectedValue={timeInterval}
-        minWidth={120}
-        onValueChange={(value) => handleChange("timeInterval", value)}
-      >
-        {timeIntervals.map((value) => (
-          <Select.Item label={value} value={value} key={value} />
-        ))}
-      </Select>
-      <Select
-        selectedValue={challengeType}
-        minWidth={120}
-        onValueChange={(value) => handleChange("challengeType", value)}
-      >
-        {challengeTypes.map((value) => (
-          <Select.Item label={value} value={value} key={value} />
-        ))}
-      </Select>
+      {challengeTypes.map((challengeType) => {
+        const buttonColor =
+          challengeType === selectedChallengeType ? "red.500" : "blue.500";
+        console.log(selectedChallengeType, challengeType);
+        return (
+          <Button
+            backgroundColor={buttonColor}
+            onPress={() => setSelectedChallengeType(challengeType)}
+            key={challengeType}
+          >
+            {challengeType}
+          </Button>
+        );
+      })}
     </HStack>
   );
 };
