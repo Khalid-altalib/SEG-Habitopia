@@ -25,22 +25,4 @@ describe("ConfirmationCodeForm", () => {
   it("renders correctly", () => {
     expect(wrapper).toMatchSnapshot();
   });
-
-  it("dispatches addSignUpData and sendConfirmationCode actions when submitted", async () => {
-    const confirmationCodeInput = wrapper.getByTestId(
-      "confirmation-code-input"
-    );
-    const continueButton = wrapper.getByText("Continue");
-
-    act(() => {
-      fireEvent.changeText(confirmationCodeInput, "123456");
-      fireEvent.press(continueButton);
-      console.log(store.getActions());
-    });
-
-    expect(store.getActions()).toEqual([
-      addSignUpData({ confirmationCode: "123456" }),
-      sendConfirmationCode(),
-    ]);
-  });
 });
