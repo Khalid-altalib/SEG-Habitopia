@@ -27,4 +27,20 @@ describe("LeaderboardLayout", () => {
     it("renders correctly", () => {
         expect(wrapper).toMatchSnapshot();
     });
+
+    it("renders the name of the user", () => {
+        expect(wrapper.getByText("alice")).toBeDefined();
+    });
+
+    it("renders an avatar of the user", () => {
+        expect(wrapper.getByTestId("avatar")).toBeDefined();
+    });
+
+    it("renders the correct place", () => {
+        expect(wrapper.getByText("#1")).toBeDefined();
+    });
+
+    it("renders the correct number of wins", () => {
+        expect(wrapper.getByText("4 wins")).toBeDefined();
+    });
 });

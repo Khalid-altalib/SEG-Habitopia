@@ -27,7 +27,7 @@ const LeaderboardCard = (props: Props) => {
     <Card backgroundColorGradient={cardColor}>
       <HStack justifyContent={"space-between"} alignItems="center">
         <HStack space={4}>
-          <Avatar />
+          <Avatar testID="avatar" />
           <View>
             <Text
               type={TextType.Subheading}
