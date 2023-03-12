@@ -15,8 +15,8 @@ export type LeaderboardState = {
 const initialState: LeaderboardState = {
   loading: false,
   error: "",
-  challengeType: "Sleep",
-  timeInterval: "Weekly",
+  challengeType: "",
+  timeInterval: "",
   page: 0,
   page_count: 2,
   entries: [],
@@ -36,6 +36,7 @@ export const fetchLeaderboard = createAsyncThunk<
     try {
       const state = thunkAPI.getState() as RootState;
       const { challengeType, page } = state.leaderboard;
+
       return fetchLeaderboardData(challengeType, page);
     } catch (error: any) {
       const message = error.message;
