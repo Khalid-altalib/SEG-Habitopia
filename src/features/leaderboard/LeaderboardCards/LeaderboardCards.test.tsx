@@ -37,14 +37,4 @@ describe("LeaderboardLayout", () => {
   it("renders correctly", () => {
     expect(wrapper).toMatchSnapshot();
   });
-
-  // it("should set status container to loading when loading is true", () => {
-  //   mockStore.getState().leaderboard.loading = true;
-  //   wrapper.rerender(
-  //     <TestingWrapperNavigation store={mockStore}>
-  //       <LeaderboardCards />
-  //     </TestingWrapperNavigation>
-  //   );
-  //   expect(wrapper).toMatchSnapshot();
-  // });
 });
