@@ -48,7 +48,6 @@ const ChatListScreen = (props: Props) => {
             chatID: data.id,
             updatedAt: data.updatedAt,
             lastMessage: lastMessage.text || "",
-            incrementUnread: isFocused,
           })
         );
       },

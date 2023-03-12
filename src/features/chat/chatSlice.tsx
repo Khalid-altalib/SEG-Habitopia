@@ -195,11 +195,9 @@ export const chatSlice = createSlice({
         chatID?: string;
         updatedAt?: string;
         lastMessage?: string;
-        incrementUnread?: boolean;
       }>
     ) => {
-      const { chatID, updatedAt, lastMessage, incrementUnread } =
-        action.payload;
+      const { chatID, updatedAt, lastMessage } = action.payload;
       const chat = state.chats.find((chat) => chat.id === chatID);
 
       if (chat) {
@@ -209,9 +207,7 @@ export const chatSlice = createSlice({
         if (lastMessage !== undefined && lastMessage !== "") {
           chat.text = lastMessage;
         }
-        if (incrementUnread) {
-          chat.unreadMessages += 1;
-        }
+        chat.unreadMessages += 1;
       }
     },
   },
