@@ -29,7 +29,7 @@ describe("LeaderboardLayout", () => {
     });
 
     it("renders the name of the user", () => {
-        expect(wrapper.getByText("alice")).toBeDefined();
+        expect(wrapper.getByText("Alice")).toBeDefined();
     });
 
     it("renders an avatar of the user", () => {
