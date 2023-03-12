@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { FlatList } from "react-native";
 import ChatItem from "../../../features/chat/ChatItem/ChatItem";
 import { useDispatch, useSelector } from "../../../app/hooks";
 import { fetchChats } from "../../../features/chat/chatSlice";
@@ -29,13 +28,14 @@ const ChatListScreen = (props: Props) => {
   return (
     <Box>
       {chats &&
-        chats.map((item) => (
+        chats.map((item, i) => (
           <ChatItem
             id={item.id}
             name={item.name}
             image={item.image}
             text={item.text}
             time={item.time}
+            key={i}
           />
         ))}
     </Box>

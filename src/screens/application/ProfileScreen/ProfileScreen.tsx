@@ -59,14 +59,6 @@ const ProfileScreen = () => {
           <ProfileHeader isLocalUserProfile={isLocalUserProfile} />
           <Divider my={4} />
           <ProfileStatistics />
-          <Button
-            onPress={() => {
-              navigation.push("Profile", { userId: "a" });
-            }}
-            my={4}
-          >
-            Visit Stacked Profile (Placeholder)
-          </Button>
         </StatusContainer>
       </PaddedContainer>
     </ScrollView>

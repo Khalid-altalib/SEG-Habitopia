@@ -134,7 +134,7 @@ const ChatScreen = (props: Props) => {
     >
       <ScrollView>
         {reversed_messages &&
-          reversed_messages.map((item) => {
+          reversed_messages.map((item, i) => {
             if (item.messageType === MessageEnum.TEXT) {
               return (
                 <TextMessage
@@ -144,6 +144,7 @@ const ChatScreen = (props: Props) => {
                   createdAt={item.createdAt}
                   userID={item.userID}
                   messageType={item.messageType}
+                  key={i}
                 />
               );
             } else if (item.messageType === MessageEnum.CHECKIN) {
@@ -157,6 +158,7 @@ const ChatScreen = (props: Props) => {
                   createdAt={item.createdAt}
                   userID={item.userID}
                   messageType={item.messageType}
+                  key={i}
                 />
               );
             } else {
