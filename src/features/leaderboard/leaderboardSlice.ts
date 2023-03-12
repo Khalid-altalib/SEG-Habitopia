@@ -8,17 +8,15 @@ export type LeaderboardState = {
   challengeType: string;
   timeInterval: string;
   page: number;
-  pageCount: number | undefined;
   entries: Array<{ name: string; checkins: number }>;
 };
 
 const initialState: LeaderboardState = {
   loading: false,
   error: "",
-  challengeType: "Sleep",
-  timeInterval: "Weekly",
+  challengeType: "",
+  timeInterval: "",
   page: 0,
-  pageCount: 2,
   entries: [],
 };
 
@@ -36,27 +34,14 @@ export const fetchLeaderboard = createAsyncThunk<
     try {
       const state = thunkAPI.getState() as RootState;
       const { challengeType, page } = state.leaderboard;
-      return fetchLeaderboardData(challengeType, page);
+      const entries = fetchLeaderboardData(challengeType, page);
+
+      return entries
     } catch (error: any) {
       const message = error.message;
       return thunkAPI.rejectWithValue(message);
     }
   },
-  {
-    condition: (_, { getState }) => {
-      const { leaderboard } = getState() as RootState;
-      if (
-        leaderboard.pageCount &&
-        leaderboard.page == leaderboard.pageCount
-      ) {
-        return false;
-      }
-
-      if (leaderboard.error.length > 0) {
-        return false;
-      }
-    },
-  }
 );
 
 export const leaderboardSlice = createSlice({
@@ -87,7 +72,7 @@ export const leaderboardSlice = createSlice({
         state.page += 1;
         state.loading = false;
         state.error = "";
-        state.entries = action.payload;
+        state.entries = [...state.entries, ...action.payload];
       }
     );
     builder.addCase(fetchLeaderboard.pending, (state) => {
