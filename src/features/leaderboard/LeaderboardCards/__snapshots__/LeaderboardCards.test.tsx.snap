@@ -178,6 +178,7 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                                 "width": 48,
                               }
                             }
+                            testID="avatar"
                           />
                           <View
                             dataSet={{}}
@@ -331,6 +332,7 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                                 "width": 48,
                               }
                             }
+                            testID="avatar"
                           />
                           <View
                             dataSet={{}}
@@ -484,6 +486,7 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                                 "width": 48,
                               }
                             }
+                            testID="avatar"
                           />
                           <View
                             dataSet={{}}
