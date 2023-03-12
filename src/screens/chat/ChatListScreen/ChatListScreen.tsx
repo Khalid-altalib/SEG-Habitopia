@@ -6,6 +6,7 @@ import { fetchChats } from "../../../features/chat/chatSlice";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ChatParams } from "types";
+import { Box } from "native-base";
 
 type Props = {};
 
@@ -26,18 +27,18 @@ const ChatListScreen = (props: Props) => {
   }, [navigation]);
 
   return (
-    <FlatList
-      data={chats}
-      renderItem={({ item }) => (
-        <ChatItem
-          id={item.id}
-          name={item.name}
-          image={item.image}
-          text={item.text}
-          time={item.time}
-        />
-      )}
-    />
+    <Box>
+      {chats &&
+        chats.map((item) => (
+          <ChatItem
+            id={item.id}
+            name={item.name}
+            image={item.image}
+            text={item.text}
+            time={item.time}
+          />
+        ))}
+    </Box>
   );
 };
 
