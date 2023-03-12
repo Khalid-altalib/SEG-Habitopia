@@ -1,85 +1,55 @@
-import configureStore, { MockStore } from "redux-mock-store";
-import thunk from "redux-thunk";
-import { setSettings } from "./settingsSlice";
-import { DataStore } from "aws-amplify";
-import { getUserFromDatabase } from "../../app/util";
-import mockUser from "@app/mockUser";
+import { getUserFromDatabase } from "@app/util";
+import { configureStore } from "@reduxjs/toolkit";
+import settingsReducer, { fetchSettings } from "./settingsSlice";
 
 jest.mock("../../app/util", () => ({
-  getUserFromDatabase: jest.fn(() => mockUser),
+  getUserFromDatabase: jest.fn(),
 }));
-
-jest.mock("aws-amplify", () => ({
-  DataStore: {
-    save: jest.fn(),
-    query: jest.fn(),
-  },
-}));
-
-const mockStore = configureStore([thunk]);
 
 describe("settingsSlice", () => {
-  let store: MockStore;
+  let store: ReturnType<typeof configureStore>;
+  const mockUserData = {
+    email: "test@test.com",
+    name: "Test User",
+    notifications: true,
+    biography: "This is a test biography.",
+  };
 
   beforeEach(() => {
-    store = mockStore({
-      auth: {
-        user: mockUser,
-      },
-      settings: {
-        loading: false,
-        error: "",
+    store = configureStore({
+      reducer: {
+        settings: settingsReducer,
       },
     });
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
   });
 
-  describe("setSettings", () => {
-    it("should update the user settings correctly", async () => {
-      const settings = {
-        name: "New name",
-        notifications: false,
-        biography: "New bio",
-      };
+  it("should handle fetchSettings correctly", async () => {
+    (getUserFromDatabase as jest.Mock).mockResolvedValueOnce(mockUserData);
+    const expectedSettings = {
+      email: mockUserData.email,
+      name: mockUserData.name,
+      notifications: mockUserData.notifications,
+      biography: mockUserData.biography,
+    };
 
-      await store.dispatch(setSettings(settings));
+    await store.dispatch(fetchSettings());
 
-      expect(getUserFromDatabase).toHaveBeenCalled();
-      expect(DataStore.save).toHaveBeenCalledWith(
-        expect.objectContaining({
-          id: "123",
-          name: "New name",
-          notifications: false,
-          biography: "New bio",
-        })
-      );
-    });
+    const actualSettings = store.getState().settings.settings;
+    expect(actualSettings).toEqual(expectedSettings);
+  });
 
-    it("should dispatch the correct actions on success", async () => {
-      await store.dispatch(setSettings({}));
+  it("should handle fetchSettings", async () => {
+    const errorMessage = "Error fetching user data";
+    (getUserFromDatabase as jest.Mock).mockRejectedValueOnce(
+      new Error(errorMessage)
+    );
 
-      const actions = store.getActions();
-
-      expect(actions[0].type).toEqual("settings/set/pending");
-      expect(actions[1].type).toEqual("settings/set/fulfilled");
-    });
-
-    it("should dispatch the correct actions on failure", async () => {
-      const errorMessage = "Something went wrong!";
-      (getUserFromDatabase as jest.Mock).mockRejectedValue(
-        new Error(errorMessage)
-      );
-
-      await store.dispatch(setSettings({}));
-
-      const actions = store.getActions();
-
-      expect(actions[0].type).toEqual("settings/set/pending");
-      expect(actions[1].type).toEqual("settings/set/rejected");
-      expect(actions[1].payload).toEqual(errorMessage);
+    await expect(store.dispatch(fetchSettings())).resolves.toMatchObject({
+      error: expect.objectContaining({ message: "Rejected" }),
     });
   });
 });

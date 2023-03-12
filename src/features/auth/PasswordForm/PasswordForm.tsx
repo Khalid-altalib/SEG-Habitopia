@@ -49,6 +49,7 @@ const PasswordForm = () => {
             value={value}
             size="xl"
             type="password"
+            testID="password-input"
           />
         )}
         name="password"

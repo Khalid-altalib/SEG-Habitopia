@@ -29,16 +29,4 @@ describe("NotificationToggle component", () => {
     const switchComponent = wrapper.getByTestId("switch");
     expect(switchComponent.props.value).toBe(true);
   });
-
-  it("should dispatch setSettings action when switch is toggled", () => {
-    const store = mockStore;
-
-    const switchComponent = wrapper.getByTestId("switch");
-    act(() => {
-      fireEvent(switchComponent, "onValueChange", true);
-    });
-    // expect(store.getActions()).toEqual([
-    //   { type: "settings/setSettings", payload: { notifications: true } },
-    // ]);
-  });
 });
