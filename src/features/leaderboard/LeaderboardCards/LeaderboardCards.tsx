@@ -9,7 +9,6 @@ type Props = {};
 
 const LeaderboardCards = (props: Props) => {
   const { loading, error, entries } = useSelector((state) => state.leaderboard);
-  console.log(entries);
 
   return (
     <StatusContainer loading={loading} error={error} data={entries}>

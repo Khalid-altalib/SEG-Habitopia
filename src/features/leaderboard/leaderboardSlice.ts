@@ -35,7 +35,7 @@ export const fetchLeaderboard = createAsyncThunk<
       const state = thunkAPI.getState() as RootState;
       const { challengeType, page } = state.leaderboard;
       const entries = fetchLeaderboardData(challengeType, page);
-      console.log(entries)
+
       return entries
     } catch (error: any) {
       const message = error.message;
