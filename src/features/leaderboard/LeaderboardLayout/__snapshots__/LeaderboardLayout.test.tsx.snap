@@ -112,6 +112,7 @@ exports[`LeaderboardLayout renders correctly 1`] = `
               onScroll={[Function]}
               scrollEventThrottle={2000}
               style={{}}
+              testID="scrollView"
             >
               <View>
                 <View
@@ -126,7 +127,13 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                   <View
                     dataSet={{}}
                     style={{}}
-                  />
+                  >
+                    <div
+                      data-testid="child"
+                    >
+                      Child component
+                    </div>
+                  </View>
                 </View>
               </View>
             </RCTScrollView>
