@@ -5,7 +5,7 @@ import PaddedContainer from "@components/PaddedContainer";
 import Button from "@components/Button";
 import { ButtonType } from "types";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { RootParams, NavigationParams } from "types";
+import { NavigationParams } from "types";
 
 type Props = {};
 
