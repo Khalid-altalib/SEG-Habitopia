@@ -3,8 +3,8 @@ import { Avatar as NativeBaseAvatar, Box } from "native-base";
 
 type Props = {
   userId: string;
-  width: number | string;
-  height: number | string;
+  width?: number | string;
+  height?: number | string;
 };
 
 const Avatar = (props: Props) => {

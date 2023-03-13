@@ -1,6 +1,7 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View, Pressable, Text, Image, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import { Image, View, Pressable, Text } from "native-base";
 import {
   Chat,
   ChatParams,
@@ -8,6 +9,8 @@ import {
   NavigationParams,
 } from "../../../../types";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import Avatar from "@components/Avatar/Avatar";
+import { Box } from "native-base";
 
 const ChatItem = (chat: Chat) => {
   const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
@@ -19,7 +22,10 @@ const ChatItem = (chat: Chat) => {
       }}
       style={chatstyles.chatContainer}
     >
-      <Image source={{ uri: chat.image }} style={chatstyles.image} />
+      <Box justifyContent="center" alignItems="center" padding={3}>
+        <Avatar userId={chat.id} />
+      </Box>
+
       <View style={chatstyles.container}>
         <View style={chatstyles.row}>
           <Text style={chatstyles.name} numberOfLines={1}>

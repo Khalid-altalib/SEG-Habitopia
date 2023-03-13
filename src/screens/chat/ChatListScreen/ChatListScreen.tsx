@@ -33,7 +33,7 @@ const ChatListScreen = (props: Props) => {
         loading={loading}
         error={error}
         data={chats}
-        noResultsDisplay={<NoChats />}
+        noDataDisplay={<NoChats />}
       >
         {chats.length > 0 &&
           chats.map((item, i) => (

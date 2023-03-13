@@ -29,7 +29,7 @@ const ProfileHeader = (props: Props) => {
         <Box>
           <HStack space={4} pb={4}>
             <Box width={100}>
-              <Avatar userId="a" />
+              <Avatar userId="a" width="100%" height={100} />
             </Box>
 
             <VStack flex={1} justifyContent={"space-between"}>
