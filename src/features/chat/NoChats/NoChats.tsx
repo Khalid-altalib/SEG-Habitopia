@@ -18,7 +18,7 @@ const NoChats = (props: Props) => {
     <PaddedContainer>
       <VStack alignItems={"center"} space={5}>
         <Image
-          source={require("src/resources/images/not_found.png")}
+          source={require("../../../../assets/images/not_found.png")}
           style={{ width: 100, height: 100 }}
           alt="Chats not found"
         />
