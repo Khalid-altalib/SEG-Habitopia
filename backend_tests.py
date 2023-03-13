@@ -21,7 +21,67 @@ headers = {
 #query ([^=f(])
 #query \l$1
 
-testQuerys = []
+testQuerys = ["getLeaderboard(id: \\\"testID\\\") {\\r\\n        id\\r\\n    }",
+
+"listLeaderboards {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"getChallenge(id: \\\"testID\\\") {\\r\\n        id\\r\\n    }",
+
+"listChallenges {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"challengesByStatus(status: ACTIVE) {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"getChallengeType(id: \\\"testID\\\") {\\r\\n        id\\r\\n    }",
+
+"listChallengeTypes {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"getUser(id: \\\"testID\\\") {\\r\\n        id\\r\\n    }",
+
+"listUsers {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"getMessage(id: \\\"testID\\\") {\\r\\n        id\\r\\n    }",
+
+"listMessages {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"messagesByChatroomID(chatroomID: \\\"testID\\\") {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"messagesByUserID(userID: \\\"testID\\\") {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"getChatRoom(id: \\\"testID\\\") {\\r\\n        id\\r\\n    }",
+
+"listChatRooms {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"getCheckin(id: \\\"testID\\\") {\\r\\n        id\\r\\n    }",
+
+"listCheckins {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"checkinsByUserID(userID: \\\"testID\\\") {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"checkinsByChatroomID(chatroomID: \\\"testID\\\") {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"getChallengeUser(id: \\\"testID\\\") {\\r\\n        id\\r\\n    }",
+
+"listChallengeUsers {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"challengeUsersByChallengeId(challengeId: \\\"testID\\\") {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"challengeUsersByUserId(userID: \\\"testID\\\") {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"getUserChatRoom(id: \\\"testID\\\") {\\r\\n        id\\r\\n    }",
+
+"listUserChatRooms {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"userChatRoomsByUserId(userId: \\\"testID\\\") {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"userChatRoomsByChatRoomId(chatRoomId: \\\"testID\\\") {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"getUserValidatedCheckIn(id: \\\"testID\\\") {\\r\\n        id\\r\\n    }",
+
+"listUserValidatedCheckIns {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"userValidatedCheckInsByUserId(userId: \\\"testID\\\") {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }",
+
+"userValidatedCheckInsByCheckinId(checkinId: \\\"testID\\\") {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }"]
 
 testMutations = [
 
