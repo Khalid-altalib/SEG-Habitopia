@@ -7,6 +7,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ChatParams } from "types";
 import { Box } from "native-base";
 import NoChats from "@features/chat/NoChats/NoChats";
+import StatusContainer from "@components/StatusContainer/StatusContainer";
 
 type Props = {};
 
@@ -28,20 +29,24 @@ const ChatListScreen = (props: Props) => {
 
   return (
     <Box>
-      {chats.length > 0 ? (
-        chats.map((item, i) => (
-          <ChatItem
-            id={item.id}
-            name={item.name}
-            image={item.image}
-            text={item.text}
-            time={item.time}
-            key={i}
-          />
-        ))
-      ) : (
-        <NoChats />
-      )}
+      <StatusContainer
+        loading={loading}
+        error={error}
+        data={chats}
+        noResultsDisplay={<NoChats />}
+      >
+        {chats.length > 0 &&
+          chats.map((item, i) => (
+            <ChatItem
+              id={item.id}
+              name={item.name}
+              image={item.image}
+              text={item.text}
+              time={item.time}
+              key={i}
+            />
+          ))}
+      </StatusContainer>
     </Box>
   );
 };
