@@ -28,6 +28,7 @@ import TextMessage from "../../../features/chat/TextMessage/TextMessage";
 import { getUserFromDatabasebyID } from "@app/util";
 import CheckInMessage from "../../../features/chat/CheckInMessage/CheckInMessage";
 import { getCheckInById, getMessageById } from "@features/chat/chatQueries";
+import { ScrollView } from "native-base";
 
 type Props = {};
 
@@ -119,45 +120,52 @@ const ChatScreen = (props: Props) => {
     };
   }, [id]);
 
+  let reversed_messages = [] as any;
+
+  if (chat.messages) {
+    reversed_messages = [...chat.messages];
+    reversed_messages.reverse();
+  }
+
   return (
     <ImageBackground
       source={{ uri: "https://placeholder.com" }}
       style={styles.bg}
     >
-      <FlatList
-        data={chat.messages}
-        renderItem={({ item }) => {
-          if (item.messageType === MessageEnum.TEXT) {
-            return (
-              <TextMessage
-                id={item.id}
-                userName={item.userName}
-                text={item.text}
-                createdAt={item.createdAt}
-                userID={item.userID}
-                messageType={item.messageType}
-              />
-            );
-          } else if (item.messageType === MessageEnum.CHECKIN) {
-            return (
-              <CheckInMessage
-                id={item.id}
-                validationCount={item.validationCount}
-                isValidated={item.isValidated}
-                userName={item.userName}
-                text={item.text}
-                createdAt={item.createdAt}
-                userID={item.userID}
-                messageType={item.messageType}
-              />
-            );
-          } else {
-            return <></>;
-          }
-        }}
-        style={styles.flatList}
-        inverted={true}
-      />
+      <ScrollView>
+        {reversed_messages &&
+          reversed_messages.map((item, i) => {
+            if (item.messageType === MessageEnum.TEXT) {
+              return (
+                <TextMessage
+                  id={item.id}
+                  userName={item.userName}
+                  text={item.text}
+                  createdAt={item.createdAt}
+                  userID={item.userID}
+                  messageType={item.messageType}
+                  key={i}
+                />
+              );
+            } else if (item.messageType === MessageEnum.CHECKIN) {
+              return (
+                <CheckInMessage
+                  id={item.id}
+                  validationCount={item.validationCount}
+                  isValidated={item.isValidated}
+                  userName={item.userName}
+                  text={item.text}
+                  createdAt={item.createdAt}
+                  userID={item.userID}
+                  messageType={item.messageType}
+                  key={i}
+                />
+              );
+            } else {
+              return <></>;
+            }
+          })}
+      </ScrollView>
 
       <InputBox chatRoomID={chat.id} />
     </ImageBackground>
