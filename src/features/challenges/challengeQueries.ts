@@ -8,6 +8,7 @@ import {
   ChallengeUser,
   User,
 } from "../../models";
+impo
 
 enum ChallengeStatus {
   ACTIVE,
@@ -72,7 +73,10 @@ const findChallengeToJoin = async (
     );
 
     if (availableChallenges.length == 0) {
-      const newChatRoom = await DataStore.save(new ChatRoom({name: challengeTypeInstance.name}));
+      const new_date = new Date();
+      let string_new_date: string = new_date.toLocaleString();
+      let chatRoomName = challengeTypeInstance.name + " - " + string_new_date;
+      const newChatRoom = await DataStore.save(new ChatRoom({name: chatRoomName}));
       const toJoin = await DataStore.save(
         new ChallengeModel({
           ChatRoom: newChatRoom,
