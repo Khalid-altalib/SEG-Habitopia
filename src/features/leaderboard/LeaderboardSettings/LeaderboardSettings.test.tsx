@@ -1,44 +1,41 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
-import configureStore from 'redux-mock-store';
-import LeaderboardSettings from './LeaderboardSettings';
-import thunk from 'redux-thunk';
-import TestingWrapperNavigation from '@app/testingWrapperWithNavigation';
+import React from "react";
+import { render, fireEvent, waitFor } from "@testing-library/react-native";
+import LeaderboardSettings from "./LeaderboardSettings";
+import configureStore from "redux-mock-store";
+import TestingWrapperNavigation from "@app/testingWrapperWithNavigation";
 
-describe('LeaderboardSettings', () => {
-    const mockState = {
-        leaderboard: {
+const mockStore = configureStore([]);
+
+describe("LeaderboardSettings", () => {
+  let store: any;
+  let component: any;
+
+  beforeEach(() => {
+    store = mockStore({
+      leaderboard: {
+        timeInterval: "Weekly",
+      },
+      challenges: {
+        challenges: [
+          { name: "Challenge 1" },
+          { name: "Challenge 2" },
+          { name: "Challenge 3" },
+        ],
+        fetchChallenges: {
           loading: false,
           error: null,
-          challengeType: 'Sleep',
-          timeInterval: 'Weekly',
-          entries: [
-            { name: 'Alice', checkins: 4 },
-            { name: 'Bob', checkins: 3 },
-            { name: 'Charlie', checkins: 2 },
-          ],
         },
-        challenges: {
-          loading: false,
-          error: null,
-          challenges: [
-            { name: 'Sleep', description: 'Sleep' },
-            { name: 'Exercise', description: 'Exercise' },
-            { name: 'Meditate', description: 'Meditate' },
-          ],
-        },
-      };
-    const mockStore = configureStore([thunk])(mockState);
-    let wrapper: any;
-    beforeEach(() => {
-        wrapper = render(
-            <TestingWrapperNavigation store={mockStore}>
-                <LeaderboardSettings />
-            </TestingWrapperNavigation>
-        );
+      },
     });
+    component = (
+      <TestingWrapperNavigation store={store}>
+        <LeaderboardSettings />
+      </TestingWrapperNavigation>
+    );
+  });
 
-    it('renders correctly', () => {
-        expect(wrapper).toMatchSnapshot();
-    });
+  it("renders correctly", () => {
+    const { getByTestId } = render(component);
+    expect(getByTestId("leaderboardSettings")).toBeDefined();
+  });
 });

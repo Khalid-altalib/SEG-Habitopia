@@ -55,7 +55,7 @@ const LeaderboardSettings = (props: Props) => {
 
   return (
     <StatusContainer loading={loading} error={error} data={challenges}>
-      <HStack space={4}>
+      <HStack space={4} testID="leaderboardSettings">
         {challenges &&
           selectedChallengeType !== "" &&
           challenges.map((challenge) => {
