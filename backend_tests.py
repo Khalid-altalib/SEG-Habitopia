@@ -84,7 +84,41 @@ testQuerys = ["getLeaderboard(id: \\\"testID\\\") {\\r\\n        id\\r\\n    }",
 "userValidatedCheckInsByCheckinId(checkinId: \\\"testID\\\") {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }"]
 
 testMutations = [
-
+    {
+        "name": "Leaderboard",
+        "creationVars": "",
+        "updateVars": ""
+    },
+    {
+        "name": "Challenge",
+        "creationVars": "challengeChallengeTypeId: \"testID\"",
+        "updateVars": ""
+    },
+    {
+        "name": "ChallengeType",
+        "creationVars": "",
+        "updateVars": ""
+    },
+    {
+        "name": "User",
+        "creationVars": "",
+        "updateVars": ""
+    },
+    {
+        "name": "Message",
+        "creationVars": "",
+        "updateVars": ""
+    },
+    {
+        "name": "ChatRoom",
+        "creationVars": "",
+        "updateVars": ""
+    },
+    {
+        "name": "Checkin",
+        "creationVars": "",
+        "updateVars": ""
+    },
 ]
 
 #payload class: generic frame to populate with test querys
