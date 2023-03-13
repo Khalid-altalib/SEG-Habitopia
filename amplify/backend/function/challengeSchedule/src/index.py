@@ -17,8 +17,8 @@ def handler(event, context):
 
     #key and protocol
     headers = {
-    'x-api-key': 'da2-n657qaa6lndkdgsdmefs5d73qu',
-    'Content-Type': 'application/json'
+        'x-api-key': 'da2-n657qaa6lndkdgsdmefs5d73qu',
+        'Content-Type': 'application/json'
     }
 
     #payload class: query for active challenges
@@ -40,7 +40,7 @@ def handler(event, context):
     #payload class: query for inactive challenges to start
     class payloadGetChallengesToStart:
         def __init__(self):
-            self.query = "{\"query\":\"query getChallengesToStart {\\r\\n        challengesByStatus(status: INACTIVE) {\\r\\n            items {\\r\\n                id\\r\\n                createdAt\\r\\n                _version\\r\\n                _deleted\\r\\n            }\\r\\n        }\\r\\n    }\",\"variables\":{}}"
+            self.query = "{\"query\":\"query getChallengesToStart {\\r\\n        challengesByStatus(status: INACTIVE) {\\r\\n            items {\\r\\n                id\\r\\n                createdAt\\r\\n                userCount\\r\\n                _version\\r\\n                _deleted\\r\\n            }\\r\\n        }\\r\\n    }\",\"variables\":{}}"
 
         def asPayload(self):
             return self.query
@@ -62,7 +62,7 @@ def handler(event, context):
 
     #Set expired challenges to completed
     for chalToInact in activeChalsWithoutDeleted:
-        if chalToInact["started"] < int(time.time())-60*60*24*7:
+        if (chalToInact["started"] < int(time.time())-60*60*24*7):
             responseSetChallengeCompleted = requests.request("POST", url, headers=headers, data=payloadSetChallengeCompleted(chalToInact["id"], chalToInact["_version"]).asPayload())
             updateResponseAsJson = json.loads(responseSetChallengeCompleted.text)["data"]["updateChallenge"]
 
@@ -75,7 +75,7 @@ def handler(event, context):
 
     #Set queued full or waiting inactive challenges to active
     for chalToStart in challengesToStartWithoutDeleted:
-        if datetime.strptime(chalToStart["createdAt"],"%Y-%m-%dT%H:%M:%S.%fZ") < (datetime.today() - timedelta(days=1)):
+        if ((datetime.strptime(chalToStart["createdAt"],"%Y-%m-%dT%H:%M:%S.%fZ") < (datetime.today() - timedelta(days=1))) and (chalToStart["userCount"]>14)):
             responseSetChallengeActive = requests.request("POST", url, headers=headers, data=payloadSetChallengeActive(chalToStart["id"], chalToStart["_version"]).asPayload())
             updateResponseAsJson = json.loads(responseSetChallengeActive.text)["data"]["updateChallenge"]
 
