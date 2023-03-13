@@ -7,6 +7,7 @@ export type CreateLeaderboardInput = {
   numberOfCheckins: number,
   _version?: number | null,
   leaderboardUserId: string,
+  leaderboardChallengeTypeId?: string | null,
 };
 
 export type ModelLeaderboardConditionInput = {
@@ -15,6 +16,7 @@ export type ModelLeaderboardConditionInput = {
   or?: Array< ModelLeaderboardConditionInput | null > | null,
   not?: ModelLeaderboardConditionInput | null,
   leaderboardUserId?: ModelIDInput | null,
+  leaderboardChallengeTypeId?: ModelIDInput | null,
 };
 
 export type ModelIntInput = {
@@ -74,12 +76,14 @@ export type Leaderboard = {
   id: string,
   numberOfCheckins: number,
   User: User,
+  ChallengeType?: ChallengeType | null,
   createdAt: string,
   updatedAt: string,
   _version: number,
   _deleted?: boolean | null,
   _lastChangedAt: number,
   leaderboardUserId: string,
+  leaderboardChallengeTypeId?: string | null,
 };
 
 export type User = {
@@ -90,6 +94,7 @@ export type User = {
   biography?: string | null,
   email?: string | null,
   notifications?: boolean | null,
+  streakStart?: string | null,
   Messages?: ModelCheckinConnection | null,
   ChatRooms?: ModelUserChatRoomConnection | null,
   Checkins?: ModelCheckinConnection | null,
@@ -264,6 +269,7 @@ export type UpdateLeaderboardInput = {
   numberOfCheckins?: number | null,
   _version?: number | null,
   leaderboardUserId?: string | null,
+  leaderboardChallengeTypeId?: string | null,
 };
 
 export type DeleteLeaderboardInput = {
@@ -367,6 +373,7 @@ export type CreateUserInput = {
   biography?: string | null,
   email?: string | null,
   notifications?: boolean | null,
+  streakStart?: string | null,
   _version?: number | null,
 };
 
@@ -376,6 +383,7 @@ export type ModelUserConditionInput = {
   biography?: ModelStringInput | null,
   email?: ModelStringInput | null,
   notifications?: ModelBooleanInput | null,
+  streakStart?: ModelStringInput | null,
   and?: Array< ModelUserConditionInput | null > | null,
   or?: Array< ModelUserConditionInput | null > | null,
   not?: ModelUserConditionInput | null,
@@ -388,6 +396,7 @@ export type UpdateUserInput = {
   biography?: string | null,
   email?: string | null,
   notifications?: boolean | null,
+  streakStart?: string | null,
   _version?: number | null,
 };
 
@@ -588,6 +597,7 @@ export type ModelLeaderboardFilterInput = {
   or?: Array< ModelLeaderboardFilterInput | null > | null,
   not?: ModelLeaderboardFilterInput | null,
   leaderboardUserId?: ModelIDInput | null,
+  leaderboardChallengeTypeId?: ModelIDInput | null,
 };
 
 export type ModelLeaderboardConnection = {
@@ -640,6 +650,7 @@ export type ModelUserFilterInput = {
   biography?: ModelStringInput | null,
   email?: ModelStringInput | null,
   notifications?: ModelBooleanInput | null,
+  streakStart?: ModelStringInput | null,
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
   not?: ModelUserFilterInput | null,
@@ -811,6 +822,7 @@ export type ModelSubscriptionUserFilterInput = {
   biography?: ModelSubscriptionStringInput | null,
   email?: ModelSubscriptionStringInput | null,
   notifications?: ModelSubscriptionBooleanInput | null,
+  streakStart?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionUserFilterInput | null > | null,
   or?: Array< ModelSubscriptionUserFilterInput | null > | null,
 };
@@ -884,6 +896,7 @@ export type CreateLeaderboardMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -915,12 +928,25 @@ export type CreateLeaderboardMutation = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
+    ChallengeType?:  {
+      __typename: "ChallengeType",
+      id: string,
+      name: string,
+      description: string,
+      active: boolean,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     leaderboardUserId: string,
+    leaderboardChallengeTypeId?: string | null,
   } | null,
 };
 
@@ -942,6 +968,7 @@ export type UpdateLeaderboardMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -973,12 +1000,25 @@ export type UpdateLeaderboardMutation = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
+    ChallengeType?:  {
+      __typename: "ChallengeType",
+      id: string,
+      name: string,
+      description: string,
+      active: boolean,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     leaderboardUserId: string,
+    leaderboardChallengeTypeId?: string | null,
   } | null,
 };
 
@@ -1000,6 +1040,7 @@ export type DeleteLeaderboardMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -1031,12 +1072,25 @@ export type DeleteLeaderboardMutation = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
+    ChallengeType?:  {
+      __typename: "ChallengeType",
+      id: string,
+      name: string,
+      description: string,
+      active: boolean,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     leaderboardUserId: string,
+    leaderboardChallengeTypeId?: string | null,
   } | null,
 };
 
@@ -1381,6 +1435,7 @@ export type CreateUserMutation = {
     biography?: string | null,
     email?: string | null,
     notifications?: boolean | null,
+    streakStart?: string | null,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -1491,6 +1546,7 @@ export type UpdateUserMutation = {
     biography?: string | null,
     email?: string | null,
     notifications?: boolean | null,
+    streakStart?: string | null,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -1601,6 +1657,7 @@ export type DeleteUserMutation = {
     biography?: string | null,
     email?: string | null,
     notifications?: boolean | null,
+    streakStart?: string | null,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -2381,6 +2438,7 @@ export type CreateChallengeUserMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -2480,6 +2538,7 @@ export type UpdateChallengeUserMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -2579,6 +2638,7 @@ export type DeleteChallengeUserMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -2637,6 +2697,7 @@ export type CreateUserChatRoomMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -2734,6 +2795,7 @@ export type UpdateUserChatRoomMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -2831,6 +2893,7 @@ export type DeleteUserChatRoomMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -2928,6 +2991,7 @@ export type CreateUserValidatedCheckInMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -3018,6 +3082,7 @@ export type UpdateUserValidatedCheckInMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -3108,6 +3173,7 @@ export type DeleteUserValidatedCheckInMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -3196,6 +3262,7 @@ export type GetLeaderboardQuery = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -3227,12 +3294,25 @@ export type GetLeaderboardQuery = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
+    ChallengeType?:  {
+      __typename: "ChallengeType",
+      id: string,
+      name: string,
+      description: string,
+      active: boolean,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     leaderboardUserId: string,
+    leaderboardChallengeTypeId?: string | null,
   } | null,
 };
 
@@ -3257,18 +3337,32 @@ export type ListLeaderboardsQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
       },
+      ChallengeType?:  {
+        __typename: "ChallengeType",
+        id: string,
+        name: string,
+        description: string,
+        active: boolean,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
       leaderboardUserId: string,
+      leaderboardChallengeTypeId?: string | null,
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
@@ -3297,18 +3391,32 @@ export type SyncLeaderboardsQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
         _deleted?: boolean | null,
         _lastChangedAt: number,
       },
+      ChallengeType?:  {
+        __typename: "ChallengeType",
+        id: string,
+        name: string,
+        description: string,
+        active: boolean,
+        createdAt: string,
+        updatedAt: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+      } | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
       leaderboardUserId: string,
+      leaderboardChallengeTypeId?: string | null,
     } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
@@ -3599,6 +3707,7 @@ export type GetUserQuery = {
     biography?: string | null,
     email?: string | null,
     notifications?: boolean | null,
+    streakStart?: string | null,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -3712,6 +3821,7 @@ export type ListUsersQuery = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -3766,6 +3876,7 @@ export type SyncUsersQuery = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -4539,6 +4650,7 @@ export type GetChallengeUserQuery = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -4614,6 +4726,7 @@ export type ListChallengeUsersQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4668,6 +4781,7 @@ export type SyncChallengeUsersQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4723,6 +4837,7 @@ export type ChallengeUsersByChallengeIdQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4778,6 +4893,7 @@ export type ChallengeUsersByUserIdQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4813,6 +4929,7 @@ export type GetUserChatRoomQuery = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -4913,6 +5030,7 @@ export type ListUserChatRoomsQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4963,6 +5081,7 @@ export type SyncUserChatRoomsQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5014,6 +5133,7 @@ export type UserChatRoomsByUserIdQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5065,6 +5185,7 @@ export type UserChatRoomsByChatRoomIdQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5110,6 +5231,7 @@ export type GetUserValidatedCheckInQuery = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -5203,6 +5325,7 @@ export type ListUserValidatedCheckInsQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5258,6 +5381,7 @@ export type SyncUserValidatedCheckInsQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5314,6 +5438,7 @@ export type UserValidatedCheckInsByUserIdQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5370,6 +5495,7 @@ export type UserValidatedCheckInsByCheckinIdQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5419,6 +5545,7 @@ export type OnCreateLeaderboardSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -5450,12 +5577,25 @@ export type OnCreateLeaderboardSubscription = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
+    ChallengeType?:  {
+      __typename: "ChallengeType",
+      id: string,
+      name: string,
+      description: string,
+      active: boolean,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     leaderboardUserId: string,
+    leaderboardChallengeTypeId?: string | null,
   } | null,
 };
 
@@ -5476,6 +5616,7 @@ export type OnUpdateLeaderboardSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -5507,12 +5648,25 @@ export type OnUpdateLeaderboardSubscription = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
+    ChallengeType?:  {
+      __typename: "ChallengeType",
+      id: string,
+      name: string,
+      description: string,
+      active: boolean,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     leaderboardUserId: string,
+    leaderboardChallengeTypeId?: string | null,
   } | null,
 };
 
@@ -5533,6 +5687,7 @@ export type OnDeleteLeaderboardSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -5564,12 +5719,25 @@ export type OnDeleteLeaderboardSubscription = {
       _deleted?: boolean | null,
       _lastChangedAt: number,
     },
+    ChallengeType?:  {
+      __typename: "ChallengeType",
+      id: string,
+      name: string,
+      description: string,
+      active: boolean,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
     leaderboardUserId: string,
+    leaderboardChallengeTypeId?: string | null,
   } | null,
 };
 
@@ -5907,6 +6075,7 @@ export type OnCreateUserSubscription = {
     biography?: string | null,
     email?: string | null,
     notifications?: boolean | null,
+    streakStart?: string | null,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -6016,6 +6185,7 @@ export type OnUpdateUserSubscription = {
     biography?: string | null,
     email?: string | null,
     notifications?: boolean | null,
+    streakStart?: string | null,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -6125,6 +6295,7 @@ export type OnDeleteUserSubscription = {
     biography?: string | null,
     email?: string | null,
     notifications?: boolean | null,
+    streakStart?: string | null,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -6895,6 +7066,7 @@ export type OnCreateChallengeUserSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -6993,6 +7165,7 @@ export type OnUpdateChallengeUserSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7091,6 +7264,7 @@ export type OnDeleteChallengeUserSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7148,6 +7322,7 @@ export type OnCreateUserChatRoomSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7244,6 +7419,7 @@ export type OnUpdateUserChatRoomSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7340,6 +7516,7 @@ export type OnDeleteUserChatRoomSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7436,6 +7613,7 @@ export type OnCreateUserValidatedCheckInSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7525,6 +7703,7 @@ export type OnUpdateUserValidatedCheckInSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7614,6 +7793,7 @@ export type OnDeleteUserValidatedCheckInSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
