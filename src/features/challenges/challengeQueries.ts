@@ -8,7 +8,6 @@ import {
   ChallengeUser,
   User,
 } from "../../models";
-impo
 
 enum ChallengeStatus {
   ACTIVE,
