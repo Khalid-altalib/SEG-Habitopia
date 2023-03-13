@@ -20,7 +20,7 @@ const LeaderboardCards = (props: Props) => {
               value={entry.checkins}
               key={index}
               place={index}
-              userId={"a"}
+              userId={entry.userId}
             />
           ))}
         </VStack>
