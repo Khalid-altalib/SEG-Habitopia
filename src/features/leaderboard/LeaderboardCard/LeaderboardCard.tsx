@@ -1,4 +1,5 @@
-import { Avatar, Box, Heading, HStack, theme, View } from "native-base";
+import { Box, Heading, HStack, theme, View } from "native-base";
+import Avatar from "@components/Avatar/Avatar";
 
 import React from "react";
 import Card from "../../../components/Card";
@@ -37,7 +38,7 @@ const LeaderboardCard = (props: Props) => {
       <Card backgroundColorGradient={cardColor}>
         <HStack justifyContent={"space-between"} alignItems="center">
           <HStack space={4}>
-            <Avatar />
+            <Avatar userId={userId} />
             <View>
               <Text
                 type={TextType.Subheading}
