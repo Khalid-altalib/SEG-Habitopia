@@ -25,7 +25,7 @@ const ChatDetailsScreen = (props: Props) => {
   }, []);
 
   return (
-    <Box backgroundColor={"black"}>
+    <ScrollView>
       <PaddedContainer>
         <StatusContainer loading={loading} error={error} data={details}>
           <Header
@@ -33,10 +33,10 @@ const ChatDetailsScreen = (props: Props) => {
             description={details?.description || "Error"}
           />
           <Statistics />
-          <ParticipantsList />
         </StatusContainer>
+        <ParticipantsList />
       </PaddedContainer>
-    </Box>
+    </ScrollView>
   );
 };
 

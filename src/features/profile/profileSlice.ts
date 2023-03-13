@@ -59,6 +59,14 @@ export const fetchFollowList = createAsyncThunk(
       followList = [
         { name: "Bob", userId: "123" },
         { name: "Tom", userId: "124" },
+        { name: "Bob", userId: "123" },
+        { name: "Tom", userId: "124" },
+        { name: "Bob", userId: "123" },
+        { name: "Tom", userId: "124" },
+        { name: "Bob", userId: "123" },
+        { name: "Tom", userId: "124" },
+        { name: "Bob", userId: "123" },
+        { name: "Tom", userId: "124" },
       ];
     }
 

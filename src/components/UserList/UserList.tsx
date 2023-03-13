@@ -11,9 +11,9 @@ const UserList = (props: Props) => {
   const { users } = props;
 
   return (
-    <ScrollView>
+    <Box>
       {users && users.map((user, i) => <UserCard user={user} key={i} />)}
-    </ScrollView>
+    </Box>
   );
 };
 

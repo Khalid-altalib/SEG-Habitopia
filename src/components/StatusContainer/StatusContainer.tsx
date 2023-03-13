@@ -45,7 +45,7 @@ const StatusContainer = (props: Props) => {
 
   return (
     <View>
-      {data && <View>{children}</View>}
+      {data && children}
       <Center>{renderStatusDisplay()}</Center>
     </View>
   );
