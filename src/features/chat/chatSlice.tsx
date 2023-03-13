@@ -183,7 +183,7 @@ export const chatSlice = createSlice({
           return oldMessage;
         }
       });
-      console.log(updatedChat);
+
       if (chat) {
         chat.messages = updatedChat;
       }

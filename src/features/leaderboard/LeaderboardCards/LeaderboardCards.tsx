@@ -17,9 +17,10 @@ const LeaderboardCards = (props: Props) => {
           {entries.map((entry, index) => (
             <LeaderboardCard
               name={entry.name}
-              wins={entry.checkins}
+              value={entry.checkins}
               key={index}
               place={index}
+              userId={"a"}
             />
           ))}
         </VStack>
