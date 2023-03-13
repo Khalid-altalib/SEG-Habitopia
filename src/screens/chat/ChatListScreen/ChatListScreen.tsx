@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ChatParams } from "types";
 import { Box } from "native-base";
+import NoChats from "@features/chat/NoChats/NoChats";
 
 type Props = {};
 
@@ -27,7 +28,7 @@ const ChatListScreen = (props: Props) => {
 
   return (
     <Box>
-      {chats &&
+      {chats.length > 0 ? (
         chats.map((item, i) => (
           <ChatItem
             id={item.id}
@@ -37,7 +38,10 @@ const ChatListScreen = (props: Props) => {
             time={item.time}
             key={i}
           />
-        ))}
+        ))
+      ) : (
+        <NoChats />
+      )}
     </Box>
   );
 };
