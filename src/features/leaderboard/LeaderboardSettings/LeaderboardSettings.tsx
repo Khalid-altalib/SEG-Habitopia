@@ -1,9 +1,15 @@
-import { HStack, Select } from "native-base";
+import { Button, HStack, Select } from "native-base";
 import React from "react";
 import { Challenge } from "../../../../types";
 import { useDispatch, useSelector } from "../../../app/hooks";
 import { fetchChallenges } from "../../challenges/challengesSlice";
-import { changeSetting, LeaderboardState } from "../leaderboardSlice";
+import {
+  changeSetting,
+  fetchLeaderboard,
+  LeaderboardState,
+} from "../leaderboardSlice";
+import { useState, useEffect } from "react";
+import StatusContainer from "@components/StatusContainer/StatusContainer";
 
 type Props = {};
 
@@ -12,44 +18,63 @@ const timeIntervals = ["Weekly", "Monthly", "All Time"];
 const LeaderboardSettings = (props: Props) => {
   const timeInterval = useSelector((state) => state.leaderboard.timeInterval);
 
-  const challengeType = useSelector((state) => state.leaderboard.challengeType);
-
   // const challenges = useSelector((state) => state.challenges.challenges); BACKEND_PLACEHOLDER
 
   // const challengeTypes = challenges.map(
   //   (challenge: Challenge) => challenge.name
   // );
 
-  const challengeTypes = ["Sleep", "Gym", "Diet"];
+  const { challenges, fetchChallenges: requestStatus } = useSelector(
+    (state) => state.challenges
+  );
+  const { loading, error } = requestStatus;
+
+  const [selectedChallengeType, setSelectedChallengeType] = useState("");
 
   const dispatch = useDispatch();
 
-  const handleChange = async (settingName: string, value: string) => {
-    dispatch(changeSetting({ name: settingName, value: value }));
+  const handleFetchChallenges = async () => {
     await dispatch(fetchChallenges());
+    setSelectedChallengeType(challenges[0].name);
   };
 
+  useEffect(() => {
+    handleFetchChallenges();
+  }, []);
+
+  const handleChange = async (settingName: string, value: string) => {
+    dispatch(changeSetting({ name: settingName, value: value }));
+    await dispatch(fetchLeaderboard());
+  };
+
+  useEffect(() => {
+    if (selectedChallengeType) {
+      handleChange("challengeType", selectedChallengeType);
+    }
+  }, [selectedChallengeType]);
+
   return (
-    <HStack space={4}>
-      <Select
-        selectedValue={timeInterval}
-        minWidth={120}
-        onValueChange={(value) => handleChange("timeInterval", value)}
-      >
-        {timeIntervals.map((value) => (
-          <Select.Item label={value} value={value} key={value} />
-        ))}
-      </Select>
-      <Select
-        selectedValue={challengeType}
-        minWidth={120}
-        onValueChange={(value) => handleChange("challengeType", value)}
-      >
-        {challengeTypes.map((value) => (
-          <Select.Item label={value} value={value} key={value} />
-        ))}
-      </Select>
-    </HStack>
+    <StatusContainer loading={loading} error={error} data={challenges}>
+      <HStack space={4}>
+        {challenges &&
+          selectedChallengeType !== "" &&
+          challenges.map((challenge) => {
+            const challengeType = challenge.name;
+            const buttonColor =
+              challengeType === selectedChallengeType ? "red.500" : "blue.500";
+            console.log(selectedChallengeType, challengeType);
+            return (
+              <Button
+                backgroundColor={buttonColor}
+                onPress={() => setSelectedChallengeType(challengeType)}
+                key={challengeType}
+              >
+                {challengeType}
+              </Button>
+            );
+          })}
+      </HStack>
+    </StatusContainer>
   );
 };
 
