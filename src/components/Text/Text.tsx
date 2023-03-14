@@ -16,6 +16,8 @@ import * as SplashScreen from "expo-splash-screen";
 // Habitopia
 import { TextType } from "types";
 
+import { act } from "@testing-library/react-native";
+
 export type TextProps = {
   /** The type of text. Affects font family, weight, etc. */
   type?: TextType;
@@ -40,13 +42,17 @@ const Text = ({ type, style, children, color }: TextProps) => {
       console.log(error);
     }
 
-    setFontsLoaded(true);
+    act(() => {
+      setFontsLoaded(true);
+    });
   };
 
   useEffect(() => {
     async function loading() {
       await loadFonts();
-      setFontsLoaded(true);
+      act(() => {
+        setFontsLoaded(true);
+      });
     }
     loading();
   }, []);

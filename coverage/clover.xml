@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1678646020298" clover="3.2.0">
-  <project timestamp="1678646020298" name="All files">
-    <metrics statements="375" coveredstatements="266" conditionals="69" coveredconditionals="33" methods="98" coveredmethods="67" elements="542" coveredelements="366" complexity="0" loc="375" ncloc="375" packages="26" files="43" classes="43"/>
+<coverage generated="1678822026529" clover="3.2.0">
+  <project timestamp="1678822026529" name="All files">
+    <metrics statements="377" coveredstatements="279" conditionals="69" coveredconditionals="33" methods="100" coveredmethods="71" elements="546" coveredelements="383" complexity="0" loc="377" ncloc="377" packages="26" files="43" classes="43"/>
     <package name="SEG-Habitopia">
       <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="types.ts" path="C:\Users\Tareita Nawaz\Downloads\SEG-Habitopia\types.ts">
@@ -31,20 +31,20 @@
         <line num="5" count="4" type="stmt"/>
         <line num="10" count="4" type="stmt"/>
         <line num="19" count="4" type="stmt"/>
-        <line num="20" count="8" type="stmt"/>
+        <line num="20" count="5" type="stmt"/>
         <line num="22" count="5" type="stmt"/>
       </file>
       <file name="testingWrapperWithNavigation.tsx" path="C:\Users\Tareita Nawaz\Downloads\SEG-Habitopia\src\app\testingWrapperWithNavigation.tsx">
         <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-        <line num="7" count="9" type="stmt"/>
-        <line num="9" count="9" type="stmt"/>
-        <line num="14" count="9" type="stmt"/>
-        <line num="25" count="9" type="stmt"/>
-        <line num="26" count="15" type="stmt"/>
-        <line num="28" count="15" type="stmt"/>
-        <line num="31" count="9" type="stmt"/>
-        <line num="32" count="22" type="stmt"/>
-        <line num="34" count="15" type="stmt"/>
+        <line num="8" count="9" type="stmt"/>
+        <line num="10" count="9" type="stmt"/>
+        <line num="15" count="9" type="stmt"/>
+        <line num="26" count="9" type="stmt"/>
+        <line num="27" count="15" type="stmt"/>
+        <line num="29" count="15" type="stmt"/>
+        <line num="32" count="9" type="stmt"/>
+        <line num="33" count="15" type="stmt"/>
+        <line num="35" count="15" type="stmt"/>
       </file>
       <file name="theme.ts" path="C:\Users\Tareita Nawaz\Downloads\SEG-Habitopia\src\app\theme.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -89,7 +89,7 @@
       <file name="Button.tsx" path="C:\Users\Tareita Nawaz\Downloads\SEG-Habitopia\src\components\Button\Button.tsx">
         <metrics statements="12" coveredstatements="12" conditionals="6" coveredconditionals="3" methods="5" coveredmethods="5"/>
         <line num="38" count="7" type="stmt"/>
-        <line num="39" count="17" type="stmt"/>
+        <line num="39" count="11" type="stmt"/>
         <line num="51" count="7" type="stmt"/>
         <line num="52" count="11" type="stmt"/>
         <line num="55" count="5" type="cond" truecount="1" falsecount="1"/>
@@ -110,7 +110,7 @@
       <file name="StatusContainer.tsx" path="C:\Users\Tareita Nawaz\Downloads\SEG-Habitopia\src\components\StatusContainer\StatusContainer.tsx">
         <metrics statements="10" coveredstatements="7" conditionals="13" coveredconditionals="8" methods="2" coveredmethods="2"/>
         <line num="21" count="1" type="stmt"/>
-        <line num="22" count="3" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
         <line num="24" count="2" type="stmt"/>
         <line num="25" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="26" count="0" type="stmt"/>
@@ -128,37 +128,39 @@
       </file>
     </package>
     <package name="SEG-Habitopia.src.components.Text">
-      <metrics statements="21" coveredstatements="19" conditionals="20" coveredconditionals="19" methods="6" coveredmethods="6"/>
+      <metrics statements="23" coveredstatements="21" conditionals="20" coveredconditionals="19" methods="8" coveredmethods="8"/>
       <file name="Text.tsx" path="C:\Users\Tareita Nawaz\Downloads\SEG-Habitopia\src\components\Text\Text.tsx">
-        <metrics statements="21" coveredstatements="19" conditionals="20" coveredconditionals="19" methods="6" coveredmethods="6"/>
-        <line num="30" count="11" type="stmt"/>
-        <line num="31" count="124" type="stmt"/>
+        <metrics statements="23" coveredstatements="21" conditionals="20" coveredconditionals="19" methods="8" coveredmethods="8"/>
+        <line num="32" count="11" type="stmt"/>
         <line num="33" count="124" type="stmt"/>
-        <line num="34" count="48" type="stmt"/>
-        <line num="35" count="48" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="43" count="48" type="stmt"/>
-        <line num="46" count="124" type="stmt"/>
-        <line num="48" count="48" type="stmt"/>
-        <line num="49" count="48" type="stmt"/>
-        <line num="51" count="48" type="stmt"/>
-        <line num="54" count="124" type="stmt"/>
-        <line num="56" count="96" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="124" type="stmt"/>
+        <line num="36" count="48" type="stmt"/>
+        <line num="37" count="48" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="45" count="48" type="stmt"/>
+        <line num="46" count="48" type="stmt"/>
+        <line num="50" count="124" type="stmt"/>
+        <line num="52" count="48" type="stmt"/>
+        <line num="53" count="48" type="stmt"/>
+        <line num="54" count="48" type="stmt"/>
         <line num="57" count="48" type="stmt"/>
-        <line num="58" count="48" type="stmt"/>
-        <line num="60" count="0" type="stmt"/>
-        <line num="64" count="96" type="stmt"/>
-        <line num="67" count="124" type="cond" truecount="1" falsecount="1"/>
-        <line num="69" count="124" type="stmt"/>
-        <line num="73" count="124" type="stmt"/>
-        <line num="109" count="124" type="stmt"/>
+        <line num="60" count="124" type="stmt"/>
+        <line num="62" count="96" type="cond" truecount="2" falsecount="0"/>
+        <line num="63" count="48" type="stmt"/>
+        <line num="64" count="48" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="70" count="96" type="stmt"/>
+        <line num="73" count="124" type="cond" truecount="1" falsecount="1"/>
+        <line num="75" count="124" type="stmt"/>
+        <line num="79" count="124" type="stmt"/>
+        <line num="115" count="124" type="stmt"/>
       </file>
       <file name="index.tsx" path="C:\Users\Tareita Nawaz\Downloads\SEG-Habitopia\src\components\Text\index.tsx">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
     </package>
     <package name="SEG-Habitopia.src.features.auth">
-      <metrics statements="98" coveredstatements="32" conditionals="12" coveredconditionals="0" methods="21" coveredmethods="3"/>
+      <metrics statements="98" coveredstatements="43" conditionals="12" coveredconditionals="0" methods="21" coveredmethods="5"/>
       <file name="authQueries.ts" path="C:\Users\Tareita Nawaz\Downloads\SEG-Habitopia\src\features\auth\authQueries.ts">
         <metrics statements="7" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="7" count="12" type="stmt"/>
@@ -170,7 +172,7 @@
         <line num="21" count="0" type="stmt"/>
       </file>
       <file name="authSlice.ts" path="C:\Users\Tareita Nawaz\Downloads\SEG-Habitopia\src\features\auth\authSlice.ts">
-        <metrics statements="91" coveredstatements="31" conditionals="10" coveredconditionals="0" methods="19" coveredmethods="3"/>
+        <metrics statements="91" coveredstatements="42" conditionals="10" coveredconditionals="0" methods="19" coveredmethods="5"/>
         <line num="26" count="12" type="stmt"/>
         <line num="29" count="4" type="stmt"/>
         <line num="30" count="4" type="stmt"/>
@@ -180,15 +182,15 @@
         <line num="41" count="2" type="stmt"/>
         <line num="42" count="2" type="stmt"/>
         <line num="47" count="12" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="53" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="56" count="0" type="stmt"/>
-        <line num="57" count="0" type="stmt"/>
-        <line num="59" count="0" type="stmt"/>
-        <line num="60" count="0" type="stmt"/>
-        <line num="61" count="0" type="stmt"/>
+        <line num="52" count="3" type="stmt"/>
+        <line num="53" count="3" type="stmt"/>
+        <line num="54" count="3" type="stmt"/>
+        <line num="55" count="3" type="stmt"/>
+        <line num="56" count="2" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="59" count="2" type="stmt"/>
+        <line num="60" count="2" type="stmt"/>
+        <line num="61" count="2" type="stmt"/>
         <line num="65" count="12" type="stmt"/>
         <line num="66" count="0" type="stmt"/>
         <line num="68" count="0" type="cond" truecount="0" falsecount="2"/>
@@ -209,17 +211,17 @@
         <line num="98" count="0" type="stmt"/>
         <line num="102" count="0" type="stmt"/>
         <line num="105" count="12" type="stmt"/>
-        <line num="106" count="2" type="stmt"/>
-        <line num="107" count="2" type="stmt"/>
-        <line num="112" count="2" type="stmt"/>
-        <line num="113" count="2" type="stmt"/>
-        <line num="114" count="2" type="stmt"/>
+        <line num="106" count="5" type="stmt"/>
+        <line num="107" count="4" type="stmt"/>
+        <line num="112" count="4" type="stmt"/>
+        <line num="113" count="4" type="stmt"/>
+        <line num="114" count="4" type="stmt"/>
         <line num="117" count="12" type="stmt"/>
-        <line num="122" count="2" type="stmt"/>
-        <line num="123" count="2" type="stmt"/>
-        <line num="124" count="2" type="stmt"/>
-        <line num="125" count="2" type="stmt"/>
-        <line num="126" count="2" type="stmt"/>
+        <line num="122" count="3" type="stmt"/>
+        <line num="123" count="3" type="stmt"/>
+        <line num="124" count="3" type="stmt"/>
+        <line num="125" count="3" type="stmt"/>
+        <line num="126" count="3" type="stmt"/>
         <line num="128" count="0" type="stmt"/>
         <line num="129" count="0" type="stmt"/>
         <line num="130" count="0" type="stmt"/>
@@ -230,8 +232,8 @@
         <line num="147" count="0" type="stmt"/>
         <line num="149" count="0" type="stmt"/>
         <line num="153" count="12" type="stmt"/>
-        <line num="154" count="0" type="stmt"/>
-        <line num="155" count="0" type="stmt"/>
+        <line num="154" count="1" type="stmt"/>
+        <line num="155" count="1" type="stmt"/>
         <line num="158" count="12" type="stmt"/>
         <line num="166" count="12" type="stmt"/>
         <line num="167" count="0" type="stmt"/>
@@ -269,7 +271,7 @@
       <file name="ConfirmationCodeForm.tsx" path="C:\Users\Tareita Nawaz\Downloads\SEG-Habitopia\src\features\auth\ConfirmationCodeForm\ConfirmationCodeForm.tsx">
         <metrics statements="10" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
         <line num="19" count="1" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
         <line num="28" count="1" type="stmt"/>
         <line num="30" count="1" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
@@ -285,7 +287,7 @@
       <file name="EmailAddressForm.tsx" path="C:\Users\Tareita Nawaz\Downloads\SEG-Habitopia\src\features\auth\EmailAddressForm\EmailAddressForm.tsx">
         <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
         <line num="18" count="1" type="stmt"/>
-        <line num="19" count="3" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
         <line num="24" count="2" type="stmt"/>
         <line num="26" count="2" type="stmt"/>
         <line num="27" count="1" type="stmt"/>
@@ -300,7 +302,7 @@
       <file name="NameForm.tsx" path="C:\Users\Tareita Nawaz\Downloads\SEG-Habitopia\src\features\auth\NameForm\NameForm.tsx">
         <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
         <line num="18" count="1" type="stmt"/>
-        <line num="19" count="3" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
         <line num="24" count="2" type="stmt"/>
         <line num="26" count="2" type="stmt"/>
         <line num="27" count="1" type="stmt"/>
@@ -315,7 +317,7 @@
       <file name="PasswordForm.tsx" path="C:\Users\Tareita Nawaz\Downloads\SEG-Habitopia\src\features\auth\PasswordForm\PasswordForm.tsx">
         <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
         <line num="23" count="1" type="stmt"/>
-        <line num="24" count="3" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
         <line num="29" count="2" type="stmt"/>
         <line num="31" count="2" type="stmt"/>
         <line num="32" count="1" type="stmt"/>
@@ -444,7 +446,7 @@
       <file name="ColorModeToggle.tsx" path="C:\Users\Tareita Nawaz\Downloads\SEG-Habitopia\src\features\settings\ColorModeToggle\ColorModeToggle.tsx">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="22" count="2" type="stmt"/>
-        <line num="23" count="5" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
         <line num="25" count="3" type="stmt"/>
       </file>
       <file name="index.ts" path="C:\Users\Tareita Nawaz\Downloads\SEG-Habitopia\src\features\settings\ColorModeToggle\index.ts">
@@ -472,7 +474,7 @@
       <file name="GenericSetting.tsx" path="C:\Users\Tareita Nawaz\Downloads\SEG-Habitopia\src\features\settings\GenericSetting\GenericSetting.tsx">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="15" count="1" type="stmt"/>
-        <line num="16" count="3" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
         <line num="18" count="2" type="stmt"/>
         <line num="24" count="2" type="stmt"/>
         <line num="26" count="2" type="stmt"/>
@@ -484,7 +486,7 @@
       <file name="NotificationToggle.tsx" path="C:\Users\Tareita Nawaz\Downloads\SEG-Habitopia\src\features\settings\NotificationToggle\NotificationToggle.tsx">
         <metrics statements="8" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
         <line num="13" count="2" type="stmt"/>
-        <line num="14" count="5" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
         <line num="15" count="3" type="stmt"/>
         <line num="17" count="3" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
@@ -512,7 +514,7 @@
       <metrics statements="4" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="1"/>
       <file name="SettingsItem.tsx" path="C:\Users\Tareita Nawaz\Downloads\SEG-Habitopia\src\features\settings\SettingsItem\SettingsItem.tsx">
         <metrics statements="4" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="1"/>
-        <line num="25" count="9" type="stmt"/>
+        <line num="25" count="7" type="stmt"/>
         <line num="26" count="7" type="stmt"/>
         <line num="28" count="7" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
@@ -523,7 +525,7 @@
       <file name="SettingsPage.tsx" path="C:\Users\Tareita Nawaz\Downloads\SEG-Habitopia\src\features\settings\SettingsPage\SettingsPage.tsx">
         <metrics statements="12" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
         <line num="16" count="1" type="stmt"/>
-        <line num="17" count="3" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
         <line num="19" count="2" type="stmt"/>
         <line num="20" count="2" type="stmt"/>
         <line num="23" count="2" type="stmt"/>
