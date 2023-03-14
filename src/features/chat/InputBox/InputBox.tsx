@@ -24,8 +24,10 @@ const InputBox = (props: InputBoxProps) => {
   const onSubmit = async (data: message) => {
     const chatRoomID = props.chatRoomID;
     const message = data.message;
-    dispatch(sendMessage({ message, chatRoomID }));
-    reset();
+    if (message.length > 0) {
+      dispatch(sendMessage({ message, chatRoomID }));
+      reset();
+    }
   };
 
   const makeCheckIn = () => {
@@ -41,6 +43,7 @@ const InputBox = (props: InputBoxProps) => {
             style={styles.input}
             placeholder="type your message"
             value={value}
+            maxLength={500}
           />
         )}
         name="message"
