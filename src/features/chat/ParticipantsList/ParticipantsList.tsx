@@ -1,6 +1,6 @@
 import { useSelector } from "@app/hooks";
 import UserList from "@components/UserList/UserList";
-import { Box, FlatList, Heading, Text, VStack } from "native-base";
+import { Box, Heading, Text, VStack } from "native-base";
 import React from "react";
 
 type Props = {};

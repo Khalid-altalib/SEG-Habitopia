@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { ImageBackground, StyleSheet, FlatList, Text } from "react-native";
 import InputBox from "../../../features/chat/InputBox/InputBox";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
-import { ChatParams, Message as MessageType } from "../../../../types";
+import { ChatParams, Message, Message as MessageType } from "../../../../types";
 import { useDispatch, useSelector } from "../../../app/hooks";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {
@@ -33,6 +33,7 @@ import {
   getMessageByCheckInId,
 } from "@features/chat/chatQueries";
 import { Button } from "react-native";
+import { ScrollView } from "native-base";
 
 type Props = {};
 
@@ -130,11 +131,52 @@ const ChatScreen = (props: Props) => {
     dispatch(fetchMessages(chat.id));
   };
 
+  let reversed_messages = [] as any;
+
+  if (chat.messages) {
+    reversed_messages = [...chat.messages];
+    reversed_messages.reverse();
+  }
+
   return (
     <ImageBackground
       source={{ uri: "https://placeholder.com" }}
       style={styles.bg}
     >
+      <ScrollView>
+        {reversed_messages &&
+          reversed_messages.map((item: Message, i: number) => {
+            if (item.messageType === MessageEnum.TEXT) {
+              return (
+                <TextMessage
+                  id={item.id}
+                  userName={item.userName}
+                  text={item.text}
+                  createdAt={item.createdAt}
+                  userID={item.userID}
+                  messageType={item.messageType}
+                  key={i}
+                />
+              );
+            } else if (item.messageType === MessageEnum.CHECKIN) {
+              return (
+                <CheckInMessage
+                  id={item.id}
+                  validationCount={item.validationCount}
+                  isValidated={item.isValidated}
+                  userName={item.userName}
+                  text={item.text}
+                  createdAt={item.createdAt}
+                  userID={item.userID}
+                  messageType={item.messageType}
+                  key={i}
+                />
+              );
+            } else {
+              return <></>;
+            }
+          })}
+      </ScrollView>
       <Button title="Load more" onPress={fetchMoreMessages} />
       <FlatList
         data={chat.messages}

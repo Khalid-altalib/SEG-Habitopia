@@ -8,30 +8,22 @@ import { fetchLeaderboard } from "../leaderboardSlice";
 type Props = {};
 
 const LeaderboardCards = (props: Props) => {
-  const dispatch = useDispatch();
-
-  const loading = useSelector((state) => state.leaderboard.loading);
-  const error = useSelector((state) => state.leaderboard.error);
-  const challengeType = useSelector((state) => state.leaderboard.challengeType);
-  const timeInterval = useSelector((state) => state.leaderboard.timeInterval);
-  const leaderboardEntries = useSelector((state) => state.leaderboard.entries);
-
-  useEffect(() => {
-    dispatch(fetchLeaderboard());
-  }, [challengeType, timeInterval]);
+  const { loading, error, entries } = useSelector((state) => state.leaderboard);
 
   return (
-    <StatusContainer loading={loading} error={error} data={leaderboardEntries}>
-      <VStack space={5}>
-        {leaderboardEntries.map((entry, index) => (
-          <LeaderboardCard
-            name={entry.name}
-            wins={entry.checkins}
-            key={index}
-            place={index}
-          />
-        ))}
-      </VStack>
+    <StatusContainer loading={loading} error={error} data={entries}>
+      {entries && (
+        <VStack space={5}>
+          {entries.map((entry, index) => (
+            <LeaderboardCard
+              name={entry.name}
+              wins={entry.checkins}
+              key={index}
+              place={index}
+            />
+          ))}
+        </VStack>
+      )}
     </StatusContainer>
   );
 };

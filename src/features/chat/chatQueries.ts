@@ -19,7 +19,7 @@ export const fetchUserChats = async (thunkAPI: any) => {
   for await (const userChat of userChatRooms) {
     const chat = (
       await DataStore.query(ChatRoom, (chatRoom) =>
-        chatRoom.id.eq(userChat.chatRoomId)
+        chatRoom.id.eq(userChat.chatRoomId || "")
       )
     )[0];
     const lastMessage = await chat.LastMessage;

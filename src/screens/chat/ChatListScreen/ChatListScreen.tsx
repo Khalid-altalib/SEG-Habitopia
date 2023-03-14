@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { FlatList } from "react-native";
 import ChatItem from "../../../features/chat/ChatItem/ChatItem";
 import { useDispatch, useSelector } from "../../../app/hooks";
 import { fetchChats, updateChatList } from "../../../features/chat/chatSlice";
@@ -14,6 +13,7 @@ import {
 } from "src/API";
 import { onUpdateChatRoom } from "../../../graphql/subscriptions";
 import { getMessageById } from "@features/chat/chatQueries";
+import { Box } from "native-base";
 
 type Props = {};
 
@@ -64,19 +64,20 @@ const ChatListScreen = (props: Props) => {
   }, []);
 
   return (
-    <FlatList
-      data={chats}
-      renderItem={({ item }) => (
-        <ChatItem
-          id={item.id}
-          name={item.name}
-          image={item.image}
-          text={item.text}
-          time={item.time}
-          unreadMessages={item.unreadMessages}
-        />
-      )}
-    />
+    <Box>
+      {chats &&
+        chats.map((item, i) => (
+          <ChatItem
+            id={item.id}
+            name={item.name}
+            image={item.image}
+            text={item.text}
+            time={item.time}
+            key={i}
+            unreadMessages={item.unreadMessages}
+          />
+        ))}
+    </Box>
   );
 };
 
