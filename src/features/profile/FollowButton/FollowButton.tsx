@@ -1,12 +1,10 @@
 import { useDispatch, useSelector } from "@app/hooks";
 import { Button } from "native-base";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { followUser } from "../profileSlice";
 
-type Props = {};
-
-const FollowButton = (props: Props) => {
+const FollowButton = () => {
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.profile?.profile);
   const { followUser: requestStatus } = useSelector((state) => state.profile);
@@ -16,8 +14,15 @@ const FollowButton = (props: Props) => {
     await dispatch(followUser());
   };
 
+  const [didMount, setDidMount] = useState(false);
+
   useEffect(() => {
-    if (profile) {
+    setDidMount(true);
+  }, []);
+
+  useEffect(() => {
+    if (profile && didMount) {
+      console.log(profile);
       if (profile.following == true) {
         Toast.show({
           type: "success",

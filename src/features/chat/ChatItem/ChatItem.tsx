@@ -1,13 +1,12 @@
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View, Pressable, Text, Image, StyleSheet } from "react-native";
-import {
-  Chat,
-  ChatParams,
-  IndividualChatScreenNavigationProp,
-  NavigationParams,
-} from "../../../../types";
+import { Chat, ChatParams } from "../../../../types";
+import moment from "moment";
+import { StyleSheet } from "react-native";
+import { View, Pressable, Text } from "native-base";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import Avatar from "@components/Avatar/Avatar";
+import { Box } from "native-base";
 
 const ChatItem = (chat: Chat) => {
   const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
@@ -19,18 +18,22 @@ const ChatItem = (chat: Chat) => {
       }}
       style={chatstyles.chatContainer}
     >
-      <Image source={{ uri: chat.image }} style={chatstyles.image} />
+      <Box justifyContent="center" alignItems="center" padding={3}>
+        <Avatar userId={chat.id} />
+      </Box>
+
       <View style={chatstyles.container}>
         <View style={chatstyles.row}>
           <Text style={chatstyles.name} numberOfLines={1}>
             {chat.name}
           </Text>
-          <Text>{chat.time}</Text>
+          <Text>{moment(chat.time).fromNow()}</Text>
         </View>
         <View>
           <Text numberOfLines={2} style={chatstyles.lastMessage}>
             {chat.text}
           </Text>
+          <Text>Unread Messages: {chat.unreadMessages}</Text>
         </View>
       </View>
     </Pressable>
@@ -42,7 +45,7 @@ const chatstyles = StyleSheet.create({
     flexDirection: "row",
     marginHorizontal: 10,
     marginVertical: 5,
-    height: 60,
+    height: 70,
   },
 
   image: {

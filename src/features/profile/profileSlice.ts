@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { Profile, User } from "../../../types";
 import { getUserFromDatabasebyID } from "../../app/util";
-import { getCheckIns } from "./statisticsQueries";
+import { getStatistics } from "./statisticsQueries";
 
 export type ProfileState = {
   profile?: Profile;
@@ -59,6 +59,14 @@ export const fetchFollowList = createAsyncThunk(
       followList = [
         { name: "Bob", userId: "123" },
         { name: "Tom", userId: "124" },
+        { name: "Bob", userId: "123" },
+        { name: "Tom", userId: "124" },
+        { name: "Bob", userId: "123" },
+        { name: "Tom", userId: "124" },
+        { name: "Bob", userId: "123" },
+        { name: "Tom", userId: "124" },
+        { name: "Bob", userId: "123" },
+        { name: "Tom", userId: "124" },
       ];
     }
 
@@ -75,13 +83,12 @@ export const fetchProfile = createAsyncThunk<
 >("profile/fetch", async (userId, thunkAPI) => {
   try {
     const user = await getUserFromDatabasebyID(userId);
-    const checkinCount = await getCheckIns(userId);
+    const { checkIns, streak, wins } = await getStatistics(userId);
 
     const statistics = [
-      { name: "Streak", quantity: 5 },
-      { name: "Wins", quantity: 1 },
-      { name: "Check Ins", quantity: checkinCount },
-      { name: "Level", quantity: 8 },
+      { name: "Streak", quantity: streak },
+      { name: "Wins", quantity: wins}, 
+      { name: "Check Ins", quantity: checkIns },
     ];
 
     const profile = {

@@ -12,6 +12,7 @@ import {
   ChallengeType,
 } from "../../models";
 import { Message as MessageType } from "../../../types";
+import moment from "moment";
 
 export const fetchUserChats = async (thunkAPI: any) => {
   const userChatRooms = (await getUserFromDatabase(thunkAPI)).ChatRooms;
@@ -19,7 +20,7 @@ export const fetchUserChats = async (thunkAPI: any) => {
   for await (const userChat of userChatRooms) {
     const chat = (
       await DataStore.query(ChatRoom, (chatRoom) =>
-        chatRoom.id.eq(userChat.chatRoomId)
+        chatRoom.id.eq(userChat.chatRoomId || "")
       )
     )[0];
     const lastMessage = await chat.LastMessage;
@@ -28,6 +29,7 @@ export const fetchUserChats = async (thunkAPI: any) => {
       name: "Chatroom",
       text: lastMessage?.text || "",
       time: lastMessage?.createdAt || "",
+      unreadMessages: 0,
     } as Chat);
   }
   chats.sort((a: Chat, b: Chat) => {
@@ -40,12 +42,19 @@ export const fetchUserChats = async (thunkAPI: any) => {
   return chats;
 };
 
-export const fetchChatMessages = async (chatId: string) => {
+export const fetchChatMessages = async (chatId: string, pageNumber: number) => {
   const chatMessages = await DataStore.query(
     Message,
     (message) => message.chatroomID.eq(chatId),
-    { sort: (message) => message.createdAt(SortDirection.DESCENDING) }
+    {
+      sort: (message) => message.createdAt(SortDirection.DESCENDING),
+      page: pageNumber,
+      limit: 100,
+    }
   );
+  if (chatMessages.length === 0) {
+    throw new Error("No more messages found!");
+  }
   let messages: MessageType[] = [];
   for await (const chatMessage of chatMessages) {
     const messageChat = { ...chatMessage };
@@ -77,7 +86,7 @@ export const sendChatMessage = async (
   thunkAPI: any
 ) => {
   const userID = getUserIdFromThunk(thunkAPI);
-  const userFromDatabase = getUserFromDatabase(thunkAPI);
+  const userFromDatabase = await getUserFromDatabase(thunkAPI);
   const newMessage = await DataStore.save(
     new Message({
       chatroomID: chatroomID,
@@ -86,10 +95,13 @@ export const sendChatMessage = async (
       messageType: MessageEnum.TEXT,
     })
   );
+
   await updateLastMessageInChat(newMessage.id, chatroomID);
+  const time = new Date().toISOString();
   return {
     ...newMessage,
-    userName: (await userFromDatabase).name,
+    userName: userFromDatabase.name,
+    createdAt: time,
   } as MessageType;
 };
 
@@ -156,7 +168,9 @@ export const sendChatCheckIn = async (chatID: string, thunkAPI: any) => {
     );
     if (timeElapsed < 1) {
       throw new Error(
-        `Already Checked in for the day at ${lastCheckIn.createdAt}! You have ${lastCheckIn.validationCount} validations!`
+        `Already checked in for the day ${moment(
+          lastCheckIn.createdAt
+        ).fromNow()}!`
       );
     } else {
       return createCheckIn(chatID, userID, thunkAPI);
@@ -200,11 +214,14 @@ const createCheckIn = async (chatID: string, userID: string, thunkAPI: any) => {
   );
 
   await updateLastMessageInChat(checkInMessage.id, chatID);
-
+  const time = new Date().toISOString();
   return {
     ...checkInMessage,
     userName: userFromDatabase.name,
     messageType: MessageEnum.CHECKIN,
+    validationCount: 0,
+    isValidated: false,
+    createdAt: time,
   } as MessageType;
 };
 
@@ -246,7 +263,7 @@ export const incrementCheckInValidation = async (
       (validateUser) => validateUser.userId === user.id
     );
     if (canValidate.length >= 1) {
-      throw new Error("already validated!");
+      throw new Error("You have already validated!");
     } else {
       await DataStore.save(
         new UserValidatedCheckIn({
@@ -259,10 +276,22 @@ export const incrementCheckInValidation = async (
           updated.validationCount = validatedBy.length + 1;
         })
       );
-      if (checkIn.validationCount === 3) {
+      if (newCheckIn.validationCount === 3) {
         const validatedCheckIn = await DataStore.save(
           Checkin.copyOf(checkIn, (updated) => {
             updated.isValidated = true;
+          })
+        );
+        const validationMessage = await DataStore.save(
+          new Message({
+            chatroomID: validatedCheckIn.chatroomID,
+            userID: user.id,
+            messageType: MessageEnum.VALIDATION,
+            text: `${
+              user.name
+            } has been validated for the check-in on day ${moment(
+              validatedCheckIn.createdAt
+            ).date()}`,
           })
         );
         return validatedCheckIn;
@@ -282,11 +311,18 @@ export const getCheckInById = async (checkInId: string) => {
   return checkIn;
 };
 
-export const getMessageById = async (checkInId: string) => {
+export const getMessageByCheckInId = async (checkInId: string) => {
   const message = (
     await DataStore.query(Message, (message) =>
       message.messageGetCheckinId.eq(checkInId)
     )
+  )[0];
+  return message;
+};
+
+export const getMessageById = async (id: string) => {
+  const message = (
+    await DataStore.query(Message, (message) => message.id.eq(id))
   )[0];
   return message;
 };
