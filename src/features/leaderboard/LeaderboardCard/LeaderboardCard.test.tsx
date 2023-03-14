@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent } from "@testing-library/react-native";
+import { render, fireEvent, waitFor } from "@testing-library/react-native";
 import LeaderboardCard from "./LeaderboardCard";
 import TestingWrapperNavigation from "@app/testingWrapperWithNavigation";
 import configureStore from "redux-mock-store";  
@@ -19,7 +19,7 @@ describe("LeaderboardLayout", () => {
     beforeEach(() => {
         wrapper = render(
             <TestingWrapperNavigation store={mockStore}>
-                <LeaderboardCard name={"Alice"} wins={4} place={0} />
+                <LeaderboardCard checkins={4} place={0} userId="aliceID" name="Alice" />
             </TestingWrapperNavigation>
         );
     });
@@ -32,15 +32,44 @@ describe("LeaderboardLayout", () => {
         expect(wrapper.getByText("Alice")).toBeDefined();
     });
 
-    it("renders an avatar of the user", () => {
-        expect(wrapper.getByTestId("avatar")).toBeDefined();
-    });
-
     it("renders the correct place", () => {
         expect(wrapper.getByText("#1")).toBeDefined();
     });
 
-    it("renders the correct number of wins", () => {
-        expect(wrapper.getByText("4 wins")).toBeDefined();
+    it("renders the correct number of checkins", () => {
+        expect(wrapper.getByText("4 Checkins")).toBeDefined();
     });
+
+    it("renders the correct color", () => {
+        expect(wrapper.getByText("#1").props.style[0].color).toEqual("#0f172a");
+        expect(wrapper.getByText("Alice").props.style[0].color).toEqual("#0f172a");
+        expect(wrapper.getByText("4 Checkins").props.style[0].color).toEqual("#0f172a");
+    });
+
+    // it("calls handlePress when the card is pressed", async () => {  
+    //     const navigation = jest.fn();
+    //     await waitFor(() => {
+    //         expect(wrapper.getByTestId("leaderboardCard")).toBeTruthy();
+    //         fireEvent.press(wrapper.getByTestId("leaderboardCard"));
+    //     });
+    //     fireEvent.press(wrapper.getByTestId("leaderboardCard"));
+    //     expect(wrapper.getByTestId("leaderboardCard")).toBeTruthy();
+    //     expect(navigation).toHaveBeenCalled();
+    //     expect(mockStore.getActions()).toEqual([
+    //         {
+    //             payload: {
+    //                 name: "Alice",
+    //                 userId: "aliceID",
+    //             },
+    //             type: "leaderboard/setSelectedUser",
+    //         },
+    //         {
+    //             payload: {
+    //                 name: "Alice",
+    //                 userId: "aliceID",
+    //             },
+    //             type: "leaderboard/setSelectedUser",
+    //         },
+    //     ]);
+    //});
 });
