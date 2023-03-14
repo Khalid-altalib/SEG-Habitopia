@@ -7,7 +7,6 @@ import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import { act } from "react-test-renderer";
 import { logOutUser } from "@features/auth/authSlice";
-import { useDispatch } from "react-redux";
 
 jest.mock("../../auth/authSlice", () => ({
   logOutUser: jest.fn(),

@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent, act } from "@testing-library/react-native";
+import { render } from "@testing-library/react-native";
 import NotificationToggle from "./NotificationToggle";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";

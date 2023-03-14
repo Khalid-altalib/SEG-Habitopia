@@ -1,4 +1,5 @@
-import { fireEvent, render, waitFor } from "@testing-library/react-native";
+import React from "react";
+import { render } from "@testing-library/react-native";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import ColorModeToggle from "./ColorModeToggle";
