@@ -9,7 +9,7 @@ function CheckInWidgetLayout(props: Props) {
   const { children } = props;
   return (
     <View paddingLeft={6} paddingRight={6}>
-      <Heading shadow={1}>Check-In 📝</Heading>
+      <Heading shadow={1}>Check in 📝</Heading>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {children}
       </ScrollView>

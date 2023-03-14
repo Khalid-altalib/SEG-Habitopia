@@ -9,7 +9,7 @@ const CatchUpWidgetLayout = (props: Props) => {
   const { children } = props;
   return (
     <View paddingLeft={6} paddingRight={6}>
-      <Heading shadow={1}>Catch-Up 👬</Heading>
+      <Heading shadow={1}>Catch up 👬</Heading>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {children}
       </ScrollView>

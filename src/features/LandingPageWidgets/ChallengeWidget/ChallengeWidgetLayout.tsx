@@ -11,7 +11,7 @@ const ChallengeWidgetLayout = (props: Props) => {
     <View>
       <Center>
         <Heading mb={4} shadow={1}>
-          Pick a Challenge! 🚀
+          Pick a challenge! 🚀
         </Heading>
       </Center>
       <VStack space={4} paddingLeft={3} paddingRight={3}>
