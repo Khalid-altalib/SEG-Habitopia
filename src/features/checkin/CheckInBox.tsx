@@ -14,14 +14,19 @@ const CheckInBox = (props: Props) => {
   const { checkIn } = props;
   return (
     <TouchableOpacity>
-      <ZStack padding={5} width={150}>
+      <ZStack size="full" style={{ aspectRatio: 5 / 6 }}>
         <Image
-          source={{ uri: "https://picsum.photos/200" }}
-          alt="Alternate Text"
-          size="xl"
-          rounded="xl"
+          source={{ uri: "https://picsum.photos/2000" }}
+          alt={checkIn.name}
+          size="full"
+          rounded="lg"
+          position="absolute"
         />
-        <Heading fontSize="md" shadow={1} ml={2} mt={1}>
+        <Heading
+          fontSize="md"
+          style={{ textShadowColor: "black", textShadowRadius: 4 }}
+          padding={2}
+        >
           {checkIn.name}
         </Heading>
         <CheckInTime timeLeft={checkIn.timeLeft} />

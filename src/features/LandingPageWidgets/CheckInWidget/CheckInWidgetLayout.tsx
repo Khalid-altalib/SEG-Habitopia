@@ -1,3 +1,4 @@
+import PaddedContainer from "@components/PaddedContainer";
 import { ScrollView, View, Heading } from "native-base";
 import React from "react";
 
@@ -8,7 +9,7 @@ type Props = {
 function CheckInWidgetLayout(props: Props) {
   const { children } = props;
   return (
-    <View paddingLeft={6} paddingRight={6}>
+    <View marginLeft={25} marginTop={25}>
       <Heading shadow={1}>Check in 📝</Heading>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {children}

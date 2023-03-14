@@ -8,8 +8,15 @@ type Props = {
 function CheckInTime(props: Props) {
   const { timeLeft } = props;
   return (
-    <Box mt={20} ml={-3}>
-      <Text color={"red.600"}>{timeLeft}h left!</Text>
+    <Box position="absolute" bottom={0} padding={2}>
+      <Text
+        style={{
+          textShadowColor: "black",
+          textShadowRadius: 4,
+        }}
+      >
+        {timeLeft}h left!
+      </Text>
     </Box>
   );
 }

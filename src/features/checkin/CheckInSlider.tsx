@@ -19,32 +19,32 @@ const CheckInSlider = (props: Props) => {
       timeLeft: "3",
     },
     {
-      name: "study",
+      name: "Study",
       timeLeft: "3",
     },
     {
-      name: "sleep",
+      name: "Sleep",
       timeLeft: "3",
     },
     {
-      name: "fitness",
+      name: "Fitness",
       timeLeft: "3",
     },
     {
-      name: "study",
+      name: "Study",
       timeLeft: "3",
     },
     {
-      name: "sleep",
+      name: "Sleep",
       timeLeft: "3",
     },
     {
-      name: "fitness",
+      name: "Fitness",
       timeLeft: "3",
     },
   ];
   return (
-    <HStack mt={3}>
+    <HStack mt={12.25} height={150} space={25}>
       {data.map((checkIn, index) => (
         <CheckInBox key={index} checkIn={checkIn} />
       ))}

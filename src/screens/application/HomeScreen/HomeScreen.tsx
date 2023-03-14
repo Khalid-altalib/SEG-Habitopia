@@ -10,7 +10,7 @@ import CheckInWidget from "@features/LandingPageWidgets/CheckInWidget/CheckInWid
 function HomeScreen() {
   return (
     <Background>
-      <ScrollView mt={5} mb={5} showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <CheckInWidget />
         <CatchUpWidget />
         <ChallengeWidget />
