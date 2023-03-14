@@ -11,9 +11,7 @@ function CheckInWidgetLayout(props: Props) {
   const { children } = props;
   return (
     <View marginLeft={25} marginTop={25}>
-      <Text type={TextType.Subheading} color="white">
-        Check in 📝
-      </Text>
+      <Text type={TextType.Subheading}>Check in 📝</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {children}
       </ScrollView>

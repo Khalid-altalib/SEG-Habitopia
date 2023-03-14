@@ -11,11 +11,7 @@ const ChallengeWidgetLayout = (props: Props) => {
   const { children } = props;
   return (
     <View margin={25}>
-      <Text
-        type={TextType.Subheading}
-        color="white"
-        style={{ marginBottom: 25 }}
-      >
+      <Text type={TextType.Subheading} style={{ marginBottom: 25 }}>
         Pick a challenge! 🚀
       </Text>
       <VStack>{children}</VStack>

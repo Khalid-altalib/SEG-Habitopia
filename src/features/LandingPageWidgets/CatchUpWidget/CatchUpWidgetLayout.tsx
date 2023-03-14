@@ -11,9 +11,7 @@ const CatchUpWidgetLayout = (props: Props) => {
   const { children } = props;
   return (
     <View marginLeft={25} marginTop={25}>
-      <Text type={TextType.Subheading} color="white">
-        Catch up 👬
-      </Text>
+      <Text type={TextType.Subheading}>Catch up 👬</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {children}
       </ScrollView>
