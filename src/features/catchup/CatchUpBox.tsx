@@ -11,15 +11,14 @@ const CatchUpBox = (props: Props) => {
   const onHeartPressed = () => setIsLiked(!isLiked);
   return (
     <TouchableOpacity>
-      <ZStack padding={5} width={150} height={150}>
+      <ZStack size="full" style={{ aspectRatio: 1 }}>
         <Image
-          source={{ uri: "https://picsum.photos/200" }}
+          source={{ uri: "https://picsum.photos/2000" }}
           alt="Alternate Text"
-          size="xl"
-          rounded="xl"
+          size="full"
+          rounded="lg"
         />
         <IconButton
-          borderRadius="xl"
           colorScheme="red"
           variant="ghost"
           onPress={onHeartPressed}

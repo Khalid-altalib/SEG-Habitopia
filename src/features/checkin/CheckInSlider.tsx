@@ -44,7 +44,7 @@ const CheckInSlider = (props: Props) => {
     },
   ];
   return (
-    <HStack mt={12.25} height={150} space={25}>
+    <HStack mt={25} height={150} space={25}>
       {data.map((checkIn, index) => (
         <CheckInBox key={index} checkIn={checkIn} />
       ))}

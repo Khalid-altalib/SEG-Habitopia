@@ -10,7 +10,7 @@ function CheckInWidgetLayout(props: Props) {
   const { children } = props;
   return (
     <View marginLeft={25} marginTop={25}>
-      <Heading shadow={1}>Check in 📝</Heading>
+      <Heading>Check in 📝</Heading>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {children}
       </ScrollView>

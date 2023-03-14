@@ -14,7 +14,7 @@ const CheckInBox = (props: Props) => {
   const { checkIn } = props;
   return (
     <TouchableOpacity>
-      <ZStack size="full" style={{ aspectRatio: 5 / 6 }}>
+      <ZStack size="full" style={{ aspectRatio: 1 }}>
         <Image
           source={{ uri: "https://picsum.photos/2000" }}
           alt={checkIn.name}
