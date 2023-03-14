@@ -14,6 +14,7 @@ function CheckInTime(props: Props) {
           textShadowColor: "black",
           textShadowRadius: 4,
         }}
+        color="white"
       >
         {timeLeft}h left!
       </Text>

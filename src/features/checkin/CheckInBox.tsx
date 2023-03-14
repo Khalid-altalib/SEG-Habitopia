@@ -26,6 +26,7 @@ const CheckInBox = (props: Props) => {
           fontSize="md"
           style={{ textShadowColor: "black", textShadowRadius: 4 }}
           padding={2}
+          color="white"
         >
           {checkIn.name}
         </Heading>

@@ -20,6 +20,10 @@ const CatchUpBox = (props: Props) => {
         />
         <IconButton
           colorScheme="red"
+          size="lg"
+          bottom={0}
+          shadow="9"
+          style={{ shadowColor: "black", shadowRadius: 4 }}
           variant="link"
           onPress={onHeartPressed}
           _icon={{
