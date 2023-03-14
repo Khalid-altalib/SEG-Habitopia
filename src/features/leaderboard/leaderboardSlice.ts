@@ -8,7 +8,7 @@ export type LeaderboardState = {
   challengeType: string;
   timeInterval: string;
   page: number;
-  entries: Array<{ name: string; checkins: number }>;
+  entries: Array<{ name: string; checkins: number, userId: string; }>;
 };
 
 const initialState: LeaderboardState = {
