@@ -228,6 +228,14 @@ export const chatSlice = createSlice({
         chat.unreadMessages += 1;
       }
     },
+    resetUnreadMessages: (state, action: PayloadAction<{ chatId: string }>) => {
+      const chat = state.chats.find(
+        (chat) => chat.id === action.payload.chatId
+      );
+      if (chat) {
+        chat.unreadMessages = 0;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchChats.pending, (state) => {
@@ -338,6 +346,7 @@ export const {
   updateCheckInMessage,
   resetPageNumber,
   updateChatList,
+  resetUnreadMessages
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

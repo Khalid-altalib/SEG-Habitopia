@@ -42,7 +42,6 @@ const ChatListScreen = (props: Props) => {
         const lastMessage = await getMessageById(
           data.chatRoomLastMessageId || ""
         );
-        const isFocused = navigation.isFocused();
         dispatch(
           updateChatList({
             chatID: data.id,

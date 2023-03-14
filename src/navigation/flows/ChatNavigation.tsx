@@ -20,6 +20,7 @@ const ChatNavigation = () => {
         name="ChatList"
         component={ChatListScreen}
         options={{
+          headerTitle: "Chats",
           headerRight: () => {
             return <ContactIcon />;
           },

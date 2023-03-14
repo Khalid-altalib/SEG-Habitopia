@@ -282,6 +282,18 @@ export const incrementCheckInValidation = async (
             updated.isValidated = true;
           })
         );
+        const validationMessage = await DataStore.save(
+          new Message({
+            chatroomID: validatedCheckIn.chatroomID,
+            userID: user.id,
+            messageType: MessageEnum.VALIDATION,
+            text: `${
+              user.name
+            } has been validated for the check-in on day ${moment(
+              validatedCheckIn.createdAt
+            ).date()}`,
+          })
+        );
         return validatedCheckIn;
       } else {
         return newCheckIn;

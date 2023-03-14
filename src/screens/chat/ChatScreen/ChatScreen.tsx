@@ -8,6 +8,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {
   fetchMessages,
   resetPageNumber,
+  resetUnreadMessages,
   setCurrentChatId,
   updateCheckInMessage,
 } from "../../../features/chat/chatSlice";
@@ -34,6 +35,7 @@ import {
 } from "@features/chat/chatQueries";
 import { Button } from "react-native";
 import { ScrollView } from "native-base";
+import ValidationMessage from "@features/chat/ValidationMessage/ValidationMessage";
 
 type Props = {};
 
@@ -122,6 +124,7 @@ const ChatScreen = (props: Props) => {
     const checkInSubscription = addCheckInSubscription(id);
     return () => {
       dispatch(resetPageNumber());
+      dispatch(resetUnreadMessages({ chatId: chat.id }));
       chatSubscription.unsubscribe();
       checkInSubscription.unsubscribe();
     };
@@ -164,8 +167,19 @@ const ChatScreen = (props: Props) => {
                 messageType={item.messageType}
               />
             );
+          } else if (item.messageType === MessageEnum.VALIDATION) {
+            return (
+              <ValidationMessage
+                id={item.id}
+                userName={item.userName}
+                text={item.text}
+                createdAt={item.createdAt}
+                userID={item.userID}
+                messageType={item.messageType}
+              />
+            );
           } else {
-            return <></>;
+            <></>;
           }
         }}
         style={styles.flatList}
