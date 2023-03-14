@@ -1,11 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Avatar, Box, Button, HStack, Text, View, VStack } from "native-base";
+import { Box, Button, HStack, Text, View, VStack } from "native-base";
 import React from "react";
 import { RootParams } from "../../../../types";
 import { useSelector } from "../../../app/hooks";
 import FollowButton from "../FollowButton/FollowButton";
 import FollowListDisplay from "../FollowListDisplay/FollowListDisplay";
+import Avatar from "@components/Avatar/Avatar";
 
 type Props = {
   isLocalUserProfile: boolean;
@@ -27,7 +28,10 @@ const ProfileHeader = (props: Props) => {
       {profile && (
         <Box>
           <HStack space={4} pb={4}>
-            <Avatar size={100} />
+            <Box width={100}>
+              <Avatar userId="a" width="100%" height={100} />
+            </Box>
+
             <VStack flex={1} justifyContent={"space-between"}>
               <HStack
                 flex={1}

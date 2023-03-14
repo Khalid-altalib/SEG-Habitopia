@@ -14,6 +14,8 @@ import {
 import { onUpdateChatRoom } from "../../../graphql/subscriptions";
 import { getMessageById } from "@features/chat/chatQueries";
 import { Box } from "native-base";
+import NoChats from "@features/chat/NoChats/NoChats";
+import StatusContainer from "@components/StatusContainer/StatusContainer";
 
 type Props = {};
 
@@ -64,18 +66,25 @@ const ChatListScreen = (props: Props) => {
 
   return (
     <Box>
-      {chats &&
-        chats.map((item, i) => (
-          <ChatItem
-            id={item.id}
-            name={item.name}
-            image={item.image}
-            text={item.text}
-            time={item.time}
-            key={i}
-            unreadMessages={item.unreadMessages}
-          />
-        ))}
+      <StatusContainer
+        loading={loading}
+        error={error}
+        data={chats}
+        noDataDisplay={<NoChats />}
+      >
+        {chats.length > 0 &&
+          chats.map((item, i) => (
+            <ChatItem
+              id={item.id}
+              name={item.name}
+              image={item.image}
+              text={item.text}
+              time={item.time}
+              unreadMessages={item.unreadMessages}
+              key={i}
+            />
+          ))}
+      </StatusContainer>
     </Box>
   );
 };
