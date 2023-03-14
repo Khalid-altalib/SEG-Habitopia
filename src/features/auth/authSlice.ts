@@ -62,18 +62,17 @@ export const sendConfirmationCode = createAsyncThunk<
   }
 });
 
-const displayErrorMessage = (err: any) => {
+const displayErrorMessage = (error: any) => {
   let errorMessage = "";
   // looked into error messages and found what is presented for the different errors
-  if (err.message.includes("previousPassword")) {
+  if (error.message.includes("previousPassword")) {
     errorMessage = "Your password does not match the correct format.";
-  } else if (err.message.includes("proposedPassword")) {
+  } else if (error.message.includes("proposedPassword")) {
     errorMessage = "The requested password does not fit the criteria for a password";
-  } else if (err.message.includes("Incorrect username or password")) {
+  } else if (error.message.includes("Incorrect username or password")) {
     errorMessage = "Your old password is incorrect.";
   } else {
-    errorMessage = err.message;
-    console.log(errorMessage);
+    errorMessage = error.message;
   }
   Toast.show({
     type: "error",
@@ -123,6 +122,12 @@ export const logInUser = createAsyncThunk<
     const state = thunkAPI.getState() as RootState;
     const { email, password } = state.auth.logInData;
     const user = await logInHelper(email, password);
+
+    Toast.show({
+      type: "success",
+      text1: "Successfully logged in!",
+    });
+
     return user as LocalUser;
   } catch (error: any) {
     displayErrorMessage(error)
@@ -151,6 +156,10 @@ export const logInUserFromStorage = createAsyncThunk<
 
 export const logOutUser = createAsyncThunk("auth/logOutUser", async () => {
   await AsyncStorage.removeItem("user");
+  Toast.show({
+    type: "success",
+    text1: "You have successfully logged out!"
+  })
   return undefined;
 });
 
