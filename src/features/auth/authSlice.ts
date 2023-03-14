@@ -125,9 +125,8 @@ export const logInUser = createAsyncThunk<
     const user = await logInHelper(email, password);
     return user as LocalUser;
   } catch (error: any) {
-    const message = error.message;
-    console.log(message);
-    return thunkAPI.rejectWithValue(message);
+    displayErrorMessage(error)
+    return thunkAPI.rejectWithValue("An error has occured");
   }
 });
 
