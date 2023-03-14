@@ -20,7 +20,7 @@ const CatchUpBox = (props: Props) => {
         />
         <IconButton
           colorScheme="red"
-          variant="ghost"
+          variant="link"
           onPress={onHeartPressed}
           _icon={{
             as: AntDesign,
