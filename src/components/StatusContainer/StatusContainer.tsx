@@ -16,7 +16,7 @@ type Props = {
   error?: string;
   data?: any;
   children: React.ReactNode;
-  noDataDisplay?: React.ReactNode;
+  noDataDisplay?: JSX.Element;
 };
 
 const StatusContainer = (props: Props) => {

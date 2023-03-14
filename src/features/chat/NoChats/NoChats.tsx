@@ -1,4 +1,4 @@
-import { Center, Heading, Image, VStack } from "native-base";
+import { Image, VStack } from "native-base";
 import React from "react";
 import Text from "@components/Text";
 import PaddedContainer from "@components/PaddedContainer";
@@ -7,9 +7,7 @@ import { ButtonType } from "types";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { NavigationParams } from "types";
 
-type Props = {};
-
-const NoChats = (props: Props) => {
+const NoChats = () => {
   const navigation = useNavigation<NavigationProp<NavigationParams>>();
 
   const handlePress = () => navigation.navigate("Explore");

@@ -1,13 +1,8 @@
-import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Image, View, Pressable, Text } from "native-base";
-import {
-  Chat,
-  ChatParams,
-  IndividualChatScreenNavigationProp,
-  NavigationParams,
-} from "../../../../types";
+import { View, Pressable, Text } from "native-base";
+import { Chat, ChatParams } from "../../../../types";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Avatar from "@components/Avatar/Avatar";
 import { Box } from "native-base";

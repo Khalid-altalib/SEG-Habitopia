@@ -1,4 +1,4 @@
-import { Box, ScrollView } from "native-base";
+import { Box } from "native-base";
 import React from "react";
 import { User } from "types";
 import UserCard from "./UserCard/UserCard";

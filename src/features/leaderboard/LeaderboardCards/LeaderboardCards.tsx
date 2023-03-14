@@ -17,7 +17,7 @@ const LeaderboardCards = (props: Props) => {
           {entries.map((entry, index) => (
             <LeaderboardCard
               name={entry.name}
-              value={entry.checkins}
+              checkins={entry.checkins}
               key={index}
               place={index}
               userId={entry.userId}

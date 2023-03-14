@@ -11,7 +11,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type Props = {
   name: string;
-  value: number;
+  checkins: number;
   place: number;
   userId: string;
 };
@@ -23,7 +23,7 @@ const rankedColors: [string, string][] = [
 ];
 
 const LeaderboardCard = (props: Props) => {
-  const { name, value, place, userId } = props;
+  const { name, checkins, place, userId } = props;
 
   const cardColor =
     place < rankedColors.length ? rankedColors[place] : undefined;
@@ -50,7 +50,7 @@ const LeaderboardCard = (props: Props) => {
                 type={TextType.Regular}
                 color={cardColor ? theme.colors.blueGray[900] : undefined}
               >
-                {value} Checkins
+                {checkins} Checkins
               </Text>
             </View>
           </HStack>
