@@ -12,6 +12,7 @@ import {
   ChallengeType,
 } from "../../models";
 import { Message as MessageType } from "../../../types";
+import moment from "moment";
 
 export const fetchUserChats = async (thunkAPI: any) => {
   const userChatRooms = (await getUserFromDatabase(thunkAPI)).ChatRooms;
@@ -167,7 +168,9 @@ export const sendChatCheckIn = async (chatID: string, thunkAPI: any) => {
     );
     if (timeElapsed < 1) {
       throw new Error(
-        `Already Checked in for the day at ${lastCheckIn.createdAt}! You have ${lastCheckIn.validationCount} validations!`
+        `Already checked in for the day ${moment(
+          lastCheckIn.createdAt
+        ).fromNow()}!`
       );
     } else {
       return createCheckIn(chatID, userID, thunkAPI);
@@ -260,7 +263,7 @@ export const incrementCheckInValidation = async (
       (validateUser) => validateUser.userId === user.id
     );
     if (canValidate.length >= 1) {
-      throw new Error("already validated!");
+      throw new Error("You have already validated!");
     } else {
       await DataStore.save(
         new UserValidatedCheckIn({

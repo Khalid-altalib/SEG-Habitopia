@@ -5,6 +5,7 @@ import { useSelector } from "@app/hooks";
 import { useDispatch } from "../../../app/hooks";
 import { validateCheckIn } from "../chatSlice";
 import moment from "moment";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 const CheckInMessage = (message: Message) => {
   const { user } = useSelector((store) => store.auth);
@@ -16,10 +17,13 @@ const CheckInMessage = (message: Message) => {
   const validatingCheckIn = () => {
     if (!isMessage()) {
       dispatch(validateCheckIn(message.id || ""));
+    } else {
+      Toast.show({
+        type: "error",
+        text1: "Nice try! Can't validate yourself",
+      });
     }
   };
-
-  useEffect(() => {}, [dispatch]);
 
   return (
     <Pressable onPress={validatingCheckIn}>

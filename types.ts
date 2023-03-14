@@ -25,7 +25,7 @@ export type ProfileParams = {
 
 export type NavigationParams = {
   Home: undefined;
-  ChatList: undefined;
+  Chats: undefined;
   Welcome: undefined;
   Explore: undefined;
   Leaderboard: undefined;
@@ -47,7 +47,7 @@ export type AuthParams = {
 };
 
 export type ChatParams = {
-  Chats: undefined;
+  ChatList: undefined;
   IndividualChat: {
     id: string;
   };

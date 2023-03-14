@@ -131,52 +131,11 @@ const ChatScreen = (props: Props) => {
     dispatch(fetchMessages(chat.id));
   };
 
-  let reversed_messages = [] as any;
-
-  if (chat.messages) {
-    reversed_messages = [...chat.messages];
-    reversed_messages.reverse();
-  }
-
   return (
     <ImageBackground
       source={{ uri: "https://placeholder.com" }}
       style={styles.bg}
     >
-      <ScrollView>
-        {reversed_messages &&
-          reversed_messages.map((item: Message, i: number) => {
-            if (item.messageType === MessageEnum.TEXT) {
-              return (
-                <TextMessage
-                  id={item.id}
-                  userName={item.userName}
-                  text={item.text}
-                  createdAt={item.createdAt}
-                  userID={item.userID}
-                  messageType={item.messageType}
-                  key={i}
-                />
-              );
-            } else if (item.messageType === MessageEnum.CHECKIN) {
-              return (
-                <CheckInMessage
-                  id={item.id}
-                  validationCount={item.validationCount}
-                  isValidated={item.isValidated}
-                  userName={item.userName}
-                  text={item.text}
-                  createdAt={item.createdAt}
-                  userID={item.userID}
-                  messageType={item.messageType}
-                  key={i}
-                />
-              );
-            } else {
-              return <></>;
-            }
-          })}
-      </ScrollView>
       <Button title="Load more" onPress={fetchMoreMessages} />
       <FlatList
         data={chat.messages}

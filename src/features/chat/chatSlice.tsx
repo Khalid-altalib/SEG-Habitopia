@@ -9,6 +9,7 @@ import {
   sendChatMessage,
 } from "./chatQueries";
 import { RootState } from "@app/store";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 type ChatState = {
   chats: Chat[];
@@ -60,6 +61,10 @@ export const fetchChats = createAsyncThunk<
     return chats;
   } catch (error: any) {
     const message = error.message;
+    Toast.show({
+      type: "error",
+      text1: message,
+    });
     return thunkAPI.rejectWithValue(message);
   }
 });
@@ -76,7 +81,10 @@ export const fetchMessages = createAsyncThunk<
     return { id: chatId, messages: messages };
   } catch (error: any) {
     const message = error.message;
-    console.log(message);
+    Toast.show({
+      type: "error",
+      text1: message,
+    });
     return thunkAPI.rejectWithValue(message);
   }
 });
@@ -90,6 +98,10 @@ export const sendMessage = createAsyncThunk<any, any, { rejectValue: string }>(
       return { chatRoomId: chatRoomID, message: newMessage };
     } catch (error: any) {
       const message = error.message;
+      Toast.show({
+        type: "error",
+        text1: message,
+      });
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -105,7 +117,10 @@ export const sendCheckIn = createAsyncThunk<
     return { chatRoomId: chatID, checkIn: checkIn };
   } catch (error: any) {
     const message = error.message;
-    console.log(message);
+    Toast.show({
+      type: "error",
+      text1: message,
+    });
     return thunkAPI.rejectWithValue(message);
   }
 });
@@ -119,7 +134,10 @@ export const validateCheckIn = createAsyncThunk<
     const newCheckIn = await incrementCheckInValidation(messageId, thunkAPI);
   } catch (error: any) {
     const message = error.message;
-    console.log(message);
+    Toast.show({
+      type: "error",
+      text1: message,
+    });
     return thunkAPI.rejectWithValue(message);
   }
 });
