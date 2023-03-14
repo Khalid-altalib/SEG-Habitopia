@@ -45,7 +45,7 @@ const chatstyles = StyleSheet.create({
     flexDirection: "row",
     marginHorizontal: 10,
     marginVertical: 5,
-    height: 60,
+    height: 70,
   },
 
   image: {
