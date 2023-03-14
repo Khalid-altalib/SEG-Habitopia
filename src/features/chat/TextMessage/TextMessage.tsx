@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { Message } from "../../../../types";
 import { useSelector } from "@app/hooks";
+import moment from "moment";
 
 const TextMessage = (message: Message) => {
   const { user } = useSelector((store) => store.auth);
@@ -21,7 +22,7 @@ const TextMessage = (message: Message) => {
     >
       <Text>{message.userName}</Text>
       <Text>{message.text}</Text>
-      <Text style={styles.time}>{message.createdAt}</Text>
+      <Text style={styles.time}>{moment(message.createdAt).fromNow()}</Text>
     </View>
   );
 };

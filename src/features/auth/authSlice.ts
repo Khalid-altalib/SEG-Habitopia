@@ -38,7 +38,7 @@ export const signUpUser = createAsyncThunk<void, void, { rejectValue: string }>(
       });
     } catch (error: any) {
       const message = error.message;
-      console.log(error);
+      console.log(message);
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -80,7 +80,7 @@ const displayErrorMessage = (error: any) => {
   });
 };
 
-export const updatePassword = async (password: string,oldPassword: string) => {
+export const updatePassword = async (password: string, oldPassword: string) => {
   if (password === oldPassword) {
     Toast.show({
       type: "error",
@@ -88,17 +88,18 @@ export const updatePassword = async (password: string,oldPassword: string) => {
     });
     return;
   }
-  
+
   Auth.currentAuthenticatedUser()
-  .then((user) => {
-    return Auth.changePassword(user, oldPassword, password);
-  })
-  .then((data) => 
-  Toast.show({
-    type: "success",
-    text1: "Password Updated Successfully",
-  }))
-  .catch((err) => displayErrorMessage(err));
+    .then((user) => {
+      return Auth.changePassword(user, oldPassword, password);
+    })
+    .then((data) =>
+      Toast.show({
+        type: "success",
+        text1: "Password Updated Successfully",
+      })
+    )
+    .catch((err) => displayErrorMessage(err));
 };
 
 const logInHelper = async (email: string, password: string, name?: string) => {
@@ -195,7 +196,6 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     addSignUpData: (state, action: PayloadAction<object>) => {
-      console.log(state, action);
       state.signUpData = { ...state.signUpData, ...action.payload };
     },
     addLogInData: (state, action: PayloadAction<object>) => {

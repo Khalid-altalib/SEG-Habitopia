@@ -8,6 +8,8 @@ import {
   sendChatCheckIn,
   sendChatMessage,
 } from "./chatQueries";
+import { RootState } from "@app/store";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 type ChatState = {
   chats: Chat[];
@@ -33,6 +35,7 @@ type ChatState = {
   };
   details?: ChatDetails;
   currentChatId?: string;
+  pageNumber: number;
 };
 
 export const fetchDetails = createAsyncThunk<
@@ -58,6 +61,10 @@ export const fetchChats = createAsyncThunk<
     return chats;
   } catch (error: any) {
     const message = error.message;
+    Toast.show({
+      type: "error",
+      text1: message,
+    });
     return thunkAPI.rejectWithValue(message);
   }
 });
@@ -68,46 +75,52 @@ export const fetchMessages = createAsyncThunk<
   { rejectValue: string }
 >("messages/fetch", async (chatId: string, thunkAPI) => {
   try {
-    const messages = await fetchChatMessages(chatId);
+    const state = thunkAPI.getState() as RootState;
+    const { pageNumber } = state.chats;
+    const messages = await fetchChatMessages(chatId, pageNumber);
     return { id: chatId, messages: messages };
   } catch (error: any) {
     const message = error.message;
+    Toast.show({
+      type: "error",
+      text1: message,
+    });
     return thunkAPI.rejectWithValue(message);
   }
 });
 
-export const sendMessage = createAsyncThunk<
-  Message,
-  any,
-  { rejectValue: string }
->(
+export const sendMessage = createAsyncThunk<any, any, { rejectValue: string }>(
   "messages/send",
-  async (message: { message: string; chatRoomID: string }, thunkAPI) => {
+  async (data: { message: string; chatRoomID: string }, thunkAPI) => {
     try {
-      const newMessage = await sendChatMessage(
-        message.message,
-        message.chatRoomID,
-        thunkAPI
-      );
-      return newMessage;
+      const { message, chatRoomID } = data;
+      const newMessage = await sendChatMessage(message, chatRoomID, thunkAPI);
+      return { chatRoomId: chatRoomID, message: newMessage };
     } catch (error: any) {
       const message = error.message;
+      Toast.show({
+        type: "error",
+        text1: message,
+      });
       return thunkAPI.rejectWithValue(message);
     }
   }
 );
 
 export const sendCheckIn = createAsyncThunk<
-  Message,
+  any,
   string,
   { rejectValue: string }
 >("checkIn/send", async (chatID: string, thunkAPI) => {
   try {
-    const newCheckIn = await sendChatCheckIn(chatID, thunkAPI);
-    return newCheckIn;
+    const checkIn = await sendChatCheckIn(chatID, thunkAPI);
+    return { chatRoomId: chatID, checkIn: checkIn };
   } catch (error: any) {
     const message = error.message;
-    console.log(message);
+    Toast.show({
+      type: "error",
+      text1: message,
+    });
     return thunkAPI.rejectWithValue(message);
   }
 });
@@ -121,7 +134,10 @@ export const validateCheckIn = createAsyncThunk<
     const newCheckIn = await incrementCheckInValidation(messageId, thunkAPI);
   } catch (error: any) {
     const message = error.message;
-    console.log(message);
+    Toast.show({
+      type: "error",
+      text1: message,
+    });
     return thunkAPI.rejectWithValue(message);
   }
 });
@@ -150,6 +166,7 @@ const initialState: ChatState = {
   },
   details: undefined,
   currentChatId: undefined,
+  pageNumber: 0,
 };
 
 export const chatSlice = createSlice({
@@ -183,9 +200,40 @@ export const chatSlice = createSlice({
           return oldMessage;
         }
       });
-
       if (chat) {
         chat.messages = updatedChat;
+      }
+    },
+    resetPageNumber: (state) => {
+      state.pageNumber = 0;
+    },
+    updateChatList: (
+      state,
+      action: PayloadAction<{
+        chatID?: string;
+        updatedAt?: string;
+        lastMessage?: string;
+      }>
+    ) => {
+      const { chatID, updatedAt, lastMessage } = action.payload;
+      const chat = state.chats.find((chat) => chat.id === chatID);
+
+      if (chat) {
+        if (updatedAt !== undefined) {
+          chat.time = updatedAt;
+        }
+        if (lastMessage !== undefined && lastMessage !== "") {
+          chat.text = lastMessage;
+        }
+        chat.unreadMessages += 1;
+      }
+    },
+    resetUnreadMessages: (state, action: PayloadAction<{ chatId: string }>) => {
+      const chat = state.chats.find(
+        (chat) => chat.id === action.payload.chatId
+      );
+      if (chat) {
+        chat.unreadMessages = 0;
       }
     },
   },
@@ -212,9 +260,14 @@ export const chatSlice = createSlice({
       fetchMessages.fulfilled,
       (state, action: PayloadAction<{ id: string; messages: Message[] }>) => {
         const chat = state.chats.find((chat) => chat.id === action.payload.id);
+
         if (chat) {
-          chat.messages = action.payload.messages;
+          if (state.pageNumber == 0) chat.messages = action.payload.messages;
+          else chat.messages?.push(...action.payload.messages);
+          chat.unreadMessages = 0;
         }
+        state.pageNumber += 1;
+
         state.fetchMessages.loading = false;
       }
     );
@@ -227,6 +280,21 @@ export const chatSlice = createSlice({
     builder.addCase(sendMessage.pending, (state) => {
       state.sendMessage.loading = true;
     });
+    builder.addCase(
+      sendMessage.fulfilled,
+      (
+        state,
+        action: PayloadAction<{ chatRoomId: string; message: Message }>
+      ) => {
+        const chat = state.chats.find(
+          (chat) => chat.id === action.payload.chatRoomId
+        );
+        if (chat) {
+          chat.messages?.unshift(action.payload.message);
+        }
+        state.fetchMessages.loading = false;
+      }
+    );
     builder.addCase(sendMessage.rejected, (state, action: any) => {
       state.sendMessage.loading = false;
       state.sendMessage.error = action.payload;
@@ -254,10 +322,31 @@ export const chatSlice = createSlice({
       state.sendCheckIn.loading = false;
       state.sendCheckIn.error = action.payload;
     });
+    builder.addCase(
+      sendCheckIn.fulfilled,
+      (
+        state,
+        action: PayloadAction<{ chatRoomId: string; checkIn: Message }>
+      ) => {
+        const chat = state.chats.find(
+          (chat) => chat.id === action.payload.chatRoomId
+        );
+        if (chat) {
+          chat.messages?.unshift(action.payload.checkIn);
+        }
+        state.fetchMessages.loading = false;
+      }
+    );
   },
 });
 
-export const { addMessageToChat, setCurrentChatId, updateCheckInMessage } =
-  chatSlice.actions;
+export const {
+  addMessageToChat,
+  setCurrentChatId,
+  updateCheckInMessage,
+  resetPageNumber,
+  updateChatList,
+  resetUnreadMessages
+} = chatSlice.actions;
 
 export default chatSlice.reducer;

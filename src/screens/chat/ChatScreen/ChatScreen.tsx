@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import { ImageBackground, StyleSheet, FlatList, Text } from "react-native";
 import InputBox from "../../../features/chat/InputBox/InputBox";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
-import { ChatParams, Message as MessageType } from "../../../../types";
+import { ChatParams, Message, Message as MessageType } from "../../../../types";
 import { useDispatch, useSelector } from "../../../app/hooks";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {
   fetchMessages,
+  resetPageNumber,
+  resetUnreadMessages,
   setCurrentChatId,
   updateCheckInMessage,
 } from "../../../features/chat/chatSlice";
@@ -27,24 +29,30 @@ import { MessageEnum } from "src/models";
 import TextMessage from "../../../features/chat/TextMessage/TextMessage";
 import { getUserFromDatabasebyID } from "@app/util";
 import CheckInMessage from "../../../features/chat/CheckInMessage/CheckInMessage";
-import { getCheckInById, getMessageById } from "@features/chat/chatQueries";
+import {
+  getCheckInById,
+  getMessageByCheckInId,
+} from "@features/chat/chatQueries";
+import { Button } from "react-native";
 import { ScrollView } from "native-base";
+import ValidationMessage from "@features/chat/ValidationMessage/ValidationMessage";
 
 type Props = {};
 
 const ChatScreen = (props: Props) => {
   const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
   const route = useRoute<RouteProp<ChatParams, "IndividualChat">>();
+  const { user } = useSelector((store) => store.auth);
   const { chats } = useSelector((store) => store.chats);
   const { id } = route.params;
   const dispatch = useDispatch();
-
-  const { user } = useSelector((store) => store.auth);
-
   const addChatSubscription = (chatID: string) => {
     const variables: OnCreateMessageSubscriptionVariables = {
       filter: {
         chatroomID: { eq: chatID },
+        userID: {
+          ne: user?.userId,
+        },
       },
     };
     const subscription = API.graphql<
@@ -93,7 +101,7 @@ const ChatScreen = (props: Props) => {
         const data = { ...value.data?.onUpdateCheckin };
         const user = await getUserFromDatabasebyID(data.userID || "");
         const message = {
-          ...(await getMessageById(data.id || "")),
+          ...(await getMessageByCheckInId(data.id || "")),
           validationCount: data.validationCount,
           isValidated: data.isValidated,
           userName: user.name,
@@ -115,57 +123,68 @@ const ChatScreen = (props: Props) => {
     const chatSubscription = addChatSubscription(id);
     const checkInSubscription = addCheckInSubscription(id);
     return () => {
+      dispatch(resetPageNumber());
+      dispatch(resetUnreadMessages({ chatId: chat.id }));
       chatSubscription.unsubscribe();
       checkInSubscription.unsubscribe();
     };
   }, [id]);
 
-  let reversed_messages = [] as any;
-
-  if (chat.messages) {
-    reversed_messages = [...chat.messages];
-    reversed_messages.reverse();
-  }
+  const fetchMoreMessages = () => {
+    dispatch(fetchMessages(chat.id));
+  };
 
   return (
     <ImageBackground
       source={{ uri: "https://placeholder.com" }}
       style={styles.bg}
     >
-      <ScrollView>
-        {reversed_messages &&
-          reversed_messages.map((item, i) => {
-            if (item.messageType === MessageEnum.TEXT) {
-              return (
-                <TextMessage
-                  id={item.id}
-                  userName={item.userName}
-                  text={item.text}
-                  createdAt={item.createdAt}
-                  userID={item.userID}
-                  messageType={item.messageType}
-                  key={i}
-                />
-              );
-            } else if (item.messageType === MessageEnum.CHECKIN) {
-              return (
-                <CheckInMessage
-                  id={item.id}
-                  validationCount={item.validationCount}
-                  isValidated={item.isValidated}
-                  userName={item.userName}
-                  text={item.text}
-                  createdAt={item.createdAt}
-                  userID={item.userID}
-                  messageType={item.messageType}
-                  key={i}
-                />
-              );
-            } else {
-              return <></>;
-            }
-          })}
-      </ScrollView>
+      <Button title="Load more" onPress={fetchMoreMessages} />
+      <FlatList
+        data={chat.messages}
+        renderItem={({ item }) => {
+          if (item.messageType === MessageEnum.TEXT) {
+            return (
+              <TextMessage
+                id={item.id}
+                userName={item.userName}
+                text={item.text}
+                createdAt={item.createdAt}
+                userID={item.userID}
+                messageType={item.messageType}
+              />
+            );
+          } else if (item.messageType === MessageEnum.CHECKIN) {
+            return (
+              <CheckInMessage
+                id={item.id}
+                validationCount={item.validationCount}
+                isValidated={item.isValidated}
+                userName={item.userName}
+                text={item.text}
+                createdAt={item.createdAt}
+                userID={item.userID}
+                messageType={item.messageType}
+              />
+            );
+          } else if (item.messageType === MessageEnum.VALIDATION) {
+            return (
+              <ValidationMessage
+                id={item.id}
+                userName={item.userName}
+                text={item.text}
+                createdAt={item.createdAt}
+                userID={item.userID}
+                messageType={item.messageType}
+              />
+            );
+          } else {
+            <></>;
+          }
+        }}
+        style={styles.flatList}
+        inverted={true}
+      />
 
       <InputBox chatRoomID={chat.id} />
     </ImageBackground>

@@ -6655,6 +6655,7 @@ export type OnCreateChatRoomSubscription = {
 
 export type OnUpdateChatRoomSubscriptionVariables = {
   filter?: ModelSubscriptionChatRoomFilterInput | null,
+  userFilter? : ModelSubscriptionUserFilterInput | null,
 };
 
 export type OnUpdateChatRoomSubscription = {
