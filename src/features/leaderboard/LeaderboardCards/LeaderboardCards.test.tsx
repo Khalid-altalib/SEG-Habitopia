@@ -17,9 +17,9 @@ describe("LeaderboardLayout", () => {
       challengeType: "Sleep",
       timeInterval: "Weekly",
       entries: [
-        { name: "Alice", checkins: 4 },
-        { name: "Bob", checkins: 3 },
-        { name: "Charlie", checkins: 2 },
+        { name: "Alice", checkins: 4, userId: "100"},
+        { name: "Bob", checkins: 3, userId: "200" },
+        { name: "Charlie", checkins: 2, userId: "300" },
       ],
     },
   };
@@ -38,8 +38,11 @@ describe("LeaderboardLayout", () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it("loads leaderboard cards correctly", () => {
-    const { queryByTestId } = wrapper;
-    expect(queryByTestId("leaderboardCard")).toBeTruthy();
+  it("loads 3 leaderboard cards", () => {
+    expect(wrapper.getAllByTestId("leaderboardCard")).toHaveLength(4);
+  });
+
+  it("loads leaderboard cards with correct data", () => {
+   expect(wrapper.getAllByTestId("leaderboardCard")[1].props.children[0]).toBeDefined();
   });
 });

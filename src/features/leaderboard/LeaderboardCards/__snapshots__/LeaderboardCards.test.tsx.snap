@@ -123,6 +123,7 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                       "opacity": 1,
                     }
                   }
+                  testID="leaderboardCard"
                 >
                   <View
                     style={
@@ -200,7 +201,7 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                               onError={[Function]}
                               source={
                                 {
-                                  "uri": "https://robohash.org/undefined",
+                                  "uri": "https://robohash.org/100",
                                 }
                               }
                               style={
@@ -318,6 +319,7 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                       "opacity": 1,
                     }
                   }
+                  testID="leaderboardCard"
                 >
                   <View
                     style={
@@ -395,7 +397,7 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                               onError={[Function]}
                               source={
                                 {
-                                  "uri": "https://robohash.org/undefined",
+                                  "uri": "https://robohash.org/200",
                                 }
                               }
                               style={
@@ -513,6 +515,7 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                       "opacity": 1,
                     }
                   }
+                  testID="leaderboardCard"
                 >
                   <View
                     style={
@@ -590,7 +593,7 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                               onError={[Function]}
                               source={
                                 {
-                                  "uri": "https://robohash.org/undefined",
+                                  "uri": "https://robohash.org/300",
                                 }
                               }
                               style={
