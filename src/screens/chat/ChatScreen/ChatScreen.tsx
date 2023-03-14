@@ -143,43 +143,44 @@ const ChatScreen = (props: Props) => {
       <FlatList
         data={chat.messages}
         renderItem={({ item }) => {
-          if (item.messageType === MessageEnum.TEXT) {
-            return (
-              <TextMessage
-                id={item.id}
-                userName={item.userName}
-                text={item.text}
-                createdAt={item.createdAt}
-                userID={item.userID}
-                messageType={item.messageType}
-              />
-            );
-          } else if (item.messageType === MessageEnum.CHECKIN) {
-            return (
-              <CheckInMessage
-                id={item.id}
-                validationCount={item.validationCount}
-                isValidated={item.isValidated}
-                userName={item.userName}
-                text={item.text}
-                createdAt={item.createdAt}
-                userID={item.userID}
-                messageType={item.messageType}
-              />
-            );
-          } else if (item.messageType === MessageEnum.VALIDATION) {
-            return (
-              <ValidationMessage
-                id={item.id}
-                userName={item.userName}
-                text={item.text}
-                createdAt={item.createdAt}
-                userID={item.userID}
-                messageType={item.messageType}
-              />
-            );
-          } else {
-            <></>;
+          switch (item.messageType) {
+            case MessageEnum.TEXT:
+              return (
+                <TextMessage
+                  id={item.id}
+                  userName={item.userName}
+                  text={item.text}
+                  createdAt={item.createdAt}
+                  userID={item.userID}
+                  messageType={item.messageType}
+                />
+              );
+            case MessageEnum.CHECKIN:
+              return (
+                <CheckInMessage
+                  id={item.id}
+                  validationCount={item.validationCount}
+                  isValidated={item.isValidated}
+                  userName={item.userName}
+                  text={item.text}
+                  createdAt={item.createdAt}
+                  userID={item.userID}
+                  messageType={item.messageType}
+                />
+              );
+            case MessageEnum.VALIDATION:
+              return (
+                <ValidationMessage
+                  id={item.id}
+                  userName={item.userName}
+                  text={item.text}
+                  createdAt={item.createdAt}
+                  userID={item.userID}
+                  messageType={item.messageType}
+                />
+              );
+            default:
+              return <></>;
           }
         }}
         style={styles.flatList}
