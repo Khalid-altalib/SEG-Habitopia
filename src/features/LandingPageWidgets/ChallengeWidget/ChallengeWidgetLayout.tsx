@@ -1,5 +1,7 @@
-import { Center, Heading, View, VStack } from "native-base";
+import Text from "@components/Text";
+import { View, VStack } from "native-base";
 import React from "react";
+import { TextType } from "types";
 
 type Props = {
   children: React.ReactNode;
@@ -9,10 +11,14 @@ const ChallengeWidgetLayout = (props: Props) => {
   const { children } = props;
   return (
     <View margin={25}>
-      <Heading mb={4} shadow={1}>
+      <Text
+        type={TextType.Subheading}
+        color="white"
+        style={{ marginBottom: 25 }}
+      >
         Pick a challenge! 🚀
-      </Heading>
-      <VStack space={4}>{children}</VStack>
+      </Text>
+      <VStack>{children}</VStack>
     </View>
   );
 };

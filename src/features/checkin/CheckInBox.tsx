@@ -1,7 +1,9 @@
-import { Image, ZStack, Heading } from "native-base";
+import { Image, ZStack } from "native-base";
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import CheckInTime from "./CheckInTime";
+import Text from "@components/Text";
+import { TextType } from "types";
 
 type Props = {
   checkIn: {
@@ -22,14 +24,17 @@ const CheckInBox = (props: Props) => {
           rounded="lg"
           position="absolute"
         />
-        <Heading
-          fontSize="md"
-          style={{ textShadowColor: "black", textShadowRadius: 4 }}
-          padding={2}
+        <Text
+          type={TextType.Regular}
           color="white"
+          style={{
+            textShadowColor: "black",
+            textShadowRadius: 4,
+            padding: 12.25,
+          }}
         >
           {checkIn.name}
-        </Heading>
+        </Text>
         <CheckInTime timeLeft={checkIn.timeLeft} />
       </ZStack>
     </TouchableOpacity>
