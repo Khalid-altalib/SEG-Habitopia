@@ -20,7 +20,7 @@ export type ProfileState = {
   };
 };
 
-const initialState: ProfileState = {
+const initialState: ProfileState = { 
   profile: undefined,
   fetchProfile: {
     loading: false,
