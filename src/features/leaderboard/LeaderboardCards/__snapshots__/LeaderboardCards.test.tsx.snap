@@ -109,6 +109,7 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                 <View
                   dataSet={{}}
                   style={{}}
+                  testID="leaderboardCard"
                 >
                   <View
                     style={

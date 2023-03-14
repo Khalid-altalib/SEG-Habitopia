@@ -37,4 +37,9 @@ describe("LeaderboardLayout", () => {
   it("renders correctly", () => {
     expect(wrapper).toMatchSnapshot();
   });
+
+  it("loads leaderboard cards correctly", () => {
+    const { queryByTestId } = wrapper;
+    expect(queryByTestId("leaderboardCard")).toBeTruthy();
+  });
 });

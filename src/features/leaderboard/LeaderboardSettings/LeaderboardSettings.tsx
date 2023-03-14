@@ -65,6 +65,7 @@ const LeaderboardSettings = (props: Props) => {
             console.log(selectedChallengeType, challengeType);
             return (
               <Button
+                testID="option"
                 backgroundColor={buttonColor}
                 onPress={() => setSelectedChallengeType(challengeType)}
                 key={challengeType}

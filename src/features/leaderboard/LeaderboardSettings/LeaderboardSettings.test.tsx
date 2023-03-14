@@ -5,10 +5,12 @@ import configureStore from "redux-mock-store";
 import TestingWrapperNavigation from "@app/testingWrapperWithNavigation";
 
 const mockStore = configureStore([]);
-
+jest.mock("@features/challenges/challengesSlice", () => ({
+  fetchChallenges: jest.fn(),
+}));
 describe("LeaderboardSettings", () => {
   let store: any;
-  let component: any;
+  let wrapper: any;
 
   beforeEach(() => {
     store = mockStore({
@@ -27,15 +29,19 @@ describe("LeaderboardSettings", () => {
         },
       },
     });
-    component = (
+    wrapper = (
       <TestingWrapperNavigation store={store}>
         <LeaderboardSettings />
       </TestingWrapperNavigation>
     );
   });
 
-  it("renders correctly", () => {
-    const { getByTestId } = render(component);
+  it("renders leaderboardSettings", () => {
+    const { getByTestId } = render(wrapper);
     expect(getByTestId("leaderboardSettings")).toBeDefined();
+  });
+
+  it("matches snapshot", () => {
+    expect(wrapper).toMatchSnapshot();
   });
 });

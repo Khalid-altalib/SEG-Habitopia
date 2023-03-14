@@ -42,4 +42,10 @@ describe("LeaderboardLayout", () => {
     fireEvent.scroll(scrollView, { nativeEvent: { contentOffset: { y: -100 } } });
     expect(fetchLeaderboard).not.toHaveBeenCalled();
   });
+
+  it("should fetch leaderboard when scroll to bottom", () => {
+    const scrollView = wrapper.getByTestId("scrollView");
+    fireEvent.scroll(scrollView, { nativeEvent: { contentOffset: { y: 100 } } });
+    expect(fetchLeaderboard).toHaveBeenCalled();
+  });
 });
