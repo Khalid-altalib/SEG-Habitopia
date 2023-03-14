@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { DataStore } from "aws-amplify";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { Settings } from "../../../types";
-import { getAuthTokenFromThunk } from "../../app/util";
 import { getUserFromDatabase } from "../../app/util";
 import { User } from "../../models";
 import { updatePassword } from "../auth/authSlice";
@@ -84,7 +84,8 @@ export const setSettings = createAsyncThunk<
         }
       }));
 
-    // could add image and password in future
+    Toast.show({type: "success", text1: "Your new setting has been saved! ✅"})
+
     return settings; 
   } catch (error: any) {
     const message = error.message;

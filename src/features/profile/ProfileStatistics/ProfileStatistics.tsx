@@ -8,7 +8,6 @@ import { Statistic } from "../../../../types";
 import { useSelector } from "../../../app/hooks";
 import ProfileStatistic from "./ProfileStatistic";
 import { useState, useEffect } from "react";
-import { getCheckIns } from "../statisticsQueries";
 
 type Props = {};
 
