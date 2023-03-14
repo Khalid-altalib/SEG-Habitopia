@@ -72,10 +72,10 @@ const findChallengeToJoin = async (
     );
 
     if (availableChallenges.length == 0) {
-      const new_date = new Date();
-      let string_new_date: string = new_date.toLocaleString();
-      let chatRoomName = challengeTypeInstance.name + " - " + string_new_date;
-      const newChatRoom = await DataStore.save(new ChatRoom({name: chatRoomName}));
+      // const new_date = new Date();
+      // let string_new_date: string = new_date.toLocaleString();
+      // let chatRoomName = challengeTypeInstance.name + " - " + string_new_date;
+      const newChatRoom = await DataStore.save(new ChatRoom({name: "chatRoomName"}));
       const toJoin = await DataStore.save(
         new ChallengeModel({
           ChatRoom: newChatRoom,
