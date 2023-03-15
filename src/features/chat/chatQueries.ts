@@ -35,11 +35,12 @@ export const fetchUserChats = async (thunkAPI: any) => {
       )
     )[0];
     const lastMessage = await chat.LastMessage;
+    const time = new Date().toISOString();
     chats.push({
       id: chat.id,
       name: "Chatroom",
-      text: lastMessage?.text || "",
-      time: lastMessage?.createdAt || "",
+      text: lastMessage?.text || "Welcome to the chat!",
+      time: lastMessage?.createdAt || time,
       unreadMessages: 0,
     } as Chat);
   }
