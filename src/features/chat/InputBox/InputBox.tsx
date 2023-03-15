@@ -43,7 +43,8 @@ const InputBox = (props: InputBoxProps) => {
             style={styles.input}
             placeholder="type your message"
             value={value}
-            maxLength={500}
+            multiline={true}
+            maxLength={200}
           />
         )}
         name="message"

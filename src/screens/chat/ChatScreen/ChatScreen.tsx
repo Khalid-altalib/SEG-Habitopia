@@ -50,9 +50,18 @@ const ChatScreen = (props: Props) => {
     const variables: OnCreateMessageSubscriptionVariables = {
       filter: {
         chatroomID: { eq: chatID },
-        userID: {
-          ne: user?.userId,
-        },
+        or: [
+          {
+            messageType: {
+              eq: MessageEnum.VALIDATION,
+            },
+          },
+          {
+            userID: {
+              ne: user?.userId,
+            },
+          },
+        ],
       },
     };
     const subscription = API.graphql<
@@ -64,19 +73,33 @@ const ChatScreen = (props: Props) => {
           data.userID || ""
         );
         let message: MessageType;
-        if (data.messageType === MessageEnum.CHECKIN) {
-          const checkIn = await getCheckInById(data.messageGetCheckinId || "");
-          message = {
-            ...data,
-            validationCount: checkIn.validationCount,
-            isValidated: checkIn.isValidated,
-            userName: userFromDatabase.name,
-          } as MessageType;
-        } else {
-          message = {
-            ...data,
-            userName: userFromDatabase.name,
-          } as MessageType;
+        switch (data.messageType) {
+          case MessageEnum.CHECKIN:
+            const checkIn = await getCheckInById(
+              data.messageGetCheckinId || ""
+            );
+            message = {
+              ...data,
+              validationCount: checkIn.validationCount,
+              isValidated: checkIn.isValidated,
+              userName: userFromDatabase.name,
+            } as MessageType;
+            break;
+          case MessageEnum.TEXT:
+            message = {
+              ...data,
+              userName: userFromDatabase.name,
+            } as MessageType;
+            break;
+          case MessageEnum.VALIDATION:
+            message = {
+              ...data,
+              userName: userFromDatabase.name,
+            } as MessageType;
+            break;
+          default:
+            message = {} as MessageType;
+            break;
         }
         dispatch(addMessageToChat({ chatID, message }));
       },

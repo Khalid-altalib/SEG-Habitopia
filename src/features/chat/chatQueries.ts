@@ -1,6 +1,10 @@
-import { Amplify, DataStore, Predicates, SortDirection } from "aws-amplify";
+import { DataStore, SortDirection } from "aws-amplify";
 import { Chat, ChatDetails } from "../../../types";
-import { getUserFromDatabase, getUserIdFromThunk } from "../../app/util";
+import {
+  getUserFromDatabase,
+  getUserFromDatabasebyID,
+  getUserIdFromThunk,
+} from "../../app/util";
 import {
   ChatRoom,
   Message,
@@ -13,6 +17,13 @@ import {
 } from "../../models";
 import { Message as MessageType } from "../../../types";
 import moment from "moment";
+import {
+  ALREADY_VALIDATED_ERROR,
+  CHECK_IN_MESSAGE,
+  COULD_NOT_VALIDATE,
+  VALIDATION_COUNT,
+  VALIDATION_MESSAGE_TEXT,
+} from "@features/constants";
 
 export const fetchUserChats = async (thunkAPI: any) => {
   const userChatRooms = (await getUserFromDatabase(thunkAPI)).ChatRooms;
@@ -209,7 +220,7 @@ const createCheckIn = async (chatID: string, userID: string, thunkAPI: any) => {
       userID: userID,
       messageType: MessageEnum.CHECKIN,
       getCheckin: checkIn,
-      text: "This is a check in",
+      text: CHECK_IN_MESSAGE,
     })
   );
 
@@ -263,7 +274,7 @@ export const incrementCheckInValidation = async (
       (validateUser) => validateUser.userId === user.id
     );
     if (canValidate.length >= 1) {
-      throw new Error("You have already validated!");
+      throw new Error(ALREADY_VALIDATED_ERROR);
     } else {
       await DataStore.save(
         new UserValidatedCheckIn({
@@ -276,23 +287,30 @@ export const incrementCheckInValidation = async (
           updated.validationCount = validatedBy.length + 1;
         })
       );
-      if (newCheckIn.validationCount === 3) {
+      if (newCheckIn.validationCount === VALIDATION_COUNT) {
         const validatedCheckIn = await DataStore.save(
           Checkin.copyOf(checkIn, (updated) => {
             updated.isValidated = true;
           })
+        );
+        const checkInUser = await getUserFromDatabasebyID(
+          validatedCheckIn.userID
+        );
+        const time = new Date().toISOString();
+        const message = await VALIDATION_MESSAGE_TEXT(
+          ...[checkInUser.name || "", validatedCheckIn.createdAt || ""]
         );
         const validationMessage = await DataStore.save(
           new Message({
             chatroomID: validatedCheckIn.chatroomID,
             userID: user.id,
             messageType: MessageEnum.VALIDATION,
-            text: `${
-              user.name
-            } has been validated for the check-in on day ${moment(
-              validatedCheckIn.createdAt
-            ).date()}`,
+            text: message,
           })
+        );
+        updateLastMessageInChat(
+          validationMessage.id,
+          validationMessage.chatroomID
         );
         return validatedCheckIn;
       } else {
@@ -300,7 +318,7 @@ export const incrementCheckInValidation = async (
       }
     }
   } else {
-    throw new Error("Could not validate!");
+    throw new Error(COULD_NOT_VALIDATE);
   }
 };
 
