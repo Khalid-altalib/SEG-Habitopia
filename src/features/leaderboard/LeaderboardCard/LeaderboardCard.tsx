@@ -37,7 +37,7 @@ const LeaderboardCard = (props: Props) => {
     <TouchableOpacity onPress={handlePress}>
       <Card backgroundColorGradient={cardColor}>
         <HStack justifyContent={"space-between"} alignItems="center">
-          <HStack space={4}>
+          <HStack space={25}>
             <Box boxSize={50}>
               <Avatar userId={userId} />
             </Box>
