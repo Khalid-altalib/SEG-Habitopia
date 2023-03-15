@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Box, Button, HStack, Text, View, VStack } from "native-base";
 import React from "react";
-import { RootParams } from "../../../../types";
+import { ButtonType, RootParams } from "../../../../types";
 import { useSelector } from "../../../app/hooks";
 import FollowButton from "../FollowButton/FollowButton";
 import FollowListDisplay from "../FollowListDisplay/FollowListDisplay";
@@ -27,17 +27,17 @@ const ProfileHeader = (props: Props) => {
     <View>
       {profile && (
         <Box>
-          <HStack space={4} pb={4}>
-            <Box width={100}>
-              <Avatar userId="a" width="100%" height={100} />
+          <HStack space={12.5} marginBottom={12.5}>
+            <Box width={125}>
+              <Avatar userId="a" />
             </Box>
 
             <VStack flex={1} justifyContent={"space-between"}>
               <HStack
                 flex={1}
                 justifyContent="center"
-                paddingBottom={3}
-                space={3}
+                paddingBottom={12.5}
+                space={12.5}
               >
                 <FollowListDisplay
                   followListMode={"follower"}

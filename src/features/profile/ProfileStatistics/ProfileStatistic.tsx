@@ -1,6 +1,8 @@
-import { Box, Card, Heading, Text } from "native-base";
+import { Box, theme } from "native-base";
 import React from "react";
-import { Statistic } from "../../../../types";
+import { Statistic, TextType } from "../../../../types";
+import { LinearGradient } from "expo-linear-gradient";
+import Text from "@components/Text";
 
 type Props = {
   statistic: Statistic;
@@ -11,11 +13,23 @@ const ProfileStatistic = (props: Props) => {
   const { name, quantity } = statistic;
 
   return (
-    <Box shadow="3" width="50%" style={{ padding: 10 }}>
-      <Card backgroundColor="blue.300">
-        <Heading>{quantity}</Heading>
-        <Text>{name}</Text>
-      </Card>
+    <Box overflow="hidden" rounded="lg">
+      <LinearGradient
+        colors={[theme.colors.darkBlue[500], theme.colors.purple[700]]}
+        start={[0, 0]}
+        end={[1, 1]}
+        style={{
+          padding: 12.5,
+          marginBottom: -9, // The -0 is to account for the text bottom margin/padding
+        }}
+      >
+        <Text type={TextType.Small} color="white">
+          {name}
+        </Text>
+        <Text type={TextType.Heading} color="white">
+          {quantity}
+        </Text>
+      </LinearGradient>
     </Box>
   );
 };
