@@ -1,4 +1,5 @@
 // Habitopia
+import Background from "@components/Background";
 import ChallengeBoxes from "@features/challenges/ChallengeBoxes/ChallengeBoxes";
 import ChallengeLayout from "@features/challenges/ChallengeLayout/ChallengeLayout";
 
@@ -9,9 +10,11 @@ import ChallengeLayout from "@features/challenges/ChallengeLayout/ChallengeLayou
  */
 const ExploreScreen = (): JSX.Element => {
   return (
-    <ChallengeLayout>
-      <ChallengeBoxes />
-    </ChallengeLayout>
+    <Background>
+      <ChallengeLayout>
+        <ChallengeBoxes />
+      </ChallengeLayout>
+    </Background>
   );
 };
 
