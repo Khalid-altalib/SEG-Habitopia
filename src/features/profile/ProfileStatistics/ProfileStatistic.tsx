@@ -1,4 +1,4 @@
-import { Box, theme } from "native-base";
+import { Box, theme, useColorModeValue } from "native-base";
 import React from "react";
 import { Statistic, TextType } from "../../../../types";
 import { LinearGradient } from "expo-linear-gradient";
@@ -15,7 +15,10 @@ const ProfileStatistic = (props: Props) => {
   return (
     <Box overflow="hidden" rounded="lg">
       <LinearGradient
-        colors={[theme.colors.darkBlue[500], theme.colors.purple[700]]}
+        colors={useColorModeValue(
+          [theme.colors.white, theme.colors.gray[50]],
+          [theme.colors.blueGray[600], theme.colors.blueGray[700]]
+        )}
         start={[0, 0]}
         end={[1, 1]}
         style={{
@@ -23,12 +26,8 @@ const ProfileStatistic = (props: Props) => {
           marginBottom: -9, // The -0 is to account for the text bottom margin/padding
         }}
       >
-        <Text type={TextType.Small} color="white">
-          {name}
-        </Text>
-        <Text type={TextType.Heading} color="white">
-          {quantity}
-        </Text>
+        <Text type={TextType.Small}>{name}</Text>
+        <Text type={TextType.Heading}>{quantity}</Text>
       </LinearGradient>
     </Box>
   );
