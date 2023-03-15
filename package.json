@@ -7,7 +7,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest --watchAll",
+    "test": "NODE_ENV=testing jest --watchAll",
     "docs": "npx typedoc --tsconfig ./tsconfig.json",
     "storybook": "start-storybook -p 7007",
     "build-storybook": "build-storybook"
