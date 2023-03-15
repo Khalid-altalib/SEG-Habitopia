@@ -1,4 +1,4 @@
-import { FlatList, Heading, View, VStack } from "native-base";
+import { Heading, View, VStack } from "native-base";
 import React from "react";
 import { DataStore } from "aws-amplify";
 import { User } from "../../../models";
@@ -8,7 +8,6 @@ import { Statistic } from "../../../../types";
 import { useSelector } from "../../../app/hooks";
 import ProfileStatistic from "./ProfileStatistic";
 import { useState, useEffect } from "react";
-import { getCheckIns } from "../statisticsQueries";
 
 type Props = {};
 

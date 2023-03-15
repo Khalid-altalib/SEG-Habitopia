@@ -17,6 +17,7 @@ export const createLeaderboard = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -43,12 +44,24 @@ export const createLeaderboard = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
+      ChallengeType {
+        id
+        name
+        description
+        active
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
       leaderboardUserId
+      leaderboardChallengeTypeId
     }
   }
 `;
@@ -67,6 +80,7 @@ export const updateLeaderboard = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -93,12 +107,24 @@ export const updateLeaderboard = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
+      ChallengeType {
+        id
+        name
+        description
+        active
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
       leaderboardUserId
+      leaderboardChallengeTypeId
     }
   }
 `;
@@ -117,6 +143,7 @@ export const deleteLeaderboard = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -143,12 +170,24 @@ export const deleteLeaderboard = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
+      ChallengeType {
+        id
+        name
+        description
+        active
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
       leaderboardUserId
+      leaderboardChallengeTypeId
     }
   }
 `;
@@ -455,6 +494,7 @@ export const createUser = /* GraphQL */ `
       biography
       email
       notifications
+      streakStart
       Messages {
         items {
           id
@@ -553,6 +593,7 @@ export const updateUser = /* GraphQL */ `
       biography
       email
       notifications
+      streakStart
       Messages {
         items {
           id
@@ -651,6 +692,7 @@ export const deleteUser = /* GraphQL */ `
       biography
       email
       notifications
+      streakStart
       Messages {
         items {
           id
@@ -1354,6 +1396,7 @@ export const createChallengeUser = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1441,6 +1484,7 @@ export const updateChallengeUser = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1528,6 +1572,7 @@ export const deleteChallengeUser = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1578,6 +1623,7 @@ export const createUserChatRoom = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1662,6 +1708,7 @@ export const updateUserChatRoom = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1746,6 +1793,7 @@ export const deleteUserChatRoom = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1830,6 +1878,7 @@ export const createUserValidatedCheckIn = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1909,6 +1958,7 @@ export const updateUserValidatedCheckIn = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1988,6 +2038,7 @@ export const deleteUserValidatedCheckIn = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt

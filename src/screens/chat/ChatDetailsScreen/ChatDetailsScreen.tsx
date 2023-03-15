@@ -6,7 +6,7 @@ import Header from "@features/chat/Header/Header";
 import ParticipantsList from "@features/chat/ParticipantsList/ParticipantsList";
 import Statistics from "@features/chat/Statistics/Statistics";
 import { RouteProp, useRoute } from "@react-navigation/native";
-import { Box } from "native-base";
+import { Box, ScrollView } from "native-base";
 import React, { useEffect } from "react";
 import { RootParams } from "types";
 
@@ -25,18 +25,18 @@ const ChatDetailsScreen = (props: Props) => {
   }, []);
 
   return (
-    <Box backgroundColor={"black"}>
+    <ScrollView>
       <PaddedContainer>
         <StatusContainer loading={loading} error={error} data={details}>
           <Header
-            name={details?.challengeName || "Erro"}
+            name={details?.challengeName || "Error"}
             description={details?.description || "Error"}
           />
           <Statistics />
-          <ParticipantsList />
         </StatusContainer>
+        <ParticipantsList />
       </PaddedContainer>
-    </Box>
+    </ScrollView>
   );
 };
 
