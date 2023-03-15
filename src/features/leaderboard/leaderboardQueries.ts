@@ -1,46 +1,107 @@
-import { DataStore, SortDirection, Auth } from "aws-amplify";
+import {
+  DataStore,
+  SortDirection,
+  Auth,
+  API,
+  graphqlOperation,
+} from "aws-amplify";
 import { Leaderboard, User, Checkin } from "../../models";
 import { getUserFromDatabasebyID } from "@app/util";
+import {
+  OnCreateCheckinSubscription,
+  OnCreateCheckinSubscriptionVariables,
+} from "../../API";
+import { GraphQLSubscription } from "@aws-amplify/api";
+import { onCreateCheckin } from "../../graphql/subscriptions";
 
 /**
  * Subscribes to the checkin model 
  * updates the leaderboard model when the user checks in
  */
-const updateLeaderboard = DataStore.observe(Checkin).subscribe({
-  next: async (msg) => {
-    if (msg.opType === "INSERT") {
-      const checkin = msg.element as Checkin;
-      const { userID, checkinChallengeTypeId } = checkin;
-      const currentUserID = (await Auth.currentAuthenticatedUser()).attributes.sub;
-      const user = await getUserFromDatabasebyID(userID);
-      if (currentUserID === userID) {
-        const leaderboardEntry = await fetchLeaderboardByUserIDAndChallengeType(
-          userID,
-          checkinChallengeTypeId as string
+// const updateLeaderboard = DataStore.observe(Checkin).subscribe({
+//   next: async (msg) => {
+//     if (msg.opType === "INSERT") {
+//       const checkin = msg.element as Checkin;
+//       const { userID, checkinChallengeTypeId } = checkin;
+//       const currentUserID = (await Auth.currentAuthenticatedUser()).attributes.sub;
+//       const user = await getUserFromDatabasebyID(userID);
+//       if (currentUserID === userID) {
+//         const leaderboardEntry = await fetchLeaderboardByUserIDAndChallengeType(
+//           userID,
+//           checkinChallengeTypeId as string
+//         );
+//         const currentCheckins = leaderboardEntry?.numberOfCheckins ?? 0;
+//         const newCheckins = currentCheckins + 1;
+//         if (currentCheckins === 0) {
+//           await DataStore.save(
+//             new Leaderboard({
+//               leaderboardUserId: userID,
+//               numberOfCheckins: newCheckins,
+//               leaderboardChallengeTypeId: checkinChallengeTypeId as string,
+//               User: user,
+//             })
+//           );
+//         } else {
+//           await DataStore.save(
+//             Leaderboard.copyOf(leaderboardEntry, (updated) => {
+//               updated.numberOfCheckins = newCheckins;
+//             })
+//           );
+//         }
+//       }
+//     }
+//   },
+//   error: (err) => console.error(err),
+// });
+
+export const addCheckinSubscriptionForLeaderboard = (currentUserId: string) => {
+  const filter: OnCreateCheckinSubscriptionVariables = {
+    filter: {
+      userID: {
+        eq: currentUserId,
+      },
+    },
+  };
+  const checkinSubscription = API.graphql<
+    GraphQLSubscription<OnCreateCheckinSubscription>
+  >(graphqlOperation(onCreateCheckin, filter)).subscribe({
+    next: async ({ value }) => {
+      const checkin = { ...value.data?.onCreateCheckin };
+      const { checkinChallengeTypeId } = checkin;
+      const user = await getUserFromDatabasebyID(currentUserId);
+      console.log("user ::", user)
+      const leaderboardEntry = await fetchLeaderboardByUserIDAndChallengeType(
+        currentUserId,
+        checkinChallengeTypeId as string
+      );
+      console.log("leaderboardEntry ::", leaderboardEntry)
+      const currentCheckins = leaderboardEntry?.numberOfCheckins ?? 0;
+      console.log("currentCheckins ::", currentCheckins)
+      const newCheckins = currentCheckins + 1;
+      if (currentCheckins === 0) {
+        await DataStore.save(
+          new Leaderboard({
+            leaderboardUserId: currentUserId,
+            numberOfCheckins: newCheckins,
+            leaderboardChallengeTypeId: checkinChallengeTypeId as string,
+            User: user,
+          })
         );
-        const currentCheckins = leaderboardEntry?.numberOfCheckins ?? 0;
-        const newCheckins = currentCheckins + 1;
-        if (currentCheckins === 0) {
-          await DataStore.save(
-            new Leaderboard({
-              leaderboardUserId: userID,
-              numberOfCheckins: newCheckins,
-              leaderboardChallengeTypeId: checkinChallengeTypeId as string,
-              User: user,
-            })
-          );
-        } else {
-          await DataStore.save(
-            Leaderboard.copyOf(leaderboardEntry, (updated) => {
-              updated.numberOfCheckins = newCheckins;
-            })
-          );
-        }
+      } else {
+        await DataStore.save(
+          Leaderboard.copyOf(leaderboardEntry, (updated) => {
+            updated.numberOfCheckins = newCheckins;
+          })
+        );
       }
-    }
-  },
-  error: (err) => console.error(err),
-});
+    },
+    error: (err) => console.error(err),
+  });
+  return checkinSubscription;
+};
+
+
+
 
 /**
  * returns the leaderboard values for a given challenge type and page as a key value pair of name and number of checkins
