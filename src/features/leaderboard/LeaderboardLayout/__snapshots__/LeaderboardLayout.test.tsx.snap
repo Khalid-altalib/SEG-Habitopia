@@ -128,10 +128,8 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                     dataSet={{}}
                     style={{}}
                   >
-                    <div
-                      data-testid="child"
-                    >
-                      Child component
+                    <div>
+                      Test
                     </div>
                   </View>
                 </View>

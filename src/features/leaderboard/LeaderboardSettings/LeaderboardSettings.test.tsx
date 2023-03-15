@@ -16,6 +16,7 @@ describe("LeaderboardSettings", () => {
     store = mockStore({
       leaderboard: {
         timeInterval: "Weekly",
+
       },
       challenges: {
         challenges: [

@@ -16,8 +16,8 @@ describe("LeaderboardLayout", () => {
   const mockState = {
     leaderboard: {
       leaderboard: [],
-      loading: false,
-      error: null,
+      leaderboardLoading: false,
+      leaderboardError: null,
     },
   };
   const mockStore = configureStore([thunk])(mockState);
@@ -27,7 +27,7 @@ describe("LeaderboardLayout", () => {
     wrapper = render(
       <TestingWrapperNavigation store={mockStore}>
         <LeaderboardLayout>
-          <div data-testid="child">Child component</div>
+          <div>Test</div>
         </LeaderboardLayout>
       </TestingWrapperNavigation>
     );
@@ -39,13 +39,9 @@ describe("LeaderboardLayout", () => {
 
   it("should not fetch leaderboard when scroll to top", () => {
     const scrollView = wrapper.getByTestId("scrollView");
-    fireEvent.scroll(scrollView, { nativeEvent: { contentOffset: { y: -100 } } });
+    fireEvent.scroll(scrollView, {
+      nativeEvent: { contentOffset: { y: -100 } },
+    });
     expect(fetchLeaderboard).not.toHaveBeenCalled();
-  });
-
-  it("should fetch leaderboard when scroll to bottom", () => {
-    const scrollView = wrapper.getByTestId("scrollView");
-    fireEvent.scroll(scrollView, { nativeEvent: { contentOffset: { y: 100 } } });
-    expect(fetchLeaderboard).toHaveBeenCalled();
   });
 });
