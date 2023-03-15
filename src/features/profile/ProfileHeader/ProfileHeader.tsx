@@ -1,8 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Box, Button, HStack, Text, View, VStack } from "native-base";
+import { Box, Button, HStack, View, VStack } from "native-base";
+import Text from "@components/Text";
 import React from "react";
-import { ButtonType, RootParams } from "../../../../types";
+import { ButtonType, RootParams, TextType } from "../../../../types";
 import { useSelector } from "../../../app/hooks";
 import FollowButton from "../FollowButton/FollowButton";
 import FollowListDisplay from "../FollowListDisplay/FollowListDisplay";
@@ -17,11 +18,6 @@ const ProfileHeader = (props: Props) => {
   const { profile } = useSelector((state) => state.profile);
 
   const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
-
-  const biographyDisplay =
-    profile?.biography === "" || profile?.biography === null
-      ? "This user does not currently have a bio"
-      : profile?.biography;
 
   return (
     <View>
@@ -59,10 +55,12 @@ const ProfileHeader = (props: Props) => {
             </VStack>
           </HStack>
           <View>
-            <Text bold fontSize={"md"}>
-              {profile!.name}
-            </Text>
-            <Text fontSize={"md"}>{biographyDisplay}</Text>
+            <Text type={TextType.Regular}>{profile!.name}</Text>
+            {profile?.biography === null || profile?.biography === "" ? null : (
+              <Text type={TextType.Small} style={{ marginTop: 2 }}>
+                {profile?.biography}
+              </Text>
+            )}
           </View>
         </Box>
       )}
