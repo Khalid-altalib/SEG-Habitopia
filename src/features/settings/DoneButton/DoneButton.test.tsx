@@ -40,7 +40,7 @@ describe("DoneButton", () => {
     expect(button).toBeDefined();
   });
 
-  it("dispatches the setSettings action pressed", async () => {
+  it("dispatches the setSettings action when pressed", async () => {
     const store = mockStore;
     const valueName = "name";
     const getValues = jest.fn().mockReturnValue("Jane Doe");

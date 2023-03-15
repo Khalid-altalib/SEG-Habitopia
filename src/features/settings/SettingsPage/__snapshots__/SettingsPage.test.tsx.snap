@@ -108,543 +108,34 @@ exports[`SettingsPage renders correctly 1`] = `
               >
                 <View
                   dataSet={{}}
-                  style={{}}
+                  style={
+                    {
+                      "paddingBottom": 12,
+                    }
+                  }
                 >
                   <View
                     dataSet={{}}
-                    style={
-                      {
-                        "paddingBottom": 12,
-                      }
-                    }
-                  >
-                    <View
-                      dataSet={{}}
-                      style={{}}
-                    >
-                      <View
-                        dataSet={{}}
-                        style={
-                          {
-                            "alignItems": "flex-start",
-                            "display": "flex",
-                            "flexDirection": "row",
-                          }
-                        }
-                      >
-                        <View
-                          dataSet={{}}
-                          style={
-                            {
-                              "borderBottomWidth": 1,
-                              "borderColor": "#d4d4d8",
-                              "flexDirection": "row",
-                            }
-                          }
-                        >
-                          <Text
-                            style={
-                              [
-                                {
-                                  "color": "#18181b",
-                                },
-                                {
-                                  "fontFamily": undefined,
-                                  "fontSize": 15,
-                                },
-                                {
-                                  "flex": 1,
-                                },
-                              ]
-                            }
-                          >
-                            Name
-                          </Text>
-                          <View
-                            dataSet={{}}
-                            style={
-                              {
-                                "flex": 3,
-                                "paddingBottom": 12,
-                              }
-                            }
-                          >
-                            <View
-                              accessible={true}
-                              collapsable={false}
-                              focusable={true}
-                              onClick={[Function]}
-                              onResponderGrant={[Function]}
-                              onResponderMove={[Function]}
-                              onResponderRelease={[Function]}
-                              onResponderTerminate={[Function]}
-                              onResponderTerminationRequest={[Function]}
-                              onStartShouldSetResponder={[Function]}
-                              style={
-                                {
-                                  "opacity": 1,
-                                }
-                              }
-                            >
-                              <Text
-                                style={
-                                  [
-                                    {
-                                      "color": "#18181b",
-                                    },
-                                    {
-                                      "color": "#71717a",
-                                      "fontFamily": undefined,
-                                      "fontSize": 15,
-                                    },
-                                    undefined,
-                                  ]
-                                }
-                              >
-                                Test User
-                              </Text>
-                            </View>
-                          </View>
-                        </View>
-                      </View>
-                    </View>
-                  </View>
-                  <View
-                    dataSet={{}}
                     style={{}}
-                  />
-                  <View
-                    dataSet={{}}
-                    style={
-                      {
-                        "paddingBottom": 12,
-                      }
-                    }
                   >
                     <View
                       dataSet={{}}
-                      style={{}}
-                    >
-                      <View
-                        dataSet={{}}
-                        style={
-                          {
-                            "alignItems": "flex-start",
-                            "display": "flex",
-                            "flexDirection": "row",
-                          }
-                        }
-                      >
-                        <View
-                          dataSet={{}}
-                          style={
-                            {
-                              "borderBottomWidth": 1,
-                              "borderColor": "#d4d4d8",
-                              "flexDirection": "row",
-                            }
-                          }
-                        >
-                          <Text
-                            style={
-                              [
-                                {
-                                  "color": "#18181b",
-                                },
-                                {
-                                  "fontFamily": undefined,
-                                  "fontSize": 15,
-                                },
-                                {
-                                  "flex": 1,
-                                },
-                              ]
-                            }
-                          >
-                            Password
-                          </Text>
-                          <View
-                            dataSet={{}}
-                            style={
-                              {
-                                "flex": 3,
-                                "paddingBottom": 12,
-                              }
-                            }
-                          >
-                            <View
-                              accessible={true}
-                              collapsable={false}
-                              focusable={true}
-                              onClick={[Function]}
-                              onResponderGrant={[Function]}
-                              onResponderMove={[Function]}
-                              onResponderRelease={[Function]}
-                              onResponderTerminate={[Function]}
-                              onResponderTerminationRequest={[Function]}
-                              onStartShouldSetResponder={[Function]}
-                              style={
-                                {
-                                  "opacity": 1,
-                                }
-                              }
-                            >
-                              <Text
-                                style={
-                                  [
-                                    {
-                                      "color": "#18181b",
-                                    },
-                                    {
-                                      "color": "#71717a",
-                                      "fontFamily": undefined,
-                                      "fontSize": 15,
-                                    },
-                                    undefined,
-                                  ]
-                                }
-                              >
-                                *******
-                              </Text>
-                            </View>
-                          </View>
-                        </View>
-                      </View>
-                    </View>
-                  </View>
-                  <View
-                    dataSet={{}}
-                    style={{}}
-                  />
-                  <View
-                    dataSet={{}}
-                    style={
-                      {
-                        "paddingBottom": 12,
-                      }
-                    }
-                  >
-                    <View
-                      dataSet={{}}
-                      style={{}}
-                    >
-                      <View
-                        dataSet={{}}
-                        style={
-                          {
-                            "alignItems": "flex-start",
-                            "display": "flex",
-                            "flexDirection": "row",
-                          }
-                        }
-                      >
-                        <View
-                          dataSet={{}}
-                          style={
-                            {
-                              "borderBottomWidth": 1,
-                              "borderColor": "#d4d4d8",
-                              "flexDirection": "row",
-                            }
-                          }
-                        >
-                          <Text
-                            style={
-                              [
-                                {
-                                  "color": "#18181b",
-                                },
-                                {
-                                  "fontFamily": undefined,
-                                  "fontSize": 15,
-                                },
-                                {
-                                  "flex": 1,
-                                },
-                              ]
-                            }
-                          >
-                            Bio
-                          </Text>
-                          <View
-                            dataSet={{}}
-                            style={
-                              {
-                                "flex": 3,
-                                "paddingBottom": 12,
-                              }
-                            }
-                          >
-                            <View
-                              accessible={true}
-                              collapsable={false}
-                              focusable={true}
-                              onClick={[Function]}
-                              onResponderGrant={[Function]}
-                              onResponderMove={[Function]}
-                              onResponderRelease={[Function]}
-                              onResponderTerminate={[Function]}
-                              onResponderTerminationRequest={[Function]}
-                              onStartShouldSetResponder={[Function]}
-                              style={
-                                {
-                                  "opacity": 1,
-                                }
-                              }
-                            >
-                              <Text
-                                style={
-                                  [
-                                    {
-                                      "color": "#18181b",
-                                    },
-                                    {
-                                      "color": "#71717a",
-                                      "fontFamily": undefined,
-                                      "fontSize": 15,
-                                    },
-                                    undefined,
-                                  ]
-                                }
-                              >
-                                Hello, I'm Test User.
-                              </Text>
-                            </View>
-                          </View>
-                        </View>
-                      </View>
-                    </View>
-                  </View>
-                  <View
-                    dataSet={{}}
-                    style={{}}
-                  />
-                  <View
-                    dataSet={{}}
-                    style={
-                      {
-                        "alignItems": "center",
-                        "borderBottomWidth": 1,
-                        "borderColor": "#d4d4d8",
-                        "display": "flex",
-                        "flexDirection": "row",
-                        "justifyContent": "space-between",
-                        "paddingBottom": 12,
-                      }
-                    }
-                  >
-                    <View
-                      dataSet={{}}
-                      style={{}}
-                    >
-                      <Text
-                        style={
-                          [
-                            {
-                              "color": "#18181b",
-                            },
-                            {
-                              "fontFamily": undefined,
-                              "fontSize": 15,
-                            },
-                            undefined,
-                          ]
-                        }
-                      >
-                        Notifications 
-                      </Text>
-                      <Text
-                        style={
-                          [
-                            {
-                              "color": "#18181b",
-                            },
-                            {
-                              "color": "#71717a",
-                              "fontFamily": undefined,
-                              "fontSize": 15,
-                            },
-                            undefined,
-                          ]
-                        }
-                      >
-                        Choose to receive notifications
-                      </Text>
-                    </View>
-                    <View
-                      dataSet={{}}
-                      style={{}}
-                    />
-                    <View
-                      dataSet={{}}
-                      style={{}}
-                    >
-                      <RCTSwitch
-                        accessibilityRole="switch"
-                        onChange={[Function]}
-                        onResponderTerminationRequest={[Function]}
-                        onStartShouldSetResponder={[Function]}
-                        onTintColor="#7e22ce"
-                        style={
-                          {
-                            "height": 31,
-                            "width": 51,
-                          }
-                        }
-                        testID="switch"
-                        thumbTintColor="white"
-                        value={true}
-                      />
-                    </View>
-                  </View>
-                  <View
-                    dataSet={{}}
-                    style={{}}
-                  />
-                  <View
-                    dataSet={{}}
-                    style={
-                      {
-                        "alignItems": "center",
-                        "display": "flex",
-                        "flexDirection": "row",
-                        "justifyContent": "space-between",
-                        "paddingTop": 12,
-                      }
-                    }
-                  >
-                    <View
-                      dataSet={{}}
-                      style={{}}
-                    >
-                      <Text
-                        style={
-                          [
-                            {
-                              "color": "#18181b",
-                            },
-                            {
-                              "fontFamily": undefined,
-                              "fontSize": 15,
-                            },
-                            undefined,
-                          ]
-                        }
-                      >
-                        Light Mode 
-                      </Text>
-                      <Text
-                        style={
-                          [
-                            {
-                              "color": "#18181b",
-                            },
-                            {
-                              "color": "#71717a",
-                              "fontFamily": undefined,
-                              "fontSize": 15,
-                            },
-                            undefined,
-                          ]
-                        }
-                      >
-                        Choose the color mode
-                      </Text>
-                    </View>
-                    <View
-                      dataSet={{}}
-                      style={{}}
-                    />
-                    <View
-                      dataSet={{}}
-                      style={{}}
-                    >
-                      <RCTSwitch
-                        accessibilityRole="switch"
-                        onChange={[Function]}
-                        onResponderTerminationRequest={[Function]}
-                        onStartShouldSetResponder={[Function]}
-                        onTintColor="#7e22ce"
-                        style={
-                          {
-                            "height": 31,
-                            "width": 51,
-                          }
-                        }
-                        thumbTintColor="white"
-                        value={true}
-                      />
-                    </View>
-                  </View>
-                  <View
-                    dataSet={{}}
-                    style={{}}
-                  />
-                  <View
-                    style={
-                      [
-                        {
-                          "borderRadius": 10,
-                          "shadowColor": "black",
-                          "shadowOffset": {
-                            "height": 5,
-                            "width": 5,
-                          },
-                          "shadowOpacity": 0.15,
-                        },
-                      ]
-                    }
-                  >
-                    <View
-                      accessible={true}
-                      collapsable={false}
-                      focusable={true}
-                      onClick={[Function]}
-                      onResponderGrant={[Function]}
-                      onResponderMove={[Function]}
-                      onResponderRelease={[Function]}
-                      onResponderTerminate={[Function]}
-                      onResponderTerminationRequest={[Function]}
-                      onStartShouldSetResponder={[Function]}
                       style={
                         {
-                          "marginTop": 40,
-                          "opacity": 1,
+                          "alignItems": "flex-start",
+                          "display": "flex",
+                          "flexDirection": "row",
                         }
                       }
                     >
-                      <ViewManagerAdapter_ExpoLinearGradient
-                        proxiedProperties={
-                          {
-                            "colors": [
-                              4278220774,
-                              4286456526,
-                            ],
-                            "endPoint": [
-                              1,
-                              1,
-                            ],
-                            "locations": undefined,
-                            "startPoint": [
-                              0,
-                              0,
-                            ],
-                          }
-                        }
+                      <View
+                        dataSet={{}}
                         style={
-                          [
-                            {
-                              "alignItems": "center",
-                              "borderRadius": 10,
-                              "flexDirection": "row",
-                              "justifyContent": "center",
-                              "paddingHorizontal": 40,
-                              "paddingVertical": 15,
-                            },
-                            {
-                              "width": "100%",
-                            },
-                          ]
+                          {
+                            "borderBottomWidth": 1,
+                            "borderColor": "#d4d4d8",
+                            "flexDirection": "row",
+                          }
                         }
                       >
                         <Text
@@ -654,30 +145,534 @@ exports[`SettingsPage renders correctly 1`] = `
                                 "color": "#18181b",
                               },
                               {
-                                "color": "#e4e4e7",
                                 "fontFamily": undefined,
-                                "fontSize": 19,
+                                "fontSize": 15,
                               },
-                              [
-                                null,
-                                {
-                                  "alignSelf": "center",
-                                },
-                              ],
+                              {
+                                "flex": 1,
+                              },
                             ]
                           }
                         >
-                          Log out
+                          Name
                         </Text>
                         <View
+                          dataSet={{}}
                           style={
                             {
-                              "marginLeft": 5,
+                              "flex": 3,
+                              "paddingBottom": 12,
                             }
                           }
-                        />
-                      </ViewManagerAdapter_ExpoLinearGradient>
+                        >
+                          <View
+                            accessible={true}
+                            collapsable={false}
+                            focusable={true}
+                            onClick={[Function]}
+                            onResponderGrant={[Function]}
+                            onResponderMove={[Function]}
+                            onResponderRelease={[Function]}
+                            onResponderTerminate={[Function]}
+                            onResponderTerminationRequest={[Function]}
+                            onStartShouldSetResponder={[Function]}
+                            style={
+                              {
+                                "opacity": 1,
+                              }
+                            }
+                          >
+                            <Text
+                              style={
+                                [
+                                  {
+                                    "color": "#18181b",
+                                  },
+                                  {
+                                    "color": "#71717a",
+                                    "fontFamily": undefined,
+                                    "fontSize": 15,
+                                  },
+                                  undefined,
+                                ]
+                              }
+                            >
+                              Test User
+                            </Text>
+                          </View>
+                        </View>
+                      </View>
                     </View>
+                  </View>
+                </View>
+                <View
+                  dataSet={{}}
+                  style={{}}
+                />
+                <View
+                  dataSet={{}}
+                  style={
+                    {
+                      "paddingBottom": 12,
+                    }
+                  }
+                >
+                  <View
+                    dataSet={{}}
+                    style={{}}
+                  >
+                    <View
+                      dataSet={{}}
+                      style={
+                        {
+                          "alignItems": "flex-start",
+                          "display": "flex",
+                          "flexDirection": "row",
+                        }
+                      }
+                    >
+                      <View
+                        dataSet={{}}
+                        style={
+                          {
+                            "borderBottomWidth": 1,
+                            "borderColor": "#d4d4d8",
+                            "flexDirection": "row",
+                          }
+                        }
+                      >
+                        <Text
+                          style={
+                            [
+                              {
+                                "color": "#18181b",
+                              },
+                              {
+                                "fontFamily": undefined,
+                                "fontSize": 15,
+                              },
+                              {
+                                "flex": 1,
+                              },
+                            ]
+                          }
+                        >
+                          Password
+                        </Text>
+                        <View
+                          dataSet={{}}
+                          style={
+                            {
+                              "flex": 3,
+                              "paddingBottom": 12,
+                            }
+                          }
+                        >
+                          <View
+                            accessible={true}
+                            collapsable={false}
+                            focusable={true}
+                            onClick={[Function]}
+                            onResponderGrant={[Function]}
+                            onResponderMove={[Function]}
+                            onResponderRelease={[Function]}
+                            onResponderTerminate={[Function]}
+                            onResponderTerminationRequest={[Function]}
+                            onStartShouldSetResponder={[Function]}
+                            style={
+                              {
+                                "opacity": 1,
+                              }
+                            }
+                          >
+                            <Text
+                              style={
+                                [
+                                  {
+                                    "color": "#18181b",
+                                  },
+                                  {
+                                    "color": "#71717a",
+                                    "fontFamily": undefined,
+                                    "fontSize": 15,
+                                  },
+                                  undefined,
+                                ]
+                              }
+                            >
+                              *******
+                            </Text>
+                          </View>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+                <View
+                  dataSet={{}}
+                  style={{}}
+                />
+                <View
+                  dataSet={{}}
+                  style={
+                    {
+                      "paddingBottom": 12,
+                    }
+                  }
+                >
+                  <View
+                    dataSet={{}}
+                    style={{}}
+                  >
+                    <View
+                      dataSet={{}}
+                      style={
+                        {
+                          "alignItems": "flex-start",
+                          "display": "flex",
+                          "flexDirection": "row",
+                        }
+                      }
+                    >
+                      <View
+                        dataSet={{}}
+                        style={
+                          {
+                            "borderBottomWidth": 1,
+                            "borderColor": "#d4d4d8",
+                            "flexDirection": "row",
+                          }
+                        }
+                      >
+                        <Text
+                          style={
+                            [
+                              {
+                                "color": "#18181b",
+                              },
+                              {
+                                "fontFamily": undefined,
+                                "fontSize": 15,
+                              },
+                              {
+                                "flex": 1,
+                              },
+                            ]
+                          }
+                        >
+                          Bio
+                        </Text>
+                        <View
+                          dataSet={{}}
+                          style={
+                            {
+                              "flex": 3,
+                              "paddingBottom": 12,
+                            }
+                          }
+                        >
+                          <View
+                            accessible={true}
+                            collapsable={false}
+                            focusable={true}
+                            onClick={[Function]}
+                            onResponderGrant={[Function]}
+                            onResponderMove={[Function]}
+                            onResponderRelease={[Function]}
+                            onResponderTerminate={[Function]}
+                            onResponderTerminationRequest={[Function]}
+                            onStartShouldSetResponder={[Function]}
+                            style={
+                              {
+                                "opacity": 1,
+                              }
+                            }
+                          >
+                            <Text
+                              style={
+                                [
+                                  {
+                                    "color": "#18181b",
+                                  },
+                                  {
+                                    "color": "#71717a",
+                                    "fontFamily": undefined,
+                                    "fontSize": 15,
+                                  },
+                                  undefined,
+                                ]
+                              }
+                            >
+                              Hello, I'm Test User.
+                            </Text>
+                          </View>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+                <View
+                  dataSet={{}}
+                  style={{}}
+                />
+                <View
+                  dataSet={{}}
+                  style={
+                    {
+                      "alignItems": "center",
+                      "borderBottomWidth": 1,
+                      "borderColor": "#d4d4d8",
+                      "display": "flex",
+                      "flexDirection": "row",
+                      "justifyContent": "space-between",
+                      "paddingBottom": 12,
+                    }
+                  }
+                >
+                  <View
+                    dataSet={{}}
+                    style={{}}
+                  >
+                    <Text
+                      style={
+                        [
+                          {
+                            "color": "#18181b",
+                          },
+                          {
+                            "fontFamily": undefined,
+                            "fontSize": 15,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      Notifications 
+                    </Text>
+                    <Text
+                      style={
+                        [
+                          {
+                            "color": "#18181b",
+                          },
+                          {
+                            "color": "#71717a",
+                            "fontFamily": undefined,
+                            "fontSize": 15,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      Choose to receive notifications
+                    </Text>
+                  </View>
+                  <View
+                    dataSet={{}}
+                    style={{}}
+                  />
+                  <View
+                    dataSet={{}}
+                    style={{}}
+                  >
+                    <RCTSwitch
+                      accessibilityRole="switch"
+                      onChange={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      onTintColor="#7e22ce"
+                      style={
+                        {
+                          "height": 31,
+                          "width": 51,
+                        }
+                      }
+                      testID="switch"
+                      thumbTintColor="white"
+                      value={true}
+                    />
+                  </View>
+                </View>
+                <View
+                  dataSet={{}}
+                  style={{}}
+                />
+                <View
+                  dataSet={{}}
+                  style={
+                    {
+                      "alignItems": "center",
+                      "display": "flex",
+                      "flexDirection": "row",
+                      "justifyContent": "space-between",
+                      "paddingTop": 12,
+                    }
+                  }
+                >
+                  <View
+                    dataSet={{}}
+                    style={{}}
+                  >
+                    <Text
+                      style={
+                        [
+                          {
+                            "color": "#18181b",
+                          },
+                          {
+                            "fontFamily": undefined,
+                            "fontSize": 15,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      Light Mode 
+                    </Text>
+                    <Text
+                      style={
+                        [
+                          {
+                            "color": "#18181b",
+                          },
+                          {
+                            "color": "#71717a",
+                            "fontFamily": undefined,
+                            "fontSize": 15,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      Choose the color mode
+                    </Text>
+                  </View>
+                  <View
+                    dataSet={{}}
+                    style={{}}
+                  />
+                  <View
+                    dataSet={{}}
+                    style={{}}
+                  >
+                    <RCTSwitch
+                      accessibilityRole="switch"
+                      onChange={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      onTintColor="#7e22ce"
+                      style={
+                        {
+                          "height": 31,
+                          "width": 51,
+                        }
+                      }
+                      thumbTintColor="white"
+                      value={true}
+                    />
+                  </View>
+                </View>
+                <View
+                  dataSet={{}}
+                  style={{}}
+                />
+                <View
+                  style={
+                    [
+                      {
+                        "borderRadius": 10,
+                        "shadowColor": "black",
+                        "shadowOffset": {
+                          "height": 5,
+                          "width": 5,
+                        },
+                        "shadowOpacity": 0.15,
+                      },
+                    ]
+                  }
+                >
+                  <View
+                    accessible={true}
+                    collapsable={false}
+                    focusable={true}
+                    onClick={[Function]}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={
+                      {
+                        "marginTop": 40,
+                        "opacity": 1,
+                      }
+                    }
+                  >
+                    <ViewManagerAdapter_ExpoLinearGradient
+                      proxiedProperties={
+                        {
+                          "colors": [
+                            4278220774,
+                            4286456526,
+                          ],
+                          "endPoint": [
+                            1,
+                            1,
+                          ],
+                          "locations": undefined,
+                          "startPoint": [
+                            0,
+                            0,
+                          ],
+                        }
+                      }
+                      style={
+                        [
+                          {
+                            "alignItems": "center",
+                            "borderRadius": 10,
+                            "flexDirection": "row",
+                            "justifyContent": "center",
+                            "paddingHorizontal": 40,
+                            "paddingVertical": 15,
+                          },
+                          {
+                            "width": "100%",
+                          },
+                        ]
+                      }
+                    >
+                      <Text
+                        style={
+                          [
+                            {
+                              "color": "#18181b",
+                            },
+                            {
+                              "color": "#e4e4e7",
+                              "fontFamily": undefined,
+                              "fontSize": 19,
+                            },
+                            [
+                              null,
+                              {
+                                "alignSelf": "center",
+                              },
+                            ],
+                          ]
+                        }
+                      >
+                        Log out
+                      </Text>
+                      <View
+                        style={
+                          {
+                            "marginLeft": 5,
+                          }
+                        }
+                      />
+                    </ViewManagerAdapter_ExpoLinearGradient>
                   </View>
                 </View>
               </View>
