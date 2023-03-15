@@ -6,7 +6,7 @@ type Props = {};
 
 const CatchUpSlider = (props: Props) => {
   return (
-    <HStack mt={25} height={150} space={25}>
+    <HStack mt={25} height={150}>
       <CatchUpBox />
     </HStack>
   );

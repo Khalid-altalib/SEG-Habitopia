@@ -1,4 +1,4 @@
-import { Image, ZStack } from "native-base";
+import { Image, ZStack, useColorModeValue } from "native-base";
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import CheckInTime from "./CheckInTime";
@@ -15,7 +15,7 @@ type Props = {
 const CheckInBox = (props: Props) => {
   const { checkIn } = props;
   return (
-    <TouchableOpacity>
+    <TouchableOpacity style={{ marginRight: 25 }}>
       <ZStack size="full" style={{ aspectRatio: 1 }}>
         <Image
           source={{ uri: "https://picsum.photos/2000" }}
@@ -23,6 +23,10 @@ const CheckInBox = (props: Props) => {
           size="full"
           rounded="lg"
           position="absolute"
+          style={{
+            borderColor: useColorModeValue("#00000011", "#ffffff11"),
+            borderWidth: 2,
+          }}
         />
         <Text
           type={TextType.Regular}

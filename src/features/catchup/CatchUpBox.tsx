@@ -1,5 +1,5 @@
 import { AntDesign } from "@expo/vector-icons";
-import { ZStack, Image, IconButton } from "native-base";
+import { ZStack, Image, IconButton, useColorModeValue } from "native-base";
 import React, { useState } from "react";
 import { TouchableOpacity } from "react-native";
 
@@ -10,13 +10,17 @@ const CatchUpBox = (props: Props) => {
   const [isLiked, setIsLiked] = useState(isUserLiked);
   const onHeartPressed = () => setIsLiked(!isLiked);
   return (
-    <TouchableOpacity>
+    <TouchableOpacity style={{ marginRight: 25 }}>
       <ZStack size="full" style={{ aspectRatio: 1 }}>
         <Image
           source={{ uri: "https://picsum.photos/2000" }}
           alt="Alternate Text"
           size="full"
           rounded="lg"
+          style={{
+            borderColor: useColorModeValue("#00000011", "#ffffff11"),
+            borderWidth: 2,
+          }}
         />
         <IconButton
           colorScheme="red"
