@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Box, Button, HStack, View, VStack } from "native-base";
+import { Box, HStack, View, VStack } from "native-base";
 import Text from "@components/Text";
 import React from "react";
 import { ButtonType, RootParams, TextType } from "../../../../types";
@@ -8,6 +8,7 @@ import { useSelector } from "../../../app/hooks";
 import FollowButton from "../FollowButton/FollowButton";
 import FollowListDisplay from "../FollowListDisplay/FollowListDisplay";
 import Avatar from "@components/Avatar/Avatar";
+import Button from "@components/Button";
 
 type Props = {
   isLocalUserProfile: boolean;
@@ -23,18 +24,13 @@ const ProfileHeader = (props: Props) => {
     <View>
       {profile && (
         <Box>
-          <HStack space={12.5} marginBottom={12.5}>
+          <HStack space={25} marginBottom={12.5}>
             <Box width={125}>
               <Avatar userId="a" />
             </Box>
 
-            <VStack flex={1} justifyContent={"space-between"}>
-              <HStack
-                flex={1}
-                justifyContent="center"
-                paddingBottom={12.5}
-                space={12.5}
-              >
+            <VStack flex={1} space={25 / 2}>
+              <HStack space={25 / 2}>
                 <FollowListDisplay
                   followListMode={"follower"}
                   followCount={profile.followerCount}
@@ -46,8 +42,12 @@ const ProfileHeader = (props: Props) => {
               </HStack>
 
               {isLocalUserProfile ? (
-                <Button onPress={() => navigation.push("Settings")}>
-                  Edit Profile/Settings
+                <Button
+                  type={ButtonType.Secondary}
+                  onPress={() => navigation.push("Settings")}
+                  isFullWidth
+                >
+                  Settings
                 </Button>
               ) : (
                 <FollowButton />
