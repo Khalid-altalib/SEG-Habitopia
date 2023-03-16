@@ -15,6 +15,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Avatar from "@components/Avatar/Avatar";
 import Card from "@components/Card";
 import Text from "@components/Text";
+import { TouchableOpacity } from "react-native";
 
 const getTimeSinceLastChat = (chat: Chat) => {
   const dateOfLastChat: Date = moment(chat.time).toDate();
@@ -80,10 +81,11 @@ const ChatItem = (chat: Chat) => {
   const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
 
   return (
-    <Pressable
+    <TouchableOpacity
       onPress={() => {
         navigation.push("IndividualChat", { id: chat.id });
       }}
+      activeOpacity={0.7}
     >
       <Card>
         <HStack space={25 / 2} overflow="hidden">
@@ -110,7 +112,7 @@ const ChatItem = (chat: Chat) => {
           </VStack>
         </HStack>
       </Card>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 
