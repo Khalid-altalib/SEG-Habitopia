@@ -1,4 +1,5 @@
-import { useDispatch } from "@app/hooks";
+import { useDispatch, useSelector } from "@app/hooks";
+import StatusContainer from "@components/StatusContainer/StatusContainer";
 import { fetchCheckInSnippet } from "@features/chat/chatSlice";
 import { HStack } from "native-base";
 import React, { useEffect } from "react";
@@ -7,44 +8,50 @@ import CheckInBox from "./CheckInBox";
 type Props = {};
 
 const CheckInSlider = (props: Props) => {
-  const data = [
-    {
-      name: "Study",
-      timeLeft: "3",
-    },
-    {
-      name: "Sleep",
-      timeLeft: "3",
-    },
-    {
-      name: "Fitness",
-      timeLeft: "3",
-    },
-    {
-      name: "Study",
-      timeLeft: "3",
-    },
-    {
-      name: "Sleep",
-      timeLeft: "3",
-    },
-    {
-      name: "Fitness",
-      timeLeft: "3",
-    },
-    {
-      name: "Study",
-      timeLeft: "3",
-    },
-    {
-      name: "Sleep",
-      timeLeft: "3",
-    },
-    {
-      name: "Fitness",
-      timeLeft: "3",
-    },
-  ];
+  // const data = [
+  //   {
+  //     name: "Study",
+  //     timeLeft: "3",
+  //   },
+  //   {
+  //     name: "Sleep",
+  //     timeLeft: "3",
+  //   },
+  //   {
+  //     name: "Fitness",
+  //     timeLeft: "3",
+  //   },
+  //   {
+  //     name: "Study",
+  //     timeLeft: "3",
+  //   },
+  //   {
+  //     name: "Sleep",
+  //     timeLeft: "3",
+  //   },
+  //   {
+  //     name: "Fitness",
+  //     timeLeft: "3",
+  //   },
+  //   {
+  //     name: "Study",
+  //     timeLeft: "3",
+  //   },
+  //   {
+  //     name: "Sleep",
+  //     timeLeft: "3",
+  //   },
+  //   {
+  //     name: "Fitness",
+  //     timeLeft: "3",
+  //   },
+  // ];
+
+  const { checkInSnippet, fetchCheckInSnippet: requestStatus } = useSelector(
+    (state) => state.chats
+  );
+
+  const { loading, error } = requestStatus;
 
   const dispatch = useDispatch();
 
@@ -54,9 +61,11 @@ const CheckInSlider = (props: Props) => {
 
   return (
     <HStack marginLeft={25} marginTop={25} height={150}>
-      {data.map((checkIn, index) => (
-        <CheckInBox key={index} checkIn={checkIn} />
-      ))}
+      <StatusContainer loading={loading} error={error} data={checkInSnippet}>
+        {checkInSnippet.map((checkInSnippetItem, index) => (
+          <CheckInBox key={index} checkInSnippetItem={checkInSnippetItem} />
+        ))}
+      </StatusContainer>
     </HStack>
   );
 };
