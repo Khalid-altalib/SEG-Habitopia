@@ -11,7 +11,7 @@ const FollowButton = () => {
   const { loading } = requestStatus;
 
   const handleFollow = async () => {
-    await dispatch(followUser());
+    await dispatch(followUser(profile?.userId || ""));
   };
 
   const [didMount, setDidMount] = useState(false);
@@ -22,7 +22,6 @@ const FollowButton = () => {
 
   useEffect(() => {
     if (profile && didMount) {
-      console.log(profile);
       if (profile.following == true) {
         Toast.show({
           type: "success",

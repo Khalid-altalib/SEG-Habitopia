@@ -34,7 +34,7 @@ import {
   getMessageByCheckInId,
 } from "@features/chat/chatQueries";
 import { Button } from "react-native";
-import { KeyboardAvoidingView, ScrollView } from "native-base";
+import { KeyboardAvoidingView } from "native-base";
 import ValidationMessage from "@features/chat/ValidationMessage/ValidationMessage";
 import Background from "@components/Background";
 

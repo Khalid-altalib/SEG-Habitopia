@@ -1,4 +1,4 @@
-import { useDispatch } from "@app/hooks";
+import { useDispatch, useSelector } from "@app/hooks";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Box, Center, theme } from "native-base";
@@ -16,6 +16,7 @@ type Props = {
 
 const FollowListDisplay = (props: Props) => {
   const { followListMode, followCount } = props;
+  const profile = useSelector((state) => state.profile?.profile);
 
   const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
 
@@ -23,7 +24,7 @@ const FollowListDisplay = (props: Props) => {
 
   const handlePress = () => {
     navigation.push("FollowList", { followListMode: followListMode });
-    dispatch(fetchFollowList(followListMode));
+    dispatch(fetchFollowList({ followListMode, profileID: profile?.userId }));
   };
 
   // Gets the capitalized form of the follow list type

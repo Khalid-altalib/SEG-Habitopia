@@ -1,3 +1,9 @@
+type Follow @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  followingUser: User @hasOne
+  followedBy: User @hasOne
+}
+
 enum MessageEnum {
   TEXT
   CHECKIN
