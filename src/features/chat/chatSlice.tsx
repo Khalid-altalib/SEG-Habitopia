@@ -33,6 +33,14 @@ type ChatState = {
     loading: boolean;
     error: string;
   };
+  fetchCheckinSnippet: {
+    loading: boolean;
+    error: string;
+  };
+  fetchValidationSnippet: {
+    loading: boolean;
+    error: string;
+  };
   details?: ChatDetails;
   currentChatId?: string;
   pageNumber: number;
@@ -161,6 +169,14 @@ const initialState: ChatState = {
     error: "",
   },
   sendCheckIn: {
+    loading: false,
+    error: "",
+  },
+  fetchCheckinSnippet: {
+    loading: false,
+    error: "",
+  },
+  fetchValidationSnippet: {
     loading: false,
     error: "",
   },
@@ -346,7 +362,7 @@ export const {
   updateCheckInMessage,
   resetPageNumber,
   updateChatList,
-  resetUnreadMessages
+  resetUnreadMessages,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;
