@@ -3,24 +3,24 @@ import React, { useState } from "react";
 import { TouchableOpacity } from "react-native";
 import CheckInTime from "./CheckInTime";
 import Text from "@components/Text";
-import { TextType } from "types";
+import { CheckInSnippetItem, TextType } from "types";
 
 type Props = {
-  checkIn: {
-    name: string;
-    timeLeft: string;
-  };
+  checkInSnippetItem: CheckInSnippetItem;
 };
 
 const CheckInBox = (props: Props) => {
-  const { checkIn } = props;
+  const { checkInSnippetItem } = props;
+  const { challenge, checkedIn, endDate } = checkInSnippetItem;
+
+  let timeLeft = endDate;
 
   return (
     <TouchableOpacity style={{ marginRight: 25 }}>
       <ZStack size="full" style={{ aspectRatio: 1 }}>
         <Image
           source={{ uri: "https://picsum.photos/2000" }}
-          alt={checkIn.name}
+          alt={challenge.name}
           size="full"
           rounded="lg"
           position="absolute"
@@ -38,9 +38,9 @@ const CheckInBox = (props: Props) => {
             padding: 12.25,
           }}
         >
-          {checkIn.name}
+          {challenge.name}
         </Text>
-        <CheckInTime timeLeft={checkIn.timeLeft} />
+        <CheckInTime timeLeft={"3h left!"} checkedIn={checkedIn} />
       </ZStack>
     </TouchableOpacity>
   );
