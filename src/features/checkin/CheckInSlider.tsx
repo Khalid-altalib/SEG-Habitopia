@@ -1,6 +1,7 @@
 import { useDispatch } from "@app/hooks";
+import { fetchCheckInSnippet } from "@features/chat/chatSlice";
 import { HStack } from "native-base";
-import React from "react";
+import React, { useEffect } from "react";
 import CheckInBox from "./CheckInBox";
 
 type Props = {};
@@ -46,6 +47,10 @@ const CheckInSlider = (props: Props) => {
   ];
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCheckInSnippet());
+  }, []);
 
   return (
     <HStack marginLeft={25} marginTop={25} height={150}>

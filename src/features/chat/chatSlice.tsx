@@ -161,6 +161,8 @@ export const fetchCheckInSnippet = createAsyncThunk<
 
     // of these challenges, filter which one needs to be checkedin
 
+    // return CheckInSnippet with checkedIn = false and the associated challenge object
+
     return [];
   } catch (error: any) {
     return thunkAPI.rejectWithValue("An error has occured");
@@ -272,6 +274,23 @@ export const chatSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(
+      fetchCheckInSnippet.fulfilled,
+      (state, action: PayloadAction<CheckInSnippetItem[]>) => {
+        state.checkInSnippet = action.payload;
+        state.fetchCheckInSnippet.loading = false;
+        state.fetchCheckInSnippet.error = "";
+      }
+    );
+    builder.addCase(fetchCheckInSnippet.pending, (state) => {
+      state.fetchCheckInSnippet.loading = true;
+      state.fetchCheckInSnippet.error = "";
+    });
+    builder.addCase(fetchCheckInSnippet.rejected, (state) => {
+      state.fetchCheckInSnippet.loading = false;
+      state.fetchCheckInSnippet.error = "";
+      state.checkInSnippet = [];
+    });
     builder.addCase(fetchChats.pending, (state) => {
       state.fetchChats.loading = true;
     });
