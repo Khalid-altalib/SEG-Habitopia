@@ -94,6 +94,7 @@ export type User = {
   biography?: string | null,
   email?: string | null,
   notifications?: boolean | null,
+  streakStart?: string | null,
   Messages?: ModelCheckinConnection | null,
   ChatRooms?: ModelUserChatRoomConnection | null,
   Checkins?: ModelCheckinConnection | null,
@@ -189,7 +190,6 @@ export type UserChatRoom = {
 export type ChatRoom = {
   __typename: "ChatRoom",
   id: string,
-  name: string,
   Messages?: ModelCheckinConnection | null,
   users?: ModelUserChatRoomConnection | null,
   Checkins?: ModelCheckinConnection | null,
@@ -251,10 +251,10 @@ export type Challenge = {
   id: string,
   ChallengeType: ChallengeType,
   Users?: ModelChallengeUserConnection | null,
-  status?: ChallengeStatusEnum | null,
-  started?: number | null,
+  started?: string | null,
   ChatRoom?: ChatRoom | null,
   userCount?: number | null,
+  finished?: string | null,
   createdAt: string,
   updatedAt: string,
   _version: number,
@@ -263,13 +263,6 @@ export type Challenge = {
   challengeChallengeTypeId: string,
   challengeChatRoomId?: string | null,
 };
-
-export enum ChallengeStatusEnum {
-  ACTIVE = "ACTIVE",
-  INACTIVE = "INACTIVE",
-  COMPLETED = "COMPLETED",
-}
-
 
 export type UpdateLeaderboardInput = {
   id: string,
@@ -286,18 +279,18 @@ export type DeleteLeaderboardInput = {
 
 export type CreateChallengeInput = {
   id?: string | null,
-  status?: ChallengeStatusEnum | null,
-  started?: number | null,
+  started?: string | null,
   userCount?: number | null,
+  finished?: string | null,
   _version?: number | null,
   challengeChallengeTypeId: string,
   challengeChatRoomId?: string | null,
 };
 
 export type ModelChallengeConditionInput = {
-  status?: ModelChallengeStatusEnumInput | null,
-  started?: ModelIntInput | null,
+  started?: ModelStringInput | null,
   userCount?: ModelIntInput | null,
+  finished?: ModelStringInput | null,
   and?: Array< ModelChallengeConditionInput | null > | null,
   or?: Array< ModelChallengeConditionInput | null > | null,
   not?: ModelChallengeConditionInput | null,
@@ -305,16 +298,27 @@ export type ModelChallengeConditionInput = {
   challengeChatRoomId?: ModelIDInput | null,
 };
 
-export type ModelChallengeStatusEnumInput = {
-  eq?: ChallengeStatusEnum | null,
-  ne?: ChallengeStatusEnum | null,
+export type ModelStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
 };
 
 export type UpdateChallengeInput = {
   id: string,
-  status?: ChallengeStatusEnum | null,
-  started?: number | null,
+  started?: string | null,
   userCount?: number | null,
+  finished?: string | null,
   _version?: number | null,
   challengeChallengeTypeId?: string | null,
   challengeChatRoomId?: string | null,
@@ -340,22 +344,6 @@ export type ModelChallengeTypeConditionInput = {
   and?: Array< ModelChallengeTypeConditionInput | null > | null,
   or?: Array< ModelChallengeTypeConditionInput | null > | null,
   not?: ModelChallengeTypeConditionInput | null,
-};
-
-export type ModelStringInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
 };
 
 export type ModelBooleanInput = {
@@ -385,6 +373,7 @@ export type CreateUserInput = {
   biography?: string | null,
   email?: string | null,
   notifications?: boolean | null,
+  streakStart?: string | null,
   _version?: number | null,
 };
 
@@ -394,6 +383,7 @@ export type ModelUserConditionInput = {
   biography?: ModelStringInput | null,
   email?: ModelStringInput | null,
   notifications?: ModelBooleanInput | null,
+  streakStart?: ModelStringInput | null,
   and?: Array< ModelUserConditionInput | null > | null,
   or?: Array< ModelUserConditionInput | null > | null,
   not?: ModelUserConditionInput | null,
@@ -406,6 +396,7 @@ export type UpdateUserInput = {
   biography?: string | null,
   email?: string | null,
   notifications?: boolean | null,
+  streakStart?: string | null,
   _version?: number | null,
 };
 
@@ -457,13 +448,11 @@ export type DeleteMessageInput = {
 
 export type CreateChatRoomInput = {
   id?: string | null,
-  name: string,
   _version?: number | null,
   chatRoomLastMessageId?: string | null,
 };
 
 export type ModelChatRoomConditionInput = {
-  name?: ModelStringInput | null,
   and?: Array< ModelChatRoomConditionInput | null > | null,
   or?: Array< ModelChatRoomConditionInput | null > | null,
   not?: ModelChatRoomConditionInput | null,
@@ -472,7 +461,6 @@ export type ModelChatRoomConditionInput = {
 
 export type UpdateChatRoomInput = {
   id: string,
-  name?: string | null,
   _version?: number | null,
   chatRoomLastMessageId?: string | null,
 };
@@ -621,9 +609,9 @@ export type ModelLeaderboardConnection = {
 
 export type ModelChallengeFilterInput = {
   id?: ModelIDInput | null,
-  status?: ModelChallengeStatusEnumInput | null,
-  started?: ModelIntInput | null,
+  started?: ModelStringInput | null,
   userCount?: ModelIntInput | null,
+  finished?: ModelStringInput | null,
   and?: Array< ModelChallengeFilterInput | null > | null,
   or?: Array< ModelChallengeFilterInput | null > | null,
   not?: ModelChallengeFilterInput | null,
@@ -637,21 +625,6 @@ export type ModelChallengeConnection = {
   nextToken?: string | null,
   startedAt?: number | null,
 };
-
-export type ModelIntKeyConditionInput = {
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-};
-
-export enum ModelSortDirection {
-  ASC = "ASC",
-  DESC = "DESC",
-}
-
 
 export type ModelChallengeTypeFilterInput = {
   id?: ModelIDInput | null,
@@ -677,6 +650,7 @@ export type ModelUserFilterInput = {
   biography?: ModelStringInput | null,
   email?: ModelStringInput | null,
   notifications?: ModelBooleanInput | null,
+  streakStart?: ModelStringInput | null,
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
   not?: ModelUserFilterInput | null,
@@ -708,9 +682,14 @@ export type ModelMessageConnection = {
   startedAt?: number | null,
 };
 
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
 export type ModelChatRoomFilterInput = {
   id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
   and?: Array< ModelChatRoomFilterInput | null > | null,
   or?: Array< ModelChatRoomFilterInput | null > | null,
   not?: ModelChatRoomFilterInput | null,
@@ -800,9 +779,9 @@ export type ModelSubscriptionIntInput = {
 
 export type ModelSubscriptionChallengeFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  status?: ModelSubscriptionStringInput | null,
-  started?: ModelSubscriptionIntInput | null,
+  started?: ModelSubscriptionStringInput | null,
   userCount?: ModelSubscriptionIntInput | null,
+  finished?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionChallengeFilterInput | null > | null,
   or?: Array< ModelSubscriptionChallengeFilterInput | null > | null,
 };
@@ -843,6 +822,7 @@ export type ModelSubscriptionUserFilterInput = {
   biography?: ModelSubscriptionStringInput | null,
   email?: ModelSubscriptionStringInput | null,
   notifications?: ModelSubscriptionBooleanInput | null,
+  streakStart?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionUserFilterInput | null > | null,
   or?: Array< ModelSubscriptionUserFilterInput | null > | null,
 };
@@ -859,7 +839,6 @@ export type ModelSubscriptionMessageFilterInput = {
 
 export type ModelSubscriptionChatRoomFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionChatRoomFilterInput | null > | null,
   or?: Array< ModelSubscriptionChatRoomFilterInput | null > | null,
 };
@@ -917,6 +896,7 @@ export type CreateLeaderboardMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -988,6 +968,7 @@ export type UpdateLeaderboardMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -1059,6 +1040,7 @@ export type DeleteLeaderboardMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -1149,12 +1131,10 @@ export type CreateChallengeMutation = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
-    status?: ChallengeStatusEnum | null,
-    started?: number | null,
+    started?: string | null,
     ChatRoom?:  {
       __typename: "ChatRoom",
       id: string,
-      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -1192,6 +1172,7 @@ export type CreateChallengeMutation = {
       chatRoomLastMessageId?: string | null,
     } | null,
     userCount?: number | null,
+    finished?: string | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1239,12 +1220,10 @@ export type UpdateChallengeMutation = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
-    status?: ChallengeStatusEnum | null,
-    started?: number | null,
+    started?: string | null,
     ChatRoom?:  {
       __typename: "ChatRoom",
       id: string,
-      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -1282,6 +1261,7 @@ export type UpdateChallengeMutation = {
       chatRoomLastMessageId?: string | null,
     } | null,
     userCount?: number | null,
+    finished?: string | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1329,12 +1309,10 @@ export type DeleteChallengeMutation = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
-    status?: ChallengeStatusEnum | null,
-    started?: number | null,
+    started?: string | null,
     ChatRoom?:  {
       __typename: "ChatRoom",
       id: string,
-      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -1372,6 +1350,7 @@ export type DeleteChallengeMutation = {
       chatRoomLastMessageId?: string | null,
     } | null,
     userCount?: number | null,
+    finished?: string | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -1456,6 +1435,7 @@ export type CreateUserMutation = {
     biography?: string | null,
     email?: string | null,
     notifications?: boolean | null,
+    streakStart?: string | null,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -1566,6 +1546,7 @@ export type UpdateUserMutation = {
     biography?: string | null,
     email?: string | null,
     notifications?: boolean | null,
+    streakStart?: string | null,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -1676,6 +1657,7 @@ export type DeleteUserMutation = {
     biography?: string | null,
     email?: string | null,
     notifications?: boolean | null,
+    streakStart?: string | null,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -1943,7 +1925,6 @@ export type CreateChatRoomMutation = {
   createChatRoom?:  {
     __typename: "ChatRoom",
     id: string,
-    name: string,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -2047,7 +2028,6 @@ export type UpdateChatRoomMutation = {
   updateChatRoom?:  {
     __typename: "ChatRoom",
     id: string,
-    name: string,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -2151,7 +2131,6 @@ export type DeleteChatRoomMutation = {
   deleteChatRoom?:  {
     __typename: "ChatRoom",
     id: string,
-    name: string,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -2430,12 +2409,10 @@ export type CreateChallengeUserMutation = {
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-      status?: ChallengeStatusEnum | null,
-      started?: number | null,
+      started?: string | null,
       ChatRoom?:  {
         __typename: "ChatRoom",
         id: string,
-        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -2444,6 +2421,7 @@ export type CreateChallengeUserMutation = {
         chatRoomLastMessageId?: string | null,
       } | null,
       userCount?: number | null,
+      finished?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -2460,6 +2438,7 @@ export type CreateChallengeUserMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -2530,12 +2509,10 @@ export type UpdateChallengeUserMutation = {
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-      status?: ChallengeStatusEnum | null,
-      started?: number | null,
+      started?: string | null,
       ChatRoom?:  {
         __typename: "ChatRoom",
         id: string,
-        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -2544,6 +2521,7 @@ export type UpdateChallengeUserMutation = {
         chatRoomLastMessageId?: string | null,
       } | null,
       userCount?: number | null,
+      finished?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -2560,6 +2538,7 @@ export type UpdateChallengeUserMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -2630,12 +2609,10 @@ export type DeleteChallengeUserMutation = {
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-      status?: ChallengeStatusEnum | null,
-      started?: number | null,
+      started?: string | null,
       ChatRoom?:  {
         __typename: "ChatRoom",
         id: string,
-        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -2644,6 +2621,7 @@ export type DeleteChallengeUserMutation = {
         chatRoomLastMessageId?: string | null,
       } | null,
       userCount?: number | null,
+      finished?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -2660,6 +2638,7 @@ export type DeleteChallengeUserMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -2718,6 +2697,7 @@ export type CreateUserChatRoomMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -2752,7 +2732,6 @@ export type CreateUserChatRoomMutation = {
     chatRoom:  {
       __typename: "ChatRoom",
       id: string,
-      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -2816,6 +2795,7 @@ export type UpdateUserChatRoomMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -2850,7 +2830,6 @@ export type UpdateUserChatRoomMutation = {
     chatRoom:  {
       __typename: "ChatRoom",
       id: string,
-      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -2914,6 +2893,7 @@ export type DeleteUserChatRoomMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -2948,7 +2928,6 @@ export type DeleteUserChatRoomMutation = {
     chatRoom:  {
       __typename: "ChatRoom",
       id: string,
-      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -3012,6 +2991,7 @@ export type CreateUserValidatedCheckInMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -3102,6 +3082,7 @@ export type UpdateUserValidatedCheckInMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -3192,6 +3173,7 @@ export type DeleteUserValidatedCheckInMutation = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -3280,6 +3262,7 @@ export type GetLeaderboardQuery = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -3354,6 +3337,7 @@ export type ListLeaderboardsQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -3407,6 +3391,7 @@ export type SyncLeaderboardsQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -3474,12 +3459,10 @@ export type GetChallengeQuery = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
-    status?: ChallengeStatusEnum | null,
-    started?: number | null,
+    started?: string | null,
     ChatRoom?:  {
       __typename: "ChatRoom",
       id: string,
-      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -3517,6 +3500,7 @@ export type GetChallengeQuery = {
       chatRoomLastMessageId?: string | null,
     } | null,
     userCount?: number | null,
+    finished?: string | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -3556,12 +3540,10 @@ export type ListChallengesQuery = {
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-      status?: ChallengeStatusEnum | null,
-      started?: number | null,
+      started?: string | null,
       ChatRoom?:  {
         __typename: "ChatRoom",
         id: string,
-        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -3570,6 +3552,7 @@ export type ListChallengesQuery = {
         chatRoomLastMessageId?: string | null,
       } | null,
       userCount?: number | null,
+      finished?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -3613,12 +3596,10 @@ export type SyncChallengesQuery = {
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-      status?: ChallengeStatusEnum | null,
-      started?: number | null,
+      started?: string | null,
       ChatRoom?:  {
         __typename: "ChatRoom",
         id: string,
-        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -3627,65 +3608,7 @@ export type SyncChallengesQuery = {
         chatRoomLastMessageId?: string | null,
       } | null,
       userCount?: number | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      challengeChallengeTypeId: string,
-      challengeChatRoomId?: string | null,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type ChallengesByStatusQueryVariables = {
-  status: ChallengeStatusEnum,
-  started?: ModelIntKeyConditionInput | null,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelChallengeFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ChallengesByStatusQuery = {
-  challengesByStatus?:  {
-    __typename: "ModelChallengeConnection",
-    items:  Array< {
-      __typename: "Challenge",
-      id: string,
-      ChallengeType:  {
-        __typename: "ChallengeType",
-        id: string,
-        name: string,
-        description: string,
-        active: boolean,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-      },
-      Users?:  {
-        __typename: "ModelChallengeUserConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      status?: ChallengeStatusEnum | null,
-      started?: number | null,
-      ChatRoom?:  {
-        __typename: "ChatRoom",
-        id: string,
-        name: string,
-        createdAt: string,
-        updatedAt: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        chatRoomLastMessageId?: string | null,
-      } | null,
-      userCount?: number | null,
+      finished?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -3784,6 +3707,7 @@ export type GetUserQuery = {
     biography?: string | null,
     email?: string | null,
     notifications?: boolean | null,
+    streakStart?: string | null,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -3897,6 +3821,7 @@ export type ListUsersQuery = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -3951,6 +3876,7 @@ export type SyncUsersQuery = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -4225,7 +4151,6 @@ export type GetChatRoomQuery = {
   getChatRoom?:  {
     __typename: "ChatRoom",
     id: string,
-    name: string,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -4332,7 +4257,6 @@ export type ListChatRoomsQuery = {
     items:  Array< {
       __typename: "ChatRoom",
       id: string,
-      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -4387,7 +4311,6 @@ export type SyncChatRoomsQuery = {
     items:  Array< {
       __typename: "ChatRoom",
       id: string,
-      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -4698,12 +4621,10 @@ export type GetChallengeUserQuery = {
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-      status?: ChallengeStatusEnum | null,
-      started?: number | null,
+      started?: string | null,
       ChatRoom?:  {
         __typename: "ChatRoom",
         id: string,
-        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4712,6 +4633,7 @@ export type GetChallengeUserQuery = {
         chatRoomLastMessageId?: string | null,
       } | null,
       userCount?: number | null,
+      finished?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -4728,6 +4650,7 @@ export type GetChallengeUserQuery = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -4784,9 +4707,9 @@ export type ListChallengeUsersQuery = {
       challenge:  {
         __typename: "Challenge",
         id: string,
-        status?: ChallengeStatusEnum | null,
-        started?: number | null,
+        started?: string | null,
         userCount?: number | null,
+        finished?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4803,6 +4726,7 @@ export type ListChallengeUsersQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4838,9 +4762,9 @@ export type SyncChallengeUsersQuery = {
       challenge:  {
         __typename: "Challenge",
         id: string,
-        status?: ChallengeStatusEnum | null,
-        started?: number | null,
+        started?: string | null,
         userCount?: number | null,
+        finished?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4857,6 +4781,7 @@ export type SyncChallengeUsersQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4893,9 +4818,9 @@ export type ChallengeUsersByChallengeIdQuery = {
       challenge:  {
         __typename: "Challenge",
         id: string,
-        status?: ChallengeStatusEnum | null,
-        started?: number | null,
+        started?: string | null,
         userCount?: number | null,
+        finished?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4912,6 +4837,7 @@ export type ChallengeUsersByChallengeIdQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4948,9 +4874,9 @@ export type ChallengeUsersByUserIdQuery = {
       challenge:  {
         __typename: "Challenge",
         id: string,
-        status?: ChallengeStatusEnum | null,
-        started?: number | null,
+        started?: string | null,
         userCount?: number | null,
+        finished?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4967,6 +4893,7 @@ export type ChallengeUsersByUserIdQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5002,6 +4929,7 @@ export type GetUserChatRoomQuery = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -5036,7 +4964,6 @@ export type GetUserChatRoomQuery = {
     chatRoom:  {
       __typename: "ChatRoom",
       id: string,
-      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -5103,6 +5030,7 @@ export type ListUserChatRoomsQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5112,7 +5040,6 @@ export type ListUserChatRoomsQuery = {
       chatRoom:  {
         __typename: "ChatRoom",
         id: string,
-        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5154,6 +5081,7 @@ export type SyncUserChatRoomsQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5163,7 +5091,6 @@ export type SyncUserChatRoomsQuery = {
       chatRoom:  {
         __typename: "ChatRoom",
         id: string,
-        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5206,6 +5133,7 @@ export type UserChatRoomsByUserIdQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5215,7 +5143,6 @@ export type UserChatRoomsByUserIdQuery = {
       chatRoom:  {
         __typename: "ChatRoom",
         id: string,
-        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5258,6 +5185,7 @@ export type UserChatRoomsByChatRoomIdQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5267,7 +5195,6 @@ export type UserChatRoomsByChatRoomIdQuery = {
       chatRoom:  {
         __typename: "ChatRoom",
         id: string,
-        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5304,6 +5231,7 @@ export type GetUserValidatedCheckInQuery = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -5397,6 +5325,7 @@ export type ListUserValidatedCheckInsQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5452,6 +5381,7 @@ export type SyncUserValidatedCheckInsQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5508,6 +5438,7 @@ export type UserValidatedCheckInsByUserIdQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5564,6 +5495,7 @@ export type UserValidatedCheckInsByCheckinIdQuery = {
         biography?: string | null,
         email?: string | null,
         notifications?: boolean | null,
+        streakStart?: string | null,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -5613,6 +5545,7 @@ export type OnCreateLeaderboardSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -5683,6 +5616,7 @@ export type OnUpdateLeaderboardSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -5753,6 +5687,7 @@ export type OnDeleteLeaderboardSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -5842,12 +5777,10 @@ export type OnCreateChallengeSubscription = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
-    status?: ChallengeStatusEnum | null,
-    started?: number | null,
+    started?: string | null,
     ChatRoom?:  {
       __typename: "ChatRoom",
       id: string,
-      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -5885,6 +5818,7 @@ export type OnCreateChallengeSubscription = {
       chatRoomLastMessageId?: string | null,
     } | null,
     userCount?: number | null,
+    finished?: string | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -5931,12 +5865,10 @@ export type OnUpdateChallengeSubscription = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
-    status?: ChallengeStatusEnum | null,
-    started?: number | null,
+    started?: string | null,
     ChatRoom?:  {
       __typename: "ChatRoom",
       id: string,
-      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -5974,6 +5906,7 @@ export type OnUpdateChallengeSubscription = {
       chatRoomLastMessageId?: string | null,
     } | null,
     userCount?: number | null,
+    finished?: string | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -6020,12 +5953,10 @@ export type OnDeleteChallengeSubscription = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
-    status?: ChallengeStatusEnum | null,
-    started?: number | null,
+    started?: string | null,
     ChatRoom?:  {
       __typename: "ChatRoom",
       id: string,
-      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -6063,6 +5994,7 @@ export type OnDeleteChallengeSubscription = {
       chatRoomLastMessageId?: string | null,
     } | null,
     userCount?: number | null,
+    finished?: string | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -6143,6 +6075,7 @@ export type OnCreateUserSubscription = {
     biography?: string | null,
     email?: string | null,
     notifications?: boolean | null,
+    streakStart?: string | null,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -6252,6 +6185,7 @@ export type OnUpdateUserSubscription = {
     biography?: string | null,
     email?: string | null,
     notifications?: boolean | null,
+    streakStart?: string | null,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -6361,6 +6295,7 @@ export type OnDeleteUserSubscription = {
     biography?: string | null,
     email?: string | null,
     notifications?: boolean | null,
+    streakStart?: string | null,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -6624,7 +6559,6 @@ export type OnCreateChatRoomSubscription = {
   onCreateChatRoom?:  {
     __typename: "ChatRoom",
     id: string,
-    name: string,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -6721,13 +6655,13 @@ export type OnCreateChatRoomSubscription = {
 
 export type OnUpdateChatRoomSubscriptionVariables = {
   filter?: ModelSubscriptionChatRoomFilterInput | null,
+  userFilter? : ModelSubscriptionUserFilterInput | null,
 };
 
 export type OnUpdateChatRoomSubscription = {
   onUpdateChatRoom?:  {
     __typename: "ChatRoom",
     id: string,
-    name: string,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -6830,7 +6764,6 @@ export type OnDeleteChatRoomSubscription = {
   onDeleteChatRoom?:  {
     __typename: "ChatRoom",
     id: string,
-    name: string,
     Messages?:  {
       __typename: "ModelCheckinConnection",
       items:  Array< {
@@ -7105,12 +7038,10 @@ export type OnCreateChallengeUserSubscription = {
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-      status?: ChallengeStatusEnum | null,
-      started?: number | null,
+      started?: string | null,
       ChatRoom?:  {
         __typename: "ChatRoom",
         id: string,
-        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -7119,6 +7050,7 @@ export type OnCreateChallengeUserSubscription = {
         chatRoomLastMessageId?: string | null,
       } | null,
       userCount?: number | null,
+      finished?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -7135,6 +7067,7 @@ export type OnCreateChallengeUserSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7204,12 +7137,10 @@ export type OnUpdateChallengeUserSubscription = {
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-      status?: ChallengeStatusEnum | null,
-      started?: number | null,
+      started?: string | null,
       ChatRoom?:  {
         __typename: "ChatRoom",
         id: string,
-        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -7218,6 +7149,7 @@ export type OnUpdateChallengeUserSubscription = {
         chatRoomLastMessageId?: string | null,
       } | null,
       userCount?: number | null,
+      finished?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -7234,6 +7166,7 @@ export type OnUpdateChallengeUserSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7303,12 +7236,10 @@ export type OnDeleteChallengeUserSubscription = {
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-      status?: ChallengeStatusEnum | null,
-      started?: number | null,
+      started?: string | null,
       ChatRoom?:  {
         __typename: "ChatRoom",
         id: string,
-        name: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -7317,6 +7248,7 @@ export type OnDeleteChallengeUserSubscription = {
         chatRoomLastMessageId?: string | null,
       } | null,
       userCount?: number | null,
+      finished?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -7333,6 +7265,7 @@ export type OnDeleteChallengeUserSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7390,6 +7323,7 @@ export type OnCreateUserChatRoomSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7424,7 +7358,6 @@ export type OnCreateUserChatRoomSubscription = {
     chatRoom:  {
       __typename: "ChatRoom",
       id: string,
-      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7487,6 +7420,7 @@ export type OnUpdateUserChatRoomSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7521,7 +7455,6 @@ export type OnUpdateUserChatRoomSubscription = {
     chatRoom:  {
       __typename: "ChatRoom",
       id: string,
-      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7584,6 +7517,7 @@ export type OnDeleteUserChatRoomSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7618,7 +7552,6 @@ export type OnDeleteUserChatRoomSubscription = {
     chatRoom:  {
       __typename: "ChatRoom",
       id: string,
-      name: string,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7681,6 +7614,7 @@ export type OnCreateUserValidatedCheckInSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7770,6 +7704,7 @@ export type OnUpdateUserValidatedCheckInSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,
@@ -7859,6 +7794,7 @@ export type OnDeleteUserValidatedCheckInSubscription = {
       biography?: string | null,
       email?: string | null,
       notifications?: boolean | null,
+      streakStart?: string | null,
       Messages?:  {
         __typename: "ModelCheckinConnection",
         nextToken?: string | null,

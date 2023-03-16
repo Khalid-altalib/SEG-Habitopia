@@ -16,6 +16,7 @@ export const onCreateLeaderboard = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -77,6 +78,7 @@ export const onUpdateLeaderboard = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -138,6 +140,7 @@ export const onDeleteLeaderboard = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -216,11 +219,9 @@ export const onCreateChallenge = /* GraphQL */ `
         nextToken
         startedAt
       }
-      status
       started
       ChatRoom {
         id
-        name
         Messages {
           nextToken
           startedAt
@@ -254,6 +255,7 @@ export const onCreateChallenge = /* GraphQL */ `
         chatRoomLastMessageId
       }
       userCount
+      finished
       createdAt
       updatedAt
       _version
@@ -295,11 +297,9 @@ export const onUpdateChallenge = /* GraphQL */ `
         nextToken
         startedAt
       }
-      status
       started
       ChatRoom {
         id
-        name
         Messages {
           nextToken
           startedAt
@@ -333,6 +333,7 @@ export const onUpdateChallenge = /* GraphQL */ `
         chatRoomLastMessageId
       }
       userCount
+      finished
       createdAt
       updatedAt
       _version
@@ -374,11 +375,9 @@ export const onDeleteChallenge = /* GraphQL */ `
         nextToken
         startedAt
       }
-      status
       started
       ChatRoom {
         id
-        name
         Messages {
           nextToken
           startedAt
@@ -412,6 +411,7 @@ export const onDeleteChallenge = /* GraphQL */ `
         chatRoomLastMessageId
       }
       userCount
+      finished
       createdAt
       updatedAt
       _version
@@ -482,6 +482,7 @@ export const onCreateUser = /* GraphQL */ `
       biography
       email
       notifications
+      streakStart
       Messages {
         items {
           id
@@ -577,6 +578,7 @@ export const onUpdateUser = /* GraphQL */ `
       biography
       email
       notifications
+      streakStart
       Messages {
         items {
           id
@@ -672,6 +674,7 @@ export const onDeleteUser = /* GraphQL */ `
       biography
       email
       notifications
+      streakStart
       Messages {
         items {
           id
@@ -900,7 +903,6 @@ export const onCreateChatRoom = /* GraphQL */ `
   subscription OnCreateChatRoom($filter: ModelSubscriptionChatRoomFilterInput) {
     onCreateChatRoom(filter: $filter) {
       id
-      name
       Messages {
         items {
           id
@@ -988,10 +990,9 @@ export const onCreateChatRoom = /* GraphQL */ `
   }
 `;
 export const onUpdateChatRoom = /* GraphQL */ `
-  subscription OnUpdateChatRoom($filter: ModelSubscriptionChatRoomFilterInput) {
+  subscription OnUpdateChatRoom($filter: ModelSubscriptionChatRoomFilterInput,  $userFilter: ModelUserChatRoomFilterInput) {
     onUpdateChatRoom(filter: $filter) {
       id
-      name
       Messages {
         items {
           id
@@ -1010,7 +1011,7 @@ export const onUpdateChatRoom = /* GraphQL */ `
         nextToken
         startedAt
       }
-      users {
+      users (filter: $userFilter){
         items {
           id
           userId
@@ -1082,7 +1083,6 @@ export const onDeleteChatRoom = /* GraphQL */ `
   subscription OnDeleteChatRoom($filter: ModelSubscriptionChatRoomFilterInput) {
     onDeleteChatRoom(filter: $filter) {
       id
-      name
       Messages {
         items {
           id
@@ -1323,11 +1323,9 @@ export const onCreateChallengeUser = /* GraphQL */ `
           nextToken
           startedAt
         }
-        status
         started
         ChatRoom {
           id
-          name
           createdAt
           updatedAt
           _version
@@ -1336,6 +1334,7 @@ export const onCreateChallengeUser = /* GraphQL */ `
           chatRoomLastMessageId
         }
         userCount
+        finished
         createdAt
         updatedAt
         _version
@@ -1351,6 +1350,7 @@ export const onCreateChallengeUser = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1410,11 +1410,9 @@ export const onUpdateChallengeUser = /* GraphQL */ `
           nextToken
           startedAt
         }
-        status
         started
         ChatRoom {
           id
-          name
           createdAt
           updatedAt
           _version
@@ -1423,6 +1421,7 @@ export const onUpdateChallengeUser = /* GraphQL */ `
           chatRoomLastMessageId
         }
         userCount
+        finished
         createdAt
         updatedAt
         _version
@@ -1438,6 +1437,7 @@ export const onUpdateChallengeUser = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1497,11 +1497,9 @@ export const onDeleteChallengeUser = /* GraphQL */ `
           nextToken
           startedAt
         }
-        status
         started
         ChatRoom {
           id
-          name
           createdAt
           updatedAt
           _version
@@ -1510,6 +1508,7 @@ export const onDeleteChallengeUser = /* GraphQL */ `
           chatRoomLastMessageId
         }
         userCount
+        finished
         createdAt
         updatedAt
         _version
@@ -1525,6 +1524,7 @@ export const onDeleteChallengeUser = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1574,6 +1574,7 @@ export const onCreateUserChatRoom = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1602,7 +1603,6 @@ export const onCreateUserChatRoom = /* GraphQL */ `
       }
       chatRoom {
         id
-        name
         Messages {
           nextToken
           startedAt
@@ -1658,6 +1658,7 @@ export const onUpdateUserChatRoom = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1686,7 +1687,6 @@ export const onUpdateUserChatRoom = /* GraphQL */ `
       }
       chatRoom {
         id
-        name
         Messages {
           nextToken
           startedAt
@@ -1742,6 +1742,7 @@ export const onDeleteUserChatRoom = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1770,7 +1771,6 @@ export const onDeleteUserChatRoom = /* GraphQL */ `
       }
       chatRoom {
         id
-        name
         Messages {
           nextToken
           startedAt
@@ -1826,6 +1826,7 @@ export const onCreateUserValidatedCheckIn = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1904,6 +1905,7 @@ export const onUpdateUserValidatedCheckIn = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1982,6 +1984,7 @@ export const onDeleteUserValidatedCheckIn = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt

@@ -14,6 +14,7 @@ export const getLeaderboard = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -78,6 +79,7 @@ export const listLeaderboards = /* GraphQL */ `
           biography
           email
           notifications
+          streakStart
           createdAt
           updatedAt
           _version
@@ -131,6 +133,7 @@ export const syncLeaderboards = /* GraphQL */ `
           biography
           email
           notifications
+          streakStart
           createdAt
           updatedAt
           _version
@@ -190,11 +193,9 @@ export const getChallenge = /* GraphQL */ `
         nextToken
         startedAt
       }
-      status
       started
       ChatRoom {
         id
-        name
         Messages {
           nextToken
           startedAt
@@ -228,6 +229,7 @@ export const getChallenge = /* GraphQL */ `
         chatRoomLastMessageId
       }
       userCount
+      finished
       createdAt
       updatedAt
       _version
@@ -262,11 +264,9 @@ export const listChallenges = /* GraphQL */ `
           nextToken
           startedAt
         }
-        status
         started
         ChatRoom {
           id
-          name
           createdAt
           updatedAt
           _version
@@ -275,6 +275,7 @@ export const listChallenges = /* GraphQL */ `
           chatRoomLastMessageId
         }
         userCount
+        finished
         createdAt
         updatedAt
         _version
@@ -318,11 +319,9 @@ export const syncChallenges = /* GraphQL */ `
           nextToken
           startedAt
         }
-        status
         started
         ChatRoom {
           id
-          name
           createdAt
           updatedAt
           _version
@@ -331,66 +330,7 @@ export const syncChallenges = /* GraphQL */ `
           chatRoomLastMessageId
         }
         userCount
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        challengeChallengeTypeId
-        challengeChatRoomId
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const challengesByStatus = /* GraphQL */ `
-  query ChallengesByStatus(
-    $status: ChallengeStatusEnum!
-    $started: ModelIntKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelChallengeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    challengesByStatus(
-      status: $status
-      started: $started
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        ChallengeType {
-          id
-          name
-          description
-          active
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        Users {
-          nextToken
-          startedAt
-        }
-        status
-        started
-        ChatRoom {
-          id
-          name
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          chatRoomLastMessageId
-        }
-        userCount
+        finished
         createdAt
         updatedAt
         _version
@@ -480,6 +420,7 @@ export const getUser = /* GraphQL */ `
       biography
       email
       notifications
+      streakStart
       Messages {
         items {
           id
@@ -580,6 +521,7 @@ export const listUsers = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -631,6 +573,7 @@ export const syncUsers = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -890,7 +833,6 @@ export const getChatRoom = /* GraphQL */ `
   query GetChatRoom($id: ID!) {
     getChatRoom(id: $id) {
       id
-      name
       Messages {
         items {
           id
@@ -986,7 +928,6 @@ export const listChatRooms = /* GraphQL */ `
     listChatRooms(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        name
         Messages {
           nextToken
           startedAt
@@ -1039,7 +980,6 @@ export const syncChatRooms = /* GraphQL */ `
     ) {
       items {
         id
-        name
         Messages {
           nextToken
           startedAt
@@ -1329,11 +1269,9 @@ export const getChallengeUser = /* GraphQL */ `
           nextToken
           startedAt
         }
-        status
         started
         ChatRoom {
           id
-          name
           createdAt
           updatedAt
           _version
@@ -1342,6 +1280,7 @@ export const getChallengeUser = /* GraphQL */ `
           chatRoomLastMessageId
         }
         userCount
+        finished
         createdAt
         updatedAt
         _version
@@ -1357,6 +1296,7 @@ export const getChallengeUser = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1404,9 +1344,9 @@ export const listChallengeUsers = /* GraphQL */ `
         userId
         challenge {
           id
-          status
           started
           userCount
+          finished
           createdAt
           updatedAt
           _version
@@ -1422,6 +1362,7 @@ export const listChallengeUsers = /* GraphQL */ `
           biography
           email
           notifications
+          streakStart
           createdAt
           updatedAt
           _version
@@ -1458,9 +1399,9 @@ export const syncChallengeUsers = /* GraphQL */ `
         userId
         challenge {
           id
-          status
           started
           userCount
+          finished
           createdAt
           updatedAt
           _version
@@ -1476,6 +1417,7 @@ export const syncChallengeUsers = /* GraphQL */ `
           biography
           email
           notifications
+          streakStart
           createdAt
           updatedAt
           _version
@@ -1514,9 +1456,9 @@ export const challengeUsersByChallengeId = /* GraphQL */ `
         userId
         challenge {
           id
-          status
           started
           userCount
+          finished
           createdAt
           updatedAt
           _version
@@ -1532,6 +1474,7 @@ export const challengeUsersByChallengeId = /* GraphQL */ `
           biography
           email
           notifications
+          streakStart
           createdAt
           updatedAt
           _version
@@ -1570,9 +1513,9 @@ export const challengeUsersByUserId = /* GraphQL */ `
         userId
         challenge {
           id
-          status
           started
           userCount
+          finished
           createdAt
           updatedAt
           _version
@@ -1588,6 +1531,7 @@ export const challengeUsersByUserId = /* GraphQL */ `
           biography
           email
           notifications
+          streakStart
           createdAt
           updatedAt
           _version
@@ -1618,6 +1562,7 @@ export const getUserChatRoom = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1646,7 +1591,6 @@ export const getUserChatRoom = /* GraphQL */ `
       }
       chatRoom {
         id
-        name
         Messages {
           nextToken
           startedAt
@@ -1705,6 +1649,7 @@ export const listUserChatRooms = /* GraphQL */ `
           biography
           email
           notifications
+          streakStart
           createdAt
           updatedAt
           _version
@@ -1713,7 +1658,6 @@ export const listUserChatRooms = /* GraphQL */ `
         }
         chatRoom {
           id
-          name
           createdAt
           updatedAt
           _version
@@ -1756,6 +1700,7 @@ export const syncUserChatRooms = /* GraphQL */ `
           biography
           email
           notifications
+          streakStart
           createdAt
           updatedAt
           _version
@@ -1764,7 +1709,6 @@ export const syncUserChatRooms = /* GraphQL */ `
         }
         chatRoom {
           id
-          name
           createdAt
           updatedAt
           _version
@@ -1809,6 +1753,7 @@ export const userChatRoomsByUserId = /* GraphQL */ `
           biography
           email
           notifications
+          streakStart
           createdAt
           updatedAt
           _version
@@ -1817,7 +1762,6 @@ export const userChatRoomsByUserId = /* GraphQL */ `
         }
         chatRoom {
           id
-          name
           createdAt
           updatedAt
           _version
@@ -1862,6 +1806,7 @@ export const userChatRoomsByChatRoomId = /* GraphQL */ `
           biography
           email
           notifications
+          streakStart
           createdAt
           updatedAt
           _version
@@ -1870,7 +1815,6 @@ export const userChatRoomsByChatRoomId = /* GraphQL */ `
         }
         chatRoom {
           id
-          name
           createdAt
           updatedAt
           _version
@@ -1902,6 +1846,7 @@ export const getUserValidatedCheckIn = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1987,6 +1932,7 @@ export const listUserValidatedCheckIns = /* GraphQL */ `
           biography
           email
           notifications
+          streakStart
           createdAt
           updatedAt
           _version
@@ -2042,6 +1988,7 @@ export const syncUserValidatedCheckIns = /* GraphQL */ `
           biography
           email
           notifications
+          streakStart
           createdAt
           updatedAt
           _version
@@ -2099,6 +2046,7 @@ export const userValidatedCheckInsByUserId = /* GraphQL */ `
           biography
           email
           notifications
+          streakStart
           createdAt
           updatedAt
           _version
@@ -2156,6 +2104,7 @@ export const userValidatedCheckInsByCheckinId = /* GraphQL */ `
           biography
           email
           notifications
+          streakStart
           createdAt
           updatedAt
           _version

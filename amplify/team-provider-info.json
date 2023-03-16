@@ -1,4 +1,28 @@
 {
+  "challend": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-habitopia-challend-184819-authRole",
+      "UnauthRoleArn": "arn:aws:iam::281181984812:role/amplify-habitopia-challend-184819-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::281181984812:role/amplify-habitopia-challend-184819-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-habitopia-challend-184819-deployment",
+      "UnauthRoleName": "amplify-habitopia-challend-184819-unauthRole",
+      "StackName": "amplify-habitopia-challend-184819",
+      "StackId": "arn:aws:cloudformation:eu-west-2:281181984812:stack/amplify-habitopia-challend-184819/4ddec410-bb86-11ed-8662-06d4e0ca15ba",
+      "AmplifyAppId": "d2fz6on51wdtwq"
+    },
+    "categories": {
+      "auth": {
+        "Habitopia": {}
+      },
+      "function": {
+        "challengeSchedule": {
+          "deploymentBucketName": "amplify-habitopia-challend-184819-deployment",
+          "s3Key": "amplify-builds/challengeSchedule-387a483048654a364d5a-build.zip"
+        }
+      }
+    }
+  },
   "staging": {
     "awscloudformation": {
       "AuthRoleName": "amplify-habitopia-staging-213137-authRole",
@@ -17,19 +41,25 @@
       },
       "api": {
         "Habitopia": {}
+      },
+      "function": {
+        "challengeSchedule": {
+          "deploymentBucketName": "amplify-habitopia-staging-213137-deployment",
+          "s3Key": "amplify-builds/challengeSchedule-6e316446575a4b767362-build.zip"
+        }
       }
     }
   },
-  "challend": {
+  "leaderbrd": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-habitopia-challend-184819-authRole",
-      "UnauthRoleArn": "arn:aws:iam::281181984812:role/amplify-habitopia-challend-184819-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::281181984812:role/amplify-habitopia-challend-184819-authRole",
+      "AuthRoleName": "amplify-habitopia-leaderbrd-155416-authRole",
+      "UnauthRoleArn": "arn:aws:iam::281181984812:role/amplify-habitopia-leaderbrd-155416-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::281181984812:role/amplify-habitopia-leaderbrd-155416-authRole",
       "Region": "eu-west-2",
-      "DeploymentBucketName": "amplify-habitopia-challend-184819-deployment",
-      "UnauthRoleName": "amplify-habitopia-challend-184819-unauthRole",
-      "StackName": "amplify-habitopia-challend-184819",
-      "StackId": "arn:aws:cloudformation:eu-west-2:281181984812:stack/amplify-habitopia-challend-184819/4ddec410-bb86-11ed-8662-06d4e0ca15ba",
+      "DeploymentBucketName": "amplify-habitopia-leaderbrd-155416-deployment",
+      "UnauthRoleName": "amplify-habitopia-leaderbrd-155416-unauthRole",
+      "StackName": "amplify-habitopia-leaderbrd-155416",
+      "StackId": "arn:aws:cloudformation:eu-west-2:281181984812:stack/amplify-habitopia-leaderbrd-155416/aaf163f0-b524-11ed-8f18-0a1401fba3ac",
       "AmplifyAppId": "d2fz6on51wdtwq"
     },
     "categories": {
@@ -38,12 +68,6 @@
       },
       "api": {
         "Habitopia": {}
-      },
-      "function": {
-        "challengeSchedule": {
-          "deploymentBucketName": "amplify-habitopia-challend-184819-deployment",
-          "s3Key": "amplify-builds/challengeSchedule-4d4263557a6f73677171-build.zip"
-        }
       }
     }
   }

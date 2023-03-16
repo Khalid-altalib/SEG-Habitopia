@@ -7,8 +7,7 @@ import ChatListScreen from "@screens/chat/ChatListScreen";
 import ContactIcon from "../../features/chat/ContactIcon/ContactIcon";
 import ChatScreen from "@screens/chat/ChatScreen";
 import { Button } from "native-base";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { useSelector } from "@app/hooks";
+import { useNavigation } from "@react-navigation/native";
 
 export const ChatStack = createNativeStackNavigator<ChatParams>();
 
@@ -16,11 +15,12 @@ const ChatNavigation = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
 
   return (
-    <ChatStack.Navigator initialRouteName="Chats">
+    <ChatStack.Navigator initialRouteName="ChatList">
       <ChatStack.Screen
-        name="Chats"
+        name="ChatList"
         component={ChatListScreen}
         options={{
+          headerTitle: "Chats",
           headerRight: () => {
             return <ContactIcon />;
           },

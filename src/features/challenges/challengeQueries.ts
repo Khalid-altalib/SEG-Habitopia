@@ -8,12 +8,12 @@ import {
   ChallengeUser,
   User,
 } from "../../models";
-
-enum ChallengeStatus {
-  ACTIVE,
-  INACTIVE,
-  COMPLETED
-}
+import {
+  ALREADY_PART_OF_CHAT,
+  CANNOT_JOIN_CHAT,
+  CHALLENGE_NOT_FOUND,
+  GROUP_CHAT_PARTICIPANTS,
+} from "@features/constants";
 
 export const joinChallengeQuery = async (
   challengeTypeInstance: ChallengeTypeModel,
@@ -34,7 +34,7 @@ export const joinChallengeQuery = async (
 
   await DataStore.save(
     ChallengeModel.copyOf(challengeToJoin, (updated) => {
-      updated.userCount += 1;
+      if (updated.userCount) updated.userCount += 1;
     })
   );
 };
@@ -53,7 +53,7 @@ const isUserPartOfChallenge = async (
 
   for await (const challenge of challenges) {
     if (challenge.challengeChallengeTypeId === challengeTypeInstance.id) {
-      throw new Error("User is already part of the challenge");
+      throw new Error(ALREADY_PART_OF_CHAT);
     }
   }
 };
@@ -67,21 +67,17 @@ const findChallengeToJoin = async (
       (allChallenges) =>
         allChallenges.and((toJoinChallenge) => [
           toJoinChallenge.ChallengeType.id.eq(challengeTypeInstance.id),
-          toJoinChallenge.userCount.lt(15),
+          toJoinChallenge.userCount.lt(GROUP_CHAT_PARTICIPANTS),
         ])
     );
 
     if (availableChallenges.length == 0) {
-      // const new_date = new Date();
-      // let string_new_date: string = new_date.toLocaleString();
-      // let chatRoomName = challengeTypeInstance.name + " - " + string_new_date;
-      const newChatRoom = await DataStore.save(new ChatRoom({name: "chatRoomName"}));
+      const newChatRoom = await DataStore.save(new ChatRoom({}));
       const toJoin = await DataStore.save(
         new ChallengeModel({
           ChatRoom: newChatRoom,
           ChallengeType: challengeTypeInstance,
           challengeChallengeTypeId: challengeTypeInstance.id,
-          status: "INACTIVE",
           userCount: 0,
         })
       );
@@ -90,7 +86,7 @@ const findChallengeToJoin = async (
 
     return availableChallenges[0];
   } catch (error) {
-    throw new Error("Challenge not found");
+    throw new Error(CHALLENGE_NOT_FOUND);
   }
 };
 
@@ -112,6 +108,6 @@ const addUserToChatRoom = async (
       })
     );
   } catch (error) {
-    throw new Error("Unable to join chat");
+    throw new Error(CANNOT_JOIN_CHAT);
   }
 };

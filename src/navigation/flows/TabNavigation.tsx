@@ -19,7 +19,7 @@ const TabNavigation = () => {
     <Tab.Navigator initialRouteName="Home" screenOptions={{}}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen
-        name="ChatList"
+        name="Chats"
         component={ChatNavigation}
         options={{
           headerShown: false,

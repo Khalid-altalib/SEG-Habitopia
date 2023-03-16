@@ -26,7 +26,10 @@
     ]
   },
   "dependencies": {
+    "@aws-amplify/datastore": "^4.0.14",
+    "@expo/ngrok": "^4.1.0",
     "@expo/vector-icons": "^13.0.0",
+    "@expo/webpack-config": "^0.17.2",
     "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-native-community/netinfo": "^9.3.7",
     "@react-navigation/bottom-tabs": "^6.0.5",
@@ -36,6 +39,7 @@
     "@testing-library/react-native": "^12.0.0-rc.0",
     "aws-amplify": "^5.0.14",
     "aws-amplify-react-native": "^7.0.2",
+    "aws-sdk": "^2.1313.0",
     "enzyme": "^3.11.0",
     "expo": "~47.0.12",
     "expo-app-loading": "^2.1.1",
@@ -48,6 +52,7 @@
     "expo-status-bar": "~1.4.2",
     "expo-system-ui": "~2.0.1",
     "expo-web-browser": "~12.0.0",
+    "moment": "^2.29.4",
     "native-base": "^3.4.25",
     "react": "18.1.0",
     "react-dom": "18.1.0",
@@ -62,12 +67,7 @@
     "react-native-web": "~0.18.9",
     "react-redux": "^8.0.5",
     "redux": "^4.2.1",
-    "redux-mock-store": "^1.5.4",
-    "@aws-crypto/sha256-js": "^2.0.1",
-    "@aws-sdk/credential-provider-node": "^3.76.0",
-    "@aws-sdk/protocol-http": "^3.58.0",
-    "@aws-sdk/signature-v4": "^3.58.0",
-    "node-fetch": "^3.2.3"
+    "redux-mock-store": "^1.5.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -98,9 +98,8 @@
     "jest-expo": "~47.0.1",
     "mock-async-storage": "^2.2.0",
     "react-test-renderer": "^18.1.0",
-    "typescript": "^4.6.3",
-    "@types/aws-lambda": "^8.10.92",
-    "typedoc": "^0.24.0-beta.2"
+    "typedoc": "^0.24.0-beta.2",
+    "typescript": "^4.6.3"
   },
   "private": true
 }
