@@ -71,6 +71,8 @@ export enum TextType {
   Small,
   Subheading,
   Button,
+  ChatName,
+  ChatText,
 }
 
 export enum ButtonType {

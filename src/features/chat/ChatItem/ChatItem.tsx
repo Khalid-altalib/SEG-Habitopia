@@ -16,39 +16,7 @@ import Avatar from "@components/Avatar/Avatar";
 import Card from "@components/Card";
 import Text from "@components/Text";
 import { TouchableOpacity } from "react-native";
-
-const getTimeSinceLastChat = (chat: Chat) => {
-  const dateOfLastChat: Date = moment(chat.time).toDate();
-  const elapsedTimeInMilliseconds: number =
-    Date.now() - dateOfLastChat.getTime();
-
-  const ONE_SECOND = 1000;
-  const ONE_MINUTE = ONE_SECOND * 60;
-  const ONE_HOUR = ONE_MINUTE * 60;
-  const ONE_DAY = ONE_HOUR * 24;
-  const ONE_WEEK = ONE_DAY * 7;
-
-  // Dealing with a matter of seconds
-  if (elapsedTimeInMilliseconds < ONE_MINUTE) {
-    return Math.round(elapsedTimeInMilliseconds / ONE_SECOND) + "s"; // E.g. '13s'
-  }
-  // Dealing with minutes
-  else if (elapsedTimeInMilliseconds < ONE_HOUR) {
-    return Math.round(elapsedTimeInMilliseconds / ONE_MINUTE) + "m"; // E.g. '4m'
-  }
-  // Dealing with hours
-  else if (elapsedTimeInMilliseconds < ONE_DAY) {
-    return Math.round(elapsedTimeInMilliseconds / ONE_HOUR) + "d"; // E.g. '3d'
-  }
-  // Dealing with days
-  else if (elapsedTimeInMilliseconds < ONE_WEEK) {
-    return Math.round(elapsedTimeInMilliseconds / ONE_DAY) + "d"; // E.g. '3d'
-  }
-  // Dealing with weeks
-  else {
-    return Math.round(elapsedTimeInMilliseconds / ONE_WEEK) + "w"; // E.g. '4w'
-  }
-};
+import { convertDateToTimeString } from "@app/util";
 
 const UnreadMessagesBadge = ({
   noOfUnreadMessages,
@@ -107,7 +75,9 @@ const ChatItem = (chat: Chat) => {
             alignItems="center"
             minWidth={9}
           >
-            <Text type={TextType.Subtle}>{getTimeSinceLastChat(chat)}</Text>
+            <Text type={TextType.Subtle}>
+              {convertDateToTimeString(moment(chat.time).toDate())}
+            </Text>
             <UnreadMessagesBadge noOfUnreadMessages={chat.unreadMessages} />
           </VStack>
         </HStack>
