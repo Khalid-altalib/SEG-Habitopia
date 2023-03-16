@@ -4,12 +4,12 @@ import React from "react";
 import { TextType } from "types";
 
 type Props = {
-  timeLeft: string;
+  hoursLeft: number;
   checkedIn: boolean;
 };
 
 function CheckInTime(props: Props) {
-  const { timeLeft, checkedIn } = props;
+  const { hoursLeft, checkedIn } = props;
   return (
     <Box position="absolute" bottom={0}>
       <Text
@@ -21,7 +21,7 @@ function CheckInTime(props: Props) {
           padding: 12.25,
         }}
       >
-        {checkedIn ? "Done!" : timeLeft}
+        {checkedIn ? "Done!" : `${hoursLeft}h left!`}
       </Text>
     </Box>
   );

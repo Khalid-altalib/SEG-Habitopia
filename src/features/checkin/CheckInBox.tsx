@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import { TouchableOpacity } from "react-native";
 import CheckInTime from "./CheckInTime";
 import Text from "@components/Text";
-import { CheckInSnippetItem, TextType } from "types";
+import { ChatParams, CheckInSnippetItem, TextType } from "types";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type Props = {
   checkInSnippetItem: CheckInSnippetItem;
@@ -13,10 +15,17 @@ const CheckInBox = (props: Props) => {
   const { checkInSnippetItem } = props;
   const { challenge, checkedIn, endDate } = checkInSnippetItem;
 
-  let timeLeft = endDate;
+  const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
+
+  const handlePress = () => {
+    // navigate to associated chatroom
+  };
+
+  const timeDifference = endDate.getTime() - new Date().getTime();
+  const timeDifferenceHours = timeDifference / (1000 * 60 * 60);
 
   return (
-    <TouchableOpacity style={{ marginRight: 25 }}>
+    <TouchableOpacity style={{ marginRight: 25 }} onPress={handlePress}>
       <ZStack size="full" style={{ aspectRatio: 1 }}>
         <Image
           source={{ uri: "https://picsum.photos/2000" }}
@@ -40,7 +49,7 @@ const CheckInBox = (props: Props) => {
         >
           {challenge.name}
         </Text>
-        <CheckInTime timeLeft={"3h left!"} checkedIn={checkedIn} />
+        <CheckInTime hoursLeft={timeDifferenceHours} checkedIn={checkedIn} />
       </ZStack>
     </TouchableOpacity>
   );
