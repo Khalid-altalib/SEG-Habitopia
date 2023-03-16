@@ -67,5 +67,8 @@ export const getCount = async (userId: string) => {
     follow.followFollowingUserId.eq(userId)
   );
 
-  return { followerCount: followerCount, followingCount: followingCount };
+  return {
+    followerCount: followerCount.length,
+    followingCount: followingCount.length,
+  };
 };
