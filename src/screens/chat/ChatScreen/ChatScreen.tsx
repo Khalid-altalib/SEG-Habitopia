@@ -36,6 +36,7 @@ import {
 import { Button } from "react-native";
 import { KeyboardAvoidingView, ScrollView } from "native-base";
 import ValidationMessage from "@features/chat/ValidationMessage/ValidationMessage";
+import Background from "@components/Background";
 
 type Props = {};
 
@@ -135,10 +136,7 @@ const ChatScreen = (props: Props) => {
   };
 
   return (
-    <ImageBackground
-      source={{ uri: "https://placeholder.com" }}
-      style={styles.bg}
-    >
+    <Background>
       <Button title="Load more" onPress={fetchMoreMessages} />
       <FlatList
         data={chat.messages}
@@ -188,15 +186,11 @@ const ChatScreen = (props: Props) => {
       <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={90}>
         <InputBox chatRoomID={chat.id} />
       </KeyboardAvoidingView>
-    </ImageBackground>
+    </Background>
   );
 };
 
 const styles = StyleSheet.create({
-  bg: {
-    flex: 1,
-  },
-
   flatList: {
     padding: 10,
     flex: 1,
