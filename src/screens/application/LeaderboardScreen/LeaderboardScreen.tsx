@@ -3,20 +3,16 @@ import LeaderboardCards from "@features/leaderboard/LeaderboardCards/Leaderboard
 import LeaderboardLayout from "@features/leaderboard/LeaderboardLayout/LeaderboardLayout";
 import LeaderboardSettings from "@features/leaderboard/LeaderboardSettings/LeaderboardSettings";
 import Background from "@components/Background";
-import { Box, Text } from "native-base";
-import { FlatList } from "react-native";
-import { useDispatch } from "@app/hooks";
-import { useEffect } from "react";
-import { fetchChallenges } from "@features/challenges/challengesSlice";
+import PaddedContainer from "@components/PaddedContainer";
 
-type Props = {};
-
-const LeaderboardScreen = (props: Props) => {
+const LeaderboardScreen = (): JSX.Element => {
   return (
     <Background>
       <LeaderboardLayout>
         <LeaderboardSettings />
-        <LeaderboardCards />
+        <PaddedContainer>
+          <LeaderboardCards />
+        </PaddedContainer>
       </LeaderboardLayout>
     </Background>
   );

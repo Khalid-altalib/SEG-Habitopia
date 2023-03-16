@@ -80,6 +80,14 @@ const Text = ({ type, style, children, color }: TextProps) => {
       fontSize: 19,
       fontFamily: fontsLoaded ? "Roboto Medium" : undefined,
     },
+    chatname: {
+      fontSize: 13,
+      fontFamily: fontsLoaded ? "Roboto Black" : undefined,
+    },
+    chattext: {
+      fontSize: 15,
+      fontFamily: fontsLoaded ? "Roboto Medium" : undefined,
+    },
     small: {
       fontSize: 15,
       fontFamily: fontsLoaded ? "Roboto Medium" : undefined,

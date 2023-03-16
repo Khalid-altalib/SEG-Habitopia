@@ -1,8 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
-import { Button } from "native-base";
 import React from "react";
-import { NavigationParams } from "types";
+import { ButtonType, NavigationParams } from "types";
 import { NavigationProp } from "@react-navigation/native";
+import Button from "@components/Button";
 
 type Props = {};
 
@@ -10,8 +10,13 @@ function ChallengeNavigationButton({}: Props) {
   const navigation = useNavigation<NavigationProp<NavigationParams>>();
   const handlePress = () => navigation.navigate("Explore");
   return (
-    <Button variant={"subtle"} onPress={handlePress}>
-      Discover More!
+    <Button
+      type={ButtonType.Primary}
+      isFullWidth
+      style={{ marginHorizontal: 25, marginBottom: 25 }}
+      onPress={handlePress}
+    >
+      Discover more!
     </Button>
   );
 }

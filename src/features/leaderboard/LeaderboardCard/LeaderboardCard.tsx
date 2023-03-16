@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, theme, View } from "native-base";
+import { AspectRatio, Box, Heading, HStack, theme, View } from "native-base";
 import Avatar from "@components/Avatar/Avatar";
 
 import React from "react";
@@ -37,8 +37,10 @@ const LeaderboardCard = (props: Props) => {
     <TouchableOpacity onPress={handlePress} testID="leaderboard-card">
       <Card backgroundColorGradient={cardColor}>
         <HStack justifyContent={"space-between"} alignItems="center">
-          <HStack space={4}>
-            <Avatar userId={userId} />
+          <HStack space={25}>
+            <Box boxSize={50}>
+              <Avatar userId={userId} />
+            </Box>
             <View>
               <Text
                 type={TextType.Subheading}

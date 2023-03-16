@@ -32,10 +32,12 @@ const LeaderboardLayout = (props: Props) => {
   };
 
   return (
-    <ScrollView scrollEventThrottle={2000} onScroll={handleScrollBottom} testID="scroll-view">
-      <PaddedContainer>
-        <VStack space={4}>{children}</VStack>
-      </PaddedContainer>
+    <ScrollView
+      scrollEventThrottle={2000}
+      onScroll={handleScrollBottom}
+      paddingTop={25}
+    >
+      <VStack>{children}</VStack>
     </ScrollView>
   );
 };
