@@ -20,7 +20,7 @@ jest.mock("@app/util", () => ({
   ),
 }));
 
-describe("leaderboard functions", () => {
+describe("leaderboardQueries", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -40,9 +40,7 @@ describe("leaderboard functions", () => {
     });
     const { DataStore } = require("aws-amplify");
     DataStore.query.mockImplementation(queryMock);
-
     const result = await fetchLeaderboardData("testChallengeType", 1);
-
     expect(result).toEqual([
       {
         userId: "123",
@@ -53,7 +51,6 @@ describe("leaderboard functions", () => {
         checkins: 3,
       },
     ]);
-
     expect(queryMock).toHaveBeenCalledWith(
       expect.anything(),
       expect.any(Function),
@@ -76,17 +73,14 @@ describe("leaderboard functions", () => {
     });
     const { DataStore } = require("aws-amplify");
     DataStore.query.mockImplementation(queryMock);
-
     const result = await fetchLeaderboardByUserIDAndChallengeType(
       "123",
       "testChallengeType"
     );
-
     expect(result).toEqual({
       leaderboardUserId: "123",
       numberOfCheckins: 5,
     });
-
     expect(queryMock).toHaveBeenCalledWith(
       expect.anything(),
       expect.any(Function)

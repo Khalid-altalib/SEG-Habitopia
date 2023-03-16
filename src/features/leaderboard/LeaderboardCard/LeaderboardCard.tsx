@@ -34,7 +34,7 @@ const LeaderboardCard = (props: Props) => {
   const handlePress = () => navigation.push("Profile", { userId: userId });
 
   return (
-    <TouchableOpacity onPress={handlePress} testID="leaderboardCard">
+    <TouchableOpacity onPress={handlePress} testID="leaderboard-card">
       <Card backgroundColorGradient={cardColor}>
         <HStack justifyContent={"space-between"} alignItems="center">
           <HStack space={4}>

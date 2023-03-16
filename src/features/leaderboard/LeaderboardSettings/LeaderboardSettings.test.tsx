@@ -39,7 +39,7 @@ describe("LeaderboardSettings", () => {
 
   it("renders leaderboardSettings", () => {
     const { getByTestId } = render(wrapper);
-    expect(getByTestId("leaderboardSettings")).toBeDefined();
+    expect(getByTestId("leaderboard-settings")).toBeDefined();
   });
 
   it("matches snapshot", () => {

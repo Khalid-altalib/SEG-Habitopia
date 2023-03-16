@@ -38,7 +38,7 @@ describe("LeaderboardLayout", () => {
   });
 
   it("should not fetch leaderboard when scroll to top", () => {
-    const scrollView = wrapper.getByTestId("scrollView");
+    const scrollView = wrapper.getByTestId("scroll-view");
     fireEvent.scroll(scrollView, {
       nativeEvent: { contentOffset: { y: -100 } },
     });
