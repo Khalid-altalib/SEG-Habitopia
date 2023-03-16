@@ -1,9 +1,11 @@
-import { useSelector } from "@app/hooks";
+import { useDispatch, useSelector } from "@app/hooks";
 import StatusContainer from "@components/StatusContainer/StatusContainer";
-import React from "react";
+import React, { useEffect } from "react";
 import ChallengeBox from "@features/challenges/ChallengeBox/ChallengeBox";
 import ChallengeNavigationButton from "../../challenges/ChallengeNavigationButton/ChallengeNavigationButton";
 import ChallengeWidgetLayout from "./ChallengeWidgetLayout";
+import { fetchChallenges } from "@features/challenges/challengesSlice";
+import { VStack } from "native-base";
 
 type Props = {};
 
@@ -16,17 +18,25 @@ function ChallengeWidget({}: Props) {
 
   const { loading, error } = requestStatus;
 
-  const shuffledChallenges = challenges.sort(() => 0.5 - Math.random());
+  let shuffledChallenges = [...challenges].sort(() => 0.5 - Math.random());
 
-  const previewedChallenges = shuffledChallenges.slice(0, 3);
+  shuffledChallenges = shuffledChallenges.slice(0, 3);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchChallenges());
+  }, []);
 
   return (
     <>
       <ChallengeWidgetLayout>
         <StatusContainer loading={loading} error={error} data={challenges}>
-          {previewedChallenges.map((challenge) => (
-            <ChallengeBox challenge={challenge} />
-          ))}
+          <VStack space={5}>
+            {shuffledChallenges.map((challenge) => (
+              <ChallengeBox challenge={challenge} />
+            ))}
+          </VStack>
         </StatusContainer>
       </ChallengeWidgetLayout>
       <ChallengeNavigationButton />
