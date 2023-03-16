@@ -8,6 +8,12 @@ export enum MessageEnum {
   VALIDATION = "VALIDATION"
 }
 
+export enum ChallengeStatusEnum {
+  ACTIVE = "ACTIVE",
+  INACTIVE = "INACTIVE",
+  COMPLETED = "COMPLETED"
+}
+
 
 
 type EagerFollow = {
@@ -172,6 +178,7 @@ type EagerChatRoom = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
+  readonly name: string;
   readonly Messages?: (Checkin | null)[] | null;
   readonly users?: (UserChatRoom | null)[] | null;
   readonly Checkins?: (Checkin | null)[] | null;
@@ -187,6 +194,7 @@ type LazyChatRoom = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
+  readonly name: string;
   readonly Messages: AsyncCollection<Checkin>;
   readonly users: AsyncCollection<UserChatRoom>;
   readonly Checkins: AsyncCollection<Checkin>;
@@ -248,10 +256,10 @@ type EagerChallenge = {
   readonly id: string;
   readonly ChallengeType: ChallengeType;
   readonly Users?: (ChallengeUser | null)[] | null;
-  readonly started?: string | null;
+  readonly status?: ChallengeStatusEnum | keyof typeof ChallengeStatusEnum | null;
+  readonly started?: number | null;
   readonly ChatRoom?: ChatRoom | null;
   readonly userCount?: number | null;
-  readonly finished?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly challengeChallengeTypeId: string;
@@ -266,10 +274,10 @@ type LazyChallenge = {
   readonly id: string;
   readonly ChallengeType: AsyncItem<ChallengeType>;
   readonly Users: AsyncCollection<ChallengeUser>;
-  readonly started?: string | null;
+  readonly status?: ChallengeStatusEnum | keyof typeof ChallengeStatusEnum | null;
+  readonly started?: number | null;
   readonly ChatRoom: AsyncItem<ChatRoom | undefined>;
   readonly userCount?: number | null;
-  readonly finished?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly challengeChallengeTypeId: string;
