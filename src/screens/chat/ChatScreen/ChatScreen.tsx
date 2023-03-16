@@ -192,7 +192,7 @@ const ChatScreen = (props: Props) => {
 
 const styles = StyleSheet.create({
   flatList: {
-    padding: 10,
+    padding: 25,
     flex: 1,
   },
 });
