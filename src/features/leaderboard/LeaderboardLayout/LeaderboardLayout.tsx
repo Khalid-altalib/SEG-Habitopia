@@ -35,7 +35,7 @@ const LeaderboardLayout = (props: Props) => {
     <ScrollView
       scrollEventThrottle={2000}
       onScroll={handleScrollBottom}
-      marginTop={25}
+      paddingTop={25}
     >
       <VStack>{children}</VStack>
     </ScrollView>
