@@ -2,6 +2,13 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { Profile, User } from "../../../types";
 import { getUserFromDatabasebyID } from "../../app/util";
 import { getStatistics } from "./statisticsQueries";
+import {
+  followUserQuery,
+  getCount,
+  getFollowers,
+  getFollowing,
+} from "./profileQueries";
+import { RootState } from "@app/store";
 
 export type ProfileState = {
   profile?: Profile;
@@ -37,42 +44,41 @@ const initialState: ProfileState = {
   },
 };
 
-export const followUser = createAsyncThunk(
-  "profile/follow",
-  async (_, thunkAPI) => {
-    // BACKEND_PLACEHOLDER Check if local user is following profile user id (get profile user id from thunkAPI)
+export const followUser = createAsyncThunk<
+  boolean,
+  string,
+  { rejectValue: string }
+>("profile/follow", async (followingUserID, thunkAPI) => {
+  try {
+    await followUserQuery(followingUserID, thunkAPI);
     return true;
+  } catch (error: any) {
+    const message = error.message;
+    return message;
   }
-);
+});
 
-export const fetchFollowList = createAsyncThunk(
+export const fetchFollowList = createAsyncThunk<
+  any,
+  any,
+  { rejectValue: string }
+>(
   "profile/fetch-follow-list",
-  async (followListMode: string) => {
-    let followList = undefined;
+  async (data: { followListMode: string; profileID: string }, thunkAPI) => {
+    try {
+      const { followListMode, profileID } = data;
+      let followList: { name: string; userId: string }[] = [];
+      if (followListMode === "following") {
+        followList = await getFollowing(profileID, followList);
+      } else if (followListMode === "follower") {
+        followList = await getFollowers(profileID, followList);
+      }
 
-    if (followListMode === "following") {
-      followList = [
-        { name: "Bob", userId: "123" },
-        { name: "Tom", userId: "124" },
-      ];
-    } else if (followListMode === "follower") {
-      followList = [
-        { name: "Bob", userId: "123" },
-        { name: "Tom", userId: "124" },
-        { name: "Bob", userId: "123" },
-        { name: "Tom", userId: "124" },
-        { name: "Bob", userId: "123" },
-        { name: "Tom", userId: "124" },
-        { name: "Bob", userId: "123" },
-        { name: "Tom", userId: "124" },
-        { name: "Bob", userId: "123" },
-        { name: "Tom", userId: "124" },
-      ];
+      return followList;
+    } catch (error: any) {
+      const message = error.message;
+      return message;
     }
-
-    // BACKEND_PLACEHOLDER
-
-    return followList;
   }
 );
 
@@ -84,10 +90,11 @@ export const fetchProfile = createAsyncThunk<
   try {
     const user = await getUserFromDatabasebyID(userId);
     const { checkIns, streak, wins } = await getStatistics(userId);
+    const { followerCount, followingCount } = await getCount(user.id);
 
     const statistics = [
       { name: "Streak", quantity: streak },
-      { name: "Wins", quantity: wins}, 
+      { name: "Wins", quantity: wins },
       { name: "Check Ins", quantity: checkIns },
     ];
 
@@ -96,10 +103,9 @@ export const fetchProfile = createAsyncThunk<
       name: user.name,
       biography: user.biography,
       statistics: statistics,
-      // BACKEND_PLACEHOLDER - get following, followerCount and followingCount
       following: false,
-      followerCount: 0,
-      followingCount: 0,
+      followerCount: followerCount,
+      followingCount: followingCount,
     };
 
     return profile;

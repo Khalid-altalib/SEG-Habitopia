@@ -34,7 +34,6 @@ import {
   getMessageByCheckInId,
 } from "@features/chat/chatQueries";
 import { Button } from "react-native";
-import { ScrollView } from "native-base";
 import ValidationMessage from "@features/chat/ValidationMessage/ValidationMessage";
 
 type Props = {};
