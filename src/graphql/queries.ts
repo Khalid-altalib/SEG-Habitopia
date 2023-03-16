@@ -2,6 +2,194 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getFollow = /* GraphQL */ `
+  query GetFollow($id: ID!) {
+    getFollow(id: $id) {
+      id
+      followingUser {
+        id
+        name
+        image
+        biography
+        email
+        notifications
+        streakStart
+        Messages {
+          nextToken
+          startedAt
+        }
+        ChatRooms {
+          nextToken
+          startedAt
+        }
+        Checkins {
+          nextToken
+          startedAt
+        }
+        challenges {
+          nextToken
+          startedAt
+        }
+        validatedCheckIns {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      followedBy {
+        id
+        name
+        image
+        biography
+        email
+        notifications
+        streakStart
+        Messages {
+          nextToken
+          startedAt
+        }
+        ChatRooms {
+          nextToken
+          startedAt
+        }
+        Checkins {
+          nextToken
+          startedAt
+        }
+        challenges {
+          nextToken
+          startedAt
+        }
+        validatedCheckIns {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      followFollowingUserId
+      followFollowedById
+    }
+  }
+`;
+export const listFollows = /* GraphQL */ `
+  query ListFollows(
+    $filter: ModelFollowFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFollows(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        followingUser {
+          id
+          name
+          image
+          biography
+          email
+          notifications
+          streakStart
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        followedBy {
+          id
+          name
+          image
+          biography
+          email
+          notifications
+          streakStart
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        followFollowingUserId
+        followFollowedById
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncFollows = /* GraphQL */ `
+  query SyncFollows(
+    $filter: ModelFollowFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncFollows(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        followingUser {
+          id
+          name
+          image
+          biography
+          email
+          notifications
+          streakStart
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        followedBy {
+          id
+          name
+          image
+          biography
+          email
+          notifications
+          streakStart
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        followFollowingUserId
+        followFollowedById
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getLeaderboard = /* GraphQL */ `
   query GetLeaderboard($id: ID!) {
     getLeaderboard(id: $id) {
@@ -193,9 +381,11 @@ export const getChallenge = /* GraphQL */ `
         nextToken
         startedAt
       }
+      status
       started
       ChatRoom {
         id
+        name
         Messages {
           nextToken
           startedAt
@@ -229,7 +419,6 @@ export const getChallenge = /* GraphQL */ `
         chatRoomLastMessageId
       }
       userCount
-      finished
       createdAt
       updatedAt
       _version
@@ -264,9 +453,11 @@ export const listChallenges = /* GraphQL */ `
           nextToken
           startedAt
         }
+        status
         started
         ChatRoom {
           id
+          name
           createdAt
           updatedAt
           _version
@@ -275,7 +466,6 @@ export const listChallenges = /* GraphQL */ `
           chatRoomLastMessageId
         }
         userCount
-        finished
         createdAt
         updatedAt
         _version
@@ -319,9 +509,11 @@ export const syncChallenges = /* GraphQL */ `
           nextToken
           startedAt
         }
+        status
         started
         ChatRoom {
           id
+          name
           createdAt
           updatedAt
           _version
@@ -330,7 +522,66 @@ export const syncChallenges = /* GraphQL */ `
           chatRoomLastMessageId
         }
         userCount
-        finished
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        challengeChallengeTypeId
+        challengeChatRoomId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const challengesByStatus = /* GraphQL */ `
+  query ChallengesByStatus(
+    $status: ChallengeStatusEnum!
+    $started: ModelIntKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelChallengeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    challengesByStatus(
+      status: $status
+      started: $started
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        ChallengeType {
+          id
+          name
+          description
+          active
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Users {
+          nextToken
+          startedAt
+        }
+        status
+        started
+        ChatRoom {
+          id
+          name
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          chatRoomLastMessageId
+        }
+        userCount
         createdAt
         updatedAt
         _version
@@ -833,6 +1084,7 @@ export const getChatRoom = /* GraphQL */ `
   query GetChatRoom($id: ID!) {
     getChatRoom(id: $id) {
       id
+      name
       Messages {
         items {
           id
@@ -928,6 +1180,7 @@ export const listChatRooms = /* GraphQL */ `
     listChatRooms(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        name
         Messages {
           nextToken
           startedAt
@@ -980,6 +1233,7 @@ export const syncChatRooms = /* GraphQL */ `
     ) {
       items {
         id
+        name
         Messages {
           nextToken
           startedAt
@@ -1269,9 +1523,11 @@ export const getChallengeUser = /* GraphQL */ `
           nextToken
           startedAt
         }
+        status
         started
         ChatRoom {
           id
+          name
           createdAt
           updatedAt
           _version
@@ -1280,7 +1536,6 @@ export const getChallengeUser = /* GraphQL */ `
           chatRoomLastMessageId
         }
         userCount
-        finished
         createdAt
         updatedAt
         _version
@@ -1344,9 +1599,9 @@ export const listChallengeUsers = /* GraphQL */ `
         userId
         challenge {
           id
+          status
           started
           userCount
-          finished
           createdAt
           updatedAt
           _version
@@ -1399,9 +1654,9 @@ export const syncChallengeUsers = /* GraphQL */ `
         userId
         challenge {
           id
+          status
           started
           userCount
-          finished
           createdAt
           updatedAt
           _version
@@ -1456,9 +1711,9 @@ export const challengeUsersByChallengeId = /* GraphQL */ `
         userId
         challenge {
           id
+          status
           started
           userCount
-          finished
           createdAt
           updatedAt
           _version
@@ -1513,9 +1768,9 @@ export const challengeUsersByUserId = /* GraphQL */ `
         userId
         challenge {
           id
+          status
           started
           userCount
-          finished
           createdAt
           updatedAt
           _version
@@ -1591,6 +1846,7 @@ export const getUserChatRoom = /* GraphQL */ `
       }
       chatRoom {
         id
+        name
         Messages {
           nextToken
           startedAt
@@ -1658,6 +1914,7 @@ export const listUserChatRooms = /* GraphQL */ `
         }
         chatRoom {
           id
+          name
           createdAt
           updatedAt
           _version
@@ -1709,6 +1966,7 @@ export const syncUserChatRooms = /* GraphQL */ `
         }
         chatRoom {
           id
+          name
           createdAt
           updatedAt
           _version
@@ -1762,6 +2020,7 @@ export const userChatRoomsByUserId = /* GraphQL */ `
         }
         chatRoom {
           id
+          name
           createdAt
           updatedAt
           _version
@@ -1815,6 +2074,7 @@ export const userChatRoomsByChatRoomId = /* GraphQL */ `
         }
         chatRoom {
           id
+          name
           createdAt
           updatedAt
           _version

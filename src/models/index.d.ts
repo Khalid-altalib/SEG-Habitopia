@@ -16,6 +16,40 @@ export enum ChallengeStatusEnum {
 
 
 
+type EagerFollow = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Follow, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly followingUser?: User | null;
+  readonly followedBy?: User | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  readonly followFollowingUserId?: string | null;
+  readonly followFollowedById?: string | null;
+}
+
+type LazyFollow = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Follow, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly followingUser: AsyncItem<User | undefined>;
+  readonly followedBy: AsyncItem<User | undefined>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  readonly followFollowingUserId?: string | null;
+  readonly followFollowedById?: string | null;
+}
+
+export declare type Follow = LazyLoading extends LazyLoadingDisabled ? EagerFollow : LazyFollow
+
+export declare const Follow: (new (init: ModelInit<Follow>) => Follow) & {
+  copyOf(source: Follow, mutator: (draft: MutableModel<Follow>) => MutableModel<Follow> | void): Follow;
+}
+
 type EagerLeaderboard = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Leaderboard, 'id'>;
@@ -137,6 +171,7 @@ type EagerUser = {
   readonly biography?: string | null;
   readonly email?: string | null;
   readonly notifications?: boolean | null;
+  readonly streakStart?: string | null;
   readonly Messages?: (Checkin | null)[] | null;
   readonly ChatRooms?: (UserChatRoom | null)[] | null;
   readonly Checkins?: (Checkin | null)[] | null;
@@ -157,6 +192,7 @@ type LazyUser = {
   readonly biography?: string | null;
   readonly email?: string | null;
   readonly notifications?: boolean | null;
+  readonly streakStart?: string | null;
   readonly Messages: AsyncCollection<Checkin>;
   readonly ChatRooms: AsyncCollection<UserChatRoom>;
   readonly Checkins: AsyncCollection<Checkin>;
