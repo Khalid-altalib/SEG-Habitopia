@@ -11,7 +11,14 @@ const FollowButton = () => {
   const { loading } = requestStatus;
 
   const handleFollow = async () => {
-    await dispatch(followUser(profile?.userId || ""));
+    if (!profile?.following) {
+      await dispatch(followUser(profile?.userId || ""));
+    } else {
+      Toast.show({
+        type: "error",
+        text1: "Already following!",
+      });
+    }
   };
 
   const [didMount, setDidMount] = useState(false);
