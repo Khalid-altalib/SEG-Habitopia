@@ -34,7 +34,7 @@ import {
   getMessageByCheckInId,
 } from "@features/chat/chatQueries";
 import { Button } from "react-native";
-import { ScrollView } from "native-base";
+import { KeyboardAvoidingView, ScrollView } from "native-base";
 import ValidationMessage from "@features/chat/ValidationMessage/ValidationMessage";
 
 type Props = {};
@@ -185,8 +185,9 @@ const ChatScreen = (props: Props) => {
         style={styles.flatList}
         inverted={true}
       />
-
-      <InputBox chatRoomID={chat.id} />
+      <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={90}>
+        <InputBox chatRoomID={chat.id} />
+      </KeyboardAvoidingView>
     </ImageBackground>
   );
 };
@@ -198,6 +199,7 @@ const styles = StyleSheet.create({
 
   flatList: {
     padding: 10,
+    flex: 1,
   },
 });
 

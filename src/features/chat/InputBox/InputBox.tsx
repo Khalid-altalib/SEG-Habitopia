@@ -3,6 +3,8 @@ import React from "react";
 import { useDispatch } from "@app/hooks";
 import { Controller, useForm } from "react-hook-form";
 import { sendCheckIn, sendMessage } from "../chatSlice";
+import { HStack, IconButton, theme } from "native-base";
+import { FontAwesome } from "@expo/vector-icons";
 
 type InputBoxProps = {
   chatRoomID: string;
@@ -32,23 +34,37 @@ const InputBox = (props: InputBoxProps) => {
     dispatch(sendCheckIn(props.chatRoomID));
   };
   return (
-    <View style={styles.container}>
+    <HStack style={styles.container} space={25 / 2}>
+      <IconButton
+        icon={
+          <FontAwesome
+            name="flag-checkered"
+            size={24}
+            color={theme.colors.coolGray[500]}
+          />
+        }
+        variant="solid"
+        bgColor="coolGray.100"
+        _pressed={{ bgColor: "coolGray.200" }}
+        colorScheme="coolGray"
+        rounded="full"
+        onPress={makeCheckIn}
+      />
       <Controller
         control={control}
         render={({ field: { onChange, value } }) => (
           <TextInput
             onChangeText={onChange}
             style={styles.input}
-            placeholder="type your message"
+            placeholder="Chat"
             value={value}
+            returnKeyType="send"
+            onSubmitEditing={handleSubmit(onSubmit)}
           />
         )}
         name="message"
       />
-
-      <Button title="send" onPress={handleSubmit(onSubmit)}></Button>
-      <Button title="check in" onPress={makeCheckIn}></Button>
-    </View>
+    </HStack>
   );
 };
 
@@ -58,15 +74,18 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingHorizontal: 10,
     alignItems: "center",
+    backgroundColor: "white",
+    borderTopColor: theme.colors.gray[300],
+    borderTopWidth: 1,
   },
-
   input: {
     flex: 1,
-    backgroundColor: "white",
-    padding: 5,
-    borderRadius: 15,
-    paddingHorizontal: 10,
+    backgroundColor: theme.colors.coolGray[100],
+    borderRadius: 20,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
     overflow: "scroll",
+    height: "100%",
   },
 });
 
