@@ -13,7 +13,7 @@ import {
 } from "src/API";
 import { onUpdateChatRoom } from "../../../graphql/subscriptions";
 import { getMessageById } from "@features/chat/chatQueries";
-import { Box, ScrollView } from "native-base";
+import { Box, ScrollView, VStack } from "native-base";
 import NoChats from "@features/chat/NoChats/NoChats";
 import StatusContainer from "@components/StatusContainer/StatusContainer";
 import Background from "@components/Background";
@@ -74,18 +74,20 @@ const ChatListScreen = (props: Props) => {
         noDataDisplay={<NoChats />}
       >
         <ScrollView height="full" showsVerticalScrollIndicator={false}>
-          {chats.length > 0 &&
-            chats.map((item, i) => (
-              <ChatItem
-                id={item.id}
-                name={item.name}
-                image={item.image}
-                text={item.text}
-                time={item.time}
-                unreadMessages={item.unreadMessages}
-                key={i}
-              />
-            ))}
+          <VStack space={25} margin={25}>
+            {chats.length > 0 &&
+              chats.map((item, i) => (
+                <ChatItem
+                  id={item.id}
+                  name={item.name}
+                  image={item.image}
+                  text={item.text}
+                  time={item.time}
+                  unreadMessages={item.unreadMessages}
+                  key={i}
+                />
+              ))}
+          </VStack>
         </ScrollView>
       </StatusContainer>
     </Background>
