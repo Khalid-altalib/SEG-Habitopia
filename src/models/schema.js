@@ -1,5 +1,107 @@
 export const schema = {
     "models": {
+        "Follow": {
+            "name": "Follow",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "followingUser": {
+                    "name": "followingUser",
+                    "isArray": false,
+                    "type": {
+                        "model": "User"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": [
+                            "id"
+                        ],
+                        "targetNames": [
+                            "followFollowingUserId"
+                        ]
+                    }
+                },
+                "followedBy": {
+                    "name": "followedBy",
+                    "isArray": false,
+                    "type": {
+                        "model": "User"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": [
+                            "id"
+                        ],
+                        "targetNames": [
+                            "followFollowedById"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "followFollowingUserId": {
+                    "name": "followFollowingUserId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "followFollowedById": {
+                    "name": "followFollowedById",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            },
+            "syncable": true,
+            "pluralName": "Follows",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "Leaderboard": {
             "name": "Leaderboard",
             "fields": {
@@ -153,10 +255,19 @@ export const schema = {
                         ]
                     }
                 },
+                "status": {
+                    "name": "status",
+                    "isArray": false,
+                    "type": {
+                        "enum": "ChallengeStatusEnum"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "started": {
                     "name": "started",
                     "isArray": false,
-                    "type": "AWSDateTime",
+                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -182,13 +293,6 @@ export const schema = {
                     "name": "userCount",
                     "isArray": false,
                     "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "finished": {
-                    "name": "finished",
-                    "isArray": false,
-                    "type": "AWSDateTime",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -229,6 +333,17 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byStatus",
+                        "queryField": "challengesByStatus",
+                        "fields": [
+                            "status",
+                            "started"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -627,6 +742,13 @@ export const schema = {
                     "name": "id",
                     "isArray": false,
                     "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -1194,9 +1316,17 @@ export const schema = {
                 "CHECKIN",
                 "VALIDATION"
             ]
+        },
+        "ChallengeStatusEnum": {
+            "name": "ChallengeStatusEnum",
+            "values": [
+                "ACTIVE",
+                "INACTIVE",
+                "COMPLETED"
+            ]
         }
     },
     "nonModels": {},
     "codegenVersion": "3.3.6",
-    "version": "2d02d2b22d15882c93449b7626442f1d"
+    "version": "824696c123f167daf7e4d5df7bf6facc"
 };
