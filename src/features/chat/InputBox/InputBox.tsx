@@ -1,9 +1,15 @@
-import { Button, TextInput, View, StyleSheet } from "react-native";
+import { Button, View, StyleSheet } from "react-native";
 import React from "react";
 import { useDispatch } from "@app/hooks";
 import { Controller, useForm } from "react-hook-form";
 import { sendCheckIn, sendMessage } from "../chatSlice";
-import { HStack, IconButton, theme } from "native-base";
+import {
+  HStack,
+  IconButton,
+  Input,
+  theme,
+  useColorModeValue,
+} from "native-base";
 import { FontAwesome } from "@expo/vector-icons";
 
 type InputBoxProps = {
@@ -34,18 +40,34 @@ const InputBox = (props: InputBoxProps) => {
     dispatch(sendCheckIn(props.chatRoomID));
   };
   return (
-    <HStack style={styles.container} space={25 / 2}>
+    <HStack
+      style={styles.container}
+      space={25 / 2}
+      borderTopColor={useColorModeValue(
+        theme.colors.gray[300],
+        theme.colors.blueGray[900]
+      )}
+      backgroundColor={useColorModeValue(
+        theme.colors.white,
+        theme.colors.blueGray[700]
+      )}
+    >
       <IconButton
         icon={
           <FontAwesome
             name="flag-checkered"
             size={24}
-            color={theme.colors.coolGray[500]}
+            color={useColorModeValue(
+              theme.colors.coolGray[500],
+              theme.colors.blueGray[700]
+            )}
           />
         }
         variant="solid"
-        bgColor="coolGray.100"
-        _pressed={{ bgColor: "coolGray.200" }}
+        bgColor={useColorModeValue("coolGray.100", "blueGray.500")}
+        _pressed={{
+          bgColor: useColorModeValue("coolGray.200", "blueGray.600"),
+        }}
         colorScheme="coolGray"
         rounded="full"
         onPress={makeCheckIn}
@@ -53,13 +75,35 @@ const InputBox = (props: InputBoxProps) => {
       <Controller
         control={control}
         render={({ field: { onChange, value } }) => (
-          <TextInput
+          <Input
             onChangeText={onChange}
-            style={styles.input}
             placeholder="Chat"
             value={value}
             returnKeyType="send"
             onSubmitEditing={handleSubmit(onSubmit)}
+            style={[
+              styles.input,
+              {
+                backgroundColor: useColorModeValue(
+                  theme.colors.coolGray[100],
+                  theme.colors.blueGray[500]
+                ),
+              },
+            ]}
+            color={useColorModeValue(
+              theme.colors.coolGray[500],
+              theme.colors.white
+            )}
+            placeholderTextColor={useColorModeValue(
+              theme.colors.coolGray[400],
+              theme.colors.blueGray[700]
+            )}
+            flex={1}
+            height="full"
+            borderRadius={20}
+            paddingX={15}
+            paddingY={10}
+            borderWidth={0}
           />
         )}
         name="message"
@@ -74,13 +118,10 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingHorizontal: 10,
     alignItems: "center",
-    backgroundColor: "white",
-    borderTopColor: theme.colors.gray[300],
     borderTopWidth: 1,
   },
   input: {
     flex: 1,
-    backgroundColor: theme.colors.coolGray[100],
     borderRadius: 20,
     paddingHorizontal: 15,
     paddingVertical: 10,
