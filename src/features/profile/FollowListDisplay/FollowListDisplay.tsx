@@ -7,6 +7,7 @@ import { RootParams, TextType } from "types";
 import { fetchFollowList } from "../profileSlice";
 import { LinearGradient } from "expo-linear-gradient";
 import Text from "@components/Text";
+import { TouchableOpacity } from "react-native";
 
 type Props = {
   followListMode: string;
@@ -31,25 +32,27 @@ const FollowListDisplay = (props: Props) => {
     followListMode[0].toUpperCase() + followListMode.slice(1);
 
   return (
-    <Box overflow="hidden" rounded="lg" flexGrow={1}>
-      <LinearGradient
-        colors={[theme.colors.darkBlue[500], theme.colors.purple[700]]}
-        start={[0, 0]}
-        end={[1, 1]}
-        style={{
-          padding: 12.5,
-        }}
-      >
-        <Center>
-          <Text type={TextType.Subheading} color="white">
-            {followCount}
-          </Text>
-          <Text type={TextType.Small} color="white">
-            {followListLabel}
-          </Text>
-        </Center>
-      </LinearGradient>
-    </Box>
+    <TouchableOpacity onPress={handlePress}>
+      <Box overflow="hidden" rounded="lg" flexGrow={1}>
+        <LinearGradient
+          colors={[theme.colors.darkBlue[500], theme.colors.purple[700]]}
+          start={[0, 0]}
+          end={[1, 1]}
+          style={{
+            padding: 12.5,
+          }}
+        >
+          <Center>
+            <Text type={TextType.Subheading} color="white">
+              {followCount}
+            </Text>
+            <Text type={TextType.Small} color="white">
+              {followListLabel}
+            </Text>
+          </Center>
+        </LinearGradient>
+      </Box>
+    </TouchableOpacity>
   );
 };
 
