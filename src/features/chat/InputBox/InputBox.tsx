@@ -24,7 +24,7 @@ const InputBox = (props: InputBoxProps) => {
   const onSubmit = async (data: message) => {
     const chatRoomID = props.chatRoomID;
     const message = data.message;
-    if (message.length > 0) {
+    if (message.trim().length > 0) {
       dispatch(sendMessage({ message, chatRoomID }));
       reset();
     }
