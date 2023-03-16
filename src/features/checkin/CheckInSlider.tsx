@@ -1,3 +1,4 @@
+import { useDispatch } from "@app/hooks";
 import { HStack } from "native-base";
 import React from "react";
 import CheckInBox from "./CheckInBox";
@@ -43,6 +44,9 @@ const CheckInSlider = (props: Props) => {
       timeLeft: "3",
     },
   ];
+
+  const dispatch = useDispatch();
+
   return (
     <HStack marginLeft={25} marginTop={25} height={150}>
       {data.map((checkIn, index) => (

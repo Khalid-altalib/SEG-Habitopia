@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { Chat, ChatDetails, Message } from "../../../types";
+import { Chat, ChatDetails, CheckInSnippetItem, Message } from "../../../types";
 import {
   fetchChatMessages,
   fetchUserChats,
@@ -33,7 +33,7 @@ type ChatState = {
     loading: boolean;
     error: string;
   };
-  fetchCheckinSnippet: {
+  fetchCheckInSnippet: {
     loading: boolean;
     error: string;
   };
@@ -44,6 +44,7 @@ type ChatState = {
   details?: ChatDetails;
   currentChatId?: string;
   pageNumber: number;
+  checkInSnippet: CheckInSnippetItem[];
 };
 
 export const fetchDetails = createAsyncThunk<
@@ -139,7 +140,7 @@ export const validateCheckIn = createAsyncThunk<
   { rejectValue: string }
 >("checkIn/validate", async (messageId: string, thunkAPI) => {
   try {
-    const newCheckIn = await incrementCheckInValidation(messageId, thunkAPI);
+    await incrementCheckInValidation(messageId, thunkAPI);
   } catch (error: any) {
     const message = error.message;
     Toast.show({
@@ -147,6 +148,22 @@ export const validateCheckIn = createAsyncThunk<
       text1: message,
     });
     return thunkAPI.rejectWithValue(message);
+  }
+});
+
+export const fetchCheckInSnippet = createAsyncThunk<
+  any,
+  void,
+  { rejectValue: string }
+>("checkIn/fetchSnippet", async (_, thunkAPI) => {
+  try {
+    // fetch challenges user is in
+
+    // of these challenges, filter which one needs to be checkedin
+
+    return [];
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue("An error has occured");
   }
 });
 
@@ -172,7 +189,7 @@ const initialState: ChatState = {
     loading: false,
     error: "",
   },
-  fetchCheckinSnippet: {
+  fetchCheckInSnippet: {
     loading: false,
     error: "",
   },
@@ -183,6 +200,7 @@ const initialState: ChatState = {
   details: undefined,
   currentChatId: undefined,
   pageNumber: 0,
+  checkInSnippet: [],
 };
 
 export const chatSlice = createSlice({

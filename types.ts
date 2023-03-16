@@ -153,3 +153,8 @@ export type ChatDetails = {
   };
   participants: User[];
 };
+
+export type CheckInSnippetItem = {
+  challenge: Challenge
+  checkedIn: boolean;
+}
