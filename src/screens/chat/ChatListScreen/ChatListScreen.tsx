@@ -63,6 +63,9 @@ const ChatListScreen = (props: Props) => {
   useEffect(() => {
     const subscription = updateChatRoomSubscription();
     dispatch(fetchChats());
+    () => {
+      return subscription.unsubscribe();
+    };
   }, []);
 
   return (
