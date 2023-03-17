@@ -7,6 +7,7 @@ import {
   UserChatRoom,
   ChallengeUser,
   User,
+  ChallengeStatusEnum,
 } from "../../models";
 import {
   ALREADY_PART_OF_CHAT,
@@ -52,7 +53,7 @@ const isUserPartOfChallenge = async (
   );
 
   for await (const challenge of challenges) {
-    if (challenge.challengeChallengeTypeId === challengeTypeInstance.id) {
+    if (challenge.challengeChallengeTypeId === challengeTypeInstance.id && challenge.status === ChallengeStatusEnum.ACTIVE) {
       throw new Error(ALREADY_PART_OF_CHAT);
     }
   }
@@ -68,6 +69,7 @@ const findChallengeToJoin = async (
         allChallenges.and((toJoinChallenge) => [
           toJoinChallenge.ChallengeType.id.eq(challengeTypeInstance.id),
           toJoinChallenge.userCount.lt(GROUP_CHAT_PARTICIPANTS),
+          toJoinChallenge.status.eq(ChallengeStatusEnum.INACTIVE),
         ])
     );
 
@@ -80,6 +82,7 @@ const findChallengeToJoin = async (
           ChallengeType: challengeTypeInstance,
           challengeChallengeTypeId: challengeTypeInstance.id,
           userCount: 0,
+          status: ChallengeStatusEnum.INACTIVE,
         })
       );
       return toJoin;

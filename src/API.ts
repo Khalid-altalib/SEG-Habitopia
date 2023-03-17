@@ -699,15 +699,6 @@ export type ModelChallengeConnection = {
   startedAt?: number | null,
 };
 
-export type ModelIntKeyConditionInput = {
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-};
-
 export enum ModelSortDirection {
   ASC = "ASC",
   DESC = "DESC",
@@ -4235,7 +4226,6 @@ export type SyncChallengesQuery = {
 
 export type ChallengesByStatusQueryVariables = {
   status: ChallengeStatusEnum,
-  started?: ModelIntKeyConditionInput | null,
   sortDirection?: ModelSortDirection | null,
   filter?: ModelChallengeFilterInput | null,
   limit?: number | null,
@@ -7632,7 +7622,6 @@ export type OnCreateChatRoomSubscription = {
 
 export type OnUpdateChatRoomSubscriptionVariables = {
   filter?: ModelSubscriptionChatRoomFilterInput | null,
-  userFilter? : ModelSubscriptionUserFilterInput | null,
 };
 
 export type OnUpdateChatRoomSubscription = {

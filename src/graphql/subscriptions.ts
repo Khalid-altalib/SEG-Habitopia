@@ -1240,7 +1240,7 @@ export const onCreateChatRoom = /* GraphQL */ `
   }
 `;
 export const onUpdateChatRoom = /* GraphQL */ `
-  subscription OnUpdateChatRoom($filter: ModelSubscriptionChatRoomFilterInput,  $userFilter: ModelUserChatRoomFilterInput) {
+  subscription OnUpdateChatRoom($filter: ModelSubscriptionChatRoomFilterInput) {
     onUpdateChatRoom(filter: $filter) {
       id
       name
@@ -1262,7 +1262,7 @@ export const onUpdateChatRoom = /* GraphQL */ `
         nextToken
         startedAt
       }
-      users (filter: $userFilter){
+      users {
         items {
           id
           userId

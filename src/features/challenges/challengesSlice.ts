@@ -5,6 +5,7 @@ import { RootState } from "../../app/store";
 import { ChallengeType as ChallengeTypeModel } from "../../models";
 import { joinChallengeQuery } from "./challengeQueries";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
+import { AsyncStorage } from "@aws-amplify/core";
 
 type ChallengesState = {
   challenges: Challenge[];
