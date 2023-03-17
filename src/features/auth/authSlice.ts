@@ -38,7 +38,6 @@ export const signUpUser = createAsyncThunk<void, void, { rejectValue: string }>(
       });
     } catch (error: any) {
       const message = error.message;
-      console.log(message);
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -68,7 +67,8 @@ const displayErrorMessage = (error: any) => {
   if (error.message.includes("previousPassword")) {
     errorMessage = "Your password does not match the correct format.";
   } else if (error.message.includes("proposedPassword")) {
-    errorMessage = "The requested password does not fit the criteria for a password";
+    errorMessage =
+      "The requested password does not fit the criteria for a password";
   } else if (error.message.includes("Incorrect username or password")) {
     errorMessage = "Your old password is incorrect.";
   } else {
@@ -131,7 +131,7 @@ export const logInUser = createAsyncThunk<
 
     return user as LocalUser;
   } catch (error: any) {
-    displayErrorMessage(error)
+    displayErrorMessage(error);
     return thunkAPI.rejectWithValue("An error has occured");
   }
 });
@@ -159,8 +159,8 @@ export const logOutUser = createAsyncThunk("auth/logOutUser", async () => {
   await AsyncStorage.removeItem("user");
   Toast.show({
     type: "success",
-    text1: "You have successfully logged out!"
-  })
+    text1: "You have successfully logged out!",
+  });
   return undefined;
 });
 

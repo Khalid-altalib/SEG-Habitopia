@@ -5,7 +5,7 @@ import {
   useRoute,
 } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Button, Divider, ScrollView } from "native-base";
+import { Button, Divider, ScrollView, useColorModeValue } from "native-base";
 import React, { useEffect } from "react";
 import { LocalUser, NavigationParams } from "types";
 import { useDispatch, useSelector } from "@app/hooks";
@@ -15,6 +15,7 @@ import ProfileHeader from "@features/profile/ProfileHeader/ProfileHeader";
 import { fetchProfile } from "@features/profile/profileSlice";
 import ProfileStatistics from "@features/profile/ProfileStatistics/ProfileStatistics";
 import PaddedContainer from "@components/PaddedContainer";
+import Background from "@components/Background";
 
 const ProfileScreen = () => {
   const route = useRoute<RouteProp<NavigationParams, "You" | "Profile">>();
@@ -48,20 +49,21 @@ const ProfileScreen = () => {
     dispatch(fetchProfile(userId));
   }, [settings]);
 
-  useEffect(() => {
-    navigation.setOptions({ title: profile?.name || "" });
-  }, [profile]);
-
   return (
-    <ScrollView>
-      <PaddedContainer>
-        <StatusContainer error={error} loading={loading} data={profile}>
-          <ProfileHeader isLocalUserProfile={isLocalUserProfile} />
-          <Divider my={4} />
-          <ProfileStatistics />
-        </StatusContainer>
-      </PaddedContainer>
-    </ScrollView>
+    <Background>
+      <ScrollView height="full">
+        <PaddedContainer>
+          <StatusContainer error={error} loading={loading} data={profile}>
+            <ProfileHeader isLocalUserProfile={isLocalUserProfile} />
+            <Divider
+              marginY={4}
+              backgroundColor={useColorModeValue("gray.300", "blueGray.700")}
+            />
+            <ProfileStatistics />
+          </StatusContainer>
+        </PaddedContainer>
+      </ScrollView>
+    </Background>
   );
 };
 

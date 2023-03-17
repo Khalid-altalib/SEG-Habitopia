@@ -1,11 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Box, Heading, HStack } from "native-base";
+import { AspectRatio, Box, HStack } from "native-base";
 import React from "react";
 import { TouchableOpacity, Image } from "react-native";
-import { Challenge, RootParams } from "../../../../types";
+import { Challenge, RootParams, TextType } from "../../../../types";
 import { challengeMappings } from "../challengeMappings";
 import ChallengeOnGoingText from "../ChallengeOnGoingText/ChallengeOnGoingText";
+import Text from "@components/Text";
 
 type Props = {
   challenge: Challenge;
@@ -29,23 +30,24 @@ const ChallengeBox = (props: Props) => {
     <TouchableOpacity onPress={handlePress}>
       <Box
         backgroundColor={cardColor}
-        borderRadius={"md"}
+        borderRadius="lg"
         shadow={3}
-        padding={3}
         height={100}
+        overflow="hidden"
       >
         <HStack justifyContent="space-between" height="100%">
-          <Box justifyContent="space-between">
-            <Heading>{name}</Heading>
+          <Box justifyContent="space-between" padding={3}>
+            <Text type={TextType.Subheading} color="white">
+              {name}
+            </Text>
             <ChallengeOnGoingText onGoing={active} />
           </Box>
-          <Box borderRadius={3}>
+          <AspectRatio ratio={1}>
             <Image
               source={{ uri: cardImage }}
-              borderRadius={6}
               style={{ height: "100%", width: 80 }}
             />
-          </Box>
+          </AspectRatio>
         </HStack>
       </Box>
     </TouchableOpacity>
