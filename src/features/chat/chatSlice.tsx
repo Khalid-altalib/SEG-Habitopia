@@ -1,5 +1,11 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { Chat, ChatDetails, CheckInSnippetItem, Message } from "../../../types";
+import {
+  Challenge,
+  Chat,
+  ChatDetails,
+  CheckInSnippetItem,
+  Message,
+} from "../../../types";
 import {
   fetchChatMessages,
   fetchUserChats,
@@ -163,7 +169,15 @@ export const fetchCheckInSnippet = createAsyncThunk<
 
     // return CheckInSnippet with checkedIn = false and the associated challenge object
 
-    return [];
+    let currentDate = new Date().toISOString();
+
+    return [
+      {
+        challenge: { name: "Sleep" } as Challenge,
+        endDate: currentDate,
+        checkedIn: false,
+      },
+    ];
   } catch (error: any) {
     return thunkAPI.rejectWithValue("An error has occured");
   }
@@ -209,6 +223,7 @@ export const chatSlice = createSlice({
   name: "chats",
   initialState,
   reducers: {
+    setCheckedInSnippetItemStatus: (state, action: PayloadAction<string>) => {},
     addMessageToChat: (
       state,
       action: PayloadAction<{ chatID: string; message: Message }>
@@ -400,6 +415,7 @@ export const {
   resetPageNumber,
   updateChatList,
   resetUnreadMessages,
+  setCheckedInSnippetItemStatus,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

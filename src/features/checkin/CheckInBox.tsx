@@ -6,6 +6,8 @@ import Text from "@components/Text";
 import { ChatParams, CheckInSnippetItem, TextType } from "types";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { setCheckedInSnippetItemStatus } from "@features/chat/chatSlice";
+import { useDispatch } from "@app/hooks";
 
 type Props = {
   checkInSnippetItem: CheckInSnippetItem;
@@ -17,12 +19,15 @@ const CheckInBox = (props: Props) => {
 
   const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
 
+  const dispatch = useDispatch();
+
   const handlePress = () => {
     // navigate to associated chatroom
+    dispatch(setCheckedInSnippetItemStatus("id"));
   };
 
-  const timeDifference = endDate.getTime() - new Date().getTime();
-  const timeDifferenceHours = timeDifference / (1000 * 60 * 60);
+  const timeDifference = new Date(endDate).getTime() - new Date().getTime();
+  const timeDifferenceHours = Math.round(timeDifference / (1000 * 60 * 60));
 
   return (
     <TouchableOpacity style={{ marginRight: 25 }} onPress={handlePress}>
