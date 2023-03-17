@@ -8,19 +8,26 @@ const MessageEnum = {
   "VALIDATION": "VALIDATION"
 };
 
-const { Follow, User, Checkin, ChallengeType, ChatRoom, Message, Challenge, Leaderboard, UserChatRoom, ChallengeUser, UserValidatedCheckIn } = initSchema(schema);
+const ChallengeStatusEnum = {
+  "ACTIVE": "ACTIVE",
+  "INACTIVE": "INACTIVE",
+  "COMPLETED": "COMPLETED"
+};
+
+const { Follow, Leaderboard, Challenge, ChallengeType, User, Message, ChatRoom, Checkin, ChallengeUser, UserChatRoom, UserValidatedCheckIn } = initSchema(schema);
 
 export {
   Follow,
-  User,
-  Checkin,
-  ChallengeType,
-  ChatRoom,
-  Message,
-  Challenge,
   Leaderboard,
-  UserChatRoom,
+  Challenge,
+  ChallengeType,
+  User,
+  Message,
+  ChatRoom,
+  Checkin,
   ChallengeUser,
+  UserChatRoom,
   UserValidatedCheckIn,
-  MessageEnum
+  MessageEnum,
+  ChallengeStatusEnum
 };
