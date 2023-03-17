@@ -1,6 +1,6 @@
-import CatchUpWidget from "@features/LandingPageWidgets/CatchUpWidget/CatchUpWidget";
-import ChallengeWidget from "@features/LandingPageWidgets/ChallengeWidget/ChallengeWidget";
-import CheckInWidget from "@features/LandingPageWidgets/CheckInWidget/CheckInWidget";
+import CatchUpWidget from "@features/challenges/LandingPageWidgets/CatchUpWidget/CatchUpWidget";
+import ChallengeWidget from "@features/challenges/LandingPageWidgets/ChallengeWidget/ChallengeWidget";
+import CheckInWidget from "@features/challenges/LandingPageWidgets/CheckInWidget/CheckInWidget";
 import TitleSection from "@screens/authentication/WelcomeScreen/TitleSection";
 import { ScrollView } from "native-base";
 import React from "react";
