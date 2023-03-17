@@ -1,12 +1,12 @@
 import { HStack } from "native-base";
 import React from "react";
-import CatchUpBox from "./CatchUpBox";
+import CatchUpBox from "../CatchUpBox/CatchUpBox";
 
 type Props = {};
 
 const CatchUpSlider = (props: Props) => {
   return (
-    <HStack marginLeft={25} marginTop={25} height={150}>
+    <HStack mt={5} justifyContent={"space-between"}>
       <CatchUpBox />
     </HStack>
   );
