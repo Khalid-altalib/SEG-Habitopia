@@ -1,18 +1,22 @@
+// Native Base
+import { ScrollView } from "native-base";
+
+// Habitopia
+import Background from "@components/Background";
 import CatchUpWidget from "@features/LandingPageWidgets/CatchUpWidget/CatchUpWidget";
 import ChallengeWidget from "@features/LandingPageWidgets/ChallengeWidget/ChallengeWidget";
 import CheckInWidget from "@features/LandingPageWidgets/CheckInWidget/CheckInWidget";
-import TitleSection from "@screens/authentication/WelcomeScreen/TitleSection";
-import { ScrollView } from "native-base";
-import React from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function HomeScreen() {
   return (
-    <ScrollView mt={5} mb={5} showsVerticalScrollIndicator={false}>
-      <TitleSection />
-      <CheckInWidget />
-      <CatchUpWidget />
-      <ChallengeWidget />
-    </ScrollView>
+    <Background>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <CheckInWidget />
+        <CatchUpWidget />
+        <ChallengeWidget />
+      </ScrollView>
+    </Background>
   );
 }
 

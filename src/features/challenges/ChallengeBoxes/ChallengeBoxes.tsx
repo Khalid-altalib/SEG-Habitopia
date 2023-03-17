@@ -26,7 +26,7 @@ const ChallengeBoxes = (props: Props) => {
 
   return (
     <StatusContainer loading={loading} error={error} data={challenges}>
-      <VStack space={4} width={"100%"}>
+      <VStack space={25} width={"100%"}>
         {challenges
           .slice(0, boxCount || challenges.length)
           .map((challenge, index) => (

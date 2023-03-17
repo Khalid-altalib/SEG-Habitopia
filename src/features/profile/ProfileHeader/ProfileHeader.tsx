@@ -1,12 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Box, Button, HStack, Text, View, VStack } from "native-base";
+import { Box, HStack, View, VStack } from "native-base";
+import Text from "@components/Text";
 import React from "react";
-import { RootParams } from "../../../../types";
+import { ButtonType, RootParams, TextType } from "../../../../types";
 import { useSelector } from "../../../app/hooks";
 import FollowButton from "../FollowButton/FollowButton";
 import FollowListDisplay from "../FollowListDisplay/FollowListDisplay";
 import Avatar from "@components/Avatar/Avatar";
+import Button from "@components/Button";
 
 type Props = {
   isLocalUserProfile: boolean;
@@ -18,27 +20,17 @@ const ProfileHeader = (props: Props) => {
 
   const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
 
-  const biographyDisplay =
-    profile?.biography === "" || profile?.biography === null
-      ? "This user does not currently have a bio"
-      : profile?.biography;
-
   return (
     <View>
       {profile && (
         <Box>
-          <HStack space={4} pb={4}>
-            <Box width={100}>
-              <Avatar userId="a" width="100%" height={100} />
+          <HStack space={25} marginBottom={12.5}>
+            <Box width={125}>
+              <Avatar userId={profile.userId} />
             </Box>
 
-            <VStack flex={1} justifyContent={"space-between"}>
-              <HStack
-                flex={1}
-                justifyContent="center"
-                paddingBottom={3}
-                space={3}
-              >
+            <VStack flex={1} space={25 / 2}>
+              <HStack space={25 / 2}>
                 <FollowListDisplay
                   followListMode={"follower"}
                   followCount={profile.followerCount}
@@ -50,8 +42,12 @@ const ProfileHeader = (props: Props) => {
               </HStack>
 
               {isLocalUserProfile ? (
-                <Button onPress={() => navigation.push("Settings")}>
-                  Edit Profile/Settings
+                <Button
+                  type={ButtonType.Secondary}
+                  onPress={() => navigation.push("Settings")}
+                  isFullWidth
+                >
+                  Settings
                 </Button>
               ) : (
                 <FollowButton />
@@ -59,10 +55,12 @@ const ProfileHeader = (props: Props) => {
             </VStack>
           </HStack>
           <View>
-            <Text bold fontSize={"md"}>
-              {profile!.name}
-            </Text>
-            <Text fontSize={"md"}>{biographyDisplay}</Text>
+            <Text type={TextType.Regular}>{profile!.name}</Text>
+            {profile?.biography === null || profile?.biography === "" ? null : (
+              <Text type={TextType.Small} style={{ marginTop: 2 }}>
+                {profile?.biography}
+              </Text>
+            )}
           </View>
         </Box>
       )}
