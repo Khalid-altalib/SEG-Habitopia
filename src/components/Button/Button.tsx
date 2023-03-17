@@ -11,7 +11,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 
 // Native Base
-import { useColorModeValue } from "native-base";
+import { theme, useColorModeValue } from "native-base";
 
 // Habitopia
 import Text from "../Text";
@@ -49,7 +49,7 @@ const Button = (props: ButtonProps) => {
       <TouchableBox onPress={props.onPress} style={props.style}>
         <GradientBox type={props.type} isFullWidth={props.isFullWidth}>
           {props.isLoading ? (
-            <ActivityIndicator />
+            <ActivityIndicator color={theme.colors.white} />
           ) : (
             <>
               <ButtonText>{props.children}</ButtonText>
