@@ -41,6 +41,7 @@ const NotificationToggle = (props: Props) => {
           onChange={handleSwitchChange}
           trackColor={{ true: theme.colors.purple[700] }}
           thumbColor="white"
+          testID="switch"
         />
       </Box>
     </HStack>
