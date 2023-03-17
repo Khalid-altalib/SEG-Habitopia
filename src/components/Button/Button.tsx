@@ -1,5 +1,11 @@
 // React Native
-import { StyleSheet, TouchableOpacity, View, ViewStyle } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from "react-native";
 
 // Expo Linear Gradient
 import { LinearGradient } from "expo-linear-gradient";
@@ -26,6 +32,8 @@ export type ButtonProps = {
   icon?: JSX.Element;
   /** The text to display within the button. */
   children: string;
+  /** Whether the button needs to show a loading state. */
+  isLoading: boolean;
 };
 
 /**
@@ -40,8 +48,14 @@ const Button = (props: ButtonProps) => {
     <BoxWithShadow>
       <TouchableBox onPress={props.onPress} style={props.style}>
         <GradientBox type={props.type} isFullWidth={props.isFullWidth}>
-          <ButtonText>{props.children}</ButtonText>
-          <View style={{ marginLeft: 5 }}>{props.icon}</View>
+          {props.isLoading ? (
+            <ActivityIndicator />
+          ) : (
+            <>
+              <ButtonText>{props.children}</ButtonText>
+              <View style={{ marginLeft: 5 }}>{props.icon}</View>
+            </>
+          )}
         </GradientBox>
       </TouchableBox>
     </BoxWithShadow>
