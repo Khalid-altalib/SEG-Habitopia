@@ -72,7 +72,8 @@ const findChallengeToJoin = async (
     );
 
     if (availableChallenges.length == 0) {
-      const newChatRoom = await DataStore.save(new ChatRoom({}));
+      let chatName = challengeTypeInstance.name+" - "+new Date().toLocaleString();
+      const newChatRoom = await DataStore.save(new ChatRoom({name: chatName}));
       const toJoin = await DataStore.save(
         new ChallengeModel({
           ChatRoom: newChatRoom,
