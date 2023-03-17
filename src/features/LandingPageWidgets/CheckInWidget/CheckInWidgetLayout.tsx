@@ -1,5 +1,7 @@
-import { ScrollView, View, Heading } from "native-base";
+import Text from "@components/Text";
+import { ScrollView, View } from "native-base";
 import React from "react";
+import { TextType } from "types";
 
 type Props = {
   children: React.ReactNode;
@@ -8,8 +10,10 @@ type Props = {
 function CheckInWidgetLayout(props: Props) {
   const { children } = props;
   return (
-    <View paddingLeft={6} paddingRight={6}>
-      <Heading shadow={1}>Check-In 📝</Heading>
+    <View marginTop={25}>
+      <Text style={{ marginLeft: 25 }} type={TextType.Subheading}>
+        Check in 📝
+      </Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {children}
       </ScrollView>

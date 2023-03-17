@@ -41,6 +41,7 @@ const Card = ({ backgroundColorGradient, children }: CardProps) => {
         shadowColor: "black",
         shadowOffset: { width: 5, height: 5 },
         shadowOpacity: useColorModeValue(0.05, 0.15),
+        width: "100%",
       }}
     >
       <LinearGradient

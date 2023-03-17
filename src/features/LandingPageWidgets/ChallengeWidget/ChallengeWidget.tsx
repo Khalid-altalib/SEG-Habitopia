@@ -7,10 +7,12 @@ type Props = {};
 
 function ChallengeWidget({}: Props) {
   return (
-    <ChallengeWidgetLayout>
-      <ChallengeBoxes boxCount={3} />
+    <>
+      <ChallengeWidgetLayout>
+        <ChallengeBoxes boxCount={3} />
+      </ChallengeWidgetLayout>
       <ChallengeNavigationButton />
-    </ChallengeWidgetLayout>
+    </>
   );
 }
 

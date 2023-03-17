@@ -8,7 +8,6 @@ import TestingWrapperNavigation from "@app/testingWrapperWithNavigation";
 describe("DoneButton", () => {
   const mockState = {
     settings: settingsMockState,
-    auth: { user: { authToken: "token", userId: "123" } },
   };
   const mockStore = configureStore([thunk])(mockState);
 
@@ -19,7 +18,7 @@ describe("DoneButton", () => {
     valueName: "name",
   };
 
-  it("renders correctly", async () => {
+  it("renders correctly", () => {
     const tree = render(
       <TestingWrapperNavigation store={mockStore}>
         <DoneButton {...defaultProps} />
@@ -29,7 +28,7 @@ describe("DoneButton", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("finds the done button", async () => {
+  it("finds the done button", () => {
     const tree = render(
       <TestingWrapperNavigation store={mockStore}>
         <DoneButton {...defaultProps} />
@@ -41,7 +40,7 @@ describe("DoneButton", () => {
     expect(button).toBeDefined();
   });
 
-  it("dispatches setSettings and updates settings when pressed", async () => {
+  it("dispatches the setSettings action when pressed", async () => {
     const store = mockStore;
     const valueName = "name";
     const getValues = jest.fn().mockReturnValue("Jane Doe");
@@ -59,11 +58,7 @@ describe("DoneButton", () => {
     await waitFor(() => {
       expect(getValues).toHaveBeenCalledTimes(1);
       expect(getValues).toHaveBeenCalledWith("formValue");
-      const actions = store.getActions();
-      // console.log(actions);
-      // expect(actions[1].type).toEqual("settings/set/fulfilled");
-      // expect(actions[1].payload).toEqual({ name: "Jane Doe" });
-      // expect(store.getState().settings.settings.name).toEqual("Jane Doe");
+      expect(store.getActions()[0].type).toEqual("settings/set/pending");
     });
   });
 });
