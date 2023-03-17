@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotificationToggle component should render correctly with default value 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    dataSet={{}}
+    style={
+      {
+        "alignItems": "center",
+        "borderBottomWidth": 1,
+        "borderColor": "#d4d4d8",
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "paddingBottom": 12,
+      }
+    }
+  >
+    <View
+      dataSet={{}}
+      style={{}}
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#18181b",
+            },
+            {
+              "fontFamily": undefined,
+              "fontSize": 15,
+            },
+            undefined,
+          ]
+        }
+      >
+        Notifications 
+      </Text>
+      <Text
+        style={
+          [
+            {
+              "color": "#18181b",
+            },
+            {
+              "color": "#71717a",
+              "fontFamily": undefined,
+              "fontSize": 15,
+            },
+            undefined,
+          ]
+        }
+      >
+        Choose to receive notifications
+      </Text>
+    </View>
+    <View
+      dataSet={{}}
+      style={{}}
+    />
+    <View
+      dataSet={{}}
+      style={{}}
+    >
+      <RCTSwitch
+        accessibilityRole="switch"
+        onChange={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        onTintColor="#7e22ce"
+        style={
+          {
+            "height": 31,
+            "width": 51,
+          }
+        }
+        testID="switch"
+        thumbTintColor="white"
+        value={true}
+      />
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
