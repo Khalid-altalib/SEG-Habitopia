@@ -1,8 +1,8 @@
 import { DataStore, SortDirection } from "@aws-amplify/datastore";
+import {getUserFromDatabasebyID} from "../../app/util";
 import { Challenge, Checkin, LazyUser, User } from "../../models";
-import { getUserFromDatabasebyID } from "../../app/util";
 
-const getCheckIns = async (userId: string) => {
+export const getCheckIns = async (userId: string) => {
   const user = await getUserFromDatabasebyID(userId);
   let checkinCount = 0;
   // get number of items in the array of user Checkins
@@ -16,16 +16,14 @@ const getCheckIns = async (userId: string) => {
 };
 
 const updateStreakStart = async (user: LazyUser, date : Date) => {
-  await DataStore.save(
-    User.copyOf(user, (updatedUser) => {
+   await DataStore.save(User.copyOf(user, (updatedUser) => {
       updatedUser.streakStart = date.toISOString();
     })
   );
 };
 
-const getLastCheckInByUserId = async (userId: string) => {
+export const getLastCheckInByUserId = async (userId: string) => {
   // look in checkins to find all the validated checkins by this user, and sort it to find the most recent
-
   const lastCheckInByUser = (
     await DataStore.query(
       Checkin,
@@ -42,7 +40,7 @@ const getLastCheckInByUserId = async (userId: string) => {
   return lastCheckInByUser;
 };
 
-const checkStreak = async (userId: string) => {
+export const checkStreak = async (userId: string) => {
   const user = await getUserFromDatabasebyID(userId);
   const streakStart = user.streakStart;
 
@@ -84,7 +82,7 @@ const checkStreak = async (userId: string) => {
   }
 };
 
-const getWins = async (userId: string) => {
+export const getWins = async (userId: string) => {
   let wins = 0;
   // query challenges where user id is in the list of users, so we get all the challenges the user is in
   const userChallenges = await DataStore.query(Challenge, (challenge) => challenge.Users.user.id.eq(userId));

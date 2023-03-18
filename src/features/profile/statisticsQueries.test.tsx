@@ -1,6 +1,6 @@
 import { DataStore, __modelMeta__ } from "@aws-amplify/datastore";
 import { getUserFromDatabasebyID } from "../../app/util";
-import { getCheckIns, getWins,getStatistics,getLastCheckInByUserId, checkStreak} from "./statisticsQueries"; 
+import { getCheckIns, getWins,getStatistics, checkStreak} from "./statisticsQueries"; 
 // import * as mockStatisticsQueries from "./statisticsQueries";
 
 jest.mock("../../app/util", () => ({
