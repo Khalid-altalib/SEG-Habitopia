@@ -80,5 +80,23 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
+  },
+  "parameters": {
+    "AMPLIFY_function_challengeSchedule_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "challengeSchedule"
+        }
+      ]
+    },
+    "AMPLIFY_function_challengeSchedule_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "challengeSchedule"
+        }
+      ]
+    }
   }
 }

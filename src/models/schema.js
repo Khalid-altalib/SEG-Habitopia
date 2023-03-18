@@ -881,8 +881,7 @@ export const schema = {
                         "name": "byStatus",
                         "queryField": "challengesByStatus",
                         "fields": [
-                            "status",
-                            "started"
+                            "status"
                         ]
                     }
                 },

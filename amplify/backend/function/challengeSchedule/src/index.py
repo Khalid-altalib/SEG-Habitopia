@@ -13,11 +13,11 @@ from datetime import datetime, timedelta
 def handler(event, context):
 
     #GraphQL resource
-    url = "https://gca5bevlizbrbf7lsmhwbn3cyi.appsync-api.eu-west-2.amazonaws.com/graphql"
+    url = "https://kak5ovgm35etxilpjodj72ed34.appsync-api.eu-west-2.amazonaws.com/graphql"
 
     #key and protocol
     headers = {
-        'x-api-key': 'da2-n657qaa6lndkdgsdmefs5d73qu',
+        'x-api-key': 'da2-ejak5jxjlrgbhlag7ajyjt7jze',
         'Content-Type': 'application/json'
     }
 
@@ -71,7 +71,7 @@ def handler(event, context):
     getInactiveResponseAsJson = json.loads(responseGetChallengesToStart.text)["data"]["challengesByStatus"]["items"]
 
     #Filter out datastore error deleted challenges
-    challengesToStartWithoutDeleted = [x for x in getInactiveResponseAsJson if (str(x["_deleted"]) != 'True')]
+    challengesToStartWithoutDeleted = [chal for chal in getInactiveResponseAsJson if (str(chal["_deleted"]) != 'True')]
 
     #Set queued full or waiting inactive challenges to active
     for chalToStart in challengesToStartWithoutDeleted:
