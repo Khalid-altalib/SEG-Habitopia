@@ -105,7 +105,6 @@ exports[`LeaderboardLayout renders correctly 1`] = `
               <View
                 dataSet={{}}
                 style={{}}
-                testID="leaderboardCard"
               >
                 <View
                   accessible={true}
@@ -123,7 +122,7 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                       "opacity": 1,
                     }
                   }
-                  testID="leaderboardCard"
+                  testID="leaderboard-card"
                 >
                   <View
                     style={
@@ -134,6 +133,7 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                           "width": 5,
                         },
                         "shadowOpacity": 0.05,
+                        "width": "100%",
                       }
                     }
                   >
@@ -183,46 +183,78 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                             dataSet={{}}
                             style={
                               {
-                                "alignItems": "center",
-                                "backgroundColor": "#a1a1aa",
-                                "borderColor": "#27272a",
-                                "borderRadius": 9999,
-                                "height": 48,
-                                "justifyContent": "center",
-                                "position": "relative",
-                                "width": 48,
+                                "height": 50,
+                                "width": 50,
                               }
                             }
                           >
-                            <Image
-                              accessibilityLabel="--"
-                              alt="--"
+                            <View
                               dataSet={{}}
-                              onError={[Function]}
-                              source={
-                                {
-                                  "uri": "https://robohash.org/100",
-                                }
-                              }
                               style={
                                 [
+                                  {},
                                   {
-                                    "borderRadius": 9999,
-                                    "maxWidth": "100%",
-                                  },
-                                  {
-                                    "height": "100%",
-                                    "width": "100%",
+                                    "aspectRatio": 1,
+                                    "style": undefined,
                                   },
                                 ]
                               }
-                            />
+                            >
+                              <View
+                                dataSet={{}}
+                                style={
+                                  [
+                                    {
+                                      "alignItems": "center",
+                                      "backgroundColor": "#a1a1aa",
+                                      "borderColor": "#27272a",
+                                      "borderRadius": 9999,
+                                      "height": "100%",
+                                      "justifyContent": "center",
+                                      "position": "relative",
+                                      "width": "100%",
+                                    },
+                                    {
+                                      "bottom": 0,
+                                      "left": 0,
+                                      "position": "absolute",
+                                      "right": 0,
+                                      "top": 0,
+                                    },
+                                  ]
+                                }
+                              >
+                                <Image
+                                  accessibilityLabel="--"
+                                  alt="--"
+                                  dataSet={{}}
+                                  onError={[Function]}
+                                  source={
+                                    {
+                                      "uri": "https://robohash.org/100",
+                                    }
+                                  }
+                                  style={
+                                    [
+                                      {
+                                        "borderRadius": 9999,
+                                        "maxWidth": "100%",
+                                      },
+                                      {
+                                        "height": "100%",
+                                        "width": "100%",
+                                      },
+                                    ]
+                                  }
+                                />
+                              </View>
+                            </View>
                           </View>
                           <View
                             dataSet={{}}
                             style={
                               {
-                                "width": 16,
+                                "width": 25,
                               }
                             }
                           />
@@ -299,7 +331,7 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                   dataSet={{}}
                   style={
                     {
-                      "height": 20,
+                      "height": 25,
                     }
                   }
                 />
@@ -319,7 +351,7 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                       "opacity": 1,
                     }
                   }
-                  testID="leaderboardCard"
+                  testID="leaderboard-card"
                 >
                   <View
                     style={
@@ -330,6 +362,7 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                           "width": 5,
                         },
                         "shadowOpacity": 0.05,
+                        "width": "100%",
                       }
                     }
                   >
@@ -379,46 +412,78 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                             dataSet={{}}
                             style={
                               {
-                                "alignItems": "center",
-                                "backgroundColor": "#a1a1aa",
-                                "borderColor": "#27272a",
-                                "borderRadius": 9999,
-                                "height": 48,
-                                "justifyContent": "center",
-                                "position": "relative",
-                                "width": 48,
+                                "height": 50,
+                                "width": 50,
                               }
                             }
                           >
-                            <Image
-                              accessibilityLabel="--"
-                              alt="--"
+                            <View
                               dataSet={{}}
-                              onError={[Function]}
-                              source={
-                                {
-                                  "uri": "https://robohash.org/200",
-                                }
-                              }
                               style={
                                 [
+                                  {},
                                   {
-                                    "borderRadius": 9999,
-                                    "maxWidth": "100%",
-                                  },
-                                  {
-                                    "height": "100%",
-                                    "width": "100%",
+                                    "aspectRatio": 1,
+                                    "style": undefined,
                                   },
                                 ]
                               }
-                            />
+                            >
+                              <View
+                                dataSet={{}}
+                                style={
+                                  [
+                                    {
+                                      "alignItems": "center",
+                                      "backgroundColor": "#a1a1aa",
+                                      "borderColor": "#27272a",
+                                      "borderRadius": 9999,
+                                      "height": "100%",
+                                      "justifyContent": "center",
+                                      "position": "relative",
+                                      "width": "100%",
+                                    },
+                                    {
+                                      "bottom": 0,
+                                      "left": 0,
+                                      "position": "absolute",
+                                      "right": 0,
+                                      "top": 0,
+                                    },
+                                  ]
+                                }
+                              >
+                                <Image
+                                  accessibilityLabel="--"
+                                  alt="--"
+                                  dataSet={{}}
+                                  onError={[Function]}
+                                  source={
+                                    {
+                                      "uri": "https://robohash.org/200",
+                                    }
+                                  }
+                                  style={
+                                    [
+                                      {
+                                        "borderRadius": 9999,
+                                        "maxWidth": "100%",
+                                      },
+                                      {
+                                        "height": "100%",
+                                        "width": "100%",
+                                      },
+                                    ]
+                                  }
+                                />
+                              </View>
+                            </View>
                           </View>
                           <View
                             dataSet={{}}
                             style={
                               {
-                                "width": 16,
+                                "width": 25,
                               }
                             }
                           />
@@ -495,7 +560,7 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                   dataSet={{}}
                   style={
                     {
-                      "height": 20,
+                      "height": 25,
                     }
                   }
                 />
@@ -515,7 +580,7 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                       "opacity": 1,
                     }
                   }
-                  testID="leaderboardCard"
+                  testID="leaderboard-card"
                 >
                   <View
                     style={
@@ -526,6 +591,7 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                           "width": 5,
                         },
                         "shadowOpacity": 0.05,
+                        "width": "100%",
                       }
                     }
                   >
@@ -575,46 +641,78 @@ exports[`LeaderboardLayout renders correctly 1`] = `
                             dataSet={{}}
                             style={
                               {
-                                "alignItems": "center",
-                                "backgroundColor": "#a1a1aa",
-                                "borderColor": "#27272a",
-                                "borderRadius": 9999,
-                                "height": 48,
-                                "justifyContent": "center",
-                                "position": "relative",
-                                "width": 48,
+                                "height": 50,
+                                "width": 50,
                               }
                             }
                           >
-                            <Image
-                              accessibilityLabel="--"
-                              alt="--"
+                            <View
                               dataSet={{}}
-                              onError={[Function]}
-                              source={
-                                {
-                                  "uri": "https://robohash.org/300",
-                                }
-                              }
                               style={
                                 [
+                                  {},
                                   {
-                                    "borderRadius": 9999,
-                                    "maxWidth": "100%",
-                                  },
-                                  {
-                                    "height": "100%",
-                                    "width": "100%",
+                                    "aspectRatio": 1,
+                                    "style": undefined,
                                   },
                                 ]
                               }
-                            />
+                            >
+                              <View
+                                dataSet={{}}
+                                style={
+                                  [
+                                    {
+                                      "alignItems": "center",
+                                      "backgroundColor": "#a1a1aa",
+                                      "borderColor": "#27272a",
+                                      "borderRadius": 9999,
+                                      "height": "100%",
+                                      "justifyContent": "center",
+                                      "position": "relative",
+                                      "width": "100%",
+                                    },
+                                    {
+                                      "bottom": 0,
+                                      "left": 0,
+                                      "position": "absolute",
+                                      "right": 0,
+                                      "top": 0,
+                                    },
+                                  ]
+                                }
+                              >
+                                <Image
+                                  accessibilityLabel="--"
+                                  alt="--"
+                                  dataSet={{}}
+                                  onError={[Function]}
+                                  source={
+                                    {
+                                      "uri": "https://robohash.org/300",
+                                    }
+                                  }
+                                  style={
+                                    [
+                                      {
+                                        "borderRadius": 9999,
+                                        "maxWidth": "100%",
+                                      },
+                                      {
+                                        "height": "100%",
+                                        "width": "100%",
+                                      },
+                                    ]
+                                  }
+                                />
+                              </View>
+                            </View>
                           </View>
                           <View
                             dataSet={{}}
                             style={
                               {
-                                "width": 16,
+                                "width": 25,
                               }
                             }
                           />

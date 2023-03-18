@@ -39,10 +39,10 @@ describe("LeaderboardLayout", () => {
   });
 
   it("loads 3 leaderboard cards", () => {
-    expect(wrapper.getAllByTestId("leaderboard-card")).toHaveLength(4);
+    expect(wrapper.getAllByTestId("leaderboard-card")).toHaveLength(3);
   });
 
   it("loads leaderboard cards with correct data", () => {
-   expect(wrapper.getAllByTestId("leaderboardC-card")[1].props.children[0]).toBeDefined();
+   expect(wrapper.getAllByTestId("leaderboard-card")[1].props.children[0]).toBeDefined();
   });
 });

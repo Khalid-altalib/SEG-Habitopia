@@ -111,27 +111,21 @@ exports[`LeaderboardLayout renders correctly 1`] = `
               dataSet={{}}
               onScroll={[Function]}
               scrollEventThrottle={2000}
-              style={{}}
-              testID="scrollView"
+              style={
+                {
+                  "paddingTop": 25,
+                }
+              }
+              testID="scroll-view"
             >
               <View>
                 <View
-                  style={
-                    {
-                      "height": "100%",
-                      "padding": 25,
-                      "width": "100%",
-                    }
-                  }
+                  dataSet={{}}
+                  style={{}}
                 >
-                  <View
-                    dataSet={{}}
-                    style={{}}
-                  >
-                    <div>
-                      Test
-                    </div>
-                  </View>
+                  <div>
+                    Test
+                  </div>
                 </View>
               </View>
             </RCTScrollView>
