@@ -37,6 +37,7 @@ import { Button } from "react-native";
 import { KeyboardAvoidingView } from "native-base";
 import ValidationMessage from "@features/chat/ValidationMessage/ValidationMessage";
 import Background from "@components/Background";
+import { addCheckinSubscriptionForLeaderboard } from "@features/leaderboard/leaderboardQueries";
 
 type Props = {};
 
@@ -146,11 +147,13 @@ const ChatScreen = (props: Props) => {
     navigation.setOptions({ title: chat.name, headerShown: true });
     const chatSubscription = addChatSubscription(id);
     const checkInSubscription = addCheckInSubscription(id);
+    const checkInSubscriptionForLeaderboard = addCheckinSubscriptionForLeaderboard(user?.userId || "");
     return () => {
       dispatch(resetPageNumber());
       dispatch(resetUnreadMessages({ chatId: chat.id }));
       chatSubscription.unsubscribe();
       checkInSubscription.unsubscribe();
+      checkInSubscriptionForLeaderboard.unsubscribe();
     };
   }, [id]);
 
