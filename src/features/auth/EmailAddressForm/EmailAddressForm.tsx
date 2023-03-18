@@ -1,31 +1,31 @@
 import React from "react";
-import { Input } from "native-base";
+import { Checkbox, Input } from "native-base";
 import { useForm, Controller } from "react-hook-form";
 import { AntDesign } from "@expo/vector-icons";
 
-import { addLogInData, addSignUpData, logInUser } from "./authSlice";
-import { useDispatch } from "../../app/hooks";
-import Button from "../../components/Button";
-import Text from "../../components/Text";
-import { AuthParams, ButtonType, TextType } from "../../../types";
+import { addLogInData, addSignUpData, logInUser } from "../authSlice";
+import { useDispatch } from "../../../app/hooks";
+import Button from "../../../components/Button";
+import Text from "../../../components/Text";
+import { AuthParams, ButtonType, TextType } from "../../../../types";
 import { View } from "react-native";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 type formData = {
-  name: string;
+  email: string;
 };
 
-const NameForm = () => {
+const EmailAddressForm = () => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      name: "",
+      email: "",
     },
   });
   const dispatch = useDispatch();
 
   const onSubmit = async (data: formData) => {
     dispatch(addSignUpData(data));
-    navigation.navigate("EmailAddress");
+    navigation.navigate("Password");
   };
 
   const navigation = useNavigation<NavigationProp<AuthParams>>();
@@ -33,14 +33,19 @@ const NameForm = () => {
   return (
     <View>
       <Text style={{ marginBottom: 5 }} type={TextType.Subtle}>
-        Name
+        Email Address
       </Text>
       <Controller
         control={control}
         render={({ field: { onChange, value } }) => (
-          <Input onChangeText={onChange} value={value} size="xl" />
+          <Input
+            onChangeText={onChange}
+            value={value}
+            size="xl"
+            testID="email-input"
+          />
         )}
-        name="name"
+        name="email"
       />
       <Button
         onPress={handleSubmit(onSubmit)}
@@ -55,4 +60,4 @@ const NameForm = () => {
   );
 };
 
-export default NameForm;
+export default EmailAddressForm;
