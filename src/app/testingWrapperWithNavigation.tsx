@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { extendTheme, NativeBaseProvider } from "native-base";
 import { Provider } from "react-redux";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Store } from "redux";
 
 const Stack = createNativeStackNavigator();
 

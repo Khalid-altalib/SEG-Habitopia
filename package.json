@@ -7,7 +7,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest --watchAll",
+    "test": "NODE_ENV=testing jest --watchAll",
     "docs": "npx typedoc --tsconfig ./tsconfig.json",
     "storybook": "start-storybook -p 7007",
     "build-storybook": "build-storybook"
@@ -74,6 +74,7 @@
     "@babel/plugin-proposal-private-methods": "^7.18.6",
     "@cfaester/enzyme-adapter-react-18": "^0.6.0",
     "@react-native-community/async-storage": "^1.12.1",
+    "@react-navigation/stack": "^6.3.16",
     "@storybook/addon-actions": "^5.3",
     "@storybook/addon-knobs": "^5.3",
     "@storybook/addon-links": "^5.3",

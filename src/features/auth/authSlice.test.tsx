@@ -1,7 +1,13 @@
 import configureStore, { MockStore } from "redux-mock-store";
 import thunk from "redux-thunk";
-import { signUpUser, logInUser } from "./authSlice";
+import {
+  signUpUser,
+  logInUser,
+  sendConfirmationCode,
+  logOutUser,
+} from "./authSlice";
 import { Auth } from "aws-amplify";
+import { RootState } from "@app/store";
 
 jest.mock("./authQueries");
 jest.mock("aws-amplify");
@@ -112,6 +118,69 @@ describe("authSlice", () => {
 
       expect(actions[0].type).toEqual("auth/login/pending");
       expect(actions[1].type).toEqual("auth/login/fulfilled");
+    });
+  });
+
+  describe("sendConfirmationCode", () => {
+    it("should call Auth.confirmSignUp with the correct parameters", async () => {
+      const confirmSignUpMock = jest.fn();
+      (Auth.confirmSignUp as jest.Mock).mockImplementation(confirmSignUpMock);
+
+      await store.dispatch(sendConfirmationCode());
+
+      const state = store.getState() as RootState;
+      const { email, confirmationCode } = state.auth.signUpData;
+
+      expect(confirmSignUpMock).toHaveBeenCalledWith(email, confirmationCode);
+    });
+
+    it("should dispatch the correct actions on success", async () => {
+      const signInMock = jest.fn().mockResolvedValue({
+        signInUserSession: {
+          idToken: {
+            jwtToken: "token",
+          },
+        },
+        attributes: {
+          sub: "123",
+        },
+      });
+      (Auth.signIn as jest.Mock).mockImplementation(signInMock);
+      await store.dispatch(logInUser());
+      await store.dispatch(sendConfirmationCode());
+
+      const actions = store.getActions();
+      console.log(actions);
+
+      expect(actions[2].type).toEqual("auth/confirmation/pending");
+      expect(actions[3].type).toEqual("auth/confirmation/fulfilled");
+      expect(actions[3].payload).toBeDefined();
+    });
+
+    it("should dispatch the correct actions on failure", async () => {
+      const errorMessage = "Something went wrong!";
+      (Auth.confirmSignUp as jest.Mock).mockRejectedValue(
+        new Error(errorMessage)
+      );
+
+      await store.dispatch(sendConfirmationCode());
+
+      const actions = store.getActions();
+
+      expect(actions[0].type).toEqual("auth/confirmation/pending");
+      expect(actions[1].type).toEqual("auth/confirmation/rejected");
+      expect(actions[1].payload).toEqual(errorMessage);
+    });
+  });
+
+  describe("logoutUser", () => {
+    it("should successfully log out the user", async () => {
+      await store.dispatch(logOutUser());
+
+      const actions = store.getActions();
+
+      expect(actions[0].type).toEqual("auth/logOutUser/pending");
+      expect(actions[1].type).toEqual("auth/logOutUser/fulfilled");
     });
   });
 });

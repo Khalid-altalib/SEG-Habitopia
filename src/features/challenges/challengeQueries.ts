@@ -8,6 +8,12 @@ import {
   ChallengeUser,
   User,
 } from "../../models";
+import {
+  ALREADY_PART_OF_CHAT,
+  CANNOT_JOIN_CHAT,
+  CHALLENGE_NOT_FOUND,
+  GROUP_CHAT_PARTICIPANTS,
+} from "@features/constants";
 
 export const joinChallengeQuery = async (
   challengeTypeInstance: ChallengeTypeModel,
@@ -47,7 +53,7 @@ const isUserPartOfChallenge = async (
 
   for await (const challenge of challenges) {
     if (challenge.challengeChallengeTypeId === challengeTypeInstance.id) {
-      throw new Error("User is already part of the challenge");
+      throw new Error(ALREADY_PART_OF_CHAT);
     }
   }
 };
@@ -61,7 +67,7 @@ const findChallengeToJoin = async (
       (allChallenges) =>
         allChallenges.and((toJoinChallenge) => [
           toJoinChallenge.ChallengeType.id.eq(challengeTypeInstance.id),
-          toJoinChallenge.userCount.lt(15),
+          toJoinChallenge.userCount.lt(GROUP_CHAT_PARTICIPANTS),
         ])
     );
 
@@ -80,7 +86,7 @@ const findChallengeToJoin = async (
 
     return availableChallenges[0];
   } catch (error) {
-    throw new Error("Challenge not found");
+    throw new Error(CHALLENGE_NOT_FOUND);
   }
 };
 
@@ -102,6 +108,6 @@ const addUserToChatRoom = async (
       })
     );
   } catch (error) {
-    throw new Error("Unable to join chat");
+    throw new Error(CANNOT_JOIN_CHAT);
   }
 };

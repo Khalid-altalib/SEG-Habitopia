@@ -34,8 +34,9 @@ import {
   getMessageByCheckInId,
 } from "@features/chat/chatQueries";
 import { Button } from "react-native";
-import { ScrollView } from "native-base";
+import { KeyboardAvoidingView } from "native-base";
 import ValidationMessage from "@features/chat/ValidationMessage/ValidationMessage";
+import Background from "@components/Background";
 
 type Props = {};
 
@@ -50,9 +51,18 @@ const ChatScreen = (props: Props) => {
     const variables: OnCreateMessageSubscriptionVariables = {
       filter: {
         chatroomID: { eq: chatID },
-        userID: {
-          ne: user?.userId,
-        },
+        or: [
+          {
+            messageType: {
+              eq: MessageEnum.VALIDATION,
+            },
+          },
+          {
+            userID: {
+              ne: user?.userId,
+            },
+          },
+        ],
       },
     };
     const subscription = API.graphql<
@@ -64,19 +74,33 @@ const ChatScreen = (props: Props) => {
           data.userID || ""
         );
         let message: MessageType;
-        if (data.messageType === MessageEnum.CHECKIN) {
-          const checkIn = await getCheckInById(data.messageGetCheckinId || "");
-          message = {
-            ...data,
-            validationCount: checkIn.validationCount,
-            isValidated: checkIn.isValidated,
-            userName: userFromDatabase.name,
-          } as MessageType;
-        } else {
-          message = {
-            ...data,
-            userName: userFromDatabase.name,
-          } as MessageType;
+        switch (data.messageType) {
+          case MessageEnum.CHECKIN:
+            const checkIn = await getCheckInById(
+              data.messageGetCheckinId || ""
+            );
+            message = {
+              ...data,
+              validationCount: checkIn.validationCount,
+              isValidated: checkIn.isValidated,
+              userName: userFromDatabase.name,
+            } as MessageType;
+            break;
+          case MessageEnum.TEXT:
+            message = {
+              ...data,
+              userName: userFromDatabase.name,
+            } as MessageType;
+            break;
+          case MessageEnum.VALIDATION:
+            message = {
+              ...data,
+              userName: userFromDatabase.name,
+            } as MessageType;
+            break;
+          default:
+            message = {} as MessageType;
+            break;
         }
         dispatch(addMessageToChat({ chatID, message }));
       },
@@ -135,69 +159,65 @@ const ChatScreen = (props: Props) => {
   };
 
   return (
-    <ImageBackground
-      source={{ uri: "https://placeholder.com" }}
-      style={styles.bg}
-    >
+    <Background>
       <Button title="Load more" onPress={fetchMoreMessages} />
       <FlatList
         data={chat.messages}
         renderItem={({ item }) => {
-          if (item.messageType === MessageEnum.TEXT) {
-            return (
-              <TextMessage
-                id={item.id}
-                userName={item.userName}
-                text={item.text}
-                createdAt={item.createdAt}
-                userID={item.userID}
-                messageType={item.messageType}
-              />
-            );
-          } else if (item.messageType === MessageEnum.CHECKIN) {
-            return (
-              <CheckInMessage
-                id={item.id}
-                validationCount={item.validationCount}
-                isValidated={item.isValidated}
-                userName={item.userName}
-                text={item.text}
-                createdAt={item.createdAt}
-                userID={item.userID}
-                messageType={item.messageType}
-              />
-            );
-          } else if (item.messageType === MessageEnum.VALIDATION) {
-            return (
-              <ValidationMessage
-                id={item.id}
-                userName={item.userName}
-                text={item.text}
-                createdAt={item.createdAt}
-                userID={item.userID}
-                messageType={item.messageType}
-              />
-            );
-          } else {
-            <></>;
+          switch (item.messageType) {
+            case MessageEnum.TEXT:
+              return (
+                <TextMessage
+                  id={item.id}
+                  userName={item.userName}
+                  text={item.text}
+                  createdAt={item.createdAt}
+                  userID={item.userID}
+                  messageType={item.messageType}
+                />
+              );
+            case MessageEnum.CHECKIN:
+              return (
+                <CheckInMessage
+                  id={item.id}
+                  validationCount={item.validationCount}
+                  isValidated={item.isValidated}
+                  userName={item.userName}
+                  text={item.text}
+                  createdAt={item.createdAt}
+                  userID={item.userID}
+                  messageType={item.messageType}
+                />
+              );
+            case MessageEnum.VALIDATION:
+              return (
+                <ValidationMessage
+                  id={item.id}
+                  userName={item.userName}
+                  text={item.text}
+                  createdAt={item.createdAt}
+                  userID={item.userID}
+                  messageType={item.messageType}
+                />
+              );
+            default:
+              return <></>;
           }
         }}
         style={styles.flatList}
         inverted={true}
       />
-
-      <InputBox chatRoomID={chat.id} />
-    </ImageBackground>
+      <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={90}>
+        <InputBox chatRoomID={chat.id} />
+      </KeyboardAvoidingView>
+    </Background>
   );
 };
 
 const styles = StyleSheet.create({
-  bg: {
-    flex: 1,
-  },
-
   flatList: {
-    padding: 10,
+    padding: 25,
+    flex: 1,
   },
 });
 

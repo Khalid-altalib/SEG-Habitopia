@@ -8,7 +8,47 @@ export enum MessageEnum {
   VALIDATION = "VALIDATION"
 }
 
+export enum ChallengeStatusEnum {
+  ACTIVE = "ACTIVE",
+  INACTIVE = "INACTIVE",
+  COMPLETED = "COMPLETED"
+}
 
+
+
+type EagerFollow = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Follow, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly followingUser?: User | null;
+  readonly followedBy?: User | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  readonly followFollowingUserId?: string | null;
+  readonly followFollowedById?: string | null;
+}
+
+type LazyFollow = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Follow, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly followingUser: AsyncItem<User | undefined>;
+  readonly followedBy: AsyncItem<User | undefined>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  readonly followFollowingUserId?: string | null;
+  readonly followFollowedById?: string | null;
+}
+
+export declare type Follow = LazyLoading extends LazyLoadingDisabled ? EagerFollow : LazyFollow
+
+export declare const Follow: (new (init: ModelInit<Follow>) => Follow) & {
+  copyOf(source: Follow, mutator: (draft: MutableModel<Follow>) => MutableModel<Follow> | void): Follow;
+}
 
 type EagerLeaderboard = {
   readonly [__modelMeta__]: {
@@ -54,10 +94,10 @@ type EagerChallenge = {
   readonly id: string;
   readonly ChallengeType: ChallengeType;
   readonly Users?: (ChallengeUser | null)[] | null;
-  readonly started?: string | null;
+  readonly status?: ChallengeStatusEnum | keyof typeof ChallengeStatusEnum | null;
+  readonly started?: number | null;
   readonly ChatRoom?: ChatRoom | null;
   readonly userCount?: number | null;
-  readonly finished?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly challengeChallengeTypeId: string;
@@ -72,10 +112,10 @@ type LazyChallenge = {
   readonly id: string;
   readonly ChallengeType: AsyncItem<ChallengeType>;
   readonly Users: AsyncCollection<ChallengeUser>;
-  readonly started?: string | null;
+  readonly status?: ChallengeStatusEnum | keyof typeof ChallengeStatusEnum | null;
+  readonly started?: number | null;
   readonly ChatRoom: AsyncItem<ChatRoom | undefined>;
   readonly userCount?: number | null;
-  readonly finished?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly challengeChallengeTypeId: string;
@@ -212,6 +252,7 @@ type EagerChatRoom = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
+  readonly name: string;
   readonly Messages?: (Checkin | null)[] | null;
   readonly users?: (UserChatRoom | null)[] | null;
   readonly Checkins?: (Checkin | null)[] | null;
@@ -227,6 +268,7 @@ type LazyChatRoom = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
+  readonly name: string;
   readonly Messages: AsyncCollection<Checkin>;
   readonly users: AsyncCollection<UserChatRoom>;
   readonly Checkins: AsyncCollection<Checkin>;
