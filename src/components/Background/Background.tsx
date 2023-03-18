@@ -25,7 +25,9 @@ const Background = (props: BackgroundProps) => {
   );
 
   return (
-    <LinearGradient colors={gradientColors}>{props.children}</LinearGradient>
+    <LinearGradient colors={gradientColors} style={{ height: "100%" }}>
+      {props.children}
+    </LinearGradient>
   );
 };
 

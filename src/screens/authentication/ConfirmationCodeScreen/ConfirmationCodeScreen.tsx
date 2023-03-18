@@ -5,7 +5,7 @@ import { TextType } from "types";
 import Background from "@components/Background";
 import PaddedContainer from "@components/PaddedContainer";
 import Text from "@components/Text";
-import ConfirmationCodeForm from "@features/auth/ConfirmationCodeForm";
+import ConfirmationCodeForm from "@features/auth/ConfirmationCodeForm/ConfirmationCodeForm";
 
 /**
  * @returns A React component representing the confirmation code page, where

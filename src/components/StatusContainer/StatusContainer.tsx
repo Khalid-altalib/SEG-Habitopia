@@ -16,10 +16,11 @@ type Props = {
   error?: string;
   data?: any;
   children: React.ReactNode;
+  noDataDisplay?: JSX.Element;
 };
 
 const StatusContainer = (props: Props) => {
-  const { loading, error, data, children } = props;
+  const { loading, error, data, children, noDataDisplay } = props;
 
   const renderStatusDisplay = () => {
     if (loading) {
@@ -32,15 +33,19 @@ const StatusContainer = (props: Props) => {
         />
       );
     } else if (data && Array.isArray(data) && data.length === 0) {
-      return (
-        <StatusIcon label="No results found" icon={<QuestionOutlineIcon />} />
-      );
+      if (noDataDisplay) {
+        return noDataDisplay;
+      } else {
+        return (
+          <StatusIcon label="No results found" icon={<QuestionOutlineIcon />} />
+        );
+      }
     }
   };
 
   return (
     <View>
-      {data && <View>{children}</View>}
+      {data && children}
       <Center>{renderStatusDisplay()}</Center>
     </View>
   );

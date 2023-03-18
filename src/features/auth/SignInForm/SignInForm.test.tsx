@@ -2,9 +2,7 @@ import React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react-native";
 import configureStore from "redux-mock-store";
 import SignInForm from "./SignInForm";
-import { logInUser } from "../authSlice";
 import TestingWrapper from "@app/testingWrapper";
-import SubmitButton from "./SubmitButton";
 
 const mockStore = configureStore([]);
 

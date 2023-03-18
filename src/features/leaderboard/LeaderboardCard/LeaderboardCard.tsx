@@ -1,14 +1,19 @@
-import { Avatar, Box, Heading, HStack, theme, View } from "native-base";
+import { AspectRatio, Box, Heading, HStack, theme, View } from "native-base";
+import Avatar from "@components/Avatar/Avatar";
 
 import React from "react";
 import Card from "../../../components/Card";
 import Text from "../../../components/Text";
-import { TextType } from "../../../../types";
+import { NavigationParams, TextType } from "../../../../types";
+import { TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type Props = {
   name: string;
-  wins: number;
+  checkins: number;
   place: number;
+  userId: string;
 };
 
 const rankedColors: [string, string][] = [
@@ -18,41 +23,50 @@ const rankedColors: [string, string][] = [
 ];
 
 const LeaderboardCard = (props: Props) => {
-  const { name, wins, place } = props;
+  const { name, checkins, place, userId } = props;
 
   const cardColor =
     place < rankedColors.length ? rankedColors[place] : undefined;
 
+  const navigation =
+    useNavigation<NativeStackNavigationProp<NavigationParams>>();
+
+  const handlePress = () => navigation.push("Profile", { userId: userId });
+
   return (
-    <Card backgroundColorGradient={cardColor}>
-      <HStack justifyContent={"space-between"} alignItems="center">
-        <HStack space={4}>
-          <Avatar />
+    <TouchableOpacity onPress={handlePress}>
+      <Card backgroundColorGradient={cardColor}>
+        <HStack justifyContent={"space-between"} alignItems="center">
+          <HStack space={25}>
+            <Box boxSize={50}>
+              <Avatar userId={userId} />
+            </Box>
+            <View>
+              <Text
+                type={TextType.Subheading}
+                color={cardColor ? theme.colors.blueGray[900] : undefined}
+              >
+                {name}
+              </Text>
+              <Text
+                type={TextType.Regular}
+                color={cardColor ? theme.colors.blueGray[900] : undefined}
+              >
+                {checkins} Checkins
+              </Text>
+            </View>
+          </HStack>
           <View>
             <Text
               type={TextType.Subheading}
               color={cardColor ? theme.colors.blueGray[900] : undefined}
             >
-              {name}
-            </Text>
-            <Text
-              type={TextType.Regular}
-              color={cardColor ? theme.colors.blueGray[900] : undefined}
-            >
-              {wins} wins
+              #{place + 1}
             </Text>
           </View>
         </HStack>
-        <View>
-          <Text
-            type={TextType.Subheading}
-            color={cardColor ? theme.colors.blueGray[900] : undefined}
-          >
-            #{place + 1}
-          </Text>
-        </View>
-      </HStack>
-    </Card>
+      </Card>
+    </TouchableOpacity>
   );
 };
 
