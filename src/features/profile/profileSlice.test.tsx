@@ -110,9 +110,10 @@ describe("profileSlice", () => {
       expect(store.getActions()[1].payload).toEqual(expectedActions[1].payload); // returns correct user?
     });
 
-
+    
     it ("should handle fetchProfile error correctly", async () => {
       const error = "Error fetching profile";
+      // if getUserFromDatabasebyID throws an error, fetchProfile should return an error
       (getUserFromDatabasebyID as jest.Mock).mockRejectedValue(
         new Error(error)
       );
@@ -124,6 +125,7 @@ describe("profileSlice", () => {
 
 
     it ("should handle fetchProfile.fulfilled", async () => {
+      // ensure that the reducer handles the fulfilled action correctly and returns the correct state
       const expectedAction = {
         type: "profile/fetch/fulfilled",
         payload: mockProfile,
@@ -150,6 +152,7 @@ describe("profileSlice", () => {
 
 
     it ("should handle fetchProfile.rejected", async () => {
+      // ensure that the reducer handles the rejected action correctly and returns the correct state
       const expectedAction = {
         type: "profile/fetch/rejected",
         payload: "Error fetching profile",
