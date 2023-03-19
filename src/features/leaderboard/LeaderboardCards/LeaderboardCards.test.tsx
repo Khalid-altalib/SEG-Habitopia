@@ -6,7 +6,7 @@ import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import { fetchLeaderboard } from "../leaderboardSlice";
 
-describe("LeaderboardLayout", () => {
+describe("LeaderboardCards", () => {
   jest.mock("../leaderboardSlice", () => ({
     fetchLeaderboard: jest.fn(),
   }));
