@@ -15,15 +15,15 @@ type Props = {
 
 const CheckInBox = (props: Props) => {
   const { checkInSnippetItem } = props;
-  const { challenge, checkedIn, endDate, chatId } = checkInSnippetItem;
+  const { challenge, endDate, chatId } = checkInSnippetItem;
 
   const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
 
   const dispatch = useDispatch();
 
   const handlePress = () => {
-    dispatch(setCheckedInSnippetItemStatus("id"));
-    navigation.push("IndividualChat", { id: chatId });
+    dispatch(setCheckedInSnippetItemStatus("a"));
+    // navigation.push("IndividualChat", { id: chatId });
   };
 
   const timeDifference = new Date(endDate).getTime() - new Date().getTime();
@@ -54,7 +54,7 @@ const CheckInBox = (props: Props) => {
         >
           {challenge.name}
         </Text>
-        <CheckInTime hoursLeft={timeDifferenceHours} checkedIn={checkedIn} />
+        <CheckInTime hoursLeft={timeDifferenceHours} />
       </ZStack>
     </TouchableOpacity>
   );

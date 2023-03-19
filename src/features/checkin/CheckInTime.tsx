@@ -5,11 +5,10 @@ import { TextType } from "types";
 
 type Props = {
   hoursLeft: number;
-  checkedIn: boolean;
 };
 
 function CheckInTime(props: Props) {
-  const { hoursLeft, checkedIn } = props;
+  const { hoursLeft } = props;
   return (
     <Box position="absolute" bottom={0}>
       <Text
@@ -21,7 +20,7 @@ function CheckInTime(props: Props) {
           padding: 12.25,
         }}
       >
-        {checkedIn ? "Done!" : `${hoursLeft}h left!`}
+        {`${hoursLeft}h left!`}
       </Text>
     </Box>
   );

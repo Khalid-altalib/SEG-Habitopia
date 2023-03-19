@@ -3,6 +3,7 @@ import StatusContainer from "@components/StatusContainer/StatusContainer";
 import Text from "@components/Text";
 import { fetchCheckInSnippet } from "@features/chat/chatSlice";
 import { Center, HStack } from "native-base";
+import { ControlledPropUpdatedSelectedItem } from "native-base/lib/typescript/components/composites/Typeahead/useTypeahead/types";
 import React, { useEffect } from "react";
 import CheckInBox from "./CheckInBox";
 
@@ -26,16 +27,16 @@ const CheckInSlider = (props: Props) => {
       <StatusContainer
         loading={loading}
         error={error}
-        data={[]}
+        data={checkInSnippet}
         noDataDisplay={
           <Center width="100%">
             <Text style={{ textAlign: "center" }}>All Caught Up!</Text>
           </Center>
         }
       >
-        {/* {checkInSnippet.map((checkInSnippetItem, index) => (
+        {checkInSnippet.map((checkInSnippetItem, index) => (
           <CheckInBox key={index} checkInSnippetItem={checkInSnippetItem} />
-        ))} */}
+        ))}
       </StatusContainer>
     </HStack>
   );

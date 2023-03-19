@@ -43,10 +43,6 @@ type ChatState = {
     loading: boolean;
     error: string;
   };
-  fetchValidationSnippet: {
-    loading: boolean;
-    error: string;
-  };
   details?: ChatDetails;
   currentChatId?: string;
   pageNumber: number;
@@ -210,10 +206,6 @@ const initialState: ChatState = {
     loading: false,
     error: "",
   },
-  fetchValidationSnippet: {
-    loading: false,
-    error: "",
-  },
   details: undefined,
   currentChatId: undefined,
   pageNumber: 0,
@@ -224,7 +216,11 @@ export const chatSlice = createSlice({
   name: "chats",
   initialState,
   reducers: {
-    setCheckedInSnippetItemStatus: (state, action: PayloadAction<string>) => {},
+    setCheckedInSnippetItemStatus: (state, action: PayloadAction<string>) => {
+      state.checkInSnippet = state.checkInSnippet.filter(
+        (checkInSnippetItem) => checkInSnippetItem.chatId !== action.payload
+      );
+    },
     addMessageToChat: (
       state,
       action: PayloadAction<{ chatID: string; message: Message }>
