@@ -45,31 +45,4 @@ describe("LeaderboardLayout", () => {
         expect(wrapper.getByText("Alice").props.style[0].color).toEqual("#0f172a");
         expect(wrapper.getByText("4 Checkins").props.style[0].color).toEqual("#0f172a");
     });
-
-    // it("calls handlePress when the card is pressed", async () => {  
-    //     const navigation = jest.fn();
-    //     await waitFor(() => {
-    //         expect(wrapper.getByTestId("leaderboardCard")).toBeTruthy();
-    //         fireEvent.press(wrapper.getByTestId("leaderboardCard"));
-    //     });
-    //     fireEvent.press(wrapper.getByTestId("leaderboardCard"));
-    //     expect(wrapper.getByTestId("leaderboardCard")).toBeTruthy();
-    //     expect(navigation).toHaveBeenCalled();
-    //     expect(mockStore.getActions()).toEqual([
-    //         {
-    //             payload: {
-    //                 name: "Alice",
-    //                 userId: "aliceID",
-    //             },
-    //             type: "leaderboard/setSelectedUser",
-    //         },
-    //         {
-    //             payload: {
-    //                 name: "Alice",
-    //                 userId: "aliceID",
-    //             },
-    //             type: "leaderboard/setSelectedUser",
-    //         },
-    //     ]);
-    //});
 });
