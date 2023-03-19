@@ -158,4 +158,5 @@ export type CheckInSnippetItem = {
   challenge: Challenge;
   endDate: string;
   checkedIn: boolean;
+  chatId: string;
 }

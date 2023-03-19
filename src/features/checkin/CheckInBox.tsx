@@ -15,15 +15,15 @@ type Props = {
 
 const CheckInBox = (props: Props) => {
   const { checkInSnippetItem } = props;
-  const { challenge, checkedIn, endDate } = checkInSnippetItem;
+  const { challenge, checkedIn, endDate, chatId } = checkInSnippetItem;
 
   const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
 
   const dispatch = useDispatch();
 
   const handlePress = () => {
-    // navigate to associated chatroom
     dispatch(setCheckedInSnippetItemStatus("id"));
+    navigation.push("IndividualChat", { id: chatId });
   };
 
   const timeDifference = new Date(endDate).getTime() - new Date().getTime();

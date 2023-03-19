@@ -176,6 +176,7 @@ export const fetchCheckInSnippet = createAsyncThunk<
         challenge: { name: "Sleep" } as Challenge,
         endDate: currentDate,
         checkedIn: false,
+        chatId: "a",
       },
     ];
   } catch (error: any) {

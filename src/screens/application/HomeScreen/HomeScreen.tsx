@@ -13,7 +13,6 @@ function HomeScreen() {
     <Background>
       <ScrollView showsVerticalScrollIndicator={false}>
         <CheckInWidget />
-        <CatchUpWidget />
         <ChallengeWidget />
       </ScrollView>
     </Background>
