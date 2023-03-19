@@ -53,7 +53,7 @@ const isUserPartOfChallenge = async (
   );
 
   for await (const challenge of challenges) {
-    if (challenge.challengeChallengeTypeId === challengeTypeInstance.id && challenge.status === ChallengeStatusEnum.ACTIVE) {
+    if (challenge.challengeChallengeTypeId === challengeTypeInstance.id && challenge.status !== ChallengeStatusEnum.ACTIVE) {
       throw new Error(ALREADY_PART_OF_CHAT);
     }
   }
@@ -74,7 +74,7 @@ const findChallengeToJoin = async (
     );
 
     if (availableChallenges.length == 0) {
-      let chatName = challengeTypeInstance.name+" - "+new Date().toLocaleString();
+      let chatName = challengeTypeInstance.name+" - "+new Date().toLocaleString('en-GB', {day: 'numeric', month: 'long', year: 'numeric'});
       const newChatRoom = await DataStore.save(new ChatRoom({name: chatName}));
       const toJoin = await DataStore.save(
         new ChallengeModel({

@@ -2,10 +2,9 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { DataStore } from "@aws-amplify/datastore";
 import { Challenge } from "../../../types";
 import { RootState } from "../../app/store";
-import { ChallengeType as ChallengeTypeModel } from "../../models";
+import { ChallengeType as ChallengeTypeModel, ChallengeUser } from "../../models";
 import { joinChallengeQuery } from "./challengeQueries";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
-import { AsyncStorage } from "@aws-amplify/core";
 
 type ChallengesState = {
   challenges: Challenge[];
