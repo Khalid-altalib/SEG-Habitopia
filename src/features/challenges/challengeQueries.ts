@@ -15,6 +15,7 @@ import {
   CHALLENGE_NOT_FOUND,
   GROUP_CHAT_PARTICIPANTS,
 } from "@features/constants";
+import moment from "moment";
 
 export const joinChallengeQuery = async (
   challengeTypeInstance: ChallengeTypeModel,
@@ -76,7 +77,7 @@ const findChallengeToJoin = async (
     );
 
     if (availableChallenges.length == 0) {
-      let chatName = challengeTypeInstance.name+" - "+new Date().toLocaleString('en-GB', {day: 'numeric', month: 'long', year: 'numeric'});
+      const chatName = challengeTypeInstance.name+" - "+moment().format("DD/MM/YYYY");
       const newChatRoom = await DataStore.save(new ChatRoom({name: chatName}));
       const toJoin = await DataStore.save(
         new ChallengeModel({
@@ -111,6 +112,7 @@ const addUserToChatRoom = async (
         chatRoomId: chatRoomToJoin.id,
         chatRoom: chatRoomToJoin,
         user: user,
+        userId: user.id,
       })
     );
   } catch (error) {

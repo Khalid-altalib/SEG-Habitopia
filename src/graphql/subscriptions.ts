@@ -1262,7 +1262,7 @@ subscription OnUpdateChatRoom($filter: ModelSubscriptionChatRoomFilterInput,  $u
         nextToken
         startedAt
       }
-      subscription OnUpdateChatRoom($filter: ModelSubscriptionChatRoomFilterInput,  $userFilter: ModelUserChatRoomFilterInput) {
+      users (filter: $userFilter) {
         items {
           id
           userId
