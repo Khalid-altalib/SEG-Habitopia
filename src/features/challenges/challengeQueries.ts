@@ -27,6 +27,8 @@ export const joinChallengeQuery = async (
   await DataStore.save(
     new ChallengeUser({
       user: user,
+      userId: user.id,
+      challengeId: challengeToJoin.id,
       challenge: challengeToJoin,
     })
   );
