@@ -1,6 +1,6 @@
 import { DataStore, SortDirection } from "@aws-amplify/datastore";
 import {getUserFromDatabasebyID} from "../../app/util";
-import { Challenge, Checkin, LazyUser, User } from "../../models";
+import { Challenge, ChallengeStatusEnum, Checkin, LazyUser, User } from "../../models";
 
 export const getCheckIns = async (userId: string) => {
   const user = await getUserFromDatabasebyID(userId);
@@ -89,7 +89,7 @@ export const getWins = async (userId: string) => {
   // then we check if the challenge is completed
   
   for await (const challenge of userChallenges) {
-    if (challenge.finished) {
+    if (challenge.status == ChallengeStatusEnum.COMPLETED) {
       wins++;
     }
   }
