@@ -5,7 +5,7 @@ import { TextType } from "types";
 import Background from "@components/Background";
 import PaddedContainer from "@components/PaddedContainer";
 import Text from "@components/Text";
-import PasswordForm from "@features/auth/PasswordForm";
+import PasswordForm from "@features/auth/PasswordForm/PasswordForm";
 
 const PasswordScreen = () => {
   return (

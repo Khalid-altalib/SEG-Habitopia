@@ -16,6 +16,12 @@ enum ChallengeStatusEnum {
   COMPLETED
 }
 
+enum ChallengeStatusEnum {
+  ACTIVE
+  INACTIVE
+  COMPLETED
+}
+
 type Leaderboard @model @auth(rules: [{allow: public}]) {
   id: ID!
   numberOfCheckins: Int!

@@ -49,10 +49,6 @@ const ProfileScreen = () => {
     dispatch(fetchProfile(userId));
   }, [settings]);
 
-  useEffect(() => {
-    navigation.setOptions({ title: profile?.name || "" });
-  }, [profile]);
-
   return (
     <Background>
       <ScrollView height="full">
