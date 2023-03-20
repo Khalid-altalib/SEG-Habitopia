@@ -7,6 +7,7 @@ import {
   UserChatRoom,
   ChallengeUser,
   User,
+  ChallengeStatusEnum,
 } from "../../models";
 import {
   ALREADY_PART_OF_CHAT,
@@ -14,6 +15,7 @@ import {
   CHALLENGE_NOT_FOUND,
   GROUP_CHAT_PARTICIPANTS,
 } from "@features/constants";
+import moment from "moment";
 
 export const joinChallengeQuery = async (
   challengeTypeInstance: ChallengeTypeModel,
@@ -26,6 +28,8 @@ export const joinChallengeQuery = async (
   await DataStore.save(
     new ChallengeUser({
       user: user,
+      userId: user.id,
+      challengeId: challengeToJoin.id,
       challenge: challengeToJoin,
     })
   );
@@ -52,7 +56,7 @@ const isUserPartOfChallenge = async (
   );
 
   for await (const challenge of challenges) {
-    if (challenge.challengeChallengeTypeId === challengeTypeInstance.id) {
+    if (challenge.challengeChallengeTypeId === challengeTypeInstance.id && challenge.status !== ChallengeStatusEnum.ACTIVE) {
       throw new Error(ALREADY_PART_OF_CHAT);
     }
   }
@@ -68,17 +72,20 @@ const findChallengeToJoin = async (
         allChallenges.and((toJoinChallenge) => [
           toJoinChallenge.ChallengeType.id.eq(challengeTypeInstance.id),
           toJoinChallenge.userCount.lt(GROUP_CHAT_PARTICIPANTS),
+          toJoinChallenge.status.eq(ChallengeStatusEnum.INACTIVE),
         ])
     );
 
     if (availableChallenges.length == 0) {
-      const newChatRoom = await DataStore.save(new ChatRoom({}));
+      const chatName = challengeTypeInstance.name+" - "+moment().format("DD/MM/YYYY");
+      const newChatRoom = await DataStore.save(new ChatRoom({name: chatName}));
       const toJoin = await DataStore.save(
         new ChallengeModel({
           ChatRoom: newChatRoom,
           ChallengeType: challengeTypeInstance,
           challengeChallengeTypeId: challengeTypeInstance.id,
           userCount: 0,
+          status: ChallengeStatusEnum.INACTIVE,
         })
       );
       return toJoin;
@@ -105,6 +112,7 @@ const addUserToChatRoom = async (
         chatRoomId: chatRoomToJoin.id,
         chatRoom: chatRoomToJoin,
         user: user,
+        userId: user.id,
       })
     );
   } catch (error) {
