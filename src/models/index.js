@@ -18,15 +18,15 @@ const { Follow, User, Checkin, ChallengeType, ChatRoom, Message, Challenge, Lead
 
 export {
   Follow,
-  Leaderboard,
-  Challenge,
-  ChallengeType,
   User,
-  Message,
-  ChatRoom,
   Checkin,
-  ChallengeUser,
+  ChallengeType,
+  ChatRoom,
+  Message,
+  Challenge,
+  Leaderboard,
   UserChatRoom,
+  ChallengeUser,
   UserValidatedCheckIn,
   MessageEnum,
   ChallengeStatusEnum

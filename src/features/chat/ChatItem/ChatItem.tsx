@@ -56,13 +56,13 @@ const ChatItem = (chat: Chat) => {
       activeOpacity={0.7}
     >
       <Card>
-        <HStack space={25 / 2} overflow="hidden">
+        <HStack space={25 / 4} overflow="hidden">
           <VStack width={70}>
             <Avatar userId={chat.id} />
           </VStack>
-          <VStack flexGrow={1} space={25 / 4}>
+          <VStack flexGrow={1} space={25 / 2}>
             <View>
-              <Text type={TextType.Regular}>{chat.name}</Text>
+              <Text type={TextType.Small}>{chat.name}</Text>
             </View>
             <View>
               <Text type={TextType.Subtle}>{chat.text}</Text>
