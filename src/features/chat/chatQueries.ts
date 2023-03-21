@@ -160,8 +160,8 @@ export const getChatDetails = async (chatId: string) => {
     challengeName: challengeTypeDetails.name,
     description: challengeTypeDetails.description,
     statistics: {
-      started: challegeDetail.started || "Yet to start",
-      ending: challegeDetail.status,
+      num: challegeDetail.userCount,
+      status: challegeDetail.status,
     },
     participants: users,
   } as ChatDetails;

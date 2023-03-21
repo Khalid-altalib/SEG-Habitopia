@@ -31,8 +31,8 @@ const Statistics = () => {
 
   return statistics ? (
     <HStack space={2} justifyContent="center">
-      <StatisticBox timestamp={statistics.started} statisticType="Started" />
-      <StatisticBox timestamp={statistics.ending} statisticType="Ending" />
+      <StatisticBox timestamp={statistics.num} statisticType="Users" />
+      <StatisticBox timestamp={statistics.status} statisticType="Status" />
     </HStack>
   ) : (
     <HStack space={1} justifyContent="center">
