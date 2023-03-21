@@ -4,7 +4,7 @@ import {ProfileState, fetchProfile, profileSlice, followUser, fetchFollowList} f
 import { getStatistics } from "./statisticsQueries";
 import { getUserFromDatabasebyID } from "../../app/util";
 import { applyMiddleware } from "redux";
-import {followUserQuery, getFollowers, getFollowing} from "./profileQueries";
+import {followUserQuery, getFollowers, getFollowing, getCount} from "./profileQueries";
 
 jest.mock("./statisticsQueries", () => ({
       getStatistics: jest.fn(),
@@ -16,6 +16,7 @@ jest.mock("../../app/util", () => ({
 
 jest.mock('./profileQueries', () => ({
     followUserQuery: jest.fn( () => Promise.resolve("Test")),
+    getCount: jest.fn( () => Promise.resolve((10,2))),
     getFollowers: jest.fn(),
     getFollowing: jest.fn(),
 }));
@@ -60,8 +61,8 @@ describe("profileSlice", () => {
     userId : "123",
     name: "Test User",
     biography: "This is a test biography",
-    followerCount: 0,
-    followingCount: 0,
+    followerCount: undefined,
+    followingCount: undefined,
     following: false,
     statistics: mockStatistics,
   };
@@ -88,7 +89,7 @@ describe("profileSlice", () => {
     jest.resetAllMocks();
   });
 
-  describe("fetchProfile", () => {   
+  describe("fetchProfileBuilder", () => {   
     
     it ("should handle fetchProfile correctly", async () => {
 
@@ -104,11 +105,9 @@ describe("profileSlice", () => {
 
       expect(getUserFromDatabasebyID).toHaveBeenCalledWith("123");
       expect(getStatistics).toHaveBeenCalledWith("123");
-
-
+      
       expect(store.getActions()[0].type).toEqual(expectedActions[0].type);
       expect(store.getActions()[1].type).toEqual(expectedActions[1].type);
-
       expect(store.getActions()[1].payload).toEqual(expectedActions[1].payload); // returns correct user?
     });
 
@@ -186,22 +185,77 @@ describe('followUser', () => {
     })
   );
 
+  // describe('followUser.fulfilled', () => {
+  let state: ProfileState;
+  beforeEach(() => {
+    mockState.profile = {
+        userId: 'test-id',
+        name: 'test-name',
+        biography: 'test-bio',
+        email: 'test-email',
+        rankings: [],
+        statistics: [],
+        followerCount: 0,
+        followingCount: 0,
+        following: false,    
+    };
+  });
+
+  it('should set profile.following to action.payload', () => {
+    const action = {
+      payload: true,
+      type: 'profile/follow/fulfilled',
+    };
+    const state = profileSlice.reducer(mockState, action);
+    expect(state.profile?.following).toBe(action.payload);
+  });
+
+  it('should increment followerCount if action.payload is true', () => {
+    
+    const action = {
+      payload: true,
+      type: 'profile/follow/fulfilled',
+    };
+    const state = profileSlice.reducer(mockState, action);
+    expect(state.profile?.followerCount).toBe(1);
+  });
+  
+  it('should decrement followerCount if action.payload is false', () => {
+    mockState.profile.followerCount = 1;
+    const action = {
+      payload: false,
+      type: 'profile/follow/fulfilled',
+    };
+    const state = profileSlice.reducer(mockState, action);
+    expect(state.profile?.followerCount).toBe(0);
+  });
+
+  it ('should handle followUser.pending', () => {
+    const action = {
+      type: 'profile/follow/pending',
+    };
+    const state = profileSlice.reducer(mockState, action);
+    expect(state.followUser.loading).toBe(true);
+    expect(state.followUser.error).toBe('');
+  });
+
   it('should return true when followUserQuery resolves', async () => {
     
     (followUserQuery as jest.Mock).mockResolvedValueOnce(true);
     const result = await store.dispatch(followUser('test-id'));
     expect(result.payload).toBe(true);
     expect(result.type).toBe('profile/follow/fulfilled');
-
   });
 
   it('should return error message when followUserQuery rejects', async () => { 
     (followUserQuery as jest.Mock).mockRejectedValueOnce(new Error('test error'));
     const result = await store.dispatch(followUser('test-id'));
     expect(result.payload).toBe('test error');
-
   });
+
 });
+
+
 
 describe("fetchFollowList", () => {
     let store : any;
@@ -215,9 +269,8 @@ describe("fetchFollowList", () => {
       middleware: [thunk],
     })
   );
-
-  describe('fetchFollowList', () => {
     it('should return following list when followListMode is "following"', async () => {
+      expect(true).toBe(true);
       (getFollowing as jest.Mock).mockResolvedValueOnce([{ name: 'test', userId: 'test-id' }]);
       const result = await store.dispatch(fetchFollowList({ followListMode: 'following', profileID: 'test-id' }));
       expect(result.payload).toEqual([{ name: 'test', userId: 'test-id' }]);
@@ -240,5 +293,70 @@ describe("fetchFollowList", () => {
       const result = await store.dispatch(fetchFollowList({ followListMode: 'follower', profileID: 'test-id' }));
       expect(result.payload).toBe('test error');
     });
-  })
-})
+});
+
+describe("fetchFollowListBuilder", () => {
+  let store : any;
+  let state: ProfileState;
+  
+  mockState.profile = {
+    userId: 'test-id',
+    name: 'test-name',
+    biography: 'test-bio',
+    email: 'test-email',
+    rankings: [],
+    statistics: [],
+    followerCount: 0,
+    followingCount: 0,
+    following: false,    
+};
+
+  beforeEach(() =>
+
+    store = configureStore([thunk])({
+      reducer:
+      {
+        profile: profileSlice.reducer,
+      },
+      middleware: [thunk],
+    })
+   
+  );
+
+  it('should return following list when followListMode is "following"', async () => {
+    const action = {
+      payload: [{ name: 'FollowListItem1', userId: 'test-id' }],
+      type: 'profile/fetch-follow-list/fulfilled',
+    };
+    const state = profileSlice.reducer(mockState, action);
+    expect(state.followList).toEqual(action.payload);
+    expect(state.fetchFollowList.loading).toBe(false);
+    expect(state.fetchFollowList.error).toBe('');
+  });
+  it ('should handle fetchFollowList.pending', () => {
+    const action = {
+      type: 'profile/fetch-follow-list/pending',
+    };
+    const state = profileSlice.reducer(mockState, action);
+    expect(state.fetchFollowList.loading).toBe(true);
+    expect(state.fetchFollowList.error).toBe('');
+  }
+  );
+  it('should return error message when fetchFollowList rejects', async () => {
+    const action = {
+      payload: 'An error has occured',
+      type: 'profile/fetch-follow-list/rejected',
+    };
+    const state = profileSlice.reducer(mockState, action);
+    expect(state.followList).toEqual(undefined);
+    expect(state.fetchFollowList.error).toBe("An error has occured");
+    expect(state.fetchFollowList.loading).toBe(false);
+  });
+
+  
+
+});
+
+    
+
+  // 165-167,171-173,176-178
