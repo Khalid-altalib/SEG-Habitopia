@@ -149,19 +149,22 @@ exports[`Renders correctly. 1`] = `
             />
           </View>
           <View
-            style={
-              [
-                {
-                  "borderRadius": 10,
-                  "shadowColor": "black",
-                  "shadowOffset": {
-                    "height": 5,
-                    "width": 5,
-                  },
-                  "shadowOpacity": 0.15,
-                },
-              ]
+            icon={
+              <Icon
+                allowFontScaling={false}
+                color="white"
+                name="arrowright"
+                size={20}
+              />
             }
+            isFullWidth={true}
+            onPress={[Function]}
+            style={
+              {
+                "marginTop": 20,
+              }
+            }
+            type={0}
           >
             <View
               accessible={true}

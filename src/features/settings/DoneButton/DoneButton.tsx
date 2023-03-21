@@ -40,6 +40,7 @@ const DoneButton = (props: Props) => {
       isFullWidth
       isLoading={loading}
       style={{ marginTop: 25 }}
+      testID="button"
     >
       Done
     </Button>

@@ -85,19 +85,13 @@ exports[`Renders correctly. 1`] = `
           You will be able to change them later.
         </Text>
         <View
+          isFullWidth={true}
           style={
-            [
-              {
-                "borderRadius": 10,
-                "shadowColor": "black",
-                "shadowOffset": {
-                  "height": 5,
-                  "width": 5,
-                },
-                "shadowOpacity": 0.15,
-              },
-            ]
+            {
+              "marginTop": 20,
+            }
           }
+          type={1}
         >
           <View
             accessible={true}
@@ -184,19 +178,13 @@ exports[`Renders correctly. 1`] = `
           </View>
         </View>
         <View
+          isFullWidth={true}
           style={
-            [
-              {
-                "borderRadius": 10,
-                "shadowColor": "black",
-                "shadowOffset": {
-                  "height": 5,
-                  "width": 5,
-                },
-                "shadowOpacity": 0.15,
-              },
-            ]
+            {
+              "marginTop": 20,
+            }
           }
+          type={1}
         >
           <View
             accessible={true}
@@ -283,19 +271,13 @@ exports[`Renders correctly. 1`] = `
           </View>
         </View>
         <View
+          isFullWidth={true}
           style={
-            [
-              {
-                "borderRadius": 10,
-                "shadowColor": "black",
-                "shadowOffset": {
-                  "height": 5,
-                  "width": 5,
-                },
-                "shadowOpacity": 0.15,
-              },
-            ]
+            {
+              "marginTop": 20,
+            }
           }
+          type={1}
         >
           <View
             accessible={true}
@@ -382,19 +364,13 @@ exports[`Renders correctly. 1`] = `
           </View>
         </View>
         <View
+          isFullWidth={true}
           style={
-            [
-              {
-                "borderRadius": 10,
-                "shadowColor": "black",
-                "shadowOffset": {
-                  "height": 5,
-                  "width": 5,
-                },
-                "shadowOpacity": 0.15,
-              },
-            ]
+            {
+              "marginTop": 20,
+            }
           }
+          type={1}
         >
           <View
             accessible={true}
@@ -481,19 +457,13 @@ exports[`Renders correctly. 1`] = `
           </View>
         </View>
         <View
+          isFullWidth={true}
           style={
-            [
-              {
-                "borderRadius": 10,
-                "shadowColor": "black",
-                "shadowOffset": {
-                  "height": 5,
-                  "width": 5,
-                },
-                "shadowOpacity": 0.15,
-              },
-            ]
+            {
+              "marginTop": 20,
+            }
           }
+          type={1}
         >
           <View
             accessible={true}
@@ -580,19 +550,13 @@ exports[`Renders correctly. 1`] = `
           </View>
         </View>
         <View
+          isFullWidth={true}
           style={
-            [
-              {
-                "borderRadius": 10,
-                "shadowColor": "black",
-                "shadowOffset": {
-                  "height": 5,
-                  "width": 5,
-                },
-                "shadowOpacity": 0.15,
-              },
-            ]
+            {
+              "marginTop": 20,
+            }
           }
+          type={1}
         >
           <View
             accessible={true}
