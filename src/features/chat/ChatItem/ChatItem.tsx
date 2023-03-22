@@ -56,11 +56,11 @@ const ChatItem = (chat: Chat) => {
       activeOpacity={0.7}
     >
       <Card>
-        <HStack space={25 / 2} overflow="hidden">
+        <HStack space={25 / 2}>
           <VStack width={70}>
             <Avatar userId={chat.id} />
           </VStack>
-          <VStack flexGrow={1} space={25 / 4}>
+          <VStack space={25 / 4} flexShrink={1}>
             <View>
               <Text type={TextType.Regular}>{chat.name}</Text>
             </View>
@@ -73,7 +73,7 @@ const ChatItem = (chat: Chat) => {
             justifyContent="flex-start"
             space={25 / 2}
             alignItems="center"
-            minWidth={9}
+            minW={9}
           >
             <Text type={TextType.Subtle}>
               {convertDateToTimeString(moment(chat.time).toDate())}
