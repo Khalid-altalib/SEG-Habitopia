@@ -38,7 +38,7 @@ export const fetchUserChats = async (thunkAPI: any) => {
     const time = new Date().toISOString();
     chats.push({
       id: chat.id,
-      name: "Chatroom",
+      name: chat.name,
       text: lastMessage?.text || "Welcome to the chat!",
       time: lastMessage?.createdAt || time,
       unreadMessages: 0,
@@ -161,7 +161,7 @@ export const getChatDetails = async (chatId: string) => {
     description: challengeTypeDetails.description,
     statistics: {
       started: challegeDetail.started || "Yet to start",
-      ending: challegeDetail.finished || "Yet to end",
+      ending: challegeDetail.status,
     },
     participants: users,
   } as ChatDetails;
