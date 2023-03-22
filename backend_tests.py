@@ -104,31 +104,36 @@ testMutations = [
         "creationVars": "",
         "updateVars": "name: \\\"testUpdated\\\""
     },
-    # {
-    #     "name": "ChatRoom",
-    #     "creationVars": "",
-    #     "updateVars": ""
-    # },
-    # {
-    #     "name": "Challenge",
-    #     "creationVars": "challengeChallengeTypeId: \"testID\", status: INACTIVE, challengeChatRoomId: \"testid\", userCount: 0",
-    #     "updateVars": "challengeChallengeTypeId: \"testID2\""
-    # },
-    # {
-    #     "name": "Message",
-    #     "creationVars": "",
-    #     "updateVars": ""
-    # },
-    # {
-    #     "name": "Checkin",
-    #     "creationVars": "",
-    #     "updateVars": ""
-    # },
-    # {
-    #     "name": "Leaderboard",
-    #     "creationVars": "",
-    #     "updateVars": ""
-    # },
+    {
+        "name": "ChatRoom",
+        "creationVars": "",
+        "updateVars": ""
+    },
+]
+
+createdItems = {}
+
+relatedTestMutations = [
+    {
+        "name": "Challenge",
+        "creationVars": "challengeChallengeTypeId: \"testID\", status: INACTIVE, challengeChatRoomId: \"testid\", userCount: 0",
+        "updateVars": "challengeChallengeTypeId: \"testID2\""
+    },
+    {
+        "name": "Message",
+        "creationVars": "",
+        "updateVars": ""
+    },
+    {
+        "name": "Checkin",
+        "creationVars": "",
+        "updateVars": ""
+    },
+    {
+        "name": "Leaderboard",
+        "creationVars": "",
+        "updateVars": ""
+    },
 ]
 
 #payload class: generic frame to populate with test querys
@@ -181,13 +186,13 @@ for testQuery in testQuerys:
 for testMutation in testMutations:
     responseTestMutationCreate = requests.request("POST", url, headers=headers, data=payloadGenericMutation(testMutation).createAsPayload())
     num_tests+=1
-    createCont=True
     try:
         assert responseTestMutationCreate.status_code == 200
         indexName = "create"+testMutation["name"]
         id = json.loads(responseTestMutationCreate.text)["data"][indexName]["id"]
         version = json.loads(responseTestMutationCreate.text)["data"][indexName]["_version"]
         print("Test Passed: create" + testMutation["name"] + " returned 200\n")
+        createdItems[testMutation["name"]] = [id, version]
     except AssertionError as e:
         createCont=False
         num_failed+=1
@@ -202,8 +207,13 @@ for testMutation in testMutations:
         print("Mutation: create" + testMutation["name"])
         print("Full Query: "+ payloadGenericMutation(testMutation).createAsPayload())
         print("Response: " + str(responseTestMutationCreate.status_code)+"\n")
+
+
     
-    if createCont:
+for testMutation in testMutations:
+    try:
+        id = createdItems[testMutation["name"]][0]
+        version = createdItems[testMutation["name"]][1]
         responseTestMutationUpdate = requests.request("POST", url, headers=headers, data=payloadGenericMutation(testMutation).updateAsPayload(id, version))
         num_tests+=1
         try:
@@ -230,7 +240,8 @@ for testMutation in testMutations:
             print("Mutation: delete" + testMutation["name"])
             print("Full Query: "+ payloadGenericMutation(testMutation).deleteAsPayload(id, version))
             print("Response: " + str(responseTestMutationDelete.status_code)+"\n")
-    else:
+
+    except KeyError:
         num_skipped+=2
 
 print("\n-------------------------\n{}/{} tests passed\n{}% test coverage ({} tests skipped)\n-------------------------\n".format(num_tests-num_failed, num_tests, str(100*num_tests/(len(testQuerys)+(len(testMutations)*3))), num_skipped))
