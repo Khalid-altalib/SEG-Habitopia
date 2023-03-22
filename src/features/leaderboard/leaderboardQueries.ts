@@ -17,43 +17,9 @@ import { onCreateCheckin } from "../../graphql/subscriptions";
 /**
  * Subscribes to the checkin model 
  * updates the leaderboard model when the user checks in
+ * @param currentUserId id of the current user
+ * @returns subscription to the checkin model
  */
-// const updateLeaderboard = DataStore.observe(Checkin).subscribe({
-//   next: async (msg) => {
-//     if (msg.opType === "INSERT") {
-//       const checkin = msg.element as Checkin;
-//       const { userID, checkinChallengeTypeId } = checkin;
-//       const currentUserID = (await Auth.currentAuthenticatedUser()).attributes.sub;
-//       const user = await getUserFromDatabasebyID(userID);
-//       if (currentUserID === userID) {
-//         const leaderboardEntry = await fetchLeaderboardByUserIDAndChallengeType(
-//           userID,
-//           checkinChallengeTypeId as string
-//         );
-//         const currentCheckins = leaderboardEntry?.numberOfCheckins ?? 0;
-//         const newCheckins = currentCheckins + 1;
-//         if (currentCheckins === 0) {
-//           await DataStore.save(
-//             new Leaderboard({
-//               leaderboardUserId: userID,
-//               numberOfCheckins: newCheckins,
-//               leaderboardChallengeTypeId: checkinChallengeTypeId as string,
-//               User: user,
-//             })
-//           );
-//         } else {
-//           await DataStore.save(
-//             Leaderboard.copyOf(leaderboardEntry, (updated) => {
-//               updated.numberOfCheckins = newCheckins;
-//             })
-//           );
-//         }
-//       }
-//     }
-//   },
-//   error: (err) => console.error(err),
-// });
-
 export const addCheckinSubscriptionForLeaderboard = (currentUserId: string) => {
   const filter: OnCreateCheckinSubscriptionVariables = {
     filter: {
