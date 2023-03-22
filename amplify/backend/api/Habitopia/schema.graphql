@@ -27,7 +27,7 @@ type Challenge @model @auth(rules: [{allow: public}]) {
   id: ID!
   ChallengeType: ChallengeType! @hasOne
   Users: [User] @manyToMany(relationName: "ChallengeUser")
-  status: ChallengeStatusEnum @index(name: "byStatus", queryField: "challengesByStatus", sortKeyFields: ["started"])
+  status: ChallengeStatusEnum @index(name: "byStatus", queryField: "challengesByStatus")
   started: Int
   ChatRoom: ChatRoom @hasOne
   userCount: Int
