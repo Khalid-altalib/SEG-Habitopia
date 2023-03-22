@@ -3,12 +3,12 @@ import { Box, Center, Heading, HStack, Text } from "native-base";
 import React from "react";
 
 type StatisticBoxProps = {
-  timestamp: string;
+  statisticValue: string;
   statisticType: string;
 };
 
 const StatisticBox = (props: StatisticBoxProps) => {
-  const { timestamp, statisticType } = props;
+  const { statisticValue, statisticType } = props;
 
   return (
     <Box
@@ -19,7 +19,7 @@ const StatisticBox = (props: StatisticBoxProps) => {
       width="125px"
     >
       <Center>
-        <Heading fontSize="xl">{timestamp}</Heading>
+        <Heading fontSize="xl">{statisticValue}</Heading>
         <Text fontSize="lg">{statisticType}</Text>
       </Center>
     </Box>
@@ -31,8 +31,11 @@ const Statistics = () => {
 
   return statistics ? (
     <HStack space={2} justifyContent="center">
-      <StatisticBox timestamp={statistics.started} statisticType="Started" />
-      <StatisticBox timestamp={statistics.ending} statisticType="Ending" />
+      <StatisticBox
+        statisticValue={statistics.num.toString()}
+        statisticType="Users"
+      />
+      <StatisticBox statisticValue={statistics.status} statisticType="Status" />
     </HStack>
   ) : (
     <HStack space={1} justifyContent="center">
