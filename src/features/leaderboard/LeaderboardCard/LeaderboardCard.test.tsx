@@ -53,4 +53,12 @@ describe("LeaderboardCard", () => {
       "#0f172a"
     );
   });
+
+  it("navigates to the profile screen when the user is pressed", async () => {
+    fireEvent.press(wrapper.getByTestId("leaderboard-card"));
+    const profileScreen = await waitFor(() =>
+      wrapper.getByTestId("profile-screen")
+    );
+    expect(profileScreen).toBeDefined();
+  });
 });
