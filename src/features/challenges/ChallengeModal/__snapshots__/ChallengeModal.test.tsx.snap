@@ -1,0 +1,351 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChallengeBoxes renders the challenge boxes correctly 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "flex": 1,
+        },
+        undefined,
+      ]
+    }
+  >
+    <RNSScreenStack
+      style={
+        {
+          "flex": 1,
+        }
+      }
+    >
+      <RNSScreen
+        collapsable={false}
+        forwardedRef={[Function]}
+        gestureResponseDistance={
+          {
+            "bottom": -1,
+            "end": -1,
+            "start": -1,
+            "top": -1,
+          }
+        }
+        nativeBackButtonDismissalEnabled={false}
+        onAppear={[Function]}
+        onDisappear={[Function]}
+        onDismissed={[Function]}
+        onHeaderBackButtonClicked={[Function]}
+        onNativeDismissCancelled={[Function]}
+        onTransitionProgress={[Function]}
+        onWillDisappear={[Function]}
+        replaceAnimation="push"
+        stackPresentation="push"
+        style={
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+        swipeDirection="horizontal"
+      >
+        <RNSScreenStackHeaderConfig
+          backButtonInCustomView={false}
+          backgroundColor="rgb(255, 255, 255)"
+          color="rgb(0, 122, 255)"
+          direction="ltr"
+          disableBackButtonMenu={false}
+          hidden={false}
+          hideBackButton={false}
+          largeTitleHideShadow={false}
+          title="TestScreen"
+          titleColor="rgb(28, 28, 30)"
+          topInsetEnabled={false}
+          translucent={false}
+        />
+        <View
+          accessibilityElementsHidden={false}
+          importantForAccessibility="auto"
+          style={
+            {
+              "flex": 1,
+              "flexDirection": "column-reverse",
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "flex": 1,
+                },
+                {
+                  "backgroundColor": "rgb(242, 242, 242)",
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              dataSet={{}}
+              style={{}}
+              testID="challengePrompt"
+            >
+              <View
+                dataSet={{}}
+                style={
+                  {
+                    "alignItems": "center",
+                  }
+                }
+              >
+                <Text
+                  dataSet={{}}
+                  style={
+                    {
+                      "backgroundColor": undefined,
+                      "color": "#171717",
+                      "fontFamily": undefined,
+                      "fontSize": 48,
+                      "fontStyle": "normal",
+                      "fontWeight": "700",
+                      "letterSpacing": 2.4000000000000004,
+                      "lineHeight": 60,
+                      "textDecorationLine": undefined,
+                    }
+                  }
+                >
+                  Fitness
+                </Text>
+                <View
+                  dataSet={{}}
+                  style={
+                    {
+                      "height": 12,
+                    }
+                  }
+                />
+                <Image
+                  accessibilityLabel="Challenge Image"
+                  alt="Challenge Image"
+                  dataSet={{}}
+                  onError={[Function]}
+                  source={
+                    {
+                      "uri": "https://picsum.photos/200",
+                    }
+                  }
+                  style={
+                    {
+                      "borderRadius": 8,
+                      "height": 100,
+                      "maxWidth": "100%",
+                      "width": 100,
+                    }
+                  }
+                />
+                <View
+                  dataSet={{}}
+                  style={
+                    {
+                      "height": 12,
+                    }
+                  }
+                />
+                <Text
+                  dataSet={{}}
+                  style={
+                    {
+                      "backgroundColor": undefined,
+                      "color": "#171717",
+                      "fontFamily": undefined,
+                      "fontSize": 20,
+                      "fontStyle": "normal",
+                      "fontWeight": "400",
+                      "letterSpacing": 0,
+                      "lineHeight": 30,
+                      "textAlign": "center",
+                      "textDecorationLine": undefined,
+                    }
+                  }
+                >
+                  Be active
+                </Text>
+                <View
+                  dataSet={{}}
+                  style={
+                    {
+                      "height": 12,
+                    }
+                  }
+                />
+                <View
+                  dataSet={{}}
+                  style={
+                    {
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <View
+                    accessibilityRole="button"
+                    accessible={true}
+                    collapsable={false}
+                    colorScheme="primary"
+                    dataSet={{}}
+                    focusable={true}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onFocus={[Function]}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={
+                      {
+                        "alignItems": "center",
+                        "backgroundColor": "#f59e0b",
+                        "borderRadius": 4,
+                        "flexDirection": "row",
+                        "justifyContent": "center",
+                        "paddingBottom": 10,
+                        "paddingLeft": 12,
+                        "paddingRight": 12,
+                        "paddingTop": 10,
+                      }
+                    }
+                    testID="joinButton"
+                  >
+                    <View
+                      dataSet={{}}
+                      style={
+                        {
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                        }
+                      }
+                      test={true}
+                    >
+                      <View
+                        dataSet={{}}
+                        style={{}}
+                      >
+                        <Text
+                          dataSet={{}}
+                          style={
+                            {
+                              "backgroundColor": undefined,
+                              "color": "#fafafa",
+                              "fontFamily": undefined,
+                              "fontSize": 14,
+                              "fontStyle": "normal",
+                              "fontWeight": "400",
+                              "letterSpacing": 0,
+                              "lineHeight": 21,
+                              "textDecorationLine": undefined,
+                            }
+                          }
+                        >
+                          Join Challenge!
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                  <View
+                    dataSet={{}}
+                    style={
+                      {
+                        "width": 12,
+                      }
+                    }
+                  />
+                  <View
+                    accessibilityRole="button"
+                    accessible={true}
+                    collapsable={false}
+                    colorScheme="primary"
+                    dataSet={{}}
+                    focusable={true}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onFocus={[Function]}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={
+                      {
+                        "alignItems": "center",
+                        "backgroundColor": "#a1a1aa",
+                        "borderRadius": 4,
+                        "flexDirection": "row",
+                        "justifyContent": "center",
+                        "paddingBottom": 10,
+                        "paddingLeft": 12,
+                        "paddingRight": 12,
+                        "paddingTop": 10,
+                      }
+                    }
+                    testID="backButton"
+                  >
+                    <View
+                      dataSet={{}}
+                      style={
+                        {
+                          "alignItems": "center",
+                          "flexDirection": "row",
+                        }
+                      }
+                      test={true}
+                    >
+                      <View
+                        dataSet={{}}
+                        style={{}}
+                      >
+                        <Text
+                          dataSet={{}}
+                          style={
+                            {
+                              "backgroundColor": undefined,
+                              "color": "#fafafa",
+                              "fontFamily": undefined,
+                              "fontSize": 14,
+                              "fontStyle": "normal",
+                              "fontWeight": "400",
+                              "letterSpacing": 0,
+                              "lineHeight": 21,
+                              "textDecorationLine": undefined,
+                            }
+                          }
+                        >
+                          Not now
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RNSScreen>
+    </RNSScreenStack>
+  </View>
+</RNCSafeAreaProvider>
+`;
