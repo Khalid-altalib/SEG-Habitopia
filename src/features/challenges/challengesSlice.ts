@@ -9,7 +9,7 @@ import {
 import { joinChallengeQuery } from "./challengeQueries";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 
-type ChallengesState = {
+export type ChallengesState = {
   challenges: Challenge[];
   fetchChallenges: {
     loading: boolean;
