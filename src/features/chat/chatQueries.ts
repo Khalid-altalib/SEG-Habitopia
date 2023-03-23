@@ -21,6 +21,7 @@ import {
   ALREADY_VALIDATED_ERROR,
   CHECK_IN_MESSAGE,
   COULD_NOT_VALIDATE,
+  MESSAGE_PAGINATION_LIMIT,
   VALIDATION_COUNT,
   VALIDATION_MESSAGE_TEXT,
 } from "@features/constants";
@@ -55,13 +56,19 @@ export const fetchUserChats = async (thunkAPI: any) => {
 };
 
 export const fetchChatMessages = async (chatId: string, pageNumber: number) => {
+  const numberOfMessageInChat = (
+    await DataStore.query(Message, (message) => message.chatroomID.eq(chatId))
+  ).length;
+  if (numberOfMessageInChat === 1 && pageNumber != 0) {
+    throw new Error("No more messages found!");
+  }
   const chatMessages = await DataStore.query(
     Message,
     (message) => message.chatroomID.eq(chatId),
     {
       sort: (message) => message.createdAt(SortDirection.DESCENDING),
       page: pageNumber,
-      limit: 100,
+      limit: MESSAGE_PAGINATION_LIMIT,
     }
   );
   if (chatMessages.length === 0) {
