@@ -19,6 +19,10 @@ const colorModeManager: StorageManager = {
     }
   },
   set: async (value: ColorMode) => {
+    if (value !== "light" && value !== "dark") {
+      throw new Error("Color mode must be 'light' or 'dark'.");
+    }
+
     if (value) {
       try {
         await AsyncStorage.setItem("@color-mode", value.toString());

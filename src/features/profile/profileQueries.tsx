@@ -2,6 +2,21 @@ import { getUserFromDatabase, getUserFromDatabasebyID } from "@app/util";
 import { DataStore } from "aws-amplify";
 import { Follow, User } from "src/models";
 
+export const isFollowingQuery = async (profileID: string, thunkAPI: any) => {
+  const user = await getUserFromDatabase(thunkAPI);
+  const checkIfFollowing = await DataStore.query(Follow, (follow) =>
+    follow.and((follow) => [
+      follow.followFollowedById.eq(user.id),
+      follow.followFollowingUserId.eq(profileID),
+    ])
+  );
+  if (checkIfFollowing.length > 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 export const followUserQuery = async (
   followingUserID: string,
   thunkAPI: any
