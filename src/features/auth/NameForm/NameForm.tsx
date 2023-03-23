@@ -10,6 +10,7 @@ import Text from "../../../components/Text";
 import { AuthParams, ButtonType, TextType } from "../../../../types";
 import { View } from "react-native";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 type formData = {
   name: string;
@@ -24,8 +25,15 @@ const NameForm = () => {
   const dispatch = useDispatch();
 
   const onSubmit = async (data: formData) => {
-    dispatch(addSignUpData(data));
-    navigation.navigate("EmailAddress");
+    if (data.name.length < 3) {
+      Toast.show({
+        type: "error",
+        text1: "Name cannot be less than 3 characters long",
+      });
+    } else {
+      dispatch(addSignUpData(data));
+      navigation.navigate("EmailAddress");
+    }
   };
 
   const navigation = useNavigation<NavigationProp<AuthParams>>();
