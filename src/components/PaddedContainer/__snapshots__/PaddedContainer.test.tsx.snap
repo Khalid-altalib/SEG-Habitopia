@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly. 1`] = `
+<View
+  style={
+    {
+      "height": "100%",
+      "padding": 25,
+      "width": "100%",
+    }
+  }
+>
+  This is some example content.
+</View>
+`;
