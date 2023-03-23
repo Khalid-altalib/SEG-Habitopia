@@ -29,6 +29,10 @@ const TestScreen = ({ route }: RouteProps) => {
   return <>{children}</>;
 };
 
+const fakeProfileScreen = () => {
+  return <div testID="profile-screen"></div>;
+};
+
 const TestingWrapperNavigation = (props: Props) => {
   const { store, children } = props;
 
@@ -41,6 +45,12 @@ const TestingWrapperNavigation = (props: Props) => {
               name="TestScreen"
               component={TestScreen}
               initialParams={{ children }}
+            />
+
+            <Stack.Screen
+              name="Profile"
+              component={fakeProfileScreen}
+              options={{ headerShown: false }}
             />
           </Stack.Navigator>
         </NavigationContainer>
