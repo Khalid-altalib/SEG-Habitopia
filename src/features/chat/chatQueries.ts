@@ -400,11 +400,11 @@ export const getCheckInSnippets = async (thunkAPI: any) => {
         checkIns.push({
           challenge: {
             id: challenge.id,
-            name: challengeTypeDetails.id,
+            name: challengeTypeDetails.name,
             active: isActive,
             description: challengeTypeDetails.description,
           },
-          status: isActive,
+          endDate: lastCheckIn.createdAt || "",
           chatId: challenge.challengeChatRoomId || "",
         });
       }
@@ -412,13 +412,14 @@ export const getCheckInSnippets = async (thunkAPI: any) => {
       checkIns.push({
         challenge: {
           id: challenge.id,
-          name: challengeTypeDetails.id,
+          name: challengeTypeDetails.name,
           active: isActive,
           description: challengeTypeDetails.description,
         },
-        status: isActive,
+        endDate: challenge.updatedAt || "",
         chatId: challenge.challengeChatRoomId || "",
       });
     }
   }
+  return checkIns;
 };

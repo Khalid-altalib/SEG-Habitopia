@@ -35,7 +35,10 @@ const CheckInSlider = (props: Props) => {
         }
       >
         {checkInSnippet.map((checkInSnippetItem, index) => (
-          <CheckInBox key={index} checkInSnippetItem={checkInSnippetItem} />
+          <CheckInBox
+            key={checkInSnippetItem.chatId}
+            checkInSnippetItem={checkInSnippetItem}
+          />
         ))}
       </StatusContainer>
     </HStack>

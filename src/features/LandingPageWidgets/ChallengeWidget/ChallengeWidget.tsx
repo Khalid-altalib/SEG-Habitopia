@@ -34,7 +34,7 @@ function ChallengeWidget({}: Props) {
         <StatusContainer loading={loading} error={error} data={challenges}>
           <VStack space={5}>
             {shuffledChallenges.map((challenge) => (
-              <ChallengeBox challenge={challenge} />
+              <ChallengeBox challenge={challenge} key={challenge.id} />
             ))}
           </VStack>
         </StatusContainer>
