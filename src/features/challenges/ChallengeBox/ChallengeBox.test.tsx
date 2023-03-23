@@ -1,18 +1,17 @@
-import { fireEvent, render, waitFor } from "@testing-library/react-native";
+import { fireEvent, render } from "@testing-library/react-native";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import TestingWrapperNavigation from "@app/testingWrapperWithNavigation";
 import challengesMockState from "../challengesMockState";
 import ChallengeBox from "./ChallengeBox";
+import { extendTheme, NativeBaseProvider } from "native-base";
 
 describe("ChallengeBox", () => {
   const mockState = {
     challenges: challengesMockState,
-    auth: { user: { authToken: "token", userId: "123" } },
   };
   const mockStore = configureStore([thunk])(mockState);
 
-  const getValuesMock = jest.fn();
   const activeBoxProps = {
     challenge: mockState.challenges.challenges[0],
   };
@@ -21,60 +20,58 @@ describe("ChallengeBox", () => {
   };
 
   it("renders the active challenge box correctly", async () => {
-    const tree = render(
+    const component = render(
       <TestingWrapperNavigation store={mockStore}>
         <ChallengeBox {...activeBoxProps} />
       </TestingWrapperNavigation>
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(component).toMatchSnapshot();
   });
 
   it("renders the unactive challenge box correctly", async () => {
-    const tree = render(
+    const component = render(
       <TestingWrapperNavigation store={mockStore}>
         <ChallengeBox {...unactiveBoxProps} />
       </TestingWrapperNavigation>
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(component).toMatchSnapshot();
   });
 
   it("finds the challenge box", async () => {
-    const tree = render(
+    const component = render(
       <TestingWrapperNavigation store={mockStore}>
         <ChallengeBox {...activeBoxProps} />
       </TestingWrapperNavigation>
     );
 
-    const button = tree.getByTestId("box");
+    const box = component.getByTestId("challengeBox");
 
-    expect(button).toBeDefined();
+    expect(box).toBeDefined();
   });
 
-  //   it("dispatches setSettings and updates settings when pressed", async () => {
-  //     const store = mockStore;
-  //     const valueName = "name";
-  //     const getValues = jest.fn().mockReturnValue("Jane Doe");
+  it("clicking on the challenge box brings up the challenge prompt", async () => {
+    const theme = extendTheme({});
+    const inset = {
+      frame: { x: 0, y: 0, width: 0, height: 0 },
+      insets: { top: 0, left: 0, right: 0, bottom: 0 },
+    };
 
-  //     const wrapper = render(
-  //       <TestingWrapperNavigation store={mockStore}>
-  //         <ChallengeBox valueName={valueName} getValues={getValues} />
-  //       </TestingWrapperNavigation>
-  //     );
+    const component = render(
+      <TestingWrapperNavigation store={mockStore}>
+        <NativeBaseProvider theme={theme} initialWindowMetrics={inset}>
+          <ChallengeBox {...activeBoxProps} />
+        </NativeBaseProvider>
+      </TestingWrapperNavigation>
+    );
 
-  //     const button = wrapper.getByTestId("button");
+    const box = component.getByTestId("challengeBox");
 
-  //     await fireEvent.press(button);
+    fireEvent(box, "press");
 
-  //     await waitFor(() => {
-  //       expect(getValues).toHaveBeenCalledTimes(1);
-  //       expect(getValues).toHaveBeenCalledWith("formValue");
-  //       const actions = store.getActions();
-  //       // console.log(actions);
-  //       // expect(actions[1].type).toEqual("settings/set/fulfilled");
-  //       // expect(actions[1].payload).toEqual({ name: "Jane Doe" });
-  //       // expect(store.getState().settings.settings.name).toEqual("Jane Doe");
-  //     });
-  //   });
+    const newScreen = component.getByTestId("challengePrompt");
+
+    expect(newScreen).toBeDefined();
+  });
 });
