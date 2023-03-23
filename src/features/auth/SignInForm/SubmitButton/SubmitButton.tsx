@@ -7,7 +7,7 @@ import { AntDesign } from "@expo/vector-icons";
 // Habitopia
 import Button from "../../../../components/Button";
 import { addLogInData, logInUser } from "../../authSlice";
-import { useDispatch } from "../../../../app/hooks";
+import { useDispatch, useSelector } from "../../../../app/hooks";
 import { ButtonType, SignInFormValues } from "../../../../../types";
 
 /**
@@ -18,6 +18,8 @@ import { ButtonType, SignInFormValues } from "../../../../../types";
  */
 const SubmitButton = ({ handleSubmit }: Props) => {
   const dispatch = useDispatch();
+
+  const { loading } = useSelector((state) => state.auth);
 
   const onSubmit = async (data: SignInFormValues) => {
     dispatch(addLogInData(data));
@@ -32,6 +34,7 @@ const SubmitButton = ({ handleSubmit }: Props) => {
       icon={<AntDesign name="arrowright" size={20} color="white" />}
       type={ButtonType.Primary}
       onPress={handleSubmit(onSubmit)}
+      isLoading={loading}
     >
       Continue
     </Button>
