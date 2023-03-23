@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly. 1`] = `
+<View
+  style={
+    [
+      {
+        "borderRadius": 10,
+        "shadowColor": "black",
+        "shadowOffset": {
+          "height": 5,
+          "width": 5,
+        },
+        "shadowOpacity": 0.15,
+      },
+    ]
+  }
+>
+  This is some example content.
+</View>
+`;

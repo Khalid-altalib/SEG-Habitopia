@@ -45,7 +45,7 @@ export type ButtonProps = {
  */
 const Button = (props: ButtonProps) => {
   return (
-    <BoxWithShadow>
+    <BoxWithShadow {...props}>
       <TouchableBox onPress={props.onPress} style={props.style}>
         <GradientBox type={props.type} isFullWidth={props.isFullWidth}>
           {props.isLoading ? (

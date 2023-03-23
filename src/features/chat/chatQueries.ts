@@ -14,6 +14,7 @@ import {
   Checkin,
   UserValidatedCheckIn,
   ChallengeType,
+  ChallengeStatusEnum,
 } from "../../models";
 import { Message as MessageType } from "../../../types";
 import moment from "moment";
@@ -21,6 +22,7 @@ import {
   ALREADY_VALIDATED_ERROR,
   CHECK_IN_MESSAGE,
   COULD_NOT_VALIDATE,
+  MESSAGE_PAGINATION_LIMIT,
   VALIDATION_COUNT,
   VALIDATION_MESSAGE_TEXT,
 } from "@features/constants";
@@ -55,13 +57,19 @@ export const fetchUserChats = async (thunkAPI: any) => {
 };
 
 export const fetchChatMessages = async (chatId: string, pageNumber: number) => {
+  const numberOfMessageInChat = (
+    await DataStore.query(Message, (message) => message.chatroomID.eq(chatId))
+  ).length;
+  if (numberOfMessageInChat === 1 && pageNumber != 0) {
+    throw new Error("No more messages found!");
+  }
   const chatMessages = await DataStore.query(
     Message,
     (message) => message.chatroomID.eq(chatId),
     {
       sort: (message) => message.createdAt(SortDirection.DESCENDING),
       page: pageNumber,
-      limit: 100,
+      limit: MESSAGE_PAGINATION_LIMIT,
     }
   );
   if (chatMessages.length === 0) {
@@ -160,8 +168,8 @@ export const getChatDetails = async (chatId: string) => {
     challengeName: challengeTypeDetails.name,
     description: challengeTypeDetails.description,
     statistics: {
-      started: challegeDetail.started || "Yet to start",
-      ending: challegeDetail.status,
+      num: challegeDetail.userCount,
+      status: challegeDetail.status,
     },
     participants: users,
   } as ChatDetails;
@@ -169,6 +177,19 @@ export const getChatDetails = async (chatId: string) => {
 };
 
 export const sendChatCheckIn = async (chatID: string, thunkAPI: any) => {
+  const challengeStatus = (
+    await DataStore.query(Challenge, (challenge) =>
+      challenge.challengeChatRoomId.eq(chatID)
+    )
+  )[0].status;
+  switch (challengeStatus) {
+    case ChallengeStatusEnum.COMPLETED:
+      throw new Error("Challenge has ended!");
+    case ChallengeStatusEnum.INACTIVE:
+      throw new Error("Challenge has not started!");
+    default:
+      break;
+  }
   const userID = getUserIdFromThunk(thunkAPI);
 
   const lastCheckIn = await getLastCheckIn(chatID, thunkAPI);

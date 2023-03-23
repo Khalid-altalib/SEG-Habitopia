@@ -40,7 +40,7 @@ def handler(event, context):
     #payload class: query for inactive challenges to start
     class payloadGetChallengesToStart:
         def __init__(self):
-            self.query = "{\"query\":\"query getChallengesToStart {\\r\\n        challengesByStatus(status: INACTIVE) {\\r\\n            items {\\r\\n                id\\r\\n                createdAt\\r\\n                userCount\\r\\n                _version\\r\\n                _deleted\\r\\n            }\\r\\n        }\\r\\n    }\",\"variables\":{}}"
+            self.query = "{\"query\":\"query getChallengesToStart {\\r\\n        challengesByStatus(status: INACTIVE) {\\r\\n            items {\\r\\n                id\\r\\n                createdAt\\r\\n                updatedAt\\r\\n                userCount\\r\\n                _version\\r\\n                _deleted\\r\\n            }\\r\\n        }\\r\\n    }\",\"variables\":{}}"
 
         def asPayload(self):
             return self.query
@@ -75,7 +75,7 @@ def handler(event, context):
 
     #Set queued full or waiting inactive challenges to active
     for chalToStart in challengesToStartWithoutDeleted:
-        if ((datetime.strptime(chalToStart["createdAt"],"%Y-%m-%dT%H:%M:%S.%fZ") < (datetime.today() - timedelta(days=1))) and (chalToStart["userCount"]>14)):
+        if ((datetime.strptime(chalToStart["updatedAt"],"%Y-%m-%dT%H:%M:%S.%fZ") < (datetime.today() - timedelta(minutes=5))) and (chalToStart["userCount"]>=3)):
             responseSetChallengeActive = requests.request("POST", url, headers=headers, data=payloadSetChallengeActive(chalToStart["id"], chalToStart["_version"]).asPayload())
             updateResponseAsJson = json.loads(responseSetChallengeActive.text)["data"]["updateChallenge"]
 

@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly. 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <ViewManagerAdapter_ExpoLinearGradient
+    proxiedProperties={
+      {
+        "colors": [
+          4293190887,
+          4294243573,
+        ],
+        "endPoint": undefined,
+        "locations": undefined,
+        "startPoint": undefined,
+      }
+    }
+    style={
+      {
+        "height": "100%",
+      }
+    }
+  >
+    <RCTScrollView
+      contentContainerStyle={
+        [
+          {},
+          {
+            "dataSet": {},
+          },
+          {},
+        ]
+      }
+      dataSet={{}}
+      style={
+        {
+          "height": "100%",
+        }
+      }
+    >
+      <View>
+        <View
+          style={
+            {
+              "height": "100%",
+              "padding": 25,
+              "width": "100%",
+            }
+          }
+        >
+          <View
+            dataSet={{}}
+            style={{}}
+          >
+            <View
+              dataSet={{}}
+              style={
+                {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "justifyContent": "center",
+                }
+              }
+            />
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </ViewManagerAdapter_ExpoLinearGradient>
+</RNCSafeAreaProvider>
+`;

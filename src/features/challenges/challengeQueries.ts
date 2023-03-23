@@ -38,7 +38,7 @@ export const joinChallengeQuery = async (
 
   await DataStore.save(
     ChallengeModel.copyOf(challengeToJoin, (updated) => {
-      if (updated.userCount) updated.userCount += 1;
+      updated.userCount += 1;
     })
   );
 };

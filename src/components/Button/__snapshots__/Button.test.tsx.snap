@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly. 1`] = `
+<View
+  isLoading={false}
+  style={
+    [
+      {
+        "borderRadius": 10,
+        "shadowColor": "black",
+        "shadowOffset": {
+          "height": 5,
+          "width": 5,
+        },
+        "shadowOpacity": 0.15,
+      },
+    ]
+  }
+  type={0}
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "opacity": 1,
+      }
+    }
+  >
+    <ViewManagerAdapter_ExpoLinearGradient
+      proxiedProperties={
+        {
+          "colors": [
+            4278220774,
+            4286456526,
+          ],
+          "endPoint": [
+            1,
+            1,
+          ],
+          "locations": undefined,
+          "startPoint": [
+            0,
+            0,
+          ],
+        }
+      }
+      style={
+        [
+          {
+            "alignItems": "center",
+            "borderRadius": 10,
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "paddingHorizontal": 40,
+            "paddingVertical": 15,
+          },
+          {
+            "alignSelf": "flex-start",
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#18181b",
+            },
+            {
+              "color": "#e4e4e7",
+              "fontFamily": undefined,
+              "fontSize": 19,
+            },
+            [
+              null,
+              {
+                "alignSelf": "center",
+              },
+            ],
+          ]
+        }
+      >
+        This is some example content.
+      </Text>
+      <View
+        style={
+          {
+            "marginLeft": 5,
+          }
+        }
+      />
+    </ViewManagerAdapter_ExpoLinearGradient>
+  </View>
+</View>
+`;
