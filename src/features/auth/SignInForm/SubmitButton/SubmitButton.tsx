@@ -9,6 +9,7 @@ import Button from "../../../../components/Button";
 import { addLogInData, logInUser } from "../../authSlice";
 import { useDispatch, useSelector } from "../../../../app/hooks";
 import { ButtonType, SignInFormValues } from "../../../../../types";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 /**
  * A button for submitting the sign in form.
@@ -22,9 +23,16 @@ const SubmitButton = ({ handleSubmit }: Props) => {
   const { loading } = useSelector((state) => state.auth);
 
   const onSubmit = async (data: SignInFormValues) => {
-    dispatch(addLogInData(data));
+    if (data.email == "" || data.password == "") {
+      Toast.show({
+        type: "error",
+        text1: "Please include both email and password",
+      });
+    } else {
+      dispatch(addLogInData(data));
 
-    await dispatch(logInUser());
+      await dispatch(logInUser());
+    }
   };
 
   return (
