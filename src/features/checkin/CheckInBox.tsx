@@ -3,24 +3,38 @@ import React, { useState } from "react";
 import { TouchableOpacity } from "react-native";
 import CheckInTime from "./CheckInTime";
 import Text from "@components/Text";
-import { TextType } from "types";
+import { ChatParams, CheckInSnippetItem, TextType } from "types";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { setCheckedInSnippetItemStatus } from "@features/chat/chatSlice";
+import { useDispatch } from "@app/hooks";
 
 type Props = {
-  checkIn: {
-    name: string;
-    timeLeft: string;
-  };
+  checkInSnippetItem: CheckInSnippetItem;
 };
 
 const CheckInBox = (props: Props) => {
-  const { checkIn } = props;
+  const { checkInSnippetItem } = props;
+  const { challenge, endDate, chatId } = checkInSnippetItem;
+
+  const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
+
+  const dispatch = useDispatch();
+
+  const handlePress = () => {
+    dispatch(setCheckedInSnippetItemStatus("a"));
+    // navigation.push("IndividualChat", { id: chatId });
+  };
+
+  const timeDifference = new Date(endDate).getTime() - new Date().getTime();
+  const timeDifferenceHours = Math.round(timeDifference / (1000 * 60 * 60));
 
   return (
-    <TouchableOpacity style={{ marginRight: 25 }}>
+    <TouchableOpacity style={{ marginRight: 25 }} onPress={handlePress}>
       <ZStack size="full" style={{ aspectRatio: 1 }}>
         <Image
           source={{ uri: "https://picsum.photos/2000" }}
-          alt={checkIn.name}
+          alt={challenge.name}
           size="full"
           rounded="lg"
           position="absolute"
@@ -38,9 +52,9 @@ const CheckInBox = (props: Props) => {
             padding: 12.25,
           }}
         >
-          {checkIn.name}
+          {challenge.name}
         </Text>
-        <CheckInTime timeLeft={checkIn.timeLeft} />
+        <CheckInTime hoursLeft={timeDifferenceHours} />
       </ZStack>
     </TouchableOpacity>
   );

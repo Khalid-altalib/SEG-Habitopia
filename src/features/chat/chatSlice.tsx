@@ -1,5 +1,11 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { Chat, ChatDetails, CheckInSnippetItem, Message } from "../../../types";
+import {
+  Challenge,
+  Chat,
+  ChatDetails,
+  CheckInSnippetItem,
+  Message,
+} from "../../../types";
 import {
   fetchChatMessages,
   fetchUserChats,
@@ -35,10 +41,6 @@ type ChatState = {
     error: string;
   };
   fetchCheckInSnippet: {
-    loading: boolean;
-    error: string;
-  };
-  fetchValidationSnippet: {
     loading: boolean;
     error: string;
   };
@@ -197,10 +199,6 @@ const initialState: ChatState = {
     loading: false,
     error: "",
   },
-  fetchValidationSnippet: {
-    loading: false,
-    error: "",
-  },
   details: undefined,
   currentChatId: undefined,
   pageNumber: 0,
@@ -211,6 +209,11 @@ export const chatSlice = createSlice({
   name: "chats",
   initialState,
   reducers: {
+    setCheckedInSnippetItemStatus: (state, action: PayloadAction<string>) => {
+      state.checkInSnippet = state.checkInSnippet.filter(
+        (checkInSnippetItem) => checkInSnippetItem.chatId !== action.payload
+      );
+    },
     addMessageToChat: (
       state,
       action: PayloadAction<{ chatID: string; message: Message }>
@@ -402,6 +405,7 @@ export const {
   resetPageNumber,
   updateChatList,
   resetUnreadMessages,
+  setCheckedInSnippetItemStatus,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;
