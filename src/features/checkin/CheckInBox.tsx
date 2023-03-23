@@ -6,8 +6,12 @@ import Text from "@components/Text";
 import { ChatParams, CheckInSnippetItem, TextType } from "types";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { setCheckedInSnippetItemStatus } from "@features/chat/chatSlice";
+import {
+  sendCheckIn,
+  setCheckedInSnippetItemStatus,
+} from "@features/chat/chatSlice";
 import { useDispatch } from "@app/hooks";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 type Props = {
   checkInSnippetItem: CheckInSnippetItem;
@@ -17,13 +21,15 @@ const CheckInBox = (props: Props) => {
   const { checkInSnippetItem } = props;
   const { challenge, endDate, chatId } = checkInSnippetItem;
 
-  const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
-
   const dispatch = useDispatch();
 
-  const handlePress = () => {
-    dispatch(setCheckedInSnippetItemStatus("a"));
-    // navigation.push("IndividualChat", { id: chatId });
+  const handlePress = async () => {
+    dispatch(setCheckedInSnippetItemStatus(chatId));
+    await dispatch(sendCheckIn(chatId));
+    Toast.show({
+      type: "success",
+      text1: "Successfully checked in!",
+    });
   };
 
   const timeDifference = new Date(endDate).getTime() - new Date().getTime();

@@ -16,6 +16,8 @@ const CheckInSlider = (props: Props) => {
 
   const { loading, error } = requestStatus;
 
+  console.log(checkInSnippet);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,25 +25,27 @@ const CheckInSlider = (props: Props) => {
   }, []);
 
   return (
-    <HStack marginLeft={25} marginTop={25} maxHeight={150} minWidth="100%">
-      <StatusContainer
-        loading={loading}
-        error={error}
-        data={checkInSnippet}
-        noDataDisplay={
-          <Center width="100%">
-            <Text style={{ textAlign: "center" }}>All Caught Up!</Text>
-          </Center>
-        }
-      >
-        {checkInSnippet.map((checkInSnippetItem, index) => (
+    <StatusContainer
+      loading={loading}
+      error={error}
+      data={checkInSnippet}
+      noDataDisplay={
+        <Center width="100%">
+          <Text style={{ textAlign: "center", marginLeft: 12 }}>
+            All Caught Up!
+          </Text>
+        </Center>
+      }
+    >
+      <HStack marginLeft={25} marginTop={25} maxHeight={150} minWidth="100%">
+        {checkInSnippet.map((checkInSnippetItem) => (
           <CheckInBox
             key={checkInSnippetItem.chatId}
             checkInSnippetItem={checkInSnippetItem}
           />
         ))}
-      </StatusContainer>
-    </HStack>
+      </HStack>
+    </StatusContainer>
   );
 };
 
