@@ -9,6 +9,7 @@ const CatchUpBox = (props: Props) => {
   let isUserLiked = false;
   const [isLiked, setIsLiked] = useState(isUserLiked);
   const onHeartPressed = () => setIsLiked(!isLiked);
+
   return (
     <TouchableOpacity style={{ marginRight: 25 }}>
       <ZStack size="full" style={{ aspectRatio: 1 }}>
