@@ -1,9 +1,16 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { Chat, ChatDetails, Message } from "../../../types";
+import {
+  Challenge,
+  Chat,
+  ChatDetails,
+  CheckInSnippetItem,
+  Message,
+} from "../../../types";
 import {
   fetchChatMessages,
   fetchUserChats,
   getChatDetails,
+  getCheckInSnippets,
   incrementCheckInValidation,
   sendChatCheckIn,
   sendChatMessage,
@@ -33,9 +40,14 @@ type ChatState = {
     loading: boolean;
     error: string;
   };
+  fetchCheckInSnippet: {
+    loading: boolean;
+    error: string;
+  };
   details?: ChatDetails;
   currentChatId?: string;
   pageNumber: number;
+  checkInSnippet: CheckInSnippetItem[];
 };
 
 export const fetchDetails = createAsyncThunk<
@@ -131,7 +143,7 @@ export const validateCheckIn = createAsyncThunk<
   { rejectValue: string }
 >("checkIn/validate", async (messageId: string, thunkAPI) => {
   try {
-    const newCheckIn = await incrementCheckInValidation(messageId, thunkAPI);
+    await incrementCheckInValidation(messageId, thunkAPI);
   } catch (error: any) {
     const message = error.message;
     Toast.show({
@@ -139,6 +151,25 @@ export const validateCheckIn = createAsyncThunk<
       text1: message,
     });
     return thunkAPI.rejectWithValue(message);
+  }
+});
+
+export const fetchCheckInSnippet = createAsyncThunk<
+  any,
+  void,
+  { rejectValue: string }
+>("checkIn/fetchSnippet", async (_, thunkAPI) => {
+  try {
+    // fetch challenges user is in
+
+    // of these challenges, filter which one needs to be checkedin
+
+    // return CheckInSnippet with checkedIn = false and the associated challenge object
+    const checkInSnippets = await getCheckInSnippets(thunkAPI);
+
+    return checkInSnippets;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue("An error has occured");
   }
 });
 
@@ -164,15 +195,25 @@ const initialState: ChatState = {
     loading: false,
     error: "",
   },
+  fetchCheckInSnippet: {
+    loading: false,
+    error: "",
+  },
   details: undefined,
   currentChatId: undefined,
   pageNumber: 0,
+  checkInSnippet: [],
 };
 
 export const chatSlice = createSlice({
   name: "chats",
   initialState,
   reducers: {
+    setCheckedInSnippetItemStatus: (state, action: PayloadAction<string>) => {
+      state.checkInSnippet = state.checkInSnippet.filter(
+        (checkInSnippetItem) => checkInSnippetItem.chatId !== action.payload
+      );
+    },
     addMessageToChat: (
       state,
       action: PayloadAction<{ chatID: string; message: Message }>
@@ -238,6 +279,23 @@ export const chatSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(
+      fetchCheckInSnippet.fulfilled,
+      (state, action: PayloadAction<CheckInSnippetItem[]>) => {
+        state.checkInSnippet = action.payload;
+        state.fetchCheckInSnippet.loading = false;
+        state.fetchCheckInSnippet.error = "";
+      }
+    );
+    builder.addCase(fetchCheckInSnippet.pending, (state) => {
+      state.fetchCheckInSnippet.loading = true;
+      state.fetchCheckInSnippet.error = "";
+    });
+    builder.addCase(fetchCheckInSnippet.rejected, (state) => {
+      state.fetchCheckInSnippet.loading = false;
+      state.fetchCheckInSnippet.error = "";
+      state.checkInSnippet = [];
+    });
     builder.addCase(fetchChats.pending, (state) => {
       state.fetchChats.loading = true;
     });
@@ -346,7 +404,8 @@ export const {
   updateCheckInMessage,
   resetPageNumber,
   updateChatList,
-  resetUnreadMessages
+  resetUnreadMessages,
+  setCheckedInSnippetItemStatus,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

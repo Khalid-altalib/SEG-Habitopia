@@ -21,7 +21,9 @@ const ChallengeBoxes = (props: Props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchChallenges());
+    if (challenges.length == 0) {
+      dispatch(fetchChallenges());
+    }
   }, []);
 
   return (
