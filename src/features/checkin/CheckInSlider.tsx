@@ -15,9 +15,7 @@ const CheckInSlider = (props: Props) => {
   );
 
   const { loading, error } = requestStatus;
-
-  console.log(checkInSnippet);
-
+  
   const dispatch = useDispatch();
 
   useEffect(() => {

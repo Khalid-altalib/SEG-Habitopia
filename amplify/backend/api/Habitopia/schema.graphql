@@ -83,4 +83,3 @@ type Checkin @model @auth(rules: [{allow: public}]) {
   validatedBy: [User] @manyToMany(relationName: "UserValidatedCheckIn")
   ChallengeType: ChallengeType @hasOne
 }
- 
