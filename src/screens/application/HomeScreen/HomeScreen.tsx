@@ -3,9 +3,9 @@ import { ScrollView } from "native-base";
 
 // Habitopia
 import Background from "@components/Background";
-import CatchUpWidget from "@features/challenges/LandingPageWidgets/CatchUpWidget/CatchUpWidget";
-import ChallengeWidget from "@features/challenges/LandingPageWidgets/ChallengeWidget/ChallengeWidget";
-import CheckInWidget from "@features/challenges/LandingPageWidgets/CheckInWidget/CheckInWidget";
+import CatchUpWidget from "@features/challenges/landingPageWidgets/CatchUpWidget/CatchUpWidget";
+import ChallengeWidget from "@features/challenges/landingPageWidgets/ChallengeWidget/ChallengeWidget";
+import CheckInWidget from "@features/challenges/landingPageWidgets/CheckInWidget/CheckInWidget";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function HomeScreen() {
