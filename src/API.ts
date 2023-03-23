@@ -7622,6 +7622,7 @@ export type OnCreateChatRoomSubscription = {
 
 export type OnUpdateChatRoomSubscriptionVariables = {
   filter?: ModelSubscriptionChatRoomFilterInput | null,
+  userFilter?: ModelSubscriptionChatRoomFilterInput | null,
 };
 
 export type OnUpdateChatRoomSubscription = {

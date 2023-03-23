@@ -148,8 +148,8 @@ export type ChatDetails = {
   challengeName: string;
   description: string;
   statistics: {
-    started: string;
-    ending: string;
+    num: number;
+    status: string;
   };
   participants: User[];
 };

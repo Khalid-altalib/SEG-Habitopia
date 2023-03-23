@@ -62,7 +62,7 @@ const ChatItem = (chat: Chat) => {
           </VStack>
           <VStack space={25 / 4} flexShrink={1}>
             <View>
-              <Text type={TextType.Regular}>{chat.name}</Text>
+              <Text type={TextType.Small}>{chat.name}</Text>
             </View>
             <View>
               <Text type={TextType.Subtle}>{chat.text}</Text>

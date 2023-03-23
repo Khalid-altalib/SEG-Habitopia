@@ -13,3 +13,4 @@ export const VALIDATION_MESSAGE_TEXT = async (...args: string[]) => {
   ).format("ddd Do, hA")}`;
 };
 export const COULD_NOT_VALIDATE = "Could not validate!";
+export const MESSAGE_PAGINATION_LIMIT = 100;
