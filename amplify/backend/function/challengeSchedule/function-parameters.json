@@ -16,43 +16,7 @@
       ]
     },
     "storage": {
-      "Leaderboard:@model(appsync)": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ],
-      "Challenge:@model(appsync)": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ],
       "ChallengeType:@model(appsync)": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ],
-      "User:@model(appsync)": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ],
-      "Message:@model(appsync)": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ],
-      "ChatRoom:@model(appsync)": [
-        "create",
-        "read",
-        "update",
-        "delete"
-      ],
-      "Checkin:@model(appsync)": [
         "create",
         "read",
         "update",

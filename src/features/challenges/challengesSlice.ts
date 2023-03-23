@@ -2,11 +2,14 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { DataStore } from "@aws-amplify/datastore";
 import { Challenge } from "../../../types";
 import { RootState } from "../../app/store";
-import { ChallengeType as ChallengeTypeModel } from "../../models";
+import {
+  ChallengeType as ChallengeTypeModel,
+  ChallengeUser,
+} from "../../models";
 import { joinChallengeQuery } from "./challengeQueries";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 
-type ChallengesState = {
+export type ChallengesState = {
   challenges: Challenge[];
   fetchChallenges: {
     loading: boolean;
@@ -45,7 +48,7 @@ const displayErrorMessage = (error: any) => {
     type: "error",
     text1: errorMessage,
   });
-}
+};
 
 export const joinChallenge = createAsyncThunk<
   Challenge,
@@ -61,11 +64,11 @@ export const joinChallenge = createAsyncThunk<
 
     await joinChallengeQuery(challengeTypeInstance, thunkAPI);
 
-    Toast.show({type: "success", text1: "Welcome to the challenge!"})
+    Toast.show({ type: "success", text1: "Welcome to the challenge!" });
 
     return { ...challengeTypeInstance };
   } catch (error: any) {
-    displayErrorMessage(error)
+    displayErrorMessage(error);
     return thunkAPI.rejectWithValue("An error has occured");
   }
 });

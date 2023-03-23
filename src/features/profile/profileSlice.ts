@@ -7,8 +7,8 @@ import {
   getCount,
   getFollowers,
   getFollowing,
+  isFollowingQuery,
 } from "./profileQueries";
-import { RootState } from "@app/store";
 
 export type ProfileState = {
   profile?: Profile;
@@ -90,7 +90,8 @@ export const fetchProfile = createAsyncThunk<
   try {
     const user = await getUserFromDatabasebyID(userId);
     const { checkIns, streak, wins } = await getStatistics(userId);
-    const { followerCount, followingCount } = await getCount(user.id);
+    const { followerCount, followingCount } = await getCount(userId);
+    const isFollowing = await isFollowingQuery(userId, thunkAPI);
 
     const statistics = [
       { name: "Streak", quantity: streak },
@@ -103,7 +104,7 @@ export const fetchProfile = createAsyncThunk<
       name: user.name,
       biography: user.biography,
       statistics: statistics,
-      following: false,
+      following: isFollowing,
       followerCount: followerCount,
       followingCount: followingCount,
     };

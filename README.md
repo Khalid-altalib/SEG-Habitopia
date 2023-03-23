@@ -1,17 +1,27 @@
-# SEG-Habitopia
+# Habitopia
 
+A social media app that turns habit-building into a multiplayer game supercharged with social accountability.
 
-### *Team members:*
+## An overview of the technologies used
 
-<ul>
-<li>KHALID ALTALIB</li>
-<li>KUNAL CHARN</li>
-<li>MOHAMMED CHOWDHURY</li>
-<li>ABDULRAHMAN GALLUL</li>
-<li>TAREITA NAWAZ</li>
-<li>VIKASH SENTHIL KUMAR</li>
-<li>TONY SMITH</li>
-<li>BURHAN TEKCAN</li>
-<li>NICKAN TOUSI</li>
-</ul>
+- React Native
+- TypeScript
+- Expo
+- NativeBase
+- AWS Amplify
 
+## Accessing the deployed version
+
+The deployed version is available [here](https://placeholder.com).
+
+## Contributors
+
+- [Abdulrahman Gallul](https://github.com/A-Gully)
+- [Burhan Tekcan](https://github.com/BurhanT)
+- [Khalid Altalib](https://github.com/Khalid-altalib)
+- [Kunal Charn](https://github.com/kunal-charn)
+- [Mohammed Chowdhury](https://github.com/ihtasham42)
+- [Nickan Tousi](https://github.com/nickan2c)
+- [Tareita Nawaz](https://github.com/tareita)
+- [Tony Smith](https://github.com/toggysmith)
+- [Vikash Senthil Kumar](https://github.com/Vikash-Vikash)

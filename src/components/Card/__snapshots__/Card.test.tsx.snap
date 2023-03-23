@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly. 1`] = `
+<View
+  style={
+    {
+      "shadowColor": "black",
+      "shadowOffset": {
+        "height": 5,
+        "width": 5,
+      },
+      "shadowOpacity": 0.05,
+      "width": "100%",
+    }
+  }
+>
+  <ViewManagerAdapter_ExpoLinearGradient
+    proxiedProperties={
+      {
+        "colors": [
+          4294967295,
+          4294243573,
+        ],
+        "endPoint": [
+          0.5,
+          2,
+        ],
+        "locations": undefined,
+        "startPoint": undefined,
+      }
+    }
+    style={
+      [
+        {
+          "borderRadius": 10,
+          "padding": 20,
+        },
+      ]
+    }
+  >
+    This is some example content.
+  </ViewManagerAdapter_ExpoLinearGradient>
+</View>
+`;

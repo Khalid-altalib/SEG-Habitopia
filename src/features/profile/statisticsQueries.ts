@@ -89,7 +89,7 @@ export const getWins = async (userId: string) => {
   // then we check if the challenge is completed
   
   for await (const challenge of userChallenges) {
-    if (challenge.status == ChallengeStatusEnum.COMPLETED) {
+    if (challenge.status === ChallengeStatusEnum.COMPLETED) {
       wins++;
     }
   }

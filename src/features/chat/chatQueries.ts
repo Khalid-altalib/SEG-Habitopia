@@ -1,5 +1,5 @@
 import { DataStore, SortDirection } from "aws-amplify";
-import { Chat, ChatDetails } from "../../../types";
+import { Chat, ChatDetails, CheckInSnippetItem } from "../../../types";
 import {
   getUserFromDatabase,
   getUserFromDatabasebyID,
@@ -14,6 +14,8 @@ import {
   Checkin,
   UserValidatedCheckIn,
   ChallengeType,
+  ChallengeStatusEnum,
+  ChallengeUser,
 } from "../../models";
 import { Message as MessageType } from "../../../types";
 import moment from "moment";
@@ -21,6 +23,7 @@ import {
   ALREADY_VALIDATED_ERROR,
   CHECK_IN_MESSAGE,
   COULD_NOT_VALIDATE,
+  MESSAGE_PAGINATION_LIMIT,
   VALIDATION_COUNT,
   VALIDATION_MESSAGE_TEXT,
 } from "@features/constants";
@@ -38,7 +41,7 @@ export const fetchUserChats = async (thunkAPI: any) => {
     const time = new Date().toISOString();
     chats.push({
       id: chat.id,
-      name: "Chatroom",
+      name: chat.name,
       text: lastMessage?.text || "Welcome to the chat!",
       time: lastMessage?.createdAt || time,
       unreadMessages: 0,
@@ -55,13 +58,19 @@ export const fetchUserChats = async (thunkAPI: any) => {
 };
 
 export const fetchChatMessages = async (chatId: string, pageNumber: number) => {
+  const numberOfMessageInChat = (
+    await DataStore.query(Message, (message) => message.chatroomID.eq(chatId))
+  ).length;
+  if (numberOfMessageInChat === 1 && pageNumber != 0) {
+    throw new Error("No more messages found!");
+  }
   const chatMessages = await DataStore.query(
     Message,
     (message) => message.chatroomID.eq(chatId),
     {
       sort: (message) => message.createdAt(SortDirection.DESCENDING),
       page: pageNumber,
-      limit: 100,
+      limit: MESSAGE_PAGINATION_LIMIT,
     }
   );
   if (chatMessages.length === 0) {
@@ -160,8 +169,8 @@ export const getChatDetails = async (chatId: string) => {
     challengeName: challengeTypeDetails.name,
     description: challengeTypeDetails.description,
     statistics: {
-      started: challegeDetail.started || "Yet to start",
-      ending: challegeDetail.finished || "Yet to end",
+      num: challegeDetail.userCount,
+      status: challegeDetail.status,
     },
     participants: users,
   } as ChatDetails;
@@ -169,6 +178,19 @@ export const getChatDetails = async (chatId: string) => {
 };
 
 export const sendChatCheckIn = async (chatID: string, thunkAPI: any) => {
+  const challengeStatus = (
+    await DataStore.query(Challenge, (challenge) =>
+      challenge.challengeChatRoomId.eq(chatID)
+    )
+  )[0].status;
+  switch (challengeStatus) {
+    case ChallengeStatusEnum.COMPLETED:
+      throw new Error("Challenge has ended!");
+    case ChallengeStatusEnum.INACTIVE:
+      throw new Error("Challenge has not started!");
+    default:
+      break;
+  }
   const userID = getUserIdFromThunk(thunkAPI);
 
   const lastCheckIn = await getLastCheckIn(chatID, thunkAPI);
@@ -344,4 +366,62 @@ export const getMessageById = async (id: string) => {
     await DataStore.query(Message, (message) => message.id.eq(id))
   )[0];
   return message;
+};
+
+export const getCheckInSnippets = async (thunkAPI: any) => {
+  const user = await getUserFromDatabase(thunkAPI);
+  const userChallenges = await DataStore.query(ChallengeUser, (challenge) =>
+    challenge.userId.eq(user.id)
+  );
+  const date = new Date().getTime();
+  const checkIns: CheckInSnippetItem[] = [];
+  for await (const userChallenge of userChallenges) {
+    const challenge = (
+      await DataStore.query(Challenge, (challenge) =>
+        challenge.id.eq(userChallenge.challengeId || "")
+      )
+    )[0];
+    const challengeTypeDetails = (
+      await DataStore.query(ChallengeType, (challengeType) =>
+        challengeType.id.eq(challenge.challengeChallengeTypeId)
+      )
+    )[0];
+    const lastCheckIn = await getLastCheckIn(
+      challenge.challengeChatRoomId || "",
+      thunkAPI
+    );
+    const isActive =
+      challenge.status === ChallengeStatusEnum.ACTIVE ? true : false;
+    if (isActive) {
+      if (lastCheckIn) {
+        const timeElapsed = Math.floor(
+          (date - new Date(lastCheckIn.createdAt || "").getTime()) / 86400000
+        );
+        if (timeElapsed > 1) {
+          checkIns.push({
+            challenge: {
+              id: challenge.id,
+              name: challengeTypeDetails.name,
+              active: isActive,
+              description: challengeTypeDetails.description,
+            },
+            endDate: lastCheckIn.createdAt || "",
+            chatId: challenge.challengeChatRoomId || "",
+          });
+        }
+      } else {
+        checkIns.push({
+          challenge: {
+            id: challenge.id,
+            name: challengeTypeDetails.name,
+            active: isActive,
+            description: challengeTypeDetails.description,
+          },
+          endDate: challenge.updatedAt || "",
+          chatId: challenge.challengeChatRoomId || "",
+        });
+      }
+    }
+  }
+  return checkIns;
 };
