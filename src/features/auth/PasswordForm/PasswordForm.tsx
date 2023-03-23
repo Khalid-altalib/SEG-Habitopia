@@ -15,6 +15,7 @@ import Text from "../../../components/Text";
 import { AuthParams, ButtonType, TextType } from "../../../../types";
 import { View } from "react-native";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 type formData = {
   password: string;
@@ -29,9 +30,28 @@ const PasswordForm = () => {
   const dispatch = useDispatch();
 
   const onSubmit = async (data: formData) => {
-    dispatch(addSignUpData(data));
-    await dispatch(signUpUser());
-    navigation.navigate("ConfirmationCode");
+    const password = data.password;
+    let error = "";
+
+    if (password.match("/W|_/g")) {
+      error = "Must contain at least one special character";
+    }
+
+    if (!password.match("^(?=.*[a-z])(?=.*[A-Z]).+$")) {
+      error = "Must contain both uppercase and lowercase characters";
+    }
+
+    if (password.length < 8) {
+      error = "Must be at least 8 characters long";
+    }
+
+    if (error == "") {
+      dispatch(addSignUpData(data));
+      await dispatch(signUpUser());
+      navigation.navigate("ConfirmationCode");
+    } else {
+      Toast.show({ type: "error", text1: "Invalid Password", text2: error });
+    }
   };
 
   const navigation = useNavigation<NavigationProp<AuthParams>>();
