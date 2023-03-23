@@ -80,19 +80,22 @@ exports[`GenericSetting component should render correctly 1`] = `
       />
     </View>
     <View
-      dataSet={{}}
-      style={{}}
+      isFullWidth={true}
+      isLoading={false}
+      onPress={[Function]}
+      style={
+        {
+          "marginTop": 25,
+        }
+      }
+      testID="button"
+      type={0}
     >
       <View
-        accessibilityRole="button"
         accessible={true}
         collapsable={false}
-        colorScheme="primary"
-        dataSet={{}}
         focusable={true}
-        onBlur={[Function]}
         onClick={[Function]}
-        onFocus={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -101,54 +104,75 @@ exports[`GenericSetting component should render correctly 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           {
-            "alignItems": "center",
-            "backgroundColor": "#0891b2",
-            "borderRadius": 4,
-            "flexDirection": "row",
-            "justifyContent": "center",
-            "marginTop": 32,
-            "paddingBottom": 10,
-            "paddingLeft": 12,
-            "paddingRight": 12,
-            "paddingTop": 10,
+            "marginTop": 25,
+            "opacity": 1,
           }
         }
-        testID="button"
       >
-        <View
-          dataSet={{}}
-          style={
+        <ViewManagerAdapter_ExpoLinearGradient
+          proxiedProperties={
             {
-              "alignItems": "center",
-              "flexDirection": "row",
+              "colors": [
+                4278220774,
+                4286456526,
+              ],
+              "endPoint": [
+                1,
+                1,
+              ],
+              "locations": undefined,
+              "startPoint": [
+                0,
+                0,
+              ],
             }
           }
-          test={true}
+          style={
+            [
+              {
+                "alignItems": "center",
+                "borderRadius": 10,
+                "flexDirection": "row",
+                "justifyContent": "center",
+                "paddingHorizontal": 40,
+                "paddingVertical": 15,
+              },
+              {
+                "width": "100%",
+              },
+            ]
+          }
         >
-          <View
-            dataSet={{}}
-            style={{}}
-          >
-            <Text
-              dataSet={{}}
-              style={
+          <Text
+            style={
+              [
                 {
-                  "backgroundColor": undefined,
-                  "color": "#fafafa",
+                  "color": "#18181b",
+                },
+                {
+                  "color": "#e4e4e7",
                   "fontFamily": undefined,
-                  "fontSize": 14,
-                  "fontStyle": "normal",
-                  "fontWeight": "400",
-                  "letterSpacing": 0,
-                  "lineHeight": 21,
-                  "textDecorationLine": undefined,
-                }
+                  "fontSize": 19,
+                },
+                [
+                  null,
+                  {
+                    "alignSelf": "center",
+                  },
+                ],
+              ]
+            }
+          >
+            Done
+          </Text>
+          <View
+            style={
+              {
+                "marginLeft": 5,
               }
-            >
-              Done
-            </Text>
-          </View>
-        </View>
+            }
+          />
+        </ViewManagerAdapter_ExpoLinearGradient>
       </View>
     </View>
   </View>

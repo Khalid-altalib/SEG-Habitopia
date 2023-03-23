@@ -12,7 +12,7 @@ export type BoxWithShadowProps = {
  * @param props - The properties passed to the component.
  * @returns - The box.
  */
-const BoxWithShadow = ({ children }: BoxWithShadowProps) => (
+const BoxWithShadow = ({ children, ...props }: BoxWithShadowProps) => (
   <View
     style={[
       {
@@ -22,6 +22,7 @@ const BoxWithShadow = ({ children }: BoxWithShadowProps) => (
         borderRadius: 10,
       },
     ]}
+    {...props}
   >
     {children}
   </View>
