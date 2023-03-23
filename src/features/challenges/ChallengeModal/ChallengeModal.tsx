@@ -44,7 +44,7 @@ const ChallengeModal = (props: Props) => {
   };
 
   return (
-    <View>
+    <View testID="challengePrompt">
       <VStack space={3} alignItems="center">
         <Heading size="3xl">{name}</Heading>
         <Image
@@ -63,12 +63,14 @@ const ChallengeModal = (props: Props) => {
             backgroundColor="amber.500"
             onPress={handleButtonClick}
             isLoading={loading}
+            testID={"joinButton"}
           >
             Join Challenge!
           </Button>
           <Button
             backgroundColor="gray.400"
             onPress={() => navigation.goBack()}
+            testID={"backButton"}
           >
             Not now
           </Button>
