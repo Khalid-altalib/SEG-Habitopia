@@ -404,7 +404,8 @@ export const getCheckInSnippets = async (thunkAPI: any) => {
             active: isActive,
             description: challengeTypeDetails.description,
           },
-          checkedIn: false,
+          status: isActive,
+          chatId: challenge.challengeChatRoomId || "",
         });
       }
     } else {
@@ -415,7 +416,8 @@ export const getCheckInSnippets = async (thunkAPI: any) => {
           active: isActive,
           description: challengeTypeDetails.description,
         },
-        checkedIn: false,
+        status: isActive,
+        chatId: challenge.challengeChatRoomId || "",
       });
     }
   }
