@@ -21,6 +21,7 @@ const LeaderboardCards = (props: Props) => {
               key={index}
               place={index}
               userId={entry.userId}
+              testID="leaderboard-card"
             />
           ))}
         </VStack>

@@ -1,7 +1,5 @@
 docs/
-
 coverage/
-
 node_modules/
 .expo/
 dist/

@@ -16,6 +16,7 @@ const CatchUpBox = (props: Props) => {
   let isUserLiked = false;
   const [isLiked, setIsLiked] = useState(isUserLiked);
   const onHeartPressed = () => setIsLiked(!isLiked);
+
   return (
     <TouchableOpacity testID="catchUpBox">
       <ZStack padding={5} width={150} height={150}>
