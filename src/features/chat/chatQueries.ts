@@ -1,5 +1,5 @@
 import { DataStore, SortDirection } from "aws-amplify";
-import { Chat, ChatDetails } from "../../../types";
+import { Chat, ChatDetails, CheckInSnippetItem } from "../../../types";
 import {
   getUserFromDatabase,
   getUserFromDatabasebyID,
@@ -15,6 +15,7 @@ import {
   UserValidatedCheckIn,
   ChallengeType,
   ChallengeStatusEnum,
+  ChallengeUser,
 } from "../../models";
 import { Message as MessageType } from "../../../types";
 import moment from "moment";
@@ -365,4 +366,57 @@ export const getMessageById = async (id: string) => {
     await DataStore.query(Message, (message) => message.id.eq(id))
   )[0];
   return message;
+};
+
+export const getCheckInSnippets = async (thunkAPI: any) => {
+  const user = await getUserFromDatabase(thunkAPI);
+  const userChallenges = await DataStore.query(ChallengeUser, (challenge) =>
+    challenge.userId.eq(user.id)
+  );
+  const date = new Date().getTime();
+  const checkIns: CheckInSnippetItem[] = [];
+  for await (const userChallenge of userChallenges) {
+    const challenge = (
+      await DataStore.query(Challenge, (challenge) =>
+        challenge.id.eq(userChallenge.challengeId || "")
+      )
+    )[0];
+    const challengeTypeDetails = (
+      await DataStore.query(ChallengeType, (challengeType) =>
+        challengeType.id.eq(challenge.challengeChallengeTypeId)
+      )
+    )[0];
+    const lastCheckIn = await getLastCheckIn(
+      challenge.challengeChatRoomId || "",
+      thunkAPI
+    );
+    const isActive =
+      challenge.status === ChallengeStatusEnum.ACTIVE ? true : false;
+    if (lastCheckIn) {
+      const timeElapsed = Math.floor(
+        (date - new Date(lastCheckIn.createdAt || "").getTime()) / 86400000
+      );
+      if (timeElapsed > 1) {
+        checkIns.push({
+          challenge: {
+            id: challenge.id,
+            name: challengeTypeDetails.id,
+            active: isActive,
+            description: challengeTypeDetails.description,
+          },
+          checkedIn: false,
+        });
+      }
+    } else {
+      checkIns.push({
+        challenge: {
+          id: challenge.id,
+          name: challengeTypeDetails.id,
+          active: isActive,
+          description: challengeTypeDetails.description,
+        },
+        checkedIn: false,
+      });
+    }
+  }
 };

@@ -4,6 +4,7 @@ import {
   fetchChatMessages,
   fetchUserChats,
   getChatDetails,
+  getCheckInSnippets,
   incrementCheckInValidation,
   sendChatCheckIn,
   sendChatMessage,
@@ -162,8 +163,9 @@ export const fetchCheckInSnippet = createAsyncThunk<
     // of these challenges, filter which one needs to be checkedin
 
     // return CheckInSnippet with checkedIn = false and the associated challenge object
+    const checkInSnippets = await getCheckInSnippets(thunkAPI);
 
-    return [];
+    return checkInSnippets;
   } catch (error: any) {
     return thunkAPI.rejectWithValue("An error has occured");
   }
