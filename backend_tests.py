@@ -96,13 +96,13 @@ testQuerys = ["getLeaderboard(id: \\\"testID\\\") {\\r\\n        id\\r\\n    }",
 testMutations = [
     {
         "name": "ChallengeType",
-        "creationVars": "name: \\\"test\\\", description: \\\"test\\\", active: true",
-        "updateVars": "name: \\\"testUpdated\\\""
+        "creationVars": "name: \\\"testChalType\\\", description: \\\"test\\\", active: true",
+        "updateVars": "name: \\\"testUpdatedChalType\\\""
     },
     {
         "name": "User",
-        "creationVars": "",
-        "updateVars": "name: \\\"testUpdated\\\""
+        "creationVars": "name: \\\"testUser\\\"",
+        "updateVars": "name: \\\"testUpdatedUser\\\""
     },
     {
         "name": "ChatRoom",
@@ -189,6 +189,7 @@ for testMutation in testMutations:
     try:
         assert responseTestMutationCreate.status_code == 200
         indexName = "create"+testMutation["name"]
+        assert (type(json.loads(responseTestMutationCreate.text)["data"]) != None.__class__)
         id = json.loads(responseTestMutationCreate.text)["data"][indexName]["id"]
         version = json.loads(responseTestMutationCreate.text)["data"][indexName]["_version"]
         print("Test Passed: create" + testMutation["name"] + " returned 200\n")
@@ -199,14 +200,24 @@ for testMutation in testMutations:
         print("Assertion Error: " + str(e))
         print("Mutation: create" + testMutation["name"])
         print("Full Query: "+ payloadGenericMutation(testMutation).createAsPayload())
-        print("Response: " + str(responseTestMutationCreate.status_code)+"\n")
+        if responseTestMutationCreate.status_code==200:
+            print("Response: " + str(responseTestMutationCreate.status_code))
+            print(json.loads(responseTestMutationCreate.text)["errors"][0])
+            print()
+        else:
+            print("Response: " + str(responseTestMutationCreate.status_code)+"\n")
     except KeyError as e:
         createCont=False
         num_failed+=1
         print("Creation Error: " + str(e))
         print("Mutation: create" + testMutation["name"])
         print("Full Query: "+ payloadGenericMutation(testMutation).createAsPayload())
-        print("Response: " + str(responseTestMutationCreate.status_code)+"\n")
+        if responseTestMutationCreate.status_code==200:
+            print("Response: " + str(responseTestMutationCreate.status_code))
+            print(json.loads(responseTestMutationCreate.text)["errors"][0])
+            print()
+        else:
+            print("Response: " + str(responseTestMutationCreate.status_code)+"\n")
 
 
     
@@ -226,7 +237,12 @@ for testMutation in testMutations:
             print("Assertion Error: " + str(e))
             print("Mutation: update" + testMutation["name"])
             print("Full Query: "+ payloadGenericMutation(testMutation).updateAsPayload(id, version))
-            print("Response: " + str(responseTestMutationUpdate.status_code)+"\n")
+            if responseTestMutationUpdate.status_code==200:
+                print("Response: " + str(responseTestMutationUpdate.status_code))
+                print(json.loads(responseTestMutationUpdate.text)["errors"][0])
+                print()
+            else:
+                print("Response: " + str(responseTestMutationUpdate.status_code)+"\n")
 
 
         responseTestMutationDelete = requests.request("POST", url, headers=headers, data=payloadGenericMutation(testMutation).deleteAsPayload(id, version))
@@ -239,7 +255,12 @@ for testMutation in testMutations:
             print("Assertion Error: " + str(e))
             print("Mutation: delete" + testMutation["name"])
             print("Full Query: "+ payloadGenericMutation(testMutation).deleteAsPayload(id, version))
-            print("Response: " + str(responseTestMutationDelete.status_code)+"\n")
+            if responseTestMutationDelete.status_code==200:
+                print("Response: " + str(responseTestMutationDelete.status_code))
+                print(json.loads(responseTestMutationDelete.text)["errors"][0])
+                print()
+            else:
+                print("Response: " + str(responseTestMutationDelete.status_code)+"\n")
 
     except KeyError:
         num_skipped+=2
