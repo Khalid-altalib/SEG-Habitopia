@@ -392,11 +392,24 @@ export const getCheckInSnippets = async (thunkAPI: any) => {
     );
     const isActive =
       challenge.status === ChallengeStatusEnum.ACTIVE ? true : false;
-    if (lastCheckIn) {
-      const timeElapsed = Math.floor(
-        (date - new Date(lastCheckIn.createdAt || "").getTime()) / 86400000
-      );
-      if (timeElapsed > 1) {
+    if (isActive) {
+      if (lastCheckIn) {
+        const timeElapsed = Math.floor(
+          (date - new Date(lastCheckIn.createdAt || "").getTime()) / 86400000
+        );
+        if (timeElapsed > 1) {
+          checkIns.push({
+            challenge: {
+              id: challenge.id,
+              name: challengeTypeDetails.name,
+              active: isActive,
+              description: challengeTypeDetails.description,
+            },
+            endDate: lastCheckIn.createdAt || "",
+            chatId: challenge.challengeChatRoomId || "",
+          });
+        }
+      } else {
         checkIns.push({
           challenge: {
             id: challenge.id,
@@ -404,21 +417,10 @@ export const getCheckInSnippets = async (thunkAPI: any) => {
             active: isActive,
             description: challengeTypeDetails.description,
           },
-          endDate: lastCheckIn.createdAt || "",
+          endDate: challenge.updatedAt || "",
           chatId: challenge.challengeChatRoomId || "",
         });
       }
-    } else {
-      checkIns.push({
-        challenge: {
-          id: challenge.id,
-          name: challengeTypeDetails.name,
-          active: isActive,
-          description: challengeTypeDetails.description,
-        },
-        endDate: challenge.updatedAt || "",
-        chatId: challenge.challengeChatRoomId || "",
-      });
     }
   }
   return checkIns;
