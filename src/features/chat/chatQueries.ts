@@ -14,6 +14,7 @@ import {
   Checkin,
   UserValidatedCheckIn,
   ChallengeType,
+  ChallengeStatusEnum,
 } from "../../models";
 import { Message as MessageType } from "../../../types";
 import moment from "moment";
@@ -176,6 +177,19 @@ export const getChatDetails = async (chatId: string) => {
 };
 
 export const sendChatCheckIn = async (chatID: string, thunkAPI: any) => {
+  const challengeStatus = (
+    await DataStore.query(Challenge, (challenge) =>
+      challenge.challengeChatRoomId.eq(chatID)
+    )
+  )[0].status;
+  switch (challengeStatus) {
+    case ChallengeStatusEnum.COMPLETED:
+      throw new Error("Challenge has ended!");
+    case ChallengeStatusEnum.INACTIVE:
+      throw new Error("Challenge has not started!");
+    default:
+      break;
+  }
   const userID = getUserIdFromThunk(thunkAPI);
 
   const lastCheckIn = await getLastCheckIn(chatID, thunkAPI);
