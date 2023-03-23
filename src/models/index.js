@@ -14,19 +14,19 @@ const ChallengeStatusEnum = {
   "COMPLETED": "COMPLETED"
 };
 
-const { Follow, Leaderboard, Challenge, ChallengeType, User, Message, ChatRoom, Checkin, ChallengeUser, UserChatRoom, UserValidatedCheckIn } = initSchema(schema);
+const { Follow, User, Checkin, ChallengeType, ChatRoom, Message, Challenge, Leaderboard, UserChatRoom, ChallengeUser, UserValidatedCheckIn } = initSchema(schema);
 
 export {
   Follow,
-  Leaderboard,
-  Challenge,
-  ChallengeType,
   User,
-  Message,
-  ChatRoom,
   Checkin,
-  ChallengeUser,
+  ChallengeType,
+  ChatRoom,
+  Message,
+  Challenge,
+  Leaderboard,
   UserChatRoom,
+  ChallengeUser,
   UserValidatedCheckIn,
   MessageEnum,
   ChallengeStatusEnum
