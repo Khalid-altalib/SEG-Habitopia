@@ -120,21 +120,21 @@ relatedTestMutations = [
         "creationVars": "challengeChallengeTypeId: \\\"REL ChallengeType ID\\\", status: INACTIVE, challengeChatRoomId: \\\"REL ChatRoom ID\\\", userCount: 0",
         "updateVars": "userCount: 1"
     },
-    # {
-    #     "name": "Message",
-    #     "creationVars": "",
-    #     "updateVars": ""
-    # },
-    # {
-    #     "name": "Checkin",
-    #     "creationVars": "",
-    #     "updateVars": ""
-    # },
-    # {
-    #     "name": "Leaderboard",
-    #     "creationVars": "",
-    #     "updateVars": ""
-    # },
+    {
+        "name": "Message",
+        "creationVars": "text: \\\"testMessage\\\", chatroomID: \\\"REL ChatRoom ID\\\", userID: \\\"REL User ID\\\"",
+        "updateVars": "text: \\\"testUpdatedMessage\\\""
+    },
+    {
+        "name": "Checkin",
+        "creationVars": "userID: \\\"REL User ID\\\", chatroomID: \\\"REL ChatRoom ID\\\", validationCount: 0",
+        "updateVars": "validationCount: 1"
+    },
+    {
+        "name": "Leaderboard",
+        "creationVars": "leaderboardChallengeTypeId: \\\"REL ChallengeType ID\\\", leaderboardUserId: \\\"REL User ID\\\", numberOfCheckins: 0",
+        "updateVars": "numberOfCheckins: 1"
+    },
 ]
 
 def replaceRelatedIds(match):
@@ -355,5 +355,5 @@ for testMutation in testMutations:
         print("Skipping update and delete tests for " + testMutation["name"] + " because create failed\n")
         num_skipped+=2
 
-print("\n-------------------------\n{}/{} tests passed\n{}% test coverage ({} tests skipped)\n-------------------------\n".format(num_tests-num_failed, num_tests, str(100*num_tests/(len(testQuerys)+(len(testMutations)*3))), num_skipped))
+print("\n-------------------------\n{}/{} tests passed\n{}% test coverage ({} tests skipped)\n-------------------------\n".format(num_tests-num_failed, num_tests, str(100*num_tests/(len(testQuerys)+(len(testMutations)*3)+(len(relatedTestMutations)*3))), num_skipped))
        
