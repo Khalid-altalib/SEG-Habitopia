@@ -73,6 +73,7 @@ const displayErrorMessage = (error: any) => {
     errorMessage = "Your old password is incorrect.";
   } else {
     errorMessage = error.message;
+    console.log(errorMessage)
   }
   Toast.show({
     type: "error",

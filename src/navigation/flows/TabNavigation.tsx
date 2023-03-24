@@ -37,6 +37,7 @@ const TabNavigation = () => {
           tabBarIcon: () => (
             <Entypo name="chat" size={ICON_SIZE} color={ICON_COLOR} />
           ),
+          tabBarHideOnKeyboard: true,
         }}
       />
       <Tab.Screen
