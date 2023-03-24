@@ -153,3 +153,9 @@ export type ChatDetails = {
   };
   participants: User[];
 };
+
+export type CheckInSnippetItem = {
+  challenge: Challenge;
+  endDate: string;
+  chatId: string;
+};
