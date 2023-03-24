@@ -74,6 +74,5 @@ describe("FollowButton", () => {
 
     // dispatch will be called, but not with followUser as before
     expect(dispatch).toHaveBeenCalled();
-    
   });
 });
