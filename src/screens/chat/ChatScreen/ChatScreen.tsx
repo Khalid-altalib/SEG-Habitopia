@@ -1,5 +1,11 @@
 import React, { useEffect } from "react";
-import { ImageBackground, StyleSheet, FlatList, Text } from "react-native";
+import {
+  ImageBackground,
+  StyleSheet,
+  FlatList,
+  Text,
+  Platform,
+} from "react-native";
 import InputBox from "../../../features/chat/InputBox/InputBox";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { ChatParams, Message, Message as MessageType } from "../../../../types";
@@ -37,7 +43,7 @@ import { Button } from "react-native";
 import { KeyboardAvoidingView } from "native-base";
 import ValidationMessage from "@features/chat/ValidationMessage/ValidationMessage";
 import Background from "@components/Background";
-import { addCheckinSubscriptionForLeaderboard } from "@features/leaderboard/leaderboardQueries";
+import { useHeaderHeight } from "@react-navigation/elements";
 
 type Props = {};
 
@@ -147,13 +153,11 @@ const ChatScreen = (props: Props) => {
     navigation.setOptions({ title: chat.name, headerShown: true });
     const chatSubscription = addChatSubscription(id);
     const checkInSubscription = addCheckInSubscription(id);
-    const checkInSubscriptionForLeaderboard = addCheckinSubscriptionForLeaderboard(user?.userId || "");
     return () => {
       dispatch(resetPageNumber());
       dispatch(resetUnreadMessages({ chatId: chat.id }));
       chatSubscription.unsubscribe();
       checkInSubscription.unsubscribe();
-      checkInSubscriptionForLeaderboard.unsubscribe();
     };
   }, [id]);
 
@@ -210,7 +214,10 @@ const ChatScreen = (props: Props) => {
         style={styles.flatList}
         inverted={true}
       />
-      <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={90}>
+      <KeyboardAvoidingView
+        behavior={Platform.select({ ios: "padding", android: undefined })}
+        keyboardVerticalOffset={useHeaderHeight()}
+      >
         <InputBox chatRoomID={chat.id} />
       </KeyboardAvoidingView>
     </Background>
