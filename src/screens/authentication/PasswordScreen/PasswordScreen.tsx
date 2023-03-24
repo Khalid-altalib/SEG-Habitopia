@@ -13,6 +13,7 @@ const PasswordScreen = () => {
     "Is 8 characters or longer",
     "Contains at least one uppercase and lowercase character",
     "Contains at least one special character",
+    "Contains at least one number",
   ];
 
   return (

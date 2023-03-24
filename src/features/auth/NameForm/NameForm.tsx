@@ -28,7 +28,7 @@ const NameForm = () => {
     if (data.name.length < 3) {
       Toast.show({
         type: "error",
-        text1: "Please ensure name is longer than 3 characters",
+        text1: "Please ensure name is at least 3 characters long",
       });
     } else {
       dispatch(addSignUpData(data));

@@ -41,6 +41,10 @@ const PasswordForm = () => {
       error = "Must contain both uppercase and lowercase characters";
     }
 
+    if (!password.match(/\d+/g)) {
+      error = "Must contain at least one number";
+    }
+
     if (password.length < 8) {
       error = "Must be at least 8 characters long";
     }
