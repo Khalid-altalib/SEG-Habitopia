@@ -7,7 +7,7 @@ import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { createUserInDatabase } from "./authQueries";
 import { Auth } from "aws-amplify";
 
-type AuthState = {
+export type AuthState = {
   signUpData: {
     email: string;
     password: string;
@@ -51,7 +51,16 @@ export const sendConfirmationCode = createAsyncThunk<
   try {
     const state = thunkAPI.getState() as RootState;
     const { email, password, confirmationCode, name } = state.auth.signUpData;
-    await Auth.confirmSignUp(email, confirmationCode);
+    try {
+      await Auth.confirmSignUp(email, confirmationCode);
+    } catch (error: any) {
+      Toast.show({
+        type: "error",
+        text1: "Error code invalid/expired",
+        text2: "Please try again",
+      });
+      throw error
+    }
     const user = await logInHelper(email, password, name);
     return user as LocalUser;
   } catch (error: any) {

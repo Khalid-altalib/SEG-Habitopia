@@ -4,11 +4,13 @@ import configureStore from "redux-mock-store";
 import SignInForm from "./SignInForm";
 import TestingWrapper from "@app/testingWrapper";
 
+import authMockState from "../authMockState";
+
 const mockStore = configureStore([]);
 
 describe("SignInForm", () => {
   it("should dispatch the logInUser action when the form is submitted", async () => {
-    const store = mockStore({});
+    const store = mockStore(authMockState);
     const wrapper = render(
       <TestingWrapper store={store}>
         <SignInForm />

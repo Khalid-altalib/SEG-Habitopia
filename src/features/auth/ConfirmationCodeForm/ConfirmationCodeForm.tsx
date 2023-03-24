@@ -33,15 +33,7 @@ const ConfirmationCodeForm = () => {
   const onSubmit = async (data: formData) => {
     dispatch(addSignUpData(data));
     await dispatch(sendConfirmationCode());
-    if (error !== "") {
-      Toast.show({
-        type: "error",
-        text1: "Error code invalid/expired",
-        text2: "Please try again",
-      });
-    } else {
-      navigation.navigate("SignIn");
-    }
+    // navigation.navigate("SignIn");
   };
 
   // React Navigation

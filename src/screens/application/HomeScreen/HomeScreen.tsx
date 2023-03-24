@@ -7,8 +7,11 @@ import CatchUpWidget from "@features/LandingPageWidgets/CatchUpWidget/CatchUpWid
 import ChallengeWidget from "@features/LandingPageWidgets/ChallengeWidget/ChallengeWidget";
 import CheckInWidget from "@features/LandingPageWidgets/CheckInWidget/CheckInWidget";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { DataStore } from "aws-amplify";
 
 function HomeScreen() {
+  AsyncStorage.clear();
+  DataStore.clear();
   return (
     <Background>
       <ScrollView showsVerticalScrollIndicator={false}>
