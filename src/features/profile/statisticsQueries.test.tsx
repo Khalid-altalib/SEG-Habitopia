@@ -1,6 +1,7 @@
 import { DataStore, __modelMeta__ } from "@aws-amplify/datastore";
 import { getUserFromDatabasebyID } from "../../app/util";
 import { getCheckIns, getWins,getStatistics, checkStreak} from "./statisticsQueries"; 
+import { ChallengeStatusEnum } from "../../models";
 // import * as mockStatisticsQueries from "./statisticsQueries";
 
 jest.mock("../../app/util", () => ({
@@ -41,25 +42,25 @@ describe("getWins", () => {
         {
             id: "1",
             name: "sleep",
-            finished: true,
+            status: ChallengeStatusEnum.COMPLETED,
         },
         {
             id: "2",
             name: "exercise",
-            finished: false,
+            status: ChallengeStatusEnum.COMPLETED,
         },
         {
             id: "3",
             name: "eat healthy",
-            finished: true,
+            status: ChallengeStatusEnum.ACTIVE,
         },
     ];
-    const winsQueryMock = jest.fn(() => Promise.resolve(mockUserChallenges));
 
+    it("should return the number of wins", async () => {
+        const winsQueryMock = jest.fn(() => Promise.resolve(mockUserChallenges));
+        DataStore.query= (winsQueryMock);
 
-        it("should return the number of wins", async () => {
-        DataStore.query = winsQueryMock;
-        const result = await getWins("123")
+        const result = await getWins("123");
         expect(result).toEqual(2);
     });
 });
