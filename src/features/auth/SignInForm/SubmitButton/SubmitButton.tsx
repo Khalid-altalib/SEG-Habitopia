@@ -7,8 +7,9 @@ import { AntDesign } from "@expo/vector-icons";
 // Habitopia
 import Button from "../../../../components/Button";
 import { addLogInData, logInUser } from "../../authSlice";
-import { useDispatch } from "../../../../app/hooks";
+import { useDispatch, useSelector } from "../../../../app/hooks";
 import { ButtonType, SignInFormValues } from "../../../../../types";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 /**
  * A button for submitting the sign in form.
@@ -19,10 +20,19 @@ import { ButtonType, SignInFormValues } from "../../../../../types";
 const SubmitButton = ({ handleSubmit }: Props) => {
   const dispatch = useDispatch();
 
-  const onSubmit = async (data: SignInFormValues) => {
-    dispatch(addLogInData(data));
+  const { loading } = useSelector((state) => state.auth);
 
-    await dispatch(logInUser());
+  const onSubmit = async (data: SignInFormValues) => {
+    if (data.email == "" || data.password == "") {
+      Toast.show({
+        type: "error",
+        text1: "Please include both email and password",
+      });
+    } else {
+      dispatch(addLogInData(data));
+
+      await dispatch(logInUser());
+    }
   };
 
   return (
@@ -32,6 +42,7 @@ const SubmitButton = ({ handleSubmit }: Props) => {
       icon={<AntDesign name="arrowright" size={20} color="white" />}
       type={ButtonType.Primary}
       onPress={handleSubmit(onSubmit)}
+      isLoading={loading}
     >
       Continue
     </Button>
