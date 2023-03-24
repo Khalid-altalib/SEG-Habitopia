@@ -4,7 +4,7 @@ import {ProfileState, fetchProfile, profileSlice, followUser, fetchFollowList} f
 import { getStatistics } from "./statisticsQueries";
 import { getUserFromDatabasebyID } from "../../app/util";
 import { applyMiddleware } from "redux";
-import {followUserQuery, getFollowers, getFollowing, getCount} from "./profileQueries";
+import {followUserQuery, getFollowers, getFollowing, getCount, isFollowingQuery} from "./profileQueries";
 
 jest.mock("./statisticsQueries", () => ({
       getStatistics: jest.fn(),
@@ -16,9 +16,10 @@ jest.mock("../../app/util", () => ({
 
 jest.mock('./profileQueries', () => ({
     followUserQuery: jest.fn( () => Promise.resolve("Test")),
-    getCount: jest.fn( () => Promise.resolve((10,2))),
+    getCount: jest.fn(),
     getFollowers: jest.fn(),
     getFollowing: jest.fn(),
+    isFollowingQuery: jest.fn(),
 }));
 
 
@@ -41,7 +42,7 @@ const mockState: ProfileState = {
 };
 
 
-describe("profileSlice", () => {
+describe("fetchProfileBuilder", () => {
   let store: any;
 
   const mockGetStatistics = {
@@ -88,28 +89,6 @@ describe("profileSlice", () => {
   afterEach(() => {
     jest.resetAllMocks();
   });
-
-  describe("fetchProfileBuilder", () => {   
-    
-    it ("should handle fetchProfile correctly", async () => {
-
-      const expectedActions = [
-        { type: "profile/fetch/pending" },
-        { type: "profile/fetch/fulfilled", payload: mockProfile }
-      ];
-      
-      (getUserFromDatabasebyID as jest.Mock).mockResolvedValue(mockUser);
-      (getStatistics as jest.Mock).mockResolvedValue(mockGetStatistics);
-
-      await store.dispatch(fetchProfile("123"));
-
-      expect(getUserFromDatabasebyID).toHaveBeenCalledWith("123");
-      expect(getStatistics).toHaveBeenCalledWith("123");
-      
-      expect(store.getActions()[0].type).toEqual(expectedActions[0].type);
-      expect(store.getActions()[1].type).toEqual(expectedActions[1].type);
-      expect(store.getActions()[1].payload).toEqual(expectedActions[1].payload); // returns correct user?
-    });
 
     
     it ("should handle fetchProfile error correctly", async () => {
@@ -164,10 +143,6 @@ describe("profileSlice", () => {
       expect(state.fetchProfile.error).toEqual("Error fetching profile");
       expect(state.profile).toEqual(undefined);
     });
-
-   }
-   
-  );
 
 });
 
@@ -357,6 +332,70 @@ describe("fetchFollowListBuilder", () => {
 
 });
 
-    
+describe("fetchProfile", () => {
+  let fetchProfileStore : any;
 
-  // 165-167,171-173,176-178
+  const mockStatistics =  [
+    { name: "Streak", quantity: 5 },
+    { name: "Wins", quantity: 43}, 
+    { name: "Check Ins", quantity: 100 },
+  ];
+  const mockGetStatistics = {
+    checkIns: 100,
+    wins: 43,
+    streak: 5,
+  };
+
+  const mockUser = {
+    id: '123',
+    name: 'test-name',
+    biography: 'test-bio',
+    statistics: [],
+    followerCount: 0,
+    followingCount: 0,
+    following: false,
+  };
+
+
+  const mockGetCount = {
+    followingCount: 10,
+    followerCount: 3,
+  };
+
+  jest.resetAllMocks();
+
+
+  beforeEach(() => 
+  fetchProfileStore = configureStore([thunk])({
+      reducer:
+      {
+        profile: profileSlice.reducer,
+      },
+      middleware: [thunk],
+    })
+  );
+
+  it('should return profile when fetchProfileQuery resolves', async () => {
+    
+    (getStatistics as jest.Mock).mockResolvedValueOnce(mockGetStatistics); 
+    (getUserFromDatabasebyID as jest.Mock).mockResolvedValue(mockUser);
+    (getCount as jest.Mock).mockResolvedValueOnce(mockGetCount);
+    (isFollowingQuery as jest.Mock).mockResolvedValueOnce(true);
+
+    const result = await fetchProfileStore.dispatch(fetchProfile('123'));
+
+    expect(result.payload).toEqual({
+      userId: '123',
+      name: 'test-name',
+      biography: 'test-bio',
+      statistics: mockStatistics,
+      followerCount: 3,
+      followingCount: 10,
+      following: true,
+
+    });
+    expect(result.type).toBe('profile/fetch/fulfilled');
+
+
+  });
+});
