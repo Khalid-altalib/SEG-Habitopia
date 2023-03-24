@@ -40,5 +40,12 @@
         "Habitopia": {}
       }
     }
+  },
+  "dev": {
+    "categories": {
+      "auth": {
+        "Habitopia": {}
+      }
+    }
   }
 }
