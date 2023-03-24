@@ -15,7 +15,7 @@ const CheckInSlider = (props: Props) => {
   );
 
   const { loading, error } = requestStatus;
-  
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,7 +29,9 @@ const CheckInSlider = (props: Props) => {
       data={checkInSnippet}
       noDataDisplay={
         <Center width="100%">
-          <Text style={{ textAlign: "center", marginLeft: 12 }}>
+          <Text
+            style={{ textAlign: "center", marginLeft: 12, marginRight: 12 }}
+          >
             All Caught Up!
           </Text>
         </Center>
