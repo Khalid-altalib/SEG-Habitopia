@@ -17,20 +17,7 @@ headers = {
     'Content-Type': 'application/json'
 }
 
-#VALUES FOR CHALLEND ENV
-# #GraphQL resource
-# url = "https://gca5bevlizbrbf7lsmhwbn3cyi.appsync-api.eu-west-2.amazonaws.com/graphql"
-
-# #key and protocol
-# headers = {
-#     'x-api-key': 'da2-n657qaa6lndkdgsdmefs5d73qu',
-#     'Content-Type': 'application/json'
-# }
-
-#export const (.*)\n  query (.*\n)
-
-#query ([^=f(])
-#query \l$1
+#GraphQL querys to execute for every table and custom index rule
 
 testQuerys = ["getLeaderboard(id: \\\"testID\\\") {\\r\\n        id\\r\\n    }",
 
@@ -94,6 +81,8 @@ testQuerys = ["getLeaderboard(id: \\\"testID\\\") {\\r\\n        id\\r\\n    }",
 
 "userValidatedCheckInsByCheckinId(checkinId: \\\"testID\\\") {\\r\\n        items {\\r\\n            id\\r\\n        }\\r\\n    }"]
 
+
+#Non related mutations (no relations to other tables)
 testMutations = [
     {
         "name": "ChallengeType",
@@ -112,8 +101,10 @@ testMutations = [
     },
 ]
 
+#List of created items for use in related mutations
 createdItems = {}
 
+#Related mutations (relations to other tables)
 relatedTestMutations = [
     {
         "name": "Challenge",
@@ -137,6 +128,7 @@ relatedTestMutations = [
     },
 ]
 
+#Replacement function for ID - transforms regex match groups into ID's from createdItems
 def replaceRelatedIds(match):
     if match.group() is not None:
         return createdItems[match.group()[4:-3]][0]
@@ -162,21 +154,21 @@ class payloadGenericMutation:
     
     def updateAsPayload(self, id, version):
         self.updateMutation = "{\"query\":\"mutation testUpdate {\\r\\n            update"+self.updateMutationStub[0]+"(input: {id: \\\""+id+"\\\", _version: "+str(version)+", "+self.updateMutationStub[1]+"}) {\\r\\n        id\\r\\n        _version\\r\\n    }\\r\\n}\",\"variables\":{}}"
-                                      # "{\"query\":\"mutation testMutation {\\r\\n    updateChallengeType(input: {id: \\\"fdf238d8-62d9-484a-a83a-4efdb59e3ce9\\\", _version: 1, name: \\\"testUpdated\\\"}) {\\r\\n        id\\r\\n        _version\\r\\n    }\\r\\n}\",\"variables\":{}}"
         return self.updateMutation
     
     def deleteAsPayload(self, id, version):
         self.deleteMutation = "{\"query\":\"mutation testDelete {\\r\\n            delete"+self.deleteMutationStub+"(input: {id: \\\""+id+"\\\", _version: "+str(version)+"}) {\\r\\n                id\\r\\n      }\\r\\n  }\",\"variables\":{}}"
         return self.deleteMutation
 
-#Queue and execute all querys and assert 200 response from GraphQL resource
 
 num_tests = 0
 num_failed = 0
 num_skipped = 0
 
 
+#Queue and execute all querys and assert 200 response from GraphQL resource
 for testQuery in testQuerys:
+    #populate and send POST request to query resource
     responseTestQuery = requests.request("POST", url, headers=headers, data=payloadGenericQuery(testQuery).asPayload())
     num_tests+=1
     try:
@@ -188,17 +180,26 @@ for testQuery in testQuerys:
         print("Query: " + testQuery)
         print("Response: " + str(responseTestQuery.status_code)+"\n")
 
+#NR CREATE
+#Queue and execute all non-related create mutations and assert 200 response from GraphQL resource
 for testMutation in testMutations:
+    #populate and send POST request to create non-related object
     responseTestMutationCreate = requests.request("POST", url, headers=headers, data=payloadGenericMutation(testMutation).createAsPayload())
     num_tests+=1
     try:
         assert responseTestMutationCreate.status_code == 200
         indexName = "create"+testMutation["name"]
+
+        #assert that the response isn't 200 with errors
         assert (type(json.loads(responseTestMutationCreate.text)["data"]) != None.__class__)
+
+        #receive and save the ID and version of the created object
         id = json.loads(responseTestMutationCreate.text)["data"][indexName]["id"]
         version = json.loads(responseTestMutationCreate.text)["data"][indexName]["_version"]
-        print("Test Passed: create" + testMutation["name"] + " returned 200\n")
         createdItems[testMutation["name"]] = [id, version]
+
+        print("Test Passed: create" + testMutation["name"] + " returned 200\n")
+
     except AssertionError as e:
         num_failed+=1
         print("Assertion Error: " + str(e))
@@ -210,6 +211,7 @@ for testMutation in testMutations:
             print()
         else:
             print("Response: " + str(responseTestMutationCreate.status_code)+"\n")
+
     except KeyError as e:
         num_failed+=1
         print("Creation Error: " + str(e))
@@ -222,22 +224,32 @@ for testMutation in testMutations:
         else:
             print("Response: " + str(responseTestMutationCreate.status_code)+"\n")
 
+#R CREATE
+#Queue and execute all related create mutations and assert 200 response from GraphQL resource
 for testMutation in relatedTestMutations:
     try:
+        #Attempt to generate and replace ID's in creationVars
         baseMutation = payloadGenericMutation(testMutation).createAsPayload()
         baseMutationReplacedId = re.sub(r"REL (\b)(\w*)(\b) ID", replaceRelatedIds, baseMutation)
+
+        #populate and send POST request to create related object
         responseTestMutationCreate = requests.request("POST", url, headers=headers, data=baseMutationReplacedId)
         num_tests+=1
         try:
             assert responseTestMutationCreate.status_code == 200
             indexName = "create"+testMutation["name"]
+
+            #assert that the response isn't 200 with errors
             assert (type(json.loads(responseTestMutationCreate.text)["data"]) != None.__class__)
+
+            #receive and save the ID and version of the created object
             id = json.loads(responseTestMutationCreate.text)["data"][indexName]["id"]
             version = json.loads(responseTestMutationCreate.text)["data"][indexName]["_version"]
-            print("Test Passed: create" + testMutation["name"] + " returned 200\n")
             createdItems[testMutation["name"]] = [id, version]
+
+            print("Test Passed: create" + testMutation["name"] + " returned 200\n")
+
         except AssertionError as e:
-            createCont=False
             num_failed+=1
             print("Assertion Error: " + str(e))
             print("Mutation: create" + testMutation["name"])
@@ -248,8 +260,8 @@ for testMutation in relatedTestMutations:
                 print()
             else:
                 print("Response: " + str(responseTestMutationCreate.status_code)+"\n")
+
         except KeyError as e:
-            createCont=False
             num_failed+=1
             print("Creation Error: " + str(e))
             print("Mutation: create" + testMutation["name"])
@@ -260,22 +272,31 @@ for testMutation in relatedTestMutations:
                 print()
             else:
                 print("Response: " + str(responseTestMutationCreate.status_code)+"\n")
+
     except KeyError as e:
+        #If the creation of a related object fails, skip the creation of all objects that rely on it
         print("Skipping create test for " + testMutation["name"] + " because creation of reliant related record failed\n")
         num_skipped+=1
 
-    
+#R UPDATE DELETE
+#Queue and execute all related update and delete mutations and assert 200 response from GraphQL resource (reverse order to maintain relationship integrity)
 for testMutation in reversed(relatedTestMutations):
     try:
+        #Attempt to get details of created object
         id = createdItems[testMutation["name"]][0]
         version = createdItems[testMutation["name"]][1]
+
+        #populate and send POST request to update existing related object
         responseTestMutationUpdate = requests.request("POST", url, headers=headers, data=payloadGenericMutation(testMutation).updateAsPayload(id, version))
         num_tests+=1
         try:
+            #assert that the response is 200 and the version has incremented
             assert responseTestMutationUpdate.status_code == 200
             assert json.loads(responseTestMutationUpdate.text)["data"]["update"+testMutation["name"]]["_version"] == (version+1)
+
             version+=1
             print("Test Passed: update" + testMutation["name"] + " returned 200\n")
+
         except AssertionError as e:
             num_failed+=1
             print("Assertion Error: " + str(e))
@@ -288,7 +309,7 @@ for testMutation in reversed(relatedTestMutations):
             else:
                 print("Response: " + str(responseTestMutationUpdate.status_code)+"\n")
 
-
+        #populate and send POST request to delete existing related object
         responseTestMutationDelete = requests.request("POST", url, headers=headers, data=payloadGenericMutation(testMutation).deleteAsPayload(id, version))
         num_tests+=1
         try:
@@ -310,17 +331,24 @@ for testMutation in reversed(relatedTestMutations):
         print("Skipping update and delete tests for " + testMutation["name"] + " because create failed\n")
         num_skipped+=2
 
+#NR UPDATE DELETE
+#Queue and execute all non-related update and delete mutations and assert 200 response from GraphQL resource
 for testMutation in testMutations:
     try:
+        #Attempt to get details of created object
         id = createdItems[testMutation["name"]][0]
         version = createdItems[testMutation["name"]][1]
+        #populate and send POST request to update existing non-related object
         responseTestMutationUpdate = requests.request("POST", url, headers=headers, data=payloadGenericMutation(testMutation).updateAsPayload(id, version))
         num_tests+=1
         try:
+            #assert that the response is 200 and the version has incremented
             assert responseTestMutationUpdate.status_code == 200
             assert json.loads(responseTestMutationUpdate.text)["data"]["update"+testMutation["name"]]["_version"] == (version+1)
+
             version+=1
             print("Test Passed: update" + testMutation["name"] + " returned 200\n")
+
         except AssertionError as e:
             num_failed+=1
             print("Assertion Error: " + str(e))
@@ -333,7 +361,7 @@ for testMutation in testMutations:
             else:
                 print("Response: " + str(responseTestMutationUpdate.status_code)+"\n")
 
-
+        #populate and send POST request to delete existing non-related object
         responseTestMutationDelete = requests.request("POST", url, headers=headers, data=payloadGenericMutation(testMutation).deleteAsPayload(id, version))
         num_tests+=1
         try:
@@ -352,8 +380,10 @@ for testMutation in testMutations:
                 print("Response: " + str(responseTestMutationDelete.status_code)+"\n")
 
     except KeyError:
+        #Skip update and delete tests if create failed
         print("Skipping update and delete tests for " + testMutation["name"] + " because create failed\n")
         num_skipped+=2
 
-print("\n-------------------------\n{}/{} tests passed\n{}% test coverage ({} tests skipped)\n-------------------------\n".format(num_tests-num_failed, num_tests, str(100*num_tests/(len(testQuerys)+(len(testMutations)*3)+(len(relatedTestMutations)*3))), num_skipped))
+#Print test summary and coverage on completion
+print("\n--------------------------------------------\n{}/{} tests passed\n{}% test coverage ({} tests skipped)\n--------------------------------------------\n".format(num_tests-num_failed, num_tests, str(100*num_tests/(len(testQuerys)+(len(testMutations)*3)+(len(relatedTestMutations)*3))), num_skipped))
        
