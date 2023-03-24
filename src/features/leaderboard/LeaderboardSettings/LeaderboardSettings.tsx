@@ -55,7 +55,7 @@ const LeaderboardSettings = (): JSX.Element => {
         showsHorizontalScrollIndicator={false}
         overflow="visible"
       >
-        <HStack space={25} overflow="visible" marginX={25}>
+        <HStack space={25} overflow="visible" marginX={25} testID="leaderboard-settings">
           {challenges &&
             selectedChallengeType !== "" &&
             challenges.map((challenge) => {
