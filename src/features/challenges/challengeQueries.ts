@@ -58,7 +58,7 @@ const isUserPartOfChallenge = async (
   for await (const challenge of challenges) {
     if (
       challenge.challengeChallengeTypeId === challengeTypeInstance.id &&
-      challenge.status !== ChallengeStatusEnum.COMPLETED
+      challenge.status === ChallengeStatusEnum.COMPLETED
     ) {
       throw new Error(ALREADY_PART_OF_CHAT);
     }
