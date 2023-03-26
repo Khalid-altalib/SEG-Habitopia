@@ -13,11 +13,11 @@ from datetime import datetime, timedelta
 def handler(event, context):
 
     #GraphQL resource
-    url = "https://kak5ovgm35etxilpjodj72ed34.appsync-api.eu-west-2.amazonaws.com/graphql"
+    url = "https://hsvnovneejbkniuslgoiow4jxi.appsync-api.eu-west-2.amazonaws.com/graphql"
 
     #key and protocol
     headers = {
-        'x-api-key': 'da2-ejak5jxjlrgbhlag7ajyjt7jze',
+        'x-api-key': 'da2-e2q5nesyvnfjlfmztf43pwyiaq',
         'Content-Type': 'application/json'
     }
 
