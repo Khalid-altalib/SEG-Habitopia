@@ -1,9 +1,8 @@
-import { fireEvent, render } from "@testing-library/react-native";
+import { render } from "@testing-library/react-native";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import TestingWrapperNavigation from "@app/testingWrapperWithNavigation";
 import challengesMockState from "../challengesMockState";
-import { extendTheme, NativeBaseProvider } from "native-base";
 import ChallengeBoxes from "./ChallengeBoxes";
 
 describe("ChallengeBoxes", () => {
