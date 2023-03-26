@@ -8,7 +8,6 @@ import {
 } from "../../models";
 import { joinChallengeQuery } from "./challengeQueries";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
-import { AsyncStorage } from "@aws-amplify/core";
 
 export type ChallengesState = {
   challenges: Challenge[];
