@@ -1,20 +1,13 @@
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-  waitForElementToBeRemoved,
-} from "@testing-library/react-native";
+import { fireEvent, render, screen } from "@testing-library/react-native";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import TestingWrapperNavigation from "@app/testingWrapperWithNavigation";
 import challengesMockState from "../challengesMockState";
 import { extendTheme, NativeBaseProvider } from "native-base";
 import ChallengeModal from "./ChallengeModal";
-import { joinChallenge } from "../challengesSlice";
 import ChallengeBox from "../ChallengeBox/ChallengeBox";
 
-describe("ChallengeBoxes", () => {
+describe("ChallengeModal", () => {
   const mockState = {
     challenges: challengesMockState,
     joinChallenge: jest.fn(),
@@ -25,7 +18,7 @@ describe("ChallengeBoxes", () => {
     challenge: mockState.challenges.challenges[0],
   };
 
-  it("renders the challenge boxes correctly", async () => {
+  it("renders the challenge modal correctly", async () => {
     const component = render(
       <TestingWrapperNavigation store={mockStore}>
         <ChallengeModal {...modalProps} />
@@ -35,7 +28,7 @@ describe("ChallengeBoxes", () => {
     expect(component).toMatchSnapshot();
   });
 
-  it("finds the challenge boxes", async () => {
+  it("finds the challenge modal", async () => {
     const component = render(
       <TestingWrapperNavigation store={mockStore}>
         <ChallengeModal {...modalProps} />

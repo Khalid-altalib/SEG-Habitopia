@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ChallengeBoxes renders the challenge boxes correctly 1`] = `
+exports[`ChallengeModal renders the challenge modal correctly 1`] = `
 <RNCSafeAreaProvider
   onInsetsChange={[Function]}
   style={
