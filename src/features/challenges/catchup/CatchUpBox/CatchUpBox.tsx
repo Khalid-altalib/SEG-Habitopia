@@ -10,13 +10,15 @@ import React, { useState } from "react";
 //React Native
 import { TouchableOpacity } from "react-native";
 
-type Props = {};
+type Props = {
+  isUserLiked: boolean;
+};
+
 /** */
 const CatchUpBox = (props: Props) => {
-  let isUserLiked = false;
+  const { isUserLiked } = props;
   const [isLiked, setIsLiked] = useState(isUserLiked);
   const onHeartPressed = () => setIsLiked(!isLiked);
-
   return (
     <TouchableOpacity testID="catchUpBox">
       <ZStack padding={5} width={150} height={150}>
@@ -27,6 +29,7 @@ const CatchUpBox = (props: Props) => {
           rounded="xl"
         />
         <IconButton
+          testID="heartButton"
           borderRadius="xl"
           colorScheme="red"
           variant="ghost"
