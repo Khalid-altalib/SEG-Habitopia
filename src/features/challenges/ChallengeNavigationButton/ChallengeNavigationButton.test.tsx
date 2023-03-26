@@ -6,7 +6,7 @@ import challengesMockState from "../challengesMockState";
 import { extendTheme, NativeBaseProvider } from "native-base";
 import ChallengeNavigationButton from "./ChallengeNavigationButton";
 
-describe("ChallengeBoxes", () => {
+describe("ChallengeNavigationButton", () => {
   const mockState = {
     challenges: challengesMockState,
   };
