@@ -48,8 +48,7 @@ def handler(event, context):
     #payload class: mutation for activating individual challenge
     class payloadSetChallengeActive:
         def __init__(self, id, version):
-            self.query = "{\"query\":\"mutation setChallengeInactive($id: ID!, $versionIn: Int) {\\r\\n       updateChallenge(input: {id: $id, status: ACTIVE, _version: $versionIn, started: "+str(int(time.time()))+"}) {\\r\\n         id\\r\\n         status\\r\\n     \\t}\\r\\n     }\",\"variables\":{\"id\":\""+id+"\",\"versionIn\": "+str(version)+"}}"
-
+            self.query = "{\"query\":\"mutation setChallengeInactive {\\r\\n    updateChallenge(input: {id: \\\""+id+"\\\", status: ACTIVE, _version: "+str(version)+", started: "+str(int(time.time()))+"}) {\\r\\n        id\\r\\n        status\\r\\n        challengeChallengeTypeId\\r\\n        _version\\r\\n        _lastChangedAt        \\r\\n        updatedAt        \\r\\n        createdAt\\r\\n    }\\r\\n}\",\"variables\":{}}"
         def asPayload(self):
             return self.query
 
