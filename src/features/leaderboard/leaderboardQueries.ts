@@ -1,9 +1,4 @@
-import {
-  DataStore,
-  SortDirection,
-  API,
-  graphqlOperation,
-} from "aws-amplify";
+import { DataStore, SortDirection, API, graphqlOperation } from "aws-amplify";
 import { Leaderboard, User, Checkin } from "../../models";
 import { getUserFromDatabasebyID } from "@app/util";
 import {
@@ -123,6 +118,7 @@ export const fetchLeaderboardByUserIDAndChallengeType = async (
  * @param userID the user id for the new leaderboard entry
  * @param user user object for the new leaderboard entry
  * @param challengeType type of challenge for the new leaderboard entry
+ * Cannot be tested by jest because it uses DataStore
  */
 const createNewLeaderboardEntry = async (
   userID: string,
@@ -143,6 +139,7 @@ const createNewLeaderboardEntry = async (
  * Updates an existing leaderboard entry with a new checkin count
  * @param leaderboardEntry entry to be updated
  * @param checkinCount updated count value
+ * Cannot be tested by jest because it uses DataStore
  */
 const updateLeaderboardWithNewCheckin = async (
   leaderboardEntry: Leaderboard,

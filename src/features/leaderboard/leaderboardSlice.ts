@@ -8,7 +8,7 @@ export type LeaderboardState = {
   challengeType: string;
   timeInterval: string;
   page: number;
-  entries: Array<{ name: string; checkins: number, userId: string; }>;
+  entries: Array<{ name: string; checkins: number; userId: string }>;
 };
 
 const initialState: LeaderboardState = {
@@ -28,22 +28,24 @@ export const fetchLeaderboard = createAsyncThunk<
   any,
   void,
   { rejectValue: string }
->(
-  "leaderboard/fetch",
-  async (_, thunkAPI) => {
-    try {
-      const state = thunkAPI.getState() as RootState;
-      const { challengeType, page } = state.leaderboard;
-      const entries = fetchLeaderboardData(challengeType, page);
+>("leaderboard/fetch", async (_, thunkAPI) => {
+  try {
+    const state = thunkAPI.getState() as RootState;
+    const { challengeType, page } = state.leaderboard;
+    const entries = fetchLeaderboardData(challengeType, page);
 
-      return entries
-    } catch (error: any) {
-      const message = error.message;
-      return thunkAPI.rejectWithValue(message);
-    }
-  },
-);
+    return entries;
+  } catch (error: any) {
+    const message = error.message;
+    return thunkAPI.rejectWithValue(message);
+  }
+});
 
+/**
+ * The leaderboard slice of the redux store
+ * @param {LeaderboardState} state The current state of the leaderboard
+ * @returns {LeaderboardState} The new state of the leaderboard
+ */
 export const leaderboardSlice = createSlice({
   name: "leaderboard",
   initialState,
