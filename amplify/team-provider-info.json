@@ -18,7 +18,7 @@
       "function": {
         "challengeSchedule": {
           "deploymentBucketName": "amplify-habitopia-deploy-170027-deployment",
-          "s3Key": "amplify-builds/challengeSchedule-2f75337458515a4b6971-build.zip"
+          "s3Key": "amplify-builds/challengeSchedule-2b616a343831444b556c-build.zip"
         }
       }
     }
