@@ -27,6 +27,7 @@ import {
   VALIDATION_COUNT,
   VALIDATION_MESSAGE_TEXT,
 } from "@features/constants";
+import { updateLeaderboardWithNewValidatedCheckin } from "@features/leaderboard/leaderboardQueries";
 
 export const fetchUserChats = async (thunkAPI: any) => {
   const userChatRooms = (await getUserFromDatabase(thunkAPI)).ChatRooms;
@@ -334,6 +335,10 @@ export const incrementCheckInValidation = async (
         updateLastMessageInChat(
           validationMessage.id,
           validationMessage.chatroomID
+        );
+        updateLeaderboardWithNewValidatedCheckin(
+          checkIn.checkinChallengeTypeId || "",
+          checkInUser
         );
         return validatedCheckIn;
       } else {

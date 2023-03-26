@@ -1,53 +1,37 @@
-import { DataStore, SortDirection, API, graphqlOperation } from "aws-amplify";
+import { DataStore, SortDirection } from "aws-amplify";
 import { Leaderboard, User, Checkin } from "../../models";
-import { getUserFromDatabasebyID } from "@app/util";
-import {
-  OnCreateCheckinSubscription,
-  OnCreateCheckinSubscriptionVariables,
-} from "../../API";
-import { GraphQLSubscription } from "@aws-amplify/api";
-import { onCreateCheckin } from "../../graphql/subscriptions";
 
 /**
- * Subscribes to the checkin model
- * updates the leaderboard model when the user checks in
- * @param currentUserId id of the current user
- * @returns subscription to the checkin model
+ * updates the leaderboard to increment the checkin count
+ * for a given user and challenge type. If the user does not have an entry
+ * in the leaderboard, a new entry is created
+ * @param checkinChallengeTypeId The challenge type id for the checkin
+ * @param user user for the validated checkin
  */
-export const addCheckinSubscriptionForLeaderboard = (currentUserId: string) => {
-  const filter: OnCreateCheckinSubscriptionVariables = {
-    filter: {
-      userID: {
-        eq: currentUserId,
-      },
-    },
-  };
-  const checkinSubscription = API.graphql<
-    GraphQLSubscription<OnCreateCheckinSubscription>
-  >(graphqlOperation(onCreateCheckin, filter)).subscribe({
-    next: async ({ value }) => {
-      const checkin = { ...value.data?.onCreateCheckin };
-      const { checkinChallengeTypeId } = checkin;
-      const user = await getUserFromDatabasebyID(currentUserId);
-      const leaderboardEntry = await fetchLeaderboardByUserIDAndChallengeType(
-        currentUserId,
+export const updateLeaderboardWithNewValidatedCheckin = async (
+  checkinChallengeTypeId: string,
+  user: User
+) => {
+  if (!checkinChallengeTypeId || !user) return;
+  try {
+    const leaderboardEntry = await fetchLeaderboardByUserIDAndChallengeType(
+      user.id,
+      checkinChallengeTypeId as string
+    );
+    const currentCheckins = (await leaderboardEntry?.numberOfCheckins) ?? 0;
+    const newCheckins = currentCheckins + 1;
+    if (currentCheckins === 0) {
+      await createNewLeaderboardEntry(
+        user.id,
+        user,
         checkinChallengeTypeId as string
       );
-      const currentCheckins = (await leaderboardEntry?.numberOfCheckins) ?? 0;
-      const newCheckins = currentCheckins + 1;
-      if (currentCheckins === 0) {
-        await createNewLeaderboardEntry(
-          currentUserId,
-          user,
-          checkinChallengeTypeId as string
-        );
-      } else {
-        await updateLeaderboardWithNewCheckin(leaderboardEntry, newCheckins);
-      }
-    },
-    error: (err) => console.error(err),
-  });
-  return checkinSubscription;
+    } else {
+      await updateLeaderboardWithCheckinCount(leaderboardEntry, newCheckins);
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 /**
@@ -141,7 +125,7 @@ const createNewLeaderboardEntry = async (
  * @param checkinCount updated count value
  * Cannot be tested by jest because it uses DataStore
  */
-const updateLeaderboardWithNewCheckin = async (
+const updateLeaderboardWithCheckinCount = async (
   leaderboardEntry: Leaderboard,
   checkinCount: number
 ) => {
