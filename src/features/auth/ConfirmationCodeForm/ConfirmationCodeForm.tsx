@@ -7,10 +7,11 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { View } from "react-native";
 
 import { addSignUpData, sendConfirmationCode } from "../authSlice";
-import { useDispatch } from "../../../app/hooks";
+import { useDispatch, useSelector } from "../../../app/hooks";
 import Button from "../../../components/Button";
 import Text from "../../../components/Text";
 import { AuthParams, ButtonType, TextType } from "../../../../types";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 type formData = {
   confirmationCode: string;
@@ -24,13 +25,23 @@ const ConfirmationCodeForm = () => {
     },
   });
 
+  const { error, loading } = useSelector((state) => state.auth);
+
   // onSubmit handler
   const dispatch = useDispatch();
 
   const onSubmit = async (data: formData) => {
     dispatch(addSignUpData(data));
     await dispatch(sendConfirmationCode());
-    navigation.navigate("SignIn");
+    if (error !== "") {
+      Toast.show({
+        type: "error",
+        text1: "Error code invalid/expired",
+        text2: "Please try again",
+      });
+    } else {
+      navigation.navigate("SignIn");
+    }
   };
 
   // React Navigation
@@ -60,6 +71,7 @@ const ConfirmationCodeForm = () => {
         style={{ marginTop: 20 }}
         isFullWidth
         icon={<AntDesign name="arrowright" size={20} color="white" />}
+        isLoading={loading}
       >
         Continue
       </Button>

@@ -10,6 +10,7 @@ import Text from "../../../components/Text";
 import { AuthParams, ButtonType, TextType } from "../../../../types";
 import { View } from "react-native";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
 type formData = {
   email: string;
@@ -24,8 +25,15 @@ const EmailAddressForm = () => {
   const dispatch = useDispatch();
 
   const onSubmit = async (data: formData) => {
-    dispatch(addSignUpData(data));
-    navigation.navigate("Password");
+    if (!data.email.includes("@")) {
+      Toast.show({
+        type: "error",
+        text1: "Please ensure email is valid",
+      });
+    } else {
+      dispatch(addSignUpData(data));
+      navigation.navigate("Password");
+    }
   };
 
   const navigation = useNavigation<NavigationProp<AuthParams>>();

@@ -33,7 +33,7 @@ export type ButtonProps = {
   /** The text to display within the button. */
   children: string;
   /** Whether the button needs to show a loading state. */
-  isLoading: boolean;
+  isLoading?: boolean;
 };
 
 /**
