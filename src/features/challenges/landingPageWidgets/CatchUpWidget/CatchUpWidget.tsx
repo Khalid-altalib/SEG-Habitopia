@@ -7,7 +7,7 @@ type Props = {};
 
 const CatchUpWidget = (props: Props) => {
   return (
-    <View>
+    <View testID="catchUpWidget">
       <CatchUpWidgetLayout>
         <CatchUpSlider />
       </CatchUpWidgetLayout>
