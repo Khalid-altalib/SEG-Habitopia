@@ -460,6 +460,8 @@ export const listChallenges = /* GraphQL */ `
             _deleted
             _lastChangedAt
           }
+          nextToken
+          startedAt
         }
         status
         started
