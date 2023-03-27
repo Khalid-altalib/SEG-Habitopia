@@ -173,6 +173,7 @@ exports[`ConfirmationCodeForm renders correctly 1`] = `
                   />
                 }
                 isFullWidth={true}
+                isLoading={false}
                 onPress={[Function]}
                 style={
                   {

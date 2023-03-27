@@ -208,6 +208,7 @@ exports[`Renders correctly. 1`] = `
               />
             }
             isFullWidth={true}
+            isLoading={false}
             onPress={[Function]}
             style={
               {
