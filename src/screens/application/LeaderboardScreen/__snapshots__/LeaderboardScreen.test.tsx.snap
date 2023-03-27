@@ -48,6 +48,7 @@ exports[`Renders correctly. 1`] = `
           "paddingTop": 25,
         }
       }
+      testID="scroll-view"
     >
       <View>
         <View
@@ -88,6 +89,7 @@ exports[`Renders correctly. 1`] = `
                       "overflow": "visible",
                     }
                   }
+                  testID="leaderboard-settings"
                 />
               </View>
             </RCTScrollView>
