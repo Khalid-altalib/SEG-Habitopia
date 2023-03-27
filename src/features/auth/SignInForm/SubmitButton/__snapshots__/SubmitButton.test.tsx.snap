@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SubmitButton renders correctly 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    icon={
+      <Icon
+        allowFontScaling={false}
+        color="white"
+        name="arrowright"
+        size={20}
+      />
+    }
+    isFullWidth={true}
+    style={
+      {
+        "marginTop": 20,
+      }
+    }
+    type={0}
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "marginTop": 20,
+          "opacity": 1,
+        }
+      }
+    >
+      <ViewManagerAdapter_ExpoLinearGradient
+        proxiedProperties={
+          {
+            "colors": [
+              4278220774,
+              4286456526,
+            ],
+            "endPoint": [
+              1,
+              1,
+            ],
+            "locations": undefined,
+            "startPoint": [
+              0,
+              0,
+            ],
+          }
+        }
+        style={
+          [
+            {
+              "alignItems": "center",
+              "borderRadius": 10,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "paddingHorizontal": 40,
+              "paddingVertical": 15,
+            },
+            {
+              "width": "100%",
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "color": "#18181b",
+              },
+              {
+                "color": "#e4e4e7",
+                "fontFamily": undefined,
+                "fontSize": 19,
+              },
+              [
+                null,
+                {
+                  "alignSelf": "center",
+                },
+              ],
+            ]
+          }
+        >
+          Continue
+        </Text>
+        <View
+          style={
+            {
+              "marginLeft": 5,
+            }
+          }
+        >
+          <Text />
+        </View>
+      </ViewManagerAdapter_ExpoLinearGradient>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;

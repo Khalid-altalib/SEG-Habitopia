@@ -1,5 +1,5 @@
 docs/
-
+coverage/
 node_modules/
 .expo/
 dist/
@@ -14,6 +14,7 @@ web-build/
 .vscode/
 package-lock.json
 yarn.lock
+coverage/
 
 # macOS
 .DS_Store

@@ -17,6 +17,7 @@ import { Challenge, RootParams } from "../../../../types";
 import { useDispatch, useSelector } from "../../../app/hooks";
 import { challengeMappings } from "../challengeMappings";
 import { joinChallenge } from "../challengesSlice";
+import { fetchChats } from "@features/chat/chatSlice";
 
 type Props = {
   challenge: Challenge;
@@ -38,6 +39,7 @@ const ChallengeModal = (props: Props) => {
 
   const handleButtonClick = async () => {
     await dispatch(joinChallenge(name));
+    dispatch(fetchChats());
     navigation.pop();
   };
 

@@ -38,7 +38,6 @@ export const signUpUser = createAsyncThunk<void, void, { rejectValue: string }>(
       });
     } catch (error: any) {
       const message = error.message;
-      console.log(error);
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -62,18 +61,19 @@ export const sendConfirmationCode = createAsyncThunk<
   }
 });
 
-const displayErrorMessage = (err: any) => {
+const displayErrorMessage = (error: any) => {
   let errorMessage = "";
   // looked into error messages and found what is presented for the different errors
-  if (err.message.includes("previousPassword")) {
+  if (error.message.includes("previousPassword")) {
     errorMessage = "Your password does not match the correct format.";
-  } else if (err.message.includes("proposedPassword")) {
-    errorMessage = "The requested password does not fit the criteria for a password";
-  } else if (err.message.includes("Incorrect username or password")) {
+  } else if (error.message.includes("proposedPassword")) {
+    errorMessage =
+      "The requested password does not fit the criteria for a password";
+  } else if (error.message.includes("Incorrect username or password")) {
     errorMessage = "Your old password is incorrect.";
   } else {
-    errorMessage = err.message;
-    console.log(errorMessage);
+    errorMessage = error.message;
+    console.log(errorMessage)
   }
   Toast.show({
     type: "error",
@@ -81,7 +81,7 @@ const displayErrorMessage = (err: any) => {
   });
 };
 
-export const updatePassword = async (password: string,oldPassword: string) => {
+export const updatePassword = async (password: string, oldPassword: string) => {
   if (password === oldPassword) {
     Toast.show({
       type: "error",
@@ -89,17 +89,18 @@ export const updatePassword = async (password: string,oldPassword: string) => {
     });
     return;
   }
-  
+
   Auth.currentAuthenticatedUser()
-  .then((user) => {
-    return Auth.changePassword(user, oldPassword, password);
-  })
-  .then((data) => 
-  Toast.show({
-    type: "success",
-    text1: "Password Updated Successfully",
-  }))
-  .catch((err) => displayErrorMessage(err));
+    .then((user) => {
+      return Auth.changePassword(user, oldPassword, password);
+    })
+    .then((data) =>
+      Toast.show({
+        type: "success",
+        text1: "Password Updated Successfully",
+      })
+    )
+    .catch((err) => displayErrorMessage(err));
 };
 
 const logInHelper = async (email: string, password: string, name?: string) => {
@@ -123,11 +124,16 @@ export const logInUser = createAsyncThunk<
     const state = thunkAPI.getState() as RootState;
     const { email, password } = state.auth.logInData;
     const user = await logInHelper(email, password);
+
+    Toast.show({
+      type: "success",
+      text1: "Successfully logged in!",
+    });
+
     return user as LocalUser;
   } catch (error: any) {
-    const message = error.message;
-    console.log(message);
-    return thunkAPI.rejectWithValue(message);
+    displayErrorMessage(error);
+    return thunkAPI.rejectWithValue("An error has occured");
   }
 });
 
@@ -152,6 +158,10 @@ export const logInUserFromStorage = createAsyncThunk<
 
 export const logOutUser = createAsyncThunk("auth/logOutUser", async () => {
   await AsyncStorage.removeItem("user");
+  Toast.show({
+    type: "success",
+    text1: "You have successfully logged out!",
+  });
   return undefined;
 });
 
@@ -187,7 +197,6 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     addSignUpData: (state, action: PayloadAction<object>) => {
-      console.log(state, action);
       state.signUpData = { ...state.signUpData, ...action.payload };
     },
     addLogInData: (state, action: PayloadAction<object>) => {

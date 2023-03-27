@@ -13,13 +13,15 @@ const LeaderboardCards = (props: Props) => {
   return (
     <StatusContainer loading={loading} error={error} data={entries}>
       {entries && (
-        <VStack space={5}>
+        <VStack space={25}>
           {entries.map((entry, index) => (
             <LeaderboardCard
               name={entry.name}
-              wins={entry.checkins}
+              checkins={entry.checkins}
               key={index}
               place={index}
+              userId={entry.userId}
+              testID="leaderboard-card"
             />
           ))}
         </VStack>

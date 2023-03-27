@@ -2,20 +2,52 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateLeaderboard = /* GraphQL */ `
-  subscription OnCreateLeaderboard(
-    $filter: ModelSubscriptionLeaderboardFilterInput
-  ) {
-    onCreateLeaderboard(filter: $filter) {
+export const onCreateFollow = /* GraphQL */ `
+  subscription OnCreateFollow($filter: ModelSubscriptionFollowFilterInput) {
+    onCreateFollow(filter: $filter) {
       id
-      numberOfCheckins
-      User {
+      followingUser {
         id
         name
         image
         biography
         email
         notifications
+        streakStart
+        Messages {
+          nextToken
+          startedAt
+        }
+        ChatRooms {
+          nextToken
+          startedAt
+        }
+        Checkins {
+          nextToken
+          startedAt
+        }
+        challenges {
+          nextToken
+          startedAt
+        }
+        validatedCheckIns {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      followedBy {
+        id
+        name
+        image
+        biography
+        email
+        notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -47,7 +79,234 @@ export const onCreateLeaderboard = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      followFollowingUserId
+      followFollowedById
+    }
+  }
+`;
+export const onUpdateFollow = /* GraphQL */ `
+  subscription OnUpdateFollow($filter: ModelSubscriptionFollowFilterInput) {
+    onUpdateFollow(filter: $filter) {
+      id
+      followingUser {
+        id
+        name
+        image
+        biography
+        email
+        notifications
+        streakStart
+        Messages {
+          nextToken
+          startedAt
+        }
+        ChatRooms {
+          nextToken
+          startedAt
+        }
+        Checkins {
+          nextToken
+          startedAt
+        }
+        challenges {
+          nextToken
+          startedAt
+        }
+        validatedCheckIns {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      followedBy {
+        id
+        name
+        image
+        biography
+        email
+        notifications
+        streakStart
+        Messages {
+          nextToken
+          startedAt
+        }
+        ChatRooms {
+          nextToken
+          startedAt
+        }
+        Checkins {
+          nextToken
+          startedAt
+        }
+        challenges {
+          nextToken
+          startedAt
+        }
+        validatedCheckIns {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      followFollowingUserId
+      followFollowedById
+    }
+  }
+`;
+export const onDeleteFollow = /* GraphQL */ `
+  subscription OnDeleteFollow($filter: ModelSubscriptionFollowFilterInput) {
+    onDeleteFollow(filter: $filter) {
+      id
+      followingUser {
+        id
+        name
+        image
+        biography
+        email
+        notifications
+        streakStart
+        Messages {
+          nextToken
+          startedAt
+        }
+        ChatRooms {
+          nextToken
+          startedAt
+        }
+        Checkins {
+          nextToken
+          startedAt
+        }
+        challenges {
+          nextToken
+          startedAt
+        }
+        validatedCheckIns {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      followedBy {
+        id
+        name
+        image
+        biography
+        email
+        notifications
+        streakStart
+        Messages {
+          nextToken
+          startedAt
+        }
+        ChatRooms {
+          nextToken
+          startedAt
+        }
+        Checkins {
+          nextToken
+          startedAt
+        }
+        challenges {
+          nextToken
+          startedAt
+        }
+        validatedCheckIns {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      followFollowingUserId
+      followFollowedById
+    }
+  }
+`;
+export const onCreateLeaderboard = /* GraphQL */ `
+  subscription OnCreateLeaderboard(
+    $filter: ModelSubscriptionLeaderboardFilterInput
+  ) {
+    onCreateLeaderboard(filter: $filter) {
+      id
+      numberOfCheckins
+      User {
+        id
+        name
+        image
+        biography
+        email
+        notifications
+        streakStart
+        Messages {
+          nextToken
+          startedAt
+        }
+        ChatRooms {
+          nextToken
+          startedAt
+        }
+        Checkins {
+          nextToken
+          startedAt
+        }
+        challenges {
+          nextToken
+          startedAt
+        }
+        validatedCheckIns {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      ChallengeType {
+        id
+        name
+        description
+        active
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       leaderboardUserId
+      leaderboardChallengeTypeId
     }
   }
 `;
@@ -65,6 +324,7 @@ export const onUpdateLeaderboard = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -91,12 +351,24 @@ export const onUpdateLeaderboard = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
+      ChallengeType {
+        id
+        name
+        description
+        active
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
       leaderboardUserId
+      leaderboardChallengeTypeId
     }
   }
 `;
@@ -114,6 +386,7 @@ export const onDeleteLeaderboard = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -140,12 +413,24 @@ export const onDeleteLeaderboard = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
+      ChallengeType {
+        id
+        name
+        description
+        active
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
       leaderboardUserId
+      leaderboardChallengeTypeId
     }
   }
 `;
@@ -180,9 +465,11 @@ export const onCreateChallenge = /* GraphQL */ `
         nextToken
         startedAt
       }
+      status
       started
       ChatRoom {
         id
+        name
         Messages {
           nextToken
           startedAt
@@ -216,7 +503,6 @@ export const onCreateChallenge = /* GraphQL */ `
         chatRoomLastMessageId
       }
       userCount
-      finished
       createdAt
       updatedAt
       _version
@@ -258,9 +544,11 @@ export const onUpdateChallenge = /* GraphQL */ `
         nextToken
         startedAt
       }
+      status
       started
       ChatRoom {
         id
+        name
         Messages {
           nextToken
           startedAt
@@ -294,7 +582,6 @@ export const onUpdateChallenge = /* GraphQL */ `
         chatRoomLastMessageId
       }
       userCount
-      finished
       createdAt
       updatedAt
       _version
@@ -336,9 +623,11 @@ export const onDeleteChallenge = /* GraphQL */ `
         nextToken
         startedAt
       }
+      status
       started
       ChatRoom {
         id
+        name
         Messages {
           nextToken
           startedAt
@@ -372,7 +661,6 @@ export const onDeleteChallenge = /* GraphQL */ `
         chatRoomLastMessageId
       }
       userCount
-      finished
       createdAt
       updatedAt
       _version
@@ -443,6 +731,7 @@ export const onCreateUser = /* GraphQL */ `
       biography
       email
       notifications
+      streakStart
       Messages {
         items {
           id
@@ -538,6 +827,7 @@ export const onUpdateUser = /* GraphQL */ `
       biography
       email
       notifications
+      streakStart
       Messages {
         items {
           id
@@ -633,6 +923,7 @@ export const onDeleteUser = /* GraphQL */ `
       biography
       email
       notifications
+      streakStart
       Messages {
         items {
           id
@@ -861,6 +1152,7 @@ export const onCreateChatRoom = /* GraphQL */ `
   subscription OnCreateChatRoom($filter: ModelSubscriptionChatRoomFilterInput) {
     onCreateChatRoom(filter: $filter) {
       id
+      name
       Messages {
         items {
           id
@@ -948,9 +1240,10 @@ export const onCreateChatRoom = /* GraphQL */ `
   }
 `;
 export const onUpdateChatRoom = /* GraphQL */ `
-  subscription OnUpdateChatRoom($filter: ModelSubscriptionChatRoomFilterInput) {
+subscription OnUpdateChatRoom($filter: ModelSubscriptionChatRoomFilterInput,  $userFilter: ModelUserChatRoomFilterInput) {
     onUpdateChatRoom(filter: $filter) {
       id
+      name
       Messages {
         items {
           id
@@ -969,7 +1262,7 @@ export const onUpdateChatRoom = /* GraphQL */ `
         nextToken
         startedAt
       }
-      users {
+      users (filter: $userFilter) {
         items {
           id
           userId
@@ -1041,6 +1334,7 @@ export const onDeleteChatRoom = /* GraphQL */ `
   subscription OnDeleteChatRoom($filter: ModelSubscriptionChatRoomFilterInput) {
     onDeleteChatRoom(filter: $filter) {
       id
+      name
       Messages {
         items {
           id
@@ -1281,9 +1575,11 @@ export const onCreateChallengeUser = /* GraphQL */ `
           nextToken
           startedAt
         }
+        status
         started
         ChatRoom {
           id
+          name
           createdAt
           updatedAt
           _version
@@ -1292,7 +1588,6 @@ export const onCreateChallengeUser = /* GraphQL */ `
           chatRoomLastMessageId
         }
         userCount
-        finished
         createdAt
         updatedAt
         _version
@@ -1308,6 +1603,7 @@ export const onCreateChallengeUser = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1367,9 +1663,11 @@ export const onUpdateChallengeUser = /* GraphQL */ `
           nextToken
           startedAt
         }
+        status
         started
         ChatRoom {
           id
+          name
           createdAt
           updatedAt
           _version
@@ -1378,7 +1676,6 @@ export const onUpdateChallengeUser = /* GraphQL */ `
           chatRoomLastMessageId
         }
         userCount
-        finished
         createdAt
         updatedAt
         _version
@@ -1394,6 +1691,7 @@ export const onUpdateChallengeUser = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1453,9 +1751,11 @@ export const onDeleteChallengeUser = /* GraphQL */ `
           nextToken
           startedAt
         }
+        status
         started
         ChatRoom {
           id
+          name
           createdAt
           updatedAt
           _version
@@ -1464,7 +1764,6 @@ export const onDeleteChallengeUser = /* GraphQL */ `
           chatRoomLastMessageId
         }
         userCount
-        finished
         createdAt
         updatedAt
         _version
@@ -1480,6 +1779,7 @@ export const onDeleteChallengeUser = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1529,6 +1829,7 @@ export const onCreateUserChatRoom = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1557,6 +1858,7 @@ export const onCreateUserChatRoom = /* GraphQL */ `
       }
       chatRoom {
         id
+        name
         Messages {
           nextToken
           startedAt
@@ -1612,6 +1914,7 @@ export const onUpdateUserChatRoom = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1640,6 +1943,7 @@ export const onUpdateUserChatRoom = /* GraphQL */ `
       }
       chatRoom {
         id
+        name
         Messages {
           nextToken
           startedAt
@@ -1695,6 +1999,7 @@ export const onDeleteUserChatRoom = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1723,6 +2028,7 @@ export const onDeleteUserChatRoom = /* GraphQL */ `
       }
       chatRoom {
         id
+        name
         Messages {
           nextToken
           startedAt
@@ -1778,6 +2084,7 @@ export const onCreateUserValidatedCheckIn = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1856,6 +2163,7 @@ export const onUpdateUserValidatedCheckIn = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt
@@ -1934,6 +2242,7 @@ export const onDeleteUserValidatedCheckIn = /* GraphQL */ `
         biography
         email
         notifications
+        streakStart
         Messages {
           nextToken
           startedAt

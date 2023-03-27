@@ -1,12 +1,13 @@
+import Button from "@components/Button";
+import StatusContainer from "@components/StatusContainer/StatusContainer";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { Button, View } from "native-base";
+import { View } from "native-base";
 import React from "react";
-import { RootParams } from "../../../../types";
+import { ButtonType, RootParams } from "../../../../types";
 import { useDispatch, useSelector } from "../../../app/hooks";
 import { setSettings } from "../settingsSlice";
 
 type Props = {
-  disabled?: boolean;
   getValues: (valueName: string) => string;
   valueName: string;
   oldPassword?: string;
@@ -14,7 +15,7 @@ type Props = {
 
 const DoneButton = (props: Props) => {
   const navigation = useNavigation<NavigationProp<RootParams>>();
-  const { getValues, disabled, valueName, oldPassword } = props;
+  const { getValues, valueName, oldPassword } = props;
 
   const { loading } = useSelector((state) => state.settings.setSettings);
 
@@ -33,17 +34,16 @@ const DoneButton = (props: Props) => {
   };
 
   return (
-    <View>
-      <Button
-        onPress={handlePress}
-        mt={8}
-        isDisabled={disabled}
-        isLoading={loading}
-        testID="button"
-      >
-        Done
-      </Button>
-    </View>
+    <Button
+      type={ButtonType.Primary}
+      onPress={handlePress}
+      isFullWidth
+      isLoading={loading}
+      style={{ marginTop: 25 }}
+      testID="button"
+    >
+      Done
+    </Button>
   );
 };
 

@@ -71,6 +71,7 @@ export const fetchLeaderboardData = async (
     leaderboard.map(async (entry) => {
       const user = await DataStore.query(User, entry.id);
       return {
+        userId: entry.id,
         name: user?.name,
         checkins: entry.checkins,
       };
@@ -78,7 +79,7 @@ export const fetchLeaderboardData = async (
   );
   const serializableResult = [
     ...result.map((item) => {
-      return { checkins: item.checkins, name: item.name };
+      return { checkins: item.checkins, name: item.name, userId: item.userId };
     }),
   ];
   return serializableResult;

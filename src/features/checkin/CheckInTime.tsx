@@ -1,15 +1,27 @@
-import { Box, Text } from "native-base";
+import Text from "@components/Text";
+import { Box } from "native-base";
 import React from "react";
+import { TextType } from "types";
 
 type Props = {
-  timeLeft: string;
+  hoursLeft: number;
 };
 
 function CheckInTime(props: Props) {
-  const { timeLeft } = props;
+  const { hoursLeft } = props;
   return (
-    <Box mt={20} ml={-3}>
-      <Text color={"red.600"}>{timeLeft}h left!</Text>
+    <Box position="absolute" bottom={0}>
+      <Text
+        type={TextType.Regular}
+        color="white"
+        style={{
+          textShadowColor: "black",
+          textShadowRadius: 4,
+          padding: 12.25,
+        }}
+      >
+        {`${hoursLeft}h left!`}
+      </Text>
     </Box>
   );
 }

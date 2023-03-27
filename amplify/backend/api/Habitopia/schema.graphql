@@ -1,7 +1,19 @@
+type Follow @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  followingUser: User @hasOne
+  followedBy: User @hasOne
+}
+
 enum MessageEnum {
   TEXT
   CHECKIN
   VALIDATION
+}
+
+enum ChallengeStatusEnum {
+  ACTIVE
+  INACTIVE
+  COMPLETED
 }
 
 type Leaderboard @model @auth(rules: [{allow: public}]) {
@@ -15,10 +27,10 @@ type Challenge @model @auth(rules: [{allow: public}]) {
   id: ID!
   ChallengeType: ChallengeType! @hasOne
   Users: [User] @manyToMany(relationName: "ChallengeUser")
-  started: AWSDateTime
+  status: ChallengeStatusEnum @index(name: "byStatus", queryField: "challengesByStatus")
+  started: Int
   ChatRoom: ChatRoom @hasOne
   userCount: Int
-  finished: AWSDateTime
 }
 
 type ChallengeType @model @auth(rules: [{allow: public}]) {
@@ -54,6 +66,7 @@ type Message @model @auth(rules: [{allow: public}]) {
 
 type ChatRoom @model @auth(rules: [{allow: public}]) {
   id: ID!
+  name: String!
   Messages: [Checkin] @hasMany(indexName: "byChatRoom", fields: ["id"])
   users: [User] @manyToMany(relationName: "UserChatRoom")
   Checkins: [Checkin] @hasMany(indexName: "byChatRoom", fields: ["id"])

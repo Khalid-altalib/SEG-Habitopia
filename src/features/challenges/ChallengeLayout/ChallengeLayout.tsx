@@ -1,6 +1,8 @@
-import { Center, Heading, ScrollView, VStack } from "native-base";
+import { Center, ScrollView, VStack } from "native-base";
 import React from "react";
 import PaddedContainer from "../../../components/PaddedContainer";
+import Text from "@components/Text";
+import { TextType } from "types";
 
 type Props = {
   children: React.ReactNode;
@@ -11,8 +13,8 @@ function ChallengeLayout(props: Props) {
   return (
     <ScrollView>
       <PaddedContainer>
-        <Center>
-          <Heading mb={4}>Pick a Challenge! 🚀</Heading>
+        <Center marginBottom={25}>
+          <Text type={TextType.Subheading}>Pick a Challenge! 🚀</Text>
         </Center>
 
         <VStack space={3} width={"100%"}>

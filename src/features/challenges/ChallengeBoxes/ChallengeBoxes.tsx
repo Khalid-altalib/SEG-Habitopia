@@ -21,12 +21,14 @@ const ChallengeBoxes = (props: Props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchChallenges());
+    if (challenges.length == 0) {
+      dispatch(fetchChallenges());
+    }
   }, []);
 
   return (
     <StatusContainer loading={loading} error={error} data={challenges}>
-      <VStack space={4} width={"100%"}>
+      <VStack space={25} width={"100%"}>
         {challenges
           .slice(0, boxCount || challenges.length)
           .map((challenge, index) => (
