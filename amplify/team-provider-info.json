@@ -1,34 +1,23 @@
 {
-  "dev": {
+  "deploy": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-habitopia-dev-190159-authRole",
-      "UnauthRoleArn": "arn:aws:iam::281181984812:role/amplify-habitopia-dev-190159-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::281181984812:role/amplify-habitopia-dev-190159-authRole",
+      "AuthRoleName": "amplify-habitopia-deploy-170027-authRole",
+      "UnauthRoleArn": "arn:aws:iam::281181984812:role/amplify-habitopia-deploy-170027-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::281181984812:role/amplify-habitopia-deploy-170027-authRole",
       "Region": "eu-west-2",
-      "DeploymentBucketName": "amplify-habitopia-dev-190159-deployment",
-      "UnauthRoleName": "amplify-habitopia-dev-190159-unauthRole",
-      "StackName": "amplify-habitopia-dev-190159",
-      "StackId": "arn:aws:cloudformation:eu-west-2:281181984812:stack/amplify-habitopia-dev-190159/33d59e30-c4f6-11ed-ac1b-0a649fe12144",
+      "DeploymentBucketName": "amplify-habitopia-deploy-170027-deployment",
+      "UnauthRoleName": "amplify-habitopia-deploy-170027-unauthRole",
+      "StackName": "amplify-habitopia-deploy-170027",
+      "StackId": "arn:aws:cloudformation:eu-west-2:281181984812:stack/amplify-habitopia-deploy-170027/6336b230-ca65-11ed-a8e4-06d433bf148a",
       "AmplifyAppId": "d2fz6on51wdtwq"
     },
     "categories": {
-      "auth": {
-        "Habitopia": {}
-      },
       "function": {
         "challengeSchedule": {
-          "deploymentBucketName": "amplify-habitopia-dev-190159-deployment",
-          "s3Key": "amplify-builds/challengeSchedule-71624d56757665553979-build.zip"
-        },
-        "Habitopia": {}
+          "deploymentBucketName": "amplify-habitopia-deploy-170027-deployment",
+          "s3Key": "amplify-builds/challengeSchedule-644849627a58784d586e-build.zip"
+        }
       },
-      "api": {
-        "Habitopia": {}
-      }
-    }
-  },
-  "dev": {
-    "categories": {
       "auth": {
         "Habitopia": {}
       }
