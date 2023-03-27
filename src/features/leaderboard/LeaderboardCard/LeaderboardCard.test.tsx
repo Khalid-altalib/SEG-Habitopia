@@ -5,6 +5,13 @@ import TestingWrapperNavigation from "@app/testingWrapperWithNavigation";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 
+/**
+ * This file contains tests for the LeaderboardCard component.
+ * checks if the component renders correctly with the correct data
+ * checks if the component renders the correct place
+ * checks if onPress navigates to the profile screen
+ */
+
 describe("LeaderboardCard", () => {
   const defaultProps: Props = {
     name: "Alice",

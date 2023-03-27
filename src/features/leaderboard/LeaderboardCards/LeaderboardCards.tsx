@@ -3,10 +3,13 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "../../../app/hooks";
 import StatusContainer from "../../../components/StatusContainer/StatusContainer";
 import LeaderboardCard from "../LeaderboardCard/LeaderboardCard";
-import { fetchLeaderboard } from "../leaderboardSlice";
 
 type Props = {};
 
+/**
+ * LeaderboardCards component renders a vertical stack of LeaderboardCard components
+ * @returns JSX.Element - LeaderboardCards component
+ */
 const LeaderboardCards = (props: Props) => {
   const { loading, error, entries } = useSelector((state) => state.leaderboard);
 

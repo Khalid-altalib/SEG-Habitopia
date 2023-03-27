@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
-import { waitFor } from "@testing-library/react-native";
 import leaderboardReducer, {
   leaderboardSlice,
   LeaderboardState,
@@ -9,6 +8,13 @@ import leaderboardReducer, {
 } from "./leaderboardSlice";
 import { RootState } from "../../app/store";
 import { fetchLeaderboardData } from "./leaderboardQueries";
+
+/**
+ * This file contains tests for the leaderboardSlice.
+ * The tests are split into two sections:
+ * 1. Reducers
+ * 2. Async actions
+ */
 
 // Mock the fetchLeaderboardData function
 jest.mock("./leaderboardQueries", () => ({

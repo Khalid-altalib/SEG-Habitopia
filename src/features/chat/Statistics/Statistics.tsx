@@ -7,6 +7,12 @@ type StatisticBoxProps = {
   statisticType: string;
 };
 
+/**
+ * A generic components that can be used to display statistics for a challenge/chat room
+ *
+ * @param props - The properties passed to the component.
+ * @returns - The box component.
+ */
 const StatisticBox = (props: StatisticBoxProps) => {
   const { statisticValue, statisticType } = props;
 

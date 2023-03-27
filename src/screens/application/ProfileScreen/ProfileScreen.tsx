@@ -5,11 +5,11 @@ import {
   useRoute,
 } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Button, Divider, ScrollView, useColorModeValue } from "native-base";
+import { Divider, ScrollView, useColorModeValue } from "native-base";
 import React, { useEffect } from "react";
 import { LocalUser, NavigationParams } from "types";
 import { useDispatch, useSelector } from "@app/hooks";
-import { selectProfile, selectUser } from "@app/selectors";
+import { selectUser } from "@app/selectors";
 import StatusContainer from "@components/StatusContainer/StatusContainer";
 import ProfileHeader from "@features/profile/ProfileHeader/ProfileHeader";
 import { fetchProfile } from "@features/profile/profileSlice";

@@ -4,14 +4,18 @@ import LeaderboardLayout from "./LeaderboardLayout";
 import TestingWrapperNavigation from "@app/testingWrapperWithNavigation";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
-import { ScrollView } from "react-native";
 import { fetchLeaderboard } from "../leaderboardSlice";
 import { useDispatch } from "../../../app/hooks";
 
+/**
+ * This file contains tests for the LeaderboardLayout component.
+ */
+
+// mock the fetchLeaderboard function
 jest.mock("../leaderboardSlice", () => ({
   fetchLeaderboard: jest.fn(),
 }));
-
+// mock the useDispatch function
 jest.mock("../../../app/hooks", () => ({
   useDispatch: jest.fn(),
 }));
@@ -47,6 +51,7 @@ describe("LeaderboardLayout", () => {
   it("should fetch leaderboard when scroll to bottom", async () => {
     const scrollView = wrapper.getByTestId("scroll-view");
     await act(async () => {
+      // simulate scroll to bottom
       await fireEvent.scroll(scrollView, {
         nativeEvent: {
           layoutMeasurement: { height: 100 },
@@ -61,6 +66,7 @@ describe("LeaderboardLayout", () => {
   it("should not fetch leaderboard when not scrolled to bottom", async () => {
     const scrollView = wrapper.getByTestId("scroll-view");
     await fireEvent.scroll(scrollView, {
+      // simulate scroll to top
       nativeEvent: {
         layoutMeasurement: { height: 100 },
         contentOffset: { y: 50 },

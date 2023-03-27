@@ -21,17 +21,28 @@ import { Message as MessageType } from "../../../types";
 import moment from "moment";
 import {
   ALREADY_VALIDATED_ERROR,
+  CHAT_DETAIL_ERROR,
   CHECK_IN_MESSAGE,
   COULD_NOT_VALIDATE,
   MESSAGE_PAGINATION_LIMIT,
   VALIDATION_COUNT,
   VALIDATION_MESSAGE_TEXT,
 } from "@features/constants";
-import { API } from 'aws-amplify';
-import * as queries from '../../graphql/queries';
-import { GraphQLQuery } from '@aws-amplify/api';
-import { ListChallengesQuery, ListChallengesQueryVariables, GetChallengeQuery, GetChallengeTypeQuery, GetChallengeTypeQueryVariables } from '../../API';
+import { API } from "aws-amplify";
+import * as queries from "../../graphql/queries";
+import { GraphQLQuery } from "@aws-amplify/api";
+import {
+  ListChallengesQuery,
+  ListChallengesQueryVariables,
+  GetChallengeQuery,
+  GetChallengeTypeQuery,
+  GetChallengeTypeQueryVariables,
+} from "../../API";
+import { updateLeaderboardWithNewValidatedCheckin } from "@features/leaderboard/leaderboardQueries";
 
+/*
+Get all chats that user is part of and sort them by latest update
+*/
 export const fetchUserChats = async (thunkAPI: any) => {
   const userChatRooms = (await getUserFromDatabase(thunkAPI)).ChatRooms;
   let chats: Chat[] = [];
@@ -61,6 +72,9 @@ export const fetchUserChats = async (thunkAPI: any) => {
   return chats;
 };
 
+/*
+Get all messages for a specific chat and paginate to reduce payload
+*/
 export const fetchChatMessages = async (chatId: string, pageNumber: number) => {
   const numberOfMessageInChat = (
     await DataStore.query(Message, (message) => message.chatroomID.eq(chatId))
@@ -105,6 +119,9 @@ export const fetchChatMessages = async (chatId: string, pageNumber: number) => {
   return messages;
 };
 
+/*
+Send a message in a chat room
+*/
 export const sendChatMessage = async (
   message: string,
   chatroomID: string,
@@ -130,6 +147,9 @@ export const sendChatMessage = async (
   } as MessageType;
 };
 
+/*
+Update the last message in a chat
+*/
 const updateLastMessageInChat = async (
   messageID: string,
   chatroomID: string
@@ -144,48 +164,73 @@ const updateLastMessageInChat = async (
   );
 };
 
+/*
+Get the details of the challenge associated with the specific chat room
+*/
 export const getChatDetails = async (chatId: string) => {
   const challengeVariables: ListChallengesQueryVariables = {
     filter: {
       challengeChatRoomId: {
-        eq: chatId
+        eq: chatId,
+      },
+    },
+  };
+  const challenge = await API.graphql<GraphQLQuery<ListChallengesQuery>>({
+    query: queries.listChallenges,
+    variables: challengeVariables,
+  });
+
+  const challengeDetail = challenge.data?.listChallenges?.items[0];
+
+  if (challengeDetail) {
+    const challengeType = await API.graphql<
+      GraphQLQuery<GetChallengeTypeQuery>
+    >({
+      query: queries.getChallengeType,
+      variables: {
+        id: challengeDetail.ChallengeType.id,
+      },
+    });
+
+    const challengeTypeDetails = challengeType.data?.getChallengeType;
+
+    const users: { userId: string; name: string }[] = [];
+    if (challengeDetail.Users) {
+      for await (const participant of challengeDetail.Users.items) {
+        const user = (
+          await DataStore.query(User, (user) =>
+            user.id.eq(participant.userId || "")
+          )
+        )[0];
+        users.push({
+          userId: user.id,
+          name: user.name || "",
+        });
       }
     }
-  };
-  const challengeDetail = await API.graphql<GraphQLQuery<ListChallengesQuery>>({
-    query: queries.listChallenges,
-    variables: challengeVariables
-  });
+    if (challengeTypeDetails) {
+      const chatDetails = {
+        challengeName: challengeTypeDetails.name,
+        description: challengeTypeDetails.description,
+        statistics: {
+          num: challengeDetail.userCount,
+          status: challengeDetail.status,
+        },
+        participants: users,
+      } as ChatDetails;
 
-  const challengeTypeDetails = await API.graphql<GraphQLQuery<GetChallengeTypeQuery>>({
-    query: queries.getChallengeType,
-    variables: {id: challengeDetail.data.listChallenges.items[0].ChallengeType.id}
-  });
-
-  const users: { userId: string; name: string }[] = [];
-  for await (const participant of challengeDetail.data.listChallenges.items[0].Users.items) {
-    const user = (
-      await DataStore.query(User, (user) =>
-        user.id.eq(participant.userId || "")
-      )
-    )[0];
-    users.push({
-      userId: user.id,
-      name: user.name || "",
-    });
+      return chatDetails;
+    } else {
+      throw new Error(CHAT_DETAIL_ERROR);
+    }
+  } else {
+    throw new Error(CHAT_DETAIL_ERROR);
   }
-  const chatDetails = {
-    challengeName: challengeTypeDetails.data.getChallengeType.name,
-    description: challengeTypeDetails.data.getChallengeType.description,
-    statistics: {
-      num: challengeDetail.data.listChallenges.items[0].userCount,
-      status: challengeDetail.data.listChallenges.items[0].status,
-    },
-    participants: users,
-  } as ChatDetails;
-  return chatDetails;
 };
 
+/*
+Send a check-in in chat
+*/
 export const sendChatCheckIn = async (chatID: string, thunkAPI: any) => {
   const challengeStatus = (
     await DataStore.query(Challenge, (challenge) =>
@@ -223,6 +268,9 @@ export const sendChatCheckIn = async (chatID: string, thunkAPI: any) => {
   }
 };
 
+/*
+Create a check-in message to distinguish from a text message
+*/
 const createCheckIn = async (chatID: string, userID: string, thunkAPI: any) => {
   const challengeTypeId = (
     await DataStore.query(Challenge, (challenge) =>
@@ -268,6 +316,9 @@ const createCheckIn = async (chatID: string, userID: string, thunkAPI: any) => {
   } as MessageType;
 };
 
+/*
+Get last check-in made by the logged-in user
+*/
 const getLastCheckIn = async (chatID: string, thunkAPI: any) => {
   const userID = await getUserIdFromThunk(thunkAPI);
   const lastCheckInByUser = (
@@ -286,6 +337,9 @@ const getLastCheckIn = async (chatID: string, thunkAPI: any) => {
   return lastCheckInByUser;
 };
 
+/*
+Increment the check-in validation count
+*/
 export const incrementCheckInValidation = async (
   messageId: string,
   thunkAPI: any
@@ -344,6 +398,10 @@ export const incrementCheckInValidation = async (
           validationMessage.id,
           validationMessage.chatroomID
         );
+        updateLeaderboardWithNewValidatedCheckin(
+          checkIn.checkinChallengeTypeId || "",
+          checkInUser
+        );
         return validatedCheckIn;
       } else {
         return newCheckIn;
@@ -354,6 +412,9 @@ export const incrementCheckInValidation = async (
   }
 };
 
+/*
+Query a check-in by its id
+*/
 export const getCheckInById = async (checkInId: string) => {
   const checkIn = (
     await DataStore.query(Checkin, (checkin) => checkin.id.eq(checkInId))
@@ -361,6 +422,9 @@ export const getCheckInById = async (checkInId: string) => {
   return checkIn;
 };
 
+/*
+Query a check-in by its message id
+*/
 export const getMessageByCheckInId = async (checkInId: string) => {
   const message = (
     await DataStore.query(Message, (message) =>
@@ -370,6 +434,9 @@ export const getMessageByCheckInId = async (checkInId: string) => {
   return message;
 };
 
+/*
+Query a message by its id
+*/
 export const getMessageById = async (id: string) => {
   const message = (
     await DataStore.query(Message, (message) => message.id.eq(id))
@@ -377,6 +444,9 @@ export const getMessageById = async (id: string) => {
   return message;
 };
 
+/*
+Get all remaining check-ins to be made for the user before the streak ends
+*/
 export const getCheckInSnippets = async (thunkAPI: any) => {
   const user = await getUserFromDatabase(thunkAPI);
   const userChallenges = await DataStore.query(ChallengeUser, (challenge) =>
@@ -419,6 +489,8 @@ export const getCheckInSnippets = async (thunkAPI: any) => {
           });
         }
       } else {
+        const date = new Date(challenge.updatedAt || "");
+        date.setHours(date.getHours() + 24);
         checkIns.push({
           challenge: {
             id: challenge.id,
@@ -426,7 +498,7 @@ export const getCheckInSnippets = async (thunkAPI: any) => {
             active: isActive,
             description: challengeTypeDetails.description,
           },
-          endDate: challenge.updatedAt || "",
+          endDate: date.toISOString(),
           chatId: challenge.challengeChatRoomId || "",
         });
       }

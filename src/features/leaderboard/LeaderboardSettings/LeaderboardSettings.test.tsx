@@ -4,10 +4,16 @@ import LeaderboardSettings from "./LeaderboardSettings";
 import configureStore from "redux-mock-store";
 import TestingWrapperNavigation from "@app/testingWrapperWithNavigation";
 
+/**
+ * This file contains tests for the LeaderboardSettings component.
+ */
+
 const mockStore = configureStore([]);
+
 jest.mock("@features/challenges/challengesSlice", () => ({
   fetchChallenges: jest.fn(),
 }));
+
 describe("LeaderboardSettings", () => {
   let store: any;
   let wrapper: any;
@@ -16,7 +22,6 @@ describe("LeaderboardSettings", () => {
     store = mockStore({
       leaderboard: {
         timeInterval: "Weekly",
-
       },
       challenges: {
         challenges: [

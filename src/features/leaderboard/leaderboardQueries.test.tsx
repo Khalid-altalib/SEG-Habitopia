@@ -1,8 +1,12 @@
-import { DataStore } from "aws-amplify";
 import {
   fetchLeaderboardData,
   fetchLeaderboardByUserIDAndChallengeType,
 } from "./leaderboardQueries";
+
+/**
+ * This file contains tests for the leaderboardQueries.tsx file.
+ * This does not cover backend queries, subscriptions or mutations.
+ */
 
 jest.mock("aws-amplify", () => ({
   DataStore: {

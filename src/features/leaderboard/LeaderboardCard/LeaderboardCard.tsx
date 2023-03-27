@@ -1,6 +1,5 @@
 import { AspectRatio, Box, Heading, HStack, theme, View } from "native-base";
 import Avatar from "@components/Avatar/Avatar";
-
 import React from "react";
 import Card from "../../../components/Card";
 import Text from "../../../components/Text";
@@ -16,18 +15,24 @@ type Props = {
   userId: string;
 };
 
+// Colors for the top 3 places
 const rankedColors: [string, string][] = [
   [theme.colors.amber[400], theme.colors.amber[300]],
   [theme.colors.orange[400], theme.colors.orange[300]],
   [theme.colors.coolGray[400], theme.colors.coolGray[300]],
 ];
 
+/**
+ * LeaderboardCard component renders a card with the user's name, checkins, and place
+ * @returns JSX.Element - LeaderboardCard component
+ */
 const LeaderboardCard = (props: Props) => {
   const { name, checkins, place, userId } = props;
 
   const cardColor =
     place < rankedColors.length ? rankedColors[place] : undefined;
 
+  // navigates to the user's profile when the card is pressed
   const navigation =
     useNavigation<NativeStackNavigationProp<NavigationParams>>();
 
