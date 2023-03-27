@@ -26,10 +26,8 @@ const PasswordScreen = () => {
             Please ensure password:
           </Text>
           <List marginBottom={4} space={2} borderWidth={0}>
-            {rules.map((rule, index) => (
-              <Text key={index} type={TextType.Subtle}>
-                - {rule}
-              </Text>
+            {rules.map((rule) => (
+              <Text type={TextType.Subtle}>- {rule}</Text>
             ))}
           </List>
           <PasswordForm />

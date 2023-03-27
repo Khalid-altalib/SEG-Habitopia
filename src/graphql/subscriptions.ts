@@ -1240,7 +1240,7 @@ export const onCreateChatRoom = /* GraphQL */ `
   }
 `;
 export const onUpdateChatRoom = /* GraphQL */ `
-  subscription OnUpdateChatRoom($filter: ModelSubscriptionChatRoomFilterInput,  $userFilter: ModelUserChatRoomFilterInput) {
+subscription OnUpdateChatRoom($filter: ModelSubscriptionChatRoomFilterInput,  $userFilter: ModelUserChatRoomFilterInput) {
     onUpdateChatRoom(filter: $filter) {
       id
       name

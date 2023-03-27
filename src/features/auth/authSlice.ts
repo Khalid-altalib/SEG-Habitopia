@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RootState } from "../../app/store";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { createUserInDatabase } from "./authQueries";
-import { Auth, DataStore, Hub } from "aws-amplify";
+import { Auth } from "aws-amplify";
 
 type AuthState = {
   signUpData: {
@@ -73,7 +73,7 @@ const displayErrorMessage = (error: any) => {
     errorMessage = "Your old password is incorrect.";
   } else {
     errorMessage = error.message;
-    console.log(errorMessage);
+    console.log(errorMessage)
   }
   Toast.show({
     type: "error",
@@ -161,11 +161,6 @@ export const logOutUser = createAsyncThunk("auth/logOutUser", async () => {
   Toast.show({
     type: "success",
     text1: "You have successfully logged out!",
-  });
-  Hub.listen("auth", async (data) => {
-    if (data.payload.event === "signOut") {
-      await DataStore.clear();
-    }
   });
   return undefined;
 });
