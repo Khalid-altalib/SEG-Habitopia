@@ -6,6 +6,12 @@ import Text from "@components/Text";
 import { HStack, theme, View } from "native-base";
 import { convertDateToTimeString } from "@app/util";
 
+/**
+ * A text message component for all messages that only contain text
+ *
+ * @param props - The properties passed to the component.
+ * @returns - The text message component.
+ */
 const TextMessage = (message: Message) => {
   const { user } = useSelector((store) => store.auth);
   function isMessage() {

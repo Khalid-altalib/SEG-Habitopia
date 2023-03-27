@@ -14,3 +14,4 @@ export const VALIDATION_MESSAGE_TEXT = async (...args: string[]) => {
 };
 export const COULD_NOT_VALIDATE = "Could not validate!";
 export const MESSAGE_PAGINATION_LIMIT = 100;
+export const CHAT_DETAIL_ERROR = "Cannot get details! Try again later!";

@@ -6,6 +6,12 @@ type Props = {
   description: string;
 };
 
+/**
+ *Custom pressable header to show challenge and chat details
+ *
+ * @param props - The properties passed to the component.
+ * @returns - The header component.
+ */
 const Header = (props: Props) => {
   const { name, description } = { ...props };
   return (
