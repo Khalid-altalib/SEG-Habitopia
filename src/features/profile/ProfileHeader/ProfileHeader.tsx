@@ -46,6 +46,7 @@ const ProfileHeader = (props: Props) => {
                   type={ButtonType.Secondary}
                   onPress={() => navigation.push("Settings")}
                   isFullWidth
+                  testID="settings-button"
                 >
                   Settings
                 </Button>
