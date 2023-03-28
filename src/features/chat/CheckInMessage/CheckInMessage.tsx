@@ -7,6 +7,12 @@ import { validateCheckIn } from "../chatSlice";
 import moment from "moment";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 
+/**
+ * A check-in message that can be validated when pressed
+ *
+ * @param props - The properties passed to the component.
+ * @returns - The check-in message component.
+ */
 const CheckInMessage = (message: Message) => {
   const { user } = useSelector((store) => store.auth);
   function isMessage() {

@@ -10,14 +10,13 @@ import { ButtonType } from "types";
 
 const timeIntervals = ["Weekly", "Monthly", "All Time"];
 
+/**
+ * LeaderboardSettings component
+ * renders buttons for selecting challenge type
+ * fetches leaderboard data for the selected challenge type
+ */
 const LeaderboardSettings = (): JSX.Element => {
   const timeInterval = useSelector((state) => state.leaderboard.timeInterval);
-
-  // const challenges = useSelector((state) => state.challenges.challenges); BACKEND_PLACEHOLDER
-
-  // const challengeTypes = challenges.map(
-  //   (challenge: Challenge) => challenge.name
-  // );
 
   const { challenges, fetchChallenges: requestStatus } = useSelector(
     (state) => state.challenges
@@ -55,7 +54,12 @@ const LeaderboardSettings = (): JSX.Element => {
         showsHorizontalScrollIndicator={false}
         overflow="visible"
       >
-        <HStack space={25} overflow="visible" marginX={25} testID="leaderboard-settings">
+        <HStack
+          space={25}
+          overflow="visible"
+          marginX={25}
+          testID="leaderboard-settings"
+        >
           {challenges &&
             selectedChallengeType !== "" &&
             challenges.map((challenge) => {

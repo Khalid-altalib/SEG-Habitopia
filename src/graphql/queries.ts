@@ -450,6 +450,16 @@ export const listChallenges = /* GraphQL */ `
           _lastChangedAt
         }
         Users {
+          items {
+            id
+            challengeId
+            userId
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
           nextToken
           startedAt
         }

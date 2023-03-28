@@ -45,6 +45,13 @@ const UnreadMessagesBadge = ({
   );
 };
 
+/**
+ * A pressable chat item components which redirects user to the specifc chat room and shows
+ * latest message and number of unread messages
+ *
+ * @param props - The properties passed to the component.
+ * @returns - The pressable component.
+ */
 const ChatItem = (chat: Chat) => {
   const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
 

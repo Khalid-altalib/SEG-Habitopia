@@ -20,6 +20,12 @@ type message = {
   message: string;
 };
 
+/**
+ * A custom input box that contains text input and check-in message input
+ *
+ * @param props - The properties passed to the component.
+ * @returns - The input component.
+ */
 const InputBox = (props: InputBoxProps) => {
   const dispatch = useDispatch();
 

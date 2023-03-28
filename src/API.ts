@@ -4136,6 +4136,7 @@ export type ListChallengesQuery = {
         _lastChangedAt: number,
       },
       Users?:  {
+        [x: string]: any;
         __typename: "ModelChallengeUserConnection",
         nextToken?: string | null,
         startedAt?: number | null,
