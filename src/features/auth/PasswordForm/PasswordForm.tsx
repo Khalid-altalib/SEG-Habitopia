@@ -41,7 +41,7 @@ const PasswordForm = () => {
       error = "Must contain both uppercase and lowercase characters";
     }    
     
-    if (password.match(".*[0-9].*")) {
+    if (!password.match(".*[0-9].*")) {
       error = "Must contain at least one number"
     }
 
