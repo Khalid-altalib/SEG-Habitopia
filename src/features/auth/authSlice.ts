@@ -70,7 +70,7 @@ const displayErrorMessage = (error: any) => {
     errorMessage =
       "The requested password does not fit the criteria for a password";
   } else if (error.message.includes("Incorrect username or password")) {
-    errorMessage = "Your old password is incorrect.";
+    errorMessage = "Your password is incorrect.";
   } else {
     errorMessage = error.message;
     console.log(errorMessage);
