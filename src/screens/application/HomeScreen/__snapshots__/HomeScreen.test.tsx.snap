@@ -49,27 +49,36 @@ exports[`Renders correctly. 1`] = `
           dataSet={{}}
           style={
             {
-              "marginTop": 25,
+              "paddingLeft": 24,
+              "paddingRight": 24,
             }
           }
         >
           <Text
+            dataSet={{}}
             style={
-              [
-                {
-                  "color": "#18181b",
+              {
+                "backgroundColor": undefined,
+                "color": "#171717",
+                "elevation": 2,
+                "fontFamily": undefined,
+                "fontSize": 24,
+                "fontStyle": "normal",
+                "fontWeight": "700",
+                "letterSpacing": 0,
+                "lineHeight": 30,
+                "shadowColor": "#000000",
+                "shadowOffset": {
+                  "height": 1,
+                  "width": 0,
                 },
-                {
-                  "fontFamily": undefined,
-                  "fontSize": 23,
-                },
-                {
-                  "marginLeft": 25,
-                },
-              ]
+                "shadowOpacity": 0.2,
+                "shadowRadius": 1.41,
+                "textDecorationLine": undefined,
+              }
             }
           >
-            Check in 📝
+            Check-In 📝
           </Text>
           <RCTScrollView
             contentContainerStyle={
@@ -92,11 +101,10 @@ exports[`Renders correctly. 1`] = `
                 style={
                   {
                     "flexDirection": "row",
-                    "height": 150,
-                    "marginLeft": 25,
-                    "marginTop": 25,
+                    "marginTop": 12,
                   }
                 }
+                testID="checkInSlider"
               >
                 <View
                   accessible={true}
@@ -111,67 +119,68 @@ exports[`Renders correctly. 1`] = `
                   onStartShouldSetResponder={[Function]}
                   style={
                     {
-                      "marginRight": 25,
                       "opacity": 1,
                     }
                   }
+                  testID="checkInBox"
                 >
                   <View
                     dataSet={{}}
                     style={
-                      [
-                        {
-                          "height": "100%",
-                          "width": "100%",
-                        },
-                        {
-                          "aspectRatio": 1,
-                        },
-                      ]
+                      {
+                        "paddingBottom": 20,
+                        "paddingLeft": 20,
+                        "paddingRight": 20,
+                        "paddingTop": 20,
+                        "width": 150,
+                      }
                     }
                   >
                     <Image
-                      accessibilityLabel="Study"
-                      alt="Study"
+                      accessibilityLabel="Alternate Text"
+                      alt="Alternate Text"
                       dataSet={{}}
                       onError={[Function]}
                       source={
                         {
-                          "uri": "https://picsum.photos/2000",
+                          "uri": "https://picsum.photos/200",
                         }
                       }
                       style={
-                        [
-                          {
-                            "borderRadius": 8,
-                            "height": "100%",
-                            "maxWidth": "100%",
-                            "position": "absolute",
-                            "width": "100%",
-                          },
-                          {
-                            "borderColor": "#00000011",
-                            "borderWidth": 2,
-                          },
-                        ]
+                        {
+                          "borderRadius": 12,
+                          "height": 128,
+                          "maxWidth": "100%",
+                          "position": "absolute",
+                          "width": 128,
+                        }
                       }
                     />
                     <Text
+                      dataSet={{}}
                       style={
-                        [
-                          {
-                            "color": "white",
+                        {
+                          "backgroundColor": undefined,
+                          "color": "#171717",
+                          "elevation": 2,
+                          "fontFamily": undefined,
+                          "fontSize": 16,
+                          "fontStyle": "normal",
+                          "fontWeight": "700",
+                          "letterSpacing": 0,
+                          "lineHeight": 20,
+                          "marginLeft": 8,
+                          "marginTop": 4,
+                          "position": "absolute",
+                          "shadowColor": "#000000",
+                          "shadowOffset": {
+                            "height": 1,
+                            "width": 0,
                           },
-                          {
-                            "fontFamily": undefined,
-                            "fontSize": 19,
-                          },
-                          {
-                            "padding": 12.25,
-                            "textShadowColor": "black",
-                            "textShadowRadius": 4,
-                          },
-                        ]
+                          "shadowOpacity": 0.2,
+                          "shadowRadius": 1.41,
+                          "textDecorationLine": undefined,
+                        }
                       }
                     >
                       Study
@@ -180,27 +189,25 @@ exports[`Renders correctly. 1`] = `
                       dataSet={{}}
                       style={
                         {
-                          "bottom": 0,
-                          "position": "absolute",
+                          "marginLeft": -12,
+                          "marginTop": 80,
                         }
                       }
                     >
                       <Text
+                        dataSet={{}}
                         style={
-                          [
-                            {
-                              "color": "white",
-                            },
-                            {
-                              "fontFamily": undefined,
-                              "fontSize": 19,
-                            },
-                            {
-                              "padding": 12.25,
-                              "textShadowColor": "black",
-                              "textShadowRadius": 4,
-                            },
-                          ]
+                          {
+                            "backgroundColor": undefined,
+                            "color": "#dc2626",
+                            "fontFamily": undefined,
+                            "fontSize": 14,
+                            "fontStyle": "normal",
+                            "fontWeight": "400",
+                            "letterSpacing": 0,
+                            "lineHeight": 21,
+                            "textDecorationLine": undefined,
+                          }
                         }
                       >
                         3
@@ -226,67 +233,68 @@ exports[`Renders correctly. 1`] = `
                   onStartShouldSetResponder={[Function]}
                   style={
                     {
-                      "marginRight": 25,
                       "opacity": 1,
                     }
                   }
+                  testID="checkInBox"
                 >
                   <View
                     dataSet={{}}
                     style={
-                      [
-                        {
-                          "height": "100%",
-                          "width": "100%",
-                        },
-                        {
-                          "aspectRatio": 1,
-                        },
-                      ]
+                      {
+                        "paddingBottom": 20,
+                        "paddingLeft": 20,
+                        "paddingRight": 20,
+                        "paddingTop": 20,
+                        "width": 150,
+                      }
                     }
                   >
                     <Image
-                      accessibilityLabel="Sleep"
-                      alt="Sleep"
+                      accessibilityLabel="Alternate Text"
+                      alt="Alternate Text"
                       dataSet={{}}
                       onError={[Function]}
                       source={
                         {
-                          "uri": "https://picsum.photos/2000",
+                          "uri": "https://picsum.photos/200",
                         }
                       }
                       style={
-                        [
-                          {
-                            "borderRadius": 8,
-                            "height": "100%",
-                            "maxWidth": "100%",
-                            "position": "absolute",
-                            "width": "100%",
-                          },
-                          {
-                            "borderColor": "#00000011",
-                            "borderWidth": 2,
-                          },
-                        ]
+                        {
+                          "borderRadius": 12,
+                          "height": 128,
+                          "maxWidth": "100%",
+                          "position": "absolute",
+                          "width": 128,
+                        }
                       }
                     />
                     <Text
+                      dataSet={{}}
                       style={
-                        [
-                          {
-                            "color": "white",
+                        {
+                          "backgroundColor": undefined,
+                          "color": "#171717",
+                          "elevation": 2,
+                          "fontFamily": undefined,
+                          "fontSize": 16,
+                          "fontStyle": "normal",
+                          "fontWeight": "700",
+                          "letterSpacing": 0,
+                          "lineHeight": 20,
+                          "marginLeft": 8,
+                          "marginTop": 4,
+                          "position": "absolute",
+                          "shadowColor": "#000000",
+                          "shadowOffset": {
+                            "height": 1,
+                            "width": 0,
                           },
-                          {
-                            "fontFamily": undefined,
-                            "fontSize": 19,
-                          },
-                          {
-                            "padding": 12.25,
-                            "textShadowColor": "black",
-                            "textShadowRadius": 4,
-                          },
-                        ]
+                          "shadowOpacity": 0.2,
+                          "shadowRadius": 1.41,
+                          "textDecorationLine": undefined,
+                        }
                       }
                     >
                       Sleep
@@ -295,27 +303,25 @@ exports[`Renders correctly. 1`] = `
                       dataSet={{}}
                       style={
                         {
-                          "bottom": 0,
-                          "position": "absolute",
+                          "marginLeft": -12,
+                          "marginTop": 80,
                         }
                       }
                     >
                       <Text
+                        dataSet={{}}
                         style={
-                          [
-                            {
-                              "color": "white",
-                            },
-                            {
-                              "fontFamily": undefined,
-                              "fontSize": 19,
-                            },
-                            {
-                              "padding": 12.25,
-                              "textShadowColor": "black",
-                              "textShadowRadius": 4,
-                            },
-                          ]
+                          {
+                            "backgroundColor": undefined,
+                            "color": "#dc2626",
+                            "fontFamily": undefined,
+                            "fontSize": 14,
+                            "fontStyle": "normal",
+                            "fontWeight": "400",
+                            "letterSpacing": 0,
+                            "lineHeight": 21,
+                            "textDecorationLine": undefined,
+                          }
                         }
                       >
                         3
@@ -341,67 +347,68 @@ exports[`Renders correctly. 1`] = `
                   onStartShouldSetResponder={[Function]}
                   style={
                     {
-                      "marginRight": 25,
                       "opacity": 1,
                     }
                   }
+                  testID="checkInBox"
                 >
                   <View
                     dataSet={{}}
                     style={
-                      [
-                        {
-                          "height": "100%",
-                          "width": "100%",
-                        },
-                        {
-                          "aspectRatio": 1,
-                        },
-                      ]
+                      {
+                        "paddingBottom": 20,
+                        "paddingLeft": 20,
+                        "paddingRight": 20,
+                        "paddingTop": 20,
+                        "width": 150,
+                      }
                     }
                   >
                     <Image
-                      accessibilityLabel="Fitness"
-                      alt="Fitness"
+                      accessibilityLabel="Alternate Text"
+                      alt="Alternate Text"
                       dataSet={{}}
                       onError={[Function]}
                       source={
                         {
-                          "uri": "https://picsum.photos/2000",
+                          "uri": "https://picsum.photos/200",
                         }
                       }
                       style={
-                        [
-                          {
-                            "borderRadius": 8,
-                            "height": "100%",
-                            "maxWidth": "100%",
-                            "position": "absolute",
-                            "width": "100%",
-                          },
-                          {
-                            "borderColor": "#00000011",
-                            "borderWidth": 2,
-                          },
-                        ]
+                        {
+                          "borderRadius": 12,
+                          "height": 128,
+                          "maxWidth": "100%",
+                          "position": "absolute",
+                          "width": 128,
+                        }
                       }
                     />
                     <Text
+                      dataSet={{}}
                       style={
-                        [
-                          {
-                            "color": "white",
+                        {
+                          "backgroundColor": undefined,
+                          "color": "#171717",
+                          "elevation": 2,
+                          "fontFamily": undefined,
+                          "fontSize": 16,
+                          "fontStyle": "normal",
+                          "fontWeight": "700",
+                          "letterSpacing": 0,
+                          "lineHeight": 20,
+                          "marginLeft": 8,
+                          "marginTop": 4,
+                          "position": "absolute",
+                          "shadowColor": "#000000",
+                          "shadowOffset": {
+                            "height": 1,
+                            "width": 0,
                           },
-                          {
-                            "fontFamily": undefined,
-                            "fontSize": 19,
-                          },
-                          {
-                            "padding": 12.25,
-                            "textShadowColor": "black",
-                            "textShadowRadius": 4,
-                          },
-                        ]
+                          "shadowOpacity": 0.2,
+                          "shadowRadius": 1.41,
+                          "textDecorationLine": undefined,
+                        }
                       }
                     >
                       Fitness
@@ -410,27 +417,25 @@ exports[`Renders correctly. 1`] = `
                       dataSet={{}}
                       style={
                         {
-                          "bottom": 0,
-                          "position": "absolute",
+                          "marginLeft": -12,
+                          "marginTop": 80,
                         }
                       }
                     >
                       <Text
+                        dataSet={{}}
                         style={
-                          [
-                            {
-                              "color": "white",
-                            },
-                            {
-                              "fontFamily": undefined,
-                              "fontSize": 19,
-                            },
-                            {
-                              "padding": 12.25,
-                              "textShadowColor": "black",
-                              "textShadowRadius": 4,
-                            },
-                          ]
+                          {
+                            "backgroundColor": undefined,
+                            "color": "#dc2626",
+                            "fontFamily": undefined,
+                            "fontSize": 14,
+                            "fontStyle": "normal",
+                            "fontWeight": "400",
+                            "letterSpacing": 0,
+                            "lineHeight": 21,
+                            "textDecorationLine": undefined,
+                          }
                         }
                       >
                         3
@@ -456,96 +461,95 @@ exports[`Renders correctly. 1`] = `
                   onStartShouldSetResponder={[Function]}
                   style={
                     {
-                      "marginRight": 25,
                       "opacity": 1,
                     }
                   }
+                  testID="checkInBox"
                 >
                   <View
                     dataSet={{}}
                     style={
-                      [
-                        {
-                          "height": "100%",
-                          "width": "100%",
-                        },
-                        {
-                          "aspectRatio": 1,
-                        },
-                      ]
+                      {
+                        "paddingBottom": 20,
+                        "paddingLeft": 20,
+                        "paddingRight": 20,
+                        "paddingTop": 20,
+                        "width": 150,
+                      }
                     }
                   >
                     <Image
-                      accessibilityLabel="Study"
-                      alt="Study"
+                      accessibilityLabel="Alternate Text"
+                      alt="Alternate Text"
                       dataSet={{}}
                       onError={[Function]}
                       source={
                         {
-                          "uri": "https://picsum.photos/2000",
+                          "uri": "https://picsum.photos/200",
                         }
                       }
                       style={
-                        [
-                          {
-                            "borderRadius": 8,
-                            "height": "100%",
-                            "maxWidth": "100%",
-                            "position": "absolute",
-                            "width": "100%",
-                          },
-                          {
-                            "borderColor": "#00000011",
-                            "borderWidth": 2,
-                          },
-                        ]
+                        {
+                          "borderRadius": 12,
+                          "height": 128,
+                          "maxWidth": "100%",
+                          "position": "absolute",
+                          "width": 128,
+                        }
                       }
                     />
                     <Text
+                      dataSet={{}}
                       style={
-                        [
-                          {
-                            "color": "white",
+                        {
+                          "backgroundColor": undefined,
+                          "color": "#171717",
+                          "elevation": 2,
+                          "fontFamily": undefined,
+                          "fontSize": 16,
+                          "fontStyle": "normal",
+                          "fontWeight": "700",
+                          "letterSpacing": 0,
+                          "lineHeight": 20,
+                          "marginLeft": 8,
+                          "marginTop": 4,
+                          "position": "absolute",
+                          "shadowColor": "#000000",
+                          "shadowOffset": {
+                            "height": 1,
+                            "width": 0,
                           },
-                          {
-                            "fontFamily": undefined,
-                            "fontSize": 19,
-                          },
-                          {
-                            "padding": 12.25,
-                            "textShadowColor": "black",
-                            "textShadowRadius": 4,
-                          },
-                        ]
+                          "shadowOpacity": 0.2,
+                          "shadowRadius": 1.41,
+                          "textDecorationLine": undefined,
+                        }
                       }
                     >
-                      Study
+                      study
                     </Text>
                     <View
                       dataSet={{}}
                       style={
                         {
-                          "bottom": 0,
-                          "position": "absolute",
+                          "marginLeft": -12,
+                          "marginTop": 80,
                         }
                       }
                     >
                       <Text
+                        dataSet={{}}
                         style={
-                          [
-                            {
-                              "color": "white",
-                            },
-                            {
-                              "fontFamily": undefined,
-                              "fontSize": 19,
-                            },
-                            {
-                              "padding": 12.25,
-                              "textShadowColor": "black",
-                              "textShadowRadius": 4,
-                            },
-                          ]
+                          {
+                            "backgroundColor": undefined,
+                            "color": "#dc2626",
+                            "fontFamily": undefined,
+                            "fontSize": 14,
+                            "fontStyle": "normal",
+                            "fontWeight": "400",
+                            "letterSpacing": 0,
+                            "lineHeight": 21,
+                            "textDecorationLine": undefined,
+                          }
                         }
                       >
                         3
@@ -571,96 +575,95 @@ exports[`Renders correctly. 1`] = `
                   onStartShouldSetResponder={[Function]}
                   style={
                     {
-                      "marginRight": 25,
                       "opacity": 1,
                     }
                   }
+                  testID="checkInBox"
                 >
                   <View
                     dataSet={{}}
                     style={
-                      [
-                        {
-                          "height": "100%",
-                          "width": "100%",
-                        },
-                        {
-                          "aspectRatio": 1,
-                        },
-                      ]
+                      {
+                        "paddingBottom": 20,
+                        "paddingLeft": 20,
+                        "paddingRight": 20,
+                        "paddingTop": 20,
+                        "width": 150,
+                      }
                     }
                   >
                     <Image
-                      accessibilityLabel="Sleep"
-                      alt="Sleep"
+                      accessibilityLabel="Alternate Text"
+                      alt="Alternate Text"
                       dataSet={{}}
                       onError={[Function]}
                       source={
                         {
-                          "uri": "https://picsum.photos/2000",
+                          "uri": "https://picsum.photos/200",
                         }
                       }
                       style={
-                        [
-                          {
-                            "borderRadius": 8,
-                            "height": "100%",
-                            "maxWidth": "100%",
-                            "position": "absolute",
-                            "width": "100%",
-                          },
-                          {
-                            "borderColor": "#00000011",
-                            "borderWidth": 2,
-                          },
-                        ]
+                        {
+                          "borderRadius": 12,
+                          "height": 128,
+                          "maxWidth": "100%",
+                          "position": "absolute",
+                          "width": 128,
+                        }
                       }
                     />
                     <Text
+                      dataSet={{}}
                       style={
-                        [
-                          {
-                            "color": "white",
+                        {
+                          "backgroundColor": undefined,
+                          "color": "#171717",
+                          "elevation": 2,
+                          "fontFamily": undefined,
+                          "fontSize": 16,
+                          "fontStyle": "normal",
+                          "fontWeight": "700",
+                          "letterSpacing": 0,
+                          "lineHeight": 20,
+                          "marginLeft": 8,
+                          "marginTop": 4,
+                          "position": "absolute",
+                          "shadowColor": "#000000",
+                          "shadowOffset": {
+                            "height": 1,
+                            "width": 0,
                           },
-                          {
-                            "fontFamily": undefined,
-                            "fontSize": 19,
-                          },
-                          {
-                            "padding": 12.25,
-                            "textShadowColor": "black",
-                            "textShadowRadius": 4,
-                          },
-                        ]
+                          "shadowOpacity": 0.2,
+                          "shadowRadius": 1.41,
+                          "textDecorationLine": undefined,
+                        }
                       }
                     >
-                      Sleep
+                      sleep
                     </Text>
                     <View
                       dataSet={{}}
                       style={
                         {
-                          "bottom": 0,
-                          "position": "absolute",
+                          "marginLeft": -12,
+                          "marginTop": 80,
                         }
                       }
                     >
                       <Text
+                        dataSet={{}}
                         style={
-                          [
-                            {
-                              "color": "white",
-                            },
-                            {
-                              "fontFamily": undefined,
-                              "fontSize": 19,
-                            },
-                            {
-                              "padding": 12.25,
-                              "textShadowColor": "black",
-                              "textShadowRadius": 4,
-                            },
-                          ]
+                          {
+                            "backgroundColor": undefined,
+                            "color": "#dc2626",
+                            "fontFamily": undefined,
+                            "fontSize": 14,
+                            "fontStyle": "normal",
+                            "fontWeight": "400",
+                            "letterSpacing": 0,
+                            "lineHeight": 21,
+                            "textDecorationLine": undefined,
+                          }
                         }
                       >
                         3
@@ -686,96 +689,95 @@ exports[`Renders correctly. 1`] = `
                   onStartShouldSetResponder={[Function]}
                   style={
                     {
-                      "marginRight": 25,
                       "opacity": 1,
                     }
                   }
+                  testID="checkInBox"
                 >
                   <View
                     dataSet={{}}
                     style={
-                      [
-                        {
-                          "height": "100%",
-                          "width": "100%",
-                        },
-                        {
-                          "aspectRatio": 1,
-                        },
-                      ]
+                      {
+                        "paddingBottom": 20,
+                        "paddingLeft": 20,
+                        "paddingRight": 20,
+                        "paddingTop": 20,
+                        "width": 150,
+                      }
                     }
                   >
                     <Image
-                      accessibilityLabel="Fitness"
-                      alt="Fitness"
+                      accessibilityLabel="Alternate Text"
+                      alt="Alternate Text"
                       dataSet={{}}
                       onError={[Function]}
                       source={
                         {
-                          "uri": "https://picsum.photos/2000",
+                          "uri": "https://picsum.photos/200",
                         }
                       }
                       style={
-                        [
-                          {
-                            "borderRadius": 8,
-                            "height": "100%",
-                            "maxWidth": "100%",
-                            "position": "absolute",
-                            "width": "100%",
-                          },
-                          {
-                            "borderColor": "#00000011",
-                            "borderWidth": 2,
-                          },
-                        ]
+                        {
+                          "borderRadius": 12,
+                          "height": 128,
+                          "maxWidth": "100%",
+                          "position": "absolute",
+                          "width": 128,
+                        }
                       }
                     />
                     <Text
+                      dataSet={{}}
                       style={
-                        [
-                          {
-                            "color": "white",
+                        {
+                          "backgroundColor": undefined,
+                          "color": "#171717",
+                          "elevation": 2,
+                          "fontFamily": undefined,
+                          "fontSize": 16,
+                          "fontStyle": "normal",
+                          "fontWeight": "700",
+                          "letterSpacing": 0,
+                          "lineHeight": 20,
+                          "marginLeft": 8,
+                          "marginTop": 4,
+                          "position": "absolute",
+                          "shadowColor": "#000000",
+                          "shadowOffset": {
+                            "height": 1,
+                            "width": 0,
                           },
-                          {
-                            "fontFamily": undefined,
-                            "fontSize": 19,
-                          },
-                          {
-                            "padding": 12.25,
-                            "textShadowColor": "black",
-                            "textShadowRadius": 4,
-                          },
-                        ]
+                          "shadowOpacity": 0.2,
+                          "shadowRadius": 1.41,
+                          "textDecorationLine": undefined,
+                        }
                       }
                     >
-                      Fitness
+                      fitness
                     </Text>
                     <View
                       dataSet={{}}
                       style={
                         {
-                          "bottom": 0,
-                          "position": "absolute",
+                          "marginLeft": -12,
+                          "marginTop": 80,
                         }
                       }
                     >
                       <Text
+                        dataSet={{}}
                         style={
-                          [
-                            {
-                              "color": "white",
-                            },
-                            {
-                              "fontFamily": undefined,
-                              "fontSize": 19,
-                            },
-                            {
-                              "padding": 12.25,
-                              "textShadowColor": "black",
-                              "textShadowRadius": 4,
-                            },
-                          ]
+                          {
+                            "backgroundColor": undefined,
+                            "color": "#dc2626",
+                            "fontFamily": undefined,
+                            "fontSize": 14,
+                            "fontStyle": "normal",
+                            "fontWeight": "400",
+                            "letterSpacing": 0,
+                            "lineHeight": 21,
+                            "textDecorationLine": undefined,
+                          }
                         }
                       >
                         3
@@ -801,96 +803,95 @@ exports[`Renders correctly. 1`] = `
                   onStartShouldSetResponder={[Function]}
                   style={
                     {
-                      "marginRight": 25,
                       "opacity": 1,
                     }
                   }
+                  testID="checkInBox"
                 >
                   <View
                     dataSet={{}}
                     style={
-                      [
-                        {
-                          "height": "100%",
-                          "width": "100%",
-                        },
-                        {
-                          "aspectRatio": 1,
-                        },
-                      ]
+                      {
+                        "paddingBottom": 20,
+                        "paddingLeft": 20,
+                        "paddingRight": 20,
+                        "paddingTop": 20,
+                        "width": 150,
+                      }
                     }
                   >
                     <Image
-                      accessibilityLabel="Study"
-                      alt="Study"
+                      accessibilityLabel="Alternate Text"
+                      alt="Alternate Text"
                       dataSet={{}}
                       onError={[Function]}
                       source={
                         {
-                          "uri": "https://picsum.photos/2000",
+                          "uri": "https://picsum.photos/200",
                         }
                       }
                       style={
-                        [
-                          {
-                            "borderRadius": 8,
-                            "height": "100%",
-                            "maxWidth": "100%",
-                            "position": "absolute",
-                            "width": "100%",
-                          },
-                          {
-                            "borderColor": "#00000011",
-                            "borderWidth": 2,
-                          },
-                        ]
+                        {
+                          "borderRadius": 12,
+                          "height": 128,
+                          "maxWidth": "100%",
+                          "position": "absolute",
+                          "width": 128,
+                        }
                       }
                     />
                     <Text
+                      dataSet={{}}
                       style={
-                        [
-                          {
-                            "color": "white",
+                        {
+                          "backgroundColor": undefined,
+                          "color": "#171717",
+                          "elevation": 2,
+                          "fontFamily": undefined,
+                          "fontSize": 16,
+                          "fontStyle": "normal",
+                          "fontWeight": "700",
+                          "letterSpacing": 0,
+                          "lineHeight": 20,
+                          "marginLeft": 8,
+                          "marginTop": 4,
+                          "position": "absolute",
+                          "shadowColor": "#000000",
+                          "shadowOffset": {
+                            "height": 1,
+                            "width": 0,
                           },
-                          {
-                            "fontFamily": undefined,
-                            "fontSize": 19,
-                          },
-                          {
-                            "padding": 12.25,
-                            "textShadowColor": "black",
-                            "textShadowRadius": 4,
-                          },
-                        ]
+                          "shadowOpacity": 0.2,
+                          "shadowRadius": 1.41,
+                          "textDecorationLine": undefined,
+                        }
                       }
                     >
-                      Study
+                      study
                     </Text>
                     <View
                       dataSet={{}}
                       style={
                         {
-                          "bottom": 0,
-                          "position": "absolute",
+                          "marginLeft": -12,
+                          "marginTop": 80,
                         }
                       }
                     >
                       <Text
+                        dataSet={{}}
                         style={
-                          [
-                            {
-                              "color": "white",
-                            },
-                            {
-                              "fontFamily": undefined,
-                              "fontSize": 19,
-                            },
-                            {
-                              "padding": 12.25,
-                              "textShadowColor": "black",
-                              "textShadowRadius": 4,
-                            },
-                          ]
+                          {
+                            "backgroundColor": undefined,
+                            "color": "#dc2626",
+                            "fontFamily": undefined,
+                            "fontSize": 14,
+                            "fontStyle": "normal",
+                            "fontWeight": "400",
+                            "letterSpacing": 0,
+                            "lineHeight": 21,
+                            "textDecorationLine": undefined,
+                          }
                         }
                       >
                         3
@@ -916,96 +917,95 @@ exports[`Renders correctly. 1`] = `
                   onStartShouldSetResponder={[Function]}
                   style={
                     {
-                      "marginRight": 25,
                       "opacity": 1,
                     }
                   }
+                  testID="checkInBox"
                 >
                   <View
                     dataSet={{}}
                     style={
-                      [
-                        {
-                          "height": "100%",
-                          "width": "100%",
-                        },
-                        {
-                          "aspectRatio": 1,
-                        },
-                      ]
+                      {
+                        "paddingBottom": 20,
+                        "paddingLeft": 20,
+                        "paddingRight": 20,
+                        "paddingTop": 20,
+                        "width": 150,
+                      }
                     }
                   >
                     <Image
-                      accessibilityLabel="Sleep"
-                      alt="Sleep"
+                      accessibilityLabel="Alternate Text"
+                      alt="Alternate Text"
                       dataSet={{}}
                       onError={[Function]}
                       source={
                         {
-                          "uri": "https://picsum.photos/2000",
+                          "uri": "https://picsum.photos/200",
                         }
                       }
                       style={
-                        [
-                          {
-                            "borderRadius": 8,
-                            "height": "100%",
-                            "maxWidth": "100%",
-                            "position": "absolute",
-                            "width": "100%",
-                          },
-                          {
-                            "borderColor": "#00000011",
-                            "borderWidth": 2,
-                          },
-                        ]
+                        {
+                          "borderRadius": 12,
+                          "height": 128,
+                          "maxWidth": "100%",
+                          "position": "absolute",
+                          "width": 128,
+                        }
                       }
                     />
                     <Text
+                      dataSet={{}}
                       style={
-                        [
-                          {
-                            "color": "white",
+                        {
+                          "backgroundColor": undefined,
+                          "color": "#171717",
+                          "elevation": 2,
+                          "fontFamily": undefined,
+                          "fontSize": 16,
+                          "fontStyle": "normal",
+                          "fontWeight": "700",
+                          "letterSpacing": 0,
+                          "lineHeight": 20,
+                          "marginLeft": 8,
+                          "marginTop": 4,
+                          "position": "absolute",
+                          "shadowColor": "#000000",
+                          "shadowOffset": {
+                            "height": 1,
+                            "width": 0,
                           },
-                          {
-                            "fontFamily": undefined,
-                            "fontSize": 19,
-                          },
-                          {
-                            "padding": 12.25,
-                            "textShadowColor": "black",
-                            "textShadowRadius": 4,
-                          },
-                        ]
+                          "shadowOpacity": 0.2,
+                          "shadowRadius": 1.41,
+                          "textDecorationLine": undefined,
+                        }
                       }
                     >
-                      Sleep
+                      sleep
                     </Text>
                     <View
                       dataSet={{}}
                       style={
                         {
-                          "bottom": 0,
-                          "position": "absolute",
+                          "marginLeft": -12,
+                          "marginTop": 80,
                         }
                       }
                     >
                       <Text
+                        dataSet={{}}
                         style={
-                          [
-                            {
-                              "color": "white",
-                            },
-                            {
-                              "fontFamily": undefined,
-                              "fontSize": 19,
-                            },
-                            {
-                              "padding": 12.25,
-                              "textShadowColor": "black",
-                              "textShadowRadius": 4,
-                            },
-                          ]
+                          {
+                            "backgroundColor": undefined,
+                            "color": "#dc2626",
+                            "fontFamily": undefined,
+                            "fontSize": 14,
+                            "fontStyle": "normal",
+                            "fontWeight": "400",
+                            "letterSpacing": 0,
+                            "lineHeight": 21,
+                            "textDecorationLine": undefined,
+                          }
                         }
                       >
                         3
@@ -1031,96 +1031,95 @@ exports[`Renders correctly. 1`] = `
                   onStartShouldSetResponder={[Function]}
                   style={
                     {
-                      "marginRight": 25,
                       "opacity": 1,
                     }
                   }
+                  testID="checkInBox"
                 >
                   <View
                     dataSet={{}}
                     style={
-                      [
-                        {
-                          "height": "100%",
-                          "width": "100%",
-                        },
-                        {
-                          "aspectRatio": 1,
-                        },
-                      ]
+                      {
+                        "paddingBottom": 20,
+                        "paddingLeft": 20,
+                        "paddingRight": 20,
+                        "paddingTop": 20,
+                        "width": 150,
+                      }
                     }
                   >
                     <Image
-                      accessibilityLabel="Fitness"
-                      alt="Fitness"
+                      accessibilityLabel="Alternate Text"
+                      alt="Alternate Text"
                       dataSet={{}}
                       onError={[Function]}
                       source={
                         {
-                          "uri": "https://picsum.photos/2000",
+                          "uri": "https://picsum.photos/200",
                         }
                       }
                       style={
-                        [
-                          {
-                            "borderRadius": 8,
-                            "height": "100%",
-                            "maxWidth": "100%",
-                            "position": "absolute",
-                            "width": "100%",
-                          },
-                          {
-                            "borderColor": "#00000011",
-                            "borderWidth": 2,
-                          },
-                        ]
+                        {
+                          "borderRadius": 12,
+                          "height": 128,
+                          "maxWidth": "100%",
+                          "position": "absolute",
+                          "width": 128,
+                        }
                       }
                     />
                     <Text
+                      dataSet={{}}
                       style={
-                        [
-                          {
-                            "color": "white",
+                        {
+                          "backgroundColor": undefined,
+                          "color": "#171717",
+                          "elevation": 2,
+                          "fontFamily": undefined,
+                          "fontSize": 16,
+                          "fontStyle": "normal",
+                          "fontWeight": "700",
+                          "letterSpacing": 0,
+                          "lineHeight": 20,
+                          "marginLeft": 8,
+                          "marginTop": 4,
+                          "position": "absolute",
+                          "shadowColor": "#000000",
+                          "shadowOffset": {
+                            "height": 1,
+                            "width": 0,
                           },
-                          {
-                            "fontFamily": undefined,
-                            "fontSize": 19,
-                          },
-                          {
-                            "padding": 12.25,
-                            "textShadowColor": "black",
-                            "textShadowRadius": 4,
-                          },
-                        ]
+                          "shadowOpacity": 0.2,
+                          "shadowRadius": 1.41,
+                          "textDecorationLine": undefined,
+                        }
                       }
                     >
-                      Fitness
+                      fitness
                     </Text>
                     <View
                       dataSet={{}}
                       style={
                         {
-                          "bottom": 0,
-                          "position": "absolute",
+                          "marginLeft": -12,
+                          "marginTop": 80,
                         }
                       }
                     >
                       <Text
+                        dataSet={{}}
                         style={
-                          [
-                            {
-                              "color": "white",
-                            },
-                            {
-                              "fontFamily": undefined,
-                              "fontSize": 19,
-                            },
-                            {
-                              "padding": 12.25,
-                              "textShadowColor": "black",
-                              "textShadowRadius": 4,
-                            },
-                          ]
+                          {
+                            "backgroundColor": undefined,
+                            "color": "#dc2626",
+                            "fontFamily": undefined,
+                            "fontSize": 14,
+                            "fontStyle": "normal",
+                            "fontWeight": "400",
+                            "letterSpacing": 0,
+                            "lineHeight": 21,
+                            "textDecorationLine": undefined,
+                          }
                         }
                       >
                         3
@@ -1141,27 +1140,36 @@ exports[`Renders correctly. 1`] = `
             dataSet={{}}
             style={
               {
-                "marginTop": 25,
+                "paddingLeft": 24,
+                "paddingRight": 24,
               }
             }
           >
             <Text
+              dataSet={{}}
               style={
-                [
-                  {
-                    "color": "#18181b",
+                {
+                  "backgroundColor": undefined,
+                  "color": "#171717",
+                  "elevation": 2,
+                  "fontFamily": undefined,
+                  "fontSize": 24,
+                  "fontStyle": "normal",
+                  "fontWeight": "700",
+                  "letterSpacing": 0,
+                  "lineHeight": 30,
+                  "shadowColor": "#000000",
+                  "shadowOffset": {
+                    "height": 1,
+                    "width": 0,
                   },
-                  {
-                    "fontFamily": undefined,
-                    "fontSize": 23,
-                  },
-                  {
-                    "marginLeft": 25,
-                  },
-                ]
+                  "shadowOpacity": 0.2,
+                  "shadowRadius": 1.41,
+                  "textDecorationLine": undefined,
+                }
               }
             >
-              Catch up 👬
+              Catch-Up 👬
             </Text>
             <RCTScrollView
               contentContainerStyle={
@@ -1184,11 +1192,11 @@ exports[`Renders correctly. 1`] = `
                   style={
                     {
                       "flexDirection": "row",
-                      "height": 150,
-                      "marginLeft": 25,
-                      "marginTop": 25,
+                      "justifyContent": "space-between",
+                      "marginTop": 20,
                     }
                   }
+                  testID="catchUpSlider"
                 >
                   <View
                     accessible={true}
@@ -1203,23 +1211,22 @@ exports[`Renders correctly. 1`] = `
                     onStartShouldSetResponder={[Function]}
                     style={
                       {
-                        "marginRight": 25,
                         "opacity": 1,
                       }
                     }
+                    testID="catchUpBox"
                   >
                     <View
                       dataSet={{}}
                       style={
-                        [
-                          {
-                            "height": "100%",
-                            "width": "100%",
-                          },
-                          {
-                            "aspectRatio": 1,
-                          },
-                        ]
+                        {
+                          "height": 150,
+                          "paddingBottom": 20,
+                          "paddingLeft": 20,
+                          "paddingRight": 20,
+                          "paddingTop": 20,
+                          "width": 150,
+                        }
                       }
                     >
                       <Image
@@ -1229,31 +1236,20 @@ exports[`Renders correctly. 1`] = `
                         onError={[Function]}
                         source={
                           {
-                            "uri": "https://picsum.photos/2000",
+                            "uri": "https://picsum.photos/200",
                           }
                         }
                         style={
-                          [
-                            {
-                              "borderRadius": 8,
-                              "height": "100%",
-                              "maxWidth": "100%",
-                              "position": "absolute",
-                              "width": "100%",
-                            },
-                            {
-                              "borderColor": "#00000011",
-                              "borderWidth": 2,
-                            },
-                          ]
+                          {
+                            "borderRadius": 12,
+                            "height": 128,
+                            "maxWidth": "100%",
+                            "position": "absolute",
+                            "width": 128,
+                          }
                         }
                       />
                       <View
-                        _spinner={
-                          {
-                            "color": "red.600",
-                          }
-                        }
                         accessibilityRole="button"
                         accessible={true}
                         collapsable={false}
@@ -1270,32 +1266,17 @@ exports[`Renders correctly. 1`] = `
                         onResponderTerminationRequest={[Function]}
                         onStartShouldSetResponder={[Function]}
                         style={
-                          [
-                            {
-                              "alignItems": "center",
-                              "borderRadius": 4,
-                              "bottom": 0,
-                              "elevation": 10,
-                              "flexDirection": "row",
-                              "justifyContent": "center",
-                              "paddingBottom": 12,
-                              "paddingLeft": 12,
-                              "paddingRight": 12,
-                              "paddingTop": 12,
-                              "position": "absolute",
-                              "shadowColor": "#000000",
-                              "shadowOffset": {
-                                "height": 5,
-                                "width": 0,
-                              },
-                              "shadowOpacity": 0.34,
-                              "shadowRadius": 6.27,
-                            },
-                            {
-                              "shadowColor": "black",
-                              "shadowRadius": 4,
-                            },
-                          ]
+                          {
+                            "alignItems": "center",
+                            "borderRadius": 12,
+                            "flexDirection": "row",
+                            "justifyContent": "center",
+                            "paddingBottom": 10,
+                            "paddingLeft": 10,
+                            "paddingRight": 10,
+                            "paddingTop": 10,
+                            "position": "absolute",
+                          }
                         }
                       >
                         <Text />
@@ -1309,36 +1290,54 @@ exports[`Renders correctly. 1`] = `
         </View>
         <View
           dataSet={{}}
-          style={
-            {
-              "marginBottom": 25,
-              "marginLeft": 25,
-              "marginRight": 25,
-              "marginTop": 25,
-            }
-          }
+          style={{}}
         >
-          <Text
-            style={
-              [
-                {
-                  "color": "#18181b",
-                },
-                {
-                  "fontFamily": undefined,
-                  "fontSize": 23,
-                },
-                {
-                  "marginBottom": 25,
-                },
-              ]
-            }
-          >
-            Pick a challenge! 🚀
-          </Text>
           <View
             dataSet={{}}
-            style={{}}
+            style={
+              {
+                "alignItems": "center",
+                "display": "flex",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              dataSet={{}}
+              style={
+                {
+                  "backgroundColor": undefined,
+                  "color": "#171717",
+                  "elevation": 2,
+                  "fontFamily": undefined,
+                  "fontSize": 24,
+                  "fontStyle": "normal",
+                  "fontWeight": "700",
+                  "letterSpacing": 0,
+                  "lineHeight": 30,
+                  "marginBottom": 16,
+                  "shadowColor": "#000000",
+                  "shadowOffset": {
+                    "height": 1,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.2,
+                  "shadowRadius": 1.41,
+                  "textDecorationLine": undefined,
+                }
+              }
+            >
+              Pick a Challenge! 🚀
+            </Text>
+          </View>
+          <View
+            dataSet={{}}
+            style={
+              {
+                "paddingLeft": 12,
+                "paddingRight": 12,
+              }
+            }
           >
             <View
               dataSet={{}}
@@ -1351,6 +1350,7 @@ exports[`Renders correctly. 1`] = `
                     "width": "100%",
                   }
                 }
+                testID="challengeBoxes"
               />
               <View
                 dataSet={{}}
@@ -1489,102 +1489,110 @@ exports[`Renders correctly. 1`] = `
                 </View>
               </View>
             </View>
-          </View>
-        </View>
-        <View
-          isFullWidth={true}
-          onPress={[Function]}
-          style={
-            {
-              "marginBottom": 25,
-              "marginHorizontal": 25,
-            }
-          }
-          type={0}
-        >
-          <View
-            accessible={true}
-            collapsable={false}
-            focusable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={
-              {
-                "marginBottom": 25,
-                "marginHorizontal": 25,
-                "opacity": 1,
-              }
-            }
-          >
-            <ViewManagerAdapter_ExpoLinearGradient
-              proxiedProperties={
-                {
-                  "colors": [
-                    4278220774,
-                    4286456526,
-                  ],
-                  "endPoint": [
-                    1,
-                    1,
-                  ],
-                  "locations": undefined,
-                  "startPoint": [
-                    0,
-                    0,
-                  ],
-                }
-              }
+            <View
+              dataSet={{}}
               style={
-                [
-                  {
-                    "alignItems": "center",
-                    "borderRadius": 10,
-                    "flexDirection": "row",
-                    "justifyContent": "center",
-                    "paddingHorizontal": 40,
-                    "paddingVertical": 15,
-                  },
-                  {
-                    "width": "100%",
-                  },
-                ]
-              }
-            >
-              <Text
-                style={
-                  [
-                    {
-                      "color": "#18181b",
-                    },
-                    {
-                      "color": "#e4e4e7",
-                      "fontFamily": undefined,
-                      "fontSize": 19,
-                    },
-                    [
-                      null,
-                      {
-                        "alignSelf": "center",
-                      },
-                    ],
-                  ]
+                {
+                  "height": 16,
                 }
-              >
-                Discover more!
-              </Text>
+              }
+            />
+            <View
+              isFullWidth={true}
+              onPress={[Function]}
+              style={
+                {
+                  "marginBottom": 25,
+                  "marginHorizontal": 25,
+                }
+              }
+              type={0}
+            >
               <View
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
                 style={
                   {
-                    "marginLeft": 5,
+                    "marginBottom": 25,
+                    "marginHorizontal": 25,
+                    "opacity": 1,
                   }
                 }
-              />
-            </ViewManagerAdapter_ExpoLinearGradient>
+              >
+                <ViewManagerAdapter_ExpoLinearGradient
+                  proxiedProperties={
+                    {
+                      "colors": [
+                        4278220774,
+                        4286456526,
+                      ],
+                      "endPoint": [
+                        1,
+                        1,
+                      ],
+                      "locations": undefined,
+                      "startPoint": [
+                        0,
+                        0,
+                      ],
+                    }
+                  }
+                  style={
+                    [
+                      {
+                        "alignItems": "center",
+                        "borderRadius": 10,
+                        "flexDirection": "row",
+                        "justifyContent": "center",
+                        "paddingHorizontal": 40,
+                        "paddingVertical": 15,
+                      },
+                      {
+                        "width": "100%",
+                      },
+                    ]
+                  }
+                >
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#18181b",
+                        },
+                        {
+                          "color": "#e4e4e7",
+                          "fontFamily": undefined,
+                          "fontSize": 19,
+                        },
+                        [
+                          null,
+                          {
+                            "alignSelf": "center",
+                          },
+                        ],
+                      ]
+                    }
+                  >
+                    Discover more!
+                  </Text>
+                  <View
+                    style={
+                      {
+                        "marginLeft": 5,
+                      }
+                    }
+                  />
+                </ViewManagerAdapter_ExpoLinearGradient>
+              </View>
+            </View>
           </View>
         </View>
       </View>

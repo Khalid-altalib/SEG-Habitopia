@@ -1,9 +1,11 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { extendTheme, NativeBaseProvider } from "native-base";
+import { extendTheme, NativeBaseProvider, View } from "native-base";
 import { Provider } from "react-redux";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Store } from "redux";
+import ChallengePrompt from "@screens/application/ChallengePromptScreen";
+import ChallengeBoxes from "@features/challenges/ChallengeBoxes/ChallengeBoxes";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,7 +32,7 @@ const TestScreen = ({ route }: RouteProps) => {
 };
 
 const fakeProfileScreen = () => {
-  return <div testID="profile-screen"></div>;
+  return <View testID="profile-screen"></View>;
 };
 
 const TestingWrapperNavigation = (props: Props) => {
@@ -46,7 +48,24 @@ const TestingWrapperNavigation = (props: Props) => {
               component={TestScreen}
               initialParams={{ children }}
             />
-
+            <Stack.Screen
+              name="ChallengePrompt"
+              component={ChallengePrompt}
+              options={{
+                animation: "slide_from_bottom",
+                headerBackVisible: false,
+                title: "Join Challenge?",
+              }}
+            />
+            <Stack.Screen
+              name="Explore"
+              component={ChallengeBoxes}
+              options={{
+                animation: "slide_from_bottom",
+                headerBackVisible: false,
+                title: "Explore",
+              }}
+            />
             <Stack.Screen
               name="Profile"
               component={fakeProfileScreen}

@@ -27,7 +27,7 @@ const ChallengeBox = (props: Props) => {
     });
 
   return (
-    <TouchableOpacity onPress={handlePress}>
+    <TouchableOpacity onPress={handlePress} testID="challengeBox">
       <Box
         backgroundColor={cardColor}
         borderRadius="lg"

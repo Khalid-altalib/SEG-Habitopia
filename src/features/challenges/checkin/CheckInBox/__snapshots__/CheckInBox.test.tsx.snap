@@ -1,0 +1,218 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CheckInBox renders the check-in box correctly 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "flex": 1,
+        },
+        undefined,
+      ]
+    }
+  >
+    <RNSScreenStack
+      style={
+        {
+          "flex": 1,
+        }
+      }
+    >
+      <RNSScreen
+        collapsable={false}
+        forwardedRef={[Function]}
+        gestureResponseDistance={
+          {
+            "bottom": -1,
+            "end": -1,
+            "start": -1,
+            "top": -1,
+          }
+        }
+        nativeBackButtonDismissalEnabled={false}
+        onAppear={[Function]}
+        onDisappear={[Function]}
+        onDismissed={[Function]}
+        onHeaderBackButtonClicked={[Function]}
+        onNativeDismissCancelled={[Function]}
+        onTransitionProgress={[Function]}
+        onWillDisappear={[Function]}
+        replaceAnimation="push"
+        stackPresentation="push"
+        style={
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+        swipeDirection="horizontal"
+      >
+        <RNSScreenStackHeaderConfig
+          backButtonInCustomView={false}
+          backgroundColor="rgb(255, 255, 255)"
+          color="rgb(0, 122, 255)"
+          direction="ltr"
+          disableBackButtonMenu={false}
+          hidden={false}
+          hideBackButton={false}
+          largeTitleHideShadow={false}
+          title="TestScreen"
+          titleColor="rgb(28, 28, 30)"
+          topInsetEnabled={false}
+          translucent={false}
+        />
+        <View
+          accessibilityElementsHidden={false}
+          importantForAccessibility="auto"
+          style={
+            {
+              "flex": 1,
+              "flexDirection": "column-reverse",
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "flex": 1,
+                },
+                {
+                  "backgroundColor": "rgb(242, 242, 242)",
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "marginRight": 25,
+                  "opacity": 1,
+                }
+              }
+              testID="checkInBox"
+            >
+              <View
+                dataSet={{}}
+                style={
+                  [
+                    {
+                      "height": "100%",
+                      "width": "100%",
+                    },
+                    {
+                      "aspectRatio": 1,
+                    },
+                  ]
+                }
+              >
+                <Image
+                  accessibilityLabel="Fitness"
+                  alt="Fitness"
+                  dataSet={{}}
+                  onError={[Function]}
+                  source={
+                    {
+                      "uri": "https://picsum.photos/2000",
+                    }
+                  }
+                  style={
+                    [
+                      {
+                        "borderRadius": 8,
+                        "height": "100%",
+                        "maxWidth": "100%",
+                        "position": "absolute",
+                        "width": "100%",
+                      },
+                      {
+                        "borderColor": "#00000011",
+                        "borderWidth": 2,
+                      },
+                    ]
+                  }
+                />
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "white",
+                      },
+                      {
+                        "fontFamily": undefined,
+                        "fontSize": 19,
+                      },
+                      {
+                        "padding": 12.25,
+                        "textShadowColor": "black",
+                        "textShadowRadius": 4,
+                      },
+                    ]
+                  }
+                >
+                  Fitness
+                </Text>
+                <View
+                  dataSet={{}}
+                  style={
+                    {
+                      "bottom": 0,
+                      "position": "absolute",
+                    }
+                  }
+                >
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "white",
+                        },
+                        {
+                          "fontFamily": undefined,
+                          "fontSize": 19,
+                        },
+                        {
+                          "padding": 12.25,
+                          "textShadowColor": "black",
+                          "textShadowRadius": 4,
+                        },
+                      ]
+                    }
+                  >
+                    NaNh left!
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RNSScreen>
+    </RNSScreenStack>
+  </View>
+</RNCSafeAreaProvider>
+`;

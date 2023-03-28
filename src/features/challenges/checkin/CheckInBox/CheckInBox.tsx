@@ -1,7 +1,6 @@
 import { Image, ZStack, useColorModeValue } from "native-base";
 import React, { useState } from "react";
 import { TouchableOpacity } from "react-native";
-import CheckInTime from "./CheckInTime";
 import Text from "@components/Text";
 import { ChatParams, CheckInSnippetItem, TextType } from "types";
 import { useNavigation } from "@react-navigation/native";
@@ -12,6 +11,7 @@ import {
 } from "@features/chat/chatSlice";
 import { useDispatch } from "@app/hooks";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
+import CheckInTime from "../CheckInTime";
 
 type Props = {
   checkInSnippetItem: CheckInSnippetItem;
@@ -36,7 +36,11 @@ const CheckInBox = (props: Props) => {
   const timeDifferenceHours = Math.round(timeDifference / (1000 * 60 * 60));
 
   return (
-    <TouchableOpacity style={{ marginRight: 25 }} onPress={handlePress}>
+    <TouchableOpacity
+      style={{ marginRight: 25 }}
+      onPress={handlePress}
+      testID={"checkInBox"}
+    >
       <ZStack size="full" style={{ aspectRatio: 1 }}>
         <Image
           source={{ uri: "https://picsum.photos/2000" }}
