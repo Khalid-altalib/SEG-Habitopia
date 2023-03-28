@@ -59,7 +59,7 @@ export const fetchDetails = createAsyncThunk<
     const chatDetails = await getChatDetails(chatId);
     return chatDetails;
   } catch (error: any) {
-    return thunkAPI.rejectWithValue("An error has occured");
+    return thunkAPI.rejectWithValue("An error has occured, please try again!");
   }
 });
 
@@ -112,7 +112,7 @@ export const sendMessage = createAsyncThunk<any, any, { rejectValue: string }>(
       const message = error.message;
       Toast.show({
         type: "error",
-        text1: message,
+        text1: "An error has occured, please try again!",
       });
       return thunkAPI.rejectWithValue(message);
     }
@@ -131,7 +131,7 @@ export const sendCheckIn = createAsyncThunk<
     const message = error.message;
     Toast.show({
       type: "error",
-      text1: message,
+      text1: "An error has occured, please try again!",
     });
     return thunkAPI.rejectWithValue(message);
   }
