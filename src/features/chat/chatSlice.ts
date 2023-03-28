@@ -160,11 +160,6 @@ export const fetchCheckInSnippet = createAsyncThunk<
   { rejectValue: string }
 >("checkIn/fetchSnippet", async (_, thunkAPI) => {
   try {
-    // fetch challenges user is in
-
-    // of these challenges, filter which one needs to be checkedin
-
-    // return CheckInSnippet with checkedIn = false and the associated challenge object
     const checkInSnippets = await getCheckInSnippets(thunkAPI);
 
     return checkInSnippets;

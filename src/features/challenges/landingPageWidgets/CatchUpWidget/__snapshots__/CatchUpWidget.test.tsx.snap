@@ -1,0 +1,265 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CatchUpWidget renders the catch-up widget correctly 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "flex": 1,
+        },
+        undefined,
+      ]
+    }
+  >
+    <RNSScreenStack
+      style={
+        {
+          "flex": 1,
+        }
+      }
+    >
+      <RNSScreen
+        collapsable={false}
+        forwardedRef={[Function]}
+        gestureResponseDistance={
+          {
+            "bottom": -1,
+            "end": -1,
+            "start": -1,
+            "top": -1,
+          }
+        }
+        nativeBackButtonDismissalEnabled={false}
+        onAppear={[Function]}
+        onDisappear={[Function]}
+        onDismissed={[Function]}
+        onHeaderBackButtonClicked={[Function]}
+        onNativeDismissCancelled={[Function]}
+        onTransitionProgress={[Function]}
+        onWillDisappear={[Function]}
+        replaceAnimation="push"
+        stackPresentation="push"
+        style={
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+        swipeDirection="horizontal"
+      >
+        <RNSScreenStackHeaderConfig
+          backButtonInCustomView={false}
+          backgroundColor="rgb(255, 255, 255)"
+          color="rgb(0, 122, 255)"
+          direction="ltr"
+          disableBackButtonMenu={false}
+          hidden={false}
+          hideBackButton={false}
+          largeTitleHideShadow={false}
+          title="TestScreen"
+          titleColor="rgb(28, 28, 30)"
+          topInsetEnabled={false}
+          translucent={false}
+        />
+        <View
+          accessibilityElementsHidden={false}
+          importantForAccessibility="auto"
+          style={
+            {
+              "flex": 1,
+              "flexDirection": "column-reverse",
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "flex": 1,
+                },
+                {
+                  "backgroundColor": "rgb(242, 242, 242)",
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              dataSet={{}}
+              style={{}}
+              testID="catchUpWidget"
+            >
+              <View
+                dataSet={{}}
+                style={
+                  {
+                    "paddingLeft": 24,
+                    "paddingRight": 24,
+                  }
+                }
+              >
+                <Text
+                  dataSet={{}}
+                  style={
+                    {
+                      "backgroundColor": undefined,
+                      "color": "#171717",
+                      "elevation": 2,
+                      "fontFamily": undefined,
+                      "fontSize": 24,
+                      "fontStyle": "normal",
+                      "fontWeight": "700",
+                      "letterSpacing": 0,
+                      "lineHeight": 30,
+                      "shadowColor": "#000000",
+                      "shadowOffset": {
+                        "height": 1,
+                        "width": 0,
+                      },
+                      "shadowOpacity": 0.2,
+                      "shadowRadius": 1.41,
+                      "textDecorationLine": undefined,
+                    }
+                  }
+                >
+                  Catch-Up 👬
+                </Text>
+                <RCTScrollView
+                  contentContainerStyle={
+                    [
+                      {},
+                      {
+                        "dataSet": {},
+                      },
+                      {},
+                    ]
+                  }
+                  dataSet={{}}
+                  horizontal={true}
+                  showsHorizontalScrollIndicator={false}
+                  style={{}}
+                >
+                  <View>
+                    <View
+                      dataSet={{}}
+                      style={
+                        {
+                          "flexDirection": "row",
+                          "justifyContent": "space-between",
+                          "marginTop": 20,
+                        }
+                      }
+                      testID="catchUpSlider"
+                    >
+                      <View
+                        accessible={true}
+                        collapsable={false}
+                        focusable={false}
+                        onClick={[Function]}
+                        onResponderGrant={[Function]}
+                        onResponderMove={[Function]}
+                        onResponderRelease={[Function]}
+                        onResponderTerminate={[Function]}
+                        onResponderTerminationRequest={[Function]}
+                        onStartShouldSetResponder={[Function]}
+                        style={
+                          {
+                            "opacity": 1,
+                          }
+                        }
+                        testID="catchUpBox"
+                      >
+                        <View
+                          dataSet={{}}
+                          style={
+                            {
+                              "height": 150,
+                              "paddingBottom": 20,
+                              "paddingLeft": 20,
+                              "paddingRight": 20,
+                              "paddingTop": 20,
+                              "width": 150,
+                            }
+                          }
+                        >
+                          <Image
+                            accessibilityLabel="Alternate Text"
+                            alt="Alternate Text"
+                            dataSet={{}}
+                            onError={[Function]}
+                            source={
+                              {
+                                "uri": "https://picsum.photos/200",
+                              }
+                            }
+                            style={
+                              {
+                                "borderRadius": 12,
+                                "height": 128,
+                                "maxWidth": "100%",
+                                "position": "absolute",
+                                "width": 128,
+                              }
+                            }
+                          />
+                          <View
+                            accessibilityRole="button"
+                            accessible={true}
+                            collapsable={false}
+                            colorScheme="red"
+                            dataSet={{}}
+                            focusable={true}
+                            onBlur={[Function]}
+                            onClick={[Function]}
+                            onFocus={[Function]}
+                            onResponderGrant={[Function]}
+                            onResponderMove={[Function]}
+                            onResponderRelease={[Function]}
+                            onResponderTerminate={[Function]}
+                            onResponderTerminationRequest={[Function]}
+                            onStartShouldSetResponder={[Function]}
+                            style={
+                              {
+                                "alignItems": "center",
+                                "borderRadius": 12,
+                                "flexDirection": "row",
+                                "justifyContent": "center",
+                                "paddingBottom": 10,
+                                "paddingLeft": 10,
+                                "paddingRight": 10,
+                                "paddingTop": 10,
+                                "position": "absolute",
+                              }
+                            }
+                            testID="heartButton"
+                          >
+                            <Text />
+                          </View>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                </RCTScrollView>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RNSScreen>
+    </RNSScreenStack>
+  </View>
+</RNCSafeAreaProvider>
+`;

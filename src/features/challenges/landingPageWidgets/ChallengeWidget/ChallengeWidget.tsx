@@ -2,10 +2,10 @@ import { useDispatch, useSelector } from "@app/hooks";
 import StatusContainer from "@components/StatusContainer/StatusContainer";
 import React, { useEffect } from "react";
 import ChallengeBox from "@features/challenges/ChallengeBox/ChallengeBox";
-import ChallengeNavigationButton from "../../challenges/ChallengeNavigationButton/ChallengeNavigationButton";
+import ChallengeNavigationButton from "../../ChallengeNavigationButton/ChallengeNavigationButton";
 import ChallengeWidgetLayout from "./ChallengeWidgetLayout";
 import { fetchChallenges } from "@features/challenges/challengesSlice";
-import { VStack } from "native-base";
+import { View, VStack } from "native-base";
 
 type Props = {};
 
@@ -29,7 +29,7 @@ function ChallengeWidget({}: Props) {
   }, []);
 
   return (
-    <>
+    <View testID="challengeWidget">
       <ChallengeWidgetLayout>
         <StatusContainer loading={loading} error={error} data={challenges}>
           <VStack space={5}>
@@ -40,7 +40,7 @@ function ChallengeWidget({}: Props) {
         </StatusContainer>
       </ChallengeWidgetLayout>
       <ChallengeNavigationButton />
-    </>
+    </View>
   );
 }
 

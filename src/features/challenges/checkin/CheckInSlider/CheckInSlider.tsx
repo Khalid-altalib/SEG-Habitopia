@@ -5,7 +5,7 @@ import { fetchCheckInSnippet } from "@features/chat/chatSlice";
 import { Center, HStack } from "native-base";
 import { ControlledPropUpdatedSelectedItem } from "native-base/lib/typescript/components/composites/Typeahead/useTypeahead/types";
 import React, { useEffect } from "react";
-import CheckInBox from "./CheckInBox";
+import CheckInBox from "../CheckInBox/CheckInBox";
 
 type Props = {};
 

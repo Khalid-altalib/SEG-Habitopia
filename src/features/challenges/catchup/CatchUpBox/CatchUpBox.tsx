@@ -1,35 +1,38 @@
+//Expo Icons
 import { AntDesign } from "@expo/vector-icons";
-import { ZStack, Image, IconButton, useColorModeValue } from "native-base";
+
+//Native Base
+import { ZStack, Image, IconButton } from "native-base";
+
+//React
 import React, { useState } from "react";
+
+//React Native
 import { TouchableOpacity } from "react-native";
 
-type Props = {};
+type Props = {
+  isUserLiked: boolean;
+};
 
+/** */
 const CatchUpBox = (props: Props) => {
-  let isUserLiked = false;
+  const { isUserLiked } = props;
   const [isLiked, setIsLiked] = useState(isUserLiked);
   const onHeartPressed = () => setIsLiked(!isLiked);
-
   return (
-    <TouchableOpacity style={{ marginRight: 25 }}>
-      <ZStack size="full" style={{ aspectRatio: 1 }}>
+    <TouchableOpacity testID="catchUpBox">
+      <ZStack padding={5} width={150} height={150}>
         <Image
-          source={{ uri: "https://picsum.photos/2000" }}
+          source={{ uri: "https://picsum.photos/200" }}
           alt="Alternate Text"
-          size="full"
-          rounded="lg"
-          style={{
-            borderColor: useColorModeValue("#00000011", "#ffffff11"),
-            borderWidth: 2,
-          }}
+          size="xl"
+          rounded="xl"
         />
         <IconButton
+          testID="heartButton"
+          borderRadius="xl"
           colorScheme="red"
-          size="lg"
-          bottom={0}
-          shadow="9"
-          style={{ shadowColor: "black", shadowRadius: 4 }}
-          variant="link"
+          variant="ghost"
           onPress={onHeartPressed}
           _icon={{
             as: AntDesign,
