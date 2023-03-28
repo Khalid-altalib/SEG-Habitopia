@@ -48,7 +48,7 @@ export const convertDateToTimeString = (date: Date) => {
   }
   // Dealing with hours
   else if (elapsedTimeInMilliseconds < ONE_DAY) {
-    return Math.round(elapsedTimeInMilliseconds / ONE_HOUR) + "d"; // E.g. '3d'
+    return Math.round(elapsedTimeInMilliseconds / ONE_HOUR) + "h"; // E.g. '3h'
   }
   // Dealing with days
   else if (elapsedTimeInMilliseconds < ONE_WEEK) {

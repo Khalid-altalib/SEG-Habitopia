@@ -59,7 +59,7 @@ export const fetchDetails = createAsyncThunk<
     const chatDetails = await getChatDetails(chatId);
     return chatDetails;
   } catch (error: any) {
-    return thunkAPI.rejectWithValue("An error has occured");
+    return thunkAPI.rejectWithValue("An error has occured, please try again!");
   }
 });
 
