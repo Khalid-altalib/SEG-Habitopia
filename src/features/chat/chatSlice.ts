@@ -112,7 +112,7 @@ export const sendMessage = createAsyncThunk<any, any, { rejectValue: string }>(
       const message = error.message;
       Toast.show({
         type: "error",
-        text1: "An error has occured, please try again!",
+        text1: message,
       });
       return thunkAPI.rejectWithValue(message);
     }
@@ -131,7 +131,7 @@ export const sendCheckIn = createAsyncThunk<
     const message = error.message;
     Toast.show({
       type: "error",
-      text1: "An error has occured, please try again!",
+      text1: message,
     });
     return thunkAPI.rejectWithValue(message);
   }
