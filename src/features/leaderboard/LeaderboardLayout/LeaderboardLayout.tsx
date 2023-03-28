@@ -2,12 +2,15 @@ import { ScrollView, VStack } from "native-base";
 import React from "react";
 import { useDispatch } from "../../../app/hooks";
 import { fetchLeaderboard } from "../leaderboardSlice";
-import PaddedContainer from "../../../components/PaddedContainer";
 
 type Props = {
   children: React.ReactNode;
 };
 
+/**
+ * Determines if the user has scrolled to the bottom of the scroll view
+ * @returns boolean - true if the user has scrolled to the bottom of the scroll view
+ */
 const isCloseToBottom = ({
   layoutMeasurement,
   contentOffset,
@@ -20,11 +23,16 @@ const isCloseToBottom = ({
   );
 };
 
+/**
+ * LeaderboardLayout component renders a scroll view with a vertical stack
+ * @returns JSX.Element - LeaderboardLayout component
+ */
 const LeaderboardLayout = (props: Props) => {
   const { children } = props;
 
   const dispatch = useDispatch();
 
+  // fetches leaderboard data when the user scrolls to the bottom of the scroll view
   const handleScrollBottom = async ({ nativeEvent }: any) => {
     if (isCloseToBottom(nativeEvent)) {
       await dispatch(fetchLeaderboard());
