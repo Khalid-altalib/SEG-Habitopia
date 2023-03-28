@@ -1,46 +1,38 @@
-import { DataStore, SortDirection, Auth } from "aws-amplify";
+import { DataStore, SortDirection } from "aws-amplify";
 import { Leaderboard, User, Checkin } from "../../models";
-import { getUserFromDatabasebyID } from "@app/util";
 
 /**
- * Subscribes to the checkin model 
- * updates the leaderboard model when the user checks in
+ * updates the leaderboard to increment the checkin count
+ * for a given user and challenge type. If the user does not have an entry
+ * in the leaderboard, a new entry is created
+ * @param checkinChallengeTypeId The challenge type id for the checkin
+ * @param user user for the validated checkin
  */
-const updateLeaderboard = DataStore.observe(Checkin).subscribe({
-  next: async (msg) => {
-    if (msg.opType === "INSERT") {
-      const checkin = msg.element as Checkin;
-      const { userID, checkinChallengeTypeId } = checkin;
-      const currentUserID = (await Auth.currentAuthenticatedUser()).attributes.sub;
-      const user = await getUserFromDatabasebyID(userID);
-      if (currentUserID === userID) {
-        const leaderboardEntry = await fetchLeaderboardByUserIDAndChallengeType(
-          userID,
-          checkinChallengeTypeId as string
-        );
-        const currentCheckins = leaderboardEntry?.numberOfCheckins ?? 0;
-        const newCheckins = currentCheckins + 1;
-        if (currentCheckins === 0) {
-          await DataStore.save(
-            new Leaderboard({
-              leaderboardUserId: userID,
-              numberOfCheckins: newCheckins,
-              leaderboardChallengeTypeId: checkinChallengeTypeId as string,
-              User: user,
-            })
-          );
-        } else {
-          await DataStore.save(
-            Leaderboard.copyOf(leaderboardEntry, (updated) => {
-              updated.numberOfCheckins = newCheckins;
-            })
-          );
-        }
-      }
+export const updateLeaderboardWithNewValidatedCheckin = async (
+  checkinChallengeTypeId: string,
+  user: User
+) => {
+  if (!checkinChallengeTypeId || !user) return;
+  try {
+    const leaderboardEntry = await fetchLeaderboardByUserIDAndChallengeType(
+      user.id,
+      checkinChallengeTypeId as string
+    );
+    const currentCheckins = (await leaderboardEntry?.numberOfCheckins) ?? 0;
+    const newCheckins = currentCheckins + 1;
+    if (currentCheckins === 0) {
+      await createNewLeaderboardEntry(
+        user.id,
+        user,
+        checkinChallengeTypeId as string
+      );
+    } else {
+      await updateLeaderboardWithCheckinCount(leaderboardEntry, newCheckins);
     }
-  },
-  error: (err) => console.error(err),
-});
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 /**
  * returns the leaderboard values for a given challenge type and page as a key value pair of name and number of checkins
@@ -102,4 +94,44 @@ export const fetchLeaderboardByUserIDAndChallengeType = async (
     ])
   );
   return leaderboardEntry;
+};
+
+/**
+ * Creates a new leaderboard entry for a given user and challenge type with
+ * a checkin count of 1
+ * @param userID the user id for the new leaderboard entry
+ * @param user user object for the new leaderboard entry
+ * @param challengeType type of challenge for the new leaderboard entry
+ * Cannot be tested by jest because it uses DataStore
+ */
+const createNewLeaderboardEntry = async (
+  userID: string,
+  user: User,
+  challengeType: string
+) => {
+  await DataStore.save(
+    new Leaderboard({
+      leaderboardUserId: userID,
+      numberOfCheckins: 1,
+      leaderboardChallengeTypeId: challengeType,
+      User: user,
+    })
+  );
+};
+
+/**
+ * Updates an existing leaderboard entry with a new checkin count
+ * @param leaderboardEntry entry to be updated
+ * @param checkinCount updated count value
+ * Cannot be tested by jest because it uses DataStore
+ */
+const updateLeaderboardWithCheckinCount = async (
+  leaderboardEntry: Leaderboard,
+  checkinCount: number
+) => {
+  await DataStore.save(
+    Leaderboard.copyOf(leaderboardEntry, (updated) => {
+      updated.numberOfCheckins = checkinCount;
+    })
+  );
 };

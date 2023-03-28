@@ -48,7 +48,7 @@ const FollowButton = () => {
   const followButtonText = profile?.following ? "Following" : "Follow";
 
   return (
-    <Button isLoading={loading} onPress={handleFollow}>
+    <Button isLoading={loading} onPress={handleFollow} testID="follow-button">
       {followButtonText}
     </Button>
   );

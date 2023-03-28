@@ -2,6 +2,12 @@ import moment from "moment";
 import { View, Text, StyleSheet } from "react-native";
 import { Message } from "types";
 
+/**
+ * A validation message for all check-ins that have been validated
+ *
+ * @param props - The properties passed to the component.
+ * @returns - The validation message component.
+ */
 const ValidationMessage = (message: Message) => {
   return (
     <View

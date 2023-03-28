@@ -58,7 +58,6 @@
     "react-dom": "18.0.0",
     "react-hook-form": "^7.43.0",
     "react-native": "0.69.6",
-    "react-native-get-random-values": "^1.8.0",
     "react-native-hide-show-password-input": "^1.2.0",
     "react-native-phone-number-input": "^2.1.0",
     "react-native-safe-area-context": "4.3.1",
@@ -66,7 +65,6 @@
     "react-native-svg": "12.3.0",
     "react-native-toast-message": "^2.1.5",
     "react-native-web": "~0.18.7",
-    "react-native-webview": "^11.23.0",
     "react-redux": "^8.0.5",
     "redux": "^4.2.1",
     "redux-mock-store": "^1.5.4"

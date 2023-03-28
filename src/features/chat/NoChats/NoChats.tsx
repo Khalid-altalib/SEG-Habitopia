@@ -7,6 +7,11 @@ import { ButtonType } from "types";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { NavigationParams } from "types";
 
+/**
+ *A component that renders when no chats are found, prompts user to join a challenge
+ *
+ * @returns - The custom component.
+ */
 const NoChats = () => {
   const navigation = useNavigation<NavigationProp<NavigationParams>>();
 

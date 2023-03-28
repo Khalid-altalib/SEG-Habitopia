@@ -11,8 +11,18 @@ import thunk from "redux-thunk";
 // Habitopia
 import SignInScreen from "@screens/authentication/SignInScreen";
 import TestingWrapper from "@app/testingWrapper";
+import { useSelector } from "react-redux";
+
+jest.mock("react-redux", () => ({
+  ...jest.requireActual("react-redux"),
+  useSelector: jest.fn(),
+}));
 
 it("Renders correctly.", () => {
+  (useSelector as jest.Mock).mockReturnValue({
+    loading: false,
+  });
+
   const mockStore = configureStore([thunk])({});
 
   render(

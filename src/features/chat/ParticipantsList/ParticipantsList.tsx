@@ -5,6 +5,12 @@ import React from "react";
 
 type Props = {};
 
+/**
+ * A list of all participants in that specific chat,
+ *
+ * @param props - The properties passed to the component.
+ * @returns - The list component.
+ */
 const ParticipantsList = (props: Props) => {
   const participants = useSelector(
     (state) => state.chats.details?.participants
