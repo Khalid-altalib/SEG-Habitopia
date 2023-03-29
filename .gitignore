@@ -15,6 +15,7 @@ web-build/
 package-lock.json
 yarn.lock
 coverage/
+.idea/
 
 # macOS
 .DS_Store

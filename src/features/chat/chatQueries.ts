@@ -21,7 +21,6 @@ import { Message as MessageType } from "../../../types";
 import moment from "moment";
 import {
   ALREADY_VALIDATED_ERROR,
-  CHAT_DETAIL_ERROR,
   CHECK_IN_MESSAGE,
   COULD_NOT_VALIDATE,
   MESSAGE_PAGINATION_LIMIT,
@@ -66,6 +65,8 @@ export const fetchUserChats = async (thunkAPI: any) => {
 Get all messages for a specific chat and paginate to reduce payload
 */
 export const fetchChatMessages = async (chatId: string, pageNumber: number) => {
+  await DataStore.stop();
+  await DataStore.start();
   const numberOfMessageInChat = (
     await DataStore.query(Message, (message) => message.chatroomID.eq(chatId))
   ).length;
@@ -200,6 +201,8 @@ export const getChatDetails = async (chatId: string) => {
 Send a check-in in chat
 */
 export const sendChatCheckIn = async (chatID: string, thunkAPI: any) => {
+  await DataStore.stop();
+  await DataStore.start();
   const challengeStatus = (
     await DataStore.query(Challenge, (challenge) =>
       challenge.challengeChatRoomId.eq(chatID)
