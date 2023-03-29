@@ -20,6 +20,11 @@ import Background from "@components/Background";
 
 type Props = {};
 
+/**
+ * @returns A React component that displays a list of chats that the user is
+ * currently participating in. The user can navigate to the chat screen
+ * by clicking on a chat item.  
+ */
 const ChatListScreen = (props: Props) => {
   const { chats, fetchChats: requestStatus } = useSelector(
     (state) => state.chats
