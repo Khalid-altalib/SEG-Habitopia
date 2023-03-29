@@ -120,6 +120,7 @@ exports[`Renders correctly. 1`] = `
           >
             <TextInput
               accessible={true}
+              autoCapitalize="none"
               dataSet={{}}
               editable={true}
               onBlur={[Function]}

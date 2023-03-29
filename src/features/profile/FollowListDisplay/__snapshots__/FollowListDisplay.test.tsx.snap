@@ -99,32 +99,32 @@ exports[`FollowListDisplay renders correctly 1`] = `
             }
           >
             <View
-              accessible={true}
-              collapsable={false}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
+              dataSet={{}}
               style={
                 {
-                  "opacity": 1,
+                  "borderRadius": 8,
+                  "flexGrow": 1,
+                  "overflow": "hidden",
                 }
               }
-              testID="follow-list-display"
             >
               <View
-                dataSet={{}}
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
                 style={
                   {
-                    "borderRadius": 8,
-                    "flexGrow": 1,
-                    "overflow": "hidden",
+                    "opacity": 1,
                   }
                 }
+                testID="follow-list-display"
               >
                 <ViewManagerAdapter_ExpoLinearGradient
                   proxiedProperties={
@@ -303,32 +303,32 @@ exports[`FollowListDisplay should push navigation to followList when handlePress
             }
           >
             <View
-              accessible={true}
-              collapsable={false}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
+              dataSet={{}}
               style={
                 {
-                  "opacity": 1,
+                  "borderRadius": 8,
+                  "flexGrow": 1,
+                  "overflow": "hidden",
                 }
               }
-              testID="follow-list-display"
             >
               <View
-                dataSet={{}}
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
                 style={
                   {
-                    "borderRadius": 8,
-                    "flexGrow": 1,
-                    "overflow": "hidden",
+                    "opacity": 1,
                   }
                 }
+                testID="follow-list-display"
               >
                 <ViewManagerAdapter_ExpoLinearGradient
                   proxiedProperties={

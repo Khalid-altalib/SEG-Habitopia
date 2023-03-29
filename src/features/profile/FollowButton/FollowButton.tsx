@@ -17,6 +17,7 @@ import { Toast } from "react-native-toast-message/lib/src/Toast";
 const FollowButton = () => {
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.profile?.profile);
+  const { loading } = useSelector((state) => state.profile.followUser);
 
   const handleFollow = async () => {
     if (!profile?.following) {

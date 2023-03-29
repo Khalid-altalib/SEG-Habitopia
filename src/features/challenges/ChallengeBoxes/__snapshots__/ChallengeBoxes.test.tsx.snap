@@ -236,7 +236,7 @@ exports[`ChallengeBoxes renders the challenge boxes correctly 1`] = `
                         <Image
                           source={
                             {
-                              "uri": "https://picsum.photos/200",
+                              "uri": "https://images.everydayhealth.com/images/everything-you-need-know-about-fitness-1440x810.jpg",
                             }
                           }
                           style={
@@ -283,7 +283,7 @@ exports[`ChallengeBoxes renders the challenge boxes correctly 1`] = `
                     dataSet={{}}
                     style={
                       {
-                        "backgroundColor": "#c084fc",
+                        "backgroundColor": "#facc15",
                         "borderRadius": 8,
                         "elevation": 4,
                         "height": 100,
@@ -356,7 +356,7 @@ exports[`ChallengeBoxes renders the challenge boxes correctly 1`] = `
                         <Image
                           source={
                             {
-                              "uri": "https://picsum.photos/200",
+                              "uri": "https://static.vecteezy.com/system/resources/previews/002/271/771/original/realistic-stationary-with-paper-strip-background-free-vector.jpg",
                             }
                           }
                           style={

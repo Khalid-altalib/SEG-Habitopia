@@ -205,37 +205,38 @@ exports[`ProfileHeader renders correctly 1`] = `
                       dataSet={{}}
                       style={
                         {
+                          "flex": 1,
                           "flexDirection": "row",
                         }
                       }
                     >
                       <View
-                        accessible={true}
-                        collapsable={false}
-                        focusable={true}
-                        onClick={[Function]}
-                        onResponderGrant={[Function]}
-                        onResponderMove={[Function]}
-                        onResponderRelease={[Function]}
-                        onResponderTerminate={[Function]}
-                        onResponderTerminationRequest={[Function]}
-                        onStartShouldSetResponder={[Function]}
+                        dataSet={{}}
                         style={
                           {
-                            "opacity": 1,
+                            "borderRadius": 8,
+                            "flexGrow": 1,
+                            "overflow": "hidden",
                           }
                         }
-                        testID="follow-list-display"
                       >
                         <View
-                          dataSet={{}}
+                          accessible={true}
+                          collapsable={false}
+                          focusable={true}
+                          onClick={[Function]}
+                          onResponderGrant={[Function]}
+                          onResponderMove={[Function]}
+                          onResponderRelease={[Function]}
+                          onResponderTerminate={[Function]}
+                          onResponderTerminationRequest={[Function]}
+                          onStartShouldSetResponder={[Function]}
                           style={
                             {
-                              "borderRadius": 8,
-                              "flexGrow": 1,
-                              "overflow": "hidden",
+                              "opacity": 1,
                             }
                           }
+                          testID="follow-list-display"
                         >
                           <ViewManagerAdapter_ExpoLinearGradient
                             proxiedProperties={
@@ -316,32 +317,32 @@ exports[`ProfileHeader renders correctly 1`] = `
                         }
                       />
                       <View
-                        accessible={true}
-                        collapsable={false}
-                        focusable={true}
-                        onClick={[Function]}
-                        onResponderGrant={[Function]}
-                        onResponderMove={[Function]}
-                        onResponderRelease={[Function]}
-                        onResponderTerminate={[Function]}
-                        onResponderTerminationRequest={[Function]}
-                        onStartShouldSetResponder={[Function]}
+                        dataSet={{}}
                         style={
                           {
-                            "opacity": 1,
+                            "borderRadius": 8,
+                            "flexGrow": 1,
+                            "overflow": "hidden",
                           }
                         }
-                        testID="follow-list-display"
                       >
                         <View
-                          dataSet={{}}
+                          accessible={true}
+                          collapsable={false}
+                          focusable={true}
+                          onClick={[Function]}
+                          onResponderGrant={[Function]}
+                          onResponderMove={[Function]}
+                          onResponderRelease={[Function]}
+                          onResponderTerminate={[Function]}
+                          onResponderTerminationRequest={[Function]}
+                          onStartShouldSetResponder={[Function]}
                           style={
                             {
-                              "borderRadius": 8,
-                              "flexGrow": 1,
-                              "overflow": "hidden",
+                              "opacity": 1,
                             }
                           }
+                          testID="follow-list-display"
                         >
                           <ViewManagerAdapter_ExpoLinearGradient
                             proxiedProperties={
@@ -546,24 +547,31 @@ exports[`ProfileHeader renders correctly 1`] = `
                   >
                     Test User
                   </Text>
-                  <Text
+                  <View
+                    dataSet={{}}
                     style={
-                      [
-                        {
-                          "color": "#18181b",
-                        },
-                        {
-                          "fontFamily": undefined,
-                          "fontSize": 15,
-                        },
-                        {
-                          "marginTop": 2,
-                        },
-                      ]
+                      {
+                        "marginTop": 8,
+                      }
                     }
                   >
-                    Test Biography
-                  </Text>
+                    <Text
+                      style={
+                        [
+                          {
+                            "color": "#18181b",
+                          },
+                          {
+                            "fontFamily": undefined,
+                            "fontSize": 15,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      Test Biography
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
@@ -780,37 +788,38 @@ exports[`ProfileHeader should push navigation to Settings when Settings button i
                       dataSet={{}}
                       style={
                         {
+                          "flex": 1,
                           "flexDirection": "row",
                         }
                       }
                     >
                       <View
-                        accessible={true}
-                        collapsable={false}
-                        focusable={true}
-                        onClick={[Function]}
-                        onResponderGrant={[Function]}
-                        onResponderMove={[Function]}
-                        onResponderRelease={[Function]}
-                        onResponderTerminate={[Function]}
-                        onResponderTerminationRequest={[Function]}
-                        onStartShouldSetResponder={[Function]}
+                        dataSet={{}}
                         style={
                           {
-                            "opacity": 1,
+                            "borderRadius": 8,
+                            "flexGrow": 1,
+                            "overflow": "hidden",
                           }
                         }
-                        testID="follow-list-display"
                       >
                         <View
-                          dataSet={{}}
+                          accessible={true}
+                          collapsable={false}
+                          focusable={true}
+                          onClick={[Function]}
+                          onResponderGrant={[Function]}
+                          onResponderMove={[Function]}
+                          onResponderRelease={[Function]}
+                          onResponderTerminate={[Function]}
+                          onResponderTerminationRequest={[Function]}
+                          onStartShouldSetResponder={[Function]}
                           style={
                             {
-                              "borderRadius": 8,
-                              "flexGrow": 1,
-                              "overflow": "hidden",
+                              "opacity": 1,
                             }
                           }
+                          testID="follow-list-display"
                         >
                           <ViewManagerAdapter_ExpoLinearGradient
                             proxiedProperties={
@@ -891,32 +900,32 @@ exports[`ProfileHeader should push navigation to Settings when Settings button i
                         }
                       />
                       <View
-                        accessible={true}
-                        collapsable={false}
-                        focusable={true}
-                        onClick={[Function]}
-                        onResponderGrant={[Function]}
-                        onResponderMove={[Function]}
-                        onResponderRelease={[Function]}
-                        onResponderTerminate={[Function]}
-                        onResponderTerminationRequest={[Function]}
-                        onStartShouldSetResponder={[Function]}
+                        dataSet={{}}
                         style={
                           {
-                            "opacity": 1,
+                            "borderRadius": 8,
+                            "flexGrow": 1,
+                            "overflow": "hidden",
                           }
                         }
-                        testID="follow-list-display"
                       >
                         <View
-                          dataSet={{}}
+                          accessible={true}
+                          collapsable={false}
+                          focusable={true}
+                          onClick={[Function]}
+                          onResponderGrant={[Function]}
+                          onResponderMove={[Function]}
+                          onResponderRelease={[Function]}
+                          onResponderTerminate={[Function]}
+                          onResponderTerminationRequest={[Function]}
+                          onStartShouldSetResponder={[Function]}
                           style={
                             {
-                              "borderRadius": 8,
-                              "flexGrow": 1,
-                              "overflow": "hidden",
+                              "opacity": 1,
                             }
                           }
+                          testID="follow-list-display"
                         >
                           <ViewManagerAdapter_ExpoLinearGradient
                             proxiedProperties={
@@ -1121,24 +1130,31 @@ exports[`ProfileHeader should push navigation to Settings when Settings button i
                   >
                     Test User
                   </Text>
-                  <Text
+                  <View
+                    dataSet={{}}
                     style={
-                      [
-                        {
-                          "color": "#18181b",
-                        },
-                        {
-                          "fontFamily": undefined,
-                          "fontSize": 15,
-                        },
-                        {
-                          "marginTop": 2,
-                        },
-                      ]
+                      {
+                        "marginTop": 8,
+                      }
                     }
                   >
-                    Test Biography
-                  </Text>
+                    <Text
+                      style={
+                        [
+                          {
+                            "color": "#18181b",
+                          },
+                          {
+                            "fontFamily": undefined,
+                            "fontSize": 15,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      Test Biography
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>

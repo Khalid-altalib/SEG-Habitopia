@@ -40,10 +40,8 @@ const ChallengeModal = (props: Props) => {
   const handleButtonClick = async () => {
     // Dispatch the joinChallenge action with the name of the challenge
     await dispatch(joinChallenge(name));
-
     // Dispatch the fetchChats action to update the chats in the store
     dispatch(fetchChats());
-
     // Pop the current screen off the navigation stack to go back to the previous screen
     navigation.pop();
   };
@@ -71,32 +69,24 @@ const ChallengeModal = (props: Props) => {
             source={{ uri: image }}
           />
 
-          {/* Render the description of the challenge */}
           <Text type={TextType.Regular}>{description}</Text>
 
           <VStack space={5} marginTop={20}>
-            {/* Render the join button */}
-            <View testID={"joinButton"}>
-              <Button
-                type={ButtonType.Primary}
-                onPress={handleButtonClick}
-                isLoading={loading}
-                isFullWidth
-              >
-                Join Challenge!
-              </Button>
-            </View>
-
-            {/* Render the back button */}
-            <View testID={"backButton"}>
-              <Button
-                type={ButtonType.Secondary}
-                onPress={() => navigation.goBack()}
-                isFullWidth
-              >
-                Not now
-              </Button>
-            </View>
+            <Button
+              type={ButtonType.Primary}
+              onPress={handleButtonClick}
+              isLoading={loading}
+              isFullWidth
+            >
+              Join Challenge!
+            </Button>
+            <Button
+              type={ButtonType.Secondary}
+              onPress={() => navigation.goBack()}
+              isFullWidth
+            >
+              Not now
+            </Button>
           </VStack>
         </VStack>
       </Background>

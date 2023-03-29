@@ -21,7 +21,7 @@ function ChallengeNavigationButton({}: Props) {
       style={{ marginHorizontal: 25, marginBottom: 25, paddingTop: 10 }} // Apply some styles to the button
       onPress={handlePress}
     >
-      Discover more! // The text inside the button
+      Discover more! {/* The text inside the button*/}
     </Button>
   );
 }

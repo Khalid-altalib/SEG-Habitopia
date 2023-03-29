@@ -105,6 +105,7 @@ exports[`ChallengeNavigationButton renders the challenge boxes correctly 1`] = `
                 {
                   "marginBottom": 25,
                   "marginHorizontal": 25,
+                  "paddingTop": 10,
                 }
               }
               type={0}
@@ -125,6 +126,7 @@ exports[`ChallengeNavigationButton renders the challenge boxes correctly 1`] = `
                     "marginBottom": 25,
                     "marginHorizontal": 25,
                     "opacity": 1,
+                    "paddingTop": 10,
                   }
                 }
               >
@@ -182,7 +184,7 @@ exports[`ChallengeNavigationButton renders the challenge boxes correctly 1`] = `
                       ]
                     }
                   >
-                    Discover more!
+                    Discover more! 
                   </Text>
                   <View
                     style={
