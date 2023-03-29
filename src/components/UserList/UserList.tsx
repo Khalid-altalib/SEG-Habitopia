@@ -1,4 +1,4 @@
-import { Box } from "native-base";
+import { Box, VStack } from "native-base";
 import React from "react";
 import { User } from "types";
 import UserCard from "./UserCard/UserCard";
@@ -11,9 +11,9 @@ const UserList = (props: Props) => {
   const { users } = props;
 
   return (
-    <Box>
+    <VStack space={5}>
       {users && users.map((user, i) => <UserCard user={user} key={i} />)}
-    </Box>
+    </VStack>
   );
 };
 
