@@ -7,11 +7,13 @@ import PasswordSetting from "@features/settings/PasswordSetting/PasswordSetting"
 import GenericSetting from "@features/settings/GenericSetting/GenericSetting";
 import PaddedContainer from "@components/PaddedContainer";
 
-type Props = {};
-
 const genericSettingTypes = ["email", "name", "biography"];
 
-const SettingDetailsScreen = (props: Props) => {
+/**
+ * @returns A React component which displays the controls and
+ * input to configure a particular setting
+ */
+const SettingDetailsScreen = () => {
   const route = useRoute<RouteProp<RootParams, "SettingDetails">>();
 
   const { settingType, defaultValue } = route.params;

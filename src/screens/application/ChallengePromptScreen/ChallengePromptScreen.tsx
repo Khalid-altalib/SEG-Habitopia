@@ -4,9 +4,12 @@ import React from "react";
 import { RootParams } from "types";
 import ChallengeModal from "@features/challenges/ChallengeModal/ChallengeModal";
 
-type Props = {};
-
-const ChallengePromptScreen = (props: Props) => {
+/**
+ * @returns A React component which represents the screen where the user is
+ * shown a modal associated with the challenge they have selected, giving
+ * them the choice of joining or declining the prompt
+ */
+const ChallengePromptScreen = () => {
   const route = useRoute<RouteProp<RootParams, "ChallengePrompt">>();
   const { challenge } = route.params;
 
