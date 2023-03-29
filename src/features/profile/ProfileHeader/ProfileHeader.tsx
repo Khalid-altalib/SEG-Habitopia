@@ -30,7 +30,7 @@ const ProfileHeader = (props: Props) => {
             </Box>
 
             <VStack flex={1} space={25 / 2}>
-              <HStack space={25 / 2}>
+              <HStack space={25 / 2} flex={1}>
                 <FollowListDisplay
                   followListMode={"follower"}
                   followCount={profile.followerCount}
@@ -57,11 +57,15 @@ const ProfileHeader = (props: Props) => {
           </HStack>
           <View>
             <Text type={TextType.Regular}>{profile!.name}</Text>
-            {profile?.biography === null || profile?.biography === "" ? null : (
-              <Text type={TextType.Small} style={{ marginTop: 2 }}>
-                {profile?.biography}
-              </Text>
-            )}
+            <Box marginTop={2}>
+              {profile?.biography === null || profile?.biography === "" ? (
+                <Text type={TextType.Subtle}>
+                  This user currently does not have a bio
+                </Text>
+              ) : (
+                <Text type={TextType.Small}>{profile?.biography}</Text>
+              )}
+            </Box>
           </View>
         </Box>
       )}
