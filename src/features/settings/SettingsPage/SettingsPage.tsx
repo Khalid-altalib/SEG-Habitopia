@@ -13,6 +13,14 @@ import Button from "@components/Button";
 import { ButtonType } from "types";
 import ColorModeToggle from "@features/settings/ColorModeToggle";
 
+/**
+ * Contains the various features of the settings page, such as the ability
+ * to toggle the settings from the home page, access setting details for particular 
+ * settings and be able to log out from the app
+ *
+ * @param props - The properties passed to the component.
+ * @returns - The settings page component.
+ */
 const SettingsPage = () => {
   const navigation = useNavigation<NavigationProp<RootParams>>();
 

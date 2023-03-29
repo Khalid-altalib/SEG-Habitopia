@@ -5,6 +5,14 @@ import DoneButton from "../DoneButton/DoneButton";
 
 type Props = {};
 
+/**
+ * A specialised version of the generic settings component
+ * which adds more input for the user to provide their old password
+ * and confirm their new password
+ *
+ * @param props - The properties passed to the component.
+ * @returns - The passwrod setting component.
+ */
 const PasswordSetting = (props: Props) => {
   const { control, getValues, watch } = useForm({
     defaultValues: {
