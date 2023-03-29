@@ -1,23 +1,15 @@
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { isLoading } from "expo-font";
-import {
-  Button,
-  HStack,
-  Text,
-  View,
-  Alert,
-  Modal,
-  VStack,
-  Image,
-  Heading,
-} from "native-base";
+import { HStack, View, VStack, Image } from "native-base";
 import React from "react";
-import { Challenge, RootParams } from "../../../../types";
+import { ButtonType, Challenge, RootParams, TextType } from "../../../../types";
 import { useDispatch, useSelector } from "../../../app/hooks";
 import { challengeMappings } from "../challengeMappings";
 import { joinChallenge } from "../challengesSlice";
 import { fetchChats } from "@features/chat/chatSlice";
+import Background from "@components/Background";
+import Text from "@components/Text";
+import Button from "@components/Button";
 
 type Props = {
   challenge: Challenge;
@@ -45,37 +37,47 @@ const ChallengeModal = (props: Props) => {
 
   return (
     <View testID="challengePrompt">
-      <VStack space={3} alignItems="center">
-        <Heading size="3xl">{name}</Heading>
-        <Image
-          width={100}
-          height={100}
-          alt="Challenge Image"
-          borderRadius="lg"
-          source={{ uri: image }}
-        />
-        <Text fontSize="xl" textAlign="center">
-          {description}
-        </Text>
+      <Background>
+        <VStack
+          space={3}
+          alignItems="center"
+          justifyContent="center"
+          height="100%"
+          padding={20}
+        >
+          <Text type={TextType.Heading}>{name}</Text>
+          <Image
+            width={150}
+            height={150}
+            alt="Challenge Image"
+            borderRadius="lg"
+            source={{ uri: image }}
+          />
+          <Text type={TextType.Regular}>{description}</Text>
 
-        <HStack space={3}>
-          <Button
-            backgroundColor="amber.500"
-            onPress={handleButtonClick}
-            isLoading={loading}
-            testID={"joinButton"}
-          >
-            Join Challenge!
-          </Button>
-          <Button
-            backgroundColor="gray.400"
-            onPress={() => navigation.goBack()}
-            testID={"backButton"}
-          >
-            Not now
-          </Button>
-        </HStack>
-      </VStack>
+          <VStack space={5} marginTop={20}>
+            <View testID={"joinButton"}>
+              <Button
+                type={ButtonType.Primary}
+                onPress={handleButtonClick}
+                isLoading={loading}
+                isFullWidth
+              >
+                Join Challenge!
+              </Button>
+            </View>
+            <View testID={"backButton"}>
+              <Button
+                type={ButtonType.Secondary}
+                onPress={() => navigation.goBack()}
+                isFullWidth
+              >
+                Not now
+              </Button>
+            </View>
+          </VStack>
+        </VStack>
+      </Background>
     </View>
   );
 };

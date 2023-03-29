@@ -1,9 +1,13 @@
 import Avatar from "@components/Avatar/Avatar";
+import Button from "@components/Button";
+import Card from "@components/Card";
+import Text from "@components/Text";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Box, Button, Heading, HStack } from "native-base";
+import { Box, HStack, theme, useColorModeValue, View, VStack } from "native-base";
 import React from "react";
-import { NavigationParams, User } from "types";
+import { TouchableOpacity } from "react-native";
+import { ButtonType, NavigationParams, TextType, User } from "types";
 
 type Props = {
   user: User;
@@ -21,17 +25,25 @@ const UserCard = (props: Props) => {
   };
 
   return (
-    <Box backgroundColor="info.600" mb={3} padding={3} borderRadius={8}>
-      <HStack space={2} alignItems="center">
-        <Avatar userId={userId} />
-        <HStack flex={1} justifyContent="space-between" alignItems="center">
-          <Heading fontSize="xl">{name}</Heading>
-          <Button backgroundColor={"amber.500"} onPress={handleVisitProfile}>
-            View Profile
-          </Button>
+    <TouchableOpacity onPress={handleVisitProfile}>
+      <Card>
+        <HStack justifyContent={"space-between"} alignItems="center">
+          <HStack space={25}>
+            <Box boxSize={50}>
+              <Avatar userId={userId} />
+            </Box>
+            <View>
+              <Text
+                type={TextType.Subheading}
+                color={useColorModeValue(theme.colors.blueGray[900], theme.colors.white)}
+              >
+                {name}
+              </Text>
+            </View>
+          </HStack>
         </HStack>
-      </HStack>
-    </Box>
+      </Card>
+    </TouchableOpacity>
   );
 };
 
