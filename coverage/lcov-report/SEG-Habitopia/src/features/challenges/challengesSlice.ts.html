@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">19.14% </span>
+                <span class="strong">40.42% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/47</span>
+                <span class='fraction'>19/47</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>1/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">7.69% </span>
+                <span class="strong">30.76% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/13</span>
+                <span class='fraction'>4/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">19.56% </span>
+                <span class="strong">41.3% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/46</span>
+                <span class='fraction'>19/46</span>
             </div>
         
             
@@ -235,14 +235,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">30x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -253,21 +253,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -367,15 +367,15 @@ export const fetchChallenges = createAsyncThunk&lt;
   }
 });
 &nbsp;
-const displayErrorMessage = <span class="fstat-no" title="function not covered" >(e</span>rror: any) =&gt; {
-  let errorMessage = <span class="cstat-no" title="statement not covered" >"";</span>
+const displayErrorMessage = (error: any) =&gt; {
+  let errorMessage = "";
   // looked into error messages and found what is presented for the different errors
-<span class="cstat-no" title="statement not covered" >  if (error.message.includes("already part of the challenge")) {</span>
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (error.message.includes("already part of the challenge")) {
 <span class="cstat-no" title="statement not covered" >    errorMessage = "You are already a part of this challenge!";</span>
   } else {
-<span class="cstat-no" title="statement not covered" >    errorMessage = error.message;</span>
+    errorMessage = error.message;
   }
-<span class="cstat-no" title="statement not covered" >  Toast.show({</span>
+  Toast.show({
     type: "error",
     text1: errorMessage,
   });
@@ -385,22 +385,22 @@ export const joinChallenge = createAsyncThunk&lt;
   Challenge,
   string,
   { rejectValue: string; state: RootState }
-&gt;("challenges/join", <span class="fstat-no" title="function not covered" >as</span>ync (challengeName: string, thunkAPI) =&gt; {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const challengeTypeInstance = <span class="cstat-no" title="statement not covered" >(</span>
-      await DataStore.query(ChallengeTypeModel, <span class="fstat-no" title="function not covered" >(c</span>hallengeNames) =&gt;
-<span class="cstat-no" title="statement not covered" >        challengeNames.name.eq(challengeName)</span>
+&gt;("challenges/join", async (challengeName: string, thunkAPI) =&gt; {
+  try {
+    const challengeTypeInstance = (
+      await DataStore.query(ChallengeTypeModel, (challengeNames) =&gt;
+        challengeNames.name.eq(challengeName)
       )
     )[0];
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    await joinChallengeQuery(challengeTypeInstance, thunkAPI);</span>
+    await joinChallengeQuery(challengeTypeInstance, thunkAPI);
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    Toast.show({ type: "success", text1: "Welcome to the challenge!" });</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return { ...challengeTypeInstance };</span>
   } catch (error: any) {
-<span class="cstat-no" title="statement not covered" >    displayErrorMessage(error);</span>
-<span class="cstat-no" title="statement not covered" >    return thunkAPI.rejectWithValue("An error has occured");</span>
+    displayErrorMessage(error);
+    return thunkAPI.rejectWithValue("An error has occured");
   }
 });
 &nbsp;
@@ -469,7 +469,7 @@ export default challengesSlice.reducer;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-29T22:33:32.296Z
+                at 2023-03-29T22:45:55.161Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
