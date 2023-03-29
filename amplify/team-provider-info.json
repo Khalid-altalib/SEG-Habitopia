@@ -15,10 +15,13 @@
       "function": {
         "challengeSchedule": {
           "deploymentBucketName": "amplify-habitopia-deploy-170027-deployment",
-          "s3Key": "amplify-builds/challengeSchedule-644849627a58784d586e-build.zip"
+          "s3Key": "amplify-builds/challengeSchedule-5165522b33725475656d-build.zip"
         }
       },
       "auth": {
+        "Habitopia": {}
+      },
+      "api": {
         "Habitopia": {}
       }
     }
