@@ -1,14 +1,8 @@
 import React, { useEffect } from "react";
-import {
-  ImageBackground,
-  StyleSheet,
-  FlatList,
-  Text,
-  Platform,
-} from "react-native";
+import { StyleSheet, FlatList, Text, Platform } from "react-native";
 import InputBox from "../../../features/chat/InputBox/InputBox";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
-import { ChatParams, Message, Message as MessageType } from "../../../../types";
+import { ChatParams, Message as MessageType } from "../../../../types";
 import { useDispatch, useSelector } from "../../../app/hooks";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {
@@ -92,8 +86,8 @@ const ChatScreen = (props: Props) => {
             break;
           case MessageEnum.TEXT:
             message = {
-            ...data,
-            userName: userFromDatabase.name,
+              ...data,
+              userName: userFromDatabase.name,
             } as MessageType;
             break;
           case MessageEnum.CHECKIN:
