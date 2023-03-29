@@ -51,6 +51,7 @@ const NameForm = () => {
             value={value}
             size="xl"
             testID="name-input"
+            autoCapitalize="none"
           />
         )}
         name="name"
