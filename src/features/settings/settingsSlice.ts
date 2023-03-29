@@ -36,38 +36,46 @@ const initialState: SettingsState = {
   },
 };
 
+// Async thunk to retrieve the user's settings from a database
 export const fetchSettings = createAsyncThunk<
   Settings,
   void,
   { rejectValue: string }
 >("settings/fetch", async (_, thunkAPI) => {
   try {
-    const userData  = await getUserFromDatabase(thunkAPI);
+    // Call an external API to get the user data
+    const userData = await getUserFromDatabase(thunkAPI);
 
-    const response =  {
+    // Map the user data to the Settings shape
+    const response = {
       email: userData.email,
       name: userData.name,
       notifications: userData.notifications,
       biography: userData.biography,
     };
-   
+
+    // Return the settings as a payload
     return (await response) as Settings;
   } catch (error: any) {
+    // If there's an error, reject the thunk with an error message
     const message = error.message;
     return thunkAPI.rejectWithValue(message);
   }
 });
 
-
+// Async thunk to update the user's settings in a database
 export const setSettings = createAsyncThunk<
   void,
   object,
   { rejectValue: string }
 >("settings/set", async (settings: any, thunkAPI) => {
   try {
-    const {name, notifications, biography, password, oldPassword} = settings;
+    const { name, notifications, biography, password, oldPassword } = settings;
+
+    // Call an external API to get the user data
     const user = await getUserFromDatabase(thunkAPI);
-    // update the one that is not null
+
+    // Update the user data with the new settings
     await DataStore.save(
       User.copyOf(user, (updated) => {
         if (name !== undefined) {
@@ -82,12 +90,16 @@ export const setSettings = createAsyncThunk<
         if (password !== undefined) {
           updatePassword(password, oldPassword);
         }
-      }));
+      })
+    );
 
-    Toast.show({type: "success", text1: "Your new setting has been saved! ✅"})
+    // Show a success message to the user
+    Toast.show({ type: "success", text1: "Your new setting has been saved! ✅" });
 
-    return settings; 
+    // Return the updated settings as a payload
+    return settings;
   } catch (error: any) {
+    // If there's an error, reject the thunk with an error message
     const message = error.message;
     return thunkAPI.rejectWithValue(message);
   }

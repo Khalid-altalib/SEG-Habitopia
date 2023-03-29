@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet, FlatList, Text, Platform } from "react-native";
+import { StyleSheet, FlatList, Platform } from "react-native";
 import InputBox from "../../../features/chat/InputBox/InputBox";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { ChatParams, Message as MessageType } from "../../../../types";
@@ -41,13 +41,24 @@ import { useHeaderHeight } from "@react-navigation/elements";
 
 type Props = {};
 
+/**
+ * The ChatScreen component renders a chat interface for a specific chat room. It fetches and displays chat messages and allows users to send new messages.
+ * @param {Props} props - The props for the component.
+ * @returns {JSX.Element} - The rendered component.
+ */
 const ChatScreen = (props: Props) => {
-  const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>();
+  const navigation = useNavigation<NativeStackNavigationProp<ChatParams>>(); // Retrieve navigation and route props using the appropriate hooks.
   const route = useRoute<RouteProp<ChatParams, "IndividualChat">>();
-  const { user } = useSelector((store) => store.auth);
+  const { user } = useSelector((store) => store.auth); // Retrieve user and chats data from the Redux store using the useSelector hook.
   const { chats } = useSelector((store) => store.chats);
   const { id } = route.params;
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); // Retrieve the dispatch function from the Redux store.
+
+  /**
+   * Subscribe to new message events for the specified chat room.
+   * @param {string} chatID - The ID of the chat room to subscribe to.
+   * @returns {ZenObservable.Subscription} - The subscription object.
+   */
   const addChatSubscription = (chatID: string) => {
     const variables: OnCreateMessageSubscriptionVariables = {
       filter: {
@@ -112,6 +123,11 @@ const ChatScreen = (props: Props) => {
     return subscription;
   };
 
+  /**
+   * Subscribe to check-in update events for the specified chat room.
+   * @param {string} chatID - The ID of the chat room to subscribe to.
+   * @returns {ZenObservable.Subscription} - The subscription object.
+   */
   const addCheckInSubscription = (chatID: string) => {
     const variable: OnUpdateCheckinSubscriptionVariables = {
       filter: {

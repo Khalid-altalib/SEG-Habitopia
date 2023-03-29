@@ -1,19 +1,35 @@
-import { useDispatch, useSelector } from "@app/hooks";
+// React
+import React from "react";
+
+// React Native
+import { TouchableOpacity } from "react-native";
+
+// React Navigation
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+// Expo Linear Gradient
+import { LinearGradient } from "expo-linear-gradient";
+
+// Native Base
 import { Box, Center, theme } from "native-base";
-import React from "react";
+
+// Habitopia
+import { useDispatch, useSelector } from "@app/hooks";
 import { RootParams, TextType } from "types";
 import { fetchFollowList } from "../profileSlice";
-import { LinearGradient } from "expo-linear-gradient";
 import Text from "@components/Text";
-import { TouchableOpacity } from "react-native";
 
 type Props = {
   followListMode: string;
   followCount: number;
 };
 
+/**
+ * Displays a box containing the follow list count and a label for a particular follow list mode.
+ *
+ * @returns The component representing the box.
+ */
 const FollowListDisplay = (props: Props) => {
   const { followListMode, followCount } = props;
   const profile = useSelector((state) => state.profile?.profile);
@@ -28,13 +44,12 @@ const FollowListDisplay = (props: Props) => {
   };
 
   // Gets the capitalized form of the follow list type
-
   const followListLabel =
     followListMode[0].toUpperCase() + followListMode.slice(1);
 
   return (
-    <TouchableOpacity onPress={handlePress} testID="follow-list-display">
-      <Box overflow="hidden" rounded="lg" flexGrow={1}>
+    <Box overflow="hidden" rounded="lg" flexGrow={1}>
+      <TouchableOpacity onPress={handlePress} testID="follow-list-display">
         <LinearGradient
           colors={[theme.colors.darkBlue[500], theme.colors.purple[700]]}
           start={[0, 0]}
@@ -52,8 +67,8 @@ const FollowListDisplay = (props: Props) => {
             </Text>
           </Center>
         </LinearGradient>
-      </Box>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </Box>
   );
 };
 

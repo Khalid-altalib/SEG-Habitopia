@@ -13,6 +13,12 @@ type Props = {
   oldPassword?: string;
 };
 
+/**
+ * A button to submit the associated setting value to the server
+ *
+ * @param props - The properties passed to the component.
+ * @returns - The done button
+ */
 const DoneButton = (props: Props) => {
   const navigation = useNavigation<NavigationProp<RootParams>>();
   const { getValues, valueName, oldPassword } = props;

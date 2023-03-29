@@ -3,7 +3,7 @@ import PaddedContainer from "@components/PaddedContainer";
 import StatusContainer from "@components/StatusContainer/StatusContainer";
 import UserList from "@components/UserList/UserList";
 import React, { useEffect } from "react";
-import { fetchFollowList, fetchProfile } from "@features/profile/profileSlice";
+import { fetchFollowList } from "@features/profile/profileSlice";
 import {
   NavigationProp,
   RouteProp,
@@ -14,9 +14,11 @@ import { RootParams } from "types";
 import { ScrollView } from "native-base";
 import Background from "@components/Background";
 
-type Props = {};
-
-const FollowListScreen = (props: Props) => {
+/**
+ * @returns A React component which displays the list of either
+ * the user's following or followers
+ */
+const FollowListScreen = () => {
   const navigation = useNavigation<NavigationProp<RootParams>>();
   const route = useRoute<RouteProp<RootParams, "FollowList">>();
   const { followListMode } = route.params;

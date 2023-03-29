@@ -21,6 +21,13 @@ type Props = {
   value: string;
 };
 
+/**
+ * A component used to navigate the app to the associated setting details
+ * page upon press
+ *
+ * @param props - The properties passed to the component.
+ * @returns - The settings item component.
+ */
 function SettingsItem(props: Props) {
   const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
   const { type, value, entry } = props;
