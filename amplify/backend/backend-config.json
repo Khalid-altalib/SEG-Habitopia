@@ -79,6 +79,12 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "motivation": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
@@ -95,6 +101,22 @@
         {
           "category": "function",
           "resourceName": "challengeSchedule"
+        }
+      ]
+    },
+    "AMPLIFY_function_motivation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "motivation"
+        }
+      ]
+    },
+    "AMPLIFY_function_motivation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "motivation"
         }
       ]
     }
