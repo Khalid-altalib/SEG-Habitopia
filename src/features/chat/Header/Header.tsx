@@ -15,7 +15,7 @@ type Props = {
 const Header = (props: Props) => {
   const { name, description } = { ...props };
   return (
-    <Center>
+    <Center marginBottom={5}>
       <Heading fontSize="4xl">{name}</Heading>
       <Text fontSize="xl">{description}</Text>
     </Center>

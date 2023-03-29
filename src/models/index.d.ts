@@ -259,7 +259,7 @@ type EagerChallenge = {
   readonly status?: ChallengeStatusEnum | keyof typeof ChallengeStatusEnum | null;
   readonly started?: number | null;
   readonly ChatRoom?: ChatRoom | null;
-  readonly userCount?: number | null;
+  readonly userCount: number | 0;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly challengeChallengeTypeId: string;
@@ -277,7 +277,7 @@ type LazyChallenge = {
   readonly status?: ChallengeStatusEnum | keyof typeof ChallengeStatusEnum | null;
   readonly started?: number | null;
   readonly ChatRoom: AsyncItem<ChatRoom | undefined>;
-  readonly userCount?: number | null;
+  readonly userCount: number | 0;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   readonly challengeChallengeTypeId: string;

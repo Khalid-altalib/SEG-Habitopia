@@ -61,6 +61,7 @@ const ConfirmationCodeForm = () => {
             value={value}
             size="xl"
             testID="confirmation-code-input"
+            autoCapitalize="none"
           />
         )}
         name="confirmationCode"
