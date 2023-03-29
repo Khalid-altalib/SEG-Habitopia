@@ -1,10 +1,25 @@
 # Habitopia
 
-A social media app that turns habit-building into a multiplayer game supercharged with social accountability.
+<p align="center"><img src="https://user-images.githubusercontent.com/61121030/228520957-7a881387-73bf-47b4-8d36-6abd627c1b00.png"/></p>
+
+<p align="center"><i>A social media app that turns habit-building into a multiplayer game supercharged with social accountability.</i></p>
+
+Habit-forming is not an easy task, and maintaining good habits consistently can be a challenging
+feat. However, in today’s socially charged world, there is no reason why building healthy habits
+shouldn’t be fun and interactive. Enter Habitopia, the gamified app designed to make habit-
+forming fun, social, and engaging. Habitopia is an app that allows users to register, log in,
+and participate in challenges where they can build good habits with a group of like-minded
+individuals. Users can check in to show participation in the challenge and follow people, view
+the leaderboard, and chat with others in a group chat. Habitopia aims to gamify the habit-
+forming process, making it more fun and engaging for users. We aimed to create an app that
+users can easily navigate and use to build sustainable habits, track their progress, and connect
+with other users in a social environment.
 
 ## An overview of the technologies used
 
 - React Native
+- Jest
+- React Native Testing Library (RNTL)
 - TypeScript
 - Expo
 - NativeBase
