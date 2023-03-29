@@ -11,7 +11,7 @@ const ChallengePromptScreen = (props: Props) => {
   const { challenge } = route.params;
 
   return (
-    <View width="100%" height="100%" paddingTop={8}>
+    <View width="100%" height="100%">
       <ChallengeModal challenge={challenge} />
     </View>
   );
