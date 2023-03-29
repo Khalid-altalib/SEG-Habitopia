@@ -7,11 +7,9 @@ type Props = {};
 
 const CatchUpWidget = (props: Props) => {
   return (
-    <View testID="catchUpWidget">
-      <CatchUpWidgetLayout>
-        <CatchUpSlider />
-      </CatchUpWidgetLayout>
-    </View>
+    <CatchUpWidgetLayout>
+      <CatchUpSlider />
+    </CatchUpWidgetLayout>
   );
 };
 

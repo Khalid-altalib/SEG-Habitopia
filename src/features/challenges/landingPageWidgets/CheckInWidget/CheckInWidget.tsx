@@ -7,11 +7,9 @@ type Props = {};
 
 const CheckInWidget = (props: Props) => {
   return (
-    <View testID="checkInWidget">
-      <CheckInWidgetLayout>
-        <CheckInSlider />
-      </CheckInWidgetLayout>
-    </View>
+    <CheckInWidgetLayout>
+      <CheckInSlider />
+    </CheckInWidgetLayout>
   );
 };
 

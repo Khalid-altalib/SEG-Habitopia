@@ -29,7 +29,7 @@ function ChallengeWidget({}: Props) {
   }, []);
 
   return (
-    <View testID="challengeWidget">
+    <>
       <ChallengeWidgetLayout>
         <StatusContainer loading={loading} error={error} data={challenges}>
           <VStack space={5}>
@@ -40,7 +40,7 @@ function ChallengeWidget({}: Props) {
         </StatusContainer>
       </ChallengeWidgetLayout>
       <ChallengeNavigationButton />
-    </View>
+    </>
   );
 }
 
