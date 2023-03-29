@@ -21,7 +21,6 @@ import { Message as MessageType } from "../../../types";
 import moment from "moment";
 import {
   ALREADY_VALIDATED_ERROR,
-  CHAT_DETAIL_ERROR,
   CHECK_IN_MESSAGE,
   COULD_NOT_VALIDATE,
   MESSAGE_PAGINATION_LIMIT,
@@ -202,6 +201,8 @@ export const getChatDetails = async (chatId: string) => {
 Send a check-in in chat
 */
 export const sendChatCheckIn = async (chatID: string, thunkAPI: any) => {
+  await DataStore.stop();
+  await DataStore.start();
   const challengeStatus = (
     await DataStore.query(Challenge, (challenge) =>
       challenge.challengeChatRoomId.eq(chatID)

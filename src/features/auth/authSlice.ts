@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RootState } from "../../app/store";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { createUserInDatabase } from "./authQueries";
-import { Auth, DataStore, Hub } from "aws-amplify";
+import { Auth, DataStore} from "aws-amplify";
 
 type AuthState = {
   signUpData: {
@@ -158,15 +158,14 @@ export const logInUserFromStorage = createAsyncThunk<
 
 export const logOutUser = createAsyncThunk("auth/logOutUser", async () => {
   await AsyncStorage.removeItem("user");
+
+  await DataStore.clear();
+
   Toast.show({
     type: "success",
     text1: "You have successfully logged out!",
   });
-  Hub.listen("auth", async (data) => {
-    if (data.payload.event === "signOut") {
-      await DataStore.clear();
-    }
-  });
+
   return undefined;
 });
 
