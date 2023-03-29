@@ -1,14 +1,8 @@
 import React, { useEffect } from "react";
-import {
-  ImageBackground,
-  StyleSheet,
-  FlatList,
-  Text,
-  Platform,
-} from "react-native";
+import { StyleSheet, FlatList, Text, Platform } from "react-native";
 import InputBox from "../../../features/chat/InputBox/InputBox";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
-import { ChatParams, Message, Message as MessageType } from "../../../../types";
+import { ChatParams, Message as MessageType } from "../../../../types";
 import { useDispatch, useSelector } from "../../../app/hooks";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {
@@ -80,16 +74,13 @@ const ChatScreen = (props: Props) => {
         const userFromDatabase = await getUserFromDatabasebyID(
           data.userID || ""
         );
+
         let message: MessageType;
+
         switch (data.messageType) {
-          case MessageEnum.CHECKIN:
-            const checkIn = await getCheckInById(
-              data.messageGetCheckinId || ""
-            );
+          case MessageEnum.VALIDATION:
             message = {
               ...data,
-              validationCount: checkIn.validationCount,
-              isValidated: checkIn.isValidated,
               userName: userFromDatabase.name,
             } as MessageType;
             break;
@@ -99,9 +90,14 @@ const ChatScreen = (props: Props) => {
               userName: userFromDatabase.name,
             } as MessageType;
             break;
-          case MessageEnum.VALIDATION:
+          case MessageEnum.CHECKIN:
+            const checkIn = await getCheckInById(
+              data.messageGetCheckinId || ""
+            );
             message = {
               ...data,
+              validationCount: checkIn.validationCount,
+              isValidated: checkIn.isValidated,
               userName: userFromDatabase.name,
             } as MessageType;
             break;
