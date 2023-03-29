@@ -30,7 +30,8 @@ const ProfileHeader = (props: Props) => {
             </Box>
 
             <VStack flex={1} space={25 / 2}>
-              <HStack space={25 / 2}>
+              <HStack space={25 / 2} flex={1}>
+                {/* <Box width="100%" backgroundColor={"red.100"}></Box> */}
                 <FollowListDisplay
                   followListMode={"follower"}
                   followCount={profile.followerCount}
