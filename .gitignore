@@ -1,5 +1,4 @@
 docs/
-coverage/
 node_modules/
 .expo/
 dist/
@@ -14,13 +13,10 @@ web-build/
 .vscode/
 package-lock.json
 yarn.lock
-coverage/
 .idea/
 
 # macOS
 .DS_Store
-
-coverage
 
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend

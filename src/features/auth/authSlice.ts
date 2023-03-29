@@ -24,6 +24,7 @@ type AuthState = {
   error: string;
 };
 
+// Handles the signing up of a user
 export const signUpUser = createAsyncThunk<void, void, { rejectValue: string }>(
   "auth/signUp",
   async (_, thunkAPI) => {
@@ -44,6 +45,7 @@ export const signUpUser = createAsyncThunk<void, void, { rejectValue: string }>(
   }
 );
 
+// Handles the sending of the confirmation code
 export const sendConfirmationCode = createAsyncThunk<
   LocalUser,
   void,
@@ -62,6 +64,7 @@ export const sendConfirmationCode = createAsyncThunk<
   }
 });
 
+// Handles the display of an error message
 const displayErrorMessage = (error: any) => {
   let errorMessage = "";
   // looked into error messages and found what is presented for the different errors
@@ -82,6 +85,7 @@ const displayErrorMessage = (error: any) => {
   });
 };
 
+// Handles the updating of a password using the old and new password
 export const updatePassword = async (password: string, oldPassword: string) => {
   if (password === oldPassword) {
     Toast.show({
@@ -104,6 +108,7 @@ export const updatePassword = async (password: string, oldPassword: string) => {
     .catch((err) => displayErrorMessage(err));
 };
 
+// Authenticates the user and stores the user in AsyncStorage
 const logInHelper = async (email: string, password: string, name?: string) => {
   const { signInUserSession, attributes } = await Auth.signIn(email, password);
   const user = {
@@ -116,6 +121,7 @@ const logInHelper = async (email: string, password: string, name?: string) => {
   return user;
 };
 
+// Handles of logging in of the user
 export const logInUser = createAsyncThunk<
   LocalUser,
   void,
@@ -138,6 +144,7 @@ export const logInUser = createAsyncThunk<
   }
 });
 
+// Handles logging in the user from AsyncStorage
 export const logInUserFromStorage = createAsyncThunk<
   LocalUser,
   void,
@@ -157,6 +164,7 @@ export const logInUserFromStorage = createAsyncThunk<
   }
 });
 
+// Handles logging out of the user
 export const logOutUser = createAsyncThunk("auth/logOutUser", async () => {
   await AsyncStorage.removeItem("user");
   await AmplifyAsyncStorage.clear()
