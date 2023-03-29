@@ -16,6 +16,11 @@ type formData = {
   email: string;
 };
 
+/**
+ * A form for accepting the user's email address 
+ *
+ * @returns The component representing the email form
+ */
 const EmailAddressForm = () => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
