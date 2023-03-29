@@ -1,10 +1,9 @@
+// Import necessary modules and types
 import { Image, ZStack, useColorModeValue } from "native-base";
-import React, { useState } from "react";
+import React from "react";
 import { TouchableOpacity } from "react-native";
 import Text from "@components/Text";
-import { ChatParams, CheckInSnippetItem, TextType } from "types";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { CheckInSnippetItem, TextType } from "types";
 import {
   sendCheckIn,
   setCheckedInSnippetItemStatus,
@@ -14,27 +13,29 @@ import { Toast } from "react-native-toast-message/lib/src/Toast";
 import CheckInTime from "../CheckInTime";
 
 type Props = {
-  checkInSnippetItem: CheckInSnippetItem;
+  checkInSnippetItem: CheckInSnippetItem; // The CheckInSnippetItem object to display
 };
 
 const CheckInBox = (props: Props) => {
   const { checkInSnippetItem } = props;
   const { challenge, endDate, chatId } = checkInSnippetItem;
-
   const dispatch = useDispatch();
 
   const handlePress = async () => {
-    dispatch(setCheckedInSnippetItemStatus(chatId));
-    await dispatch(sendCheckIn(chatId));
+    dispatch(setCheckedInSnippetItemStatus(chatId)); // Update the status of the CheckInSnippetItem to "checked in"
+    await dispatch(sendCheckIn(chatId)); // Send a check-in message to the chat
     Toast.show({
+      // Show a success message
       type: "success",
       text1: "Successfully checked in!",
     });
   };
 
+  // Calculate the time difference between the endDate and the current time, in hours
   const timeDifference = new Date(endDate).getTime() - new Date().getTime();
   const timeDifferenceHours = Math.round(timeDifference / (1000 * 60 * 60));
 
+  // Render the CheckInBox component
   return (
     <TouchableOpacity
       style={{ marginRight: 25 }}

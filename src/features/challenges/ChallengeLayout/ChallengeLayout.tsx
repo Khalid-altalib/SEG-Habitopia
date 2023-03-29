@@ -1,3 +1,4 @@
+// Import necessary modules and components
 import { Center, ScrollView, VStack } from "native-base";
 import React from "react";
 import PaddedContainer from "../../../components/PaddedContainer";
@@ -10,15 +11,16 @@ type Props = {
 
 function ChallengeLayout(props: Props) {
   const { children } = props;
+
   return (
     <ScrollView>
       <PaddedContainer>
+        {/* A container with some padding */}
         <Center marginBottom={25}>
           <Text type={TextType.Subheading}>Pick a Challenge! 🚀</Text>
         </Center>
-
         <VStack space={3} width={"100%"}>
-          {children}
+          {children} {/* Renders the child components passed as props */}
         </VStack>
       </PaddedContainer>
     </ScrollView>

@@ -1,3 +1,4 @@
+// Importing necessary dependencies and components
 import { Center, Heading, View, VStack } from "native-base";
 import React from "react";
 
@@ -14,6 +15,7 @@ const ChallengeWidgetLayout = (props: Props) => {
           Pick a Challenge! 🚀
         </Heading>
       </Center>
+      {/* Define a vertical stack with spacing between its child components */}
       <VStack space={4} paddingLeft={3} paddingRight={3}>
         {children}
       </VStack>
