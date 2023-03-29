@@ -1,7 +1,8 @@
+// Maps challenges to their corresponding colors
+
 type challengeMappingsType = {
   [key: string]: { color: string; image: string };
 };
-
 export const challengeMappings: challengeMappingsType = {
   Sleep: { color: "blue.400", image: "https://www.westelm.co.uk/site/WE/Product%20Images/mid-century-bedframe-acorn-h001-202215-0205-mid-century-bed-2-z.jpg?resizeid=61&resizeh=450&resizew=450" },
   Diet: { color: "green.400", image: "https://www.heart.org/-/media/Images/News/2019/April-2019/0429SustainableFoodSystem_SC.jpg" },

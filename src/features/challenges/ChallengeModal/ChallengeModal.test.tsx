@@ -1,3 +1,4 @@
+// Import necessary libraries and components for testing
 import { fireEvent, render, screen } from "@testing-library/react-native";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
@@ -8,12 +9,14 @@ import ChallengeModal from "./ChallengeModal";
 import ChallengeBox from "../ChallengeBox/ChallengeBox";
 
 describe("ChallengeModal", () => {
+  // Define mock state and store for testing
   const mockState = {
     challenges: challengesMockState,
     joinChallenge: jest.fn(),
   };
   const mockStore = configureStore([thunk])(mockState);
 
+  // Define modal props for testing
   const modalProps = {
     challenge: mockState.challenges.challenges[0],
   };
@@ -24,7 +27,7 @@ describe("ChallengeModal", () => {
         <ChallengeModal {...modalProps} />
       </TestingWrapperNavigation>
     );
-
+    // expect the rendered component to match the snapshot
     expect(component).toMatchSnapshot();
   });
 
@@ -35,6 +38,7 @@ describe("ChallengeModal", () => {
       </TestingWrapperNavigation>
     );
 
+    // Use the getByTestId function to find the challenge prompt element and ensure that it is defined
     const box = component.getByTestId("challengePrompt");
 
     expect(box).toBeDefined();
@@ -51,10 +55,12 @@ describe("ChallengeModal", () => {
 
     fireEvent.press(button);
 
+    //checks if the dispatch is called and its the correct dispatch
     expect(mockStore.getActions()[0].type).toEqual("challenges/join/pending");
   });
 
   it("navigates back when back button is pressed", async () => {
+    // Define theme and initial window metrics for testing
     const theme = extendTheme({});
     const inset = {
       frame: { x: 0, y: 0, width: 0, height: 0 },
@@ -68,12 +74,15 @@ describe("ChallengeModal", () => {
       </TestingWrapperNavigation>
     );
 
+    // Simulate pressing the challenge box to open the modal
     const box = component.getByTestId("challengeBox");
     fireEvent(box, "press");
 
+    // Simulate pressing the back button to navigate back
     const backButton = component.getByTestId("backButton");
     fireEvent.press(backButton);
 
+    // Check that the challenge prompt is no longer in the screen
     const checkChallengePrompt = screen.queryByTestId("challengePrompt");
     expect(checkChallengePrompt).toBeNull();
   });
