@@ -12,6 +12,7 @@ import {
 } from "@react-navigation/native";
 import { RootParams } from "types";
 import { ScrollView } from "native-base";
+import Background from "@components/Background";
 
 type Props = {};
 
@@ -41,13 +42,15 @@ const FollowListScreen = (props: Props) => {
   }, []);
 
   return (
-    <ScrollView>
+    <Background>
+      <ScrollView>
       <PaddedContainer>
         <StatusContainer loading={loading} error={error} data={followList}>
           <UserList users={followList} />
         </StatusContainer>
       </PaddedContainer>
     </ScrollView>
+    </Background>
   );
 };
 
