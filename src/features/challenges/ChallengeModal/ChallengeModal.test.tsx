@@ -51,7 +51,7 @@ describe("ChallengeModal", () => {
       </TestingWrapperNavigation>
     );
 
-    const button = component.getByTestId("joinButton");
+    const button = component.getByText("Join Challenge!");
 
     fireEvent.press(button);
 
@@ -79,7 +79,7 @@ describe("ChallengeModal", () => {
     fireEvent(box, "press");
 
     // Simulate pressing the back button to navigate back
-    const backButton = component.getByTestId("backButton");
+    const backButton = component.getByText("Not now");
     fireEvent.press(backButton);
 
     // Check that the challenge prompt is no longer in the screen

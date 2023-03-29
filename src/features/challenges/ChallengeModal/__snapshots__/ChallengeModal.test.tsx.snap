@@ -219,111 +219,105 @@ exports[`ChallengeModal renders the challenge modal correctly 1`] = `
                     }
                   >
                     <View
-                      dataSet={{}}
-                      style={{}}
-                      testID="joinButton"
+                      isFullWidth={true}
+                      isLoading={false}
+                      onPress={[Function]}
+                      style={
+                        [
+                          {
+                            "borderRadius": 10,
+                            "shadowColor": "black",
+                            "shadowOffset": {
+                              "height": 5,
+                              "width": 5,
+                            },
+                            "shadowOpacity": 0.15,
+                          },
+                        ]
+                      }
+                      type={0}
                     >
                       <View
-                        isFullWidth={true}
-                        isLoading={false}
-                        onPress={[Function]}
+                        accessible={true}
+                        collapsable={false}
+                        focusable={true}
+                        onClick={[Function]}
+                        onResponderGrant={[Function]}
+                        onResponderMove={[Function]}
+                        onResponderRelease={[Function]}
+                        onResponderTerminate={[Function]}
+                        onResponderTerminationRequest={[Function]}
+                        onStartShouldSetResponder={[Function]}
                         style={
-                          [
-                            {
-                              "borderRadius": 10,
-                              "shadowColor": "black",
-                              "shadowOffset": {
-                                "height": 5,
-                                "width": 5,
-                              },
-                              "shadowOpacity": 0.15,
-                            },
-                          ]
+                          {
+                            "opacity": 1,
+                          }
                         }
-                        type={0}
                       >
-                        <View
-                          accessible={true}
-                          collapsable={false}
-                          focusable={true}
-                          onClick={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderRelease={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
-                          style={
+                        <ViewManagerAdapter_ExpoLinearGradient
+                          proxiedProperties={
                             {
-                              "opacity": 1,
+                              "colors": [
+                                4278220774,
+                                4286456526,
+                              ],
+                              "endPoint": [
+                                1,
+                                1,
+                              ],
+                              "locations": undefined,
+                              "startPoint": [
+                                0,
+                                0,
+                              ],
                             }
                           }
-                        >
-                          <ViewManagerAdapter_ExpoLinearGradient
-                            proxiedProperties={
+                          style={
+                            [
                               {
-                                "colors": [
-                                  4278220774,
-                                  4286456526,
-                                ],
-                                "endPoint": [
-                                  1,
-                                  1,
-                                ],
-                                "locations": undefined,
-                                "startPoint": [
-                                  0,
-                                  0,
-                                ],
-                              }
-                            }
+                                "alignItems": "center",
+                                "borderRadius": 10,
+                                "flexDirection": "row",
+                                "justifyContent": "center",
+                                "paddingHorizontal": 40,
+                                "paddingVertical": 15,
+                              },
+                              {
+                                "width": "100%",
+                              },
+                            ]
+                          }
+                        >
+                          <Text
                             style={
                               [
                                 {
-                                  "alignItems": "center",
-                                  "borderRadius": 10,
-                                  "flexDirection": "row",
-                                  "justifyContent": "center",
-                                  "paddingHorizontal": 40,
-                                  "paddingVertical": 15,
+                                  "color": "#18181b",
                                 },
                                 {
-                                  "width": "100%",
+                                  "color": "#e4e4e7",
+                                  "fontFamily": undefined,
+                                  "fontSize": 19,
                                 },
+                                [
+                                  null,
+                                  {
+                                    "alignSelf": "center",
+                                  },
+                                ],
                               ]
                             }
                           >
-                            <Text
-                              style={
-                                [
-                                  {
-                                    "color": "#18181b",
-                                  },
-                                  {
-                                    "color": "#e4e4e7",
-                                    "fontFamily": undefined,
-                                    "fontSize": 19,
-                                  },
-                                  [
-                                    null,
-                                    {
-                                      "alignSelf": "center",
-                                    },
-                                  ],
-                                ]
+                            Join Challenge!
+                          </Text>
+                          <View
+                            style={
+                              {
+                                "marginLeft": 5,
                               }
-                            >
-                              Join Challenge!
-                            </Text>
-                            <View
-                              style={
-                                {
-                                  "marginLeft": 5,
-                                }
-                              }
-                            />
-                          </ViewManagerAdapter_ExpoLinearGradient>
-                        </View>
+                            }
+                          />
+                        </ViewManagerAdapter_ExpoLinearGradient>
                       </View>
                     </View>
                     <View
@@ -335,110 +329,104 @@ exports[`ChallengeModal renders the challenge modal correctly 1`] = `
                       }
                     />
                     <View
-                      dataSet={{}}
-                      style={{}}
-                      testID="backButton"
+                      isFullWidth={true}
+                      onPress={[Function]}
+                      style={
+                        [
+                          {
+                            "borderRadius": 10,
+                            "shadowColor": "black",
+                            "shadowOffset": {
+                              "height": 5,
+                              "width": 5,
+                            },
+                            "shadowOpacity": 0.15,
+                          },
+                        ]
+                      }
+                      type={1}
                     >
                       <View
-                        isFullWidth={true}
-                        onPress={[Function]}
+                        accessible={true}
+                        collapsable={false}
+                        focusable={true}
+                        onClick={[Function]}
+                        onResponderGrant={[Function]}
+                        onResponderMove={[Function]}
+                        onResponderRelease={[Function]}
+                        onResponderTerminate={[Function]}
+                        onResponderTerminationRequest={[Function]}
+                        onStartShouldSetResponder={[Function]}
                         style={
-                          [
-                            {
-                              "borderRadius": 10,
-                              "shadowColor": "black",
-                              "shadowOffset": {
-                                "height": 5,
-                                "width": 5,
-                              },
-                              "shadowOpacity": 0.15,
-                            },
-                          ]
+                          {
+                            "opacity": 1,
+                          }
                         }
-                        type={1}
                       >
-                        <View
-                          accessible={true}
-                          collapsable={false}
-                          focusable={true}
-                          onClick={[Function]}
-                          onResponderGrant={[Function]}
-                          onResponderMove={[Function]}
-                          onResponderRelease={[Function]}
-                          onResponderTerminate={[Function]}
-                          onResponderTerminationRequest={[Function]}
-                          onStartShouldSetResponder={[Function]}
-                          style={
+                        <ViewManagerAdapter_ExpoLinearGradient
+                          proxiedProperties={
                             {
-                              "opacity": 1,
+                              "colors": [
+                                4288782762,
+                                4285624698,
+                              ],
+                              "endPoint": [
+                                1,
+                                1,
+                              ],
+                              "locations": undefined,
+                              "startPoint": [
+                                0,
+                                0,
+                              ],
                             }
                           }
-                        >
-                          <ViewManagerAdapter_ExpoLinearGradient
-                            proxiedProperties={
+                          style={
+                            [
                               {
-                                "colors": [
-                                  4288782762,
-                                  4285624698,
-                                ],
-                                "endPoint": [
-                                  1,
-                                  1,
-                                ],
-                                "locations": undefined,
-                                "startPoint": [
-                                  0,
-                                  0,
-                                ],
-                              }
-                            }
+                                "alignItems": "center",
+                                "borderRadius": 10,
+                                "flexDirection": "row",
+                                "justifyContent": "center",
+                                "paddingHorizontal": 40,
+                                "paddingVertical": 15,
+                              },
+                              {
+                                "width": "100%",
+                              },
+                            ]
+                          }
+                        >
+                          <Text
                             style={
                               [
                                 {
-                                  "alignItems": "center",
-                                  "borderRadius": 10,
-                                  "flexDirection": "row",
-                                  "justifyContent": "center",
-                                  "paddingHorizontal": 40,
-                                  "paddingVertical": 15,
+                                  "color": "#18181b",
                                 },
                                 {
-                                  "width": "100%",
+                                  "color": "#e4e4e7",
+                                  "fontFamily": undefined,
+                                  "fontSize": 19,
                                 },
+                                [
+                                  null,
+                                  {
+                                    "alignSelf": "center",
+                                  },
+                                ],
                               ]
                             }
                           >
-                            <Text
-                              style={
-                                [
-                                  {
-                                    "color": "#18181b",
-                                  },
-                                  {
-                                    "color": "#e4e4e7",
-                                    "fontFamily": undefined,
-                                    "fontSize": 19,
-                                  },
-                                  [
-                                    null,
-                                    {
-                                      "alignSelf": "center",
-                                    },
-                                  ],
-                                ]
+                            Not now
+                          </Text>
+                          <View
+                            style={
+                              {
+                                "marginLeft": 5,
                               }
-                            >
-                              Not now
-                            </Text>
-                            <View
-                              style={
-                                {
-                                  "marginLeft": 5,
-                                }
-                              }
-                            />
-                          </ViewManagerAdapter_ExpoLinearGradient>
-                        </View>
+                            }
+                          />
+                        </ViewManagerAdapter_ExpoLinearGradient>
                       </View>
                     </View>
                   </View>
