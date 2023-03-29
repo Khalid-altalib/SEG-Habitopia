@@ -100,161 +100,156 @@ exports[`CatchUpWidget renders the catch-up widget correctly 1`] = `
           >
             <View
               dataSet={{}}
-              style={{}}
+              style={
+                {
+                  "paddingLeft": 24,
+                  "paddingRight": 24,
+                }
+              }
               testID="catchUpWidget"
             >
-              <View
+              <Text
                 dataSet={{}}
                 style={
                   {
-                    "paddingLeft": 24,
-                    "paddingRight": 24,
+                    "backgroundColor": undefined,
+                    "color": "#171717",
+                    "elevation": 2,
+                    "fontFamily": undefined,
+                    "fontSize": 24,
+                    "fontStyle": "normal",
+                    "fontWeight": "700",
+                    "letterSpacing": 0,
+                    "lineHeight": 30,
+                    "shadowColor": "#000000",
+                    "shadowOffset": {
+                      "height": 1,
+                      "width": 0,
+                    },
+                    "shadowOpacity": 0.2,
+                    "shadowRadius": 1.41,
+                    "textDecorationLine": undefined,
                   }
                 }
               >
-                <Text
-                  dataSet={{}}
-                  style={
+                Catch-Up 👬
+              </Text>
+              <RCTScrollView
+                contentContainerStyle={
+                  [
+                    {},
                     {
-                      "backgroundColor": undefined,
-                      "color": "#171717",
-                      "elevation": 2,
-                      "fontFamily": undefined,
-                      "fontSize": 24,
-                      "fontStyle": "normal",
-                      "fontWeight": "700",
-                      "letterSpacing": 0,
-                      "lineHeight": 30,
-                      "shadowColor": "#000000",
-                      "shadowOffset": {
-                        "height": 1,
-                        "width": 0,
-                      },
-                      "shadowOpacity": 0.2,
-                      "shadowRadius": 1.41,
-                      "textDecorationLine": undefined,
-                    }
-                  }
-                >
-                  Catch-Up 👬
-                </Text>
-                <RCTScrollView
-                  contentContainerStyle={
-                    [
-                      {},
+                      "dataSet": {},
+                    },
+                    {},
+                  ]
+                }
+                dataSet={{}}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                style={{}}
+              >
+                <View>
+                  <View
+                    dataSet={{}}
+                    style={
                       {
-                        "dataSet": {},
-                      },
-                      {},
-                    ]
-                  }
-                  dataSet={{}}
-                  horizontal={true}
-                  showsHorizontalScrollIndicator={false}
-                  style={{}}
-                >
-                  <View>
+                        "flexDirection": "row",
+                        "justifyContent": "space-between",
+                        "marginTop": 20,
+                      }
+                    }
+                    testID="catchUpSlider"
+                  >
                     <View
-                      dataSet={{}}
+                      accessible={true}
+                      collapsable={false}
+                      focusable={false}
+                      onClick={[Function]}
+                      onResponderGrant={[Function]}
+                      onResponderMove={[Function]}
+                      onResponderRelease={[Function]}
+                      onResponderTerminate={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
                       style={
                         {
-                          "flexDirection": "row",
-                          "justifyContent": "space-between",
-                          "marginTop": 20,
+                          "opacity": 1,
                         }
                       }
-                      testID="catchUpSlider"
+                      testID="catchUpBox"
                     >
                       <View
-                        accessible={true}
-                        collapsable={false}
-                        focusable={false}
-                        onClick={[Function]}
-                        onResponderGrant={[Function]}
-                        onResponderMove={[Function]}
-                        onResponderRelease={[Function]}
-                        onResponderTerminate={[Function]}
-                        onResponderTerminationRequest={[Function]}
-                        onStartShouldSetResponder={[Function]}
+                        dataSet={{}}
                         style={
                           {
-                            "opacity": 1,
+                            "height": 150,
+                            "paddingBottom": 20,
+                            "paddingLeft": 20,
+                            "paddingRight": 20,
+                            "paddingTop": 20,
+                            "width": 150,
                           }
                         }
-                        testID="catchUpBox"
                       >
-                        <View
+                        <Image
+                          accessibilityLabel="Alternate Text"
+                          alt="Alternate Text"
                           dataSet={{}}
-                          style={
+                          onError={[Function]}
+                          source={
                             {
-                              "height": 150,
-                              "paddingBottom": 20,
-                              "paddingLeft": 20,
-                              "paddingRight": 20,
-                              "paddingTop": 20,
-                              "width": 150,
+                              "uri": "https://picsum.photos/200",
                             }
                           }
+                          style={
+                            {
+                              "borderRadius": 12,
+                              "height": 128,
+                              "maxWidth": "100%",
+                              "position": "absolute",
+                              "width": 128,
+                            }
+                          }
+                        />
+                        <View
+                          accessibilityRole="button"
+                          accessible={true}
+                          collapsable={false}
+                          colorScheme="red"
+                          dataSet={{}}
+                          focusable={true}
+                          onBlur={[Function]}
+                          onClick={[Function]}
+                          onFocus={[Function]}
+                          onResponderGrant={[Function]}
+                          onResponderMove={[Function]}
+                          onResponderRelease={[Function]}
+                          onResponderTerminate={[Function]}
+                          onResponderTerminationRequest={[Function]}
+                          onStartShouldSetResponder={[Function]}
+                          style={
+                            {
+                              "alignItems": "center",
+                              "borderRadius": 12,
+                              "flexDirection": "row",
+                              "justifyContent": "center",
+                              "paddingBottom": 10,
+                              "paddingLeft": 10,
+                              "paddingRight": 10,
+                              "paddingTop": 10,
+                              "position": "absolute",
+                            }
+                          }
+                          testID="heartButton"
                         >
-                          <Image
-                            accessibilityLabel="Alternate Text"
-                            alt="Alternate Text"
-                            dataSet={{}}
-                            onError={[Function]}
-                            source={
-                              {
-                                "uri": "https://picsum.photos/200",
-                              }
-                            }
-                            style={
-                              {
-                                "borderRadius": 12,
-                                "height": 128,
-                                "maxWidth": "100%",
-                                "position": "absolute",
-                                "width": 128,
-                              }
-                            }
-                          />
-                          <View
-                            accessibilityRole="button"
-                            accessible={true}
-                            collapsable={false}
-                            colorScheme="red"
-                            dataSet={{}}
-                            focusable={true}
-                            onBlur={[Function]}
-                            onClick={[Function]}
-                            onFocus={[Function]}
-                            onResponderGrant={[Function]}
-                            onResponderMove={[Function]}
-                            onResponderRelease={[Function]}
-                            onResponderTerminate={[Function]}
-                            onResponderTerminationRequest={[Function]}
-                            onStartShouldSetResponder={[Function]}
-                            style={
-                              {
-                                "alignItems": "center",
-                                "borderRadius": 12,
-                                "flexDirection": "row",
-                                "justifyContent": "center",
-                                "paddingBottom": 10,
-                                "paddingLeft": 10,
-                                "paddingRight": 10,
-                                "paddingTop": 10,
-                                "position": "absolute",
-                              }
-                            }
-                            testID="heartButton"
-                          >
-                            <Text />
-                          </View>
+                          <Text />
                         </View>
                       </View>
                     </View>
                   </View>
-                </RCTScrollView>
-              </View>
+                </View>
+              </RCTScrollView>
             </View>
           </View>
         </View>
