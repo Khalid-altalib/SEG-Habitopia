@@ -51,6 +51,7 @@ const EmailAddressForm = () => {
             value={value}
             size="xl"
             testID="email-input"
+            autoCapitalize="none"
           />
         )}
         name="email"

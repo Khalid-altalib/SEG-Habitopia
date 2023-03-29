@@ -18,7 +18,9 @@ const ParticipantsList = (props: Props) => {
 
   return (
     <VStack>
-      <Heading mb={4}>Participants</Heading>
+      <Heading mb={5} mt={10}>
+        Participants
+      </Heading>
       <UserList users={participants} />
     </VStack>
   );

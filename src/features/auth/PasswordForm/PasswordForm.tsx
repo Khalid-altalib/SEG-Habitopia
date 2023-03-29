@@ -39,10 +39,10 @@ const PasswordForm = () => {
 
     if (!password.match("^(?=.*[a-z])(?=.*[A-Z]).+$")) {
       error = "Must contain both uppercase and lowercase characters";
-    }    
-    
+    }
+
     if (!password.match(".*[0-9].*")) {
-      error = "Must contain at least one number"
+      error = "Must contain at least one number";
     }
 
     if (password.length < 8) {
@@ -74,6 +74,7 @@ const PasswordForm = () => {
             size="xl"
             type="password"
             testID="password-input"
+            autoCapitalize="none"
           />
         )}
         name="password"

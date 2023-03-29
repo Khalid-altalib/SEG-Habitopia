@@ -1,5 +1,6 @@
 import { useSelector } from "@app/hooks";
-import { Box, Center, Heading, HStack, Text } from "native-base";
+import Card from "@components/Card";
+import { Box, Center, Heading, HStack, Text, View } from "native-base";
 import React from "react";
 
 type StatisticBoxProps = {
@@ -17,18 +18,14 @@ const StatisticBox = (props: StatisticBoxProps) => {
   const { statisticValue, statisticType } = props;
 
   return (
-    <Box
-      padding={3}
-      borderRadius={8}
-      backgroundColor="info.600"
-      margin={3}
-      width="125px"
-    >
-      <Center>
-        <Heading fontSize="xl">{statisticValue}</Heading>
-        <Text fontSize="lg">{statisticType}</Text>
-      </Center>
-    </Box>
+    <View width={120}>
+      <Card>
+        <Center>
+          <Heading fontSize="xl">{statisticValue}</Heading>
+          <Text fontSize="lg">{statisticType}</Text>
+        </Center>
+      </Card>
+    </View>
   );
 };
 
@@ -36,7 +33,7 @@ const Statistics = () => {
   const statistics = useSelector((state) => state.chats.details?.statistics);
 
   return statistics ? (
-    <HStack space={2} justifyContent="center">
+    <HStack space={5} justifyContent="center">
       <StatisticBox
         statisticValue={statistics.num.toString()}
         statisticType="Users"

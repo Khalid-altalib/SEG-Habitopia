@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "@app/hooks";
-import { Button } from "native-base";
 import React, { useEffect, useState } from "react";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { followUser } from "../profileSlice";
+import Button from "@components/Button";
+import { ButtonType } from "types";
 
 const FollowButton = () => {
   const dispatch = useDispatch();
@@ -48,7 +49,13 @@ const FollowButton = () => {
   const followButtonText = profile?.following ? "Following" : "Follow";
 
   return (
-    <Button isLoading={loading} onPress={handleFollow} testID="follow-button">
+    <Button
+      type={ButtonType.Secondary}
+      isLoading={loading}
+      onPress={handleFollow}
+      isFullWidth
+      testID="follow-button"
+    >
       {followButtonText}
     </Button>
   );
