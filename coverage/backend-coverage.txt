@@ -1,0 +1,109 @@
+Test Passed: getLeaderboard returned 200
+
+Test Passed: listLeaderboards returned 200
+
+Test Passed: getChallenge returned 200
+
+Test Passed: listChallenges returned 200
+
+Test Passed: challengesByStatus returned 200
+
+Test Passed: getChallengeType returned 200
+
+Test Passed: listChallengeTypes returned 200
+
+Test Passed: getUser returned 200
+
+Test Passed: listUsers returned 200
+
+Test Passed: getMessage returned 200
+
+Test Passed: listMessages returned 200
+
+Test Passed: messagesByChatroomID returned 200
+
+Test Passed: messagesByUserID returned 200
+
+Test Passed: getChatRoom returned 200
+
+Test Passed: listChatRooms returned 200
+
+Test Passed: getCheckin returned 200
+
+Test Passed: listCheckins returned 200
+
+Test Passed: checkinsByUserID returned 200
+
+Test Passed: checkinsByChatroomID returned 200
+
+Test Passed: getChallengeUser returned 200
+
+Test Passed: listChallengeUsers returned 200
+
+Test Passed: challengeUsersByChallengeId returned 200
+
+Test Passed: challengeUsersByUserId returned 200
+
+Test Passed: getUserChatRoom returned 200
+
+Test Passed: listUserChatRooms returned 200
+
+Test Passed: userChatRoomsByUserId returned 200
+
+Test Passed: userChatRoomsByChatRoomId returned 200
+
+Test Passed: getUserValidatedCheckIn returned 200
+
+Test Passed: listUserValidatedCheckIns returned 200
+
+Test Passed: userValidatedCheckInsByUserId returned 200
+
+Test Passed: userValidatedCheckInsByCheckinId returned 200
+
+Test Passed: createChallengeType returned 200
+
+Test Passed: createUser returned 200
+
+Test Passed: createChatRoom returned 200
+
+Test Passed: createChallenge returned 200
+
+Test Passed: createMessage returned 200
+
+Test Passed: createCheckin returned 200
+
+Test Passed: createLeaderboard returned 200
+
+Test Passed: updateLeaderboard returned 200
+
+Test Passed: deleteLeaderboard returned 200
+
+Test Passed: updateCheckin returned 200
+
+Test Passed: deleteCheckin returned 200
+
+Test Passed: updateMessage returned 200
+
+Test Passed: deleteMessage returned 200
+
+Test Passed: updateChallenge returned 200
+
+Test Passed: deleteChallenge returned 200
+
+Test Passed: updateChallengeType returned 200
+
+Test Passed: deleteChallengeType returned 200
+
+Test Passed: updateUser returned 200
+
+Test Passed: deleteUser returned 200
+
+Test Passed: updateChatRoom returned 200
+
+Test Passed: deleteChatRoom returned 200
+
+
+--------------------------------------------
+52/52 tests passed
+100.0% test coverage (0 tests skipped)
+--------------------------------------------
