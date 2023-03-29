@@ -48,8 +48,8 @@ const FollowListDisplay = (props: Props) => {
     followListMode[0].toUpperCase() + followListMode.slice(1);
 
   return (
-    <TouchableOpacity onPress={handlePress} testID="follow-list-display">
-      <Box overflow="hidden" rounded="lg" flexGrow={1}>
+    <Box overflow="hidden" rounded="lg" flexGrow={1}>
+      <TouchableOpacity onPress={handlePress} testID="follow-list-display">
         <LinearGradient
           colors={[theme.colors.darkBlue[500], theme.colors.purple[700]]}
           start={[0, 0]}
@@ -67,8 +67,8 @@ const FollowListDisplay = (props: Props) => {
             </Text>
           </Center>
         </LinearGradient>
-      </Box>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </Box>
   );
 };
 

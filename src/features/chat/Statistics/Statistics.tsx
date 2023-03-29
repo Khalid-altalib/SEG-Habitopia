@@ -18,7 +18,7 @@ const StatisticBox = (props: StatisticBoxProps) => {
   const { statisticValue, statisticType } = props;
 
   return (
-    <View width={120}>
+    <View flex={1}>
       <Card>
         <Center>
           <Heading fontSize="xl">{statisticValue}</Heading>
@@ -36,7 +36,7 @@ const Statistics = () => {
     <HStack space={5} justifyContent="center">
       <StatisticBox
         statisticValue={statistics.num.toString()}
-        statisticType="Users"
+        statisticType="Participants"
       />
       <StatisticBox statisticValue={statistics.status} statisticType="Status" />
     </HStack>
