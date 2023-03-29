@@ -30,7 +30,7 @@ const CheckInSlider = (props: Props) => {
       noDataDisplay={
         <Center width="100%">
           <Text
-            style={{ textAlign: "center", marginLeft: 12, marginRight: 12 }}
+            style={{ textAlign: "center", marginLeft: -10, marginRight: 12 }}
           >
             All Caught Up!
           </Text>

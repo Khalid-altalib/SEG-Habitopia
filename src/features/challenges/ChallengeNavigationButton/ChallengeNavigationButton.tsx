@@ -13,7 +13,7 @@ function ChallengeNavigationButton({}: Props) {
     <Button
       type={ButtonType.Primary}
       isFullWidth
-      style={{ marginHorizontal: 25, marginBottom: 25 }}
+      style={{ marginHorizontal: 25, marginBottom: 25, paddingTop: 10 }}
       onPress={handlePress}
     >
       Discover more!
