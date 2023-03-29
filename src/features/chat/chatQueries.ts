@@ -21,23 +21,12 @@ import { Message as MessageType } from "../../../types";
 import moment from "moment";
 import {
   ALREADY_VALIDATED_ERROR,
-  CHAT_DETAIL_ERROR,
   CHECK_IN_MESSAGE,
   COULD_NOT_VALIDATE,
   MESSAGE_PAGINATION_LIMIT,
   VALIDATION_COUNT,
   VALIDATION_MESSAGE_TEXT,
 } from "@features/constants";
-import { API } from "aws-amplify";
-import * as queries from "../../graphql/queries";
-import { GraphQLQuery } from "@aws-amplify/api";
-import {
-  ListChallengesQuery,
-  ListChallengesQueryVariables,
-  GetChallengeQuery,
-  GetChallengeTypeQuery,
-  GetChallengeTypeQueryVariables,
-} from "../../API";
 import { updateLeaderboardWithNewValidatedCheckin } from "@features/leaderboard/leaderboardQueries";
 
 /*
@@ -76,6 +65,8 @@ export const fetchUserChats = async (thunkAPI: any) => {
 Get all messages for a specific chat and paginate to reduce payload
 */
 export const fetchChatMessages = async (chatId: string, pageNumber: number) => {
+  await DataStore.stop();
+  await DataStore.start();
   const numberOfMessageInChat = (
     await DataStore.query(Message, (message) => message.chatroomID.eq(chatId))
   ).length;
@@ -168,70 +159,50 @@ const updateLastMessageInChat = async (
 Get the details of the challenge associated with the specific chat room
 */
 export const getChatDetails = async (chatId: string) => {
-  const challengeVariables: ListChallengesQueryVariables = {
-    filter: {
-      challengeChatRoomId: {
-        eq: chatId,
-      },
-    },
-  };
-  const challenge = await API.graphql<GraphQLQuery<ListChallengesQuery>>({
-    query: queries.listChallenges,
-    variables: challengeVariables,
-  });
-
-  const challengeDetail = challenge.data?.listChallenges?.items[0];
-
-  if (challengeDetail) {
-    const challengeType = await API.graphql<
-      GraphQLQuery<GetChallengeTypeQuery>
-    >({
-      query: queries.getChallengeType,
-      variables: {
-        id: challengeDetail.ChallengeType.id,
-      },
+  await DataStore.stop();
+  await DataStore.start();
+  const challegeDetail = (
+    await DataStore.query(Challenge, (challenge) =>
+      challenge.challengeChatRoomId.eq(chatId)
+    )
+  )[0];
+  const challengeTypeDetails = (
+    await DataStore.query(ChallengeType, (challengeType) =>
+      challengeType.id.eq(challegeDetail.challengeChallengeTypeId)
+    )
+  )[0];
+  const users: { userId: string; name: string }[] = [];
+  for await (const participant of challegeDetail.Users) {
+    const user = (
+      await DataStore.query(User, (user) =>
+        user.id.eq(participant.userId || "")
+      )
+    )[0];
+    users.push({
+      userId: user.id,
+      name: user.name || "",
     });
-
-    const challengeTypeDetails = challengeType.data?.getChallengeType;
-
-    const users: { userId: string; name: string }[] = [];
-    if (challengeDetail.Users) {
-      for await (const participant of challengeDetail.Users.items) {
-        const user = (
-          await DataStore.query(User, (user) =>
-            user.id.eq(participant.userId || "")
-          )
-        )[0];
-        users.push({
-          userId: user.id,
-          name: user.name || "",
-        });
-      }
-    }
-    if (challengeTypeDetails) {
-      const chatDetails = {
-        challengeName: challengeTypeDetails.name,
-        description: challengeTypeDetails.description,
-        statistics: {
-          num: challengeDetail.userCount,
-          status: challengeDetail.status,
-        },
-        participants: users,
-      } as ChatDetails;
-
-      return chatDetails;
-    } else {
-      throw new Error(CHAT_DETAIL_ERROR);
-    }
-  } else {
-    throw new Error(CHAT_DETAIL_ERROR);
   }
+  const chatDetails = {
+    challengeName: challengeTypeDetails.name,
+    description: challengeTypeDetails.description,
+    statistics: {
+      started: challegeDetail.started || "Yet to start",
+      ending: challegeDetail.status,
+      num: challegeDetail.userCount,
+      status: challegeDetail.status,
+    },
+    participants: users,
+  } as ChatDetails;
+  return chatDetails;
 };
 
 /*
 Send a check-in in chat
 */
 export const sendChatCheckIn = async (chatID: string, thunkAPI: any) => {
+  await DataStore.stop();
+  await DataStore.start();
   const challengeStatus = (
     await DataStore.query(Challenge, (challenge) =>
       challenge.challengeChatRoomId.eq(chatID)
