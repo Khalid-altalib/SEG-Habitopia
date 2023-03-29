@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1680129955857" clover="3.2.0">
-  <project timestamp="1680129955857" name="All files">
-    <metrics statements="1349" coveredstatements="791" conditionals="329" coveredconditionals="114" methods="381" coveredmethods="194" elements="2059" coveredelements="1099" complexity="0" loc="1349" ncloc="1349" packages="77" files="135" classes="135"/>
+<coverage generated="1680130485523" clover="3.2.0">
+  <project timestamp="1680130485523" name="All files">
+    <metrics statements="1350" coveredstatements="797" conditionals="329" coveredconditionals="121" methods="382" coveredmethods="198" elements="2061" coveredelements="1116" complexity="0" loc="1350" ncloc="1350" packages="77" files="135" classes="135"/>
     <package name="SEG-Habitopia">
       <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="types.ts" path="C:\Users\charn\Desktop\SEG-Habitopia\types.ts">
@@ -67,13 +67,13 @@
         <line num="12" count="28" type="stmt"/>
         <line num="17" count="28" type="stmt"/>
         <line num="28" count="28" type="stmt"/>
-        <line num="29" count="59" type="stmt"/>
-        <line num="31" count="59" type="stmt"/>
+        <line num="29" count="60" type="stmt"/>
+        <line num="31" count="60" type="stmt"/>
         <line num="34" count="28" type="stmt"/>
         <line num="35" count="1" type="stmt"/>
         <line num="38" count="28" type="stmt"/>
         <line num="39" count="61" type="stmt"/>
-        <line num="41" count="59" type="stmt"/>
+        <line num="41" count="60" type="stmt"/>
       </file>
       <file name="theme.ts" path="C:\Users\charn\Desktop\SEG-Habitopia\src\app\theme.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -1436,26 +1436,27 @@
       </file>
     </package>
     <package name="SEG-Habitopia.src.features.profile.FollowButton">
-      <metrics statements="17" coveredstatements="9" conditionals="12" coveredconditionals="1" methods="5" coveredmethods="2"/>
+      <metrics statements="18" coveredstatements="15" conditionals="12" coveredconditionals="8" methods="6" coveredmethods="6"/>
       <file name="FollowButton.tsx" path="C:\Users\charn\Desktop\SEG-Habitopia\src\features\profile\FollowButton\FollowButton.tsx">
-        <metrics statements="17" coveredstatements="9" conditionals="12" coveredconditionals="1" methods="5" coveredmethods="2"/>
+        <metrics statements="18" coveredstatements="15" conditionals="12" coveredconditionals="8" methods="6" coveredmethods="6"/>
         <line num="17" count="3" type="stmt"/>
-        <line num="18" count="4" type="stmt"/>
-        <line num="19" count="4" type="stmt"/>
-        <line num="21" count="4" type="stmt"/>
-        <line num="22" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="23" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="32" count="4" type="stmt"/>
-        <line num="34" count="3" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="38" count="3" type="stmt"/>
-        <line num="39" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="40" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="56" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="58" count="3" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="19" count="8" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+        <line num="22" count="8" type="stmt"/>
+        <line num="23" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="24" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+        <line num="35" count="8" type="stmt"/>
+        <line num="36" count="4" type="stmt"/>
+        <line num="39" count="8" type="stmt"/>
+        <line num="40" count="4" type="cond" truecount="3" falsecount="1"/>
+        <line num="41" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="57" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="59" count="8" type="stmt"/>
       </file>
     </package>
     <package name="SEG-Habitopia.src.features.profile.FollowListDisplay">
