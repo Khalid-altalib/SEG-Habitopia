@@ -4,9 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import { AntDesign } from "@expo/vector-icons";
 
 import {
-  addLogInData,
   addSignUpData,
-  logInUser,
   signUpUser,
 } from "../authSlice";
 import { useDispatch } from "../../../app/hooks";
@@ -21,6 +19,12 @@ type formData = {
   password: string;
 };
 
+/**
+ * A form for accepting the user's password while providing
+ * information about the password requirements
+ *
+ * @returns The component representing the password
+ */
 const PasswordForm = () => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
