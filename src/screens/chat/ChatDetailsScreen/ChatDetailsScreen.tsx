@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "@app/hooks";
+import Background from "@components/Background";
 import PaddedContainer from "@components/PaddedContainer";
 import StatusContainer from "@components/StatusContainer/StatusContainer";
 import { fetchDetails } from "@features/chat/chatSlice";
@@ -25,18 +26,20 @@ const ChatDetailsScreen = (props: Props) => {
   }, []);
 
   return (
-    <ScrollView>
-      <PaddedContainer>
-        <StatusContainer loading={loading} error={error} data={details}>
-          <Header
-            name={details?.challengeName || "Error"}
-            description={details?.description || "Error"}
-          />
-          <Statistics />
-        </StatusContainer>
-        <ParticipantsList />
-      </PaddedContainer>
-    </ScrollView>
+    <Background>
+      <ScrollView>
+        <PaddedContainer>
+          <StatusContainer loading={loading} error={error} data={details}>
+            <Header
+              name={details?.challengeName || "Error"}
+              description={details?.description || "Error"}
+            />
+            <Statistics />
+          </StatusContainer>
+          <ParticipantsList />
+        </PaddedContainer>
+      </ScrollView>
+    </Background>
   );
 };
 

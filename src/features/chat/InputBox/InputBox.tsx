@@ -87,6 +87,7 @@ const InputBox = (props: InputBoxProps) => {
             onChangeText={onChange}
             placeholder="Chat"
             value={value}
+            autoCapitalize="none"
             returnKeyType="send"
             onSubmitEditing={handleSubmit(onSubmit)}
             style={[

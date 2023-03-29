@@ -26,7 +26,12 @@ const PasswordSetting = (props: Props) => {
         <Controller
           control={control}
           render={({ field: { onChange, value } }) => (
-            <Input onChangeText={onChange} value={value} size="xl" />
+            <Input
+              onChangeText={onChange}
+              value={value}
+              size="xl"
+              autoCapitalize="none"
+            />
           )}
           name="oldPassword"
         />
@@ -36,7 +41,12 @@ const PasswordSetting = (props: Props) => {
         <Controller
           control={control}
           render={({ field: { onChange, value } }) => (
-            <Input onChangeText={onChange} value={value} size="xl" />
+            <Input
+              onChangeText={onChange}
+              value={value}
+              size="xl"
+              autoCapitalize="none"
+            />
           )}
           name="formValue"
         />
@@ -46,7 +56,12 @@ const PasswordSetting = (props: Props) => {
         <Controller
           control={control}
           render={({ field: { onChange, value } }) => (
-            <Input onChangeText={onChange} value={value} size="xl" />
+            <Input
+              onChangeText={onChange}
+              value={value}
+              size="xl"
+              autoCapitalize="none"
+            />
           )}
           name="confirmPassword"
         />
