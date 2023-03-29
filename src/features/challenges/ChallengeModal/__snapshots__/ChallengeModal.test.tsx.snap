@@ -103,244 +103,347 @@ exports[`ChallengeModal renders the challenge modal correctly 1`] = `
               style={{}}
               testID="challengePrompt"
             >
-              <View
-                dataSet={{}}
+              <ViewManagerAdapter_ExpoLinearGradient
+                proxiedProperties={
+                  {
+                    "colors": [
+                      4293190887,
+                      4294243573,
+                    ],
+                    "endPoint": undefined,
+                    "locations": undefined,
+                    "startPoint": undefined,
+                  }
+                }
                 style={
                   {
-                    "alignItems": "center",
+                    "height": "100%",
                   }
                 }
               >
-                <Text
+                <View
                   dataSet={{}}
                   style={
                     {
-                      "backgroundColor": undefined,
-                      "color": "#171717",
-                      "fontFamily": undefined,
-                      "fontSize": 48,
-                      "fontStyle": "normal",
-                      "fontWeight": "700",
-                      "letterSpacing": 2.4000000000000004,
-                      "lineHeight": 60,
-                      "textDecorationLine": undefined,
+                      "alignItems": "center",
+                      "height": "100%",
+                      "justifyContent": "center",
+                      "paddingBottom": 80,
+                      "paddingLeft": 80,
+                      "paddingRight": 80,
+                      "paddingTop": 80,
                     }
                   }
                 >
-                  Fitness
-                </Text>
-                <View
-                  dataSet={{}}
-                  style={
-                    {
-                      "height": 12,
-                    }
-                  }
-                />
-                <Image
-                  accessibilityLabel="Challenge Image"
-                  alt="Challenge Image"
-                  dataSet={{}}
-                  onError={[Function]}
-                  source={
-                    {
-                      "uri": "https://picsum.photos/200",
-                    }
-                  }
-                  style={
-                    {
-                      "borderRadius": 8,
-                      "height": 100,
-                      "maxWidth": "100%",
-                      "width": 100,
-                    }
-                  }
-                />
-                <View
-                  dataSet={{}}
-                  style={
-                    {
-                      "height": 12,
-                    }
-                  }
-                />
-                <Text
-                  dataSet={{}}
-                  style={
-                    {
-                      "backgroundColor": undefined,
-                      "color": "#171717",
-                      "fontFamily": undefined,
-                      "fontSize": 20,
-                      "fontStyle": "normal",
-                      "fontWeight": "400",
-                      "letterSpacing": 0,
-                      "lineHeight": 30,
-                      "textAlign": "center",
-                      "textDecorationLine": undefined,
-                    }
-                  }
-                >
-                  Be active
-                </Text>
-                <View
-                  dataSet={{}}
-                  style={
-                    {
-                      "height": 12,
-                    }
-                  }
-                />
-                <View
-                  dataSet={{}}
-                  style={
-                    {
-                      "flexDirection": "row",
-                    }
-                  }
-                >
-                  <View
-                    accessibilityRole="button"
-                    accessible={true}
-                    collapsable={false}
-                    colorScheme="primary"
-                    dataSet={{}}
-                    focusable={true}
-                    onBlur={[Function]}
-                    onClick={[Function]}
-                    onFocus={[Function]}
-                    onResponderGrant={[Function]}
-                    onResponderMove={[Function]}
-                    onResponderRelease={[Function]}
-                    onResponderTerminate={[Function]}
-                    onResponderTerminationRequest={[Function]}
-                    onStartShouldSetResponder={[Function]}
+                  <Text
                     style={
-                      {
-                        "alignItems": "center",
-                        "backgroundColor": "#f59e0b",
-                        "borderRadius": 4,
-                        "flexDirection": "row",
-                        "justifyContent": "center",
-                        "paddingBottom": 10,
-                        "paddingLeft": 12,
-                        "paddingRight": 12,
-                        "paddingTop": 10,
-                      }
-                    }
-                    testID="joinButton"
-                  >
-                    <View
-                      dataSet={{}}
-                      style={
+                      [
                         {
-                          "alignItems": "center",
-                          "flexDirection": "row",
-                        }
-                      }
-                      test={true}
-                    >
-                      <View
-                        dataSet={{}}
-                        style={{}}
-                      >
-                        <Text
-                          dataSet={{}}
-                          style={
-                            {
-                              "backgroundColor": undefined,
-                              "color": "#fafafa",
-                              "fontFamily": undefined,
-                              "fontSize": 14,
-                              "fontStyle": "normal",
-                              "fontWeight": "400",
-                              "letterSpacing": 0,
-                              "lineHeight": 21,
-                              "textDecorationLine": undefined,
-                            }
-                          }
-                        >
-                          Join Challenge!
-                        </Text>
-                      </View>
-                    </View>
-                  </View>
+                          "color": "#18181b",
+                        },
+                        {
+                          "fontFamily": undefined,
+                          "fontSize": 40,
+                        },
+                        undefined,
+                      ]
+                    }
+                  >
+                    Fitness
+                  </Text>
                   <View
                     dataSet={{}}
                     style={
                       {
-                        "width": 12,
+                        "height": 12,
+                      }
+                    }
+                  />
+                  <Image
+                    accessibilityLabel="Challenge Image"
+                    alt="Challenge Image"
+                    dataSet={{}}
+                    onError={[Function]}
+                    source={
+                      {
+                        "uri": "https://images.everydayhealth.com/images/everything-you-need-know-about-fitness-1440x810.jpg",
+                      }
+                    }
+                    style={
+                      {
+                        "borderRadius": 8,
+                        "height": 150,
+                        "maxWidth": "100%",
+                        "width": 150,
                       }
                     }
                   />
                   <View
-                    accessibilityRole="button"
-                    accessible={true}
-                    collapsable={false}
-                    colorScheme="primary"
                     dataSet={{}}
-                    focusable={true}
-                    onBlur={[Function]}
-                    onClick={[Function]}
-                    onFocus={[Function]}
-                    onResponderGrant={[Function]}
-                    onResponderMove={[Function]}
-                    onResponderRelease={[Function]}
-                    onResponderTerminate={[Function]}
-                    onResponderTerminationRequest={[Function]}
-                    onStartShouldSetResponder={[Function]}
                     style={
                       {
-                        "alignItems": "center",
-                        "backgroundColor": "#a1a1aa",
-                        "borderRadius": 4,
-                        "flexDirection": "row",
-                        "justifyContent": "center",
-                        "paddingBottom": 10,
-                        "paddingLeft": 12,
-                        "paddingRight": 12,
-                        "paddingTop": 10,
+                        "height": 12,
                       }
                     }
-                    testID="backButton"
+                  />
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#18181b",
+                        },
+                        {
+                          "fontFamily": undefined,
+                          "fontSize": 19,
+                        },
+                        undefined,
+                      ]
+                    }
                   >
+                    Be active
+                  </Text>
+                  <View
+                    dataSet={{}}
+                    style={
+                      {
+                        "height": 12,
+                      }
+                    }
+                  />
+                  <View
+                    dataSet={{}}
+                    style={
+                      {
+                        "marginTop": 80,
+                      }
+                    }
+                  >
+                    <View
+                      dataSet={{}}
+                      style={{}}
+                      testID="joinButton"
+                    >
+                      <View
+                        isFullWidth={true}
+                        isLoading={false}
+                        onPress={[Function]}
+                        style={
+                          [
+                            {
+                              "borderRadius": 10,
+                              "shadowColor": "black",
+                              "shadowOffset": {
+                                "height": 5,
+                                "width": 5,
+                              },
+                              "shadowOpacity": 0.15,
+                            },
+                          ]
+                        }
+                        type={0}
+                      >
+                        <View
+                          accessible={true}
+                          collapsable={false}
+                          focusable={true}
+                          onClick={[Function]}
+                          onResponderGrant={[Function]}
+                          onResponderMove={[Function]}
+                          onResponderRelease={[Function]}
+                          onResponderTerminate={[Function]}
+                          onResponderTerminationRequest={[Function]}
+                          onStartShouldSetResponder={[Function]}
+                          style={
+                            {
+                              "opacity": 1,
+                            }
+                          }
+                        >
+                          <ViewManagerAdapter_ExpoLinearGradient
+                            proxiedProperties={
+                              {
+                                "colors": [
+                                  4278220774,
+                                  4286456526,
+                                ],
+                                "endPoint": [
+                                  1,
+                                  1,
+                                ],
+                                "locations": undefined,
+                                "startPoint": [
+                                  0,
+                                  0,
+                                ],
+                              }
+                            }
+                            style={
+                              [
+                                {
+                                  "alignItems": "center",
+                                  "borderRadius": 10,
+                                  "flexDirection": "row",
+                                  "justifyContent": "center",
+                                  "paddingHorizontal": 40,
+                                  "paddingVertical": 15,
+                                },
+                                {
+                                  "width": "100%",
+                                },
+                              ]
+                            }
+                          >
+                            <Text
+                              style={
+                                [
+                                  {
+                                    "color": "#18181b",
+                                  },
+                                  {
+                                    "color": "#e4e4e7",
+                                    "fontFamily": undefined,
+                                    "fontSize": 19,
+                                  },
+                                  [
+                                    null,
+                                    {
+                                      "alignSelf": "center",
+                                    },
+                                  ],
+                                ]
+                              }
+                            >
+                              Join Challenge!
+                            </Text>
+                            <View
+                              style={
+                                {
+                                  "marginLeft": 5,
+                                }
+                              }
+                            />
+                          </ViewManagerAdapter_ExpoLinearGradient>
+                        </View>
+                      </View>
+                    </View>
                     <View
                       dataSet={{}}
                       style={
                         {
-                          "alignItems": "center",
-                          "flexDirection": "row",
+                          "height": 20,
                         }
                       }
-                      test={true}
+                    />
+                    <View
+                      dataSet={{}}
+                      style={{}}
+                      testID="backButton"
                     >
                       <View
-                        dataSet={{}}
-                        style={{}}
+                        isFullWidth={true}
+                        onPress={[Function]}
+                        style={
+                          [
+                            {
+                              "borderRadius": 10,
+                              "shadowColor": "black",
+                              "shadowOffset": {
+                                "height": 5,
+                                "width": 5,
+                              },
+                              "shadowOpacity": 0.15,
+                            },
+                          ]
+                        }
+                        type={1}
                       >
-                        <Text
-                          dataSet={{}}
+                        <View
+                          accessible={true}
+                          collapsable={false}
+                          focusable={true}
+                          onClick={[Function]}
+                          onResponderGrant={[Function]}
+                          onResponderMove={[Function]}
+                          onResponderRelease={[Function]}
+                          onResponderTerminate={[Function]}
+                          onResponderTerminationRequest={[Function]}
+                          onStartShouldSetResponder={[Function]}
                           style={
                             {
-                              "backgroundColor": undefined,
-                              "color": "#fafafa",
-                              "fontFamily": undefined,
-                              "fontSize": 14,
-                              "fontStyle": "normal",
-                              "fontWeight": "400",
-                              "letterSpacing": 0,
-                              "lineHeight": 21,
-                              "textDecorationLine": undefined,
+                              "opacity": 1,
                             }
                           }
                         >
-                          Not now
-                        </Text>
+                          <ViewManagerAdapter_ExpoLinearGradient
+                            proxiedProperties={
+                              {
+                                "colors": [
+                                  4288782762,
+                                  4285624698,
+                                ],
+                                "endPoint": [
+                                  1,
+                                  1,
+                                ],
+                                "locations": undefined,
+                                "startPoint": [
+                                  0,
+                                  0,
+                                ],
+                              }
+                            }
+                            style={
+                              [
+                                {
+                                  "alignItems": "center",
+                                  "borderRadius": 10,
+                                  "flexDirection": "row",
+                                  "justifyContent": "center",
+                                  "paddingHorizontal": 40,
+                                  "paddingVertical": 15,
+                                },
+                                {
+                                  "width": "100%",
+                                },
+                              ]
+                            }
+                          >
+                            <Text
+                              style={
+                                [
+                                  {
+                                    "color": "#18181b",
+                                  },
+                                  {
+                                    "color": "#e4e4e7",
+                                    "fontFamily": undefined,
+                                    "fontSize": 19,
+                                  },
+                                  [
+                                    null,
+                                    {
+                                      "alignSelf": "center",
+                                    },
+                                  ],
+                                ]
+                              }
+                            >
+                              Not now
+                            </Text>
+                            <View
+                              style={
+                                {
+                                  "marginLeft": 5,
+                                }
+                              }
+                            />
+                          </ViewManagerAdapter_ExpoLinearGradient>
+                        </View>
                       </View>
                     </View>
                   </View>
                 </View>
-              </View>
+              </ViewManagerAdapter_ExpoLinearGradient>
             </View>
           </View>
         </View>
