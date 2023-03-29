@@ -86,9 +86,10 @@ def handler(event, context):
     """
     nowTime = datetime.now()
     allowed_mins = [0,1,2]
+    allowed_hours = [9,21]
 
     #Send motivational messages only when running at 9:00, 9:01, 9:02
-    if nowTime.hour == 9 and (nowTime.minute in allowed_mins):
+    if (nowTime.hour in allowed_hours) and (nowTime.minute in allowed_mins):
         def motivationalQuoteFromGpt(prompt):
             #Prompt is a list of two strings: [challenge detail, list of users in challenge]
             #use this to form prompt for GPT-3
