@@ -66,6 +66,8 @@ export const fetchUserChats = async (thunkAPI: any) => {
 Get all messages for a specific chat and paginate to reduce payload
 */
 export const fetchChatMessages = async (chatId: string, pageNumber: number) => {
+  await DataStore.stop();
+  await DataStore.start();
   const numberOfMessageInChat = (
     await DataStore.query(Message, (message) => message.chatroomID.eq(chatId))
   ).length;

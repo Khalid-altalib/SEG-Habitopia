@@ -80,8 +80,22 @@ const ChatScreen = (props: Props) => {
         const userFromDatabase = await getUserFromDatabasebyID(
           data.userID || ""
         );
+
         let message: MessageType;
+
         switch (data.messageType) {
+          case MessageEnum.VALIDATION:
+            message = {
+              ...data,
+              userName: userFromDatabase.name,
+            } as MessageType;
+            break;
+          case MessageEnum.TEXT:
+            message = {
+            ...data,
+            userName: userFromDatabase.name,
+            } as MessageType;
+            break;
           case MessageEnum.CHECKIN:
             const checkIn = await getCheckInById(
               data.messageGetCheckinId || ""
@@ -90,18 +104,6 @@ const ChatScreen = (props: Props) => {
               ...data,
               validationCount: checkIn.validationCount,
               isValidated: checkIn.isValidated,
-              userName: userFromDatabase.name,
-            } as MessageType;
-            break;
-          case MessageEnum.TEXT:
-            message = {
-              ...data,
-              userName: userFromDatabase.name,
-            } as MessageType;
-            break;
-          case MessageEnum.VALIDATION:
-            message = {
-              ...data,
               userName: userFromDatabase.name,
             } as MessageType;
             break;
