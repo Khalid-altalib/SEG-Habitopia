@@ -11,6 +11,12 @@ import { useNavigation } from "@react-navigation/native";
 
 export const ChatStack = createNativeStackNavigator<ChatParams>();
 
+/**
+ * This component handles the navigation between the screens involved
+ * in the chat system
+ *
+ * @returns The component representing the chat navigation system
+ */
 const ChatNavigation = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
 
