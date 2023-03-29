@@ -8,7 +8,7 @@ type Props = {
 function CheckInWidgetLayout(props: Props) {
   const { children } = props;
   return (
-    <View paddingLeft={6} paddingRight={6}>
+    <View paddingLeft={6} paddingRight={6} testID="checkInWidget">
       <Heading shadow={1}>Check-In 📝</Heading>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {children}

@@ -8,7 +8,7 @@ type Props = {
 const ChallengeWidgetLayout = (props: Props) => {
   const { children } = props;
   return (
-    <View>
+    <View testID="challengeWidget">
       <Center>
         <Heading mb={4} shadow={1}>
           Pick a Challenge! 🚀
