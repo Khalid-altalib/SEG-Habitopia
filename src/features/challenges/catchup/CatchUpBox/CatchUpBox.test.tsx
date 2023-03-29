@@ -1,14 +1,17 @@
-import { fireEvent, render, screen } from "@testing-library/react-native";
+// Importing testing-related dependencies
+import { render } from "@testing-library/react-native";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import TestingWrapperNavigation from "@app/testingWrapperWithNavigation";
-import CatchUpBox from "./CatchUpBox";
-import { NavigationContainer } from "@react-navigation/native";
-import TestingWrapper from "@app/testingWrapper";
-import { extendTheme, NativeBaseProvider } from "native-base";
 
+// Imports the component to be tested
+import CatchUpBox from "./CatchUpBox";
+
+// Define a test suite for the CatchUpBox component
 describe("CatchUpBox", () => {
+  // Create a mock store using configureStore and the thunk middleware
   const mockStore = configureStore([thunk])();
+
   const props = {
     isUserLiked: false,
   };
@@ -20,6 +23,7 @@ describe("CatchUpBox", () => {
       </TestingWrapperNavigation>
     );
 
+    // Take a snapshot of the rendered component and check that it matches the previous snapshot
     expect(component).toMatchSnapshot();
   });
 
@@ -30,31 +34,8 @@ describe("CatchUpBox", () => {
       </TestingWrapperNavigation>
     );
 
+    // Find the catch-up box by its test ID and check that it is defined
     const box = component.getByTestId("catchUpBox");
-
     expect(box).toBeDefined();
   });
-
-  //   it("the 'like' button changes state when pressed", async () => {
-  //     const theme = extendTheme({});
-  //     const inset = {
-  //       frame: { x: 0, y: 0, width: 0, height: 0 },
-  //       insets: { top: 0, left: 0, right: 0, bottom: 0 },
-  //     };
-  //     const component = render(
-  //       <TestingWrapperNavigation store={mockStore}>
-  //         <NativeBaseProvider theme={theme} initialWindowMetrics={inset}>
-  //           <CatchUpBox {...props} />
-  //         </NativeBaseProvider>
-  //       </TestingWrapperNavigation>
-  //     );
-
-  //     const button = screen.getByRole("button");
-
-  //     setTimeout(() => fireEvent(button, "press"), 1000);
-
-  //     const box = component.getByTestId("catchUpBox");
-
-  //     expect(box).toMatchObject(<CatchUpBox isUserLiked={true} />);
-  //   });
 });

@@ -1,5 +1,6 @@
 import { ChallengesState } from "./challengesSlice";
 
+// Mocks the challenge state for testing purposes
 const challengesMockState: ChallengesState = {
     challenges: [
         {

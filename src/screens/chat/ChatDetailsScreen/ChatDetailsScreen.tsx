@@ -6,13 +6,15 @@ import { fetchDetails } from "@features/chat/chatSlice";
 import Header from "@features/chat/Header/Header";
 import ParticipantsList from "@features/chat/ParticipantsList/ParticipantsList";
 import Statistics from "@features/chat/Statistics/Statistics";
-import { RouteProp, useRoute } from "@react-navigation/native";
-import { Box, ScrollView } from "native-base";
+import { ScrollView } from "native-base";
 import React, { useEffect } from "react";
-import { RootParams } from "types";
 
 type Props = {};
 
+/**
+ * @returns A react component that displays the details of a chat, including
+ * the challenge name, description, statistics, and participants.
+ */
 const ChatDetailsScreen = (props: Props) => {
   const { currentChatId } = useSelector((state) => state.chats);
 

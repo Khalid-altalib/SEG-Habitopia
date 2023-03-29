@@ -1,3 +1,4 @@
+// Importing necessary dependencies and components
 import { ScrollView, View, Heading } from "native-base";
 import React from "react";
 
@@ -7,6 +8,7 @@ type Props = {
 
 function CheckInWidgetLayout(props: Props) {
   const { children } = props;
+  // Return a render of the 'children' within the CheckInWidgetLayout component
   return (
     <View
       paddingLeft={6}

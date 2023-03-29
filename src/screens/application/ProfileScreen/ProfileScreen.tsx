@@ -17,6 +17,11 @@ import ProfileStatistics from "@features/profile/ProfileStatistics/ProfileStatis
 import PaddedContainer from "@components/PaddedContainer";
 import Background from "@components/Background";
 
+/**
+ * @returns A React component which displays the profile of the
+ * associated user, which contains the statistics and controls
+ * to either follow the profile or access the user's settings
+ */
 const ProfileScreen = () => {
   const route = useRoute<RouteProp<NavigationParams, "You" | "Profile">>();
   const navigation =

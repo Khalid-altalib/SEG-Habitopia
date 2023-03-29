@@ -18,6 +18,12 @@ import FollowListScreen from "@screens/application/FollowListScreen/FollowListSc
 
 const Stack = createNativeStackNavigator<RootParams>();
 
+/**
+ * This component houses the various navigators and conditionally
+ * displays the correct navigator 
+ *
+ * @returns The navigation component
+ */
 const Navigation = () => {
   const dispatch = useDispatch();
 

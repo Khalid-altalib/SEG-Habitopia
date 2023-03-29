@@ -1,3 +1,4 @@
+// Import necessary modules and components
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AspectRatio, Box, HStack } from "native-base";
@@ -16,16 +17,20 @@ const ChallengeBox = (props: Props) => {
   const { challenge } = props;
   const { name, active } = challenge;
 
+  // Access the navigation object for navigating to the "ChallengePrompt" screen
   const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
 
+  // Retrieve the challenge's card color and image from the challengeMappings object
   const { color: cardColor, image: cardImage } =
     challengeMappings[name] || challengeMappings["fallback"];
 
+  // Define a function to handle the press event of the component
   const handlePress = () =>
     navigation.navigate("ChallengePrompt", {
       challenge: challenge,
     });
 
+  // Render the component
   return (
     <TouchableOpacity onPress={handlePress} testID="challengeBox">
       <Box

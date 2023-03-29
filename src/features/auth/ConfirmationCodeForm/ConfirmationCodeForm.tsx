@@ -17,6 +17,12 @@ type formData = {
   confirmationCode: string;
 };
 
+/**
+ * A form, for accepting the confirmation code that was sent to the user's
+ * email
+ *
+ * @returns The component representing the confirmation code form.
+ */
 const ConfirmationCodeForm = () => {
   // Initial form state
   const { control, handleSubmit } = useForm({

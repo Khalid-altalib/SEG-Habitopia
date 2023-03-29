@@ -1,5 +1,9 @@
 import { SettingsState } from "./settingsSlice";
 
+/**
+ * The mock state for the settings redux state
+ */
+
 const settingsMockState: SettingsState = {
   settings: {
     email: "test@test.com",

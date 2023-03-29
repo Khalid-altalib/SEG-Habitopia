@@ -1,3 +1,4 @@
+// Import required modules and models
 import { DataStore } from "@aws-amplify/datastore";
 import { getUserFromDatabase } from "../../app/util";
 import {
@@ -17,14 +18,21 @@ import {
 } from "@features/constants";
 import moment from "moment";
 
+// A function to join a challenge
 export const joinChallengeQuery = async (
   challengeTypeInstance: ChallengeTypeModel,
   thunkAPI: any
 ) => {
+  // Get the user from the database
   const user = await getUserFromDatabase(thunkAPI);
+
+  // Check if the user is already part of the challenge
   await isUserPartOfChallenge(challengeTypeInstance, user);
+
+  // Find a challenge to join
   const challengeToJoin = await findChallengeToJoin(challengeTypeInstance);
 
+  // Save the challenge user
   await DataStore.save(
     new ChallengeUser({
       user: user,
@@ -34,8 +42,10 @@ export const joinChallengeQuery = async (
     })
   );
 
+  // Add user to the chat room of the challenge
   await addUserToChatRoom(challengeToJoin, user);
 
+  // Update the user count of the challenge
   await DataStore.save(
     ChallengeModel.copyOf(challengeToJoin, (updated) => {
       updated.userCount += 1;
@@ -43,18 +53,22 @@ export const joinChallengeQuery = async (
   );
 };
 
+// A function to check if the user is already part of the challenge
 const isUserPartOfChallenge = async (
   challengeTypeInstance: ChallengeTypeModel,
   user: User
 ) => {
+  // Get the challenge users from the database
   const challengeUsers = await DataStore.query(ChallengeUser, (challengeUser) =>
     challengeUser.user.id.eq(user.id)
   );
 
+  // Get the challenges from the challenge users
   const challenges = challengeUsers.map(
     (challengeUser) => challengeUser.challenge
   );
 
+  // Loop through the challenges and throw an error if the user is already part of the challenge
   for await (const challenge of challenges) {
     if (
       challenge.challengeChallengeTypeId === challengeTypeInstance.id &&
@@ -65,10 +79,12 @@ const isUserPartOfChallenge = async (
   }
 };
 
+// A function to find a challenge to join
 const findChallengeToJoin = async (
   challengeTypeInstance: ChallengeTypeModel
 ) => {
   try {
+    // Query the database for available challenges
     const availableChallenges = await DataStore.query(
       ChallengeModel,
       (allChallenges) =>
@@ -79,6 +95,7 @@ const findChallengeToJoin = async (
         ])
     );
 
+    // If there are no available challenges, create a new challenge and chat room
     if (availableChallenges.length == 0) {
       const chatName =
         challengeTypeInstance.name + " - " + moment().format("DD/MM/YYYY");
@@ -103,6 +120,7 @@ const findChallengeToJoin = async (
   }
 };
 
+// A function that adds the user to the chat room
 const addUserToChatRoom = async (
   challengeToJoin: ChallengeModel,
   user: User

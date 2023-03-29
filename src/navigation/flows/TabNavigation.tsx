@@ -12,6 +12,12 @@ import { theme } from "native-base";
 
 const Tab = createBottomTabNavigator<NavigationParams>();
 
+/**
+ * This component handles the navigation between the various 
+ * tabs that can be visited from the bottom tab navigator
+ *
+ * @returns The component representing the tab navigation system
+ */
 const TabNavigation = () => {
   const localUser = useSelector(selectUser);
 
