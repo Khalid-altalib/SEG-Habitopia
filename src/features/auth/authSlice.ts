@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { LocalUser } from "../../../types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AsyncStorage as AmplifyAsyncStorage } from "@aws-amplify/core";
 import { RootState } from "../../app/store";
 import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { createUserInDatabase } from "./authQueries";
@@ -158,6 +159,7 @@ export const logInUserFromStorage = createAsyncThunk<
 
 export const logOutUser = createAsyncThunk("auth/logOutUser", async () => {
   await AsyncStorage.removeItem("user");
+  await AmplifyAsyncStorage.clear()
 
   await DataStore.clear();
 
