@@ -25,7 +25,7 @@ const ProfileHeader = (props: Props) => {
       {profile && (
         <Box>
           <HStack space={25} marginBottom={12.5}>
-            <Box width={125}>
+            <Box width={100}>
               <Avatar userId={profile.userId} />
             </Box>
 
