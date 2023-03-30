@@ -20,7 +20,7 @@ function ChallengeLayout(props: Props) {
           <Text type={TextType.Subheading}>Pick a Challenge! 🚀</Text>
         </Center>
         <VStack space={3} width={"100%"}>
-          {children} {/* Renders the child components passed as props */}
+          {children} 
         </VStack>
       </PaddedContainer>
     </ScrollView>

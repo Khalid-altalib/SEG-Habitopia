@@ -11,7 +11,7 @@ import {
   ChallengeStatusEnum,
 } from "../../models";
 import {
-  ALREADY_PART_OF_CHAT,
+  ALREADY_PART_OF_CHALLENGE,
   CANNOT_JOIN_CHAT,
   CHALLENGE_NOT_FOUND,
   GROUP_CHAT_PARTICIPANTS,
@@ -74,7 +74,7 @@ const isUserPartOfChallenge = async (
       challenge.challengeChallengeTypeId === challengeTypeInstance.id &&
       challenge.status !== ChallengeStatusEnum.COMPLETED
     ) {
-      throw new Error(ALREADY_PART_OF_CHAT);
+      throw new Error(ALREADY_PART_OF_CHALLENGE);
     }
   }
 };

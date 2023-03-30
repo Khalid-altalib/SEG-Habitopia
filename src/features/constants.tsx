@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export const ALREADY_PART_OF_CHAT = "You are already part of the chat";
+export const ALREADY_PART_OF_CHALLENGE = "You are already part of the challenge";
 export const CHALLENGE_NOT_FOUND = "Challenge not found!";
 export const GROUP_CHAT_PARTICIPANTS = 3;
 export const CANNOT_JOIN_CHAT = "Unable to join chat!";
