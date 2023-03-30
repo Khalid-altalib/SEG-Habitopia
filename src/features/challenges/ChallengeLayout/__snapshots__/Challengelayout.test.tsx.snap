@@ -156,9 +156,7 @@ exports[`ChallengeLayout renders the challenge layout correctly 1`] = `
                         "width": "100%",
                       }
                     }
-                  >
-                     
-                  </View>
+                  />
                 </View>
               </View>
             </RCTScrollView>
