@@ -15,12 +15,14 @@ import { Toast } from "react-native-toast-message/lib/src/Toast";
  * @return The button component.
  */
 const FollowButton = () => {
+  // get profile and request status from redux
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.profile?.profile);
   const { loading } = useSelector((state) => state.profile.followUser);
 
   const handleFollow = async () => {
     if (!profile?.following) {
+      // if not following, follow
       await dispatch(followUser(profile?.userId || ""));
     } else {
       Toast.show({
@@ -36,6 +38,7 @@ const FollowButton = () => {
     setDidMount(true);
   }, []);
 
+  // if profile.following changes, show message to user
   useEffect(() => {
     if (profile && didMount) {
       if (profile.following == true) {

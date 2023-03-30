@@ -12,6 +12,7 @@ import ProfileStatistic from "./ProfileStatistic";
  */
 const ProfileStatistics = (): JSX.Element => {
   const { profile } = useSelector((state) => state.profile);
+  // render the statistics if they exist
   return (
     <VStack>
       <Heading mb={4}>Statistics</Heading>

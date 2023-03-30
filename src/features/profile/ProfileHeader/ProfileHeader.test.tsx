@@ -6,23 +6,25 @@ import TestingWrapperNavigation from "@app/testingWrapperWithNavigation";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 
-jest.mock("../../../app/hooks", () => ({
-  useSelector: jest.fn(),
-  useDispatch: jest.fn(),
-}));
+// Mock the useDispatch and useSelector hooks 
+jest.mock("../../../app/hooks", () => ({ 
+  useSelector: jest.fn(), 
+  useDispatch: jest.fn(), 
+})); 
 
-describe("ProfileHeader", () => {
-  const mockState = {
-    profile: {
-      profile: {
-        userId: "123",
-        name: "Test User",
-        followerCount: 10,
-        followingCount: 20,
-        biography: "Test Biography",
-      },
+describe("ProfileHeader", () => { 
+  const mockState = { 
+    profile: { 
+      profile: { 
+        userId: "123", 
+        name: "Test User", 
+        followerCount: 10, 
+        followingCount: 20, 
+        biography: "Test Biography", 
+      }, 
     },
-  };
+  }; 
+  // Mock the store and wrap the component in the TestingWrapperNavigation for testing
 
   const mockStore = configureStore([thunk])(mockState);
   let wrapper: any;
@@ -36,10 +38,11 @@ describe("ProfileHeader", () => {
       </TestingWrapperNavigation>
     );
   });
+  // test that the component renders correctly with snapshot testing
   it("renders correctly", () => {
     expect(wrapper).toMatchSnapshot();
   });
-
+  // test that the navigation is pushed to the Settings screen when the Settings button is pressed
   it("should push navigation to Settings when Settings button is pressed", () => {
     const settingsButton = wrapper.getByTestId("settings-button");
     settingsButton.props.onPress();

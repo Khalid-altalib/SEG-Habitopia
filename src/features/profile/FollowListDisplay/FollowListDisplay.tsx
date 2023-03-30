@@ -31,13 +31,13 @@ type Props = {
  * @returns The component representing the box.
  */
 const FollowListDisplay = (props: Props) => {
-  const { followListMode, followCount } = props;
-  const profile = useSelector((state) => state.profile?.profile);
-
-  const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
-
-  const dispatch = useDispatch();
-
+  // get props and redux state 
+  const { followListMode, followCount } = props; 
+  const profile = useSelector((state) => state.profile?.profile); 
+  const navigation = useNavigation<NativeStackNavigationProp<RootParams>>(); 
+ 
+  const dispatch = useDispatch(); 
+ 
   const handlePress = () => {
     navigation.push("FollowList", { followListMode: followListMode });
     dispatch(fetchFollowList({ followListMode, profileID: profile?.userId }));

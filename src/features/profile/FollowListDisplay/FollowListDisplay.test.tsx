@@ -8,10 +8,12 @@ import configureStore from "redux-mock-store";
 import FollowListDisplay from "./FollowListDisplay";
 import thunk from "redux-thunk";
 
+// Mock the useDispatch and useSelector hooks and useNavigation 
 const mockedDispatch = jest.fn();
 const mockedUseSelector = useSelector as jest.Mock;
 const mockedUseNavigation = useNavigation as jest.Mock;
 
+//return arbitrary profile data
 mockedUseSelector.mockReturnValue({
   profile: {
     userId: "123",
@@ -46,7 +48,7 @@ describe('FollowListDisplay', () => {
           },
         },
       };
-    
+     // Mock the store and wrap the component in the TestingWrapperNavigation for testing
       const mockStore = configureStore([thunk])(mockState);
       let wrapper: any;
       beforeEach(() => {
@@ -57,10 +59,11 @@ describe('FollowListDisplay', () => {
           </TestingWrapperNavigation>
         );
       });
+      // test that the component renders correctly with snapshot testing
       it("renders correctly", () => {
         expect(wrapper).toMatchSnapshot();
       });
-
+      // test that the navigation is pushed to the FollowList screen when the followListDisplay button is pressed
       it("should push navigation to followList when handlePress is called", () => {
         const followListButton = wrapper.getByTestId('follow-list-display');
         fireEvent.press(followListButton);
