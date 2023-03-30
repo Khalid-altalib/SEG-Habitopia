@@ -37,7 +37,7 @@ To access the Habitopia App, follow these steps:
     Email: habitopia1@gmail.com
     Password: Password.123
 
-- Once logged in, select the appropriate operating system option for your device (IOS or Android).
+- Once logged in, click the corresponding link 'view' for the operating system you would like to run the app on (IOS or Android).
 
 - You can log in to the application using the generated mock user with the details:
     Email: john.doe@example.org, bob.smith@example.org, petra.pickles@example.org
