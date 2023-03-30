@@ -16,6 +16,12 @@ type formData = {
   name: string;
 };
 
+
+/**
+ * A form for accepting the user's name
+ *
+ * @returns The component representing the name form
+ */
 const NameForm = () => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
@@ -51,6 +57,7 @@ const NameForm = () => {
             value={value}
             size="xl"
             testID="name-input"
+            autoCapitalize="none"
           />
         )}
         name="name"

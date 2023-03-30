@@ -1,37 +1,48 @@
-import { useNavigation } from "@react-navigation/native"; 
-import { NativeStackNavigationProp } from "@react-navigation/native-stack"; 
+// React Navigation
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+// React
+import React from "react";
+
+// Native Base
 import { Box, HStack, View, VStack } from "native-base";
-import Text from "@components/Text"; 
-import React from "react"; 
-import { ButtonType, RootParams, TextType } from "../../../../types"; 
-import { useSelector } from "../../../app/hooks"; 
-import FollowButton from "../FollowButton/FollowButton"; 
-import FollowListDisplay from "../FollowListDisplay/FollowListDisplay"; 
-import Avatar from "@components/Avatar/Avatar"; 
-import Button from "@components/Button";                             
- 
-type Props = { 
-  isLocalUserProfile: boolean; 
-}; 
 
-const ProfileHeader = (props: Props) => { 
-  // get props and redux state
-  const { isLocalUserProfile } = props;  
-  const { profile } = useSelector((state) => state.profile); 
+// Habitopia
+import { ButtonType, RootParams, TextType } from "types";
+import { useSelector } from "@app/hooks";
+import FollowButton from "../FollowButton/FollowButton";
+import FollowListDisplay from "../FollowListDisplay/FollowListDisplay";
+import Avatar from "@components/Avatar/Avatar";
+import Button from "@components/Button";
+import Text from "@components/Text";
 
-  const navigation = useNavigation<NativeStackNavigationProp<RootParams>>(); 
- 
-  return ( 
-    <View> 
+type Props = {
+  isLocalUserProfile: boolean;
+};
+
+/**
+ * Renders the header component for a user's profile, including their avatar, follow counts, and profile details.
+ *
+ * @returns The component representing the profile header.
+ */
+const ProfileHeader = (props: Props) => {
+  const { isLocalUserProfile } = props;
+  const { profile } = useSelector((state) => state.profile);
+
+  const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
+
+  return (
+    <View>
       {profile && (
         <Box>
           <HStack space={25} marginBottom={12.5}>
-            <Box width={125}>
+            <Box width={100}>
               <Avatar userId={profile.userId} />
             </Box>
 
             <VStack flex={1} space={25 / 2}>
-              <HStack space={25 / 2}>
+              <HStack space={25 / 2} flex={1}>
                 <FollowListDisplay
                   followListMode={"follower"}
                   followCount={profile.followerCount}
@@ -58,11 +69,15 @@ const ProfileHeader = (props: Props) => {
           </HStack>
           <View>
             <Text type={TextType.Regular}>{profile!.name}</Text>
-            {profile?.biography === null || profile?.biography === "" ? null : (
-              <Text type={TextType.Small} style={{ marginTop: 2 }}>
-                {profile?.biography}
-              </Text>
-            )}
+            <Box marginTop={2}>
+              {profile?.biography === null || profile?.biography === "" ? (
+                <Text type={TextType.Subtle}>
+                  This user currently does not have a bio
+                </Text>
+              ) : (
+                <Text type={TextType.Small}>{profile?.biography}</Text>
+              )}
+            </Box>
           </View>
         </Box>
       )}

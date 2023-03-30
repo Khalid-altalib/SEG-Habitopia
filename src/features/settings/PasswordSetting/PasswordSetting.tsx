@@ -5,6 +5,14 @@ import DoneButton from "../DoneButton/DoneButton";
 
 type Props = {};
 
+/**
+ * A specialised version of the generic settings component
+ * which adds more input for the user to provide their old password
+ * and confirm their new password
+ *
+ * @param props - The properties passed to the component.
+ * @returns - The passwrod setting component.
+ */
 const PasswordSetting = (props: Props) => {
   const { control, getValues, watch } = useForm({
     defaultValues: {
@@ -26,7 +34,12 @@ const PasswordSetting = (props: Props) => {
         <Controller
           control={control}
           render={({ field: { onChange, value } }) => (
-            <Input onChangeText={onChange} value={value} size="xl" />
+            <Input
+              onChangeText={onChange}
+              value={value}
+              size="xl"
+              autoCapitalize="none"
+            />
           )}
           name="oldPassword"
         />
@@ -36,7 +49,12 @@ const PasswordSetting = (props: Props) => {
         <Controller
           control={control}
           render={({ field: { onChange, value } }) => (
-            <Input onChangeText={onChange} value={value} size="xl" />
+            <Input
+              onChangeText={onChange}
+              value={value}
+              size="xl"
+              autoCapitalize="none"
+            />
           )}
           name="formValue"
         />
@@ -46,7 +64,12 @@ const PasswordSetting = (props: Props) => {
         <Controller
           control={control}
           render={({ field: { onChange, value } }) => (
-            <Input onChangeText={onChange} value={value} size="xl" />
+            <Input
+              onChangeText={onChange}
+              value={value}
+              size="xl"
+              autoCapitalize="none"
+            />
           )}
           name="confirmPassword"
         />

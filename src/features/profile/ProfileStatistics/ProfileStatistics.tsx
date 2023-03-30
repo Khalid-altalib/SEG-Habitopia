@@ -1,10 +1,15 @@
 // Native Base
-import { Heading, View, VStack } from "native-base";
+import { Heading, VStack } from "native-base";
 
 // Habitopia
 import { useSelector } from "@app/hooks";
 import ProfileStatistic from "./ProfileStatistic";
 
+/**
+ * Renders a list of profile statistics.
+ *
+ * @returns The component represensting the list of profile statistics.
+ */
 const ProfileStatistics = (): JSX.Element => {
   const { profile } = useSelector((state) => state.profile);
   // render the statistics if they exist

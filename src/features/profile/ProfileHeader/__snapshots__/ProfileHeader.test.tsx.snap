@@ -1,0 +1,1167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProfileHeader renders correctly 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "flex": 1,
+        },
+        undefined,
+      ]
+    }
+  >
+    <RNSScreenStack
+      style={
+        {
+          "flex": 1,
+        }
+      }
+    >
+      <RNSScreen
+        collapsable={false}
+        forwardedRef={[Function]}
+        gestureResponseDistance={
+          {
+            "bottom": -1,
+            "end": -1,
+            "start": -1,
+            "top": -1,
+          }
+        }
+        nativeBackButtonDismissalEnabled={false}
+        onAppear={[Function]}
+        onDisappear={[Function]}
+        onDismissed={[Function]}
+        onHeaderBackButtonClicked={[Function]}
+        onNativeDismissCancelled={[Function]}
+        onTransitionProgress={[Function]}
+        onWillDisappear={[Function]}
+        replaceAnimation="push"
+        stackPresentation="push"
+        style={
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+        swipeDirection="horizontal"
+      >
+        <RNSScreenStackHeaderConfig
+          backButtonInCustomView={false}
+          backgroundColor="rgb(255, 255, 255)"
+          color="rgb(0, 122, 255)"
+          direction="ltr"
+          disableBackButtonMenu={false}
+          hidden={false}
+          hideBackButton={false}
+          largeTitleHideShadow={false}
+          title="TestScreen"
+          titleColor="rgb(28, 28, 30)"
+          topInsetEnabled={false}
+          translucent={false}
+        />
+        <View
+          accessibilityElementsHidden={false}
+          importantForAccessibility="auto"
+          style={
+            {
+              "flex": 1,
+              "flexDirection": "column-reverse",
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "flex": 1,
+                },
+                {
+                  "backgroundColor": "rgb(242, 242, 242)",
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              dataSet={{}}
+              style={{}}
+            >
+              <View
+                dataSet={{}}
+                style={{}}
+              >
+                <View
+                  dataSet={{}}
+                  style={
+                    {
+                      "flexDirection": "row",
+                      "marginBottom": 12.5,
+                    }
+                  }
+                >
+                  <View
+                    dataSet={{}}
+                    style={
+                      {
+                        "width": 100,
+                      }
+                    }
+                  >
+                    <View
+                      dataSet={{}}
+                      style={
+                        [
+                          {},
+                          {
+                            "aspectRatio": 1,
+                            "style": undefined,
+                          },
+                        ]
+                      }
+                    >
+                      <View
+                        dataSet={{}}
+                        style={
+                          [
+                            {
+                              "alignItems": "center",
+                              "backgroundColor": "#a1a1aa",
+                              "borderColor": "#27272a",
+                              "borderRadius": 9999,
+                              "height": "100%",
+                              "justifyContent": "center",
+                              "position": "relative",
+                              "width": "100%",
+                            },
+                            {
+                              "bottom": 0,
+                              "left": 0,
+                              "position": "absolute",
+                              "right": 0,
+                              "top": 0,
+                            },
+                          ]
+                        }
+                      >
+                        <Image
+                          accessibilityLabel="--"
+                          alt="--"
+                          dataSet={{}}
+                          onError={[Function]}
+                          source={
+                            {
+                              "uri": "https://robohash.org/123",
+                            }
+                          }
+                          style={
+                            [
+                              {
+                                "borderRadius": 9999,
+                                "maxWidth": "100%",
+                              },
+                              {
+                                "height": "100%",
+                                "width": "100%",
+                              },
+                            ]
+                          }
+                        />
+                      </View>
+                    </View>
+                  </View>
+                  <View
+                    dataSet={{}}
+                    style={
+                      {
+                        "width": 25,
+                      }
+                    }
+                  />
+                  <View
+                    dataSet={{}}
+                    style={
+                      {
+                        "flex": 1,
+                      }
+                    }
+                  >
+                    <View
+                      dataSet={{}}
+                      style={
+                        {
+                          "flex": 1,
+                          "flexDirection": "row",
+                        }
+                      }
+                    >
+                      <View
+                        dataSet={{}}
+                        style={
+                          {
+                            "borderRadius": 8,
+                            "flexGrow": 1,
+                            "overflow": "hidden",
+                          }
+                        }
+                      >
+                        <View
+                          accessible={true}
+                          collapsable={false}
+                          focusable={true}
+                          onClick={[Function]}
+                          onResponderGrant={[Function]}
+                          onResponderMove={[Function]}
+                          onResponderRelease={[Function]}
+                          onResponderTerminate={[Function]}
+                          onResponderTerminationRequest={[Function]}
+                          onStartShouldSetResponder={[Function]}
+                          style={
+                            {
+                              "opacity": 1,
+                            }
+                          }
+                          testID="follow-list-display"
+                        >
+                          <ViewManagerAdapter_ExpoLinearGradient
+                            proxiedProperties={
+                              {
+                                "colors": [
+                                  4278220774,
+                                  4286456526,
+                                ],
+                                "endPoint": [
+                                  1,
+                                  1,
+                                ],
+                                "locations": undefined,
+                                "startPoint": [
+                                  0,
+                                  0,
+                                ],
+                              }
+                            }
+                            style={
+                              {
+                                "padding": 12.5,
+                              }
+                            }
+                          >
+                            <View
+                              dataSet={{}}
+                              style={
+                                {
+                                  "alignItems": "center",
+                                  "display": "flex",
+                                  "justifyContent": "center",
+                                }
+                              }
+                            >
+                              <Text
+                                style={
+                                  [
+                                    {
+                                      "color": "white",
+                                    },
+                                    {
+                                      "fontFamily": undefined,
+                                      "fontSize": 23,
+                                    },
+                                    undefined,
+                                  ]
+                                }
+                              >
+                                10
+                              </Text>
+                              <Text
+                                style={
+                                  [
+                                    {
+                                      "color": "white",
+                                    },
+                                    {
+                                      "fontFamily": undefined,
+                                      "fontSize": 15,
+                                    },
+                                    undefined,
+                                  ]
+                                }
+                              >
+                                Follower
+                              </Text>
+                            </View>
+                          </ViewManagerAdapter_ExpoLinearGradient>
+                        </View>
+                      </View>
+                      <View
+                        dataSet={{}}
+                        style={
+                          {
+                            "width": 12.5,
+                          }
+                        }
+                      />
+                      <View
+                        dataSet={{}}
+                        style={
+                          {
+                            "borderRadius": 8,
+                            "flexGrow": 1,
+                            "overflow": "hidden",
+                          }
+                        }
+                      >
+                        <View
+                          accessible={true}
+                          collapsable={false}
+                          focusable={true}
+                          onClick={[Function]}
+                          onResponderGrant={[Function]}
+                          onResponderMove={[Function]}
+                          onResponderRelease={[Function]}
+                          onResponderTerminate={[Function]}
+                          onResponderTerminationRequest={[Function]}
+                          onStartShouldSetResponder={[Function]}
+                          style={
+                            {
+                              "opacity": 1,
+                            }
+                          }
+                          testID="follow-list-display"
+                        >
+                          <ViewManagerAdapter_ExpoLinearGradient
+                            proxiedProperties={
+                              {
+                                "colors": [
+                                  4278220774,
+                                  4286456526,
+                                ],
+                                "endPoint": [
+                                  1,
+                                  1,
+                                ],
+                                "locations": undefined,
+                                "startPoint": [
+                                  0,
+                                  0,
+                                ],
+                              }
+                            }
+                            style={
+                              {
+                                "padding": 12.5,
+                              }
+                            }
+                          >
+                            <View
+                              dataSet={{}}
+                              style={
+                                {
+                                  "alignItems": "center",
+                                  "display": "flex",
+                                  "justifyContent": "center",
+                                }
+                              }
+                            >
+                              <Text
+                                style={
+                                  [
+                                    {
+                                      "color": "white",
+                                    },
+                                    {
+                                      "fontFamily": undefined,
+                                      "fontSize": 23,
+                                    },
+                                    undefined,
+                                  ]
+                                }
+                              >
+                                20
+                              </Text>
+                              <Text
+                                style={
+                                  [
+                                    {
+                                      "color": "white",
+                                    },
+                                    {
+                                      "fontFamily": undefined,
+                                      "fontSize": 15,
+                                    },
+                                    undefined,
+                                  ]
+                                }
+                              >
+                                Following
+                              </Text>
+                            </View>
+                          </ViewManagerAdapter_ExpoLinearGradient>
+                        </View>
+                      </View>
+                    </View>
+                    <View
+                      dataSet={{}}
+                      style={
+                        {
+                          "height": 12.5,
+                        }
+                      }
+                    />
+                    <View
+                      isFullWidth={true}
+                      onPress={[Function]}
+                      style={
+                        [
+                          {
+                            "borderRadius": 10,
+                            "shadowColor": "black",
+                            "shadowOffset": {
+                              "height": 5,
+                              "width": 5,
+                            },
+                            "shadowOpacity": 0.15,
+                          },
+                        ]
+                      }
+                      testID="settings-button"
+                      type={1}
+                    >
+                      <View
+                        accessible={true}
+                        collapsable={false}
+                        focusable={true}
+                        onClick={[Function]}
+                        onResponderGrant={[Function]}
+                        onResponderMove={[Function]}
+                        onResponderRelease={[Function]}
+                        onResponderTerminate={[Function]}
+                        onResponderTerminationRequest={[Function]}
+                        onStartShouldSetResponder={[Function]}
+                        style={
+                          {
+                            "opacity": 1,
+                          }
+                        }
+                      >
+                        <ViewManagerAdapter_ExpoLinearGradient
+                          proxiedProperties={
+                            {
+                              "colors": [
+                                4288782762,
+                                4285624698,
+                              ],
+                              "endPoint": [
+                                1,
+                                1,
+                              ],
+                              "locations": undefined,
+                              "startPoint": [
+                                0,
+                                0,
+                              ],
+                            }
+                          }
+                          style={
+                            [
+                              {
+                                "alignItems": "center",
+                                "borderRadius": 10,
+                                "flexDirection": "row",
+                                "justifyContent": "center",
+                                "paddingHorizontal": 40,
+                                "paddingVertical": 15,
+                              },
+                              {
+                                "width": "100%",
+                              },
+                            ]
+                          }
+                        >
+                          <Text
+                            style={
+                              [
+                                {
+                                  "color": "#18181b",
+                                },
+                                {
+                                  "color": "#e4e4e7",
+                                  "fontFamily": undefined,
+                                  "fontSize": 19,
+                                },
+                                [
+                                  null,
+                                  {
+                                    "alignSelf": "center",
+                                  },
+                                ],
+                              ]
+                            }
+                          >
+                            Settings
+                          </Text>
+                          <View
+                            style={
+                              {
+                                "marginLeft": 5,
+                              }
+                            }
+                          />
+                        </ViewManagerAdapter_ExpoLinearGradient>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+                <View
+                  dataSet={{}}
+                  style={{}}
+                >
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#18181b",
+                        },
+                        {
+                          "fontFamily": undefined,
+                          "fontSize": 19,
+                        },
+                        undefined,
+                      ]
+                    }
+                  >
+                    Test User
+                  </Text>
+                  <View
+                    dataSet={{}}
+                    style={
+                      {
+                        "marginTop": 8,
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        [
+                          {
+                            "color": "#18181b",
+                          },
+                          {
+                            "fontFamily": undefined,
+                            "fontSize": 15,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      Test Biography
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RNSScreen>
+    </RNSScreenStack>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`ProfileHeader should push navigation to Settings when Settings button is pressed 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "flex": 1,
+        },
+        undefined,
+      ]
+    }
+  >
+    <RNSScreenStack
+      style={
+        {
+          "flex": 1,
+        }
+      }
+    >
+      <RNSScreen
+        collapsable={false}
+        forwardedRef={[Function]}
+        gestureResponseDistance={
+          {
+            "bottom": -1,
+            "end": -1,
+            "start": -1,
+            "top": -1,
+          }
+        }
+        nativeBackButtonDismissalEnabled={false}
+        onAppear={[Function]}
+        onDisappear={[Function]}
+        onDismissed={[Function]}
+        onHeaderBackButtonClicked={[Function]}
+        onNativeDismissCancelled={[Function]}
+        onTransitionProgress={[Function]}
+        onWillDisappear={[Function]}
+        replaceAnimation="push"
+        stackPresentation="push"
+        style={
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+        swipeDirection="horizontal"
+      >
+        <RNSScreenStackHeaderConfig
+          backButtonInCustomView={false}
+          backgroundColor="rgb(255, 255, 255)"
+          color="rgb(0, 122, 255)"
+          direction="ltr"
+          disableBackButtonMenu={false}
+          hidden={false}
+          hideBackButton={false}
+          largeTitleHideShadow={false}
+          title="TestScreen"
+          titleColor="rgb(28, 28, 30)"
+          topInsetEnabled={false}
+          translucent={false}
+        />
+        <View
+          accessibilityElementsHidden={false}
+          importantForAccessibility="auto"
+          style={
+            {
+              "flex": 1,
+              "flexDirection": "column-reverse",
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "flex": 1,
+                },
+                {
+                  "backgroundColor": "rgb(242, 242, 242)",
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              dataSet={{}}
+              style={{}}
+            >
+              <View
+                dataSet={{}}
+                style={{}}
+              >
+                <View
+                  dataSet={{}}
+                  style={
+                    {
+                      "flexDirection": "row",
+                      "marginBottom": 12.5,
+                    }
+                  }
+                >
+                  <View
+                    dataSet={{}}
+                    style={
+                      {
+                        "width": 100,
+                      }
+                    }
+                  >
+                    <View
+                      dataSet={{}}
+                      style={
+                        [
+                          {},
+                          {
+                            "aspectRatio": 1,
+                            "style": undefined,
+                          },
+                        ]
+                      }
+                    >
+                      <View
+                        dataSet={{}}
+                        style={
+                          [
+                            {
+                              "alignItems": "center",
+                              "backgroundColor": "#a1a1aa",
+                              "borderColor": "#27272a",
+                              "borderRadius": 9999,
+                              "height": "100%",
+                              "justifyContent": "center",
+                              "position": "relative",
+                              "width": "100%",
+                            },
+                            {
+                              "bottom": 0,
+                              "left": 0,
+                              "position": "absolute",
+                              "right": 0,
+                              "top": 0,
+                            },
+                          ]
+                        }
+                      >
+                        <Image
+                          accessibilityLabel="--"
+                          alt="--"
+                          dataSet={{}}
+                          onError={[Function]}
+                          source={
+                            {
+                              "uri": "https://robohash.org/123",
+                            }
+                          }
+                          style={
+                            [
+                              {
+                                "borderRadius": 9999,
+                                "maxWidth": "100%",
+                              },
+                              {
+                                "height": "100%",
+                                "width": "100%",
+                              },
+                            ]
+                          }
+                        />
+                      </View>
+                    </View>
+                  </View>
+                  <View
+                    dataSet={{}}
+                    style={
+                      {
+                        "width": 25,
+                      }
+                    }
+                  />
+                  <View
+                    dataSet={{}}
+                    style={
+                      {
+                        "flex": 1,
+                      }
+                    }
+                  >
+                    <View
+                      dataSet={{}}
+                      style={
+                        {
+                          "flex": 1,
+                          "flexDirection": "row",
+                        }
+                      }
+                    >
+                      <View
+                        dataSet={{}}
+                        style={
+                          {
+                            "borderRadius": 8,
+                            "flexGrow": 1,
+                            "overflow": "hidden",
+                          }
+                        }
+                      >
+                        <View
+                          accessible={true}
+                          collapsable={false}
+                          focusable={true}
+                          onClick={[Function]}
+                          onResponderGrant={[Function]}
+                          onResponderMove={[Function]}
+                          onResponderRelease={[Function]}
+                          onResponderTerminate={[Function]}
+                          onResponderTerminationRequest={[Function]}
+                          onStartShouldSetResponder={[Function]}
+                          style={
+                            {
+                              "opacity": 1,
+                            }
+                          }
+                          testID="follow-list-display"
+                        >
+                          <ViewManagerAdapter_ExpoLinearGradient
+                            proxiedProperties={
+                              {
+                                "colors": [
+                                  4278220774,
+                                  4286456526,
+                                ],
+                                "endPoint": [
+                                  1,
+                                  1,
+                                ],
+                                "locations": undefined,
+                                "startPoint": [
+                                  0,
+                                  0,
+                                ],
+                              }
+                            }
+                            style={
+                              {
+                                "padding": 12.5,
+                              }
+                            }
+                          >
+                            <View
+                              dataSet={{}}
+                              style={
+                                {
+                                  "alignItems": "center",
+                                  "display": "flex",
+                                  "justifyContent": "center",
+                                }
+                              }
+                            >
+                              <Text
+                                style={
+                                  [
+                                    {
+                                      "color": "white",
+                                    },
+                                    {
+                                      "fontFamily": undefined,
+                                      "fontSize": 23,
+                                    },
+                                    undefined,
+                                  ]
+                                }
+                              >
+                                10
+                              </Text>
+                              <Text
+                                style={
+                                  [
+                                    {
+                                      "color": "white",
+                                    },
+                                    {
+                                      "fontFamily": undefined,
+                                      "fontSize": 15,
+                                    },
+                                    undefined,
+                                  ]
+                                }
+                              >
+                                Follower
+                              </Text>
+                            </View>
+                          </ViewManagerAdapter_ExpoLinearGradient>
+                        </View>
+                      </View>
+                      <View
+                        dataSet={{}}
+                        style={
+                          {
+                            "width": 12.5,
+                          }
+                        }
+                      />
+                      <View
+                        dataSet={{}}
+                        style={
+                          {
+                            "borderRadius": 8,
+                            "flexGrow": 1,
+                            "overflow": "hidden",
+                          }
+                        }
+                      >
+                        <View
+                          accessible={true}
+                          collapsable={false}
+                          focusable={true}
+                          onClick={[Function]}
+                          onResponderGrant={[Function]}
+                          onResponderMove={[Function]}
+                          onResponderRelease={[Function]}
+                          onResponderTerminate={[Function]}
+                          onResponderTerminationRequest={[Function]}
+                          onStartShouldSetResponder={[Function]}
+                          style={
+                            {
+                              "opacity": 1,
+                            }
+                          }
+                          testID="follow-list-display"
+                        >
+                          <ViewManagerAdapter_ExpoLinearGradient
+                            proxiedProperties={
+                              {
+                                "colors": [
+                                  4278220774,
+                                  4286456526,
+                                ],
+                                "endPoint": [
+                                  1,
+                                  1,
+                                ],
+                                "locations": undefined,
+                                "startPoint": [
+                                  0,
+                                  0,
+                                ],
+                              }
+                            }
+                            style={
+                              {
+                                "padding": 12.5,
+                              }
+                            }
+                          >
+                            <View
+                              dataSet={{}}
+                              style={
+                                {
+                                  "alignItems": "center",
+                                  "display": "flex",
+                                  "justifyContent": "center",
+                                }
+                              }
+                            >
+                              <Text
+                                style={
+                                  [
+                                    {
+                                      "color": "white",
+                                    },
+                                    {
+                                      "fontFamily": undefined,
+                                      "fontSize": 23,
+                                    },
+                                    undefined,
+                                  ]
+                                }
+                              >
+                                20
+                              </Text>
+                              <Text
+                                style={
+                                  [
+                                    {
+                                      "color": "white",
+                                    },
+                                    {
+                                      "fontFamily": undefined,
+                                      "fontSize": 15,
+                                    },
+                                    undefined,
+                                  ]
+                                }
+                              >
+                                Following
+                              </Text>
+                            </View>
+                          </ViewManagerAdapter_ExpoLinearGradient>
+                        </View>
+                      </View>
+                    </View>
+                    <View
+                      dataSet={{}}
+                      style={
+                        {
+                          "height": 12.5,
+                        }
+                      }
+                    />
+                    <View
+                      isFullWidth={true}
+                      onPress={[Function]}
+                      style={
+                        [
+                          {
+                            "borderRadius": 10,
+                            "shadowColor": "black",
+                            "shadowOffset": {
+                              "height": 5,
+                              "width": 5,
+                            },
+                            "shadowOpacity": 0.15,
+                          },
+                        ]
+                      }
+                      testID="settings-button"
+                      type={1}
+                    >
+                      <View
+                        accessible={true}
+                        collapsable={false}
+                        focusable={true}
+                        onClick={[Function]}
+                        onResponderGrant={[Function]}
+                        onResponderMove={[Function]}
+                        onResponderRelease={[Function]}
+                        onResponderTerminate={[Function]}
+                        onResponderTerminationRequest={[Function]}
+                        onStartShouldSetResponder={[Function]}
+                        style={
+                          {
+                            "opacity": 1,
+                          }
+                        }
+                      >
+                        <ViewManagerAdapter_ExpoLinearGradient
+                          proxiedProperties={
+                            {
+                              "colors": [
+                                4288782762,
+                                4285624698,
+                              ],
+                              "endPoint": [
+                                1,
+                                1,
+                              ],
+                              "locations": undefined,
+                              "startPoint": [
+                                0,
+                                0,
+                              ],
+                            }
+                          }
+                          style={
+                            [
+                              {
+                                "alignItems": "center",
+                                "borderRadius": 10,
+                                "flexDirection": "row",
+                                "justifyContent": "center",
+                                "paddingHorizontal": 40,
+                                "paddingVertical": 15,
+                              },
+                              {
+                                "width": "100%",
+                              },
+                            ]
+                          }
+                        >
+                          <Text
+                            style={
+                              [
+                                {
+                                  "color": "#18181b",
+                                },
+                                {
+                                  "color": "#e4e4e7",
+                                  "fontFamily": undefined,
+                                  "fontSize": 19,
+                                },
+                                [
+                                  null,
+                                  {
+                                    "alignSelf": "center",
+                                  },
+                                ],
+                              ]
+                            }
+                          >
+                            Settings
+                          </Text>
+                          <View
+                            style={
+                              {
+                                "marginLeft": 5,
+                              }
+                            }
+                          />
+                        </ViewManagerAdapter_ExpoLinearGradient>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+                <View
+                  dataSet={{}}
+                  style={{}}
+                >
+                  <Text
+                    style={
+                      [
+                        {
+                          "color": "#18181b",
+                        },
+                        {
+                          "fontFamily": undefined,
+                          "fontSize": 19,
+                        },
+                        undefined,
+                      ]
+                    }
+                  >
+                    Test User
+                  </Text>
+                  <View
+                    dataSet={{}}
+                    style={
+                      {
+                        "marginTop": 8,
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        [
+                          {
+                            "color": "#18181b",
+                          },
+                          {
+                            "fontFamily": undefined,
+                            "fontSize": 15,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      Test Biography
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RNSScreen>
+    </RNSScreenStack>
+  </View>
+</RNCSafeAreaProvider>
+`;

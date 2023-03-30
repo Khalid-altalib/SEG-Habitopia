@@ -17,7 +17,7 @@ import { SignInFormValues, TextType } from "../../../../../types";
 const PasswordField = ({ control }: Props) => (
   <>
     <FieldText />
-    <FieldInput control={control} />
+    <FieldInput control={control} autoCapitalize="none" />
   </>
 );
 
@@ -49,6 +49,7 @@ const FieldInput = ({ control }: Props) => (
         placeholder="Password"
         type="password"
         testID="password-input"
+        autoCapitalize="none"
       />
     )}
     name="password"

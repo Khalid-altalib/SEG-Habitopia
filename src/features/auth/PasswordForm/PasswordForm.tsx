@@ -4,9 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import { AntDesign } from "@expo/vector-icons";
 
 import {
-  addLogInData,
   addSignUpData,
-  logInUser,
   signUpUser,
 } from "../authSlice";
 import { useDispatch } from "../../../app/hooks";
@@ -21,6 +19,12 @@ type formData = {
   password: string;
 };
 
+/**
+ * A form for accepting the user's password while providing
+ * information about the password requirements
+ *
+ * @returns The component representing the password
+ */
 const PasswordForm = () => {
   const { control, handleSubmit } = useForm({
     defaultValues: {
@@ -39,6 +43,10 @@ const PasswordForm = () => {
 
     if (!password.match("^(?=.*[a-z])(?=.*[A-Z]).+$")) {
       error = "Must contain both uppercase and lowercase characters";
+    }
+
+    if (!password.match(".*[0-9].*")) {
+      error = "Must contain at least one number";
     }
 
     if (password.length < 8) {
@@ -70,6 +78,7 @@ const PasswordForm = () => {
             size="xl"
             type="password"
             testID="password-input"
+            autoCapitalize="none"
           />
         )}
         name="password"

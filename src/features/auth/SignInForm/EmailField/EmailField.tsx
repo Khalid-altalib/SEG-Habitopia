@@ -17,7 +17,7 @@ import { SignInFormValues, TextType } from "../../../../../types";
 const EmailField = ({ control }: Props) => (
   <>
     <FieldText />
-    <FieldInput control={control} />
+    <FieldInput control={control} autoCapitalize="none" />
   </>
 );
 
@@ -48,6 +48,7 @@ const FieldInput = ({ control }: Props) => (
         size="xl"
         placeholder="Email"
         testID="email-input"
+        autoCapitalize="none"
       />
     )}
     name="email"

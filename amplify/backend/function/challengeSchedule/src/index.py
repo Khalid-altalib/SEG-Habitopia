@@ -4,7 +4,7 @@ import time
 from datetime import datetime, timedelta
 
 """
-    Trigger event handler for cloudwatch scheduled event (every 12 hours)
+    Trigger event handler for cloudwatch scheduled event (every 5 minutes)
      - Stops and sets expired active challenges to completed
      - Starts queued inactive challenges if full or older than a day
 
@@ -24,7 +24,7 @@ def handler(event, context):
     #payload class: query for active challenges
     class payloadGetActiveChallenges:
         def __init__(self):
-            self.query = "{\"query\":\"query getActiveChallenges {\\r\\n        challengesByStatus(status: ACTIVE) {\\r\\n            items {\\r\\n                id\\r\\n                started\\r\\n                _version\\r\\n                _deleted\\r\\n            }\\r\\n        }\\r\\n    }\",\"variables\":{}}"
+            self.query = "{\"query\":\"query getActiveChallenges {\\r\\n    challengesByStatus(status: ACTIVE) {\\r\\n        items{\\r\\n            id\\r\\n            started\\r\\n            _version\\r\\n            _deleted\\r\\n            challengeChatRoomId\\r\\n            Users {\\r\\n                items {\\r\\n                    user {\\r\\n                        name\\r\\n                    }\\r\\n                }\\r\\n            }\\r\\n            ChallengeType {\\r\\n                name\\r\\n                description\\r\\n            }\\r\\n        }\\r\\n    }\\r\\n}\",\"variables\":{}}"
         
         def asPayload(self):
             return self.query
@@ -74,8 +74,8 @@ def handler(event, context):
 
     #Set queued full or waiting inactive challenges to active
     for chalToStart in challengesToStartWithoutDeleted:
-        if ((datetime.strptime(chalToStart["updatedAt"],"%Y-%m-%dT%H:%M:%S.%fZ") < (datetime.today() - timedelta(minutes=5))) and (chalToStart["userCount"]>=3)):
+        if ((datetime.strptime(chalToStart["updatedAt"],"%Y-%m-%dT%H:%M:%S.%fZ") < (datetime.today() - timedelta(minutes=1))) and (chalToStart["userCount"]>=3)):
             responseSetChallengeActive = requests.request("POST", url, headers=headers, data=payloadSetChallengeActive(chalToStart["id"], chalToStart["_version"]).asPayload())
             updateResponseAsJson = json.loads(responseSetChallengeActive.text)["data"]["updateChallenge"]
-
+    
     return "SUCCESS"

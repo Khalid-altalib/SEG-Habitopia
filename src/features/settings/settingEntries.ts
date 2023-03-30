@@ -1,3 +1,7 @@
+/**
+ * The input settings that will be displayed in the settings page
+ */
+
 type SettingEntries = {
   [key: string]: SettingEntry;
 };

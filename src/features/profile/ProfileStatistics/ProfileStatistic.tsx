@@ -1,13 +1,25 @@
+// Native Base
 import { Box, theme, useColorModeValue } from "native-base";
+
+// React
 import React from "react";
-import { Statistic, TextType } from "../../../../types";
+
+// Expo Linear Gradient
 import { LinearGradient } from "expo-linear-gradient";
+
+// Habitopia
+import { Statistic, TextType } from "types";
 import Text from "@components/Text";
 
 type Props = {
   statistic: Statistic;
 };
 
+/**
+ * Renders a statistic for a user's profile.
+ *
+ * @returns The component representing the statistic for a user's profile.
+ */
 const ProfileStatistic = (props: Props) => {
   const { statistic } = props;
   const { name, quantity } = statistic;

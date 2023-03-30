@@ -10,6 +10,14 @@ type Props = {
   defaultValue: boolean;
 };
 
+/**
+ * A component that toggles the associated setting state between
+ * true and false
+ *
+ * @param props - The properties passed to the component.
+ * @returns - The notification toggle component.
+ */
+
 const NotificationToggle = (props: Props) => {
   const [switchEnabled, setSwitchEnabled] = useState(props.defaultValue);
   const dispatch = useDispatch();

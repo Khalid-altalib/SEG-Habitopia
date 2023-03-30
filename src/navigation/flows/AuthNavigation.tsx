@@ -16,6 +16,12 @@ import SignInScreen from "../../screens/authentication/SignInScreen";
 
 export const AuthStack = createNativeStackNavigator<AuthParams>();
 
+/**
+ * This component handles the navigation between the various authorization
+ * screens
+ *
+ * @returns The component representing the authorisation navigation system
+ */
 const AuthNavigation = () => {
   return (
     <AuthStack.Navigator initialRouteName="Welcome">

@@ -5,6 +5,10 @@ import LeaderboardSettings from "@features/leaderboard/LeaderboardSettings/Leade
 import Background from "@components/Background";
 import PaddedContainer from "@components/PaddedContainer";
 
+/**
+ * @returns A React component which displays leaderboards
+ * for each challenge type that exists
+ */
 const LeaderboardScreen = (): JSX.Element => {
   return (
     <Background>

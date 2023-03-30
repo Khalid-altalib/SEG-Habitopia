@@ -1,17 +1,25 @@
+// React
+import React, { useEffect, useState } from "react";
+
+// Habitopia
 import { useDispatch, useSelector } from "@app/hooks";
 import { Button } from "native-base";
-import React, { useEffect, useState } from "react";
-import { Toast } from "react-native-toast-message/lib/src/Toast";
 import { followUser } from "../profileSlice";
 
+// React Native Toast Message
+import { Toast } from "react-native-toast-message/lib/src/Toast";
+
+/**
+ * A button component that handles following/unfollowing a user profile.
+ *
+ * @return The button component.
+ */
 const FollowButton = () => {
   // get profile and request status from redux
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.profile?.profile);
-  const { followUser: requestStatus } = useSelector((state) => state.profile);
-  const { loading } = requestStatus;
-  
-  // function to handle follow/unfollow
+  const { loading } = useSelector((state) => state.profile.followUser);
+
   const handleFollow = async () => {
     if (!profile?.following) {
       // if not following, follow

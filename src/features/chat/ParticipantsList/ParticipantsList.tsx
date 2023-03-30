@@ -1,4 +1,5 @@
 import { useSelector } from "@app/hooks";
+import StatusContainer from "@components/StatusContainer/StatusContainer";
 import UserList from "@components/UserList/UserList";
 import { Box, Heading, Text, VStack } from "native-base";
 import React from "react";
@@ -16,10 +17,17 @@ const ParticipantsList = (props: Props) => {
     (state) => state.chats.details?.participants
   );
 
+  const requestStatus = useSelector((state) => state.chats.fetchDetails);
+  const { loading, error } = requestStatus;
+
   return (
     <VStack>
-      <Heading mb={4}>Participants</Heading>
-      <UserList users={participants} />
+      <Heading mb={5} mt={10}>
+        Participants
+      </Heading>
+      <StatusContainer data={participants} loading={loading} error={error}>
+        <UserList users={participants} />
+      </StatusContainer>
     </VStack>
   );
 };

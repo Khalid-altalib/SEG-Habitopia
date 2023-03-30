@@ -12,6 +12,13 @@ type Props = {
   settingType: string;
 };
 
+/**
+ * An input box that updates the state of the associated setting
+ * to be submitted to the server
+ *
+ * @param props - The properties passed to the component.
+ * @returns - The generic setting component.
+ */
 const GenericSetting = (props: Props) => {
   const { defaultValue, settingType } = props;
 
