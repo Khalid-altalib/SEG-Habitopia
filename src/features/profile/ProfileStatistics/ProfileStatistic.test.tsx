@@ -22,6 +22,7 @@ describe("ProfileStatistic", () => {
       },
     },
   };
+   // Mock the store and wrap the component in the TestingWrapperNavigation for testing
 
   const mockStore = configureStore([thunk])(mockState);
   let wrapper: any;
@@ -32,6 +33,7 @@ describe("ProfileStatistic", () => {
       </TestingWrapperNavigation>
     );
   });
+   // test that the component renders correctly with snapshot testing
 
   it("renders correctly", () => {
     expect(wrapper).toMatchSnapshot();

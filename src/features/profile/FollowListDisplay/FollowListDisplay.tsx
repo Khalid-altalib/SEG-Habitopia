@@ -15,24 +15,24 @@ type Props = {
 };
 
 const FollowListDisplay = (props: Props) => {
-  const { followListMode, followCount } = props;
-  const profile = useSelector((state) => state.profile?.profile);
-
-  const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
-
-  const dispatch = useDispatch();
-
+  // get props and redux state 
+  const { followListMode, followCount } = props; 
+  const profile = useSelector((state) => state.profile?.profile); 
+  const navigation = useNavigation<NativeStackNavigationProp<RootParams>>(); 
+ 
+  const dispatch = useDispatch(); 
+ 
   const handlePress = () => {
     navigation.push("FollowList", { followListMode: followListMode });
     dispatch(fetchFollowList({ followListMode, profileID: profile?.userId }));
-  };
-
-  // Gets the capitalized form of the follow list type
-
-  const followListLabel =
-    followListMode[0].toUpperCase() + followListMode.slice(1);
-
-  return (
+  }; 
+ 
+  // Gets the capitalized form of the follow list type 
+  
+  const followListLabel = 
+    followListMode[0].toUpperCase() + followListMode.slice(1); 
+ 
+  return ( 
     <TouchableOpacity onPress={handlePress} testID="follow-list-display">
       <Box overflow="hidden" rounded="lg" flexGrow={1}>
         <LinearGradient

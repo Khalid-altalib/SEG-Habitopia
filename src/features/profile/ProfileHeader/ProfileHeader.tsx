@@ -1,27 +1,28 @@
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native"; 
+import { NativeStackNavigationProp } from "@react-navigation/native-stack"; 
 import { Box, HStack, View, VStack } from "native-base";
-import Text from "@components/Text";
-import React from "react";
-import { ButtonType, RootParams, TextType } from "../../../../types";
-import { useSelector } from "../../../app/hooks";
-import FollowButton from "../FollowButton/FollowButton";
-import FollowListDisplay from "../FollowListDisplay/FollowListDisplay";
-import Avatar from "@components/Avatar/Avatar";
-import Button from "@components/Button";
+import Text from "@components/Text"; 
+import React from "react"; 
+import { ButtonType, RootParams, TextType } from "../../../../types"; 
+import { useSelector } from "../../../app/hooks"; 
+import FollowButton from "../FollowButton/FollowButton"; 
+import FollowListDisplay from "../FollowListDisplay/FollowListDisplay"; 
+import Avatar from "@components/Avatar/Avatar"; 
+import Button from "@components/Button";                             
+ 
+type Props = { 
+  isLocalUserProfile: boolean; 
+}; 
 
-type Props = {
-  isLocalUserProfile: boolean;
-};
+const ProfileHeader = (props: Props) => { 
+  // get props and redux state
+  const { isLocalUserProfile } = props;  
+  const { profile } = useSelector((state) => state.profile); 
 
-const ProfileHeader = (props: Props) => {
-  const { isLocalUserProfile } = props;
-  const { profile } = useSelector((state) => state.profile);
-
-  const navigation = useNavigation<NativeStackNavigationProp<RootParams>>();
-
-  return (
-    <View>
+  const navigation = useNavigation<NativeStackNavigationProp<RootParams>>(); 
+ 
+  return ( 
+    <View> 
       {profile && (
         <Box>
           <HStack space={25} marginBottom={12.5}>

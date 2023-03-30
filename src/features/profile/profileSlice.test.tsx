@@ -18,6 +18,7 @@ import {
   isFollowingQuery,
 } from "./profileQueries";
 
+// mock functions that wont be needed for testing
 jest.mock("./statisticsQueries", () => ({
   getStatistics: jest.fn(),
 }));
@@ -34,6 +35,7 @@ jest.mock("./profileQueries", () => ({
   isFollowingQuery: jest.fn(),
 }));
 
+// define the mock state for the store
 const mockState: ProfileState = {
   profile: undefined,
   followList: undefined,
@@ -53,12 +55,7 @@ const mockState: ProfileState = {
 
 describe("fetchProfileBuilder", () => {
   let store: any;
-
-  const mockGetStatistics = {
-    checkIns: 100,
-    wins: 43,
-    streak: 5,
-  };
+  // define mock data that should be returned from the mocked functions
 
   const mockStatistics = [
     { name: "Streak", quantity: 5 },
@@ -76,19 +73,14 @@ describe("fetchProfileBuilder", () => {
     statistics: mockStatistics,
   };
 
-  const mockUser = {
-    id: "123",
-    name: "Test User",
-    biography: "This is a test biography",
-  };
-
   beforeEach(
     () =>
+    // create a mock store with the mock state and thunk middleware 
       (store = configureStore([thunk])({
         reducer: {
-          profile: profileSlice.reducer,
-        },
-        middleware: [thunk],
+          profile: profileSlice.reducer, 
+        }, 
+        middleware: [thunk], 
       }))
   );
 
@@ -101,6 +93,7 @@ describe("fetchProfileBuilder", () => {
     // if getUserFromDatabasebyID throws an error, fetchProfile should return an error
     (getUserFromDatabasebyID as jest.Mock).mockRejectedValue(new Error(error));
 
+    // expect the promise to be rejected and the error to be returned
     await expect(store.dispatch(fetchProfile("123"))).resolves.toMatchObject({
       error: expect.objectContaining({ message: "Rejected" }),
     });
@@ -112,7 +105,7 @@ describe("fetchProfileBuilder", () => {
       type: "profile/fetch/fulfilled",
       payload: mockProfile,
     };
-
+ 
     const state = profileSlice.reducer(mockState, expectedAction);
     expect(state.fetchProfile.loading).toEqual(false);
     expect(state.fetchProfile.error).toEqual("");
@@ -120,6 +113,7 @@ describe("fetchProfileBuilder", () => {
   });
 
   it("should handle fetchProfile.pending", async () => {
+    // ensure that the reducer handles the pending action correctly and returns the correct state
     const expectedAction = {
       type: "profile/fetch/pending",
     };
@@ -147,6 +141,7 @@ describe("fetchProfileBuilder", () => {
 describe("followUser", () => {
   let store: any;
 
+  // create a mock store with the mock state and thunk middleware 
   beforeEach(
     () =>
       (store = configureStore([thunk])({
@@ -157,8 +152,8 @@ describe("followUser", () => {
       }))
   );
 
-  // describe('followUser.fulfilled', () => {
   let state: ProfileState;
+  // create a mockState profile with arbritary data
   beforeEach(() => {
     mockState.profile = {
       userId: "test-id",
@@ -174,6 +169,7 @@ describe("followUser", () => {
   });
 
   it("should set profile.following to action.payload", () => {
+    // ensure that profile.following changes upon the fulfilled action
     const action = {
       payload: true,
       type: "profile/follow/fulfilled",
@@ -183,16 +179,20 @@ describe("followUser", () => {
   });
 
   it("should increment followerCount if action.payload is true", () => {
+    // ensure that profile.followerCount increases upon the fulfilled action and payload is true.
     const action = {
       payload: true,
       type: "profile/follow/fulfilled",
     };
+
     const state = profileSlice.reducer(mockState, action);
     expect(state.profile?.followerCount).toBe(1);
   });
 
   it("should decrement followerCount if action.payload is false", () => {
     mockState.profile.followerCount = 1;
+
+    // ensure that profile.followerCount decfreases upon the fulfilled action and payload is false
     const action = {
       payload: false,
       type: "profile/follow/fulfilled",
@@ -202,6 +202,8 @@ describe("followUser", () => {
   });
 
   it("should handle followUser.pending", () => {
+    // ensure that the reducer handles the pending action correctly and returns the correct state
+
     const action = {
       type: "profile/follow/pending",
     };
@@ -211,6 +213,8 @@ describe("followUser", () => {
   });
 
   it("should return true when followUserQuery resolves", async () => {
+    // ensure that the followUserQuery returns the correct value, and that the action type is correct
+
     (followUserQuery as jest.Mock).mockResolvedValueOnce(true);
     const result = await store.dispatch(followUser("test-id"));
     expect(result.payload).toBe(true);
@@ -218,6 +222,7 @@ describe("followUser", () => {
   });
 
   it("should return error message when followUserQuery rejects", async () => {
+    // if followUserQuery gives an error, we should return an error action.
     (followUserQuery as jest.Mock).mockRejectedValueOnce(
       new Error("test error")
     );
@@ -238,11 +243,13 @@ describe("fetchFollowList", () => {
         middleware: [thunk],
       }))
   );
+
   it('should return following list when followListMode is "following"', async () => {
-    expect(true).toBe(true);
+    // mock getFollowing to give arbitrary follower
     (getFollowing as jest.Mock).mockResolvedValueOnce([
       { name: "test", userId: "test-id" },
     ]);
+    // expect correct result
     const result = await store.dispatch(
       fetchFollowList({ followListMode: "following", profileID: "test-id" })
     );
@@ -250,9 +257,11 @@ describe("fetchFollowList", () => {
   });
 
   it('should return followers list when followListMode is "follower"', async () => {
+    // mock getFollowers to give arbitrary follower
     (getFollowers as jest.Mock).mockResolvedValueOnce([
       { name: "test", userId: "test-id" },
     ]);
+    // expect correct result
     const result = await store.dispatch(
       fetchFollowList({ followListMode: "follower", profileID: "test-id" })
     );
@@ -260,7 +269,10 @@ describe("fetchFollowList", () => {
   });
 
   it("should return error message when getFollowing rejects", async () => {
+    // mock getFollowing to throw an error, and expect it to reject.
     (getFollowing as jest.Mock).mockRejectedValueOnce(new Error("test error"));
+    
+    // expect error to be returned
     const result = await store.dispatch(
       fetchFollowList({ followListMode: "following", profileID: "test-id" })
     );
@@ -268,7 +280,10 @@ describe("fetchFollowList", () => {
   });
 
   it("should return error message when getFollowers rejects", async () => {
+    // mock getFollowing to throw an error
     (getFollowers as jest.Mock).mockRejectedValueOnce(new Error("test error"));
+    
+    // expect error to be returned
     const result = await store.dispatch(
       fetchFollowList({ followListMode: "follower", profileID: "test-id" })
     );
@@ -279,7 +294,7 @@ describe("fetchFollowList", () => {
 describe("fetchFollowListBuilder", () => {
   let store: any;
   let state: ProfileState;
-
+  // initial mockState profile
   mockState.profile = {
     userId: "test-id",
     name: "test-name",
@@ -292,6 +307,7 @@ describe("fetchFollowListBuilder", () => {
     following: false,
   };
 
+  // create a mock store with the mock state and thunk middleware 
   beforeEach(
     () =>
       (store = configureStore([thunk])({
@@ -303,6 +319,7 @@ describe("fetchFollowListBuilder", () => {
   );
 
   it('should return following list when followListMode is "following"', async () => {
+    // ensure that the reducer handles the fulfilled action correctly and returns the correct state
     const action = {
       payload: [{ name: "FollowListItem1", userId: "test-id" }],
       type: "profile/fetch-follow-list/fulfilled",
@@ -312,7 +329,9 @@ describe("fetchFollowListBuilder", () => {
     expect(state.fetchFollowList.loading).toBe(false);
     expect(state.fetchFollowList.error).toBe("");
   });
+
   it("should handle fetchFollowList.pending", () => {
+    // ensure that the reducer handles the pending action correctly and returns the correct state
     const action = {
       type: "profile/fetch-follow-list/pending",
     };
@@ -320,7 +339,9 @@ describe("fetchFollowListBuilder", () => {
     expect(state.fetchFollowList.loading).toBe(true);
     expect(state.fetchFollowList.error).toBe("");
   });
+
   it("should return error message when fetchFollowList rejects", async () => {
+    // ensure that the reducer handles the rejected action correctly and returns the correct state
     const action = {
       payload: "An error has occured",
       type: "profile/fetch-follow-list/rejected",
@@ -334,6 +355,7 @@ describe("fetchFollowListBuilder", () => {
 
 describe("fetchProfile", () => {
   let fetchProfileStore: any;
+  // provide mock values for the complex functions
 
   const mockStatistics = [
     { name: "Streak", quantity: 5 },
@@ -363,6 +385,7 @@ describe("fetchProfile", () => {
 
   jest.resetAllMocks();
 
+  // create a mock store with the mock state and thunk middleware 
   beforeEach(
     () =>
       (fetchProfileStore = configureStore([thunk])({
@@ -374,13 +397,14 @@ describe("fetchProfile", () => {
   );
 
   it("should return profile when fetchProfileQuery resolves", async () => {
+    // use mock values for complex functions
     (getStatistics as jest.Mock).mockResolvedValueOnce(mockGetStatistics);
     (getUserFromDatabasebyID as jest.Mock).mockResolvedValue(mockUser);
     (getCount as jest.Mock).mockResolvedValueOnce(mockGetCount);
     (isFollowingQuery as jest.Mock).mockResolvedValueOnce(true);
 
     const result = await fetchProfileStore.dispatch(fetchProfile("123"));
-
+    // expect mock profile to be returned 
     expect(result.payload).toEqual({
       userId: "123",
       name: "test-name",
@@ -390,6 +414,7 @@ describe("fetchProfile", () => {
       followingCount: 10,
       following: true,
     });
+    // expect action type to be fulfilled.
     expect(result.type).toBe("profile/fetch/fulfilled");
   });
 });

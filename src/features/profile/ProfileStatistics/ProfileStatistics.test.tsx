@@ -5,6 +5,7 @@ import TestingWrapperNavigation from "@app/testingWrapperWithNavigation";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 
+// Mock the useSelector hook and return arbitrary profile data with some statistics
 jest.mock("@app/hooks", () => ({
   useSelector: jest.fn(() => ({
     profile: {
@@ -28,6 +29,7 @@ describe("ProfileStatistics", () => {
       },
     },
   };
+  // Mock the store and wrap the component in the TestingWrapperNavigation for testing
 
   const mockStore = configureStore([thunk])(mockState);
   let wrapper: any;
@@ -38,7 +40,7 @@ describe("ProfileStatistics", () => {
       </TestingWrapperNavigation>
     );
   });
-
+  // test that the component renders correctly with snapshot testing
   it("renders correctly", () => {
     expect(wrapper).toMatchSnapshot();
   });
