@@ -27,18 +27,24 @@ with other users in a social environment.
 
 ## Accessing the deployed version
 
-Download the [Expo Go](https://expo.dev/client) app from the Android Play Store or the Apple App Store.
+To access the Habitopia App, follow these steps:
 
-Expo Go allows us to share the deployed version of the app without paying for an Apple Developer Programme licence or joining the Android Developer Programme.
+- Open a web browser and go to the website https://appetize.io/.
 
-Apple places restrictions on the Expo Go app. These restrictions mean that if you are on iOS then you will need to be a member of our developer organisation to access the app within Expo Go. We have created a dummy member account for this purpose. Within the Expo Go app, click the log in button and use the following user details:
+- On the top right corner of the page, click on the "Sign In" button.
 
-- Email: habitopia@mail.com
-- Password: habitopia
+- Enter the following login credentials:
+    Email: habitopia1@gmail.com
+    Password: Password.123
 
-Go to the [app page](https://expo.dev/@habitopia/habitopia?serviceType=classic&distribution=expo-go) on the Expo Store.
+- Once logged in, select the appropriate operating system option for your device (IOS or Android).
 
-Follow the instructions on the app page to load the Habitopia app within Expo Go.
+- You can log in to the application using the generated mock user with the details:
+    Email: john.doe@example.org, bob.smith@example.org, petra.pickles@example.org
+    Password: Password.123
+
+The bundle for both operating systems was built using [EAS Build Tool](https://docs.expo.dev/build/introduction/),
+for Android APK using https://docs.expo.dev/build-reference/apk/ and for iOS .app using https://docs.expo.dev/build-reference/apk/.
 
 ## Contributors
 
@@ -51,3 +57,8 @@ Follow the instructions on the app page to load the Habitopia app within Expo Go
 - [Tareita Nawaz](https://github.com/tareita)
 - [Tony Smith](https://github.com/toggysmith)
 - [Vikash Senthil Kumar](https://github.com/Vikash-Vikash)
+
+## Known Bugs
+1. On joining a challenge chat with no messages, after sending a message the page has to be
+reloaded to see current and new messages.
+2. Fonts do not load in the deployed build; an issue with Expo itself: [click for expo issue](https://github.com/expo/expo/issues/21888)
