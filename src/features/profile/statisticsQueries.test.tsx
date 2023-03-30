@@ -8,10 +8,10 @@ import {
 } from "./statisticsQueries";
 import { ChallengeStatusEnum } from "../../models";
 
+// mock complex functions
 jest.mock("../../app/util", () => ({
   getUserFromDatabasebyID: jest.fn(),
 }));
-jest.resetAllMocks();
 
 jest.mock("aws-amplify", () => ({
   DataStore: {
@@ -22,6 +22,7 @@ jest.mock("aws-amplify", () => ({
 
 describe("getCheckIns", () => {
   it("should return the number of check-ins for a user", async () => {
+    // mock getUserFromDatabasebyID to return arbitrary profile with some checkins
     (getUserFromDatabasebyID as jest.Mock).mockResolvedValue({
       id: "123",
       name: "Test User",
@@ -32,6 +33,7 @@ describe("getCheckIns", () => {
       ],
     });
 
+    // expect it to return the correct number of validated checkIns
     const checkinCount = await getCheckIns("123");
     expect(checkinCount).toEqual(2);
   });
@@ -57,15 +59,18 @@ describe("getWins", () => {
   ];
 
   it("should return the number of wins", async () => {
+    // mock DataStore query to return mock challenges data
     const winsQueryMock = jest.fn(() => Promise.resolve(mockUserChallenges));
     DataStore.query = winsQueryMock;
 
+    // expect it to count the number of completed challenges
     const result = await getWins("123");
     expect(result).toEqual(2);
   });
 });
 
-describe("getStatistics", () => {
+describe("getStatistics", () => { 
+  // mock getUserFromDatabasebyID to return arbitrary profile with some checkins  
   (getUserFromDatabasebyID as jest.Mock).mockResolvedValue({
     id: "123",
     name: "Test User",
@@ -88,6 +93,7 @@ describe("getStatistics", () => {
 });
 
 describe("checkStreak", () => {
+  // define arbitrary user object
   let mockUserObject = {
     id: "123",
     name: "Test User",
@@ -100,8 +106,10 @@ describe("checkStreak", () => {
   };
 
   it("should return 0 if the lastCheckIn was over 1 day ago", async () => {
+    // mock the query to return some checkIns for the user 
     DataStore.query = jest.fn(() => Promise.resolve(mockUserObject.Checkins));
     (getUserFromDatabasebyID as jest.Mock).mockResolvedValue(mockUserObject);
+
     const result = await checkStreak("123");
     expect(result).toEqual(0);
   });
@@ -140,23 +148,29 @@ describe("checkStreak", () => {
     ];
     DataStore.query = jest.fn(() => Promise.resolve(mockUserObject.Checkins));
     (getUserFromDatabasebyID as jest.Mock).mockResolvedValue(mockUserObject);
+    // should be 0 as streakStart is in future
     const result = await checkStreak("123");
     expect(result).toEqual(0);
   });
 
   it("should return 1 if the last checkin was within a day", async () => {
     // set another day to 12 hours ago
-    const anotherDay = new Date();
-    anotherDay.setHours(anotherDay.getHours() - 12);
-    mockUserObject.streakStart = anotherDay;
+    const oneHourAgo = new Date();
+    const twelveHoursAgo = new Date();
+
+    oneHourAgo.setHours(oneHourAgo.getHours() - 1);
+    twelveHoursAgo.setHours(twelveHoursAgo.getHours() - 12);
+
+    mockUserObject.streakStart = twelveHoursAgo;
 
     mockUserObject.Checkins = [
-      { id: "checkin1", isValidated: true, createdAt: anotherDay },
-    ];
+      { id: "checkin1", isValidated: true, createdAt: oneHourAgo},
+    ];  
+    
     DataStore.query = jest.fn(() => Promise.resolve(mockUserObject.Checkins));
     (getUserFromDatabasebyID as jest.Mock).mockResolvedValue(mockUserObject);
     const result = await checkStreak("123");
-    expect(result).toEqual(0);
+    expect(result).toEqual(1);
   });
 
   it("should return 0 if streakStart is undefined", async () => {
