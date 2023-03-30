@@ -1,11 +1,15 @@
 {
-    "build": {
-      "habitopia": {
-        "android": {
-          "buildType": "apk"
-        }
-      },
-      "production": {}
-    }
+  "build": {
+    "habitopia": {
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "habitopia-ios": {
+      "ios": {
+        "simulator": true
+      }
+    },
+    "production": {}
   }
-  
+}

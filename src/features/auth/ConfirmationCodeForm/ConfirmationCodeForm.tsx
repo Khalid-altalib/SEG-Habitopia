@@ -33,13 +33,14 @@ const ConfirmationCodeForm = () => {
 
   const { error, loading } = useSelector((state) => state.auth);
 
+  const { user } = useSelector((state) => state.auth);
   // onSubmit handler
   const dispatch = useDispatch();
 
   const onSubmit = async (data: formData) => {
     dispatch(addSignUpData(data));
     await dispatch(sendConfirmationCode());
-    if (error !== "") {
+    if (user === undefined) {
       Toast.show({
         type: "error",
         text1: "Error code invalid/expired",

@@ -1,13 +1,12 @@
 {
   "expo": {
-    "owner": "habitopia",
+    "owner": "habitopia-deploy",
     "name": "habitopia",
     "slug": "habitopia",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "cover"
@@ -16,10 +15,23 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
-      ["assets/fonts/*"] 
+      "./assets/fonts/Roboto/Black.ttf",
+      "./assets/fonts/Roboto/BlackItalic.ttf",
+      "./assets/fonts/Roboto/Bold.ttf",
+      "./assets/fonts/Roboto/BoldItalic.ttf",
+      "./assets/fonts/Roboto/Italic.ttf",
+      "./assets/fonts/Roboto/Light.ttf",
+      "./assets/fonts/Roboto/LightItalic.ttf",
+      "./assets/fonts/Roboto/Medium.ttf",
+      "./assets/fonts/Roboto/MediumItalic.ttf",
+      "./assets/fonts/Roboto/Regular.ttf",
+      "./assets/fonts/Roboto/Thin.ttf",
+      "./assets/fonts/Roboto/ThinItalic.ttf",
+      "./assets/fonts/SpaceMono-Regular.ttf"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.habitopia.habitopia"
     },
     "android": {
       "adaptiveIcon": {
@@ -33,7 +45,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "6e9585a7-aa97-4cea-9deb-d838e79322fc"
+        "projectId": "2ea93748-cd39-4b08-8424-c47f307777a6"
       }
     }
   }
