@@ -1,0 +1,278 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EmailAddressForm renders correctly 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "flex": 1,
+        },
+        undefined,
+      ]
+    }
+  >
+    <RNSScreenStack
+      style={
+        {
+          "flex": 1,
+        }
+      }
+    >
+      <RNSScreen
+        collapsable={false}
+        forwardedRef={[Function]}
+        gestureResponseDistance={
+          {
+            "bottom": -1,
+            "end": -1,
+            "start": -1,
+            "top": -1,
+          }
+        }
+        nativeBackButtonDismissalEnabled={false}
+        onAppear={[Function]}
+        onDisappear={[Function]}
+        onDismissed={[Function]}
+        onHeaderBackButtonClicked={[Function]}
+        onNativeDismissCancelled={[Function]}
+        onTransitionProgress={[Function]}
+        onWillDisappear={[Function]}
+        replaceAnimation="push"
+        stackPresentation="push"
+        style={
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+        swipeDirection="horizontal"
+      >
+        <RNSScreenStackHeaderConfig
+          backButtonInCustomView={false}
+          backgroundColor="rgb(255, 255, 255)"
+          color="rgb(0, 122, 255)"
+          direction="ltr"
+          disableBackButtonMenu={false}
+          hidden={false}
+          hideBackButton={false}
+          largeTitleHideShadow={false}
+          title="TestScreen"
+          titleColor="rgb(28, 28, 30)"
+          topInsetEnabled={false}
+          translucent={false}
+        />
+        <View
+          accessibilityElementsHidden={false}
+          importantForAccessibility="auto"
+          style={
+            {
+              "flex": 1,
+              "flexDirection": "column-reverse",
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "flex": 1,
+                },
+                {
+                  "backgroundColor": "rgb(242, 242, 242)",
+                },
+                undefined,
+              ]
+            }
+          >
+            <View>
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#18181b",
+                    },
+                    {
+                      "color": "#71717a",
+                      "fontFamily": undefined,
+                      "fontSize": 15,
+                    },
+                    {
+                      "marginBottom": 5,
+                    },
+                  ]
+                }
+              >
+                Email Address
+              </Text>
+              <View
+                dataSet={{}}
+                isFocused={false}
+                style={
+                  {
+                    "alignItems": "center",
+                    "borderColor": "#d4d4d4",
+                    "borderRadius": 4,
+                    "borderWidth": 1,
+                    "flexDirection": "row",
+                    "overflow": "hidden",
+                  }
+                }
+              >
+                <TextInput
+                  accessible={true}
+                  autoCapitalize="none"
+                  dataSet={{}}
+                  editable={true}
+                  onBlur={[Function]}
+                  onChangeText={[Function]}
+                  onFocus={[Function]}
+                  onKeyPress={[Function]}
+                  placeholderTextColor="#a3a3a3"
+                  secureTextEntry={false}
+                  style={
+                    {
+                      "backgroundColor": "transparent",
+                      "color": "#171717",
+                      "flex": 1,
+                      "fontFamily": undefined,
+                      "fontSize": 18,
+                      "fontStyle": "normal",
+                      "fontWeight": "400",
+                      "height": "100%",
+                      "paddingBottom": 8,
+                      "paddingLeft": 12,
+                      "paddingRight": 12,
+                      "paddingTop": 8,
+                      "width": "100%",
+                    }
+                  }
+                  testID="email-input"
+                  value=""
+                />
+              </View>
+              <View
+                icon={
+                  <Icon
+                    allowFontScaling={false}
+                    color="white"
+                    name="arrowright"
+                    size={20}
+                  />
+                }
+                isFullWidth={true}
+                onPress={[Function]}
+                style={
+                  {
+                    "marginTop": 20,
+                  }
+                }
+                type={0}
+              >
+                <View
+                  accessible={true}
+                  collapsable={false}
+                  focusable={true}
+                  onClick={[Function]}
+                  onResponderGrant={[Function]}
+                  onResponderMove={[Function]}
+                  onResponderRelease={[Function]}
+                  onResponderTerminate={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                  style={
+                    {
+                      "marginTop": 20,
+                      "opacity": 1,
+                    }
+                  }
+                >
+                  <ViewManagerAdapter_ExpoLinearGradient
+                    proxiedProperties={
+                      {
+                        "colors": [
+                          4278220774,
+                          4286456526,
+                        ],
+                        "endPoint": [
+                          1,
+                          1,
+                        ],
+                        "locations": undefined,
+                        "startPoint": [
+                          0,
+                          0,
+                        ],
+                      }
+                    }
+                    style={
+                      [
+                        {
+                          "alignItems": "center",
+                          "borderRadius": 10,
+                          "flexDirection": "row",
+                          "justifyContent": "center",
+                          "paddingHorizontal": 40,
+                          "paddingVertical": 15,
+                        },
+                        {
+                          "width": "100%",
+                        },
+                      ]
+                    }
+                  >
+                    <Text
+                      style={
+                        [
+                          {
+                            "color": "#18181b",
+                          },
+                          {
+                            "color": "#e4e4e7",
+                            "fontFamily": undefined,
+                            "fontSize": 19,
+                          },
+                          [
+                            null,
+                            {
+                              "alignSelf": "center",
+                            },
+                          ],
+                        ]
+                      }
+                    >
+                      Continue
+                    </Text>
+                    <View
+                      style={
+                        {
+                          "marginLeft": 5,
+                        }
+                      }
+                    >
+                      <Text />
+                    </View>
+                  </ViewManagerAdapter_ExpoLinearGradient>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RNSScreen>
+    </RNSScreenStack>
+  </View>
+</RNCSafeAreaProvider>
+`;

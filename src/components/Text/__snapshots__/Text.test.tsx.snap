@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly. 1`] = `
+<Text
+  style={
+    [
+      {
+        "color": "#18181b",
+      },
+      {
+        "fontFamily": undefined,
+        "fontSize": 19,
+      },
+      undefined,
+    ]
+  }
+>
+  This is some example content.
+</Text>
+`;

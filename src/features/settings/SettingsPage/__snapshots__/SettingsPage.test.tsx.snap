@@ -1,0 +1,691 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SettingsPage renders correctly 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "flex": 1,
+        },
+        undefined,
+      ]
+    }
+  >
+    <RNSScreenStack
+      style={
+        {
+          "flex": 1,
+        }
+      }
+    >
+      <RNSScreen
+        collapsable={false}
+        forwardedRef={[Function]}
+        gestureResponseDistance={
+          {
+            "bottom": -1,
+            "end": -1,
+            "start": -1,
+            "top": -1,
+          }
+        }
+        nativeBackButtonDismissalEnabled={false}
+        onAppear={[Function]}
+        onDisappear={[Function]}
+        onDismissed={[Function]}
+        onHeaderBackButtonClicked={[Function]}
+        onNativeDismissCancelled={[Function]}
+        onTransitionProgress={[Function]}
+        onWillDisappear={[Function]}
+        replaceAnimation="push"
+        stackPresentation="push"
+        style={
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+        swipeDirection="horizontal"
+      >
+        <RNSScreenStackHeaderConfig
+          backButtonInCustomView={false}
+          backgroundColor="rgb(255, 255, 255)"
+          color="rgb(0, 122, 255)"
+          direction="ltr"
+          disableBackButtonMenu={false}
+          hidden={false}
+          hideBackButton={false}
+          largeTitleHideShadow={false}
+          title="TestScreen"
+          titleColor="rgb(28, 28, 30)"
+          topInsetEnabled={false}
+          translucent={false}
+        />
+        <View
+          accessibilityElementsHidden={false}
+          importantForAccessibility="auto"
+          style={
+            {
+              "flex": 1,
+              "flexDirection": "column-reverse",
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "flex": 1,
+                },
+                {
+                  "backgroundColor": "rgb(242, 242, 242)",
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              dataSet={{}}
+              style={{}}
+            >
+              <View
+                dataSet={{}}
+                style={{}}
+              >
+                <View
+                  dataSet={{}}
+                  style={
+                    {
+                      "paddingBottom": 12,
+                    }
+                  }
+                >
+                  <View
+                    dataSet={{}}
+                    style={{}}
+                  >
+                    <View
+                      dataSet={{}}
+                      style={
+                        {
+                          "alignItems": "flex-start",
+                          "display": "flex",
+                          "flexDirection": "row",
+                        }
+                      }
+                    >
+                      <View
+                        dataSet={{}}
+                        style={
+                          {
+                            "borderBottomWidth": 1,
+                            "borderColor": "#d4d4d8",
+                            "flexDirection": "row",
+                          }
+                        }
+                      >
+                        <Text
+                          style={
+                            [
+                              {
+                                "color": "#18181b",
+                              },
+                              {
+                                "fontFamily": undefined,
+                                "fontSize": 15,
+                              },
+                              {
+                                "flex": 1,
+                              },
+                            ]
+                          }
+                        >
+                          Name
+                        </Text>
+                        <View
+                          dataSet={{}}
+                          style={
+                            {
+                              "flex": 3,
+                              "paddingBottom": 12,
+                            }
+                          }
+                        >
+                          <View
+                            accessible={true}
+                            collapsable={false}
+                            focusable={true}
+                            onClick={[Function]}
+                            onResponderGrant={[Function]}
+                            onResponderMove={[Function]}
+                            onResponderRelease={[Function]}
+                            onResponderTerminate={[Function]}
+                            onResponderTerminationRequest={[Function]}
+                            onStartShouldSetResponder={[Function]}
+                            style={
+                              {
+                                "opacity": 1,
+                              }
+                            }
+                          >
+                            <Text
+                              style={
+                                [
+                                  {
+                                    "color": "#18181b",
+                                  },
+                                  {
+                                    "color": "#71717a",
+                                    "fontFamily": undefined,
+                                    "fontSize": 15,
+                                  },
+                                  undefined,
+                                ]
+                              }
+                            >
+                              Test User
+                            </Text>
+                          </View>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+                <View
+                  dataSet={{}}
+                  style={{}}
+                />
+                <View
+                  dataSet={{}}
+                  style={
+                    {
+                      "paddingBottom": 12,
+                    }
+                  }
+                >
+                  <View
+                    dataSet={{}}
+                    style={{}}
+                  >
+                    <View
+                      dataSet={{}}
+                      style={
+                        {
+                          "alignItems": "flex-start",
+                          "display": "flex",
+                          "flexDirection": "row",
+                        }
+                      }
+                    >
+                      <View
+                        dataSet={{}}
+                        style={
+                          {
+                            "borderBottomWidth": 1,
+                            "borderColor": "#d4d4d8",
+                            "flexDirection": "row",
+                          }
+                        }
+                      >
+                        <Text
+                          style={
+                            [
+                              {
+                                "color": "#18181b",
+                              },
+                              {
+                                "fontFamily": undefined,
+                                "fontSize": 15,
+                              },
+                              {
+                                "flex": 1,
+                              },
+                            ]
+                          }
+                        >
+                          Password
+                        </Text>
+                        <View
+                          dataSet={{}}
+                          style={
+                            {
+                              "flex": 3,
+                              "paddingBottom": 12,
+                            }
+                          }
+                        >
+                          <View
+                            accessible={true}
+                            collapsable={false}
+                            focusable={true}
+                            onClick={[Function]}
+                            onResponderGrant={[Function]}
+                            onResponderMove={[Function]}
+                            onResponderRelease={[Function]}
+                            onResponderTerminate={[Function]}
+                            onResponderTerminationRequest={[Function]}
+                            onStartShouldSetResponder={[Function]}
+                            style={
+                              {
+                                "opacity": 1,
+                              }
+                            }
+                          >
+                            <Text
+                              style={
+                                [
+                                  {
+                                    "color": "#18181b",
+                                  },
+                                  {
+                                    "color": "#71717a",
+                                    "fontFamily": undefined,
+                                    "fontSize": 15,
+                                  },
+                                  undefined,
+                                ]
+                              }
+                            >
+                              *******
+                            </Text>
+                          </View>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+                <View
+                  dataSet={{}}
+                  style={{}}
+                />
+                <View
+                  dataSet={{}}
+                  style={
+                    {
+                      "paddingBottom": 12,
+                    }
+                  }
+                >
+                  <View
+                    dataSet={{}}
+                    style={{}}
+                  >
+                    <View
+                      dataSet={{}}
+                      style={
+                        {
+                          "alignItems": "flex-start",
+                          "display": "flex",
+                          "flexDirection": "row",
+                        }
+                      }
+                    >
+                      <View
+                        dataSet={{}}
+                        style={
+                          {
+                            "borderBottomWidth": 1,
+                            "borderColor": "#d4d4d8",
+                            "flexDirection": "row",
+                          }
+                        }
+                      >
+                        <Text
+                          style={
+                            [
+                              {
+                                "color": "#18181b",
+                              },
+                              {
+                                "fontFamily": undefined,
+                                "fontSize": 15,
+                              },
+                              {
+                                "flex": 1,
+                              },
+                            ]
+                          }
+                        >
+                          Bio
+                        </Text>
+                        <View
+                          dataSet={{}}
+                          style={
+                            {
+                              "flex": 3,
+                              "paddingBottom": 12,
+                            }
+                          }
+                        >
+                          <View
+                            accessible={true}
+                            collapsable={false}
+                            focusable={true}
+                            onClick={[Function]}
+                            onResponderGrant={[Function]}
+                            onResponderMove={[Function]}
+                            onResponderRelease={[Function]}
+                            onResponderTerminate={[Function]}
+                            onResponderTerminationRequest={[Function]}
+                            onStartShouldSetResponder={[Function]}
+                            style={
+                              {
+                                "opacity": 1,
+                              }
+                            }
+                          >
+                            <Text
+                              style={
+                                [
+                                  {
+                                    "color": "#18181b",
+                                  },
+                                  {
+                                    "color": "#71717a",
+                                    "fontFamily": undefined,
+                                    "fontSize": 15,
+                                  },
+                                  undefined,
+                                ]
+                              }
+                            >
+                              Hello, I'm Test User.
+                            </Text>
+                          </View>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+                <View
+                  dataSet={{}}
+                  style={{}}
+                />
+                <View
+                  dataSet={{}}
+                  style={
+                    {
+                      "alignItems": "center",
+                      "borderBottomWidth": 1,
+                      "borderColor": "#d4d4d8",
+                      "display": "flex",
+                      "flexDirection": "row",
+                      "justifyContent": "space-between",
+                      "paddingBottom": 12,
+                    }
+                  }
+                >
+                  <View
+                    dataSet={{}}
+                    style={{}}
+                  >
+                    <Text
+                      style={
+                        [
+                          {
+                            "color": "#18181b",
+                          },
+                          {
+                            "fontFamily": undefined,
+                            "fontSize": 15,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      Notifications 
+                    </Text>
+                    <Text
+                      style={
+                        [
+                          {
+                            "color": "#18181b",
+                          },
+                          {
+                            "color": "#71717a",
+                            "fontFamily": undefined,
+                            "fontSize": 15,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      Choose to receive notifications
+                    </Text>
+                  </View>
+                  <View
+                    dataSet={{}}
+                    style={{}}
+                  />
+                  <View
+                    dataSet={{}}
+                    style={{}}
+                  >
+                    <RCTSwitch
+                      accessibilityRole="switch"
+                      onChange={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      onTintColor="#7e22ce"
+                      style={
+                        {
+                          "height": 31,
+                          "width": 51,
+                        }
+                      }
+                      testID="switch"
+                      thumbTintColor="white"
+                      value={true}
+                    />
+                  </View>
+                </View>
+                <View
+                  dataSet={{}}
+                  style={{}}
+                />
+                <View
+                  dataSet={{}}
+                  style={
+                    {
+                      "alignItems": "center",
+                      "display": "flex",
+                      "flexDirection": "row",
+                      "justifyContent": "space-between",
+                      "paddingTop": 12,
+                    }
+                  }
+                >
+                  <View
+                    dataSet={{}}
+                    style={{}}
+                  >
+                    <Text
+                      style={
+                        [
+                          {
+                            "color": "#18181b",
+                          },
+                          {
+                            "fontFamily": undefined,
+                            "fontSize": 15,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      Light Mode 
+                    </Text>
+                    <Text
+                      style={
+                        [
+                          {
+                            "color": "#18181b",
+                          },
+                          {
+                            "color": "#71717a",
+                            "fontFamily": undefined,
+                            "fontSize": 15,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      Choose the color mode
+                    </Text>
+                  </View>
+                  <View
+                    dataSet={{}}
+                    style={{}}
+                  />
+                  <View
+                    dataSet={{}}
+                    style={{}}
+                  >
+                    <RCTSwitch
+                      accessibilityRole="switch"
+                      onChange={[Function]}
+                      onResponderTerminationRequest={[Function]}
+                      onStartShouldSetResponder={[Function]}
+                      onTintColor="#7e22ce"
+                      style={
+                        {
+                          "height": 31,
+                          "width": 51,
+                        }
+                      }
+                      thumbTintColor="white"
+                      value={true}
+                    />
+                  </View>
+                </View>
+                <View
+                  dataSet={{}}
+                  style={{}}
+                />
+                <View
+                  isFullWidth={true}
+                  onPress={[Function]}
+                  style={
+                    {
+                      "marginTop": 40,
+                    }
+                  }
+                  type={0}
+                >
+                  <View
+                    accessible={true}
+                    collapsable={false}
+                    focusable={true}
+                    onClick={[Function]}
+                    onResponderGrant={[Function]}
+                    onResponderMove={[Function]}
+                    onResponderRelease={[Function]}
+                    onResponderTerminate={[Function]}
+                    onResponderTerminationRequest={[Function]}
+                    onStartShouldSetResponder={[Function]}
+                    style={
+                      {
+                        "marginTop": 40,
+                        "opacity": 1,
+                      }
+                    }
+                  >
+                    <ViewManagerAdapter_ExpoLinearGradient
+                      proxiedProperties={
+                        {
+                          "colors": [
+                            4278220774,
+                            4286456526,
+                          ],
+                          "endPoint": [
+                            1,
+                            1,
+                          ],
+                          "locations": undefined,
+                          "startPoint": [
+                            0,
+                            0,
+                          ],
+                        }
+                      }
+                      style={
+                        [
+                          {
+                            "alignItems": "center",
+                            "borderRadius": 10,
+                            "flexDirection": "row",
+                            "justifyContent": "center",
+                            "paddingHorizontal": 40,
+                            "paddingVertical": 15,
+                          },
+                          {
+                            "width": "100%",
+                          },
+                        ]
+                      }
+                    >
+                      <Text
+                        style={
+                          [
+                            {
+                              "color": "#18181b",
+                            },
+                            {
+                              "color": "#e4e4e7",
+                              "fontFamily": undefined,
+                              "fontSize": 19,
+                            },
+                            [
+                              null,
+                              {
+                                "alignSelf": "center",
+                              },
+                            ],
+                          ]
+                        }
+                      >
+                        Log out
+                      </Text>
+                      <View
+                        style={
+                          {
+                            "marginLeft": 5,
+                          }
+                        }
+                      />
+                    </ViewManagerAdapter_ExpoLinearGradient>
+                  </View>
+                </View>
+              </View>
+              <View
+                dataSet={{}}
+                style={
+                  {
+                    "alignItems": "center",
+                    "display": "flex",
+                    "justifyContent": "center",
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+      </RNSScreen>
+    </RNSScreenStack>
+  </View>
+</RNCSafeAreaProvider>
+`;

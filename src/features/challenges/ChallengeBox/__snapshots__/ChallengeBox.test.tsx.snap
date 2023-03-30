@@ -1,0 +1,467 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChallengeBox renders the active challenge box correctly 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "flex": 1,
+        },
+        undefined,
+      ]
+    }
+  >
+    <RNSScreenStack
+      style={
+        {
+          "flex": 1,
+        }
+      }
+    >
+      <RNSScreen
+        collapsable={false}
+        forwardedRef={[Function]}
+        gestureResponseDistance={
+          {
+            "bottom": -1,
+            "end": -1,
+            "start": -1,
+            "top": -1,
+          }
+        }
+        nativeBackButtonDismissalEnabled={false}
+        onAppear={[Function]}
+        onDisappear={[Function]}
+        onDismissed={[Function]}
+        onHeaderBackButtonClicked={[Function]}
+        onNativeDismissCancelled={[Function]}
+        onTransitionProgress={[Function]}
+        onWillDisappear={[Function]}
+        replaceAnimation="push"
+        stackPresentation="push"
+        style={
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+        swipeDirection="horizontal"
+      >
+        <RNSScreenStackHeaderConfig
+          backButtonInCustomView={false}
+          backgroundColor="rgb(255, 255, 255)"
+          color="rgb(0, 122, 255)"
+          direction="ltr"
+          disableBackButtonMenu={false}
+          hidden={false}
+          hideBackButton={false}
+          largeTitleHideShadow={false}
+          title="TestScreen"
+          titleColor="rgb(28, 28, 30)"
+          topInsetEnabled={false}
+          translucent={false}
+        />
+        <View
+          accessibilityElementsHidden={false}
+          importantForAccessibility="auto"
+          style={
+            {
+              "flex": 1,
+              "flexDirection": "column-reverse",
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "flex": 1,
+                },
+                {
+                  "backgroundColor": "rgb(242, 242, 242)",
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "opacity": 1,
+                }
+              }
+              testID="challengeBox"
+            >
+              <View
+                dataSet={{}}
+                style={
+                  {
+                    "backgroundColor": "#fbbf24",
+                    "borderRadius": 8,
+                    "elevation": 4,
+                    "height": 100,
+                    "overflow": "hidden",
+                    "shadowColor": "#000000",
+                    "shadowOffset": {
+                      "height": 2,
+                      "width": 0,
+                    },
+                    "shadowOpacity": 0.23,
+                    "shadowRadius": 2.62,
+                  }
+                }
+              >
+                <View
+                  dataSet={{}}
+                  style={
+                    {
+                      "flexDirection": "row",
+                      "height": "100%",
+                      "justifyContent": "space-between",
+                    }
+                  }
+                >
+                  <View
+                    dataSet={{}}
+                    style={
+                      {
+                        "justifyContent": "space-between",
+                        "paddingBottom": 12,
+                        "paddingLeft": 12,
+                        "paddingRight": 12,
+                        "paddingTop": 12,
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        [
+                          {
+                            "color": "white",
+                          },
+                          {
+                            "fontFamily": undefined,
+                            "fontSize": 23,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      Fitness
+                    </Text>
+                    <View
+                      dataSet={{}}
+                      style={
+                        {
+                          "backgroundColor": "#ef4444",
+                          "borderRadius": 4,
+                          "paddingBottom": 4,
+                          "paddingLeft": 8,
+                          "paddingRight": 8,
+                          "paddingTop": 4,
+                        }
+                      }
+                    >
+                      <Text
+                        style={
+                          [
+                            {
+                              "color": "white",
+                            },
+                            {
+                              "fontFamily": undefined,
+                              "fontSize": 19,
+                            },
+                            undefined,
+                          ]
+                        }
+                      >
+                        On-going
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    dataSet={{}}
+                    style={{}}
+                  />
+                  <View
+                    dataSet={{}}
+                    style={
+                      [
+                        {},
+                        {
+                          "aspectRatio": 1,
+                          "style": undefined,
+                        },
+                      ]
+                    }
+                  >
+                    <Image
+                      source={
+                        {
+                          "uri": "https://images.everydayhealth.com/images/everything-you-need-know-about-fitness-1440x810.jpg",
+                        }
+                      }
+                      style={
+                        {
+                          "bottom": 0,
+                          "left": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                        }
+                      }
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RNSScreen>
+    </RNSScreenStack>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`ChallengeBox renders the inactive challenge box correctly 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "flex": 1,
+        },
+        undefined,
+      ]
+    }
+  >
+    <RNSScreenStack
+      style={
+        {
+          "flex": 1,
+        }
+      }
+    >
+      <RNSScreen
+        collapsable={false}
+        forwardedRef={[Function]}
+        gestureResponseDistance={
+          {
+            "bottom": -1,
+            "end": -1,
+            "start": -1,
+            "top": -1,
+          }
+        }
+        nativeBackButtonDismissalEnabled={false}
+        onAppear={[Function]}
+        onDisappear={[Function]}
+        onDismissed={[Function]}
+        onHeaderBackButtonClicked={[Function]}
+        onNativeDismissCancelled={[Function]}
+        onTransitionProgress={[Function]}
+        onWillDisappear={[Function]}
+        replaceAnimation="push"
+        stackPresentation="push"
+        style={
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+        swipeDirection="horizontal"
+      >
+        <RNSScreenStackHeaderConfig
+          backButtonInCustomView={false}
+          backgroundColor="rgb(255, 255, 255)"
+          color="rgb(0, 122, 255)"
+          direction="ltr"
+          disableBackButtonMenu={false}
+          hidden={false}
+          hideBackButton={false}
+          largeTitleHideShadow={false}
+          title="TestScreen"
+          titleColor="rgb(28, 28, 30)"
+          topInsetEnabled={false}
+          translucent={false}
+        />
+        <View
+          accessibilityElementsHidden={false}
+          importantForAccessibility="auto"
+          style={
+            {
+              "flex": 1,
+              "flexDirection": "column-reverse",
+            }
+          }
+        >
+          <View
+            style={
+              [
+                {
+                  "flex": 1,
+                },
+                {
+                  "backgroundColor": "rgb(242, 242, 242)",
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "opacity": 1,
+                }
+              }
+              testID="challengeBox"
+            >
+              <View
+                dataSet={{}}
+                style={
+                  {
+                    "backgroundColor": "#facc15",
+                    "borderRadius": 8,
+                    "elevation": 4,
+                    "height": 100,
+                    "overflow": "hidden",
+                    "shadowColor": "#000000",
+                    "shadowOffset": {
+                      "height": 2,
+                      "width": 0,
+                    },
+                    "shadowOpacity": 0.23,
+                    "shadowRadius": 2.62,
+                  }
+                }
+              >
+                <View
+                  dataSet={{}}
+                  style={
+                    {
+                      "flexDirection": "row",
+                      "height": "100%",
+                      "justifyContent": "space-between",
+                    }
+                  }
+                >
+                  <View
+                    dataSet={{}}
+                    style={
+                      {
+                        "justifyContent": "space-between",
+                        "paddingBottom": 12,
+                        "paddingLeft": 12,
+                        "paddingRight": 12,
+                        "paddingTop": 12,
+                      }
+                    }
+                  >
+                    <Text
+                      style={
+                        [
+                          {
+                            "color": "white",
+                          },
+                          {
+                            "fontFamily": undefined,
+                            "fontSize": 23,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      Study
+                    </Text>
+                  </View>
+                  <View
+                    dataSet={{}}
+                    style={{}}
+                  />
+                  <View
+                    dataSet={{}}
+                    style={
+                      [
+                        {},
+                        {
+                          "aspectRatio": 1,
+                          "style": undefined,
+                        },
+                      ]
+                    }
+                  >
+                    <Image
+                      source={
+                        {
+                          "uri": "https://static.vecteezy.com/system/resources/previews/002/271/771/original/realistic-stationary-with-paper-strip-background-free-vector.jpg",
+                        }
+                      }
+                      style={
+                        {
+                          "bottom": 0,
+                          "left": 0,
+                          "position": "absolute",
+                          "right": 0,
+                          "top": 0,
+                        }
+                      }
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RNSScreen>
+    </RNSScreenStack>
+  </View>
+</RNCSafeAreaProvider>
+`;

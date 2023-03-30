@@ -1,3 +1,4 @@
+docs/
 node_modules/
 .expo/
 dist/
@@ -10,6 +11,9 @@ npm-debug.*
 *.orig.*
 web-build/
 .vscode/
+package-lock.json
+yarn.lock
+.idea/
 
 # macOS
 .DS_Store

@@ -1,6 +1,21 @@
 {
   "extends": "expo/tsconfig.base",
+  "typedocOptions": {
+    "out": "docs",
+    "entryPoints": ["src/**/*.ts", "src/**/*.tsx", "./App.tsx"]
+  },
   "compilerOptions": {
-    "strict": true
-  }
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "types": ["types"],
+      "@app/*": ["src/app/*"],
+      "@components/*": ["src/components/*"],
+      "@features/*": ["src/features/*"],
+      "@navigation/*": ["src/navigation/*"],
+      "@screens/*": ["src/screens/*"],
+      "@assets/*": ["assets/*"]
+    }
+  },
+  "exclude": ["node_modules"]
 }
